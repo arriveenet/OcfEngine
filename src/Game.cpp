@@ -59,6 +59,11 @@ void Game::exit()
 	m_running = false;
 }
 
+glm::vec2 Game::getVisibleSize()
+{
+	return Applicaiton::getInstance()->getWindowSize();
+}
+
 void Game::update()
 {
 	static double currentTime;

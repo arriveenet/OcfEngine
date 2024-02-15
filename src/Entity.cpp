@@ -3,11 +3,18 @@
 Entity::Entity()
 	: m_state(State::Active)
 	, m_position()
+	, m_size()
 {
 }
 
 Entity::~Entity()
 {
+	while (!m_entities.empty())
+	{
+		delete m_entities.back();
+		m_entities.pop_back();
+	}
+
 	while (!m_components.empty()) {
 		delete m_components.back();
 	}
@@ -33,6 +40,9 @@ void Entity::updateComponents(float deltaTime)
 
 void Entity::updateEntity(float deltaTime)
 {
+	for (const auto& entity : m_entities) {
+		entity->update(deltaTime);
+	}
 }
 
 void Entity::setPosition(const glm::vec2& position)
@@ -40,9 +50,27 @@ void Entity::setPosition(const glm::vec2& position)
 	m_position = position;
 }
 
+void Entity::setPosition(float x, float y)
+{
+	m_position = { x, y };
+}
+
 glm::vec2 Entity::getPosition() const
 {
 	return m_position;
+}
+
+void Entity::addChild(Entity* pEntity)
+{
+	m_entities.emplace_back(pEntity);
+}
+
+void Entity::removeChild(Entity* pEntity)
+{
+	auto iter = std::find(m_entities.begin(), m_entities.end(), pEntity);
+	if (iter != m_entities.end()) {
+		m_entities.erase(iter);
+	}
 }
 
 void Entity::addComponent(Component* pComponent)

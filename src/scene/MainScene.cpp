@@ -1,4 +1,5 @@
 #include "MainScene.h"
+#include "../Game.h"
 #include "../renderer/Image.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
@@ -16,10 +17,13 @@ bool MainScene::init()
 {
 	Scene::init();
 
-	Entity* sprite = new Entity();
-	sprite->addComponent(new Sprite(sprite));
+	Sprite* sprite = new Sprite();
+	sprite->init();
+	addChild(sprite);
 
-	addEntity(sprite);
+	glm::vec2 size = Game::getInstance()->getVisibleSize();
+	size /= 2.0f;
+	sprite->setPosition(size.x, size.y);
 
 	return true;
 }

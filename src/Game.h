@@ -23,6 +23,8 @@ public:
 	void mainLoop();
 	void exit();
 
+	glm::vec2 getVisibleSize();
+
 private:
 	void update();
 	void draw();

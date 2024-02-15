@@ -1,8 +1,8 @@
 #pragma once
-#include "../Camera.h"
 #include <vector>
+#include "../Camera.h"
 
-class Scene {
+class Scene : public Entity {
 public:
 	Scene();
 	virtual ~Scene();
@@ -15,11 +15,9 @@ public:
 
 	virtual void onKeyEnvet(int key, int scancode, int action, int mods) {};
 
-	void addEntity(Entity* pEntity);
+	virtual Camera* getDefaultCamera() { return &m_defaultCamera; }
 
+protected:
 	Camera m_defaultCamera;
-
-private:
-	std::vector<Entity*> m_entities;
 };
 

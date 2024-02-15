@@ -10,8 +10,10 @@ public:
 	~Renderer();
 
 	bool init();
+	void destroy();
 
 	void addSprite(Sprite* pSprite);
+	void removeSprite(Sprite* pSprite);
 
 	void draw();
 };
