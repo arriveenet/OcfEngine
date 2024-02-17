@@ -1,12 +1,7 @@
 #pragma once
 #include <string>
-#include "../GameObject.h"
-
-enum class PixelFormat {
-	RGB,
-	RGBA,
-	NONE
-};
+#include "GameObject.h"
+#include "base/types.h"
 
 class Image : public GameObject {
 public:

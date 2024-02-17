@@ -14,7 +14,14 @@ GameObject::~GameObject()
 {
 }
 
-unsigned int GameObject::getID()
+unsigned int GameObject::getID() const
 {
 	return m_id;
+}
+
+void GameObject::release()
+{
+	if (this) {
+		delete this;
+	}
 }

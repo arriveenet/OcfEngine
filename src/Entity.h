@@ -4,11 +4,17 @@
 #include <glm/glm.hpp>
 #include <vector>
 
+/**
+ * @brief エンティティクラス
+ */
 class Entity : public GameObject {
 public:
+	/**
+	 * @brief エンティティの状態
+	 */
 	enum State {
-		Active,
-		Dead
+		Active,	//!< 生存中
+		Dead	//!< 死亡
 	};
 
 	Entity();
@@ -27,6 +33,12 @@ public:
 	virtual void setPosition(float x, float y);
 	virtual glm::vec2 getPosition() const;
 
+	virtual void setSize(float width, float height);
+	virtual glm::vec2 getSize() const;
+
+	virtual void setRotation(float rotation);
+	virtual float getRotation() const;
+
 	virtual void addChild(Entity* pEntity);
 	virtual void removeChild(Entity* pEntity);
 
@@ -37,6 +49,7 @@ protected:
 	State m_state;
 	glm::vec2 m_position;
 	glm::vec2 m_size;
+	float m_rotation;
 	std::vector<Entity*> m_entities;
 	std::vector<Component*> m_components;
 };

@@ -61,16 +61,20 @@ void Applicaiton::destroy()
 
 int Applicaiton::run()
 {
-	Game* pGame = Game::getInstance();
-	pGame->init();
+	auto game = Game::getInstance();
 
 	// Main loop
-	pGame->mainLoop();
+	game->mainLoop();
 
 	// Destroy application
 	destroy();
 
 	return 0;
+}
+
+void Applicaiton::exit()
+{
+	m_window.close();
 }
 
 void Applicaiton::swapBuffers()
@@ -83,9 +87,9 @@ void Applicaiton::pollEvents()
 	m_window.pollEvents();
 }
 
-bool Applicaiton::shouldClose()
+bool Applicaiton::windowShouldClose()
 {
-	return m_window.shouldClose();
+	return m_window.windowShouldClose();
 }
 
 double Applicaiton::getTime()
@@ -100,5 +104,5 @@ glm::ivec2 Applicaiton::getWindowSize() const
 
 void Applicaiton::onKeyEnvet(int key, int scancode, int action, int mods)
 {
-	//m_pScene->onKeyEnvet(key, scancode, action, mods);
+	Game::getInstance()->onKeyEnvet(key, scancode, action, mods);
 }

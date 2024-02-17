@@ -1,6 +1,6 @@
 #include "MainScene.h"
-#include "../Game.h"
-#include "../renderer/Image.h"
+#include "Game.h"
+#include "renderer/Image.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -18,7 +18,7 @@ bool MainScene::init()
 	Scene::init();
 
 	Sprite* sprite = new Sprite();
-	sprite->init();
+	sprite->initWithFile(".\\resource\\25_Crono.png");
 	addChild(sprite);
 
 	glm::vec2 size = Game::getInstance()->getVisibleSize();

@@ -1,5 +1,5 @@
 #include "Renderer.h"
-#include "../Game.h"
+#include "Game.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -45,9 +45,14 @@ void Renderer::draw()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	// Draw sprites
 	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnable(GL_TEXTURE_2D);
 	for (auto& sprite : m_sprites) {
 		sprite->draw();
 	}
+	glDisable(GL_TEXTURE_2D);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }

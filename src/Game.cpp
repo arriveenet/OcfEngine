@@ -1,21 +1,38 @@
 #include "Game.h"
+#include <Windows.h>
 #include "Application.h"
 #include "scene/MainScene.h"
-#include <Windows.h>
+
+Game* Game::s_sharedGame = nullptr;
 
 Game::Game()
 	: m_running(false)
+	, m_pRenderer(nullptr)
+	, m_pScene(nullptr)
 {
 }
 
 Game::~Game()
 {
+	// シーンを解放
+	delete m_pScene;
+	m_pScene = nullptr;
+
+	// レンダラーを解放
+	delete m_pRenderer;
+	m_pRenderer = nullptr;
+
+	s_sharedGame = nullptr;
 }
 
 Game* Game::getInstance()
 {
-	static Game game;
-	return &game;
+	if (!s_sharedGame) {
+		s_sharedGame = new Game();
+		s_sharedGame->init();
+	}
+
+	return s_sharedGame;
 }
 
 bool Game::init()
@@ -29,21 +46,12 @@ bool Game::init()
 	return true;
 }
 
-void Game::destroy()
-{
-	delete m_pRenderer;
-	m_pRenderer = nullptr;
-
-	delete m_pScene;
-	m_pScene = nullptr;
-}
-
 void Game::mainLoop()
 {
 	Applicaiton* app = Applicaiton::getInstance();
 	m_running = true;
 
-	while (app->shouldClose()) {
+	while (app->windowShouldClose()) {
 		update();
 		draw();
 
@@ -51,13 +59,23 @@ void Game::mainLoop()
 		app->swapBuffers();
 	}
 
-	destroy();
+	// delete Game instance
+	release();
 }
 
 void Game::exit()
 {
 	m_running = false;
+	Applicaiton::getInstance()->exit();
 }
+
+void Game::onKeyEnvet(int key, int scancode, int action, int mods)
+{
+	// Escキーが押された場合、終了する
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		exit();
+}
+
 
 glm::vec2 Game::getVisibleSize()
 {

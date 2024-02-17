@@ -25,6 +25,12 @@
     <Filter Include="ヘッダー ファイル\scene">
       <UniqueIdentifier>{188cff54-9dc5-4547-8d21-038b2e51ad2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\base">
+      <UniqueIdentifier>{c878e97b-a1a2-4b7a-9539-20b06d9f18db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\base">
+      <UniqueIdentifier>{2b377cda-b4ad-4a8c-b6dd-59c12e99b0da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -115,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="renderer\Renderer.h">
       <Filter>ヘッダー ファイル\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="base\types.h">
+      <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

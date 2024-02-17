@@ -8,9 +8,10 @@ public:
 
 	bool create(int width, int height, const char* title);
 	void destroy();
+	void close();
 
 	void setCallback();
-	bool shouldClose();
+	bool windowShouldClose();
 	void pollEvents();
 	void swapBuffers();
 

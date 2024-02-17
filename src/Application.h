@@ -14,9 +14,10 @@ public:
 	void destroy();
 
 	int run();
+	void exit();
 	void swapBuffers();
 	void pollEvents();
-	bool shouldClose();
+	bool windowShouldClose();
 	double getTime();
 
 	glm::ivec2 getWindowSize() const;

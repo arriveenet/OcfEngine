@@ -27,12 +27,17 @@ void Window::destroy()
 	glfwDestroyWindow(m_pWindow);
 }
 
+void Window::close()
+{
+	glfwSetWindowShouldClose(m_pWindow, GL_TRUE);
+}
+
 void Window::setCallback()
 {
 	glfwSetKeyCallback(m_pWindow, onKeyEvent);
 }
 
-bool Window::shouldClose()
+bool Window::windowShouldClose()
 {
 	return (glfwWindowShouldClose(m_pWindow) == 0) ? true : false;
 }

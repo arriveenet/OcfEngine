@@ -5,7 +5,9 @@ public:
 	GameObject();
 	virtual ~GameObject();
 
-	unsigned int getID();
+	unsigned int getID() const;
+
+	void release();
 
 private:
 	unsigned int m_id;

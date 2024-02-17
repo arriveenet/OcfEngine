@@ -4,6 +4,7 @@ Entity::Entity()
 	: m_state(State::Active)
 	, m_position()
 	, m_size()
+	, m_rotation(0.0f)
 {
 }
 
@@ -11,7 +12,8 @@ Entity::~Entity()
 {
 	while (!m_entities.empty())
 	{
-		delete m_entities.back();
+		auto entity = m_entities.back();
+		entity->release();
 		m_entities.pop_back();
 	}
 
@@ -58,6 +60,27 @@ void Entity::setPosition(float x, float y)
 glm::vec2 Entity::getPosition() const
 {
 	return m_position;
+}
+
+void Entity::setSize(float width, float height)
+{
+	m_size.x = width;
+	m_size.y = height;
+}
+
+glm::vec2 Entity::getSize() const
+{
+	return m_size;
+}
+
+void Entity::setRotation(float rotation)
+{
+	m_rotation = rotation;
+}
+
+float Entity::getRotation() const
+{
+	return m_rotation;
 }
 
 void Entity::addChild(Entity* pEntity)
