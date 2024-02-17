@@ -39,6 +39,12 @@ public:
 	virtual void setRotation(float rotation);
 	virtual float getRotation() const;
 
+	virtual void setScale(float scale);
+	virtual void setScaleX(float scaleX);
+	virtual void setScaleY(float scaleY);
+	virtual void setScaleZ(float scaleZ);
+	virtual float getScale() const;
+
 	virtual void addChild(Entity* pEntity);
 	virtual void removeChild(Entity* pEntity);
 
@@ -47,9 +53,16 @@ public:
 	
 protected:
 	State m_state;
+
 	glm::vec2 m_position;
 	glm::vec2 m_size;
+
 	float m_rotation;
+	
+	float m_scaleX;
+	float m_scaleY;
+	float m_scaleZ;
+
 	std::vector<Entity*> m_entities;
 	std::vector<Component*> m_components;
 };

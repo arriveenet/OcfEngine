@@ -5,6 +5,8 @@
 
 #define SPRITE_DEBUG
 
+using namespace glm;
+
 Sprite::Sprite(int drawOrder)
 	: m_drawOrder(drawOrder)
 	, m_flippedX(false)
@@ -74,6 +76,8 @@ void Sprite::draw()
 	glTranslatef(m_position.x, m_position.y, 0.0f);
 	// âÒì]
 	glRotatef(m_rotation, 0.0f, 0.0f, 1.0f);
+	// ägëÂèkè¨
+	glScalef(m_scaleX, m_scaleY, m_scaleZ);
 
 	glColor3ub(0xff, 0xff, 0xff);
 

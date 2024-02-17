@@ -5,6 +5,9 @@ Entity::Entity()
 	, m_position()
 	, m_size()
 	, m_rotation(0.0f)
+	, m_scaleX(1.0f)
+	, m_scaleY(1.0f)
+	, m_scaleZ(1.0f)
 {
 }
 
@@ -81,6 +84,31 @@ void Entity::setRotation(float rotation)
 float Entity::getRotation() const
 {
 	return m_rotation;
+}
+
+void Entity::setScale(float scale)
+{
+	m_scaleX = m_scaleY = m_scaleZ = scale;
+}
+
+void Entity::setScaleX(float scaleX)
+{
+	m_scaleX = scaleX;
+}
+
+void Entity::setScaleY(float scaleY)
+{
+	m_scaleY = scaleY;
+}
+
+void Entity::setScaleZ(float scaleZ)
+{
+	m_scaleZ = scaleZ;
+}
+
+float Entity::getScale() const
+{
+	return m_scaleX;
 }
 
 void Entity::addChild(Entity* pEntity)
