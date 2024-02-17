@@ -1,6 +1,4 @@
 #include "Application.h"
-
-#include <Windows.h>
 #include "Game.h"
 #include "Scene/MainScene.h"
 

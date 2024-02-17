@@ -1,8 +1,8 @@
 #pragma once
 #include "Component.h"
-#include "Rect.h"
 #include "Entity.h"
 #include "base/types.h"
+#include "base/Rect.h"
 #include <string>
 
 class Texture2D;
@@ -14,6 +14,8 @@ public:
 
 	virtual bool init();
 	virtual bool initWithFile(const std::string& filename);
+
+	int getDrawOrder() const;
 	
 	void setPosition(float x, float y) override;
 

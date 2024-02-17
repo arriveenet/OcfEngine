@@ -1,7 +1,7 @@
 #pragma once
+#include <glm/glm.hpp>
 #include "Window.h"
 #include "Scene/Scene.h"
-#include <glm/glm.hpp>
 
 class Applicaiton {
 public:

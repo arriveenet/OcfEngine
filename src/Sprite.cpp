@@ -52,6 +52,11 @@ bool Sprite::initWithFile(const std::string& filename)
 	return true;
 }
 
+int Sprite::getDrawOrder() const
+{
+	return m_drawOrder;
+}
+
 void Sprite::setPosition(float x, float y)
 {
 	Entity::setPosition(x, y);
@@ -98,7 +103,7 @@ void Sprite::draw()
 	glPointSize(3.0f);
 	glBegin(GL_POINTS);
 	{
-		glVertex2f(m_position.x, m_position.y);
+		glVertex2f(0.0f, 0.0f);
 	}
 	glEnd();
 

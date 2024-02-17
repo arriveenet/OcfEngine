@@ -23,7 +23,15 @@ void Renderer::destroy()
 
 void Renderer::addSprite(Sprite* pSprite)
 {
-	m_sprites.emplace_back(pSprite);
+	const int myDrawOrder = pSprite->getDrawOrder();
+	auto iter = m_sprites.begin();
+	for (; iter != m_sprites.end(); ++iter) {
+		if (myDrawOrder < (*iter)->getDrawOrder()) {
+			break;
+		}
+	}
+
+	m_sprites.insert(iter, pSprite);
 }
 
 void Renderer::removeSprite(Sprite* pSprite)

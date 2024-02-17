@@ -27,7 +27,7 @@ Entity::~Entity()
 
 bool Entity::init()
 {
-	return false;
+	return true;
 }
 
 void Entity::update(float deltaTime)
