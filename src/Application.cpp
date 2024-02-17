@@ -1,4 +1,6 @@
 #include "Application.h"
+
+#include <Windows.h>
 #include "Game.h"
 #include "Scene/MainScene.h"
 
@@ -35,13 +37,17 @@ bool Applicaiton::init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
-	//int displayWidth = GetSystemMetrics(SM_CXSCREEN);
-	//int displayHeight = GetSystemMetrics(SM_CYSCREEN);
-
 	m_windowHeight = 720;
-	m_windowWidth = m_windowHeight * 4 / 3;
+	m_windowWidth = m_windowHeight * 4 / 3;	
 
 	m_window.create(m_windowWidth, m_windowHeight, "Happy Birthday to oocfuu!");
+
+	const int displayWidth = GetSystemMetrics(SM_CXSCREEN);
+	const int displayHeight = GetSystemMetrics(SM_CYSCREEN);
+	const int windowPosX = (displayWidth / 2) - (m_windowWidth / 2);
+	const int windowPosY = (displayHeight / 2) - (m_windowHeight / 2);
+
+	m_window.setWindowPos(windowPosX, windowPosY);
 
 	m_window.setCallback();
 

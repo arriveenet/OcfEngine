@@ -10,6 +10,7 @@ public:
 	void destroy();
 	void close();
 
+	void setWindowPos(int posX, int posY);
 	void setCallback();
 	bool windowShouldClose();
 	void pollEvents();

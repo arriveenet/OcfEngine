@@ -32,6 +32,11 @@ void Window::close()
 	glfwSetWindowShouldClose(m_pWindow, GL_TRUE);
 }
 
+void Window::setWindowPos(int posX, int posY)
+{
+	glfwSetWindowPos(m_pWindow, posX, posY);
+}
+
 void Window::setCallback()
 {
 	glfwSetKeyCallback(m_pWindow, onKeyEvent);
