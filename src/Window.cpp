@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "Application.h"
+#include "base/Keyboard.h"
 
 Window::Window()
 	: m_pWindow(nullptr)
@@ -39,7 +40,7 @@ void Window::setWindowPos(int posX, int posY)
 
 void Window::setCallback()
 {
-	glfwSetKeyCallback(m_pWindow, onKeyEvent);
+	glfwSetKeyCallback(m_pWindow, Keyboard::onKeyEvent);
 }
 
 bool Window::windowShouldClose()
@@ -55,9 +56,4 @@ void Window::pollEvents()
 void Window::swapBuffers()
 {
 	glfwSwapBuffers(m_pWindow);
-}
-
-void Window::onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	Applicaiton::getInstance()->onKeyEnvet(key, scancode, action, mods);
 }

@@ -18,8 +18,5 @@ public:
 	void swapBuffers();
 
 private:
-	static void onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods);
-
-private:
 	GLFWwindow* m_pWindow;
 };

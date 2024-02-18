@@ -3,13 +3,13 @@
 #include "Application.h"
 #include "scene/MainScene.h"
 
-
 Game* Game::s_sharedGame = nullptr;
 
 Game::Game()
 	: m_running(false)
 	, m_pRenderer(nullptr)
 	, m_pScene(nullptr)
+	, m_input()
 {
 }
 
@@ -48,6 +48,8 @@ bool Game::init()
 
 	m_font.setText(500, 0, "Hello World!");
 
+	m_input.init();
+
 	return true;
 }
 
@@ -74,17 +76,22 @@ void Game::exit()
 	Applicaiton::getInstance()->exit();
 }
 
-void Game::onKeyEnvet(int key, int scancode, int action, int mods)
-{
-	// Escキーが押された場合、終了する
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		exit();
-}
-
-
 glm::vec2 Game::getVisibleSize()
 {
 	return Applicaiton::getInstance()->getWindowSize();
+}
+
+void Game::processInput()
+{
+	const InputState& inputState = m_input.getState();
+
+	if (inputState.keyboard.getKeyState(GLFW_KEY_ESCAPE) == ButtonState::Pressed) {
+		exit();
+	}
+
+	m_pScene->processInput(inputState);
+
+	m_input.update();
 }
 
 void Game::update()
@@ -94,8 +101,9 @@ void Game::update()
 	float deltaTime = static_cast<float>(Applicaiton::getInstance()->getTime() - currentTime);
 	//printf("deltaTime=%f\n", deltaTime);
 
-	currentTime = Applicaiton::getInstance()->getTime();
+	processInput();
 
+	currentTime = Applicaiton::getInstance()->getTime();
 	m_pScene->update(deltaTime);
 }
 

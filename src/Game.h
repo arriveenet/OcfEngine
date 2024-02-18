@@ -3,6 +3,7 @@
 #include "Scene/Scene.h"
 #include "renderer/Renderer.h"
 #include "base/Font.h"
+#include "base/Input.h"
 
 /**
  * @brief ƒQ[ƒ€ƒNƒ‰ƒX
@@ -25,11 +26,10 @@ public:
 	void mainLoop();
 	void exit();
 
-	void onKeyEnvet(int key, int scancode, int action, int mods);
-
 	glm::vec2 getVisibleSize();
 
 private:
+	void processInput();
 	void update();
 	void draw();
 
@@ -43,4 +43,5 @@ private:
 	Renderer* m_pRenderer;
 	Scene* m_pScene;
 	Font m_font;
+	Input m_input;
 };

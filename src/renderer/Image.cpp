@@ -17,7 +17,7 @@ namespace {
 
 		if ((pSource->offset + length) <= pSource->size) {
 			memcpy(data, pSource->pData + pSource->offset, length);
-			pSource->offset += length;
+			pSource->offset += static_cast<int>(length);
 		} else {
 			png_error(png_ptr, "pngReadCallback failed");
 		}
@@ -176,7 +176,7 @@ bool Image::initWidhtPngData(const unsigned char* pData, size_t dataSize)
 
 		rowbytes = png_get_rowbytes(png_ptr, info_ptr);
 
-		int dataLen = rowbytes * m_height;
+		const size_t dataLen = rowbytes * m_height;
 		m_pData = new unsigned char[dataLen * sizeof(unsigned char)];
 
 		for (int i = 0; i < m_height; i++) {

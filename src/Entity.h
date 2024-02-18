@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Component.h"
+#include "base/Input.h"
 #include <glm/glm.hpp>
 #include <vector>
 
@@ -21,6 +22,8 @@ public:
 	virtual ~Entity();
 
 	virtual bool init();
+
+	virtual void processInput(const InputState& inputState);
 
 	virtual void update(float deltaTime);
 	virtual void updateComponents(float deltaTime);

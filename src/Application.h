@@ -22,8 +22,6 @@ public:
 
 	glm::ivec2 getWindowSize() const;
 
-	void onKeyEnvet(int key, int scancode, int action, int mods);
-
 private:
 	Window m_window;
 	int m_windowWidth;

@@ -8,6 +8,13 @@ enum class PixelFormat {
 	NONE
 };
 
+enum class ButtonState {
+	None,
+	Pressed,
+	Released,
+	Held
+};
+
 
 struct Vertex2f {
 	glm::vec2 position;

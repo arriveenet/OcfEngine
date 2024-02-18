@@ -105,8 +105,3 @@ glm::ivec2 Applicaiton::getWindowSize() const
 {
 	return glm::ivec2(m_windowWidth, m_windowHeight);
 }
-
-void Applicaiton::onKeyEnvet(int key, int scancode, int action, int mods)
-{
-	Game::getInstance()->onKeyEnvet(key, scancode, action, mods);
-}

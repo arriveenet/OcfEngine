@@ -30,6 +30,13 @@ bool Entity::init()
 	return true;
 }
 
+void Entity::processInput(const InputState& inputState)
+{
+	for (auto& entity : m_entities) {
+		entity->processInput(inputState);
+	}
+}
+
 void Entity::update(float deltaTime)
 {
 	updateComponents(deltaTime);
