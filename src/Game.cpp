@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "scene/MainScene.h"
 
+
 Game* Game::s_sharedGame = nullptr;
 
 Game::Game()
@@ -42,6 +43,10 @@ bool Game::init()
 
 	m_pScene = new MainScene();
 	m_pScene->init();
+
+	m_font.init(".\\resource\\Consolas.fnt");
+
+	m_font.setText(500, 0, "Hello World!");
 
 	return true;
 }
@@ -97,4 +102,5 @@ void Game::update()
 void Game::draw()
 {
 	m_pRenderer->draw();
+	m_font.draw();
 }

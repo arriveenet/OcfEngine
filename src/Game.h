@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Scene/Scene.h"
 #include "renderer/Renderer.h"
+#include "base/Font.h"
 
 /**
  * @brief ƒQ[ƒ€ƒNƒ‰ƒX
@@ -41,4 +42,5 @@ private:
 	bool m_running;
 	Renderer* m_pRenderer;
 	Scene* m_pScene;
+	Font m_font;
 };

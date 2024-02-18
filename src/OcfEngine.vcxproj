@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="base\Font.cpp" />
     <ClCompile Include="base\Rect.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -149,6 +150,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="base\fnt.h" />
+    <ClInclude Include="base\Font.h" />
     <ClInclude Include="base\Rect.h" />
     <ClInclude Include="base\types.h" />
     <ClInclude Include="Camera.h" />

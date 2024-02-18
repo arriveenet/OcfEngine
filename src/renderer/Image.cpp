@@ -157,6 +157,9 @@ bool Image::initWidhtPngData(const unsigned char* pData, size_t dataSize)
 
 		// ピクセルフォーマットを設定
 		switch (colorType) {
+		case PNG_COLOR_TYPE_GRAY:
+			m_pixcelFormat = PixelFormat::GRAY;
+			break;
 		case PNG_COLOR_TYPE_RGB:
 			m_pixcelFormat = PixelFormat::RGB;
 			break;

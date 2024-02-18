@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 
 enum class PixelFormat {
+	GRAY,
 	RGB,
 	RGBA,
 	NONE
