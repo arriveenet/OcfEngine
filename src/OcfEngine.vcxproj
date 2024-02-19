@@ -131,14 +131,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="2d\Camera.cpp" />
+    <ClCompile Include="2d\Component.cpp" />
+    <ClCompile Include="2d\Entity.cpp" />
+    <ClCompile Include="2d\Label.cpp" />
+    <ClCompile Include="2d\Sprite.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="base\Font.cpp" />
     <ClCompile Include="base\Input.cpp" />
     <ClCompile Include="base\Keyboard.cpp" />
     <ClCompile Include="base\Rect.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
@@ -147,10 +149,14 @@
     <ClCompile Include="renderer\Texture2D.cpp" />
     <ClCompile Include="scene\MainScene.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
-    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="2d\Camera.h" />
+    <ClInclude Include="2d\Component.h" />
+    <ClInclude Include="2d\Entity.h" />
+    <ClInclude Include="2d\Label.h" />
+    <ClInclude Include="2d\Sprite.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="base\fnt.h" />
     <ClInclude Include="base\Font.h" />
@@ -158,9 +164,6 @@
     <ClInclude Include="base\Keyboard.h" />
     <ClInclude Include="base\Rect.h" />
     <ClInclude Include="base\types.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="renderer\Image.h" />
@@ -168,7 +171,6 @@
     <ClInclude Include="renderer\Texture2D.h" />
     <ClInclude Include="scene\MainScene.h" />
     <ClInclude Include="scene\Scene.h" />
-    <ClInclude Include="Sprite.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

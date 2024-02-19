@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Sprite.h"
+#include "2d/Sprite.h"
 
 /**
  * @brief レンダラークラス

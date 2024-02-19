@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "../Camera.h"
+#include "2d/Camera.h"
 
 class Scene : public Entity {
 public:
@@ -12,8 +12,6 @@ public:
 	virtual void update() = 0;
 	virtual void update(float deltaTime);
 	virtual void draw() = 0;
-
-	virtual void onKeyEnvet(int key, int scancode, int action, int mods) {};
 
 	virtual Camera* getDefaultCamera() { return &m_defaultCamera; }
 

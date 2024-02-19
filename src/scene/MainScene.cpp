@@ -42,8 +42,3 @@ void MainScene::update()
 void MainScene::draw()
 {
 }
-
-void MainScene::onKeyEnvet(int key, int scancode, int action, int mods)
-{
-
-}

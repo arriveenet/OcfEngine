@@ -31,18 +31,18 @@
     <Filter Include="ソース ファイル\base">
       <UniqueIdentifier>{2b377cda-b4ad-4a8c-b6dd-59c12e99b0da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\2d">
+      <UniqueIdentifier>{a4bb255a-6cee-4698-a8e9-984306053ca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\2d">
+      <UniqueIdentifier>{c35ca194-a9dc-4ae5-aec5-668e84ed69d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
@@ -63,12 +63,6 @@
     <ClCompile Include="Window.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="renderer\Texture2D.cpp">
       <Filter>ソース ファイル\renderer</Filter>
     </ClCompile>
@@ -87,15 +81,24 @@
     <ClCompile Include="base\Input.cpp">
       <Filter>ソース ファイル\base</Filter>
     </ClCompile>
+    <ClCompile Include="2d\Camera.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Component.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Entity.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Label.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Sprite.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
@@ -119,12 +122,6 @@
     <ClInclude Include="Window.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="renderer\Renderer.h">
       <Filter>ヘッダー ファイル\renderer</Filter>
     </ClInclude>
@@ -145,6 +142,21 @@
     </ClInclude>
     <ClInclude Include="base\Input.h">
       <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Camera.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Component.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Entity.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Label.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Sprite.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
