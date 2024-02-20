@@ -42,6 +42,11 @@ void Renderer::removeSprite(Sprite* pSprite)
 	}
 }
 
+void Renderer::addLabel(Label* pLabel)
+{
+	m_labels.push_back(pLabel);
+}
+
 void Renderer::draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -56,10 +61,20 @@ void Renderer::draw()
 	// Draw sprites
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	for (auto& sprite : m_sprites) {
 		sprite->draw();
 	}
+
+	for (auto& label : m_labels) {
+		label->draw();
+	}
+
 	glDisable(GL_TEXTURE_2D);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);

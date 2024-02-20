@@ -77,8 +77,23 @@ void Font::setText(float _x, float _y, const char* _format, ...)
 	}
 }
 
+const FntChars& Font::getChar(unsigned int id) const
+{
+	auto iter = m_chars.find(id);
+	if (iter != m_chars.end()) {
+		return iter->second;
+	}
+
+	static FntChars fntChar;
+	return fntChar;
+}
+
 void Font::draw()
 {
+	if (m_vertices.empty()) {
+		return;
+	}
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf((GLfloat*)&m_projection);
 

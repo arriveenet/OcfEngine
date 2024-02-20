@@ -1,8 +1,9 @@
 #include "MainScene.h"
-#include "Game.h"
-#include "renderer/Image.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
+#include "Game.h"
+#include "renderer/Image.h"
+#include "2d/Label.h"
 
 
 MainScene::MainScene()
@@ -31,12 +32,17 @@ bool MainScene::init()
 	sprite1->setPosition(size.x, size.y);
 	sprite2->setPosition(200, 200);
 
+	Label* label = Label::create("Hello World!");
+	addChild(label);
+
+	label->setPosition(700.0f, 0.0f);
+
 	return true;
 }
 
-void MainScene::update()
+void MainScene::update(float deltaTime)
 {
-
+	Entity::update(deltaTime);
 }
 
 void MainScene::draw()

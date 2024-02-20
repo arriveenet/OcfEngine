@@ -10,7 +10,7 @@ enum class FntBlockType : uint8_t {
 	Unknown = 6
 };
 
-#pragma pack(1)
+#pragma pack(push, 1)
 struct FntBlock {
 	FntBlockType type;
 	int32_t size;
@@ -63,4 +63,4 @@ struct FntKerningPairs {
 	short amount;
 };
 
-#pragma pack()
+#pragma pack(pop)

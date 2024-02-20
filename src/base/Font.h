@@ -16,6 +16,12 @@ public:
 
 	void setText(float _x, float _y, const char* _format, ...);
 
+	const FntChars& getChar(unsigned int id) const;
+	const FntInfo& getFntInfo() const {return m_fntInfo; }
+	const FntCommon& getFntCommon() const { return m_fntCommon; }
+
+	Texture2D* getTexture() const { return m_texture; }
+
 	void draw();
 
 protected:

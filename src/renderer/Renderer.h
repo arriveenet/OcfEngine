@@ -1,12 +1,14 @@
 #pragma once
 #include <vector>
 #include "2d/Sprite.h"
+#include "2d/Label.h"
 
 /**
  * @brief レンダラークラス
  */
 class Renderer {
 	std::vector<Sprite*> m_sprites;	//!< スプライト配列
+	std::vector<Label*> m_labels;
 
 public:
 	/** コンストラクター */
@@ -32,6 +34,8 @@ public:
 	 * @param pSprite	削除するスプライト
 	 */
 	void removeSprite(Sprite* pSprite);
+
+	void addLabel(Label* pLabel);
 
 	/** 描画処理を行う */
 	void draw();

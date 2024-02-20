@@ -7,6 +7,8 @@ Game* Game::s_sharedGame = nullptr;
 
 Game::Game()
 	: m_running(false)
+	, m_deltaTime(0.0f)
+	, m_lastUpdate()
 	, m_pRenderer(nullptr)
 	, m_pScene(nullptr)
 	, m_input()
@@ -38,6 +40,8 @@ Game* Game::getInstance()
 
 bool Game::init()
 {
+	m_lastUpdate = std::chrono::steady_clock::now();
+
 	m_pRenderer = new Renderer();
 	m_pRenderer->init();
 
@@ -45,8 +49,6 @@ bool Game::init()
 	m_pScene->init();
 
 	m_font.init(".\\resource\\Consolas.fnt");
-
-	m_font.setText(500, 0, "Hello World!");
 
 	m_input.init();
 
@@ -96,19 +98,33 @@ void Game::processInput()
 
 void Game::update()
 {
-	static double currentTime;
-	Sleep(16);
-	float deltaTime = static_cast<float>(Applicaiton::getInstance()->getTime() - currentTime);
-	//printf("deltaTime=%f\n", deltaTime);
+	calculateDeltaTime();
+	//printf("deltaTime: %f\n", m_deltaTime);
+
+	m_frames++;
+	m_accumulator += m_deltaTime;
+
+	if (m_accumulator > 0.5f) {
+		//printf("FPS: %.1fn", m_frames / m_accumDt);
+
+		m_frames = 0;
+		m_accumulator = 0.0f;
+	}
 
 	processInput();
 
-	currentTime = Applicaiton::getInstance()->getTime();
-	m_pScene->update(deltaTime);
+	m_pScene->update(m_deltaTime);
 }
 
 void Game::draw()
 {
 	m_pRenderer->draw();
 	m_font.draw();
+}
+
+void Game::calculateDeltaTime()
+{
+	auto now = std::chrono::steady_clock::now();
+	m_deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(now - m_lastUpdate).count() / 1000000.0f;
+	m_lastUpdate = now;
 }

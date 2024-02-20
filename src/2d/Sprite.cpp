@@ -31,6 +31,8 @@ Sprite::~Sprite()
 {
 	delete m_texture;
 	m_texture = nullptr;
+
+	Game::getInstance()->getRenderer()->removeSprite(this);
 }
 
 bool Sprite::init()
@@ -87,8 +89,8 @@ void Sprite::draw()
 	glColor3ub(0xff, 0xff, 0xff);
 
 	// 頂点データの配列を定義
-	glVertexPointer(2, GL_FLOAT, sizeof(Vertex2f), &m_vertices[0].position);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex2f), &m_vertices[0].texCoord);
+	glVertexPointer(2, GL_FLOAT, sizeof(Vertex2fT2f), &m_vertices[0].position);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex2fT2f), &m_vertices[0].texCoord);
 
 	// テクスチャを設定
 	if (m_texture)

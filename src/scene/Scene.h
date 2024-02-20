@@ -9,8 +9,7 @@ public:
 
 	virtual bool init();
 
-	virtual void update() = 0;
-	virtual void update(float deltaTime);
+	void update(float deltaTime) override;
 	virtual void draw() = 0;
 
 	virtual Camera* getDefaultCamera() { return &m_defaultCamera; }
