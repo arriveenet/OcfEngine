@@ -1,6 +1,6 @@
 #include "Renderer.h"
 #include "Game.h"
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
 
 OCF_BEGIN

@@ -112,13 +112,17 @@ void Sprite::draw()
 	}
 	glEnd();
 
-	glBegin(GL_LINE_LOOP);
-	{
-		glVertex2fv((GLfloat*)&m_quad.topLeft.position);
-		glVertex2fv((GLfloat*)&m_quad.bottomLeft.position);
-		glVertex2fv((GLfloat*)&m_quad.bottomRight.position);
-		glVertex2fv((GLfloat*)&m_quad.topRight.position);
-	}
+	// ポリンゴンをワイヤーフレームで描画
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, indices);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	glEnable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
+
 	glEnd();
 #endif
 
