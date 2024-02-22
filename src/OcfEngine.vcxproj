@@ -152,6 +152,7 @@
     <ClCompile Include="renderer\Image.cpp" />
     <ClCompile Include="renderer\Renderer.cpp" />
     <ClCompile Include="renderer\Texture2D.cpp" />
+    <ClCompile Include="renderer\TextureAtlas.cpp" />
     <ClCompile Include="renderer\TextureManager.cpp" />
     <ClCompile Include="scene\MainScene.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="renderer\Image.h" />
     <ClInclude Include="renderer\Renderer.h" />
     <ClInclude Include="renderer\Texture2D.h" />
+    <ClInclude Include="renderer\TextureAtlas.h" />
     <ClInclude Include="renderer\TextureManager.h" />
     <ClInclude Include="scene\MainScene.h" />
     <ClInclude Include="scene\Scene.h" />

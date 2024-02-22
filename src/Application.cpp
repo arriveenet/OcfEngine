@@ -51,7 +51,11 @@ bool Applicaiton::init()
 
 	m_window.setCallback();
 
-	gladLoadGL();
+	const int status = gladLoadGL();
+	if (status != 1) {
+		return false;
+	}
+	printf("GL %d.%d\n", GLVersion.major, GLVersion.minor);
 
 	glfwSwapInterval(1);
 
