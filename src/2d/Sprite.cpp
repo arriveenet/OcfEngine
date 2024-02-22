@@ -3,7 +3,7 @@
 #include "renderer/Texture2D.h"
 #include <GLFW/glfw3.h>
 
-#define SPRITE_DEBUG
+#define SPRITE_DEBUG_DRAW
 
 using namespace glm;
 
@@ -14,15 +14,16 @@ Sprite::Sprite(int drawOrder)
 	, m_texture(nullptr)
 {
 	m_size = { 2.0f, 2.0f };
-	m_vertices[0].position = { -1.0f, -1.0f };
-	m_vertices[1].position = {  1.0f, -1.0f };
-	m_vertices[2].position = {  1.0f,  1.0f };
-	m_vertices[3].position = { -1.0f,  1.0f };
 
-	m_vertices[0].texCoord = { 0.0f, 0.0f };	// 左下
-	m_vertices[1].texCoord = { 1.0f, 0.0f };	// 右下
-	m_vertices[2].texCoord = { 1.0f, 1.0f };	// 右上
-	m_vertices[3].texCoord = { 0.0f, 1.0f };	// 左上
+	m_quad.topLeft.position		= { 0.0f, 0.0f, 0.0f };
+	m_quad.bottomLeft.position	= { 0.0f, 0.0f, 0.0f };
+	m_quad.topRight.position	= { 0.0f, 0.0f, 0.0f };
+	m_quad.bottomRight.position	= { 0.0f, 0.0f, 0.0f };
+
+	m_quad.topLeft.texCoord		= { 0.0f, 1.0f };
+	m_quad.bottomLeft.texCoord	= { 0.0f, 0.0f };
+	m_quad.topRight.texCoord	= { 1.0f, 1.0f };
+	m_quad.bottomRight.texCoord	= { 1.0f, 0.0f };
 
 	Game::getInstance()->getRenderer()->addSprite(this);
 }
@@ -89,18 +90,20 @@ void Sprite::draw()
 	glColor3ub(0xff, 0xff, 0xff);
 
 	// 頂点データの配列を定義
-	glVertexPointer(2, GL_FLOAT, sizeof(Vertex2fT2f), &m_vertices[0].position);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex2fT2f), &m_vertices[0].texCoord);
+	glVertexPointer(3, GL_FLOAT, sizeof(Vertex3fT2f), &m_quad.topLeft.position);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex3fT2f), &m_quad.topLeft.texCoord);
 
 	// テクスチャを設定
 	if (m_texture)
 		m_texture->setActive();
 
 	// レンダリング
-	glDrawArrays(GL_QUADS, 0, 4);
+	//glDrawArrays(GL_QUADS, 0, 4);
+	static unsigned char indices[] = { 0, 1, 2, 3, 2, 1 };
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, indices);
 
 	// スプライトデバッグ表示
-#ifdef SPRITE_DEBUG
+#ifdef SPRITE_DEBUG_DRAW
 	glColor3ub(0x00, 0xff, 0x00);
 	glPointSize(3.0f);
 	glBegin(GL_POINTS);
@@ -109,16 +112,12 @@ void Sprite::draw()
 	}
 	glEnd();
 
-	glBegin(GL_LINES);
+	glBegin(GL_LINE_LOOP);
 	{
-		glVertex2fv((GLfloat*)&m_vertices[0].position);
-		glVertex2fv((GLfloat*)&m_vertices[1].position);
-		glVertex2fv((GLfloat*)&m_vertices[1].position);
-		glVertex2fv((GLfloat*)&m_vertices[2].position);
-		glVertex2fv((GLfloat*)&m_vertices[2].position);
-		glVertex2fv((GLfloat*)&m_vertices[3].position);
-		glVertex2fv((GLfloat*)&m_vertices[3].position);
-		glVertex2fv((GLfloat*)&m_vertices[0].position);
+		glVertex2fv((GLfloat*)&m_quad.topLeft.position);
+		glVertex2fv((GLfloat*)&m_quad.bottomLeft.position);
+		glVertex2fv((GLfloat*)&m_quad.bottomRight.position);
+		glVertex2fv((GLfloat*)&m_quad.topRight.position);
 	}
 	glEnd();
 #endif
@@ -158,21 +157,21 @@ void Sprite::updatePolygon()
 	float offsetY = m_size.y / 2.0f;
 	glm::vec2 lb = { m_position.x - offsetX, m_position.y - offsetY };
 	glm::vec2 rt = { m_position.x + offsetX, m_position.y + offsetY };
-	
-	m_vertices[0].position = lb;
-	m_vertices[1].position = { rt.x, lb.y };
-	m_vertices[2].position = rt;
-	m_vertices[3].position = { lb.x, rt.y };
+
+	m_quad.topLeft.position = { lb.x, rt.y, 0.0f };
+	m_quad.bottomLeft.position = { lb , 0.0f};
+	m_quad.topRight.position = { rt, 0.0f };
+	m_quad.bottomRight.position = { rt.x, lb.y, 0.0f };
 }
 
 void Sprite::flipX()
 {
-	std::swap(m_vertices[0].texCoord, m_vertices[1].texCoord);
-	std::swap(m_vertices[2].texCoord, m_vertices[3].texCoord);
+	std::swap(m_quad.topLeft.texCoord, m_quad.topRight.texCoord);
+	std::swap(m_quad.bottomLeft.texCoord, m_quad.bottomRight.texCoord);
 }
 
 void Sprite::flipY()
 {
-	std::swap(m_vertices[0].texCoord, m_vertices[3].texCoord);
-	std::swap(m_vertices[1].texCoord, m_vertices[2].texCoord);
+	std::swap(m_quad.topLeft.texCoord, m_quad.bottomLeft.texCoord);
+	std::swap(m_quad.topRight.texCoord, m_quad.bottomRight.texCoord);
 }

@@ -37,9 +37,9 @@ protected:
 
 protected:
 	int m_drawOrder;
+	QuadV3fT2f m_quad;
 	Rect m_rect;
 	bool m_flippedX;
 	bool m_flippedY;
-	Vertex2fT2f m_vertices[4];
 	Texture2D* m_texture;
 };
