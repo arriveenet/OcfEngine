@@ -1,7 +1,7 @@
 #include "Sprite.h"
 #include "Game.h"
 #include "renderer/Texture2D.h"
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 #define SPRITE_DEBUG_DRAW
 

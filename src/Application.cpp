@@ -51,6 +51,8 @@ bool Applicaiton::init()
 
 	m_window.setCallback();
 
+	gladLoadGL();
+
 	glfwSwapInterval(1);
 
 	return true;
