@@ -15,5 +15,5 @@ void Input::prepareUpdate()
 
 void Input::update()
 {
-	memcpy(m_inputState.keyboard.m_prevState, m_inputState.keyboard.m_currentState, GLFW_KEY_LAST);
+	memcpy(m_inputState.keyboard.m_prevState, m_inputState.keyboard.m_currentState, KEY_CODE_MAX);
 }

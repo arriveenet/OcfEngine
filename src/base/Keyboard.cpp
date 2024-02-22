@@ -1,9 +1,10 @@
 #include "Keyboard.h"
 #include <cstring>
 #include <cstdio>
+#include <GLFW/glfw3.h>
 
-uint8_t Keyboard::m_currentState[GLFW_KEY_LAST];
-uint8_t Keyboard::m_prevState[GLFW_KEY_LAST];
+uint8_t Keyboard::m_currentState[KEY_CODE_MAX];
+uint8_t Keyboard::m_prevState[KEY_CODE_MAX];
 
 void Keyboard::onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
