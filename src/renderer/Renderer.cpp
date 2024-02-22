@@ -3,6 +3,8 @@
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
+OCF_BEGIN
+
 Renderer::Renderer()
 {
 }
@@ -71,11 +73,29 @@ void Renderer::draw()
 		sprite->draw();
 	}
 
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);
+
+	// Draw labels
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	for (auto& label : m_labels) {
 		label->draw();
 	}
 
+	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
+
 }
+
+OCF_END

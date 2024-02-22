@@ -4,6 +4,8 @@
 #include <glm/glm.hpp>
 #include <string>
 
+OCF_BEGIN
+
 class Texture2D : public GameObject {
 public:
 	Texture2D();
@@ -22,3 +24,5 @@ private:
 	PixelFormat m_pixelFormat;
 	glm::vec2 m_size;
 };
+
+OCF_END

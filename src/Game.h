@@ -6,6 +6,8 @@
 #include "base/Font.h"
 #include "base/Input.h"
 
+OCF_BEGIN
+
 /**
  * @brief ゲームクラス
  * ゲームの状態管理などを行うシングルトンクラス。
@@ -56,3 +58,5 @@ private:
 	Font m_font;
 	Input m_input;
 };
+
+OCF_END

@@ -5,6 +5,8 @@
 
 #pragma comment(lib, "opengl32.lib")
 
+using namespace ocf;
+
 int main(int argc, char** argv)
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -12,8 +14,6 @@ int main(int argc, char** argv)
 
 	Applicaiton* app = Applicaiton::getInstance();
 	result = app->run();
-
-	_CrtDumpMemoryLeaks();
 
 	return result;
 }

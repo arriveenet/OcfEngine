@@ -3,6 +3,9 @@
 #include <vector>
 #include "2d/Entity.h"
 #include "base/types.h"
+#include "base/Macros.h"
+
+OCF_BEGIN
 
 class Label : public Entity {
 public:
@@ -21,6 +24,11 @@ protected:
 
 protected:
 	std::string m_text;
+
+	bool m_isUpdate;
+
 	std::vector<QuadV3fT2f> m_quads;
-	std::vector<unsigned int> m_indices;
+	std::vector<unsigned short> m_indices;
 };
+
+OCF_END

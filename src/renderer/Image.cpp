@@ -4,6 +4,8 @@
 
 #include <libpng16/png.h>
 
+OCF_BEGIN
+
 namespace {
 	struct ImageSource {
 		const unsigned char* pData;
@@ -219,3 +221,5 @@ bool Image::isPng(const unsigned char* pData, size_t dataSize)
 
 	return memcmp(PNG_SIGNATURE, pData, sizeof(PNG_SIGNATURE)) == 0;
 }
+
+OCF_END

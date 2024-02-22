@@ -1,6 +1,8 @@
 #include "GameObject.h"
 #include <iostream>
 
+OCF_BEGIN
+
 GameObject::GameObject()
 {
 	static unsigned int objectCount = 0;
@@ -25,3 +27,5 @@ void GameObject::release()
 		delete this;
 	}
 }
+
+OCF_END

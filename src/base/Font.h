@@ -7,6 +7,8 @@
 #include "renderer/Texture2D.h"
 #include "fnt.h"
 
+OCF_BEGIN
+
 class Font : GameObject {
 public:
 	Font();
@@ -48,3 +50,5 @@ private:
 	std::unordered_map<unsigned int, FntChars> m_chars;
 	std::vector<FontVertex> m_vertices;
 };
+
+OCF_END

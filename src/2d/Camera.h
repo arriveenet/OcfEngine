@@ -1,6 +1,8 @@
 #pragma once
 #include "Entity.h"
 
+OCF_BEGIN
+
 class Camera : public Entity {
 public:
 	Camera();
@@ -14,3 +16,5 @@ protected:
 	glm::mat4 m_projection;
 	glm::mat4 m_view;
 };
+
+OCF_END

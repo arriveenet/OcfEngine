@@ -1,5 +1,8 @@
 #pragma once
 #include <glm/glm.hpp>
+#include "base/Macros.h"
+
+OCF_BEGIN
 
 enum class PixelFormat {
 	GRAY,
@@ -32,3 +35,5 @@ struct QuadV3fT2f {
 	Vertex3fT2f topRight;
 	Vertex3fT2f bottomRight;
 };
+
+OCF_END

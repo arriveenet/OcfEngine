@@ -1,6 +1,8 @@
 #pragma once
 #include <stdint.h>
 
+OCF_BEGIN
+
 enum class FntBlockType : uint8_t {
 	Info = 1,
 	Common = 2,
@@ -64,3 +66,5 @@ struct FntKerningPairs {
 };
 
 #pragma pack(pop)
+
+OCF_END

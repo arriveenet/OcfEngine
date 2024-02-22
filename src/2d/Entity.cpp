@@ -1,5 +1,7 @@
 #include "Entity.h"
 
+OCF_BEGIN
+
 Entity::Entity()
 	: m_state(State::Active)
 	, m_position()
@@ -151,3 +153,5 @@ void Entity::removeComponent(Component* pComponent)
 		m_components.erase(iter);
 	}
 }
+
+OCF_END

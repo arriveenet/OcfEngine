@@ -2,6 +2,8 @@
 #include "Game.h"
 #include "Scene/MainScene.h"
 
+OCF_BEGIN
+
 class Game;
 
 Applicaiton* g_pApplication = nullptr;
@@ -105,3 +107,5 @@ glm::ivec2 Applicaiton::getWindowSize() const
 {
 	return glm::ivec2(m_windowWidth, m_windowHeight);
 }
+
+OCF_END

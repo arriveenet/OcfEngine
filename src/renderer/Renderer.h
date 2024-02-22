@@ -3,6 +3,8 @@
 #include "2d/Sprite.h"
 #include "2d/Label.h"
 
+OCF_BEGIN
+
 /**
  * @brief レンダラークラス
  */
@@ -40,3 +42,5 @@ public:
 	/** 描画処理を行う */
 	void draw();
 };
+
+OCF_END

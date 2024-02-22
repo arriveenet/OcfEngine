@@ -7,6 +7,8 @@
 
 using namespace glm;
 
+OCF_BEGIN
+
 Sprite::Sprite(int drawOrder)
 	: m_drawOrder(drawOrder)
 	, m_flippedX(false)
@@ -175,3 +177,5 @@ void Sprite::flipY()
 	std::swap(m_quad.topLeft.texCoord, m_quad.bottomLeft.texCoord);
 	std::swap(m_quad.topRight.texCoord, m_quad.bottomRight.texCoord);
 }
+
+OCF_END

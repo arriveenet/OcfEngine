@@ -1,4 +1,7 @@
 #pragma once
+#include"base/Macros.h"
+
+OCF_BEGIN
 
 class Entity;
 
@@ -14,3 +17,5 @@ protected:
 	Entity* m_pOwner;
 	int m_updateOrder;
 };
+
+OCF_END

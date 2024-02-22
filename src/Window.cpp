@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "base/Keyboard.h"
 
+OCF_BEGIN
+
 Window::Window()
 	: m_pWindow(nullptr)
 {
@@ -40,7 +42,7 @@ void Window::setWindowPos(int posX, int posY)
 
 void Window::setCallback()
 {
-	glfwSetKeyCallback(m_pWindow, Keyboard::onKeyEvent);
+	glfwSetKeyCallback(m_pWindow, ocf::Keyboard::onKeyEvent);
 }
 
 bool Window::windowShouldClose()
@@ -57,3 +59,5 @@ void Window::swapBuffers()
 {
 	glfwSwapBuffers(m_pWindow);
 }
+
+OCF_END

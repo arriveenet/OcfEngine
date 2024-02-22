@@ -1,5 +1,7 @@
 #include "Rect.h"
 
+OCF_BEGIN
+
 Rect::Rect()
 {
 	setRect(0.0f, 0.0f, 0.0f, 0.0f);
@@ -75,3 +77,5 @@ bool Rect::intersect(const Rect& rect) const
 	}
 	return false;
 }
+
+OCF_END

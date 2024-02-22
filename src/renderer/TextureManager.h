@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "Texture2D.h"
 
+OCF_BEGIN
+
 class TextureManager : public GameObject {
 public:
 	TextureManager();
@@ -14,3 +16,5 @@ public:
 private:
 	std::unordered_map<std::string, Texture2D*> m_textures;
 };
+
+OCF_END

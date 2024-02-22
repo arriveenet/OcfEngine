@@ -1,9 +1,11 @@
 #pragma once
 #include "types.h"
 
-#define KEY_CODE_MAX	348
+#define KEY_CODE_MAX	34
 
 struct GLFWwindow;
+
+OCF_BEGIN
 
 class Keyboard {
 public:
@@ -17,3 +19,5 @@ private:
 	static uint8_t m_currentState[KEY_CODE_MAX];
 	static uint8_t m_prevState[KEY_CODE_MAX];
 };
+
+OCF_END

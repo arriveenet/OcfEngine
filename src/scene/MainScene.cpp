@@ -5,6 +5,7 @@
 #include "renderer/Image.h"
 #include "2d/Label.h"
 
+USING_OCF
 
 MainScene::MainScene()
 {
@@ -23,8 +24,8 @@ bool MainScene::init()
 
 	sprite1->initWithFile(".\\resource\\25_Crono.png");
 	sprite2->initWithFile(".\\resource\\25_Crono.png");
-	addChild(sprite1);
-	addChild(sprite2);
+	this->addChild(sprite1);
+	this->addChild(sprite2);
 
 	glm::vec2 size = Game::getInstance()->getVisibleSize();
 	size /= 2.0f;
@@ -33,7 +34,7 @@ bool MainScene::init()
 	sprite2->setPosition(200, 200);
 
 	Label* label = Label::create("Hello World!");
-	addChild(label);
+	this->addChild(label);
 
 	label->setPosition(700.0f, 0.0f);
 

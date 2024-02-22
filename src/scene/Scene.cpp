@@ -1,5 +1,7 @@
 #include "Scene.h"
 
+OCF_BEGIN
+
 Scene::Scene()
 {
 }
@@ -18,3 +20,5 @@ bool Scene::init()
 void Scene::update(float deltaTime)
 {
 }
+
+OCF_END

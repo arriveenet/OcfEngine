@@ -1,4 +1,7 @@
 #pragma once
+#include "base/Macros.h"
+
+OCF_BEGIN
 
 class GameObject {
 public:
@@ -12,3 +15,5 @@ public:
 private:
 	unsigned int m_id;
 };
+
+OCF_END

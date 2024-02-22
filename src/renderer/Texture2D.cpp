@@ -2,6 +2,8 @@
 #include "Image.h"
 #include <GLFW/glfw3.h>
 
+OCF_BEGIN
+
 static GLenum convertPixelFormatToOpneGLFormat(PixelFormat format)
 {
 	GLenum result = 0;
@@ -98,3 +100,5 @@ int Texture2D::getHeight() const
 {
 	return m_height;
 }
+
+OCF_END

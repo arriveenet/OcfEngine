@@ -2,6 +2,8 @@
 #include "2d/Sprite.h"
 #include "2d/Label.h"
 
+OCF_BEGIN
+
 class MainScene : public Scene {
 public:
 	MainScene();
@@ -12,3 +14,5 @@ public:
 	void update(float deltaTime) override;
 	void draw() override;
 };
+
+OCF_END

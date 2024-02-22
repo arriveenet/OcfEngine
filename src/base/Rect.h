@@ -1,5 +1,8 @@
 #pragma once
 #include <glm/glm.hpp>
+#include "base/Macros.h"
+
+OCF_BEGIN
 
 class Rect {
 public:
@@ -27,3 +30,5 @@ public:
 
 	bool intersect(const Rect& rect) const;
 };
+
+OCF_END

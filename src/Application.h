@@ -3,6 +3,8 @@
 #include "Window.h"
 #include "Scene/Scene.h"
 
+OCF_BEGIN
+
 class Applicaiton {
 public:
 	static Applicaiton* getInstance();
@@ -27,3 +29,5 @@ private:
 	int m_windowWidth;
 	int m_windowHeight;
 };
+
+OCF_END

@@ -2,6 +2,8 @@
 #include "types.h"
 #include "Keyboard.h"
 
+OCF_BEGIN
+
 struct InputState {
 	Keyboard keyboard;
 };
@@ -18,3 +20,5 @@ public:
 private:
 	InputState m_inputState;
 };
+
+OCF_END

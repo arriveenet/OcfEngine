@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "scene/MainScene.h"
 
+OCF_BEGIN
+
 Game* Game::s_sharedGame = nullptr;
 
 Game::Game()
@@ -128,3 +130,5 @@ void Game::calculateDeltaTime()
 	m_deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(now - m_lastUpdate).count() / 1000000.0f;
 	m_lastUpdate = now;
 }
+
+OCF_END

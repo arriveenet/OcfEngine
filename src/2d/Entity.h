@@ -5,6 +5,8 @@
 #include <glm/glm.hpp>
 #include <vector>
 
+OCF_BEGIN
+
 /**
  * @brief エンティティクラス
  */
@@ -69,3 +71,5 @@ protected:
 	std::vector<Entity*> m_entities;
 	std::vector<Component*> m_components;
 };
+
+OCF_END

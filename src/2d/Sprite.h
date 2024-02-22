@@ -5,6 +5,8 @@
 #include "base/Rect.h"
 #include <string>
 
+OCF_BEGIN
+
 class Texture2D;
 
 class Sprite : public Entity {
@@ -43,3 +45,5 @@ protected:
 	bool m_flippedY;
 	Texture2D* m_texture;
 };
+
+OCF_END

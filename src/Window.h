@@ -1,6 +1,9 @@
 #pragma once
 #include <Windows.h>
 #include <GLFW/glfw3.h>
+#include "base/Macros.h"
+
+OCF_BEGIN
 
 class Window {
 public:
@@ -20,3 +23,5 @@ public:
 private:
 	GLFWwindow* m_pWindow;
 };
+
+OCF_END

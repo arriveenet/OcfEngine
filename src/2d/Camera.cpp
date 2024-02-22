@@ -2,6 +2,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Application.h"
 
+OCF_BEGIN
+
 Camera::Camera()
 {
 }
@@ -23,3 +25,5 @@ const glm::mat4 Camera::getProjectionMatrix() const
 {
 	return m_projection;
 }
+
+OCF_END

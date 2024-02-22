@@ -6,6 +6,8 @@
 #include <glm/gtx/transform.hpp>
 #include "Game.h"
 
+OCF_BEGIN
+
 using namespace glm;
 
 Font::Font()
@@ -54,6 +56,8 @@ void Font::setText(float _x, float _y, const char* _format, ...)
 	va_end(ap);
 
 	vec3 drawPosition = { _x, _y, 0 };
+
+	m_vertices.clear();
 
 	for (p = str; (*p != '\0') && (*p != '\n'); p++) {
 		FntChars& fntChar = m_chars.at(*p);
@@ -224,3 +228,5 @@ void Font::readFntChars(FntBlock& fntBlock, FILE* pFile)
 		m_chars.insert(std::make_pair(fntChar.id, fntChar));
 	}
 }
+
+OCF_END

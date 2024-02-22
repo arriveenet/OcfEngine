@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "base/types.h"
 
+OCF_BEGIN
+
 class Image : public GameObject {
 public:
 	enum class Format {
@@ -40,3 +42,5 @@ protected:
 	PixelFormat m_pixcelFormat;
 	std::string m_filePath;
 };
+
+OCF_END
