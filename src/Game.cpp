@@ -13,6 +13,7 @@ Game::Game()
 	, m_lastUpdate()
 	, m_pRenderer(nullptr)
 	, m_pScene(nullptr)
+	, m_pTextureManager(nullptr)
 	, m_input()
 {
 }
@@ -22,6 +23,10 @@ Game::~Game()
 	// シーンを解放
 	delete m_pScene;
 	m_pScene = nullptr;
+
+	// テクスチャーマネージャーを解放
+	delete m_pTextureManager;
+	m_pTextureManager = nullptr;
 
 	// レンダラーを解放
 	delete m_pRenderer;
@@ -46,6 +51,8 @@ bool Game::init()
 
 	m_pRenderer = new Renderer();
 	m_pRenderer->init();
+
+	m_pTextureManager = new TextureManager();
 
 	m_pScene = new MainScene();
 	m_pScene->init();

@@ -32,9 +32,6 @@ Sprite::Sprite(int drawOrder)
 
 Sprite::~Sprite()
 {
-	delete m_texture;
-	m_texture = nullptr;
-
 	Game::getInstance()->getRenderer()->removeSprite(this);
 }
 
@@ -45,8 +42,9 @@ bool Sprite::init()
 
 bool Sprite::initWithFile(const std::string& filename)
 {
-	m_texture = new Texture2D();
-	if (!m_texture->initWithFile(filename)) {
+	m_texture = Game::getInstance()->getTextureManager()->addImage(filename);
+
+	if (!m_texture) {
 		delete m_texture;
 		m_texture = nullptr;
 		return false;

@@ -2,9 +2,10 @@
 #include <chrono>
 #include "GameObject.h"
 #include "Scene/Scene.h"
-#include "renderer/Renderer.h"
 #include "base/Font.h"
 #include "base/Input.h"
+#include "renderer/Renderer.h"
+#include "renderer/TextureManager.h"
 
 OCF_BEGIN
 
@@ -41,6 +42,7 @@ protected:
 public:
 	Renderer* getRenderer() const { return m_pRenderer; }
 	Scene* getCurrentScene() const { return m_pScene; }
+	TextureManager* getTextureManager() const { return m_pTextureManager; }
 	Font* getFont() { return &m_font; }
 
 private:
@@ -55,6 +57,8 @@ private:
 
 	Renderer* m_pRenderer;
 	Scene* m_pScene;
+	TextureManager* m_pTextureManager;
+
 	Font m_font;
 	Input m_input;
 };
