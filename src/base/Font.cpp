@@ -48,51 +48,6 @@ bool Font::init(const std::string& filename)
 	return true;
 }
 
-
-void Font::setText(float _x, float _y, const char* _format, ...)
-{
-	va_list ap;
-	char str[256];
-	char* p;
-
-	va_start(ap, _format);
-	vsprintf_s(str, _format, ap);
-	va_end(ap);
-
-	vec3 drawPosition = { _x, _y, 0 };
-
-	m_vertices.clear();
-
-	for (p = str; (*p != '\0') && (*p != '\n'); p++) {
-		FntChars& fntChar = m_chars.at(*p);
-
-		float tx0 = static_cast<float>(fntChar.x) / m_fntCommon.scaleW;
-		float ty0 = static_cast<float>(fntChar.y) / m_fntCommon.scaleH;
-		float tx1 = static_cast<float>((fntChar.x) + fntChar.width) / m_fntCommon.scaleW;
-		float ty1 = static_cast<float>((fntChar.y) + fntChar.height) / m_fntCommon.scaleH;
-
-		FontVertex vertix[4] = {};
-		vertix[0].position = drawPosition + vec3(fntChar.xoffset, fntChar.yoffset, 0);
-		vertix[0].texCoord = vec2(tx0, ty0);
-
-		vertix[1].position = drawPosition + vec3(fntChar.xoffset, fntChar.height + fntChar.yoffset, 0);
-		vertix[1].texCoord = vec2(tx0, ty1);
-
-		vertix[2].position = drawPosition + vec3(fntChar.width + fntChar.xoffset, fntChar.height + fntChar.yoffset, 0);
-		vertix[2].texCoord = vec2(tx1, ty1);
-
-		vertix[3].position = drawPosition + vec3(fntChar.width + fntChar.xoffset, fntChar.yoffset, 0);
-		vertix[3].texCoord = vec2(tx1, ty0);;
-
-		int index[] = { 0,1,2,0,2,3 };
-		for (int i = 0; i < 6; i++) {
-			m_vertices.push_back(vertix[index[i]]);
-		}
-
-		drawPosition.x += fntChar.xadvance;
-	}
-}
-
 const FntChars& Font::getChar(unsigned int id) const
 {
 	auto iter = m_chars.find(id);
@@ -103,42 +58,6 @@ const FntChars& Font::getChar(unsigned int id) const
 	assert(false);
 	static FntChars fntChar;
 	return fntChar;
-}
-
-void Font::draw()
-{
-	if (m_vertices.empty()) {
-		return;
-	}
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf((GLfloat*)&m_projection);
-
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-
-	glBlendFunc(
-		GL_SRC_ALPHA,           // GLenum sfactor
-		GL_ONE_MINUS_SRC_ALPHA);// GLenum dfactor
-
-	m_texture->setActive();
-
-	glVertexPointer(3, GL_FLOAT, sizeof(FontVertex), &m_vertices[0].position);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(FontVertex), &m_vertices[0].texCoord);
-
-	glDrawArrays(GL_TRIANGLES, 0, (GLsizei)m_vertices.size());
-
-	glDisable(GL_TEXTURE_2D);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-
-	glPopMatrix();
 }
 
 bool Font::parseFntFile(const std::string& fntFile)

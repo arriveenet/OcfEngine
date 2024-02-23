@@ -17,15 +17,11 @@ public:
 
 	bool init(const std::string& filename);
 
-	void setText(float _x, float _y, const char* _format, ...);
-
 	const FntChars& getChar(unsigned int id) const;
 	const FntInfo& getFntInfo() const {return m_fntInfo; }
 	const FntCommon& getFntCommon() const { return m_fntCommon; }
 
 	Texture2D* getTexture() const { return m_texture; }
-
-	void draw();
 
 protected:
 	bool parseFntFile(const std::string& fntFile);
@@ -38,12 +34,7 @@ protected:
 
 	void setupTextureAtlas(const std::string& filename);
 
-private:
-	struct FontVertex {
-		glm::vec3 position;
-		glm::vec2 texCoord;
-	};
-	
+private:	
 	glm::mat4 m_projection;
 	Texture2D* m_texture;
 	TextureAtlas* m_textureAtlas = nullptr;
@@ -52,7 +43,6 @@ private:
 	std::string m_fontName;
 	std::string m_pageName;
 	std::unordered_map<unsigned int, FntChars> m_chars;
-	std::vector<FontVertex> m_vertices;
 	std::vector<QuadV3fT2f> m_quads;
 };
 

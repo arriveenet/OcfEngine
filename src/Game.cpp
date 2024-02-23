@@ -141,7 +141,6 @@ void Game::update()
 void Game::draw()
 {
 	m_pRenderer->draw();
-	m_font.draw();
 }
 
 void Game::calculateDeltaTime()
