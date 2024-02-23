@@ -22,6 +22,8 @@ Font::~Font()
 {
 	m_chars.clear();
 
+	m_textureAtlas->release();
+
 	delete m_texture;
 	m_texture = nullptr;
 }
@@ -40,6 +42,8 @@ bool Font::init(const std::string& filename)
 
 	vec2 windowSize = Game::getInstance()->getVisibleSize();
 	m_projection = glm::ortho(0.0f, windowSize.x, windowSize.y, 0.0f);
+
+	setupTextureAtlas(".\\resource\\Consolas_0.png");
 
 	return true;
 }
@@ -62,15 +66,23 @@ void Font::setText(float _x, float _y, const char* _format, ...)
 	for (p = str; (*p != '\0') && (*p != '\n'); p++) {
 		FntChars& fntChar = m_chars.at(*p);
 
-		FontVertex vertix[4];
+		float tx0 = static_cast<float>(fntChar.x) / m_fntCommon.scaleW;
+		float ty0 = static_cast<float>(fntChar.y) / m_fntCommon.scaleH;
+		float tx1 = static_cast<float>((fntChar.x) + fntChar.width) / m_fntCommon.scaleW;
+		float ty1 = static_cast<float>((fntChar.y) + fntChar.height) / m_fntCommon.scaleH;
+
+		FontVertex vertix[4] = {};
 		vertix[0].position = drawPosition + vec3(fntChar.xoffset, fntChar.yoffset, 0);
-		vertix[0].texCoord = vec2((float)fntChar.x / 256.0f, (float)fntChar.y / 256.0f);
+		vertix[0].texCoord = vec2(tx0, ty0);
+
 		vertix[1].position = drawPosition + vec3(fntChar.xoffset, fntChar.height + fntChar.yoffset, 0);
-		vertix[1].texCoord = vec2((float)fntChar.x / 256.0f, (float)(fntChar.y + fntChar.height) / 256.0f);
+		vertix[1].texCoord = vec2(tx0, ty1);
+
 		vertix[2].position = drawPosition + vec3(fntChar.width + fntChar.xoffset, fntChar.height + fntChar.yoffset, 0);
-		vertix[2].texCoord = vec2((float)(fntChar.x + fntChar.width) / 256.0f, (float)(fntChar.y + fntChar.height) / 256.0f);
+		vertix[2].texCoord = vec2(tx1, ty1);
+
 		vertix[3].position = drawPosition + vec3(fntChar.width + fntChar.xoffset, fntChar.yoffset, 0);
-		vertix[3].texCoord = vec2((float)(fntChar.x + fntChar.width) / 256.0f, (float)fntChar.y / 256.0f);
+		vertix[3].texCoord = vec2(tx1, ty0);;
 
 		int index[] = { 0,1,2,0,2,3 };
 		for (int i = 0; i < 6; i++) {
@@ -88,6 +100,7 @@ const FntChars& Font::getChar(unsigned int id) const
 		return iter->second;
 	}
 
+	assert(false);
 	static FntChars fntChar;
 	return fntChar;
 }
@@ -227,6 +240,12 @@ void Font::readFntChars(FntBlock& fntBlock, FILE* pFile)
 		fread(&fntChar, sizeof(FntChars), 1, pFile);
 		m_chars.insert(std::make_pair(fntChar.id, fntChar));
 	}
+}
+
+void Font::setupTextureAtlas(const std::string& filename)
+{
+	m_textureAtlas = TextureAtlas::create(filename, m_chars.size());
+	
 }
 
 OCF_END

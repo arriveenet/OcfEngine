@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include "GameObject.h"
 #include "renderer/Texture2D.h"
+#include"renderer/TextureAtlas.h"
 #include "fnt.h"
 
 OCF_BEGIN
@@ -35,6 +36,8 @@ protected:
 	void readFntPages(FntBlock& fntBlock, FILE* pFile);
 	void readFntChars(FntBlock& fntBlock, FILE* pFile);
 
+	void setupTextureAtlas(const std::string& filename);
+
 private:
 	struct FontVertex {
 		glm::vec3 position;
@@ -43,12 +46,14 @@ private:
 	
 	glm::mat4 m_projection;
 	Texture2D* m_texture;
+	TextureAtlas* m_textureAtlas = nullptr;
 	FntInfo m_fntInfo;
 	FntCommon m_fntCommon;
 	std::string m_fontName;
 	std::string m_pageName;
 	std::unordered_map<unsigned int, FntChars> m_chars;
 	std::vector<FontVertex> m_vertices;
+	std::vector<QuadV3fT2f> m_quads;
 };
 
 OCF_END

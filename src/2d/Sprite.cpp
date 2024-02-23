@@ -98,7 +98,6 @@ void Sprite::draw()
 		m_texture->setActive();
 
 	// ƒŒƒ“ƒ_ƒŠƒ“ƒO
-	//glDrawArrays(GL_QUADS, 0, 4);
 	static unsigned char indices[] = { 0, 1, 2, 3, 2, 1 };
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, indices);
 

@@ -23,7 +23,7 @@ bool MainScene::init()
 	Sprite* sprite2 = new Sprite();
 
 	sprite1->initWithFile(".\\resource\\25_Crono.png");
-	sprite2->initWithFile(".\\resource\\25_Crono.png");
+	sprite2->initWithFile(".\\resource\\28_Frog.png");
 	this->addChild(sprite1);
 	this->addChild(sprite2);
 
@@ -31,12 +31,12 @@ bool MainScene::init()
 	size /= 2.0f;
 
 	sprite1->setPosition(size.x, size.y);
-	sprite2->setPosition(200, 200);
+	sprite2->setPosition(240, 240);
 
 	Label* label = Label::create("Hello World!");
 	this->addChild(label);
 
-	label->setPosition(700.0f, 0.0f);
+	label->setPosition(700.0f, 200.0f);
 
 	return true;
 }

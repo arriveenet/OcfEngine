@@ -4,6 +4,7 @@
 #include "2d/Entity.h"
 #include "base/types.h"
 #include "base/Macros.h"
+#include "renderer/Texture2D.h"
 
 OCF_BEGIN
 
@@ -26,6 +27,8 @@ protected:
 	std::string m_text;
 
 	bool m_isUpdate;
+
+	Texture2D* m_texture = nullptr;
 
 	std::vector<QuadV3fT2f> m_quads;
 	std::vector<unsigned short> m_indices;

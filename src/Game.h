@@ -4,6 +4,7 @@
 #include "Scene/Scene.h"
 #include "base/Font.h"
 #include "base/Input.h"
+#include "2d/Label.h"
 #include "renderer/Renderer.h"
 #include "renderer/TextureManager.h"
 
@@ -44,6 +45,7 @@ public:
 	Scene* getCurrentScene() const { return m_pScene; }
 	TextureManager* getTextureManager() const { return m_pTextureManager; }
 	Font* getFont() { return &m_font; }
+	float getFrameRate() const { return m_frameRate; }
 
 private:
 	static Game* s_sharedGame;
@@ -54,6 +56,7 @@ private:
 
 	unsigned int m_frames = 0;
 	float m_accumulator = 0.0f;
+	float m_frameRate = 0.0f;
 
 	Renderer* m_pRenderer;
 	Scene* m_pScene;
@@ -61,6 +64,8 @@ private:
 
 	Font m_font;
 	Input m_input;
+
+	Label* m_pFPSLabel = nullptr;
 };
 
 OCF_END

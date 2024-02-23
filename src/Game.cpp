@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "scene/MainScene.h"
 
+#define FPS_UPDATE_INTERVAL	(0.5f)
+
 OCF_BEGIN
 
 Game* Game::s_sharedGame = nullptr;
@@ -20,6 +22,8 @@ Game::Game()
 
 Game::~Game()
 {
+	m_pFPSLabel->release();
+
 	// ƒV[ƒ“‚ğ‰ğ•ú
 	delete m_pScene;
 	m_pScene = nullptr;
@@ -54,12 +58,14 @@ bool Game::init()
 
 	m_pTextureManager = new TextureManager();
 
+	m_font.init(".\\resource\\Consolas.fnt");
+
 	m_pScene = new MainScene();
 	m_pScene->init();
 
-	m_font.init(".\\resource\\Consolas.fnt");
-
 	m_input.init();
+
+	m_pFPSLabel = Label::create("FPS: 0.0");
 
 	return true;
 }
@@ -113,14 +119,21 @@ void Game::update()
 	m_frames++;
 	m_accumulator += m_deltaTime;
 
-	if (m_accumulator > 0.5f) {
-		//printf("FPS: %.1fn", m_frames / m_accumDt);
+	if (m_pFPSLabel) {
+		if (m_accumulator > FPS_UPDATE_INTERVAL) {
+			char buffer[30] = { 0 };
+			sprintf_s(buffer, "FPS: %.1f", m_frames / m_accumulator);
+			m_pFPSLabel->setString(buffer);
+			m_pFPSLabel->update(m_deltaTime);
 
-		m_frames = 0;
-		m_accumulator = 0.0f;
+			m_frames = 0;
+			m_accumulator = 0.0f;
+		}
 	}
 
 	processInput();
+
+	m_frameRate = 1.0f / m_deltaTime;
 
 	m_pScene->update(m_deltaTime);
 }

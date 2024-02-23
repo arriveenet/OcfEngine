@@ -5,6 +5,8 @@
 OCF_BEGIN
 
 Camera::Camera()
+	: m_projection(1.0f)
+	, m_view(1.0f)
 {
 }
 

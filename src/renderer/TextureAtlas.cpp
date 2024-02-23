@@ -58,7 +58,7 @@ bool TextureAtlas::initWidthTexture(Texture2D* pTexture, size_t capacity)
 
 	this->setupIndices();
 
-	return false;
+	return true;
 }
 
 void TextureAtlas::insertQuad(QuadV3fT2f* pQuad, size_t index)
@@ -112,7 +112,7 @@ QuadV3fT2f* TextureAtlas::getQuads() const
 
 void TextureAtlas::setupIndices()
 {
-	if (m_capacity = 0) return;
+	if (m_capacity == 0) return;
 
 	for (int i = 0; i < m_capacity; i++) {
 		m_pIndices[i * 6 + 0] = i * 4 + 0;

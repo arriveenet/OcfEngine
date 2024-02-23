@@ -1,23 +1,26 @@
 #include "Label.h"
+
+#include <glad/glad.h>
 #include "Game.h"
-#include <GLFW/glfw3.h>
 
 OCF_BEGIN
 
 Label* Label::create(const std::string& text)
 {
-	Label* result = new Label();
+	Label* label = new Label();
 
-	Game::getInstance()->getRenderer()->addLabel(result);
+	Game::getInstance()->getRenderer()->addLabel(label);
 
-	result->setString(text);
+	label->setString(text);
 
-	return result;
+	return label;
 }
 
 Label::Label()
 	: m_isUpdate(true)
 {
+	Font* pFont = Game::getInstance()->getFont();
+	m_texture = pFont->getTexture();
 }
 
 Label::~Label()
@@ -44,10 +47,12 @@ void Label::update(float deltaTime)
 
 void Label::draw()
 {
-	//Font* pFont = Game::getInstance()->getFont();
-	//pFont->setText(m_position.x, m_position.y, m_text.c_str());
-	//pFont->draw();
+#if 0
+	Font* pFont = Game::getInstance()->getFont();
+	pFont->setText(m_position.x, m_position.y, m_text.c_str());
+	pFont->draw();
 
+#else
 	if (m_quads.empty())
 		return;
 
@@ -56,14 +61,14 @@ void Label::draw()
 	glTranslatef(m_position.x, m_position.y, 0.0f);
 
 	glVertexPointer(3, GL_FLOAT, sizeof(Vertex3fT2f), &m_quads[0].topLeft.position);
-	glTexCoordPointer(2, GL_FLAT, sizeof(Vertex3fT2f), &m_quads[0].topLeft.texCoord);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex3fT2f), &m_quads[0].topLeft.texCoord);
 
-	Font* pFont = Game::getInstance()->getFont();
-	pFont->getTexture()->setActive();
+	m_texture->setActive();
 
 	glDrawElements(GL_TRIANGLES, (GLsizei)m_indices.size(), GL_UNSIGNED_SHORT, m_indices.data());
 
 	glPopMatrix();
+#endif
 }
 
 void Label::updateQuads()
@@ -98,13 +103,13 @@ void Label::updateQuads()
 		quad.topLeft.texCoord = { tx0, ty0 };
 
 		quad.bottomLeft.position = { x + pChar.xoffset, y + pChar.yoffset + pChar.height, 0.0f };
-		quad.bottomLeft.texCoord = {tx0, ty1};
+		quad.bottomLeft.texCoord = { tx0, ty1 };
 
 		quad.topRight.position = { x + pChar.xoffset + pChar.width, y + pChar.yoffset, 0.0f };
-		quad.topRight.texCoord = { tx1, ty0};
+		quad.topRight.texCoord = { tx1, ty0 };
 
 		quad.bottomRight.position = { x + pChar.xoffset + pChar.width, y + pChar.yoffset + pChar.height, 0.0f };
-		quad.bottomRight.texCoord = {tx1, ty1};
+		quad.bottomRight.texCoord = { tx1, ty1 };
 
 		m_quads.emplace_back(quad);
 
