@@ -4,8 +4,6 @@
 
 OCF_BEGIN
 
-class Game;
-
 Applicaiton* g_pApplication = nullptr;
 
 Applicaiton* Applicaiton::getInstance()
@@ -112,6 +110,11 @@ double Applicaiton::getTime()
 glm::ivec2 Applicaiton::getWindowSize() const
 {
 	return glm::ivec2(m_windowWidth, m_windowHeight);
+}
+
+void Applicaiton::onWindowSize(GLFWwindow* window, int width, int height)
+{
+	Game::getInstance()->onWindowSize(width, height);
 }
 
 OCF_END

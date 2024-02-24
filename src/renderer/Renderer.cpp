@@ -1,6 +1,6 @@
 #include "Renderer.h"
 #include "Game.h"
-#include <glad/glad.h>
+#include "renderer/OpenGLInclude.h"
 #include <glm/gtc/type_ptr.hpp>
 
 OCF_BEGIN
@@ -47,6 +47,17 @@ void Renderer::removeSprite(Sprite* pSprite)
 void Renderer::addLabel(Label* pLabel)
 {
 	m_labels.push_back(pLabel);
+}
+
+void Renderer::setViewPort(int x, int y, int width, int height)
+{
+	m_viewport = { x, y, width, height };
+	glViewport(x, y, width, height);
+}
+
+glm::ivec4 Renderer::getViewport() const
+{
+	return m_viewport;
 }
 
 void Renderer::draw()

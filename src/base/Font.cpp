@@ -2,7 +2,6 @@
 #include <memory>
 #include <stdio.h>
 #include <stdarg.h>
-#include <GLFW/glfw3.h>
 #include <glm/gtx/transform.hpp>
 #include "Game.h"
 

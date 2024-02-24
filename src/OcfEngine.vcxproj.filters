@@ -176,5 +176,8 @@
     <ClInclude Include="renderer\TextureAtlas.h">
       <Filter>ヘッダー ファイル\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\OpenGLInclude.h">
+      <Filter>ヘッダー ファイル\renderer</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

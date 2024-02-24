@@ -1,6 +1,7 @@
 #pragma once
 #include <chrono>
 #include "GameObject.h"
+#include "Application.h"
 #include "Scene/Scene.h"
 #include "base/Font.h"
 #include "base/Input.h"
@@ -31,7 +32,12 @@ public:
 	void mainLoop();
 	void exit();
 
-	glm::vec2 getVisibleSize();
+	glm::vec2 getVisibleSize() const;
+	Renderer* getRenderer() const { return m_renderer; }
+	Scene* getCurrentScene() const { return m_scene; }
+	TextureManager* getTextureManager() const { return m_textureManager; }
+	Font* getFont() { return m_font; }
+	float getFrameRate() const { return m_frameRate; }
 
 protected:
 	void processInput();
@@ -40,12 +46,9 @@ protected:
 
 	void calculateDeltaTime();
 
-public:
-	Renderer* getRenderer() const { return m_renderer; }
-	Scene* getCurrentScene() const { return m_scene; }
-	TextureManager* getTextureManager() const { return m_textureManager; }
-	Font* getFont() { return m_font; }
-	float getFrameRate() const { return m_frameRate; }
+private:
+	friend Applicaiton;
+	void onWindowSize(int width, int height);
 
 private:
 	static Game* s_sharedGame;

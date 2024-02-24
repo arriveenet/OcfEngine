@@ -1,7 +1,5 @@
 #pragma once
-#include <Windows.h>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "renderer/OpenGLInclude.h"
 #include "base/Macros.h"
 
 OCF_BEGIN

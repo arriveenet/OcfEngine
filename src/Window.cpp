@@ -42,7 +42,10 @@ void Window::setWindowPos(int posX, int posY)
 
 void Window::setCallback()
 {
+	// キーボードのコールバックを設定
 	glfwSetKeyCallback(m_pWindow, ocf::Keyboard::onKeyEvent);
+	// ウィンドウサイズ変更時のコールバックを設定
+	glfwSetWindowSizeCallback(m_pWindow, ocf::Applicaiton::onWindowSize);
 }
 
 bool Window::windowShouldClose()

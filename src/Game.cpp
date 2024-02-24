@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <Windows.h>
 #include "Application.h"
 #include "scene/MainScene.h"
 
@@ -16,7 +15,8 @@ Game::Game()
 	, m_renderer(nullptr)
 	, m_scene(nullptr)
 	, m_textureManager(nullptr)
-	, m_input()
+	, m_font(nullptr)
+	, m_input(nullptr)
 {
 }
 
@@ -103,7 +103,7 @@ void Game::exit()
 	Applicaiton::getInstance()->exit();
 }
 
-glm::vec2 Game::getVisibleSize()
+glm::vec2 Game::getVisibleSize() const
 {
 	return Applicaiton::getInstance()->getWindowSize();
 }
@@ -158,6 +158,12 @@ void Game::calculateDeltaTime()
 	auto now = std::chrono::steady_clock::now();
 	m_deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(now - m_lastUpdate).count() / 1000000.0f;
 	m_lastUpdate = now;
+}
+
+void Game::onWindowSize(int width, int height)
+{
+	// ウィンドウ全体をビューポートに設定
+	m_renderer->setViewPort(0, 0, width, height);
 }
 
 OCF_END

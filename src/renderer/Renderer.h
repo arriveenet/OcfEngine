@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <glm/glm.hpp>
 #include "2d/Sprite.h"
 #include "2d/Label.h"
 
@@ -11,6 +12,7 @@ OCF_BEGIN
 class Renderer {
 	std::vector<Sprite*> m_sprites;	//!< スプライト配列
 	std::vector<Label*> m_labels;
+	glm::ivec4 m_viewport;
 
 public:
 	/** コンストラクター */
@@ -38,6 +40,12 @@ public:
 	void removeSprite(Sprite* pSprite);
 
 	void addLabel(Label* pLabel);
+
+	/** ビューポートを設定する */
+	void setViewPort(int x, int y, int width, int height);
+
+	/** ビューポートを取得する */
+	glm::ivec4 getViewport() const;
 
 	/** 描画処理を行う */
 	void draw();

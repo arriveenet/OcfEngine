@@ -25,6 +25,10 @@ public:
 	glm::ivec2 getWindowSize() const;
 
 private:
+	friend Window;
+	static void onWindowSize(GLFWwindow* window, int width, int height);
+
+private:
 	Window m_window;
 	int m_windowWidth;
 	int m_windowHeight;
