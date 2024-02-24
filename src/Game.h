@@ -41,10 +41,10 @@ protected:
 	void calculateDeltaTime();
 
 public:
-	Renderer* getRenderer() const { return m_pRenderer; }
-	Scene* getCurrentScene() const { return m_pScene; }
-	TextureManager* getTextureManager() const { return m_pTextureManager; }
-	Font* getFont() { return &m_font; }
+	Renderer* getRenderer() const { return m_renderer; }
+	Scene* getCurrentScene() const { return m_scene; }
+	TextureManager* getTextureManager() const { return m_textureManager; }
+	Font* getFont() { return m_font; }
 	float getFrameRate() const { return m_frameRate; }
 
 private:
@@ -58,12 +58,12 @@ private:
 	float m_accumulator = 0.0f;
 	float m_frameRate = 0.0f;
 
-	Renderer* m_pRenderer;
-	Scene* m_pScene;
-	TextureManager* m_pTextureManager;
+	Renderer* m_renderer;
+	Scene* m_scene;
+	TextureManager* m_textureManager;
 
-	Font m_font;
-	Input m_input;
+	Font* m_font;
+	Input* m_input;
 
 	Label* m_pFPSLabel = nullptr;
 };

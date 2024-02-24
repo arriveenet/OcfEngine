@@ -47,28 +47,27 @@ void Label::update(float deltaTime)
 
 void Label::draw()
 {
-#if 0
-	Font* pFont = Game::getInstance()->getFont();
-	pFont->setText(m_position.x, m_position.y, m_text.c_str());
-	pFont->draw();
-
-#else
 	if (m_quads.empty())
 		return;
 
 	glPushMatrix();
 
+	// •½sˆÚ“®
 	glTranslatef(m_position.x, m_position.y, 0.0f);
+	// ‰ñ“]
+	glRotatef(m_rotation, 0.0f, 0.0f, 1.0f);
+	// Šg‘åk¬
+	glScalef(m_scaleX, m_scaleY, m_scaleZ);
 
 	glVertexPointer(3, GL_FLOAT, sizeof(Vertex3fT2f), &m_quads[0].topLeft.position);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex3fT2f), &m_quads[0].topLeft.texCoord);
 
-	m_texture->setActive();
+	if (m_texture)
+		m_texture->setActive();
 
 	glDrawElements(GL_TRIANGLES, (GLsizei)m_indices.size(), GL_UNSIGNED_SHORT, m_indices.data());
 
 	glPopMatrix();
-#endif
 }
 
 void Label::updateQuads()

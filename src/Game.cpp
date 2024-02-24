@@ -13,9 +13,9 @@ Game::Game()
 	: m_running(false)
 	, m_deltaTime(0.0f)
 	, m_lastUpdate()
-	, m_pRenderer(nullptr)
-	, m_pScene(nullptr)
-	, m_pTextureManager(nullptr)
+	, m_renderer(nullptr)
+	, m_scene(nullptr)
+	, m_textureManager(nullptr)
 	, m_input()
 {
 }
@@ -24,17 +24,25 @@ Game::~Game()
 {
 	m_pFPSLabel->release();
 
+	// 入力クラスを解放
+	delete m_input;
+	m_input = nullptr;
+
 	// シーンを解放
-	delete m_pScene;
-	m_pScene = nullptr;
+	delete m_scene;
+	m_scene = nullptr;
+
+	// フォントを解放
+	delete m_font;
+	m_font = nullptr;
 
 	// テクスチャーマネージャーを解放
-	delete m_pTextureManager;
-	m_pTextureManager = nullptr;
+	delete m_textureManager;
+	m_textureManager = nullptr;
 
 	// レンダラーを解放
-	delete m_pRenderer;
-	m_pRenderer = nullptr;
+	delete m_renderer;
+	m_renderer = nullptr;
 
 	s_sharedGame = nullptr;
 }
@@ -53,17 +61,19 @@ bool Game::init()
 {
 	m_lastUpdate = std::chrono::steady_clock::now();
 
-	m_pRenderer = new Renderer();
-	m_pRenderer->init();
+	m_renderer = new Renderer();
+	m_renderer->init();
 
-	m_pTextureManager = new TextureManager();
+	m_textureManager = new TextureManager();
 
-	m_font.init(".\\resource\\Consolas.fnt");
+	m_font = new Font();
+	m_font->init(".\\resource\\Consolas.fnt");
 
-	m_pScene = new MainScene();
-	m_pScene->init();
+	m_scene = new MainScene();
+	m_scene->init();
 
-	m_input.init();
+	m_input = new Input();
+	m_input->init();
 
 	m_pFPSLabel = Label::create("FPS: 0.0");
 
@@ -100,15 +110,15 @@ glm::vec2 Game::getVisibleSize()
 
 void Game::processInput()
 {
-	const InputState& inputState = m_input.getState();
+	const InputState& inputState = m_input->getState();
 
 	if (inputState.keyboard.getKeyState(GLFW_KEY_ESCAPE) == ButtonState::Pressed) {
 		exit();
 	}
 
-	m_pScene->processInput(inputState);
+	m_scene->processInput(inputState);
 
-	m_input.update();
+	m_input->update();
 }
 
 void Game::update()
@@ -135,12 +145,12 @@ void Game::update()
 
 	m_frameRate = 1.0f / m_deltaTime;
 
-	m_pScene->update(m_deltaTime);
+	m_scene->update(m_deltaTime);
 }
 
 void Game::draw()
 {
-	m_pRenderer->draw();
+	m_renderer->draw();
 }
 
 void Game::calculateDeltaTime()

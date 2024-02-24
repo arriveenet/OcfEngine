@@ -37,6 +37,7 @@ bool MainScene::init()
 	this->addChild(label);
 
 	label->setPosition(700.0f, 200.0f);
+	label->setRotation(30.0f);
 
 	return true;
 }
