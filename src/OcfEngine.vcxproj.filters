@@ -108,6 +108,9 @@
     <ClCompile Include="renderer\TextureAtlas.cpp">
       <Filter>ソース ファイル\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="base\FileUtils.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="renderer\OpenGLInclude.h">
       <Filter>ヘッダー ファイル\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="base\FileUtils.h">
+      <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

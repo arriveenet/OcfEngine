@@ -27,23 +27,63 @@ public:
 	 */
 	static Game* getInstance();
 
+	/** ゲームを初期化 */
 	bool init();
 
+	/** ゲームのメインループを開始する */
 	void mainLoop();
+
+	/** ゲームのメインループから抜ける */
 	void exit();
 
 	glm::vec2 getVisibleSize() const;
+
+	/**
+	 * @brief レンダラーを取得する
+	 * 
+	 * @return レンダラーのポインタ
+	 */
 	Renderer* getRenderer() const { return m_renderer; }
+
+	/**
+	 * @brief 現在設定されているシーンを取得する
+	 * 
+	 * @return 現在のシーンのポインタ
+	 */
 	Scene* getCurrentScene() const { return m_scene; }
+
+	/**
+	 * @brief テクスチャ管理クラスを取得する
+	 *
+	 * @return テクスチャ管理クラスのポインタ
+	 */
 	TextureManager* getTextureManager() const { return m_textureManager; }
+
+	/**
+	 * @brief フォントを取得する
+	 *
+	 * @return フォントのポインタ
+	 */
 	Font* getFont() { return m_font; }
+
+	/**
+	 * @brief フレームレートを取得する
+	 *
+	 * @return フレームレート
+	 */
 	float getFrameRate() const { return m_frameRate; }
 
 protected:
+	/** 入力システムを処理 */
 	void processInput();
+
+	/** ゲームの更新処理を行う */
 	void update();
+
+	/** ゲームの描画処理を行う */
 	void draw();
 
+	/** デルタタイムを計算する */
 	void calculateDeltaTime();
 
 private:
@@ -51,6 +91,7 @@ private:
 	void onWindowSize(int width, int height);
 
 private:
+	/** ゲームクラスのインスタンス */
 	static Game* s_sharedGame;
 	bool m_running;
 

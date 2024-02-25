@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <glm/gtx/transform.hpp>
 #include "Game.h"
+#include "base/FileUtils.h"
 
 OCF_BEGIN
 
@@ -34,8 +35,11 @@ bool Font::init(const std::string& filename)
 	}
 
 	m_texture = new Texture2D();
-	if (!m_texture->initWithFile(".\\resource\\Consolas_0.png")) {
+	
+	std::string parentPath = FileUtils::getInstance()->getParentFullPath(filename);
+	if (!m_texture->initWithFile(parentPath + "\\" + m_pageName)) {
 		delete m_texture;
+		m_texture = nullptr;
 		return false;
 	}
 

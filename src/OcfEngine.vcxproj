@@ -142,6 +142,7 @@
     <ClCompile Include="2d\Label.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="base\FileUtils.cpp" />
     <ClCompile Include="base\Font.cpp" />
     <ClCompile Include="base\Input.cpp" />
     <ClCompile Include="base\Keyboard.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="2d\Label.h" />
     <ClInclude Include="2d\Sprite.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="base\FileUtils.h" />
     <ClInclude Include="base\fnt.h" />
     <ClInclude Include="base\Font.h" />
     <ClInclude Include="base\Input.h" />

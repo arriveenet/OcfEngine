@@ -1,5 +1,6 @@
 #include "TextureManager.h"
 #include "Image.h"
+#include "base/FileUtils.h"
 
 OCF_BEGIN
 
@@ -17,6 +18,8 @@ TextureManager::~TextureManager()
 Texture2D* TextureManager::addImage(const std::string& filePath)
 {
 	Texture2D* texture = nullptr;
+
+	std::string fullPath = FileUtils::getInstance()->getFullPath(filePath);
 
 	auto iter = m_textures.find(filePath);
 	if (iter != m_textures.end()) {

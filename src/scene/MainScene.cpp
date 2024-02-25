@@ -21,8 +21,8 @@ bool MainScene::init()
 	Sprite* sprite1 = new Sprite(120);
 	Sprite* sprite2 = new Sprite();
 
-	sprite1->initWithFile(".\\resource\\25_Crono.png");
-	sprite2->initWithFile(".\\resource\\28_Frog.png");
+	sprite1->initWithFile("..\\assets\\textures\\25_Crono.png");
+	sprite2->initWithFile("..\\assets\\textures\\28_Frog.png");
 	this->addChild(sprite1);
 	this->addChild(sprite2);
 

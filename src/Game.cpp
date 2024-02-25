@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Application.h"
 #include "scene/MainScene.h"
+#include "base/FileUtils.h"
 
 #define FPS_UPDATE_INTERVAL	(0.5f)
 
@@ -40,6 +41,9 @@ Game::~Game()
 	delete m_textureManager;
 	m_textureManager = nullptr;
 
+	// ファイルユーティリティを解放
+	FileUtils::destroyInstance();
+
 	// レンダラーを解放
 	delete m_renderer;
 	m_renderer = nullptr;
@@ -67,7 +71,7 @@ bool Game::init()
 	m_textureManager = new TextureManager();
 
 	m_font = new Font();
-	m_font->init(".\\resource\\Consolas.fnt");
+	m_font->init("..\\assets\\fonts\\Consolas.fnt");
 
 	m_scene = new MainScene();
 	m_scene->init();
