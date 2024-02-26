@@ -16,11 +16,20 @@ Renderer::~Renderer()
 
 bool Renderer::init()
 {
-	return false;
+	// シェーダーを初期化
+	m_shaderManager = ShaderManager::getInstance();
+
+	//TrianglesCommand::Triangles triangles;
+	//m_triangleCommand.init(nullptr, m_shaderManager->getProgram(ProgramType::Basic), triangles, glm::mat4());
+
+	return true;
 }
 
 void Renderer::destroy()
 {
+	// シェーダーの後始末
+	m_shaderManager->removeAllPrograms();
+	m_shaderManager->destroyInstance();
 }
 
 void Renderer::addSprite(Sprite* pSprite)

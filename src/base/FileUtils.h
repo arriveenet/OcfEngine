@@ -32,6 +32,12 @@ public:
 	 */
 	std::string getParentFullPath(const std::string& filename) const;
 
+	/**
+	 * @brief assetsフォルダのパスを取得す
+	 * @return assetsフォルダのパス
+	 */
+	std::string getAssetsPath() const;
+
 protected:
 	/** デフォルトコンストラクター */
 	FileUtils();

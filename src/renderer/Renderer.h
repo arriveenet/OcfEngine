@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <glm/glm.hpp>
+#include "ShaderManager.h"
+#include "RenderCommand.h"
 #include "2d/Sprite.h"
 #include "2d/Label.h"
 
@@ -13,6 +15,8 @@ class Renderer {
 	std::vector<Sprite*> m_sprites;	//!< スプライト配列
 	std::vector<Label*> m_labels;
 	glm::ivec4 m_viewport;
+	ShaderManager* m_shaderManager;
+	TrianglesCommand m_triangleCommand;
 
 public:
 	/** コンストラクター */

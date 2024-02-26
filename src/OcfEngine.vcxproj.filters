@@ -111,6 +111,24 @@
     <ClCompile Include="base\FileUtils.cpp">
       <Filter>ソース ファイル\base</Filter>
     </ClCompile>
+    <ClCompile Include="renderer\Shader.cpp">
+      <Filter>ソース ファイル\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Program.cpp">
+      <Filter>ソース ファイル\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\ShaderManager.cpp">
+      <Filter>ソース ファイル\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\RenderCommand.cpp">
+      <Filter>ソース ファイル\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\VertexBuffer.cpp">
+      <Filter>ソース ファイル\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\VertexArray.cpp">
+      <Filter>ソース ファイル\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -140,7 +158,7 @@
     <ClInclude Include="renderer\Renderer.h">
       <Filter>ヘッダー ファイル\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="base\types.h">
+    <ClInclude Include="base\Types.h">
       <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
     <ClInclude Include="base\Rect.h">
@@ -151,9 +169,6 @@
     </ClInclude>
     <ClInclude Include="base\fnt.h">
       <Filter>ヘッダー ファイル\base</Filter>
-    </ClInclude>
-    <ClInclude Include="base\Keyboard.h">
-      <Filter>ヘッダー ファイル\renderer</Filter>
     </ClInclude>
     <ClInclude Include="base\Input.h">
       <Filter>ヘッダー ファイル\base</Filter>
@@ -184,6 +199,30 @@
     </ClInclude>
     <ClInclude Include="base\FileUtils.h">
       <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Macros.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Shader.h">
+      <Filter>ヘッダー ファイル\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Program.h">
+      <Filter>ヘッダー ファイル\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Keyboard.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\ShaderManager.h">
+      <Filter>ヘッダー ファイル\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\RenderCommand.h">
+      <Filter>ヘッダー ファイル\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VertexBuffer.h">
+      <Filter>ヘッダー ファイル\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VertexArray.h">
+      <Filter>ヘッダー ファイル\renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

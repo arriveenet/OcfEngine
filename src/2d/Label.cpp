@@ -1,7 +1,6 @@
 #include "Label.h"
-
-#include <glad/glad.h>
 #include "Game.h"
+#include "renderer/OpenGLInclude.h"
 
 OCF_BEGIN
 

@@ -38,6 +38,15 @@ std::string FileUtils::getParentFullPath(const std::string& filename) const
 	return std::filesystem::absolute(parentPath).string();
 }
 
+std::string FileUtils::getAssetsPath() const
+{
+	std::filesystem::path currentPath = std::filesystem::current_path();
+	std::filesystem::path assetsPath = currentPath.parent_path();
+	assetsPath.append("assets");
+
+	return assetsPath.string();
+}
+
 FileUtils::FileUtils()
 {
 }
