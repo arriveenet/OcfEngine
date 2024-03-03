@@ -183,6 +183,7 @@
     <ClInclude Include="base\Macros.h" />
     <ClInclude Include="base\Rect.h" />
     <ClInclude Include="base\Types.h" />
+    <ClInclude Include="OcfEngine.h" />
     <ClInclude Include="platform\Application.h" />
     <ClInclude Include="platform\Window.h" />
     <ClInclude Include="renderer\Image.h" />
