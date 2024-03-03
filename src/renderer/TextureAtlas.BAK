@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "base/GameObject.h"
+#include "GameObject.h"
 #include "Texture2D.h"
 #include "base/Types.h"
 

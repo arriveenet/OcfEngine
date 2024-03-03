@@ -32,6 +32,24 @@ VertexBuffer::~VertexBuffer()
 	glDeleteBuffers(1, &m_buffer);
 }
 
+void VertexBuffer::bind() const
+{
+	if (m_type == BufferType::Vertex) {
+		glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
+	} else {
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_buffer);
+	}
+}
+
+void VertexBuffer::unbind() const
+{
+	if (m_type == BufferType::Vertex) {
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	} else {
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+}
+
 void VertexBuffer::updateData(void* pData, size_t size)
 {
 	if (m_type == BufferType::Vertex) {

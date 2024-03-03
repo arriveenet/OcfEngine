@@ -1,5 +1,5 @@
 #include "Label.h"
-#include "Game.h"
+#include "base/Game.h"
 #include "renderer/OpenGLInclude.h"
 
 OCF_BEGIN

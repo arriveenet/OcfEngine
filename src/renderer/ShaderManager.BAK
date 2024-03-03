@@ -1,6 +1,6 @@
 #pragma once
 #include <unordered_map>
-#include "base/GameObject.h"
+#include "GameObject.h"
 #include "Program.h"
 
 OCF_BEGIN

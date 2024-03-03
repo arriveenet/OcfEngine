@@ -1,11 +1,13 @@
 #pragma once
-#include "GameObject.h"
 #include "Component.h"
+#include "base/GameObject.h"
 #include "base/Input.h"
 #include <glm/glm.hpp>
 #include <vector>
 
 OCF_BEGIN
+
+class Renderer;
 
 /**
  * @brief エンティティクラス
@@ -30,6 +32,8 @@ public:
 	virtual void update(float deltaTime);
 	virtual void updateComponents(float deltaTime);
 	virtual void updateEntity(float deltaTime);
+
+	virtual void draw(Renderer* renderer);
 
 	void setState(State state) { m_state = state; }
 	State getState() const { return m_state; }

@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "Application.h"
+#include "platform/Application.h"
 #include "scene/MainScene.h"
 #include "base/FileUtils.h"
 
@@ -154,6 +154,8 @@ void Game::update()
 
 void Game::draw()
 {
+	m_scene->draw(m_renderer);
+
 	m_renderer->draw();
 }
 

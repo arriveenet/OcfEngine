@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "base/GameObject.h"
 #include "base/types.h"
 #include <glm/glm.hpp>
 #include <string>

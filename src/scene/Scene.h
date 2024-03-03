@@ -12,7 +12,7 @@ public:
 	virtual bool init();
 
 	void update(float deltaTime) override;
-	virtual void draw() = 0;
+	void draw(Renderer* renderer) override;
 
 	virtual Camera* getDefaultCamera() { return &m_defaultCamera; }
 

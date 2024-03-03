@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "base/GameObject.h"
+#include "GameObject.h"
 #include "base/types.h"
 
 OCF_BEGIN

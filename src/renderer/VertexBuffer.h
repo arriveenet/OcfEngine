@@ -20,6 +20,10 @@ public:
 	~VertexBuffer();
 
 	GLuint getBuffer() const { return m_buffer; }
+	BufferType getType() const { return m_type; }
+
+	void bind() const;
+	void unbind() const;
 
 	void updateData(void* pData, size_t size);
 

@@ -31,8 +31,7 @@ Shader::~Shader()
 
 bool Shader::load(ShaderStage stage, const std::string& shaderSource)
 {
-	compileShader(stage, shaderSource);
-	return false;
+	return compileShader(stage, shaderSource);
 }
 
 void Shader::unload()
@@ -54,7 +53,7 @@ bool Shader::compileShader(ShaderStage stage, const std::string& source)
 	std::string contents = sstream.str();
 	const char* contentChar = contents.c_str();
 
-	GLuint m_shader = glCreateShader(toGLShaderType(stage));
+	m_shader = glCreateShader(toGLShaderType(stage));
 	glShaderSource(m_shader, 1, &(contentChar), nullptr);
 	glCompileShader(m_shader);
 

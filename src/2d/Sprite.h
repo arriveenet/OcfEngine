@@ -1,9 +1,10 @@
 #pragma once
+#include <string>
 #include "Component.h"
 #include "Entity.h"
 #include "base/types.h"
 #include "base/Rect.h"
-#include <string>
+#include "renderer/TrianglesCommand.h"
 
 OCF_BEGIN
 
@@ -26,6 +27,7 @@ public:
 	virtual Rect getRect() const;
 
 	virtual void draw();
+	void draw(Renderer* renderer) override;
 
 	void setFlippedX(bool flippedX);
 	void setFlippedY(bool flippedY);
@@ -39,11 +41,16 @@ protected:
 
 protected:
 	int m_drawOrder;
-	QuadV3fT2f m_quad;
+	QuadV3fC3fT2f m_quad;
 	Rect m_rect;
+	glm::mat4 m_modelView;
+
 	bool m_flippedX;
 	bool m_flippedY;
+
 	Texture2D* m_texture;
+	TrianglesCommand m_trianglesCommand;
+
 };
 
 OCF_END

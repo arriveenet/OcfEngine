@@ -1,7 +1,8 @@
 #include "Sprite.h"
-#include "Game.h"
+#include "base/Game.h"
 #include "renderer/Texture2D.h"
 #include "renderer/OpenGLInclude.h"
+#include "renderer/ShaderManager.h"
 
 #define SPRITE_DEBUG_DRAW
 
@@ -9,8 +10,11 @@ using namespace glm;
 
 OCF_BEGIN
 
+static unsigned short indices[] = { 0, 1, 2, 3, 2, 1 };
+
 Sprite::Sprite(int drawOrder)
 	: m_drawOrder(drawOrder)
+	, m_modelView(1.0f)
 	, m_flippedX(false)
 	, m_flippedY(false)
 	, m_texture(nullptr)
@@ -21,6 +25,11 @@ Sprite::Sprite(int drawOrder)
 	m_quad.bottomLeft.position	= { 0.0f, 0.0f, 0.0f };
 	m_quad.topRight.position	= { 0.0f, 0.0f, 0.0f };
 	m_quad.bottomRight.position	= { 0.0f, 0.0f, 0.0f };
+
+	m_quad.topLeft.color		= { 1.0f, 1.0f, 1.0f };
+	m_quad.bottomLeft.color		= { 1.0f, 1.0f, 1.0f };
+	m_quad.topRight.color		= { 1.0f, 1.0f, 1.0f };
+	m_quad.bottomRight.color	= { 1.0f, 1.0f, 1.0f };
 
 	m_quad.topLeft.texCoord		= { 0.0f, 1.0f };
 	m_quad.bottomLeft.texCoord	= { 0.0f, 0.0f };
@@ -49,6 +58,29 @@ bool Sprite::initWithFile(const std::string& filename)
 		m_texture = nullptr;
 		return false;
 	}
+
+	ProgramState& programState = m_trianglesCommand.getProgramState();
+	programState.init(ShaderManager::getInstance()->getProgram(ProgramType::Basic));
+
+	Program* program = programState.getProgram();
+	VertexBuffer* vertexBuffer = programState.getVertexBuffer();
+	VertexArray* vertexArray = programState.getVertexArray();
+
+	glUseProgram(program->getProgram());
+
+	glBindVertexArray(vertexArray->getHandle());
+	vertexBuffer->bind();
+
+	int location = program->getAttributeLocation("inPosition");
+	vertexArray->setAttribute(location, 3, sizeof(Vertex3fC3fT2f), 0);
+
+	location = program->getAttributeLocation("inColor");
+	vertexArray->setAttribute(location, 3, sizeof(Vertex3fC3fT2f), sizeof(glm::vec3));
+	
+	vertexBuffer->unbind();
+
+	glBindVertexArray(0);
+	glUseProgram(0);
 
 	setSize((float)m_texture->getWidth(), (float)m_texture->getHeight());
 
@@ -128,6 +160,19 @@ void Sprite::draw()
 	glPopMatrix();
 }
 
+void Sprite::draw(Renderer* renderer)
+{
+	TrianglesCommand::Triangles triangles;
+	triangles.vertices = &m_quad.bottomLeft;
+	triangles.vertexCount = 4;
+	triangles.indices = indices;
+	triangles.indexCount = 6;
+
+	m_trianglesCommand.init(m_texture, triangles, m_modelView);
+
+	renderer->addCommand(&m_trianglesCommand);
+}
+
 void Sprite::setFlippedX(bool flippedX)
 {
 	if (m_flippedX != flippedX) {
@@ -165,6 +210,13 @@ void Sprite::updatePolygon()
 	m_quad.bottomLeft.position = { lb , 0.0f};
 	m_quad.topRight.position = { rt, 0.0f };
 	m_quad.bottomRight.position = { rt.x, lb.y, 0.0f };
+
+	ProgramState& programState = m_trianglesCommand.getProgramState();
+	VertexBuffer* vertexBuffer =  programState.getVertexBuffer();
+	vertexBuffer->updateData(&m_quad.topLeft.position, sizeof(m_quad));
+
+	VertexBuffer* indexBuffer = programState.getIndexBuffer();
+	indexBuffer->updateData(&indices[0], sizeof(indices));
 }
 
 void Sprite::flipX()

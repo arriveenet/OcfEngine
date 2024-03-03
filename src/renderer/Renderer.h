@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include "ShaderManager.h"
 #include "RenderCommand.h"
+#include "TrianglesCommand.h"
 #include "2d/Sprite.h"
 #include "2d/Label.h"
 
@@ -12,12 +13,6 @@ OCF_BEGIN
  * @brief レンダラークラス
  */
 class Renderer {
-	std::vector<Sprite*> m_sprites;	//!< スプライト配列
-	std::vector<Label*> m_labels;
-	glm::ivec4 m_viewport;
-	ShaderManager* m_shaderManager;
-	TrianglesCommand m_triangleCommand;
-
 public:
 	/** コンストラクター */
 	Renderer();
@@ -43,6 +38,7 @@ public:
 	 */
 	void removeSprite(Sprite* pSprite);
 
+	/** ラベルを追加する */
 	void addLabel(Label* pLabel);
 
 	/** ビューポートを設定する */
@@ -51,8 +47,20 @@ public:
 	/** ビューポートを取得する */
 	glm::ivec4 getViewport() const;
 
+	/** レンダーコマンドを追加する */
+	void addCommand(RenderCommand* command);
+
 	/** 描画処理を行う */
 	void draw();
+
+private:
+	std::vector<Sprite*> m_sprites;	//!< スプライト配列
+	std::vector<Label*> m_labels;
+	glm::ivec4 m_viewport;
+	ShaderManager* m_shaderManager;
+	std::vector<RenderCommand*> m_renderCommands;
+
+	VertexArray* m_SpriteVerts;
 };
 
 OCF_END

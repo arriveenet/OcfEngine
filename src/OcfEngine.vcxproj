@@ -141,16 +141,18 @@
     <ClCompile Include="2d\Entity.cpp" />
     <ClCompile Include="2d\Label.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
-    <ClCompile Include="Application.cpp" />
     <ClCompile Include="base\FileUtils.cpp" />
     <ClCompile Include="base\Font.cpp" />
+    <ClCompile Include="base\Game.cpp" />
+    <ClCompile Include="base\GameObject.cpp" />
     <ClCompile Include="base\Input.cpp" />
     <ClCompile Include="base\Keyboard.cpp" />
     <ClCompile Include="base\Rect.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="platform\Application.cpp" />
+    <ClCompile Include="platform\Window.cpp" />
     <ClCompile Include="renderer\Image.cpp" />
+    <ClCompile Include="renderer\ProgramState.cpp" />
     <ClCompile Include="renderer\RenderCommand.cpp" />
     <ClCompile Include="renderer\Renderer.cpp" />
     <ClCompile Include="renderer\Shader.cpp" />
@@ -159,11 +161,11 @@
     <ClCompile Include="renderer\Texture2D.cpp" />
     <ClCompile Include="renderer\TextureAtlas.cpp" />
     <ClCompile Include="renderer\TextureManager.cpp" />
+    <ClCompile Include="renderer\TrianglesCommand.cpp" />
     <ClCompile Include="renderer\VertexArray.cpp" />
     <ClCompile Include="renderer\VertexBuffer.cpp" />
     <ClCompile Include="scene\MainScene.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
-    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\Camera.h" />
@@ -171,19 +173,21 @@
     <ClInclude Include="2d\Entity.h" />
     <ClInclude Include="2d\Label.h" />
     <ClInclude Include="2d\Sprite.h" />
-    <ClInclude Include="Application.h" />
     <ClInclude Include="base\FileUtils.h" />
     <ClInclude Include="base\fnt.h" />
     <ClInclude Include="base\Font.h" />
+    <ClInclude Include="base\Game.h" />
+    <ClInclude Include="base\GameObject.h" />
     <ClInclude Include="base\Input.h" />
     <ClInclude Include="base\Keyboard.h" />
     <ClInclude Include="base\Macros.h" />
     <ClInclude Include="base\Rect.h" />
     <ClInclude Include="base\Types.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="platform\Application.h" />
+    <ClInclude Include="platform\Window.h" />
     <ClInclude Include="renderer\Image.h" />
     <ClInclude Include="renderer\OpenGLInclude.h" />
+    <ClInclude Include="renderer\ProgramState.h" />
     <ClInclude Include="renderer\RenderCommand.h" />
     <ClInclude Include="renderer\Renderer.h" />
     <ClInclude Include="renderer\Shader.h" />
@@ -192,11 +196,11 @@
     <ClInclude Include="renderer\Texture2D.h" />
     <ClInclude Include="renderer\TextureAtlas.h" />
     <ClInclude Include="renderer\TextureManager.h" />
+    <ClInclude Include="renderer\TrianglesCommand.h" />
     <ClInclude Include="renderer\VertexArray.h" />
     <ClInclude Include="renderer\VertexBuffer.h" />
     <ClInclude Include="scene\MainScene.h" />
     <ClInclude Include="scene\Scene.h" />
-    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

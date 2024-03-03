@@ -14,6 +14,9 @@ public:
 
 	GLuint getProgram() const { return m_program; }
 
+	int getAttributeLocation(const std::string& name) const;
+	int getUniformLocation(const std::string& name) const;
+
 private:
 	void compileProgram();
 	bool isValidProgram();

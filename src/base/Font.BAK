@@ -3,7 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <glm/glm.hpp>
-#include "base/GameObject.h"
+#include "GameObject.h"
 #include "renderer/Texture2D.h"
 #include"renderer/TextureAtlas.h"
 #include "fnt.h"

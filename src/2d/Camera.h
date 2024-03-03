@@ -5,6 +5,11 @@ OCF_BEGIN
 
 class Camera : public Entity {
 public:
+	enum class Type {
+		Perspective,	//!< “§Ž‹“Š‰e
+		Orthographic	//!< •½s“Š‰e
+	};
+
 	Camera();
 	~Camera();
 

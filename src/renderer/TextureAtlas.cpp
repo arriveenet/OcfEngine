@@ -1,5 +1,5 @@
 #include "TextureAtlas.h"
-#include "Game.h"
+#include "base/Game.h"
 
 OCF_BEGIN
 

@@ -7,7 +7,7 @@ Program::Program(const std::string& vertexShader, const std::string& fragmentSha
 {
 	std::string assetsPath = FileUtils::getInstance()->getAssetsPath();
 	m_vertexShader.load(ShaderStage::Vertex, assetsPath + "\\shaders\\" + vertexShader);
-	m_vertexShader.load(ShaderStage::Fragment, assetsPath + "\\shaders\\" + fragmentShader);
+	m_fragmentShader.load(ShaderStage::Fragment, assetsPath + "\\shaders\\" + fragmentShader);
 
 	compileProgram();
 }
@@ -19,6 +19,16 @@ Program::~Program()
 
 	if (m_program != 0)
 		glDeleteProgram(m_program);
+}
+
+int Program::getAttributeLocation(const std::string& name) const
+{
+	return glGetAttribLocation(m_program, name.c_str());
+}
+
+int Program::getUniformLocation(const std::string& name) const
+{
+	return glGetUniformLocation(m_program, name.c_str());
 }
 
 void Program::compileProgram()

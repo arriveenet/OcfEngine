@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "Game.h"
+#include "base/Game.h"
 #include "Scene/MainScene.h"
 
 OCF_BEGIN
@@ -32,8 +32,9 @@ bool Applicaiton::init()
 	if (!glfwInit())
 		return false;
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	m_windowHeight = 720;
 	m_windowWidth = m_windowHeight * 4 / 3;	

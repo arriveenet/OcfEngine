@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <unordered_map>
-#include "base/GameObject.h"
+#include "GameObject.h"
 #include "Texture2D.h"
 
 OCF_BEGIN

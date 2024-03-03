@@ -1,6 +1,6 @@
 #include "MainScene.h"
 #include <glm/gtc/type_ptr.hpp>
-#include "Game.h"
+#include "base/Game.h"
 #include "renderer/Image.h"
 #include "2d/Label.h"
 
@@ -44,8 +44,4 @@ bool MainScene::init()
 void MainScene::update(float deltaTime)
 {
 	Entity::update(deltaTime);
-}
-
-void MainScene::draw()
-{
 }

@@ -21,4 +21,11 @@ void Scene::update(float deltaTime)
 {
 }
 
+void Scene::draw(Renderer* renderer)
+{
+	for (auto& entity : m_entities) {
+		entity->draw(renderer);
+	}
+}
+
 OCF_END

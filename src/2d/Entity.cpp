@@ -59,6 +59,10 @@ void Entity::updateEntity(float deltaTime)
 	}
 }
 
+void Entity::draw(Renderer* renderer)
+{
+}
+
 void Entity::setPosition(const glm::vec2& position)
 {
 	m_position = position;
