@@ -3,6 +3,10 @@
 OCF_BEGIN
 
 VertexArray::VertexArray()
+	: m_vertexCount(0)
+	, m_vertexBuffer(0)
+	, m_vertexArray(0)
+	, m_indexCount(0)
 {
 }
 

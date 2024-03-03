@@ -7,6 +7,7 @@ OCF_BEGIN
 Camera::Camera()
 	: m_projection(1.0f)
 	, m_view(1.0f)
+	, m_type(Type::Orthographic)
 {
 }
 
@@ -18,9 +19,12 @@ bool Camera::init()
 {
 	glm::ivec2 windowSize = Applicaiton::getInstance()->getWindowSize();
 
-	m_projection = glm::ortho(0.0f, static_cast<float>(windowSize.x), static_cast<float>(windowSize.y), 0.0f);
+	const float halfWidth = static_cast<float>(windowSize.x / 2);
+	const float halfHeight = static_cast<float>(windowSize.y / 2);
 
-	return false;
+	m_projection = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight);
+
+	return true;
 }
 
 const glm::mat4 Camera::getProjectionMatrix() const

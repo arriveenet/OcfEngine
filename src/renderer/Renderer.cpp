@@ -104,7 +104,7 @@ void Renderer::draw()
 	//glm::mat4 projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f);
 
 	glm::mat4 modelView(1.0f);
-	modelView *= glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0));
+	modelView *= glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 	modelView *= glm::scale(glm::mat4(1.0f), glm::vec3(400.0f, 400.0f, 1.0f));
 
 
