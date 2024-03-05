@@ -17,7 +17,8 @@ public:
 
 	GLuint getHandle() const { return m_vertexArray; }
 
-	void setAttribute(int index, int size, int stride, size_t offset);
+	void bind();
+	void unbind();
 
 private:
 	GLuint m_vertexArray;

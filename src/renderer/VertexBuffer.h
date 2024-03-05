@@ -27,6 +27,8 @@ public:
 
 	void updateData(void* pData, size_t size);
 
+	void setAttribute(int index, int size, int stride, size_t offset);
+
 private:
 	GLuint m_buffer;
 	BufferType m_type;

@@ -5,6 +5,7 @@
 #include "base/types.h"
 #include "base/Rect.h"
 #include "renderer/TrianglesCommand.h"
+#include "renderer/VertexArray.h"
 
 OCF_BEGIN
 
@@ -12,6 +13,8 @@ class Texture2D;
 
 class Sprite : public Entity {
 public:
+	static Sprite* create(const std::string& filenam, int drawOrder = 100);
+
 	Sprite(int drawOrder = 100);
 	virtual ~Sprite();
 
@@ -50,7 +53,7 @@ protected:
 
 	Texture2D* m_texture;
 	TrianglesCommand m_trianglesCommand;
-
+	VertexArray m_vertexArray;
 };
 
 OCF_END

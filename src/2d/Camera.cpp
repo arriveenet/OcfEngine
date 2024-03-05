@@ -22,7 +22,8 @@ bool Camera::init()
 	const float halfWidth = static_cast<float>(windowSize.x / 2);
 	const float halfHeight = static_cast<float>(windowSize.y / 2);
 
-	m_projection = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight);
+	//m_projection = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight);
+	m_projection = glm::ortho(0.0f, static_cast<float>(windowSize.x), 0.0f, static_cast<float>(windowSize.y));
 
 	return true;
 }

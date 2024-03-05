@@ -59,8 +59,6 @@ private:
 	glm::ivec4 m_viewport;
 	ShaderManager* m_shaderManager;
 	std::vector<RenderCommand*> m_renderCommands;
-
-	VertexArray* m_SpriteVerts;
 };
 
 OCF_END

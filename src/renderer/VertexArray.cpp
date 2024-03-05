@@ -8,6 +8,7 @@ VertexArray::VertexArray()
 	, m_vertexArray(0)
 	, m_indexCount(0)
 {
+	glGenVertexArrays(1, &m_vertexArray);
 }
 
 VertexArray::~VertexArray()
@@ -46,10 +47,14 @@ void VertexArray::init(Vertex3fC3fT2f* vertices, unsigned short* indices, unsign
 		reinterpret_cast<void*>(sizeof(float) * 6));
 }
 
-void VertexArray::setAttribute(int index, int size, int stride, size_t offset)
+void VertexArray::bind()
 {
-
+	glBindVertexArray(m_vertexArray);
 }
 
+void VertexArray::unbind()
+{
+	glBindVertexArray(0);
+}
 
 OCF_END

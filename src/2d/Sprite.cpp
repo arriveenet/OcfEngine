@@ -1,4 +1,7 @@
 #include "Sprite.h"
+
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "base/Game.h"
 #include "renderer/Texture2D.h"
 #include "renderer/OpenGLInclude.h"
@@ -12,6 +15,18 @@ OCF_BEGIN
 
 static unsigned short indices[] = { 0, 1, 2, 3, 2, 1 };
 
+Sprite* Sprite::create(const std::string& filenam, int drawOrder/*= 100*/)
+{
+	Sprite* pSprite = new Sprite(drawOrder);
+
+	if (pSprite) {
+		pSprite->initWithFile(filenam);
+		return pSprite;
+	}
+
+	return nullptr;
+}
+
 Sprite::Sprite(int drawOrder)
 	: m_drawOrder(drawOrder)
 	, m_modelView(1.0f)
@@ -21,20 +36,25 @@ Sprite::Sprite(int drawOrder)
 {
 	m_size = { 2.0f, 2.0f };
 
-	m_quad.topLeft.position		= { 0.0f, 0.0f, 0.0f };
-	m_quad.bottomLeft.position	= { 0.0f, 0.0f, 0.0f };
-	m_quad.topRight.position	= { 0.0f, 0.0f, 0.0f };
-	m_quad.bottomRight.position	= { 0.0f, 0.0f, 0.0f };
+	// 頂点を設定
+	m_quad.topLeft.position		= { -0.5f,  0.5f, 0.0f };
+	m_quad.bottomLeft.position	= { -0.5f, -0.5f, 0.0f };
+	m_quad.topRight.position	= {  0.5f,  0.5f, 0.0f };
+	m_quad.bottomRight.position	= {  0.5f, -0.5f, 0.0f };
 
+	// 色を設定
 	m_quad.topLeft.color		= { 1.0f, 1.0f, 1.0f };
 	m_quad.bottomLeft.color		= { 1.0f, 1.0f, 1.0f };
 	m_quad.topRight.color		= { 1.0f, 1.0f, 1.0f };
 	m_quad.bottomRight.color	= { 1.0f, 1.0f, 1.0f };
 
-	m_quad.topLeft.texCoord		= { 0.0f, 1.0f };
-	m_quad.bottomLeft.texCoord	= { 0.0f, 0.0f };
-	m_quad.topRight.texCoord	= { 1.0f, 1.0f };
-	m_quad.bottomRight.texCoord	= { 1.0f, 0.0f };
+	// テクスチャ座標を設定
+	m_quad.topLeft.texCoord		= { 0.0f, 0.0f };
+	m_quad.bottomLeft.texCoord	= { 0.0f, 1.0f };
+	m_quad.topRight.texCoord	= { 1.0f, 0.0f };
+	m_quad.bottomRight.texCoord	= { 1.0f, 1.0f };
+
+	m_vertexArray.init(&m_quad.topLeft, indices, 4, 6);
 
 	Game::getInstance()->getRenderer()->addSprite(this);
 }
@@ -58,29 +78,6 @@ bool Sprite::initWithFile(const std::string& filename)
 		m_texture = nullptr;
 		return false;
 	}
-
-	ProgramState& programState = m_trianglesCommand.getProgramState();
-	programState.init(ShaderManager::getInstance()->getProgram(ProgramType::Basic));
-
-	Program* program = programState.getProgram();
-	VertexBuffer* vertexBuffer = programState.getVertexBuffer();
-	VertexArray* vertexArray = programState.getVertexArray();
-
-	glUseProgram(program->getProgram());
-
-	glBindVertexArray(vertexArray->getHandle());
-	vertexBuffer->bind();
-
-	int location = program->getAttributeLocation("inPosition");
-	vertexArray->setAttribute(location, 3, sizeof(Vertex3fC3fT2f), 0);
-
-	location = program->getAttributeLocation("inColor");
-	vertexArray->setAttribute(location, 3, sizeof(Vertex3fC3fT2f), sizeof(glm::vec3));
-	
-	vertexBuffer->unbind();
-
-	glBindVertexArray(0);
-	glUseProgram(0);
 
 	setSize((float)m_texture->getWidth(), (float)m_texture->getHeight());
 
@@ -110,54 +107,27 @@ Rect Sprite::getRect() const
 
 void Sprite::draw()
 {
-	glPushMatrix();
+	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
+	glUseProgram(pProgram->getProgram());
 
-	// 平行移動
-	glTranslatef(m_position.x, m_position.y, 0.0f);
-	// 回転
-	glRotatef(m_rotation, 0.0f, 0.0f, 1.0f);
-	// 拡大縮小
-	glScalef(m_scaleX, m_scaleY, m_scaleZ);
+	Scene* scene = Game::getInstance()->getCurrentScene();
+	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
 
-	glColor3ub(0xff, 0xff, 0xff);
+	GLint location = glGetUniformLocation(pProgram->getProgram(), "uViewProj");
+	glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(projection));
 
-	// 頂点データの配列を定義
-	glVertexPointer(3, GL_FLOAT, sizeof(Vertex3fT2f), &m_quad.topLeft.position);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex3fT2f), &m_quad.topLeft.texCoord);
+	glm::mat4 modelView(1.0f);
+	modelView *= glm::translate(glm::mat4(1.0f), glm::vec3(m_position, 0));
+	modelView *= glm::scale(glm::mat4(1.0f), glm::vec3(m_size.x, m_size.y, 1.0f));
+	location = glGetUniformLocation(pProgram->getProgram(), "uWorldTransform");
+	glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(modelView));
 
-	// テクスチャを設定
 	if (m_texture)
 		m_texture->setActive();
 
-	// レンダリング
-	static unsigned char indices[] = { 0, 1, 2, 3, 2, 1 };
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, indices);
+	m_vertexArray.bind();
 
-	// スプライトデバッグ表示
-#ifdef SPRITE_DEBUG_DRAW
-	glColor3ub(0x00, 0xff, 0x00);
-	glPointSize(3.0f);
-	glBegin(GL_POINTS);
-	{
-		glVertex2f(0.0f, 0.0f);
-	}
-	glEnd();
-
-	// ポリンゴンをワイヤーフレームで描画
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, indices);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
-
-	glEnd();
-#endif
-
-	glPopMatrix();
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, nullptr);
 }
 
 void Sprite::draw(Renderer* renderer)
@@ -210,13 +180,6 @@ void Sprite::updatePolygon()
 	m_quad.bottomLeft.position = { lb , 0.0f};
 	m_quad.topRight.position = { rt, 0.0f };
 	m_quad.bottomRight.position = { rt.x, lb.y, 0.0f };
-
-	ProgramState& programState = m_trianglesCommand.getProgramState();
-	VertexBuffer* vertexBuffer =  programState.getVertexBuffer();
-	vertexBuffer->updateData(&m_quad.topLeft.position, sizeof(m_quad));
-
-	VertexBuffer* indexBuffer = programState.getIndexBuffer();
-	indexBuffer->updateData(&indices[0], sizeof(indices));
 }
 
 void Sprite::flipX()
