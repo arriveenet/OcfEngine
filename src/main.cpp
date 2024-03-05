@@ -1,7 +1,7 @@
 #define _CRTDBG_MAP_ALLOC
 #include <cstdlib>
 #include <crtdbg.h>
-#include "Application.h"
+#include "platform/Application.h"
 
 #pragma comment(lib, "opengl32.lib")
 
