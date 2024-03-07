@@ -16,6 +16,8 @@ public:
 	bool init() override;
 
 	const glm::mat4 getProjectionMatrix() const;
+	const glm::mat4 getViewMatrix() const;
+
 	Camera::Type getType() const { return m_type; }
 
 protected:

@@ -1,4 +1,5 @@
 #include "Program.h"
+#include <glm/gtc/type_ptr.hpp>
 #include "base/FileUtils.h"
 
 OCF_BEGIN
@@ -29,6 +30,12 @@ int Program::getAttributeLocation(const std::string& name) const
 int Program::getUniformLocation(const std::string& name) const
 {
 	return glGetUniformLocation(m_program, name.c_str());
+}
+
+void Program::setUniform(const std::string& name, const glm::mat4& matrix) const
+{
+	const int location = getUniformLocation(name);
+	glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(matrix));
 }
 
 void Program::compileProgram()

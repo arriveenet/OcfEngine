@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <glm/glm.hpp>
 #include "Shader.h"
 #include "base/Macros.h"
 
@@ -16,6 +17,8 @@ public:
 
 	int getAttributeLocation(const std::string& name) const;
 	int getUniformLocation(const std::string& name) const;
+
+	void setUniform(const std::string& name, const glm::mat4& matrix) const;
 
 private:
 	void compileProgram();

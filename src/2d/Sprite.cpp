@@ -112,15 +112,17 @@ void Sprite::draw()
 
 	Scene* scene = Game::getInstance()->getCurrentScene();
 	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
+	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();
 
-	GLint location = glGetUniformLocation(pProgram->getProgram(), "uViewProj");
-	glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(projection));
+	pProgram->setUniform("uViewProj", projection);
 
-	glm::mat4 modelView(1.0f);
-	modelView *= glm::translate(glm::mat4(1.0f), glm::vec3(m_position, 0));
-	modelView *= glm::scale(glm::mat4(1.0f), glm::vec3(m_size.x, m_size.y, 1.0f));
-	location = glGetUniformLocation(pProgram->getProgram(), "uWorldTransform");
-	glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(modelView));
+	glm::mat4 model(1.0f);
+	model *= glm::translate(glm::mat4(1.0f), glm::vec3(m_position, 0));
+	model *= glm::scale(glm::mat4(1.0f), glm::vec3(m_size.x, m_size.y, 1.0f));
+
+	glm::mat4 modelView = view * model;
+
+	pProgram->setUniform("uWorldTransform", modelView);
 
 	if (m_texture)
 		m_texture->setActive();

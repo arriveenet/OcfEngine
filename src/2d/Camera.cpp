@@ -22,8 +22,10 @@ bool Camera::init()
 	const float halfWidth = static_cast<float>(windowSize.x / 2);
 	const float halfHeight = static_cast<float>(windowSize.y / 2);
 
-	//m_projection = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight);
-	m_projection = glm::ortho(0.0f, static_cast<float>(windowSize.x), 0.0f, static_cast<float>(windowSize.y));
+	m_projection = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight);
+	//m_projection = glm::ortho(0.0f, static_cast<float>(windowSize.x), 0.0f, static_cast<float>(windowSize.y));
+
+	m_view = glm::lookAt(glm::vec3(halfWidth, halfHeight, 1), glm::vec3(halfWidth, halfHeight, 0), glm::vec3(0, 1, 0));
 
 	return true;
 }
@@ -31,6 +33,11 @@ bool Camera::init()
 const glm::mat4 Camera::getProjectionMatrix() const
 {
 	return m_projection;
+}
+
+const glm::mat4 Camera::getViewMatrix() const
+{
+	return m_view;
 }
 
 OCF_END
