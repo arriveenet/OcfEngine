@@ -10,13 +10,18 @@ public:
 		Orthographic	//!< •½s“Š‰e
 	};
 
+	static Camera* createOrthographic(float left, float right, float bottom, float top, float zNear = -1.0f, float zFar = 1.0f);
+	static Camera* getDefaultCamera();
+
 	Camera();
 	~Camera();
 
 	bool init() override;
+	bool initOrthographic(float left, float right, float bottom, float top, float zNear = -1.0f, float zFar = 1.0f);
 
 	const glm::mat4 getProjectionMatrix() const;
 	const glm::mat4 getViewMatrix() const;
+	const glm::mat4 getViewProjectionMatrix() const;
 
 	Camera::Type getType() const { return m_type; }
 
