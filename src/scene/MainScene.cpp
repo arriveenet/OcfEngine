@@ -30,6 +30,8 @@ bool MainScene::init()
 	sprite1->setPosition(size.x, size.y);
 	sprite2->setPosition(240, 240);
 
+	sprite1->setRotation(30.0f);
+
 	Label* label = Label::create("Hello World!");
 	this->addChild(label);
 

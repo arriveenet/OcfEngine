@@ -6,10 +6,12 @@ OCF_BEGIN
 
 Program::Program(const std::string& vertexShader, const std::string& fragmentShader)
 {
+	// 頂点シェーダーと、フラグメントシェーダーを読み込む
 	std::string assetsPath = FileUtils::getInstance()->getAssetsPath();
 	m_vertexShader.load(ShaderStage::Vertex, assetsPath + "\\shaders\\" + vertexShader);
 	m_fragmentShader.load(ShaderStage::Fragment, assetsPath + "\\shaders\\" + fragmentShader);
 
+	// シェーダーをコンパイル
 	compileProgram();
 }
 
@@ -35,6 +37,8 @@ int Program::getUniformLocation(const std::string& name) const
 void Program::setUniform(const std::string& name, const glm::mat4& matrix) const
 {
 	const int location = getUniformLocation(name);
+	assert(location != -1);
+
 	glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(matrix));
 }
 

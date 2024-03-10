@@ -97,6 +97,9 @@ void Sprite::setPosition(float x, float y)
 void Sprite::setSize(float width, float height)
 {
 	Entity::setSize(width, height);
+	m_scaleX = width;
+	m_scaleY = height;
+
 	updatePolygon();
 }
 
@@ -107,28 +110,31 @@ Rect Sprite::getRect() const
 
 void Sprite::draw()
 {
+	// シェーダを設定
 	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
 	glUseProgram(pProgram->getProgram());
 
+	// プロジェクション行列、モデルビュー行列を設定
 	Scene* scene = Game::getInstance()->getCurrentScene();
 	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
 	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();
 
+	updateTransform();
+
+	glm::mat4 modelView = view * m_transform;
+
+	// 行列をシェーダに設定
 	pProgram->setUniform("uViewProj", projection);
-
-	glm::mat4 model(1.0f);
-	model *= glm::translate(glm::mat4(1.0f), glm::vec3(m_position, 0));
-	model *= glm::scale(glm::mat4(1.0f), glm::vec3(m_size.x, m_size.y, 1.0f));
-
-	glm::mat4 modelView = view * model;
-
 	pProgram->setUniform("uWorldTransform", modelView);
 
+	// テクスチャを設定
 	if (m_texture)
 		m_texture->setActive();
 
+	// VAOを設定
 	m_vertexArray.bind();
 
+	// 描画
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, nullptr);
 }
 

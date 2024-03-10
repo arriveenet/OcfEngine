@@ -32,6 +32,7 @@ public:
 	virtual void update(float deltaTime);
 	virtual void updateComponents(float deltaTime);
 	virtual void updateEntity(float deltaTime);
+	virtual void updateTransform();
 
 	virtual void draw(Renderer* renderer);
 
@@ -71,6 +72,9 @@ protected:
 	float m_scaleX;
 	float m_scaleY;
 	float m_scaleZ;
+
+	glm::mat4 m_transform;
+	bool m_transformDirty;
 
 	std::vector<Entity*> m_entities;
 	std::vector<Component*> m_components;

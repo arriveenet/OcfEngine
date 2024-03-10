@@ -9,7 +9,7 @@ GameObject::GameObject()
 
 	m_id = ++objectCount;
 
-	std::cout << "GameObject: " << m_id << std::endl;
+	//std::cout << "GameObject: " << m_id << std::endl;
 }
 
 GameObject::~GameObject()

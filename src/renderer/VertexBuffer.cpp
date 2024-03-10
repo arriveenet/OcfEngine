@@ -65,7 +65,7 @@ void VertexBuffer::updateData(void* pData, size_t size)
 void VertexBuffer::setAttribute(int index, int size, int stride, size_t offset)
 {
 	glEnableVertexAttribArray(index);
-	glVertexAttribPointer(index, size, GL_FLOAT, GL_FALSE, stride, &offset);
+	glVertexAttribPointer(index, size, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(offset));
 }
 
 OCF_END

@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include <glm/gtx/transform.hpp>
 
 OCF_BEGIN
 
@@ -10,6 +11,8 @@ Entity::Entity()
 	, m_scaleX(1.0f)
 	, m_scaleY(1.0f)
 	, m_scaleZ(1.0f)
+	, m_transform(1.0f)
+	, m_transformDirty(true)
 {
 }
 
@@ -56,6 +59,17 @@ void Entity::updateEntity(float deltaTime)
 {
 	for (const auto& entity : m_entities) {
 		entity->update(deltaTime);
+	}
+}
+
+void Entity::updateTransform()
+{
+	if (m_transformDirty) {
+		m_transformDirty = false;
+
+		m_transform = glm::translate(glm::vec3(m_position, 0));
+		m_transform *= glm::rotate(glm::radians(m_rotation), glm::vec3(0, 0, 1));
+		m_transform *= glm::scale(glm::vec3(m_scaleX, m_scaleY, m_scaleZ));
 	}
 }
 
