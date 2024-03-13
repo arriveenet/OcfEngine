@@ -38,10 +38,11 @@ bool MainScene::init()
 	this->addChild(label);
 	this->addChild(label2);
 
-	label->setPosition(700.0f, 200.0f);
+	label->setPosition(300.0f, 200.0f);
 	label2->setPosition(0.0f, 680.0f);
 
-	label->setTextColor(glm::vec3(0.0f, 1.0f, 0.0f));
+	label->setTextColor(0, 255, 0);
+	label2->setTextColor(0, 0, 255);
 
 	return true;
 }

@@ -62,6 +62,13 @@ void Label::setTextColor(const glm::vec3& textColor)
 	m_textColor = textColor;
 }
 
+void Label::setTextColor(unsigned char r, unsigned char g, unsigned b)
+{
+	m_textColor.x = r / 255.0f;
+	m_textColor.y = g / 255.0f;
+	m_textColor.z = b / 255.0f;
+}
+
 void Label::update(float deltaTime)
 {
 	if (m_isDirty) {
