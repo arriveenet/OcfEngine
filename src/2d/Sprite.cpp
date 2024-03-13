@@ -29,6 +29,7 @@ Sprite* Sprite::create(const std::string& filenam, int drawOrder/*= 100*/)
 
 Sprite::Sprite(int drawOrder)
 	: m_drawOrder(drawOrder)
+	, m_isDirty(true)
 	, m_modelView(1.0f)
 	, m_flippedX(false)
 	, m_flippedY(false)
@@ -54,7 +55,20 @@ Sprite::Sprite(int drawOrder)
 	m_quad.topRight.texCoord	= { 1.0f, 0.0f };
 	m_quad.bottomRight.texCoord	= { 1.0f, 1.0f };
 
-	m_vertexArray.init(&m_quad.topLeft, indices, 4, 6);
+	m_vertexArray.bind();
+
+	m_vertexArray.setStride(sizeof(Vertex3fC3fT2f));
+
+	m_vertexArray.updateVertexData(&m_quad.topLeft, sizeof(Vertex3fC3fT2f) * 4);
+	m_vertexArray.updateIndexData(indices, sizeof(unsigned short)* 6);
+
+	m_vertexArray.setAttribute("inPosition", 0, 3, false, 0);
+	m_vertexArray.setAttribute("inNormal", 1, 3, false, sizeof(float) * 3);
+	m_vertexArray.setAttribute("inTexCoord", 2, 2, false, sizeof(float) * 6);
+
+	m_vertexArray.bindVertexBuffer();
+
+	m_vertexArray.unbind();
 
 	Game::getInstance()->getRenderer()->addSprite(this);
 }
@@ -97,15 +111,25 @@ void Sprite::setPosition(float x, float y)
 void Sprite::setSize(float width, float height)
 {
 	Entity::setSize(width, height);
-	m_scaleX = width;
-	m_scaleY = height;
-
 	updatePolygon();
+
+	m_isDirty = true;
 }
 
 Rect Sprite::getRect() const
 {
 	return m_rect;
+}
+
+void Sprite::update(float deltaTime)
+{
+	if (m_isDirty) {
+		m_vertexArray.updateVertexData(&m_quad.topLeft, sizeof(Vertex3fC3fT2f) * 4);
+		m_vertexArray.updateIndexData(indices, sizeof(unsigned short) * 6);
+
+		m_isDirty = false;
+	}
+
 }
 
 void Sprite::draw()
@@ -136,6 +160,8 @@ void Sprite::draw()
 
 	// •`‰æ
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, nullptr);
+
+	m_vertexArray.unbind();
 }
 
 void Sprite::draw(Renderer* renderer)

@@ -33,10 +33,15 @@ bool MainScene::init()
 	sprite1->setRotation(30.0f);
 
 	Label* label = Label::create("Hello World!");
+	Label* label2 = Label::create("#include <stdio.h>\n\nint main(int argc, **argv)\n{\n    printf(\"Hello World\");\n}");
+
 	this->addChild(label);
+	this->addChild(label2);
 
 	label->setPosition(700.0f, 200.0f);
-	label->setRotation(30.0f);
+	label2->setPosition(0.0f, 680.0f);
+
+	label->setTextColor(glm::vec3(0.0f, 1.0f, 0.0f));
 
 	return true;
 }

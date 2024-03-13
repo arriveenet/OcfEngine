@@ -42,6 +42,8 @@ static void debugMessageCallback(GLenum source, GLenum type, GLuint id,
 #endif
 
 Renderer::Renderer()
+	: m_viewport(0, 0, 0,0)
+	, m_shaderManager(nullptr)
 {
 }
 
@@ -127,6 +129,13 @@ void Renderer::draw()
 	for (auto& sprite : m_sprites) {
 		sprite->draw();
 	}
+
+	for (auto& lable : m_labels) {
+		lable->draw();
+	}
+
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
 }
 
 OCF_END

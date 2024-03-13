@@ -6,8 +6,8 @@ VertexArray::VertexArray()
 	: m_vertexArray(0)
 	, m_vertexCount(0)
 	, m_indexCount(0)
-	, m_vertexBuffer(BufferType::Vertex, BufferUsage::Static)
-	, m_indexBuffer(BufferType::Index, BufferUsage::Static)
+	, m_vertexBuffer(BufferType::Vertex, BufferUsage::Dynamic)
+	, m_indexBuffer(BufferType::Index, BufferUsage::Dynamic)
 	, m_stride(0)
 {
 	glGenVertexArrays(1, &m_vertexArray);

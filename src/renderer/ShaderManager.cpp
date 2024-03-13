@@ -43,8 +43,10 @@ void ShaderManager::removeAllPrograms()
 bool ShaderManager::init()
 {
 	Program* program = new Program("basic.vert", "basic.frag");
-
 	m_programs.emplace(ProgramType::Basic, program);
+
+	program = new Program("label.vert", "label.frag");
+	m_programs.emplace(ProgramType::Label, program);
 
 	return true;
 }

@@ -10,8 +10,8 @@ static GLenum convertPixelFormatToOpneGLFormat(PixelFormat format)
 
 	switch (format) {
 	case PixelFormat::GRAY:
-		//result = GL_LUMINANCE;
-		result = GL_ALPHA;
+		result = GL_LUMINANCE;
+		//result = GL_ALPHA;
 		break;
 	case PixelFormat::RGB:
 		result = GL_RGB;

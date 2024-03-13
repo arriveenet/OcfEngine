@@ -41,6 +41,8 @@ public:
 	/** スプライトの矩形を取得 */
 	virtual Rect getRect() const;
 
+	void update(float deltaTime) override;
+
 	/** スプライトを描画 */
 	virtual void draw();
 	void draw(Renderer* renderer) override;
@@ -58,6 +60,7 @@ protected:
 
 protected:
 	int m_drawOrder;
+	bool m_isDirty;
 	QuadV3fC3fT2f m_quad;
 	Rect m_rect;
 	glm::mat4 m_modelView;
