@@ -35,7 +35,7 @@ static void debugMessageCallback(GLenum source, GLenum type, GLuint id,
 		printf("OpenGL warning: %s\n", message);
 		break;
 	case GL_DEBUG_SEVERITY_NOTIFICATION:
-		printf("OpenGL info: %s\n", message);
+		//printf("OpenGL info: %s\n", message);
 		break;
 	default:
 		break;
@@ -61,9 +61,9 @@ bool Renderer::init()
 
 	// OpenGLのデバッグメッセージを有効にする
 #ifdef _DEBUG
-	//glEnable(GL_DEBUG_OUTPUT);
-	//glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-	//glDebugMessageCallback(debugMessageCallback, nullptr);
+	glEnable(GL_DEBUG_OUTPUT);
+	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+	glDebugMessageCallback(debugMessageCallback, nullptr);
 #endif
 
 	return true;
@@ -123,9 +123,7 @@ void Renderer::draw()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// Draw sprites
-	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	for (auto& sprite : m_sprites) {
@@ -135,9 +133,7 @@ void Renderer::draw()
 	for (auto& lable : m_labels) {
 		lable->draw();
 	}
-
 	glDisable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
 
 	for (const auto& command : m_renderCommands) {
 
