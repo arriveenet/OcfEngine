@@ -8,6 +8,7 @@ OCF_BEGIN
 enum class ProgramType : uint32_t {
 	Basic,
 	Label,
+	DrawShape,
 	Max
 };
 

@@ -73,7 +73,7 @@ void Entity::updateTransform()
 	}
 }
 
-void Entity::draw(Renderer* renderer)
+void Entity::draw(Renderer* renderer, const glm::mat4& transform)
 {
 }
 

@@ -34,6 +34,11 @@ int Program::getUniformLocation(const std::string& name) const
 	return glGetUniformLocation(m_program, name.c_str());
 }
 
+void Program::use()
+{
+	glUseProgram(m_program);
+}
+
 void Program::setUniform(const std::string& name, const glm::mat4& matrix) const
 {
 	const int location = getUniformLocation(name);

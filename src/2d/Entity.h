@@ -34,7 +34,7 @@ public:
 	virtual void updateEntity(float deltaTime);
 	virtual void updateTransform();
 
-	virtual void draw(Renderer* renderer);
+	virtual void draw(Renderer* renderer, const glm::mat4& transform);
 
 	void setState(State state) { m_state = state; }
 	State getState() const { return m_state; }

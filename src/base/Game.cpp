@@ -154,7 +154,7 @@ void Game::update()
 
 void Game::draw()
 {
-	m_scene->draw(m_renderer);
+	m_scene->draw(m_renderer, glm::mat4(1.0f));
 
 	m_renderer->draw();
 }

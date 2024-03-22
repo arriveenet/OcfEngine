@@ -53,6 +53,9 @@ public:
 	/** 描画処理を行う */
 	void draw();
 
+protected:
+	void drawCustomCommand(RenderCommand* command);
+
 private:
 	std::vector<Sprite*> m_sprites;	//!< スプライト配列
 	std::vector<Label*> m_labels;

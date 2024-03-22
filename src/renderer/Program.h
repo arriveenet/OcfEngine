@@ -18,6 +18,7 @@ public:
 	int getAttributeLocation(const std::string& name) const;
 	int getUniformLocation(const std::string& name) const;
 
+	void use();
 	void setUniform(const std::string& name, const glm::mat4& matrix) const;
 
 private:

@@ -14,21 +14,24 @@ public:
 	virtual ~DrawShape();
 
 	bool init() override;
+	void clear();
+
+	void ensureCapacityGLLine(int count);
 
 	void drawLine(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
 
 	void update(float deltaTime) override;
-	void draw(Renderer* renderer) override;
+	void draw(Renderer* renderer, const glm::mat4& transform) override;
 
 protected:
 	void updateVertexBuffer();
 
 protected:
 	bool m_dirtyLine;
-	int m_bufferCapacity;
+	int m_bufferCapacityLine;
+	int m_bufferCountLine;
 	std::vector<Vertex2fC4> m_lineBuffers;
-	VertexArray m_vertexArray;
-	CustomCommand m_customCommand;
+	CustomCommand m_customCommandLine;
 };
 
 OCF_END

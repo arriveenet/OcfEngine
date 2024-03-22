@@ -59,8 +59,11 @@ Sprite::Sprite(int drawOrder)
 
 	m_vertexArray.setStride(sizeof(Vertex3fC3fT2f));
 
-	m_vertexArray.updateVertexData(&m_quad.topLeft, sizeof(Vertex3fC3fT2f) * 4);
-	m_vertexArray.updateIndexData(indices, sizeof(unsigned short)* 6);
+	m_vertexArray.createVertexBuffer(BufferUsage::Dynamic);
+	m_vertexArray.createIndexBuffer(BufferUsage::Dynamic);
+
+	m_vertexArray.updateVertexBuffer(&m_quad.topLeft, sizeof(Vertex3fC3fT2f) * 4);
+	m_vertexArray.updateIndexBuffer(indices, sizeof(unsigned short)* 6);
 
 	m_vertexArray.setAttribute("inPosition", 0, 3, false, 0);
 	m_vertexArray.setAttribute("inNormal", 1, 3, false, sizeof(float) * 3);
@@ -124,8 +127,8 @@ Rect Sprite::getRect() const
 void Sprite::update(float deltaTime)
 {
 	if (m_isDirty) {
-		m_vertexArray.updateVertexData(&m_quad.topLeft, sizeof(Vertex3fC3fT2f) * 4);
-		m_vertexArray.updateIndexData(indices, sizeof(unsigned short) * 6);
+		m_vertexArray.updateVertexBuffer(&m_quad.topLeft, sizeof(Vertex3fC3fT2f) * 4);
+		m_vertexArray.updateIndexBuffer(indices, sizeof(unsigned short) * 6);
 
 		m_isDirty = false;
 	}
@@ -164,7 +167,7 @@ void Sprite::draw()
 	m_vertexArray.unbind();
 }
 
-void Sprite::draw(Renderer* renderer)
+void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 {
 	TrianglesCommand::Triangles triangles;
 	triangles.vertices = &m_quad.bottomLeft;
@@ -175,6 +178,14 @@ void Sprite::draw(Renderer* renderer)
 	m_trianglesCommand.init(m_texture, triangles, m_modelView);
 
 	renderer->addCommand(&m_trianglesCommand);
+
+	m_drawShape.clear();
+	m_drawShape.drawLine(glm::vec2(m_quad.topLeft.position), glm::vec2(m_quad.bottomLeft.position), glm::vec4(1, 1, 1, 1));
+	m_drawShape.drawLine(glm::vec2(m_quad.bottomLeft.position), glm::vec2(m_quad.bottomRight.position), glm::vec4(1, 1, 1, 1));
+	m_drawShape.drawLine(glm::vec2(m_quad.bottomRight.position), glm::vec2(m_quad.topRight.position), glm::vec4(1, 1, 1, 1));
+	m_drawShape.drawLine(glm::vec2(m_quad.topRight.position), glm::vec2(m_quad.topLeft.position), glm::vec4(1, 1, 1, 1));
+
+	m_drawShape.draw(renderer, m_transform);
 }
 
 void Sprite::setFlippedX(bool flippedX)

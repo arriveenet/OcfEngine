@@ -35,8 +35,11 @@ bool Label::init()
 
 	m_vertexArray.setStride(sizeof(Vertex3fC3fT2f));
 
-	m_vertexArray.updateVertexData(m_quads.data(), sizeof(Vertex3fC3fT2f) * m_quads.size());
-	m_vertexArray.updateIndexData(m_indices.data(), sizeof(unsigned short) * m_indices.size());
+	m_vertexArray.createVertexBuffer(BufferUsage::Dynamic);
+	m_vertexArray.createIndexBuffer(BufferUsage::Dynamic);
+
+	m_vertexArray.updateVertexBuffer(m_quads.data(), sizeof(Vertex3fC3fT2f) * m_quads.size());
+	m_vertexArray.updateIndexBuffer(m_indices.data(), sizeof(unsigned short) * m_indices.size());
 
 	m_vertexArray.setAttribute("inPosition", 0, 3, false, 0);
 	m_vertexArray.setAttribute("inColor", 1, 3, false, sizeof(float) * 3);
@@ -111,6 +114,8 @@ void Label::draw()
 
 	// •`‰æ
 	glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_indices.size()), GL_UNSIGNED_SHORT, nullptr);
+
+	m_vertexArray.unbind();
 }
 
 void Label::updateQuads()
@@ -177,8 +182,8 @@ void Label::updateQuads()
 void Label::updateVertex()
 {
 	m_vertexArray.bind();
-	m_vertexArray.updateVertexData(m_quads.data(), sizeof(Vertex3fC3fT2f) * m_quads.size() * 4);
-	m_vertexArray.updateIndexData(m_indices.data(), sizeof(unsigned short) * m_indices.size());
+	m_vertexArray.updateVertexBuffer(m_quads.data(), sizeof(Vertex3fC3fT2f) * m_quads.size() * 4);
+	m_vertexArray.updateIndexBuffer(m_indices.data(), sizeof(unsigned short) * m_indices.size());
 	m_vertexArray.unbind();
 }
 

@@ -21,10 +21,10 @@ void Scene::update(float deltaTime)
 {
 }
 
-void Scene::draw(Renderer* renderer)
+void Scene::draw(Renderer* renderer, const glm::mat4& transform)
 {
 	for (auto& entity : m_entities) {
-		entity->draw(renderer);
+		entity->draw(renderer, m_transform);
 	}
 }
 

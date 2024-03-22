@@ -26,6 +26,7 @@ public:
 	void unbind() const;
 
 	void updateData(void* pData, size_t size);
+	void updateSubData(void* pData, size_t offset, size_t size);
 
 	void setAttribute(int index, int size, int stride, size_t offset);
 

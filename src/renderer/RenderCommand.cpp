@@ -8,6 +8,7 @@ void RenderCommand::init(const glm::mat4& modelViewMatrix)
 }
 
 RenderCommand::RenderCommand()
+	: m_Type(Type::UnknownCommand)
 {
 }
 

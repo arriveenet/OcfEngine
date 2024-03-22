@@ -12,7 +12,8 @@ DrawShape* DrawShape::create()
 
 DrawShape::DrawShape()
 	: m_dirtyLine(false)
-	, m_bufferCapacity(0)
+	, m_bufferCapacityLine(0)
+	, m_bufferCountLine(0)
 {
 	init();
 }
@@ -23,37 +24,75 @@ DrawShape::~DrawShape()
 
 bool DrawShape::init()
 {
-	m_vertexArray.bind();
+	m_customCommandLine.setDrawType(CustomCommand::DrawType::Array);
+	m_customCommandLine.setPrimitiveType(PrimitiveType::Line);
 
-	m_vertexArray.setStride(sizeof(Vertex2fC4));
+	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::DrawShape);
 
-	m_vertexArray.updateVertexData(m_lineBuffers.data(), sizeof(Vertex3fC3fT2f) * m_lineBuffers.size());
+	auto& programState = m_customCommandLine.getProgramState();
+	programState.setProgram(pProgram);
 
-	m_vertexArray.setAttribute("inPosition", 0, 3, false, 0);
-	m_vertexArray.setAttribute("inColor", 1, 4, false, sizeof(float) * 4);
+	VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
+	pVertexArray->bind();
 
-	m_vertexArray.unbind();
+	pVertexArray->setStride(sizeof(Vertex2fC4));
+
+	pVertexArray->createVertexBuffer(BufferUsage::Dynamic);
+	ensureCapacityGLLine(256);
+
+	pVertexArray->setAttribute("inPosition", 0, 2, false, 0);
+	pVertexArray->setAttribute("inColor", 1, 4, false, sizeof(float) * 2);
+
+	pVertexArray->bindVertexBuffer();
+
+	pVertexArray->unbind();
 
 	return true;
 }
 
+void DrawShape::clear()
+{
+	m_lineBuffers.clear();
+	m_bufferCountLine = 0;
+	m_dirtyLine = true;
+}
+
+void DrawShape::ensureCapacityGLLine(int count)
+{
+	if (m_bufferCountLine + count > m_bufferCapacityLine) {
+		m_bufferCapacityLine += max(m_bufferCapacityLine, count);
+		m_lineBuffers.resize(m_bufferCapacityLine);
+
+		VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
+		pVertexArray->updateVertexBuffer(m_lineBuffers.data(), sizeof(Vertex2fC4) * m_bufferCapacityLine);
+	}
+}
+
 void DrawShape::drawLine(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color)
 {
+	ensureCapacityGLLine(2);
+
 	m_lineBuffers.push_back({ origin, color });
 	m_lineBuffers.push_back({ destanation, color });
 
+	VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
+	pVertexArray->updateVertexBuffer(m_lineBuffers.data() + m_bufferCountLine, sizeof(Vertex2fC4) * m_bufferCountLine, sizeof(Vertex2fC4) * 2);
+
+	m_bufferCountLine += 2;
 	m_dirtyLine = true;
+
+	m_customCommandLine.setVertexDrawInfo(0, m_bufferCountLine);
 }
 
 void DrawShape::update(float deltaTime)
 {
 }
 
-void DrawShape::draw(Renderer* renderer)
+void DrawShape::draw(Renderer* renderer, const glm::mat4& transform)
 {
 	if (!m_lineBuffers.empty()) {
-		m_customCommand.init(m_transform);
-		renderer->addCommand(&m_customCommand);
+		m_customCommandLine.init(transform);
+		renderer->addCommand(&m_customCommandLine);
 	}
 
 }

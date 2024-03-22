@@ -138,6 +138,7 @@
     <ClCompile Include="..\third_party\glad\src\glad.c" />
     <ClCompile Include="2d\Camera.cpp" />
     <ClCompile Include="2d\Component.cpp" />
+    <ClCompile Include="2d\DrawShape.cpp" />
     <ClCompile Include="2d\Entity.cpp" />
     <ClCompile Include="2d\Label.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
@@ -151,7 +152,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="platform\Application.cpp" />
     <ClCompile Include="platform\Window.cpp" />
+    <ClCompile Include="renderer\CustomCommand.cpp" />
     <ClCompile Include="renderer\Image.cpp" />
+    <ClCompile Include="renderer\OpenGLUtility.cpp" />
     <ClCompile Include="renderer\ProgramState.cpp" />
     <ClCompile Include="renderer\RenderCommand.cpp" />
     <ClCompile Include="renderer\Renderer.cpp" />
@@ -170,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="2d\Camera.h" />
     <ClInclude Include="2d\Component.h" />
+    <ClInclude Include="2d\DrawShape.h" />
     <ClInclude Include="2d\Entity.h" />
     <ClInclude Include="2d\Label.h" />
     <ClInclude Include="2d\Sprite.h" />
@@ -186,8 +190,10 @@
     <ClInclude Include="OcfEngine.h" />
     <ClInclude Include="platform\Application.h" />
     <ClInclude Include="platform\Window.h" />
+    <ClInclude Include="renderer\CustomCommand.h" />
     <ClInclude Include="renderer\Image.h" />
     <ClInclude Include="renderer\OpenGLInclude.h" />
+    <ClInclude Include="renderer\OpenGLUtility.h" />
     <ClInclude Include="renderer\ProgramState.h" />
     <ClInclude Include="renderer\RenderCommand.h" />
     <ClInclude Include="renderer\Renderer.h" />
@@ -198,6 +204,7 @@
     <ClInclude Include="renderer\TextureAtlas.h" />
     <ClInclude Include="renderer\TextureManager.h" />
     <ClInclude Include="renderer\TrianglesCommand.h" />
+    <ClInclude Include="renderer\Types.h" />
     <ClInclude Include="renderer\VertexArray.h" />
     <ClInclude Include="renderer\VertexBuffer.h" />
     <ClInclude Include="scene\MainScene.h" />

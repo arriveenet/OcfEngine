@@ -1,31 +1,9 @@
 #include "Texture2D.h"
 #include "Image.h"
-#include <GLFW/glfw3.h>
+#include "OpenGLInclude.h"
+#include "OpenGLUtility.h"
 
 OCF_BEGIN
-
-static GLenum convertPixelFormatToOpneGLFormat(PixelFormat format)
-{
-	GLenum result = 0;
-
-	switch (format) {
-	case PixelFormat::GRAY:
-		result = GL_LUMINANCE;
-		//result = GL_ALPHA;
-		break;
-	case PixelFormat::RGB:
-		result = GL_RGB;
-		break;
-	case PixelFormat::RGBA:
-		result = GL_RGBA;
-		break;
-	default:
-		assert(false);
-		break;
-	}
-
-	return result;
-}
 
 static int getPixelAlignment(PixelFormat format)
 {
@@ -56,6 +34,7 @@ Texture2D::Texture2D()
 
 Texture2D::~Texture2D()
 {
+	glDeleteTextures(1, &m_textureId);
 }
 
 bool Texture2D::initWithFile(const std::string& filename)
@@ -68,7 +47,7 @@ bool Texture2D::initWithFile(const std::string& filename)
 	m_height = img.getHeight();
 	m_pixelFormat = img.getPixelFormat();
 
-	const GLenum format = convertPixelFormatToOpneGLFormat(m_pixelFormat);
+	const GLenum format = OpenGLUtility::toGLFormat(m_pixelFormat);
 	const int alignment = getPixelAlignment(m_pixelFormat);
 	
 	glGenTextures(1, &m_textureId);

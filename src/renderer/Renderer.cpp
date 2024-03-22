@@ -1,6 +1,8 @@
 #include "Renderer.h"
 #include "base/Game.h"
 #include "renderer/OpenGLInclude.h"
+#include "renderer/OpenGLUtility.h"
+#include "renderer/CustomCommand.h"
 #include <glm/gtc/type_ptr.hpp>
 
 OCF_BEGIN
@@ -136,6 +138,53 @@ void Renderer::draw()
 
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
+
+	for (const auto& command : m_renderCommands) {
+
+		const auto commandType = command->getType();
+
+		switch (commandType) {
+		case RenderCommand::Type::TrianglesCommand:
+			break;
+		case RenderCommand::Type::CustomCommand:
+			drawCustomCommand(command);
+			break;
+		default:
+			assert(false);
+			break;
+		}
+	}
+
+	m_renderCommands.clear();
+}
+
+void Renderer::drawCustomCommand(RenderCommand* command)
+{
+	CustomCommand* cmd = static_cast<CustomCommand*>(command);
+	ProgramState& programState = cmd->getProgramState();
+
+	Program* pProgram = programState.getProgram();
+	pProgram->use();
+
+	Scene* scene = Game::getInstance()->getCurrentScene();
+	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
+	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();
+
+	glm::mat4 modelView = view * cmd->getModelView();
+
+	pProgram->setUniform("uViewProj", projection);
+	pProgram->setUniform("uWorldTransform", modelView);
+
+	cmd->getVertexArray()->bind();
+
+	const auto drawType = cmd->getDrawType();
+	if (drawType == CustomCommand::DrawType::Element) {
+		glDrawElements(OpenGLUtility::toGLPrimitive(cmd->getPrimitiveType()), 0, GL_UNSIGNED_SHORT, nullptr);
+	} else {
+		glDrawArrays(OpenGLUtility::toGLPrimitive(cmd->getPrimitiveType()), cmd->getVertexDrawStart(), cmd->getVertexDrawCount());
+	}
+
+	cmd->getVertexArray()->unbind();
 }
 
 OCF_END

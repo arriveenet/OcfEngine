@@ -2,6 +2,7 @@
 #include <string>
 #include "Component.h"
 #include "Entity.h"
+#include "DrawShape.h"
 #include "base/types.h"
 #include "base/Rect.h"
 #include "renderer/TrianglesCommand.h"
@@ -45,7 +46,7 @@ public:
 
 	/** スプライトを描画 */
 	virtual void draw();
-	void draw(Renderer* renderer) override;
+	void draw(Renderer* renderer, const glm::mat4& transform) override;
 
 	/** スプライトを反転 */
 	void setFlippedX(bool flippedX);
@@ -71,6 +72,7 @@ protected:
 	Texture2D* m_texture;
 	TrianglesCommand m_trianglesCommand;
 	VertexArray m_vertexArray;
+	DrawShape m_drawShape;
 };
 
 OCF_END

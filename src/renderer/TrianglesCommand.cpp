@@ -5,6 +5,7 @@ OCF_BEGIN
 TrianglesCommand::TrianglesCommand()
 	: m_texture(nullptr)
 {
+	m_Type = Type::TrianglesCommand;
 }
 
 TrianglesCommand::~TrianglesCommand()

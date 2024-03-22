@@ -39,8 +39,13 @@ public:
 	std::size_t getStride() const { return m_stride; }
 	void setStride(std::size_t stride);
 
-	void updateVertexData(void* pData, size_t size);
-	void updateIndexData(void* pData, size_t size);
+	void createVertexBuffer(BufferUsage usage);
+	void createIndexBuffer(BufferUsage usage);
+
+	void updateVertexBuffer(void* pData, size_t size);
+	void updateIndexBuffer(void* pData, size_t size);
+	void updateVertexBuffer(void* pData, size_t offset, size_t size);
+	void updateIndexBuffer(void* pData, size_t offset, size_t size);
 
 	void bindVertexBuffer();
 	void setAttribute(const std::string& name, int index, int size, bool needToBeNormallized, std::size_t offset);
@@ -48,8 +53,8 @@ public:
 private:
 	GLuint m_vertexArray;
 
-	VertexBuffer m_vertexBuffer;
-	VertexBuffer m_indexBuffer;
+	VertexBuffer* m_vertexBuffer;
+	VertexBuffer* m_indexBuffer;
 
 	unsigned int m_vertexCount;
 	unsigned int m_indexCount;

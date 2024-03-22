@@ -48,6 +48,9 @@ bool ShaderManager::init()
 	program = new Program("label.vert", "label.frag");
 	m_programs.emplace(ProgramType::Label, program);
 
+	program = new Program("drawShape.vert", "drawShape.frag");
+	m_programs.emplace(ProgramType::DrawShape, program);
+
 	return true;
 }
 
