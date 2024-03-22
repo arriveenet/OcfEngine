@@ -180,10 +180,10 @@ void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 	renderer->addCommand(&m_trianglesCommand);
 
 	m_drawShape.clear();
-	m_drawShape.drawLine(glm::vec2(m_quad.topLeft.position), glm::vec2(m_quad.bottomLeft.position), glm::vec4(1, 1, 1, 1));
-	m_drawShape.drawLine(glm::vec2(m_quad.bottomLeft.position), glm::vec2(m_quad.bottomRight.position), glm::vec4(1, 1, 1, 1));
-	m_drawShape.drawLine(glm::vec2(m_quad.bottomRight.position), glm::vec2(m_quad.topRight.position), glm::vec4(1, 1, 1, 1));
-	m_drawShape.drawLine(glm::vec2(m_quad.topRight.position), glm::vec2(m_quad.topLeft.position), glm::vec4(1, 1, 1, 1));
+	m_drawShape.drawLine(glm::vec2(m_quad.topLeft.position), glm::vec2(m_quad.bottomLeft.position), Color4f::WHITE);
+	m_drawShape.drawLine(glm::vec2(m_quad.bottomLeft.position), glm::vec2(m_quad.bottomRight.position), Color4f::WHITE);
+	m_drawShape.drawLine(glm::vec2(m_quad.bottomRight.position), glm::vec2(m_quad.topRight.position), Color4f::WHITE);
+	m_drawShape.drawLine(glm::vec2(m_quad.topRight.position), glm::vec2(m_quad.topLeft.position), Color4f::WHITE);
 
 	m_drawShape.draw(renderer, m_transform);
 }

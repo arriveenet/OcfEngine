@@ -18,6 +18,22 @@ enum class ButtonState {
 	Held
 };
 
+struct Color3b {
+	static const glm::u8vec3 BLACK;
+	static const glm::u8vec3 WHITE;
+	static const glm::u8vec3 RED;
+	static const glm::u8vec3 GREEN;
+	static const glm::u8vec3 BLUE;
+};
+
+struct Color4f {
+	static const glm::vec4 BLACK;
+	static const glm::vec4 WHITE;
+	static const glm::vec4 RED;
+	static const glm::vec4 GREEN;
+	static const glm::vec4 BLUE;
+};
+
 
 struct Vertex2fT2f {
 	glm::vec2 position;

@@ -149,6 +149,7 @@
     <ClCompile Include="base\Input.cpp" />
     <ClCompile Include="base\Keyboard.cpp" />
     <ClCompile Include="base\Rect.cpp" />
+    <ClCompile Include="base\Types.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="platform\Application.cpp" />
     <ClCompile Include="platform\Window.cpp" />
