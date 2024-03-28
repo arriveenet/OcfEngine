@@ -141,6 +141,7 @@
     <ClCompile Include="2d\DrawShape.cpp" />
     <ClCompile Include="2d\Entity.cpp" />
     <ClCompile Include="2d\Label.cpp" />
+    <ClCompile Include="2d\MoveComponent.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
     <ClCompile Include="base\FileUtils.cpp" />
     <ClCompile Include="base\Font.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="2d\DrawShape.h" />
     <ClInclude Include="2d\Entity.h" />
     <ClInclude Include="2d\Label.h" />
+    <ClInclude Include="2d\MoveComponent.h" />
     <ClInclude Include="2d\Sprite.h" />
     <ClInclude Include="base\FileUtils.h" />
     <ClInclude Include="base\fnt.h" />
