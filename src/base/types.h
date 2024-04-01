@@ -15,7 +15,7 @@ enum class ButtonState {
 	None,
 	Pressed,
 	Released,
-	Held
+	Hold
 };
 
 struct Color3b {

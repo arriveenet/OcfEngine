@@ -1,7 +1,7 @@
 #pragma once
 #include "types.h"
 
-#define KEY_CODE_MAX	34
+#define KEY_CODE_MAX	348
 
 struct GLFWwindow;
 

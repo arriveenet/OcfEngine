@@ -36,7 +36,7 @@ ButtonState Keyboard::getKeyState(int key) const
 			return ButtonState::Released;
 		}
 		else {
-			return ButtonState::Held;
+			return ButtonState::Hold;
 		}
 	}
 }
