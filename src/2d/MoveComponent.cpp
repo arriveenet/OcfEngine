@@ -21,7 +21,7 @@ void MoveComponent::update(float deltaTime)
 
 	const float angle = glm::radians(m_pOwner->getRotation());
 	glm::vec2 foward = { glm::cos(angle), glm::sin(angle) };
-	if (m_forwardSpeed != 0) {
+	if (m_forwardSpeed != 0.0f) {
 		glm::vec2 position = m_pOwner->getPosition();
 		position += foward * m_forwardSpeed * deltaTime;
 		m_pOwner->setPosition(position);

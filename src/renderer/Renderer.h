@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <glm/glm.hpp>
+#include "VertexBuffer.h"
 #include "ShaderManager.h"
 #include "RenderCommand.h"
 #include "TrianglesCommand.h"
@@ -14,6 +15,9 @@ OCF_BEGIN
  */
 class Renderer {
 public:
+	static constexpr int VBO_SIZE = 0x10000;
+	static constexpr int INDEX_VBO_SIZE = VBO_SIZE * 6 / 4;
+
 	/** コンストラクター */
 	Renderer();
 	/** デストラクター */
@@ -54,14 +58,33 @@ public:
 	void draw();
 
 protected:
+	void flush();
+	void trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int vertexBufferOffset);
+	void drawTrianglesCommand();
 	void drawCustomCommand(RenderCommand* command);
 
 private:
-	std::vector<Sprite*> m_sprites;	//!< スプライト配列
+	std::vector<Sprite*> m_sprites;
 	std::vector<Label*> m_labels;
 	glm::ivec4 m_viewport;
 	ShaderManager* m_shaderManager;
 	std::vector<RenderCommand*> m_renderCommands;
+	std::vector<TrianglesCommand*> m_trianglesCommands;
+
+	struct TriangleBatchToDraw {
+		TrianglesCommand* pCommand = nullptr;
+		unsigned int indicesToDraw = 0;
+		unsigned int offset = 0;
+	};
+	TriangleBatchToDraw* m_pTriangleBatchToDraw;
+	int m_triangleBatchToDrawSize;
+
+	Vertex3fC3fT2f m_triangleVertices[VBO_SIZE];
+	unsigned short m_triangleIndices[INDEX_VBO_SIZE];
+	unsigned int m_triangleVertexCount;
+	unsigned int m_triangleIndexCount;
+	VertexBuffer* m_pVertexBuffer;
+	VertexBuffer* m_pIndexBuffer;
 };
 
 OCF_END

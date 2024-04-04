@@ -42,7 +42,7 @@ public:
 	/** スプライトの矩形を取得 */
 	virtual Rect getRect() const;
 
-	void update(float deltaTime) override;
+	void updateEntity(float deltaTime) override;
 
 	/** スプライトを描画 */
 	virtual void draw();

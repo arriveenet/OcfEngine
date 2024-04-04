@@ -1,10 +1,86 @@
 #include "MainScene.h"
+#include <stdlib.h>
 #include <glm/gtc/type_ptr.hpp>
 #include "base/Game.h"
 #include "renderer/Image.h"
 #include "2d/Label.h"
+#include "2d/MoveComponent.h"
 
-USING_OCF
+OCF_BEGIN
+
+Asteroid::Asteroid()
+{
+	initWithFile("..\\assets\\textures\\Asteroid.png");
+	m_pMoveComponent = new MoveComponent(this);
+	addComponent(m_pMoveComponent);
+
+	m_pMoveComponent->setForwardSpeed(150.0f);
+
+	glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
+	float rot = rand() % 360;
+	float x = rand() % (int)visibleSize.x;
+	float y = rand() % (int)visibleSize.y;
+
+	setRotation(rot);
+	setPosition(x, y);
+}
+
+void Asteroid::updateEntity(float deltaTime)
+{
+	glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
+
+	if (m_position.x < 0.0f) {
+		m_position.x = visibleSize.x;
+	}
+	if (m_position.x > visibleSize.x) {
+		m_position.x = 0.0f;
+	}
+	if (m_position.y < 0.0f) {
+		m_position.y = visibleSize.y;
+	}
+	if (m_position.y > visibleSize.y) {
+		m_position.y = 0.0f;
+	}
+
+	Sprite::updateEntity(deltaTime);
+}
+
+Ship::Ship()
+{
+	initWithFile("..\\assets\\textures\\Ship.png");
+
+	m_pMoveComponent = new MoveComponent(this);
+	addComponent(m_pMoveComponent);
+
+	glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
+	setPosition(visibleSize.x / 2, visibleSize.y / 2);
+}
+
+void Ship::processInput(const InputState& inputState)
+{
+
+	float fowardSpeed = 0.0f;
+	if (inputState.keyboard.getKeyState(GLFW_KEY_W) == ButtonState::Hold) {
+		fowardSpeed = 300.0f;
+	}
+	if (inputState.keyboard.getKeyState(GLFW_KEY_S) == ButtonState::Hold) {
+		fowardSpeed = -300.0f;
+	}
+
+	float rotation = getRotation();
+	if (inputState.keyboard.getKeyState(GLFW_KEY_Q) == ButtonState::Hold) {
+		rotation += 3.0f;
+	}
+	if (inputState.keyboard.getKeyState(GLFW_KEY_E) == ButtonState::Hold) {
+		rotation -= 3.0f;
+	}
+	setRotation(rotation);
+
+	m_pMoveComponent->setForwardSpeed(fowardSpeed);
+
+}
+
+
 
 MainScene::MainScene()
 {
@@ -18,31 +94,13 @@ bool MainScene::init()
 {
 	Scene::init();
 
-	Sprite* sprite1 = Sprite::create("..\\assets\\textures\\25_Crono.png", 120);
-	Sprite* sprite2 = Sprite::create("..\\assets\\textures\\28_Frog.png");
+	for (int i = 0; i < 20; i++) {
+		Asteroid* astroid = new Asteroid();
+		addChild(astroid);
+	}
 
-	this->addChild(sprite1);
-	this->addChild(sprite2);
-
-	glm::vec2 size = Game::getInstance()->getVisibleSize();
-	size /= 2.0f;
-
-	sprite1->setPosition(size.x, size.y);
-	sprite2->setPosition(240, 240);
-
-	sprite1->setRotation(30.0f);
-
-	Label* label = Label::create("Hello World!");
-	Label* label2 = Label::create("#include <stdio.h>\n\nint main(int argc, **argv)\n{\n    printf(\"Hello World\");\n}");
-
-	this->addChild(label);
-	this->addChild(label2);
-
-	label->setPosition(300.0f, 200.0f);
-	label2->setPosition(0.0f, 680.0f);
-
-	label->setTextColor(0, 255, 0);
-	label2->setTextColor(0, 0, 255);
+	Ship* ship = new Ship();
+	addChild(ship);
 
 	return true;
 }
@@ -51,3 +109,5 @@ void MainScene::update(float deltaTime)
 {
 	Entity::update(deltaTime);
 }
+
+OCF_END

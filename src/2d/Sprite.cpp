@@ -7,7 +7,7 @@
 #include "renderer/OpenGLInclude.h"
 #include "renderer/ShaderManager.h"
 
-#define SPRITE_DEBUG_DRAW
+#define SPRITE_DEBUG_DRAW	0
 
 using namespace glm;
 
@@ -124,7 +124,7 @@ Rect Sprite::getRect() const
 	return m_rect;
 }
 
-void Sprite::update(float deltaTime)
+void Sprite::updateEntity(float deltaTime)
 {
 	if (m_isDirty) {
 		m_vertexArray.updateVertexBuffer(&m_quad.topLeft, sizeof(Vertex3fC3fT2f) * 4);
@@ -170,15 +170,18 @@ void Sprite::draw()
 void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 {
 	TrianglesCommand::Triangles triangles;
-	triangles.vertices = &m_quad.bottomLeft;
+	triangles.vertices = &m_quad.topLeft;
 	triangles.vertexCount = 4;
 	triangles.indices = indices;
 	triangles.indexCount = 6;
+
+	updateTransform();
 
 	m_trianglesCommand.init(m_texture, triangles, m_modelView);
 
 	renderer->addCommand(&m_trianglesCommand);
 
+#if SPRITE_DEBUG_DRAW
 	m_drawShape.clear();
 	m_drawShape.drawLine(glm::vec2(m_quad.topLeft.position), glm::vec2(m_quad.bottomLeft.position), Color4f::WHITE);
 	m_drawShape.drawLine(glm::vec2(m_quad.bottomLeft.position), glm::vec2(m_quad.bottomRight.position), Color4f::WHITE);
@@ -186,6 +189,7 @@ void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 	m_drawShape.drawLine(glm::vec2(m_quad.topRight.position), glm::vec2(m_quad.topLeft.position), Color4f::WHITE);
 
 	m_drawShape.draw(renderer, m_transform);
+#endif
 }
 
 void Sprite::setFlippedX(bool flippedX)

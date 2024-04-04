@@ -14,12 +14,11 @@ Component::~Component()
 
 void Component::update(float deltaTime)
 {
-	m_updateOrder;
 }
 
 int Component::getUpdateOrder() const
 {
-	return 0;
+	return m_updateOrder;
 }
 
 OCF_END
