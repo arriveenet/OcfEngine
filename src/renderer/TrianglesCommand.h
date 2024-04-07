@@ -28,6 +28,7 @@ public:
 	void init(Texture2D* texture, const Triangles& triangles, const glm::mat4& modelView);
 
 	const Triangles& getTriangles() const { return m_triangles; }
+	Texture2D* getTexture() const { return m_texture; }
 
 protected:
 	Triangles m_triangles;

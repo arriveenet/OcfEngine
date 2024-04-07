@@ -118,6 +118,10 @@ void Label::draw()
 	m_vertexArray.unbind();
 }
 
+void Label::draw(Renderer* renderer, const glm::mat4& transform)
+{
+}
+
 void Label::updateQuads()
 {
 	Font* pFont = Game::getInstance()->getFont();

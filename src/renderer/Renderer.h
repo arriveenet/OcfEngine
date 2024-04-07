@@ -83,8 +83,7 @@ private:
 	unsigned short m_triangleIndices[INDEX_VBO_SIZE];
 	unsigned int m_triangleVertexCount;
 	unsigned int m_triangleIndexCount;
-	VertexBuffer* m_pVertexBuffer;
-	VertexBuffer* m_pIndexBuffer;
+	VertexArray* m_pVertexArray;
 };
 
 OCF_END

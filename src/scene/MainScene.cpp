@@ -17,9 +17,9 @@ Asteroid::Asteroid()
 	m_pMoveComponent->setForwardSpeed(150.0f);
 
 	glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
-	float rot = rand() % 360;
-	float x = rand() % (int)visibleSize.x;
-	float y = rand() % (int)visibleSize.y;
+	float rot = static_cast<float>(rand() % 360);
+	float x = static_cast<float>(rand() % (int)visibleSize.x);
+	float y = static_cast<float>(rand() % (int)visibleSize.y);
 
 	setRotation(rot);
 	setPosition(x, y);

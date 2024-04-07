@@ -70,6 +70,7 @@ protected:
 	bool m_flippedY;
 
 	Texture2D* m_texture;
+	TrianglesCommand::Triangles m_triangles;
 	TrianglesCommand m_trianglesCommand;
 	VertexArray m_vertexArray;
 	DrawShape m_drawShape;

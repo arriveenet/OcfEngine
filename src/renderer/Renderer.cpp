@@ -47,14 +47,14 @@ Renderer::Renderer()
 	: m_viewport(0, 0, 0, 0)
 	, m_shaderManager(nullptr)
 	, m_pTriangleBatchToDraw(nullptr)
-	, m_triangleBatchToDrawSize(256)
 	, m_triangleVertices()
 	, m_triangleIndices()
 	, m_triangleVertexCount(0)
 	, m_triangleIndexCount(0)
-	, m_pVertexBuffer(nullptr)
-	, m_pIndexBuffer(nullptr)
+	,m_pVertexArray(nullptr)
 {
+	m_triangleBatchToDrawSize = 256;
+	m_pTriangleBatchToDraw = static_cast<TriangleBatchToDraw*>(std::malloc(sizeof(TriangleBatchToDraw) * m_triangleBatchToDrawSize));
 }
 
 Renderer::~Renderer()
@@ -67,10 +67,24 @@ bool Renderer::init()
 	// シェーダーを初期化
 	m_shaderManager = ShaderManager::getInstance();
 
-	m_pTriangleBatchToDraw = static_cast<TriangleBatchToDraw*>(std::malloc(sizeof(TriangleBatchToDraw) * m_triangleBatchToDrawSize));
+	m_pVertexArray = new VertexArray();
+	m_pVertexArray->bind();
 
-	m_pVertexBuffer = new VertexBuffer(BufferType::Vertex, BufferUsage::Dynamic);
-	m_pIndexBuffer = new VertexBuffer(BufferType::Index, BufferUsage::Dynamic);
+	m_pVertexArray->setStride(sizeof(Vertex3fC3fT2f));
+
+	m_pVertexArray->createVertexBuffer(BufferUsage::Dynamic);
+	m_pVertexArray->createIndexBuffer(BufferUsage::Dynamic);
+
+	m_pVertexArray->updateVertexBuffer(m_triangleVertices, m_triangleVertexCount);
+	m_pVertexArray->updateIndexBuffer(m_triangleIndices, m_triangleIndexCount);
+
+	m_pVertexArray->setAttribute("inPosition", 0, 3, false, 0);
+	m_pVertexArray->setAttribute("inNormal", 1, 3, false, sizeof(float) * 3);
+	m_pVertexArray->setAttribute("inTexCoord", 2, 2, false, sizeof(float) * 6);
+
+	m_pVertexArray->bindVertexBuffer();
+
+	m_pVertexArray->unbind();
 
 	m_trianglesCommands.reserve(64);
 
@@ -92,11 +106,8 @@ void Renderer::destroy()
 
 	std::free(m_pTriangleBatchToDraw);
 
-	delete m_pVertexBuffer;
-	m_pVertexBuffer = nullptr;
-
-	delete m_pIndexBuffer;
-	m_pIndexBuffer = nullptr;
+	delete m_pVertexArray;
+	m_pVertexArray = nullptr;
 }
 
 void Renderer::addSprite(Sprite* pSprite)
@@ -149,14 +160,13 @@ void Renderer::draw()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	for (auto& sprite : m_sprites) {
-		sprite->draw();
-	}
+	//for (auto& sprite : m_sprites) {
+	//	sprite->draw();
+	//}
 
 	for (auto& lable : m_labels) {
 		lable->draw();
 	}
-	glDisable(GL_BLEND);
 
 	for (const auto& command : m_renderCommands) {
 
@@ -183,6 +193,8 @@ void Renderer::draw()
 
 	flush();
 
+	glDisable(GL_BLEND);
+
 	m_renderCommands.clear();
 }
 
@@ -193,19 +205,21 @@ void Renderer::flush()
 
 void Renderer::trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int vertexBufferOffset)
 {
-	size_t vertexCount = pCmd->getTriangles().vertexCount;
+	// 頂点データを配列に追加
+	unsigned int vertexCount = pCmd->getTriangles().vertexCount;
 	memcpy(&m_triangleVertices[m_triangleVertexCount], pCmd->getTriangles().vertices, sizeof(Vertex3fC3fT2f) * vertexCount);
 	
-	const glm::mat4& modelView = pCmd->getModelView();
-	for (int i = 0; i < vertexCount; i++) {
-		Vertex3fC3fT2f vertex = m_triangleVertices[m_triangleVertexCount + i];
-		glm::vec4 pos = modelView * glm::vec4(vertex.position, 1.0f);
-		m_triangleVertices[m_triangleVertexCount + i].position = pos;
-	}
+	//const glm::mat4& modelView = pCmd->getModelView();
+	//for (unsigned int i = 0; i < vertexCount; i++) {
+	//	Vertex3fC3fT2f vertex = m_triangleVertices[m_triangleVertexCount + i];
+	//	glm::vec4 pos = glm::vec4(vertex.position, 1.0f) * modelView;
+	//	m_triangleVertices[m_triangleVertexCount + i].position = pos;
+	//}
 
+	// インデックスを配列に追加
 	unsigned short* indices = pCmd->getTriangles().indices;
-	size_t indexCount = pCmd->getTriangles().indexCount;
-	for (int i = 0; i < indexCount; i++) {
+	unsigned int indexCount = pCmd->getTriangles().indexCount;
+	for (unsigned int i = 0; i < indexCount; i++) {
 		int a = m_triangleVertexCount + indices[i];
 		m_triangleIndices[m_triangleIndexCount + i] = m_triangleVertexCount + indices[i];
 	}
@@ -240,7 +254,7 @@ void Renderer::drawTrianglesCommand()
 		m_pTriangleBatchToDraw[batchTotal].indicesToDraw = cmd->getTriangles().indexCount;
 
 		if (batchTotal + 1 >= m_triangleBatchToDrawSize) {
-			m_triangleBatchToDrawSize *= 1.4;
+			m_triangleBatchToDrawSize = static_cast<int>(m_triangleBatchToDrawSize * 1.4);
 
 			if (m_pTriangleBatchToDraw != nullptr) {
 				m_pTriangleBatchToDraw = static_cast<TriangleBatchToDraw*>(std::realloc(m_pTriangleBatchToDraw, sizeof(TriangleBatchToDraw) * m_triangleBatchToDrawSize));
@@ -251,15 +265,34 @@ void Renderer::drawTrianglesCommand()
 	}
 	batchTotal++;
 
-	m_pVertexBuffer->updateData(m_triangleVertices, sizeof(m_triangleVertices[0]) * m_triangleVertexCount);
-	m_pIndexBuffer->updateData(m_triangleIndices, sizeof(m_triangleIndices[0]) * m_triangleIndexCount);
+	m_pVertexArray->bind();
+
+	m_pVertexArray->updateVertexBuffer(m_triangleVertices, sizeof(m_triangleVertices[0]) * m_triangleVertexCount);
+	m_pVertexArray->updateIndexBuffer(m_triangleIndices, sizeof(m_triangleIndices[0]) * m_triangleIndexCount);
 
 	for (int i = 0; i < batchTotal; i++) {
 		auto& drawInfo = m_pTriangleBatchToDraw[i];
-		
-		size_t offset = sizeof(m_triangleIndices[0]) * drawInfo.offset;
-		glDrawElements(GL_TRIANGLES, drawInfo.indicesToDraw, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(offset));
+		if (drawInfo.pCommand == nullptr)
+			continue;
+
+		ProgramState& programState = drawInfo.pCommand->getProgramState();
+		Program* pProgram = programState.getProgram();
+		pProgram->use();
+
+		Scene* scene = Game::getInstance()->getCurrentScene();
+		glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
+
+		pProgram->setUniform("uViewProj", projection);
+		pProgram->setUniform("uWorldTransform", drawInfo.pCommand->getModelView());
+
+		Texture2D* pTexture = drawInfo.pCommand->getTexture();
+		if (pTexture) {
+			pTexture->setActive();
+		}
+
+		glDrawElements(GL_TRIANGLES, drawInfo.indicesToDraw, GL_UNSIGNED_SHORT, (GLvoid*)(sizeof(m_triangleIndices[0]) * drawInfo.offset));
 	}
+	m_pVertexArray->unbind();
 
 	m_trianglesCommands.clear();
 }

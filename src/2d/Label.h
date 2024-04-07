@@ -25,7 +25,9 @@ public:
 	const glm::vec3& getTextColor() const { return m_textColor; }
 
 	void update(float deltaTime) override;
+
 	void draw();
+	void draw(Renderer* renderer, const glm::mat4& transform) override;
 
 protected:
 	void updateQuads();

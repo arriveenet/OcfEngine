@@ -7,7 +7,7 @@
 #include "renderer/OpenGLInclude.h"
 #include "renderer/ShaderManager.h"
 
-#define SPRITE_DEBUG_DRAW	0
+#define SPRITE_DEBUG_DRAW	1
 
 using namespace glm;
 
@@ -54,6 +54,9 @@ Sprite::Sprite(int drawOrder)
 	m_quad.bottomLeft.texCoord	= { 0.0f, 1.0f };
 	m_quad.topRight.texCoord	= { 1.0f, 0.0f };
 	m_quad.bottomRight.texCoord	= { 1.0f, 1.0f };
+
+	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
+	m_trianglesCommand.getProgramState().setProgram(pProgram);
 
 	m_vertexArray.bind();
 
@@ -169,15 +172,16 @@ void Sprite::draw()
 
 void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 {
-	TrianglesCommand::Triangles triangles;
-	triangles.vertices = &m_quad.topLeft;
-	triangles.vertexCount = 4;
-	triangles.indices = indices;
-	triangles.indexCount = 6;
+	// プロジェクション行列、モデルビュー行列を設定
+	Scene* scene = Game::getInstance()->getCurrentScene();
+	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
+	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();
 
 	updateTransform();
 
-	m_trianglesCommand.init(m_texture, triangles, m_modelView);
+	glm::mat4 modelView = view * m_transform;
+
+	m_trianglesCommand.init(m_texture, m_triangles, modelView);
 
 	renderer->addCommand(&m_trianglesCommand);
 
@@ -226,9 +230,14 @@ void Sprite::updatePolygon()
 	glm::vec2 rt = { m_position.x + offsetX, m_position.y + offsetY };
 
 	m_quad.topLeft.position = { lb.x, rt.y, 0.0f };
-	m_quad.bottomLeft.position = { lb , 0.0f};
+	m_quad.bottomLeft.position = { lb , 0.0f };
 	m_quad.topRight.position = { rt, 0.0f };
 	m_quad.bottomRight.position = { rt.x, lb.y, 0.0f };
+
+	m_triangles.vertices = &m_quad.topLeft;
+	m_triangles.vertexCount = 4;
+	m_triangles.indices = indices;
+	m_triangles.indexCount = 6;
 }
 
 void Sprite::flipX()
