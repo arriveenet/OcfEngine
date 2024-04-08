@@ -8,8 +8,6 @@ Label* Label::create(const std::string& text)
 {
 	Label* label = new Label();
 
-	Game::getInstance()->getRenderer()->addLabel(label);
-
 	label->setString(text);
 
 	return label;
@@ -31,23 +29,8 @@ Label::~Label()
 
 bool Label::init()
 {
-	m_vertexArray.bind();
-
-	m_vertexArray.setStride(sizeof(Vertex3fC3fT2f));
-
-	m_vertexArray.createVertexBuffer(BufferUsage::Dynamic);
-	m_vertexArray.createIndexBuffer(BufferUsage::Dynamic);
-
-	m_vertexArray.updateVertexBuffer(m_quads.data(), sizeof(Vertex3fC3fT2f) * m_quads.size());
-	m_vertexArray.updateIndexBuffer(m_indices.data(), sizeof(unsigned short) * m_indices.size());
-
-	m_vertexArray.setAttribute("inPosition", 0, 3, false, 0);
-	m_vertexArray.setAttribute("inColor", 1, 3, false, sizeof(float) * 3);
-	m_vertexArray.setAttribute("inTexCoord", 2, 2, false, sizeof(float) * 6);
-
-	m_vertexArray.bindVertexBuffer();
-
-	m_vertexArray.unbind();
+	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Label);
+	m_quadCommand.getProgramState().setProgram(pProgram);
 
 	return true;
 }
@@ -67,32 +50,26 @@ void Label::setTextColor(const glm::vec3& textColor)
 
 void Label::setTextColor(unsigned char r, unsigned char g, unsigned b)
 {
-	m_textColor.x = r / 255.0f;
-	m_textColor.y = g / 255.0f;
-	m_textColor.z = b / 255.0f;
+	m_textColor.r = r / 255.0f;
+	m_textColor.g = g / 255.0f;
+	m_textColor.b = b / 255.0f;
 }
 
 void Label::update(float deltaTime)
 {
 	if (m_isDirty) {
 		updateQuads();
-		updateVertex();
 
 		m_isDirty = false;
 	}
 
 }
 
-void Label::draw()
+void Label::draw(Renderer* renderer, const glm::mat4& transform)
 {
 	if (m_quads.empty())
 		return;
 
-	// シェーダを設定
-	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Label);
-	glUseProgram(pProgram->getProgram());
-
-	// プロジェクション行列、モデルビュー行列を設定
 	Scene* scene = Game::getInstance()->getCurrentScene();
 	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
 	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();
@@ -101,25 +78,8 @@ void Label::draw()
 
 	glm::mat4 modelView = view * m_transform;
 
-	// 行列をシェーダに設定
-	pProgram->setUniform("uViewProj", projection);
-	pProgram->setUniform("uWorldTransform", modelView);
-
-	// テクスチャを設定
-	if (m_texture)
-		m_texture->setActive();
-
-	// VAOを設定
-	m_vertexArray.bind();
-
-	// 描画
-	glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_indices.size()), GL_UNSIGNED_SHORT, nullptr);
-
-	m_vertexArray.unbind();
-}
-
-void Label::draw(Renderer* renderer, const glm::mat4& transform)
-{
+	m_quadCommand.init(m_texture, m_quads.data(), m_indices.data(), m_quads.size(), modelView);
+	renderer->addCommand(&m_quadCommand);
 }
 
 void Label::updateQuads()
@@ -181,14 +141,6 @@ void Label::updateQuads()
 		m_indices[(size_t)i * 6 + 4] = (unsigned short)i * 4 + 2;
 		m_indices[(size_t)i * 6 + 5] = (unsigned short)i * 4 + 1;
 	}
-}
-
-void Label::updateVertex()
-{
-	m_vertexArray.bind();
-	m_vertexArray.updateVertexBuffer(m_quads.data(), sizeof(Vertex3fC3fT2f) * m_quads.size() * 4);
-	m_vertexArray.updateIndexBuffer(m_indices.data(), sizeof(unsigned short) * m_indices.size());
-	m_vertexArray.unbind();
 }
 
 OCF_END

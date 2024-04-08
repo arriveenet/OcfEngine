@@ -110,32 +110,6 @@ void Renderer::destroy()
 	m_pVertexArray = nullptr;
 }
 
-void Renderer::addSprite(Sprite* pSprite)
-{
-	const int myDrawOrder = pSprite->getDrawOrder();
-	auto iter = m_sprites.begin();
-	for (; iter != m_sprites.end(); ++iter) {
-		if (myDrawOrder < (*iter)->getDrawOrder()) {
-			break;
-		}
-	}
-
-	m_sprites.insert(iter, pSprite);
-}
-
-void Renderer::removeSprite(Sprite* pSprite)
-{
-	auto iter = std::find(m_sprites.begin(), m_sprites.end(), pSprite);
-	if (iter != m_sprites.end()) {
-		m_sprites.erase(iter);
-	}
-}
-
-void Renderer::addLabel(Label* pLabel)
-{
-	m_labels.push_back(pLabel);
-}
-
 void Renderer::setViewPort(int x, int y, int width, int height)
 {
 	m_viewport = { x, y, width, height };
@@ -159,14 +133,6 @@ void Renderer::draw()
 	// Draw sprites
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	//for (auto& sprite : m_sprites) {
-	//	sprite->draw();
-	//}
-
-	for (auto& lable : m_labels) {
-		lable->draw();
-	}
 
 	for (const auto& command : m_renderCommands) {
 

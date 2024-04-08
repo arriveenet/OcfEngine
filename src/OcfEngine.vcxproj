@@ -158,6 +158,7 @@
     <ClCompile Include="renderer\Image.cpp" />
     <ClCompile Include="renderer\OpenGLUtility.cpp" />
     <ClCompile Include="renderer\ProgramState.cpp" />
+    <ClCompile Include="renderer\QuadCommand.cpp" />
     <ClCompile Include="renderer\RenderCommand.cpp" />
     <ClCompile Include="renderer\Renderer.cpp" />
     <ClCompile Include="renderer\Shader.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="renderer\OpenGLInclude.h" />
     <ClInclude Include="renderer\OpenGLUtility.h" />
     <ClInclude Include="renderer\ProgramState.h" />
+    <ClInclude Include="renderer\QuadCommand.h" />
     <ClInclude Include="renderer\RenderCommand.h" />
     <ClInclude Include="renderer\Renderer.h" />
     <ClInclude Include="renderer\Shader.h" />

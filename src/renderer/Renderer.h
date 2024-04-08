@@ -28,23 +28,6 @@ public:
 	/** レンダラーを破棄する */
 	void destroy();
 
-	/**
-	 * @brief スプライトを追加する
-	 * 
-	 * @param pSprite	追加するスプライト
-	 */
-	void addSprite(Sprite* pSprite);
-
-	/**
-	 * @brief スプライトを削除する
-	 *
-	 * @param pSprite	削除するスプライト
-	 */
-	void removeSprite(Sprite* pSprite);
-
-	/** ラベルを追加する */
-	void addLabel(Label* pLabel);
-
 	/** ビューポートを設定する */
 	void setViewPort(int x, int y, int width, int height);
 

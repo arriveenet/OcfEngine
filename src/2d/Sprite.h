@@ -45,7 +45,6 @@ public:
 	void updateEntity(float deltaTime) override;
 
 	/** スプライトを描画 */
-	virtual void draw();
 	void draw(Renderer* renderer, const glm::mat4& transform) override;
 
 	/** スプライトを反転 */
@@ -72,7 +71,6 @@ protected:
 	Texture2D* m_texture;
 	TrianglesCommand::Triangles m_triangles;
 	TrianglesCommand m_trianglesCommand;
-	VertexArray m_vertexArray;
 	DrawShape m_drawShape;
 };
 

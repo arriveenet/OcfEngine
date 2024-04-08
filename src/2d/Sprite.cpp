@@ -57,31 +57,10 @@ Sprite::Sprite(int drawOrder)
 
 	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
 	m_trianglesCommand.getProgramState().setProgram(pProgram);
-
-	m_vertexArray.bind();
-
-	m_vertexArray.setStride(sizeof(Vertex3fC3fT2f));
-
-	m_vertexArray.createVertexBuffer(BufferUsage::Dynamic);
-	m_vertexArray.createIndexBuffer(BufferUsage::Dynamic);
-
-	m_vertexArray.updateVertexBuffer(&m_quad.topLeft, sizeof(Vertex3fC3fT2f) * 4);
-	m_vertexArray.updateIndexBuffer(indices, sizeof(unsigned short)* 6);
-
-	m_vertexArray.setAttribute("inPosition", 0, 3, false, 0);
-	m_vertexArray.setAttribute("inNormal", 1, 3, false, sizeof(float) * 3);
-	m_vertexArray.setAttribute("inTexCoord", 2, 2, false, sizeof(float) * 6);
-
-	m_vertexArray.bindVertexBuffer();
-
-	m_vertexArray.unbind();
-
-	Game::getInstance()->getRenderer()->addSprite(this);
 }
 
 Sprite::~Sprite()
 {
-	Game::getInstance()->getRenderer()->removeSprite(this);
 }
 
 bool Sprite::init()
@@ -130,49 +109,14 @@ Rect Sprite::getRect() const
 void Sprite::updateEntity(float deltaTime)
 {
 	if (m_isDirty) {
-		m_vertexArray.updateVertexBuffer(&m_quad.topLeft, sizeof(Vertex3fC3fT2f) * 4);
-		m_vertexArray.updateIndexBuffer(indices, sizeof(unsigned short) * 6);
 
 		m_isDirty = false;
 	}
 
 }
 
-void Sprite::draw()
-{
-	// シェーダを設定
-	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
-	glUseProgram(pProgram->getProgram());
-
-	// プロジェクション行列、モデルビュー行列を設定
-	Scene* scene = Game::getInstance()->getCurrentScene();
-	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
-	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();
-
-	updateTransform();
-
-	glm::mat4 modelView = view * m_transform;
-
-	// 行列をシェーダに設定
-	pProgram->setUniform("uViewProj", projection);
-	pProgram->setUniform("uWorldTransform", modelView);
-
-	// テクスチャを設定
-	if (m_texture)
-		m_texture->setActive();
-
-	// VAOを設定
-	m_vertexArray.bind();
-
-	// 描画
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, nullptr);
-
-	m_vertexArray.unbind();
-}
-
 void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 {
-	// プロジェクション行列、モデルビュー行列を設定
 	Scene* scene = Game::getInstance()->getCurrentScene();
 	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
 	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();

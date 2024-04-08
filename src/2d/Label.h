@@ -5,6 +5,7 @@
 #include "base/types.h"
 #include "base/Macros.h"
 #include "renderer/VertexArray.h"
+#include "renderer/QuadCommand.h"
 
 OCF_BEGIN
 
@@ -26,21 +27,19 @@ public:
 
 	void update(float deltaTime) override;
 
-	void draw();
 	void draw(Renderer* renderer, const glm::mat4& transform) override;
 
 protected:
 	void updateQuads();
-	void updateVertex();
 
 protected:
 	std::string m_text;
 	glm::vec3 m_textColor;
 	bool m_isDirty;
 	Texture2D* m_texture = nullptr;
-	VertexArray m_vertexArray;
 	std::vector<QuadV3fC3fT2f> m_quads;
 	std::vector<unsigned short> m_indices;
+	QuadCommand m_quadCommand;
 };
 
 OCF_END
