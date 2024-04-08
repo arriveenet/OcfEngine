@@ -47,8 +47,6 @@ protected:
 	void drawCustomCommand(RenderCommand* command);
 
 private:
-	std::vector<Sprite*> m_sprites;
-	std::vector<Label*> m_labels;
 	glm::ivec4 m_viewport;
 	ShaderManager* m_shaderManager;
 	std::vector<RenderCommand*> m_renderCommands;
