@@ -86,6 +86,9 @@ protected:
 	/** デルタタイムを計算する */
 	void calculateDeltaTime();
 
+	/** デバッグ用の状態(FPSなど)を表示 */
+	void showStats();
+
 private:
 	friend Applicaiton;
 	void onWindowSize(int width, int height);
@@ -110,6 +113,8 @@ private:
 	Input* m_input;
 
 	Label* m_pFPSLabel = nullptr;
+	Label* m_pDrawCallLabel = nullptr;
+	Label* m_pDrawVertexLabel = nullptr;
 };
 
 OCF_END

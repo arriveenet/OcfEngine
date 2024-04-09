@@ -7,7 +7,7 @@
 #include "renderer/OpenGLInclude.h"
 #include "renderer/ShaderManager.h"
 
-#define SPRITE_DEBUG_DRAW	1
+#define SPRITE_DEBUG_DRAW	0
 
 using namespace glm;
 

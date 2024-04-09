@@ -24,6 +24,8 @@ Game::Game()
 Game::~Game()
 {
 	m_pFPSLabel->release();
+	m_pDrawCallLabel->release();
+	m_pDrawVertexLabel->release();
 
 	// “ü—ÍƒNƒ‰ƒX‚ð‰ð•ú
 	delete m_input;
@@ -80,6 +82,14 @@ bool Game::init()
 	m_input->init();
 
 	m_pFPSLabel = Label::create("FPS: 0.0");
+	m_pDrawCallLabel = Label::create("Draw call: 0");
+	m_pDrawVertexLabel = Label::create("Draw vert: 0");
+
+	glm::vec2 visibleSize = getVisibleSize();
+	unsigned short fontHeight = m_font->getFntCommon().lineHeight;
+	m_pFPSLabel->setPosition(0, visibleSize.y - fontHeight);
+	m_pDrawCallLabel->setPosition(0, visibleSize.y - fontHeight * 2);
+	m_pDrawVertexLabel->setPosition(0, visibleSize.y - fontHeight* 3);
 
 	return true;
 }
@@ -130,21 +140,6 @@ void Game::update()
 	calculateDeltaTime();
 	//printf("deltaTime: %f\n", m_deltaTime);
 
-	m_frames++;
-	m_accumulator += m_deltaTime;
-
-	if (m_pFPSLabel) {
-		if (m_accumulator > FPS_UPDATE_INTERVAL) {
-			char buffer[30] = { 0 };
-			sprintf_s(buffer, "FPS: %.1f", m_frames / m_accumulator);
-			m_pFPSLabel->setString(buffer);
-			m_pFPSLabel->update(m_deltaTime);
-
-			m_frames = 0;
-			m_accumulator = 0.0f;
-		}
-	}
-
 	processInput();
 
 	m_frameRate = 1.0f / m_deltaTime;
@@ -154,10 +149,16 @@ void Game::update()
 
 void Game::draw()
 {
+	m_renderer->beginFrame();
+
+	m_renderer->clear();
+
 	m_scene->draw(m_renderer, glm::mat4(1.0f));
 
-	m_pFPSLabel->draw(m_renderer, glm::mat4(1.0f));
+	showStats();
 	m_renderer->draw();
+
+	m_renderer->endFrame();
 }
 
 void Game::calculateDeltaTime()
@@ -165,6 +166,51 @@ void Game::calculateDeltaTime()
 	auto now = std::chrono::steady_clock::now();
 	m_deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(now - m_lastUpdate).count() / 1000000.0f;
 	m_lastUpdate = now;
+}
+
+void Game::showStats()
+{
+	m_frames++;
+	m_accumulator += m_deltaTime;
+
+	char buffer[30] = { 0 };
+
+	if (m_pFPSLabel) {
+		if (m_accumulator > FPS_UPDATE_INTERVAL) {
+			sprintf_s(buffer, "FPS: %.1f", m_frames / m_accumulator);
+			m_pFPSLabel->setString(buffer);
+			m_pFPSLabel->update(m_deltaTime);
+
+			m_frames = 0;
+			m_accumulator = 0.0f;
+		}
+	}
+
+	static uint32_t prevCalls = 0;
+	static uint32_t prevVerts = 0;
+
+	uint32_t currentCalls = m_renderer->getDrawCallCount();
+	uint32_t currentVerts = m_renderer->getDrawVertexCount();
+
+	if (currentCalls != prevCalls) {
+		sprintf_s(buffer, "Draw call: %u", currentCalls);
+		m_pDrawCallLabel->setString(buffer);
+		m_pDrawCallLabel->update(m_deltaTime);
+
+		prevCalls = currentCalls;
+	}
+
+	if (currentVerts != prevVerts) {
+		sprintf_s(buffer, "Draw vert: %u", currentVerts);
+		m_pDrawVertexLabel->setString(buffer);
+		m_pDrawVertexLabel->update(m_deltaTime);
+
+		prevVerts = currentVerts;
+	}
+
+	m_pFPSLabel->draw(m_renderer, glm::mat4(1.0f));
+	m_pDrawCallLabel->draw(m_renderer, glm::mat4(1.0f));
+	m_pDrawVertexLabel->draw(m_renderer, glm::mat4(1.0f));
 }
 
 void Game::onWindowSize(int width, int height)

@@ -51,7 +51,9 @@ Renderer::Renderer()
 	, m_triangleIndices()
 	, m_triangleVertexCount(0)
 	, m_triangleIndexCount(0)
-	,m_pVertexArray(nullptr)
+	, m_pVertexArray(nullptr)
+	, m_drawCallCount(0)
+	, m_drawVertexCount(0)
 {
 	m_triangleBatchToDrawSize = 256;
 	m_pTriangleBatchToDraw = static_cast<TriangleBatchToDraw*>(std::malloc(sizeof(TriangleBatchToDraw) * m_triangleBatchToDrawSize));
@@ -110,6 +112,16 @@ void Renderer::destroy()
 	m_pVertexArray = nullptr;
 }
 
+void Renderer::beginFrame()
+{
+}
+
+void Renderer::endFrame()
+{
+	m_drawCallCount = 0;
+	m_drawVertexCount = 0;
+}
+
 void Renderer::setViewPort(int x, int y, int width, int height)
 {
 	m_viewport = { x, y, width, height };
@@ -126,11 +138,13 @@ void Renderer::addCommand(RenderCommand* command)
 	m_renderCommands.push_back(command);
 }
 
-void Renderer::draw()
+void Renderer::clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
+}
 
-	// Draw sprites
+void Renderer::draw()
+{
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -257,6 +271,9 @@ void Renderer::drawTrianglesCommand()
 		}
 
 		glDrawElements(GL_TRIANGLES, drawInfo.indicesToDraw, GL_UNSIGNED_SHORT, (GLvoid*)(sizeof(m_triangleIndices[0]) * drawInfo.offset));
+
+		m_drawCallCount++;
+		m_drawVertexCount += drawInfo.indicesToDraw;
 	}
 	m_pVertexArray->unbind();
 
@@ -288,6 +305,9 @@ void Renderer::drawCustomCommand(RenderCommand* command)
 	} else {
 		glDrawArrays(OpenGLUtility::toGLPrimitive(cmd->getPrimitiveType()), cmd->getVertexDrawStart(), cmd->getVertexDrawCount());
 	}
+
+	m_drawCallCount++;
+	m_drawVertexCount += cmd->getVertexDrawCount();
 
 	cmd->getVertexArray()->unbind();
 }

@@ -28,6 +28,11 @@ public:
 	/** レンダラーを破棄する */
 	void destroy();
 
+	/** フレームの描画を始める */
+	void beginFrame();
+	/** フレームの描画を終わる */
+	void endFrame();
+
 	/** ビューポートを設定する */
 	void setViewPort(int x, int y, int width, int height);
 
@@ -37,8 +42,14 @@ public:
 	/** レンダーコマンドを追加する */
 	void addCommand(RenderCommand* command);
 
+	/** バッファをクリアする */
+	void clear();
+
 	/** 描画処理を行う */
 	void draw();
+
+	uint32_t getDrawCallCount() const { return m_drawCallCount; }
+	uint32_t getDrawVertexCount() const { return m_drawVertexCount; }
 
 protected:
 	void flush();
@@ -51,6 +62,9 @@ private:
 	ShaderManager* m_shaderManager;
 	std::vector<RenderCommand*> m_renderCommands;
 	std::vector<TrianglesCommand*> m_trianglesCommands;
+
+	uint32_t m_drawCallCount;
+	uint32_t m_drawVertexCount;
 
 	struct TriangleBatchToDraw {
 		TrianglesCommand* pCommand = nullptr;

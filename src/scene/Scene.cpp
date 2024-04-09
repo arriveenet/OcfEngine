@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "renderer/Renderer.h"
 
 OCF_BEGIN
 
@@ -26,6 +27,8 @@ void Scene::draw(Renderer* renderer, const glm::mat4& transform)
 	for (auto& entity : m_entities) {
 		entity->draw(renderer, m_transform);
 	}
+
+	renderer->draw();
 }
 
 OCF_END
