@@ -51,6 +51,9 @@ bool ShaderManager::init()
 	program = new Program("drawShape.vert", "drawShape.frag");
 	m_programs.emplace(ProgramType::DrawShape, program);
 
+	program = new Program("positionTexture.vert", "positionTexture.frag");
+	m_programs.emplace(ProgramType::PositionTexture, program);
+
 	return true;
 }
 

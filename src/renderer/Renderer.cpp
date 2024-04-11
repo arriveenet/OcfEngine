@@ -189,12 +189,12 @@ void Renderer::trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int 
 	unsigned int vertexCount = pCmd->getTriangles().vertexCount;
 	memcpy(&m_triangleVertices[m_triangleVertexCount], pCmd->getTriangles().vertices, sizeof(Vertex3fC3fT2f) * vertexCount);
 	
-	//const glm::mat4& modelView = pCmd->getModelView();
-	//for (unsigned int i = 0; i < vertexCount; i++) {
-	//	Vertex3fC3fT2f vertex = m_triangleVertices[m_triangleVertexCount + i];
-	//	glm::vec4 pos = glm::vec4(vertex.position, 1.0f) * modelView;
-	//	m_triangleVertices[m_triangleVertexCount + i].position = pos;
-	//}
+	// ローカル座標からワールド座標に変換
+	const glm::mat4& modelView = pCmd->getModelView();
+	for (unsigned int i = 0; i < vertexCount; i++) {
+		Vertex3fC3fT2f vertex = m_triangleVertices[m_triangleVertexCount + i];
+		m_triangleVertices[m_triangleVertexCount + i].position = modelView * glm::vec4(vertex.position, 1.0f);;
+	}
 
 	// インデックスを配列に追加
 	unsigned short* indices = pCmd->getTriangles().indices;
@@ -222,25 +222,32 @@ void Renderer::drawTrianglesCommand()
 	int batchTotal = 0;
 	bool firstCommand = true;
 
+	uint32_t prevMaterialID = 0;
+
 	for (const auto& cmd : m_trianglesCommands) {
 		trianglesVerticesAndIndices(cmd, 0);
 
-		if (!firstCommand) {
-			batchTotal++;
-			m_pTriangleBatchToDraw[batchTotal].offset = m_pTriangleBatchToDraw[batchTotal - 1].offset + m_pTriangleBatchToDraw[batchTotal - 1].indicesToDraw;
-		}
+		uint32_t currentMaterialID = cmd->getMaterialID();
 
-		m_pTriangleBatchToDraw[batchTotal].pCommand = cmd;
-		m_pTriangleBatchToDraw[batchTotal].indicesToDraw = cmd->getTriangles().indexCount;
+		if ((prevMaterialID == currentMaterialID) || firstCommand) {
+			m_pTriangleBatchToDraw[batchTotal].indicesToDraw += cmd->getIndexCount();
+			m_pTriangleBatchToDraw[batchTotal].pCommand = cmd;
+		} else {
+			if (!firstCommand) {
+				batchTotal++;
+				m_pTriangleBatchToDraw[batchTotal].offset = m_pTriangleBatchToDraw[batchTotal - 1].offset + m_pTriangleBatchToDraw[batchTotal - 1].indicesToDraw;
+			}
+
+			m_pTriangleBatchToDraw[batchTotal].pCommand = cmd;
+			m_pTriangleBatchToDraw[batchTotal].indicesToDraw = cmd->getIndexCount();
+		}
 
 		if (batchTotal + 1 >= m_triangleBatchToDrawSize) {
 			m_triangleBatchToDrawSize = static_cast<int>(m_triangleBatchToDrawSize * 1.4);
-
-			if (m_pTriangleBatchToDraw != nullptr) {
-				m_pTriangleBatchToDraw = static_cast<TriangleBatchToDraw*>(std::realloc(m_pTriangleBatchToDraw, sizeof(TriangleBatchToDraw) * m_triangleBatchToDrawSize));
-			}
+			m_pTriangleBatchToDraw = static_cast<TriangleBatchToDraw*>(std::realloc(m_pTriangleBatchToDraw, sizeof(TriangleBatchToDraw) * m_triangleBatchToDrawSize));
 		}
 
+		prevMaterialID = currentMaterialID;
 		firstCommand = false;
 	}
 	batchTotal++;
@@ -263,7 +270,7 @@ void Renderer::drawTrianglesCommand()
 		glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
 
 		pProgram->setUniform("uViewProj", projection);
-		pProgram->setUniform("uWorldTransform", drawInfo.pCommand->getModelView());
+		pProgram->setUniform("uWorldTransform", glm::mat4(1.0f));
 
 		Texture2D* pTexture = drawInfo.pCommand->getTexture();
 		if (pTexture) {

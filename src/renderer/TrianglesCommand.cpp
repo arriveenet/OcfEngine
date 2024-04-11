@@ -1,9 +1,12 @@
 #include "TrianglesCommand.h"
+#define XXH_INLINE_ALL
+#include "xxhash.h"
 
 OCF_BEGIN
 
 TrianglesCommand::TrianglesCommand()
-	: m_texture(nullptr)
+	: m_materialID(0)
+	, m_texture(nullptr)
 {
 	m_Type = Type::TrianglesCommand;
 }
@@ -18,6 +21,13 @@ void TrianglesCommand::init(Texture2D* texture, const Triangles& triangles, cons
 
 	m_texture = texture;
 	m_triangles = triangles;
+
+	genarateMaterialID();
+}
+
+void TrianglesCommand::genarateMaterialID()
+{
+	m_materialID = XXH32(m_texture, sizeof(Texture2D), 0);
 }
 
 OCF_END
