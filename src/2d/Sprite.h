@@ -34,6 +34,7 @@ public:
 	int getDrawOrder() const;
 	
 	/** スプライトの位置を設定 */
+	void setPosition(const glm::vec2& position) override;
 	void setPosition(float x, float y) override;
 
 	/** スプライトのサイズを設定 */
@@ -41,8 +42,6 @@ public:
 
 	/** スプライトの矩形を取得 */
 	virtual Rect getRect() const;
-
-	void updateEntity(float deltaTime) override;
 
 	/** スプライトを描画 */
 	void draw(Renderer* renderer, const glm::mat4& transform) override;

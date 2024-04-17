@@ -88,6 +88,11 @@ int Sprite::getDrawOrder() const
 	return m_drawOrder;
 }
 
+void Sprite::setPosition(const glm::vec2& position)
+{
+	Entity::setPosition(position);
+}
+
 void Sprite::setPosition(float x, float y)
 {
 	Entity::setPosition(x, y);
@@ -106,19 +111,9 @@ Rect Sprite::getRect() const
 	return m_rect;
 }
 
-void Sprite::updateEntity(float deltaTime)
-{
-	if (m_isDirty) {
-
-		m_isDirty = false;
-	}
-
-}
-
 void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 {
 	Scene* scene = Game::getInstance()->getCurrentScene();
-	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
 	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();
 
 	updateTransform();
