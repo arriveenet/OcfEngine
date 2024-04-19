@@ -179,7 +179,6 @@ void Game::showStats()
 		if (m_accumulator > FPS_UPDATE_INTERVAL) {
 			sprintf_s(buffer, "FPS: %.1f", m_frames / m_accumulator);
 			m_pFPSLabel->setString(buffer);
-			m_pFPSLabel->update(m_deltaTime);
 
 			m_frames = 0;
 			m_accumulator = 0.0f;
@@ -195,18 +194,18 @@ void Game::showStats()
 	if (currentCalls != prevCalls) {
 		sprintf_s(buffer, "Draw call: %u", currentCalls);
 		m_pDrawCallLabel->setString(buffer);
-		m_pDrawCallLabel->update(m_deltaTime);
-
 		prevCalls = currentCalls;
 	}
 
 	if (currentVerts != prevVerts) {
 		sprintf_s(buffer, "Draw vert: %u", currentVerts);
 		m_pDrawVertexLabel->setString(buffer);
-		m_pDrawVertexLabel->update(m_deltaTime);
-
 		prevVerts = currentVerts;
 	}
+
+	m_pFPSLabel->update(m_deltaTime);
+	m_pDrawCallLabel->update(m_deltaTime);
+	m_pDrawVertexLabel->update(m_deltaTime);
 
 	m_pFPSLabel->draw(m_renderer, glm::mat4(1.0f));
 	m_pDrawCallLabel->draw(m_renderer, glm::mat4(1.0f));

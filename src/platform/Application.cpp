@@ -113,6 +113,14 @@ glm::ivec2 Applicaiton::getWindowSize() const
 	return glm::ivec2(m_windowWidth, m_windowHeight);
 }
 
+glm::vec2 Applicaiton::getCursorPosition() const
+{
+	double x, y;
+	m_window.getCursorPos(x, y);
+
+	return glm::vec2(x, y);
+}
+
 void Applicaiton::onWindowSize(GLFWwindow* window, int width, int height)
 {
 	Game::getInstance()->onWindowSize(width, height);

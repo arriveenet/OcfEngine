@@ -45,8 +45,17 @@ void Entity::processInput(const InputState& inputState)
 
 void Entity::update(float deltaTime)
 {
+	// コンポーネントを更新
 	updateComponents(deltaTime);
+	// 配下のエンティティを更新
+	updateEntitices(deltaTime);
+
+	//　自身を更新
 	updateEntity(deltaTime);
+}
+
+void Entity::updateEntity(float deltaTime)
+{
 }
 
 void Entity::updateComponents(float deltaTime)
@@ -56,10 +65,21 @@ void Entity::updateComponents(float deltaTime)
 	}
 }
 
-void Entity::updateEntity(float deltaTime)
+void Entity::updateEntitices(float deltaTime)
 {
 	for (const auto& entity : m_entities) {
 		entity->update(deltaTime);
+	}
+
+	std::vector<Entity*> deadEntities;
+	for (const auto& entity : m_entities) {
+		if (entity->getState() == Entity::Dead) {
+			deadEntities.emplace_back(entity);
+		}
+	}
+
+	for (auto entity : deadEntities) {
+		removeChild(entity);
 	}
 }
 
@@ -157,6 +177,8 @@ void Entity::removeChild(Entity* pEntity)
 	auto iter = std::find(m_entities.begin(), m_entities.end(), pEntity);
 	if (iter != m_entities.end()) {
 		m_entities.erase(iter);
+		delete pEntity;
+		pEntity = nullptr;
 	}
 }
 
@@ -178,6 +200,21 @@ void Entity::removeComponent(Component* pComponent)
 	auto iter = std::find(m_components.begin(), m_components.end(), pComponent);
 	if (iter != m_components.end()) {
 		m_components.erase(iter);
+	}
+}
+
+void Entity::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t sceneID)
+{
+	if (!m_entities.empty()) {
+		if (this->getID() != sceneID)
+			this->draw(pRenderer, parentTransform);
+
+		for (auto iter = m_entities.cbegin(); iter != m_entities.cend(); ++iter) {
+			(*iter)->visit(pRenderer, parentTransform, sceneID);
+		}
+	}
+	else {
+		this->draw(pRenderer, parentTransform);
 	}
 }
 

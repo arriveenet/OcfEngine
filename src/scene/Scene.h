@@ -11,7 +11,6 @@ public:
 
 	virtual bool init();
 
-	void update(float deltaTime) override;
 	void draw(Renderer* renderer, const glm::mat4& transform) override;
 
 	virtual Camera* getDefaultCamera() { return &m_defaultCamera; }

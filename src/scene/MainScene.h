@@ -5,6 +5,19 @@
 OCF_BEGIN
 
 class MoveComponent;
+class CircleComponent;
+
+class Laser : public Sprite {
+public:
+	Laser();
+	virtual ~Laser();
+
+	void updateEntity(float deltaTime) override;
+
+	MoveComponent* m_pMoveComponent;
+	CircleComponent* m_pCircleComponent;
+	float m_deathTimer;
+};
 
 class Asteroid : public Sprite {
 public:
@@ -13,6 +26,7 @@ public:
 	void updateEntity(float deltaTime) override;
 
 	MoveComponent* m_pMoveComponent;
+	CircleComponent* m_pCircleComponent;
 };
 
 class Ship : public Sprite {
@@ -30,8 +44,6 @@ public:
 	virtual ~MainScene();
 
 	bool init() override;
-
-	void update(float deltaTime) override;
 
 	Asteroid* m_astroid;
 };

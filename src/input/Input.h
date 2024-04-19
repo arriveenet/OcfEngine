@@ -1,11 +1,13 @@
 #pragma once
-#include "types.h"
-#include "Keyboard.h"
+#include "base/types.h"
+#include "input/Keyboard.h"
+#include "input/Mouse.h"
 
 OCF_BEGIN
 
 struct InputState {
 	Keyboard keyboard;
+	Mouse mouse;
 };
 
 class Input {

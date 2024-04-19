@@ -23,6 +23,7 @@ public:
 	double getTime();
 
 	glm::ivec2 getWindowSize() const;
+	glm::vec2 getCursorPosition() const;
 
 private:
 	friend Window;

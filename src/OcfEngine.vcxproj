@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="..\third_party\glad\src\glad.c" />
     <ClCompile Include="2d\Camera.cpp" />
+    <ClCompile Include="2d\CircleComponent.cpp" />
     <ClCompile Include="2d\Component.cpp" />
     <ClCompile Include="2d\DrawShape.cpp" />
     <ClCompile Include="2d\Entity.cpp" />
@@ -147,10 +148,11 @@
     <ClCompile Include="base\Font.cpp" />
     <ClCompile Include="base\Game.cpp" />
     <ClCompile Include="base\GameObject.cpp" />
-    <ClCompile Include="base\Input.cpp" />
-    <ClCompile Include="base\Keyboard.cpp" />
     <ClCompile Include="base\Rect.cpp" />
     <ClCompile Include="base\Types.cpp" />
+    <ClCompile Include="input\Input.cpp" />
+    <ClCompile Include="input\Keyboard.cpp" />
+    <ClCompile Include="input\Mouse.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="platform\Application.cpp" />
     <ClCompile Include="platform\Window.cpp" />
@@ -175,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\Camera.h" />
+    <ClInclude Include="2d\CircleComponent.h" />
     <ClInclude Include="2d\Component.h" />
     <ClInclude Include="2d\DrawShape.h" />
     <ClInclude Include="2d\Entity.h" />
@@ -186,11 +189,12 @@
     <ClInclude Include="base\Font.h" />
     <ClInclude Include="base\Game.h" />
     <ClInclude Include="base\GameObject.h" />
-    <ClInclude Include="base\Input.h" />
-    <ClInclude Include="base\Keyboard.h" />
     <ClInclude Include="base\Macros.h" />
     <ClInclude Include="base\Rect.h" />
     <ClInclude Include="base\Types.h" />
+    <ClInclude Include="input\Input.h" />
+    <ClInclude Include="input\Keyboard.h" />
+    <ClInclude Include="input\Mouse.h" />
     <ClInclude Include="OcfEngine.h" />
     <ClInclude Include="platform\Application.h" />
     <ClInclude Include="platform\Window.h" />

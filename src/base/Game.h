@@ -4,7 +4,7 @@
 #include "Scene/Scene.h"
 #include "base/GameObject.h"
 #include "base/Font.h"
-#include "base/Input.h"
+#include "input/Input.h"
 #include "2d/Label.h"
 #include "renderer/Renderer.h"
 #include "renderer/TextureManager.h"

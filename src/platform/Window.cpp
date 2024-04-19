@@ -1,6 +1,7 @@
 #include "Window.h"
 #include "Application.h"
-#include "base/Keyboard.h"
+#include "input/Keyboard.h"
+#include "input/Mouse.h"
 
 OCF_BEGIN
 
@@ -44,8 +45,15 @@ void Window::setCallback()
 {
 	// キーボードのコールバックを設定
 	glfwSetKeyCallback(m_pWindow, ocf::Keyboard::onKeyEvent);
+	// マウスボタンのコールバックを設定
+	glfwSetMouseButtonCallback(m_pWindow, ocf::Mouse::onMouseButton);
 	// ウィンドウサイズ変更時のコールバックを設定
 	glfwSetWindowSizeCallback(m_pWindow, ocf::Applicaiton::onWindowSize);
+}
+
+void Window::getCursorPos(double& posX, double& posY) const
+{
+	glfwGetCursorPos(m_pWindow, &posX, &posY);
 }
 
 bool Window::windowShouldClose()

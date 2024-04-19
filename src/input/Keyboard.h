@@ -1,5 +1,5 @@
 #pragma once
-#include "types.h"
+#include "base/types.h"
 
 #define KEY_CODE_MAX	348
 

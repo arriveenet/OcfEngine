@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "base/GameObject.h"
-#include "base/Input.h"
+#include "input/Input.h"
 #include <glm/glm.hpp>
 #include <vector>
 
@@ -30,8 +30,9 @@ public:
 	virtual void processInput(const InputState& inputState);
 
 	virtual void update(float deltaTime);
-	virtual void updateComponents(float deltaTime);
 	virtual void updateEntity(float deltaTime);
+	virtual void updateComponents(float deltaTime);
+	virtual void updateEntitices(float deltaTime);
 	virtual void updateTransform();
 
 	virtual void draw(Renderer* renderer, const glm::mat4& transform);
@@ -60,6 +61,8 @@ public:
 
 	void addComponent(Component* pComponent);
 	void removeComponent(Component* pComponent);
+
+	virtual void visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t sceneID);
 	
 protected:
 	State m_state;

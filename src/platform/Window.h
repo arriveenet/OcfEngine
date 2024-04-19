@@ -15,6 +15,7 @@ public:
 
 	void setWindowPos(int posX, int posY);
 	void setCallback();
+	void getCursorPos(double& posX, double& posY) const;
 	bool windowShouldClose();
 	void pollEvents();
 	void swapBuffers();
