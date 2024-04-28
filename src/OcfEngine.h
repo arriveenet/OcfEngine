@@ -9,7 +9,7 @@
 #include "base/FileUtils.h"
 #include "base/fnt.h"
 #include "base/Font.h"
-#include "base/Input.h"
+#include "input/Input.h"
 
 #include "renderer/Image.h"
 #include "renderer/OpenGLInclude.h"

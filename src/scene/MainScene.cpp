@@ -128,9 +128,6 @@ void Ship::processInput(const InputState& inputState)
 		pLaser->setRotation(getRotation());
 		this->addChild(pLaser);
 	}
-
-	
-	printf("Mouse left: %d\n", inputState.mouse.getButtonState(Mouse::Left));
 }
 
 
