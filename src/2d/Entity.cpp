@@ -5,6 +5,7 @@ OCF_BEGIN
 
 Entity::Entity()
 	: m_state(State::Active)
+	, m_pParent(nullptr)
 	, m_position()
 	, m_size()
 	, m_rotation(0.0f)
@@ -170,6 +171,8 @@ float Entity::getScale() const
 void Entity::addChild(Entity* pEntity)
 {
 	m_entities.emplace_back(pEntity);
+
+	pEntity->setParent(this);
 }
 
 void Entity::removeChild(Entity* pEntity)
@@ -180,6 +183,16 @@ void Entity::removeChild(Entity* pEntity)
 		delete pEntity;
 		pEntity = nullptr;
 	}
+}
+
+size_t Entity::getChildCount() const
+{
+	return m_entities.size();
+}
+
+void Entity::setParent(Entity* pEntity)
+{
+	m_pParent = pEntity;
 }
 
 void Entity::addComponent(Component* pComponent)

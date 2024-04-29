@@ -58,6 +58,9 @@ public:
 
 	virtual void addChild(Entity* pEntity);
 	virtual void removeChild(Entity* pEntity);
+	virtual size_t getChildCount() const;
+	virtual void setParent(Entity* pEntity);
+	virtual Entity* getParent() { return m_pParent; }
 
 	void addComponent(Component* pComponent);
 	void removeComponent(Component* pComponent);
@@ -66,6 +69,8 @@ public:
 	
 protected:
 	State m_state;
+
+	Entity* m_pParent;
 
 	glm::vec2 m_position;
 	glm::vec2 m_size;
