@@ -1,5 +1,6 @@
 #pragma once
 #include <chrono>
+#include <stack>
 #include "platform/Application.h"
 #include "Scene/Scene.h"
 #include "base/GameObject.h"
@@ -22,7 +23,6 @@ public:
 
 	/**
 	 * @brief ゲームのインスタンスを取得する
-	 *
 	 * @return ゲームクラスのインスタンス
 	 */
 	static Game* getInstance();
@@ -40,38 +40,68 @@ public:
 
 	/**
 	 * @brief レンダラーを取得する
-	 * 
 	 * @return レンダラーのポインタ
 	 */
 	Renderer* getRenderer() const { return m_renderer; }
 
 	/**
 	 * @brief 現在設定されているシーンを取得する
-	 * 
 	 * @return 現在のシーンのポインタ
 	 */
 	Scene* getCurrentScene() const { return m_scene; }
 
 	/**
 	 * @brief テクスチャ管理クラスを取得する
-	 *
 	 * @return テクスチャ管理クラスのポインタ
 	 */
 	TextureManager* getTextureManager() const { return m_textureManager; }
 
 	/**
 	 * @brief フォントを取得する
-	 *
 	 * @return フォントのポインタ
 	 */
 	Font* getFont() { return m_font; }
 
 	/**
 	 * @brief フレームレートを取得する
-	 *
 	 * @return フレームレート
 	 */
 	float getFrameRate() const { return m_frameRate; }
+
+	/** @brief 行列スタックを初期化 */
+	void initMatrixStack();
+
+	/**
+	 * @brief 行列スタックを単位行列に置き換える
+	 * @param[in] type 行列スタックの種類
+	 */
+	void loadIdentityMatrix(MatrixStack type);
+
+	/**
+	 * @brief 行列スタックを指定された行列に置き換える
+	 * @param[in] type 行列スタックの種類
+	 * @param[in] matrix 置き換える行列
+	 */
+	void loadMatrix(MatrixStack type, const glm::mat4& matrix);
+
+	/**
+	 * @brief 行列スタックを指定された行列で乗算し置き換える
+	 * @param[in] type 行列スタックの種類
+	 * @param[in] matrix 乗算する行列
+	 */
+	void multiplyMatrix(MatrixStack type, const glm::mat4& matrix);
+
+	/**
+	 * @brief 行列スタックをプッシュする
+	 * @param[in] type 行列スタックの種別
+	 */
+	void pushMatrix(MatrixStack type);
+
+	/**
+	 * @brief 行列スタックをポップする
+	 * @param[in] type 行列スタックの種別
+	 */
+	void popMatrix(MatrixStack type);
 
 protected:
 	/** 入力システムを処理 */
@@ -115,6 +145,9 @@ private:
 	Label* m_pFPSLabel = nullptr;
 	Label* m_pDrawCallLabel = nullptr;
 	Label* m_pDrawVertexLabel = nullptr;
+
+	std::stack<glm::mat4> m_projectionMatrixStack;
+	std::stack<glm::mat4> m_modelViewMatrixStack;
 };
 
 OCF_END

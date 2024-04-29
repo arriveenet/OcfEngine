@@ -18,6 +18,11 @@ enum class ButtonState {
 	Hold
 };
 
+enum class MatrixStack {
+	Projection,
+	ModelView
+};
+
 struct Color3b {
 	static const glm::u8vec3 BLACK;
 	static const glm::u8vec3 WHITE;

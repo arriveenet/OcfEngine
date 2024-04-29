@@ -91,6 +91,8 @@ bool Game::init()
 	m_pDrawCallLabel->setPosition(0, visibleSize.y - fontHeight * 2);
 	m_pDrawVertexLabel->setPosition(0, visibleSize.y - fontHeight* 3);
 
+	initMatrixStack();
+
 	return true;
 }
 
@@ -120,6 +122,95 @@ void Game::exit()
 glm::vec2 Game::getVisibleSize() const
 {
 	return Applicaiton::getInstance()->getWindowSize();
+}
+
+void Game::initMatrixStack()
+{
+	while (!m_projectionMatrixStack.empty()) {
+		m_projectionMatrixStack.pop();
+	}
+
+	while (!m_modelViewMatrixStack.empty()) {
+		m_modelViewMatrixStack.pop();
+	}
+
+	m_projectionMatrixStack.push(glm::mat4(1.0f));
+	m_modelViewMatrixStack.push(glm::mat4(1.0f));
+}
+
+void Game::loadIdentityMatrix(MatrixStack type)
+{
+	switch (type) {
+	case MatrixStack::Projection:
+		m_projectionMatrixStack.top() = glm::mat4(1.0f);
+		break;
+	case MatrixStack::ModelView:
+		m_modelViewMatrixStack.top() = glm::mat4(1.0f);
+		break;
+	default:
+		assert(false);
+		break;
+	}
+}
+
+void Game::loadMatrix(MatrixStack type, const glm::mat4& matrix)
+{
+	switch (type) {
+	case MatrixStack::Projection:
+		m_projectionMatrixStack.top() = matrix;
+		break;
+	case MatrixStack::ModelView:
+		m_modelViewMatrixStack.top() = matrix;
+		break;
+	default:
+		assert(false);
+		break;
+	}
+}
+
+void Game::multiplyMatrix(MatrixStack type, const glm::mat4& matrix)
+{
+	switch (type) {
+	case MatrixStack::Projection:
+		m_projectionMatrixStack.top() *= matrix;
+		break;
+	case MatrixStack::ModelView:
+		m_modelViewMatrixStack.top() *= matrix;
+		break;
+	default:
+		assert(false);
+		break;
+	}
+}
+
+void Game::pushMatrix(MatrixStack type)
+{
+	switch (type) {
+	case MatrixStack::Projection:
+		m_projectionMatrixStack.push(m_projectionMatrixStack.top());
+		break;
+	case MatrixStack::ModelView:
+		m_modelViewMatrixStack.push(m_modelViewMatrixStack.top());
+		break;
+	default:
+		assert(false);
+		break;
+	}
+}
+
+void Game::popMatrix(MatrixStack type)
+{
+	switch (type) {
+	case MatrixStack::Projection:
+		m_projectionMatrixStack.pop();
+		break;
+	case MatrixStack::ModelView:
+		m_modelViewMatrixStack.pop();
+		break;
+	default:
+		assert(false);
+		break;
+	}
 }
 
 void Game::processInput()
