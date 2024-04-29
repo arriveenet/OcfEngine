@@ -84,6 +84,14 @@ void DrawShape::drawLine(const glm::vec2& origin, const glm::vec2& destanation, 
 	m_customCommandLine.setVertexDrawInfo(0, m_bufferCountLine);
 }
 
+void DrawShape::drawRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color)
+{
+	drawLine(origin, glm::vec2(destanation.x, origin.y), color);
+	drawLine(glm::vec2(destanation.x, origin.y), destanation, color);
+	drawLine(destanation, glm::vec2(origin.x, destanation.y), color);
+	drawLine(glm::vec2(origin.x, destanation.y), origin, color);
+}
+
 void DrawShape::update(float deltaTime)
 {
 }

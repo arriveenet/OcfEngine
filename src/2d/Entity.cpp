@@ -203,14 +203,13 @@ void Entity::removeComponent(Component* pComponent)
 	}
 }
 
-void Entity::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t sceneID)
+void Entity::visit(Renderer* pRenderer, const glm::mat4& parentTransform)
 {
 	if (!m_entities.empty()) {
-		if (this->getID() != sceneID)
-			this->draw(pRenderer, parentTransform);
+		this->draw(pRenderer, parentTransform);
 
 		for (auto iter = m_entities.cbegin(); iter != m_entities.cend(); ++iter) {
-			(*iter)->visit(pRenderer, parentTransform, sceneID);
+			(*iter)->visit(pRenderer, parentTransform);
 		}
 	}
 	else {

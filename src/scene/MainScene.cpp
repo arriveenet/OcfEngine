@@ -152,6 +152,11 @@ bool MainScene::init()
 	Ship* ship = new Ship();
 	addChild(ship);
 
+	DrawShape* shape = new DrawShape;
+	shape->drawLine(glm::vec2(100, 100), glm::vec2(600,600), Color4f::WHITE);
+
+	addChild(shape);
+
 	return true;
 }
 

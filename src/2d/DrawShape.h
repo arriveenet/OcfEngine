@@ -19,6 +19,7 @@ public:
 	void ensureCapacityGLLine(int count);
 
 	void drawLine(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
+	void drawRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
 
 	void update(float deltaTime) override;
 	void draw(Renderer* renderer, const glm::mat4& transform) override;

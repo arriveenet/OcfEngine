@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "base/Game.h"
 #include "renderer/Renderer.h"
 
 OCF_BEGIN
@@ -18,9 +19,13 @@ bool Scene::init()
 	return true;
 }
 
-void Scene::draw(Renderer* renderer, const glm::mat4& transform)
+void Scene::render(Renderer* renderer, const glm::mat4& transform)
 {
-	Entity::visit(renderer, transform, this->getID());
+	Scene* pCurrentScene = Game::getInstance()->getCurrentScene();
+	glm::mat4 view = pCurrentScene->getDefaultCamera()->getViewMatrix();
+	glm::mat4 modelView = view * transform;
+
+	Entity::visit(renderer, modelView);
 
 	renderer->draw();
 }

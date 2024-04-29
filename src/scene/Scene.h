@@ -11,7 +11,7 @@ public:
 
 	virtual bool init();
 
-	void draw(Renderer* renderer, const glm::mat4& transform) override;
+	void render(Renderer* renderer, const glm::mat4& transform);
 
 	virtual Camera* getDefaultCamera() { return &m_defaultCamera; }
 

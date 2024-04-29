@@ -153,8 +153,10 @@ void Game::draw()
 
 	m_renderer->clear();
 
-	m_scene->draw(m_renderer, glm::mat4(1.0f));
+	// シーンを描画
+	m_scene->render(m_renderer, glm::mat4(1.0f));
 
+	// ステータスを描画
 	showStats();
 	m_renderer->draw();
 

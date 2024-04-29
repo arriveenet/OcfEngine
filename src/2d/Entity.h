@@ -62,7 +62,7 @@ public:
 	void addComponent(Component* pComponent);
 	void removeComponent(Component* pComponent);
 
-	virtual void visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t sceneID);
+	virtual void visit(Renderer* pRenderer, const glm::mat4& parentTransform);
 	
 protected:
 	State m_state;
