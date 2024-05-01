@@ -4,8 +4,6 @@ set(OCF_BASE_HEADER
     "base/Font.h"
     "base/Game.h"
     "base/GameObject.h"
-    "base/Input.h"
-    "base/Keyboard.h"
     "base/Macros.h"
     "base/Rect.h"
     "base/Types.h"
@@ -16,7 +14,5 @@ set(OCF_BASE_SRC
     "base/Font.cpp"
     "base/Game.cpp"
     "base/GameObject.cpp"
-    "base/Input.cpp"
-    "base/Keyboard.cpp"
     "base/Rect.cpp"
     )
