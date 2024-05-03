@@ -7,6 +7,7 @@
 
 OCF_BEGIN
 
+class Game;
 class Renderer;
 
 /**
@@ -20,6 +21,14 @@ public:
 	enum State {
 		Active,	//!< ¶‘¶’†
 		Dead	//!< Ž€–S
+	};
+
+	enum {
+		FLAGS_TRANSFORM_DIRTY		= (1 << 0),
+		FLAGS_CONTENT_SIZE_DIRTY	= (1 << 1),
+		FLAGS_RENDER_AS_3D			= (1 << 3),
+
+		FLAGS_DIRTY_MASK = (FLAGS_TRANSFORM_DIRTY | FLAGS_CONTENT_SIZE_DIRTY),
 	};
 
 	Entity();
@@ -65,12 +74,19 @@ public:
 	void addComponent(Component* pComponent);
 	void removeComponent(Component* pComponent);
 
-	virtual void visit(Renderer* pRenderer, const glm::mat4& parentTransform);
+	const glm::mat4& getEntityToParentTransform();
+
+	virtual void visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags);
+
+protected:
+	glm::mat4 transform(const glm::mat4& parentTransform);
+	uint32_t processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag);
 	
 protected:
 	State m_state;
 
 	Entity* m_pParent;
+	Game* m_pGame;
 
 	glm::vec2 m_position;
 	glm::vec2 m_size;
@@ -82,7 +98,10 @@ protected:
 	float m_scaleZ;
 
 	glm::mat4 m_transform;
+	glm::mat4 m_modelVewTransform;
 	bool m_transformDirty;
+	bool m_transformUpdated;
+	bool m_contentSizeDirty;
 
 	std::vector<Entity*> m_entities;
 	std::vector<Component*> m_components;

@@ -213,6 +213,20 @@ void Game::popMatrix(MatrixStack type)
 	}
 }
 
+const glm::mat4& Game::getMatrix(MatrixStack type)
+{
+	switch (type) {
+	case MatrixStack::Projection:
+		return m_projectionMatrixStack.top();
+	case MatrixStack::ModelView:
+		return m_modelViewMatrixStack.top();
+	default:
+		assert(false);
+	}
+
+	return m_modelViewMatrixStack.top();
+}
+
 void Game::processInput()
 {
 	const InputState& inputState = m_input->getState();
@@ -300,9 +314,17 @@ void Game::showStats()
 	m_pDrawCallLabel->update(m_deltaTime);
 	m_pDrawVertexLabel->update(m_deltaTime);
 
-	m_pFPSLabel->draw(m_renderer, glm::mat4(1.0f));
-	m_pDrawCallLabel->draw(m_renderer, glm::mat4(1.0f));
-	m_pDrawVertexLabel->draw(m_renderer, glm::mat4(1.0f));
+	Camera* pCamera = m_scene->getDefaultCamera();
+	glm::mat4 modelView = pCamera->getViewMatrix();
+
+	pushMatrix(MatrixStack::Projection);
+	loadMatrix(MatrixStack::Projection, pCamera->getProjectionMatrix());
+
+	m_pFPSLabel->visit(m_renderer, modelView, 0);
+	m_pDrawCallLabel->visit(m_renderer, modelView, 0);
+	m_pDrawVertexLabel->visit(m_renderer, modelView, 0);
+
+	popMatrix(MatrixStack::Projection);
 }
 
 void Game::onWindowSize(int width, int height)

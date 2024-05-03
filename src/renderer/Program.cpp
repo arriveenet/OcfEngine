@@ -39,6 +39,13 @@ void Program::use()
 	glUseProgram(m_program);
 }
 
+void Program::setUniform(int location, const glm::mat4& matrix) const
+{
+	assert(location != -1);
+
+	glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(matrix));
+}
+
 void Program::setUniform(const std::string& name, const glm::mat4& matrix) const
 {
 	const int location = getUniformLocation(name);

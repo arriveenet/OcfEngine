@@ -103,6 +103,12 @@ public:
 	 */
 	void popMatrix(MatrixStack type);
 
+	/**
+	 * @brief 行列を取得する
+	 * @param[in] type 行列スタックの種別
+	 */
+	const glm::mat4& getMatrix(MatrixStack type);
+
 protected:
 	/** 入力システムを処理 */
 	void processInput();

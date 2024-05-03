@@ -7,7 +7,7 @@
 #include "renderer/OpenGLInclude.h"
 #include "renderer/ShaderManager.h"
 
-#define SPRITE_DEBUG_DRAW	0
+#define SPRITE_DEBUG_DRAW	1
 
 using namespace glm;
 
@@ -57,6 +57,11 @@ Sprite::Sprite(int drawOrder)
 
 	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
 	m_trianglesCommand.getProgramState().setProgram(pProgram);
+
+#if SPRITE_DEBUG_DRAW
+	m_pDebugDrawShape = new DrawShape();
+	addChild(m_pDebugDrawShape);
+#endif
 }
 
 Sprite::~Sprite()
@@ -113,25 +118,28 @@ Rect Sprite::getRect() const
 
 void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 {
-	Scene* scene = Game::getInstance()->getCurrentScene();
-	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();
+	setMVPMarixUniform();
 
-	updateTransform();
-
-	glm::mat4 modelView = view * m_transform;
-
-	m_trianglesCommand.init(m_texture, m_triangles, modelView);
+	m_trianglesCommand.init(m_texture, m_triangles, transform);
 
 	renderer->addCommand(&m_trianglesCommand);
 
 #if SPRITE_DEBUG_DRAW
-	m_drawShape.clear();
-	m_drawShape.drawLine(glm::vec2(m_quad.topLeft.position), glm::vec2(m_quad.bottomLeft.position), Color4f::WHITE);
-	m_drawShape.drawLine(glm::vec2(m_quad.bottomLeft.position), glm::vec2(m_quad.bottomRight.position), Color4f::WHITE);
-	m_drawShape.drawLine(glm::vec2(m_quad.bottomRight.position), glm::vec2(m_quad.topRight.position), Color4f::WHITE);
-	m_drawShape.drawLine(glm::vec2(m_quad.topRight.position), glm::vec2(m_quad.topLeft.position), Color4f::WHITE);
+	m_pDebugDrawShape->clear();
 
-	m_drawShape.draw(renderer, m_transform);
+	//int count = m_triangles.indexCount / 3;
+	//auto vertices = m_triangles.vertices;
+	//auto indices = m_triangles.indices;
+	//for (int i = 0; i < count; i++) {
+	//	glm::vec3 from = vertices[indices[i * 3]].position;
+	//	glm::vec3 to = vertices[indices[i * 3 + 1]].position;
+
+	//	m_pDebugDrawShape->drawLine(glm::vec2(from.x, from.y), glm::vec2(to.x, to.y), Color4f::WHITE);
+	//}
+	m_pDebugDrawShape->drawLine(glm::vec2(m_quad.topLeft.position), glm::vec2(m_quad.bottomLeft.position), Color4f::WHITE);
+	m_pDebugDrawShape->drawLine(glm::vec2(m_quad.bottomLeft.position), glm::vec2(m_quad.bottomRight.position), Color4f::WHITE);
+	m_pDebugDrawShape->drawLine(glm::vec2(m_quad.bottomRight.position), glm::vec2(m_quad.topRight.position), Color4f::WHITE);
+	m_pDebugDrawShape->drawLine(glm::vec2(m_quad.topRight.position), glm::vec2(m_quad.topLeft.position), Color4f::WHITE);
 #endif
 }
 
@@ -189,6 +197,14 @@ void Sprite::flipY()
 {
 	std::swap(m_quad.topLeft.texCoord, m_quad.bottomLeft.texCoord);
 	std::swap(m_quad.topRight.texCoord, m_quad.bottomRight.texCoord);
+}
+
+void Sprite::setMVPMarixUniform()
+{
+	glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
+	auto& programState = m_trianglesCommand.getProgramState();
+	programState.setUniform("uViewProj", projection);
+	programState.setUniform("uWorldTransform", glm::mat4(1.0f));
 }
 
 OCF_END

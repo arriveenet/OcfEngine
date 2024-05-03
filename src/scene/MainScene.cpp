@@ -152,10 +152,12 @@ bool MainScene::init()
 	Ship* ship = new Ship();
 	addChild(ship);
 
-	DrawShape* shape = new DrawShape;
-	shape->drawLine(glm::vec2(100, 100), glm::vec2(600,600), Color4f::WHITE);
+	Label* label = new Label();
+	label->setPosition(100, 100);
+	label->setTextColor(Color4f::GREEN);
+	label->setString("Hello World!");
 
-	addChild(shape);
+	addChild(label);
 
 	return true;
 }

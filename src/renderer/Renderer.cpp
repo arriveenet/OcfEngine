@@ -266,11 +266,7 @@ void Renderer::drawTrianglesCommand()
 		Program* pProgram = programState.getProgram();
 		pProgram->use();
 
-		Scene* scene = Game::getInstance()->getCurrentScene();
-		glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
-
-		pProgram->setUniform("uViewProj", projection);
-		pProgram->setUniform("uWorldTransform", glm::mat4(1.0f));
+		programState.bindUniforms();
 
 		Texture2D* pTexture = drawInfo.pCommand->getTexture();
 		if (pTexture) {
@@ -295,14 +291,7 @@ void Renderer::drawCustomCommand(RenderCommand* command)
 	Program* pProgram = programState.getProgram();
 	pProgram->use();
 
-	Scene* scene = Game::getInstance()->getCurrentScene();
-	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
-	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();
-
-	glm::mat4 modelView = view * cmd->getModelView();
-
-	pProgram->setUniform("uViewProj", projection);
-	pProgram->setUniform("uWorldTransform", modelView);
+	programState.bindUniforms();
 
 	cmd->getVertexArray()->bind();
 

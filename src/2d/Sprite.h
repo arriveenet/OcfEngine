@@ -56,6 +56,7 @@ protected:
 	void updatePolygon();
 	void flipX();
 	void flipY();
+	void setMVPMarixUniform();
 
 protected:
 	int m_drawOrder;
@@ -70,7 +71,7 @@ protected:
 	Texture2D* m_texture;
 	TrianglesCommand::Triangles m_triangles;
 	TrianglesCommand m_trianglesCommand;
-	DrawShape m_drawShape;
+	DrawShape* m_pDebugDrawShape = nullptr;
 };
 
 OCF_END

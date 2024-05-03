@@ -19,6 +19,7 @@ public:
 	int getUniformLocation(const std::string& name) const;
 
 	void use();
+	void setUniform(int location, const glm::mat4& matrix) const;
 	void setUniform(const std::string& name, const glm::mat4& matrix) const;
 
 private:

@@ -70,15 +70,12 @@ void Label::draw(Renderer* renderer, const glm::mat4& transform)
 	if (m_quads.empty())
 		return;
 
-	Scene* scene = Game::getInstance()->getCurrentScene();
-	glm::mat4 projection = scene->getDefaultCamera()->getProjectionMatrix();
-	glm::mat4 view = scene->getDefaultCamera()->getViewMatrix();
+	glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
+	auto& programState = m_quadCommand.getProgramState();
+	programState.setUniform("uViewProj", projection);
+	programState.setUniform("uWorldTransform", glm::mat4(1.0f));
 
-	updateTransform();
-
-	glm::mat4 modelView = view * m_transform;
-
-	m_quadCommand.init(m_texture, m_quads.data(), m_indices.data(), m_quads.size(), modelView);
+	m_quadCommand.init(m_texture, m_quads.data(), m_indices.data(), m_quads.size(), transform);
 	renderer->addCommand(&m_quadCommand);
 }
 

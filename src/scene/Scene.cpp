@@ -22,12 +22,18 @@ bool Scene::init()
 void Scene::render(Renderer* renderer, const glm::mat4& transform)
 {
 	Scene* pCurrentScene = Game::getInstance()->getCurrentScene();
-	glm::mat4 view = pCurrentScene->getDefaultCamera()->getViewMatrix();
-	glm::mat4 modelView = view * transform;
+	Camera* pCamera = pCurrentScene->getDefaultCamera();
 
-	Entity::visit(renderer, modelView);
+	glm::mat4 modelView = pCamera->getViewMatrix();
+
+	m_pGame->pushMatrix(MatrixStack::Projection);
+	m_pGame->loadMatrix(MatrixStack::Projection, pCamera->getProjectionMatrix());
+
+	Entity::visit(renderer, modelView, FLAGS_TRANSFORM_DIRTY);
 
 	renderer->draw();
+
+	m_pGame->popMatrix(MatrixStack::Projection);
 }
 
 OCF_END

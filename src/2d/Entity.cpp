@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include <glm/gtx/transform.hpp>
+#include "base/Game.h"
 
 OCF_BEGIN
 
@@ -13,8 +14,12 @@ Entity::Entity()
 	, m_scaleY(1.0f)
 	, m_scaleZ(1.0f)
 	, m_transform(1.0f)
+	, m_modelVewTransform(1.0f)
 	, m_transformDirty(true)
+	, m_transformUpdated(true)
+	, m_contentSizeDirty(true)
 {
+	m_pGame = Game::getInstance();
 }
 
 Entity::~Entity()
@@ -216,18 +221,63 @@ void Entity::removeComponent(Component* pComponent)
 	}
 }
 
-void Entity::visit(Renderer* pRenderer, const glm::mat4& parentTransform)
+const glm::mat4& Entity::getEntityToParentTransform()
 {
-	if (!m_entities.empty()) {
-		this->draw(pRenderer, parentTransform);
+	if (m_transformDirty) {
+		glm::mat4 transform = glm::translate(glm::vec3(m_position, 0));
+		transform = glm::rotate(transform, glm::radians(m_rotation), glm::vec3(0, 0, 1));
+		transform = glm::scale(transform, glm::vec3(m_scaleX, m_scaleY, m_scaleZ));
 
+		m_transform = transform;
+	}
+
+	m_transformDirty = false;
+
+	return m_transform;
+}
+
+void Entity::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags)
+{
+	uint32_t flags = processParentFlag(parentTransform, parentFlags);
+
+	m_pGame->pushMatrix(MatrixStack::ModelView);
+	m_pGame->loadMatrix(MatrixStack::ModelView, m_modelVewTransform);
+
+	if (!m_entities.empty()) {
+		// 自身を描画
+		this->draw(pRenderer, m_modelVewTransform);
+
+		// 子エンティティを描画
 		for (auto iter = m_entities.cbegin(); iter != m_entities.cend(); ++iter) {
-			(*iter)->visit(pRenderer, parentTransform);
+			(*iter)->visit(pRenderer, m_modelVewTransform, flags);
 		}
 	}
 	else {
-		this->draw(pRenderer, parentTransform);
+		this->draw(pRenderer, m_modelVewTransform);
 	}
+
+	m_pGame->popMatrix(MatrixStack::ModelView);
+}
+
+glm::mat4 Entity::transform(const glm::mat4& parentTransform)
+{
+	return parentTransform * this->getEntityToParentTransform();
+}
+
+uint32_t Entity::processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag)
+{
+	uint32_t flags = parentFlag;
+	flags |= (m_transformUpdated ? FLAGS_TRANSFORM_DIRTY : 0);
+	flags |= (m_contentSizeDirty ? FLAGS_CONTENT_SIZE_DIRTY : 0);
+
+	if (flags & FLAGS_TRANSFORM_DIRTY) {
+		m_modelVewTransform = this->transform(parentTransform);
+	}
+
+	m_transformUpdated = false;
+	m_contentSizeDirty = false;
+
+	return flags;
 }
 
 OCF_END
