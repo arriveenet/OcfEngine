@@ -193,7 +193,7 @@ void Renderer::trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int 
 	const glm::mat4& modelView = pCmd->getModelView();
 	for (unsigned int i = 0; i < vertexCount; i++) {
 		Vertex3fC3fT2f vertex = m_triangleVertices[m_triangleVertexCount + i];
-		m_triangleVertices[m_triangleVertexCount + i].position = modelView * glm::vec4(vertex.position, 1.0f);;
+		m_triangleVertices[m_triangleVertexCount + i].position = modelView * glm::vec4(vertex.position, 1.0f);
 	}
 
 	// インデックスを配列に追加
