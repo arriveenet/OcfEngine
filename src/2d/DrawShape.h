@@ -26,6 +26,7 @@ public:
 
 protected:
 	void updateVertexBuffer();
+	void updateUniforms(const glm::mat4& transform, CustomCommand& cmd);
 
 protected:
 	bool m_dirtyLine;

@@ -99,6 +99,7 @@ void DrawShape::update(float deltaTime)
 void DrawShape::draw(Renderer* renderer, const glm::mat4& transform)
 {
 	if (!m_lineBuffers.empty()) {
+		updateUniforms(transform, m_customCommandLine);
 		m_customCommandLine.init(transform);
 		renderer->addCommand(&m_customCommandLine);
 	}
@@ -107,6 +108,15 @@ void DrawShape::draw(Renderer* renderer, const glm::mat4& transform)
 
 void DrawShape::updateVertexBuffer()
 {
+}
+
+void DrawShape::updateUniforms(const glm::mat4& transform, CustomCommand& cmd)
+{
+	glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
+	auto& programState = cmd.getProgramState();
+
+	programState.setUniform("uProjection", projection);
+	programState.setUniform("uModelView", transform);
 }
 
 OCF_END
