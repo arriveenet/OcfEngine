@@ -127,19 +127,22 @@ void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 #if SPRITE_DEBUG_DRAW
 	m_pDebugDrawShape->clear();
 
-	//int count = m_triangles.indexCount / 3;
-	//auto vertices = m_triangles.vertices;
-	//auto indices = m_triangles.indices;
-	//for (int i = 0; i < count; i++) {
-	//	glm::vec3 from = vertices[indices[i * 3]].position;
-	//	glm::vec3 to = vertices[indices[i * 3 + 1]].position;
+	int count = m_triangles.indexCount / 3;
+	auto vertices = m_triangles.vertices;
+	auto indices = m_triangles.indices;
+	for (int i = 0; i < count; i++) {
+		glm::vec3 from = vertices[indices[i * 3]].position;
+		glm::vec3 to   = vertices[indices[i * 3 + 1]].position;
+		m_pDebugDrawShape->drawLine(glm::vec2(from.x, from.y), glm::vec2(to.x, to.y), Color4f::WHITE);
 
-	//	m_pDebugDrawShape->drawLine(glm::vec2(from.x, from.y), glm::vec2(to.x, to.y), Color4f::WHITE);
-	//}
-	m_pDebugDrawShape->drawLine(glm::vec2(m_quad.topLeft.position), glm::vec2(m_quad.bottomLeft.position), Color4f::WHITE);
-	m_pDebugDrawShape->drawLine(glm::vec2(m_quad.bottomLeft.position), glm::vec2(m_quad.bottomRight.position), Color4f::WHITE);
-	m_pDebugDrawShape->drawLine(glm::vec2(m_quad.bottomRight.position), glm::vec2(m_quad.topRight.position), Color4f::WHITE);
-	m_pDebugDrawShape->drawLine(glm::vec2(m_quad.topRight.position), glm::vec2(m_quad.topLeft.position), Color4f::WHITE);
+		from = vertices[indices[i * 3 + 1]].position;
+		to   = vertices[indices[i * 3 + 2]].position;
+		m_pDebugDrawShape->drawLine(glm::vec2(from.x, from.y), glm::vec2(to.x, to.y), Color4f::WHITE);
+
+		from = vertices[indices[i * 3 + 2]].position;
+		to   = vertices[indices[i * 3]].position;
+		m_pDebugDrawShape->drawLine(glm::vec2(from.x, from.y), glm::vec2(to.x, to.y), Color4f::WHITE);
+	}
 #endif
 }
 
