@@ -29,7 +29,7 @@ void Scene::render(Renderer* renderer, const glm::mat4& transform)
 	m_pGame->pushMatrix(MatrixStack::Projection);
 	m_pGame->loadMatrix(MatrixStack::Projection, pCamera->getProjectionMatrix());
 
-	Entity::visit(renderer, modelView, FLAGS_TRANSFORM_DIRTY);
+	Entity::visit(renderer, modelView, 0);
 
 	renderer->draw();
 

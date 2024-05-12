@@ -107,13 +107,13 @@ void Entity::draw(Renderer* renderer, const glm::mat4& transform)
 void Entity::setPosition(const glm::vec2& position)
 {
 	m_position = position;
-	m_transformDirty = true;
+	m_transformUpdated = m_transformDirty = true;
 }
 
 void Entity::setPosition(float x, float y)
 {
 	m_position = { x, y };
-	m_transformDirty = true;
+	m_transformUpdated = m_transformDirty = true;
 }
 
 glm::vec2 Entity::getPosition() const
@@ -125,7 +125,7 @@ void Entity::setSize(float width, float height)
 {
 	m_size.x = width;
 	m_size.y = height;
-	m_transformDirty = true;
+	m_transformUpdated = m_transformDirty = true;
 }
 
 glm::vec2 Entity::getSize() const
@@ -136,7 +136,7 @@ glm::vec2 Entity::getSize() const
 void Entity::setRotation(float rotation)
 {
 	m_rotation = rotation;
-	m_transformDirty = true;
+	m_transformUpdated = m_transformDirty = true;
 }
 
 float Entity::getRotation() const
@@ -147,25 +147,25 @@ float Entity::getRotation() const
 void Entity::setScale(float scale)
 {
 	m_scaleX = m_scaleY = m_scaleZ = scale;
-	m_transformDirty = true;
+	m_transformUpdated = m_transformDirty = true;
 }
 
 void Entity::setScaleX(float scaleX)
 {
 	m_scaleX = scaleX;
-	m_transformDirty = true;
+	m_transformUpdated = m_transformDirty = true;
 }
 
 void Entity::setScaleY(float scaleY)
 {
 	m_scaleY = scaleY;
-	m_transformDirty = true;
+	m_transformUpdated = m_transformDirty = true;
 }
 
 void Entity::setScaleZ(float scaleZ)
 {
 	m_scaleZ = scaleZ;
-	m_transformDirty = true;
+	m_transformUpdated = m_transformDirty = true;
 }
 
 float Entity::getScale() const
