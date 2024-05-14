@@ -1,6 +1,8 @@
 #include "MainScene.h"
 #include <stdlib.h>
+#include <iostream>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/string_cast.hpp>
 #include "base/Game.h"
 #include "renderer/Image.h"
 #include "2d/Label.h"
@@ -36,17 +38,19 @@ void Laser::updateEntity(float deltaTime)
 	}
 	else {
 		for (auto astroid : g_pAsteroid) {
-			if (astroid == nullptr) continue;
-
 			if (intersectCircle(*m_pCircleComponent, *astroid->m_pCircleComponent)) {
 				setState(Dead);
 				astroid->setState(Dead);
+
+				auto iter = std::find(g_pAsteroid.begin(), g_pAsteroid.end(), astroid);
+				if (iter != g_pAsteroid.end()) {
+					g_pAsteroid.erase(iter);
+				}
 				break;
 			}
 		}
 	}
 }
-
 
 Asteroid::Asteroid()
 {
@@ -84,8 +88,6 @@ void Asteroid::updateEntity(float deltaTime)
 	if (m_position.y > visibleSize.y) {
 		m_position.y = 0.0f;
 	}
-
-	Sprite::updateEntity(deltaTime);
 }
 
 Ship::Ship()
@@ -144,7 +146,7 @@ bool MainScene::init()
 {
 	Scene::init();
 
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 1; i++) {
 		g_pAsteroid.emplace_back(new Asteroid());
 		addChild(g_pAsteroid[i]);
 	}
@@ -153,7 +155,7 @@ bool MainScene::init()
 	addChild(ship);
 
 	Label* label = new Label();
-	label->setPosition(100, 100);
+	//label->setPosition(100, 100);
 	label->setTextColor(Color4f::GREEN);
 	label->setString("Hello World!");
 

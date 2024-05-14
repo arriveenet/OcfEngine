@@ -71,6 +71,9 @@ public:
 	virtual void setParent(Entity* pEntity);
 	virtual Entity* getParent() { return m_pParent; }
 
+	uint16_t getCameraMask() const { return m_cameraMask; }
+	virtual void setCameraMask(uint16_t mask, bool applyChildren = true);
+
 	void addComponent(Component* pComponent);
 	void removeComponent(Component* pComponent);
 
@@ -79,6 +82,7 @@ public:
 	virtual void visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags);
 
 protected:
+	bool isVisitableByVisitingCamera() const;
 	glm::mat4 transform(const glm::mat4& parentTransform);
 	uint32_t processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag);
 	
@@ -87,6 +91,8 @@ protected:
 
 	Entity* m_pParent;
 	Game* m_pGame;
+
+	uint16_t m_cameraMask;
 
 	glm::vec2 m_position;
 	glm::vec2 m_size;

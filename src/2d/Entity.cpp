@@ -1,12 +1,14 @@
 #include "Entity.h"
 #include <glm/gtx/transform.hpp>
 #include "base/Game.h"
+#include "2d/Camera.h"
 
 OCF_BEGIN
 
 Entity::Entity()
 	: m_state(State::Active)
 	, m_pParent(nullptr)
+	, m_cameraMask(1)
 	, m_position()
 	, m_size()
 	, m_rotation(0.0f)
@@ -200,6 +202,17 @@ void Entity::setParent(Entity* pEntity)
 	m_pParent = pEntity;
 }
 
+void Entity::setCameraMask(uint16_t mask, bool applyChildren)
+{
+	m_cameraMask = mask;
+
+	if (applyChildren) {
+		for (const auto& child : m_entities) {
+			child->setCameraMask(mask, applyChildren);
+		}
+	}
+}
+
 void Entity::addComponent(Component* pComponent)
 {
 	int myOrder = pComponent->getUpdateOrder();
@@ -243,20 +256,34 @@ void Entity::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32
 	m_pGame->pushMatrix(MatrixStack::ModelView);
 	m_pGame->loadMatrix(MatrixStack::ModelView, m_modelVewTransform);
 
+	const bool visibleByCamera = isVisitableByVisitingCamera();
+
 	if (!m_entities.empty()) {
 		// 自身を描画
-		this->draw(pRenderer, m_modelVewTransform);
+		if (visibleByCamera) {
+			this->draw(pRenderer, m_modelVewTransform);
+		}
 
 		// 子エンティティを描画
 		for (auto iter = m_entities.cbegin(); iter != m_entities.cend(); ++iter) {
 			(*iter)->visit(pRenderer, m_modelVewTransform, flags);
 		}
 	}
-	else {
+	else if (visibleByCamera) {
 		this->draw(pRenderer, m_modelVewTransform);
+	}
+	else {
+		// 何もしない
 	}
 
 	m_pGame->popMatrix(MatrixStack::ModelView);
+}
+
+bool Entity::isVisitableByVisitingCamera() const
+{
+	Camera* pCamera = Camera::getVisitingCamera();
+	bool visibleByCamera = (pCamera != nullptr) ? static_cast<uint16_t>(pCamera->getCameraFlag()) & m_cameraMask : true;
+	return visibleByCamera;
 }
 
 glm::mat4 Entity::transform(const glm::mat4& parentTransform)
@@ -266,6 +293,10 @@ glm::mat4 Entity::transform(const glm::mat4& parentTransform)
 
 uint32_t Entity::processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag)
 {
+	if (!isVisitableByVisitingCamera()) {
+		return parentFlag;
+	}
+
 	uint32_t flags = parentFlag;
 	flags |= (m_transformUpdated ? FLAGS_TRANSFORM_DIRTY : 0);
 	flags |= (m_contentSizeDirty ? FLAGS_CONTENT_SIZE_DIRTY : 0);

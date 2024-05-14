@@ -1,8 +1,10 @@
 #pragma once
 #include <vector>
-#include "2d/Camera.h"
+#include "2d/Entity.h"
 
 OCF_BEGIN
+
+class Camera;
 
 class Scene : public Entity {
 public:
@@ -13,10 +15,10 @@ public:
 
 	void render(Renderer* renderer, const glm::mat4& transform);
 
-	virtual Camera* getDefaultCamera() { return &m_defaultCamera; }
+	virtual Camera* getDefaultCamera() { return m_pDefaultCamera; }
 
 protected:
-	Camera m_defaultCamera;
+	Camera* m_pDefaultCamera;
 };
 
 OCF_END

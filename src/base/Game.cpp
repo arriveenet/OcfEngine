@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "2d/Camera.h"
 #include "platform/Application.h"
 #include "scene/MainScene.h"
 #include "base/FileUtils.h"

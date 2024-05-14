@@ -6,11 +6,22 @@
 
 OCF_BEGIN
 
+Camera* Camera::s_pVisitingCamera = nullptr;
+
 Camera::Camera()
-	: m_projection(1.0f)
+	: m_cameraFlag(CameraFlag::Default)
+	, m_projection(1.0f)
 	, m_view(1.0f)
 	, m_type(Type::Orthographic)
 {
+}
+
+Camera* Camera::createPerspective(float fovy, float aspect, float zNear, float zFar)
+{
+	Camera* pCamera = new Camera();
+	pCamera->initPerspective(fovy, aspect, zNear, zFar);
+
+	return pCamera;
 }
 
 Camera* Camera::createOrthographic(float left, float right, float bottom, float top, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
@@ -29,6 +40,11 @@ Camera* Camera::getDefaultCamera()
 	return pScene->getDefaultCamera();
 }
 
+Camera* Camera::getVisitingCamera()
+{
+	return s_pVisitingCamera;
+}
+
 Camera::~Camera()
 {
 }
@@ -45,6 +61,15 @@ bool Camera::init()
 	return true;
 }
 
+bool Camera::initPerspective(float fovy, float aspect, float zNear, float zFar)
+{
+	m_type = Type::Perspective;
+
+	m_projection = glm::perspective(fovy, aspect, zNear, zFar);
+
+	return true;
+}
+
 bool Camera::initOrthographic(float left, float right, float bottom, float top, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
 {
 	m_type = Type::Orthographic;
@@ -53,6 +78,11 @@ bool Camera::initOrthographic(float left, float right, float bottom, float top, 
 	m_view = glm::lookAt(glm::vec3(right, top, 1), glm::vec3(right, top, 0), glm::vec3(0, 1, 0));
 
 	return true;
+}
+
+void Camera::lookAt(const glm::vec3& eye, const glm::vec3& center, const glm::vec3& up)
+{
+	m_view = glm::lookAt(eye, center, up);
 }
 
 const glm::mat4 Camera::getProjectionMatrix() const
