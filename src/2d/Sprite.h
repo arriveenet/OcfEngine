@@ -5,6 +5,7 @@
 #include "DrawShape.h"
 #include "base/types.h"
 #include "base/Rect.h"
+#include "base/Config.h"
 #include "renderer/TrianglesCommand.h"
 #include "renderer/VertexArray.h"
 
@@ -71,7 +72,10 @@ protected:
 	Texture2D* m_texture;
 	TrianglesCommand::Triangles m_triangles;
 	TrianglesCommand m_trianglesCommand;
+
+#if OCF_SPRITE_DEBUG_DRAW
 	DrawShape* m_pDebugDrawShape = nullptr;
+#endif
 };
 
 OCF_END

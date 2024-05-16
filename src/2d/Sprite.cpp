@@ -3,7 +3,6 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "base/Game.h"
-#include "base/Config.h"
 #include "renderer/Texture2D.h"
 #include "renderer/OpenGLInclude.h"
 #include "renderer/ShaderManager.h"
@@ -57,7 +56,7 @@ Sprite::Sprite(int drawOrder)
 	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
 	m_trianglesCommand.getProgramState().setProgram(pProgram);
 
-#if SPRITE_DEBUG_DRAW
+#if OCF_SPRITE_DEBUG_DRAW
 	m_pDebugDrawShape = new DrawShape();
 	addChild(m_pDebugDrawShape);
 #endif
