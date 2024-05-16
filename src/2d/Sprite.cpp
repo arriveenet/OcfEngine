@@ -3,11 +3,10 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "base/Game.h"
+#include "base/Config.h"
 #include "renderer/Texture2D.h"
 #include "renderer/OpenGLInclude.h"
 #include "renderer/ShaderManager.h"
-
-#define SPRITE_DEBUG_DRAW	1
 
 using namespace glm;
 
@@ -124,7 +123,7 @@ void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 
 	renderer->addCommand(&m_trianglesCommand);
 
-#if SPRITE_DEBUG_DRAW
+#if OCF_SPRITE_DEBUG_DRAW
 	m_pDebugDrawShape->clear();
 
 	int count = m_triangles.indexCount / 3;

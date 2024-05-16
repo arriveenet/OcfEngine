@@ -1,9 +1,0 @@
-set(OCF_SCENE_HEADER
-    "Scene/MainScene.h"
-    "Scene/Scene.h"
-    )
-
-set(OCF_SCENE_SRC
-    "Scene/MainScene.cpp"
-    "Scene/Scene.cpp"
-    )

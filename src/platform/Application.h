@@ -1,11 +1,12 @@
 #pragma once
 #include <glm/glm.hpp>
+#include "ApplicationBase.h"
 #include "Window.h"
-#include "Scene/Scene.h"
+#include "2d/Scene.h"
 
 OCF_BEGIN
 
-class Applicaiton {
+class Applicaiton : public ApplicationBase {
 public:
 	static Applicaiton* getInstance();
 

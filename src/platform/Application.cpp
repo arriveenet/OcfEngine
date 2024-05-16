@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "base/Game.h"
-#include "Scene/MainScene.h"
+#include "2d/Scene.h"
 
 OCF_BEGIN
 
@@ -8,11 +8,7 @@ Applicaiton* g_pApplication = nullptr;
 
 Applicaiton* Applicaiton::getInstance()
 {
-	if (g_pApplication == nullptr) {
-		g_pApplication = new Applicaiton();
-		g_pApplication->init();
-	}
-
+	assert(g_pApplication);
 	return g_pApplication;
 }
 
@@ -21,6 +17,7 @@ Applicaiton::Applicaiton()
 	, m_windowWidth(720)
 	, m_windowHeight(480)
 {
+	g_pApplication = this;
 }
 
 Applicaiton::~Applicaiton()
@@ -66,12 +63,15 @@ void Applicaiton::destroy()
 	m_window.destroy();
 	glfwTerminate();
 
-	delete g_pApplication;
 	g_pApplication = nullptr;
 }
 
 int Applicaiton::run()
 {
+	if (!applicationDidFinishLaunching()) {
+		return 1;
+	}
+
 	auto game = Game::getInstance();
 
 	// Main loop

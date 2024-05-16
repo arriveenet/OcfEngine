@@ -1,4 +1,4 @@
-#include "Scene.h"
+#include "2d/Scene.h"
 #include "2d/Sprite.h"
 #include "2d/Label.h"
 

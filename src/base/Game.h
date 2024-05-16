@@ -2,10 +2,10 @@
 #include <chrono>
 #include <stack>
 #include "platform/Application.h"
-#include "Scene/Scene.h"
 #include "base/GameObject.h"
 #include "base/Font.h"
 #include "input/Input.h"
+#include "2d/Scene.h"
 #include "2d/Label.h"
 #include "renderer/Renderer.h"
 #include "renderer/TextureManager.h"
@@ -35,6 +35,9 @@ public:
 
 	/** ゲームのメインループから抜ける */
 	void exit();
+
+	/** 起動時のシーンを設定する */
+	void runWithScene(Scene* pScene);
 
 	glm::vec2 getVisibleSize() const;
 

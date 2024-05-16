@@ -1,7 +1,6 @@
 #include "Game.h"
 #include "2d/Camera.h"
 #include "platform/Application.h"
-#include "scene/MainScene.h"
 #include "base/FileUtils.h"
 
 #define FPS_UPDATE_INTERVAL	(0.5f)
@@ -76,9 +75,6 @@ bool Game::init()
 	m_font = new Font();
 	m_font->init("..\\assets\\fonts\\Consolas.fnt");
 
-	m_scene = new MainScene();
-	m_scene->init();
-
 	m_input = new Input();
 	m_input->init();
 
@@ -102,6 +98,11 @@ void Game::mainLoop()
 	Applicaiton* app = Applicaiton::getInstance();
 	m_running = true;
 
+	if (m_scene == nullptr) {
+		release();
+		return;
+	}
+
 	while (app->windowShouldClose()) {
 		update();
 		draw();
@@ -118,6 +119,11 @@ void Game::exit()
 {
 	m_running = false;
 	Applicaiton::getInstance()->exit();
+}
+
+void Game::runWithScene(Scene* pScene)
+{
+	m_scene = pScene;
 }
 
 glm::vec2 Game::getVisibleSize() const

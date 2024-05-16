@@ -143,6 +143,7 @@
     <ClCompile Include="2d\Entity.cpp" />
     <ClCompile Include="2d\Label.cpp" />
     <ClCompile Include="2d\MoveComponent.cpp" />
+    <ClCompile Include="2d\Scene.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
     <ClCompile Include="base\FileUtils.cpp" />
     <ClCompile Include="base\Font.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="input\Keyboard.cpp" />
     <ClCompile Include="input\Mouse.cpp" />
     <ClCompile Include="platform\Application.cpp" />
+    <ClCompile Include="platform\ApplicationBase.cpp" />
     <ClCompile Include="platform\Window.cpp" />
     <ClCompile Include="renderer\CustomCommand.cpp" />
     <ClCompile Include="renderer\Image.cpp" />
@@ -171,8 +173,6 @@
     <ClCompile Include="renderer\TrianglesCommand.cpp" />
     <ClCompile Include="renderer\VertexArray.cpp" />
     <ClCompile Include="renderer\VertexBuffer.cpp" />
-    <ClCompile Include="scene\MainScene.cpp" />
-    <ClCompile Include="scene\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\Camera.h" />
@@ -182,7 +182,9 @@
     <ClInclude Include="2d\Entity.h" />
     <ClInclude Include="2d\Label.h" />
     <ClInclude Include="2d\MoveComponent.h" />
+    <ClInclude Include="2d\Scene.h" />
     <ClInclude Include="2d\Sprite.h" />
+    <ClInclude Include="base\Config.h" />
     <ClInclude Include="base\FileUtils.h" />
     <ClInclude Include="base\fnt.h" />
     <ClInclude Include="base\Font.h" />
@@ -196,6 +198,7 @@
     <ClInclude Include="input\Mouse.h" />
     <ClInclude Include="OcfEngine.h" />
     <ClInclude Include="platform\Application.h" />
+    <ClInclude Include="platform\ApplicationBase.h" />
     <ClInclude Include="platform\Window.h" />
     <ClInclude Include="renderer\CustomCommand.h" />
     <ClInclude Include="renderer\Image.h" />
@@ -215,8 +218,6 @@
     <ClInclude Include="renderer\Types.h" />
     <ClInclude Include="renderer\VertexArray.h" />
     <ClInclude Include="renderer\VertexBuffer.h" />
-    <ClInclude Include="scene\MainScene.h" />
-    <ClInclude Include="scene\Scene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
