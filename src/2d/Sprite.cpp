@@ -57,7 +57,7 @@ Sprite::Sprite(int drawOrder)
 	m_trianglesCommand.getProgramState().setProgram(pProgram);
 
 #if OCF_SPRITE_DEBUG_DRAW
-	m_pDebugDrawShape = new DrawShape();
+	m_pDebugDrawShape = DrawShape::create();
 	addChild(m_pDebugDrawShape);
 #endif
 }

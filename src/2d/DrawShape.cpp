@@ -6,8 +6,12 @@ OCF_BEGIN
 
 DrawShape* DrawShape::create()
 {
-	static DrawShape drawShape;
-	return &drawShape;
+	DrawShape* drawShape = new DrawShape();
+	if (drawShape->init()) {
+		return drawShape;
+	}
+
+	return nullptr;
 }
 
 DrawShape::DrawShape()
@@ -15,7 +19,6 @@ DrawShape::DrawShape()
 	, m_bufferCapacityLine(0)
 	, m_bufferCountLine(0)
 {
-	init();
 }
 
 DrawShape::~DrawShape()
@@ -77,6 +80,7 @@ void DrawShape::drawLine(const glm::vec2& origin, const glm::vec2& destanation, 
 
 	VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
 	pVertexArray->updateVertexBuffer(m_lineBuffers.data() + m_bufferCountLine, sizeof(Vertex2fC4) * m_bufferCountLine, sizeof(Vertex2fC4) * 2);
+
 
 	m_bufferCountLine += 2;
 	m_dirtyLine = true;
