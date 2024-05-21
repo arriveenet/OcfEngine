@@ -3,18 +3,18 @@
 
 OCF_BEGIN
 
-class Entity;
+class Node;
 
 class Component {
 public:
-	Component(Entity* pEntity, int updateOrder = 100);
+	Component(Node* pEntity, int updateOrder = 100);
 	virtual ~Component();
 
 	virtual void update(float deltaTime);
 	int getUpdateOrder() const;
 
 protected:
-	Entity* m_pOwner;
+	Node* m_pOwner;
 	int m_updateOrder;
 };
 

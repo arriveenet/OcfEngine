@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
-#include "Entity.h"
+#include "Node.h"
 #include "renderer/VertexArray.h"
 #include "renderer/CustomCommand.h"
 
 OCF_BEGIN
 
-class DrawShape : public Entity {
+class DrawShape : public Node {
 public:
 	static DrawShape* create();
 

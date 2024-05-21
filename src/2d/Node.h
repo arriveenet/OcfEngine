@@ -11,9 +11,9 @@ class Game;
 class Renderer;
 
 /**
- * @brief エンティティクラス
+ * @brief ノードクラス
  */
-class Entity : public GameObject {
+class Node : public GameObject {
 public:
 	/**
 	 * @brief エンティティの状態
@@ -31,17 +31,17 @@ public:
 		FLAGS_DIRTY_MASK = (FLAGS_TRANSFORM_DIRTY | FLAGS_CONTENT_SIZE_DIRTY),
 	};
 
-	Entity();
-	virtual ~Entity();
+	Node();
+	virtual ~Node();
 
 	virtual bool init();
 
 	virtual void processInput(const InputState& inputState);
 
 	virtual void update(float deltaTime);
-	virtual void updateEntity(float deltaTime);
+	virtual void updateNode(float deltaTime);
 	virtual void updateComponents(float deltaTime);
-	virtual void updateEntitices(float deltaTime);
+	virtual void updateNodes(float deltaTime);
 	virtual void updateTransform();
 
 	virtual void draw(Renderer* renderer, const glm::mat4& transform);
@@ -65,11 +65,11 @@ public:
 	virtual void setScaleZ(float scaleZ);
 	virtual float getScale() const;
 
-	virtual void addChild(Entity* pEntity);
-	virtual void removeChild(Entity* pEntity);
+	virtual void addChild(Node* pEntity);
+	virtual void removeChild(Node* pEntity);
 	virtual size_t getChildCount() const;
-	virtual void setParent(Entity* pEntity);
-	virtual Entity* getParent() { return m_pParent; }
+	virtual void setParent(Node* pEntity);
+	virtual Node* getParent() { return m_pParent; }
 
 	uint16_t getCameraMask() const { return m_cameraMask; }
 	virtual void setCameraMask(uint16_t mask, bool applyChildren = true);
@@ -77,7 +77,7 @@ public:
 	void addComponent(Component* pComponent);
 	void removeComponent(Component* pComponent);
 
-	const glm::mat4& getEntityToParentTransform();
+	const glm::mat4& getNodeToParentTransform();
 
 	virtual void visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags);
 
@@ -89,7 +89,7 @@ protected:
 protected:
 	State m_state;
 
-	Entity* m_pParent;
+	Node* m_pParent;
 	Game* m_pGame;
 
 	uint16_t m_cameraMask;
@@ -109,7 +109,7 @@ protected:
 	bool m_transformUpdated;
 	bool m_contentSizeDirty;
 
-	std::vector<Entity*> m_entities;
+	std::vector<Node*> m_children;
 	std::vector<Component*> m_components;
 };
 

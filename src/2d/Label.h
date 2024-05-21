@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "2d/Entity.h"
+#include "2d/Node.h"
 #include "base/types.h"
 #include "base/Macros.h"
 #include "renderer/VertexArray.h"
@@ -11,7 +11,7 @@ OCF_BEGIN
 
 class Texture2D;
 
-class Label : public Entity {
+class Label : public Node {
 public:
 	static Label* create(const std::string& text);
 

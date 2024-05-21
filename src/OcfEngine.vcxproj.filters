@@ -69,7 +69,7 @@
     <ClCompile Include="2d\Component.cpp">
       <Filter>ソース ファイル\2d</Filter>
     </ClCompile>
-    <ClCompile Include="2d\Entity.cpp">
+    <ClCompile Include="2d\Node.cpp">
       <Filter>ソース ファイル\2d</Filter>
     </ClCompile>
     <ClCompile Include="2d\Label.cpp">
@@ -191,7 +191,7 @@
     <ClInclude Include="2d\Component.h">
       <Filter>ヘッダー ファイル\2d</Filter>
     </ClInclude>
-    <ClInclude Include="2d\Entity.h">
+    <ClInclude Include="2d\Node.h">
       <Filter>ヘッダー ファイル\2d</Filter>
     </ClInclude>
     <ClInclude Include="2d\Label.h">

@@ -3,11 +3,11 @@
 
 OCF_BEGIN
 
-class Entity;
+class Node;
 
 class MoveComponent : public Component {
 public:
-	MoveComponent(Entity* pEntity, int updateOrder = 100);
+	MoveComponent(Node* pEntity, int updateOrder = 100);
 
 	void update(float deltaTime) override;
 

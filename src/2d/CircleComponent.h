@@ -6,7 +6,7 @@ OCF_BEGIN
 
 class CircleComponent : public Component {
 public:
-	CircleComponent(Entity* pEntity);
+	CircleComponent(Node* pEntity);
 
 	void setRadius(float radius) { m_radius = radius; }
 	float getRadius() const;

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "Component.h"
-#include "Entity.h"
+#include "Node.h"
 #include "DrawShape.h"
 #include "base/types.h"
 #include "base/Rect.h"
@@ -16,7 +16,7 @@ class Texture2D;
 /**
  * @brief スプライトクラス
  */
-class Sprite : public Entity {
+class Sprite : public Node {
 public:
 	/** スプライトを作成*/
 	static Sprite* create(const std::string& filenam, int drawOrder = 100);

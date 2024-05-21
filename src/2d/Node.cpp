@@ -1,11 +1,11 @@
-#include "Entity.h"
+#include "Node.h"
 #include <glm/gtx/transform.hpp>
 #include "base/Game.h"
 #include "2d/Camera.h"
 
 OCF_BEGIN
 
-Entity::Entity()
+Node::Node()
 	: m_state(State::Active)
 	, m_pParent(nullptr)
 	, m_cameraMask(1)
@@ -24,12 +24,12 @@ Entity::Entity()
 	m_pGame = Game::getInstance();
 }
 
-Entity::~Entity()
+Node::~Node()
 {
-	while (!m_entities.empty()) {
-		auto entity = m_entities.back();
+	while (!m_children.empty()) {
+		auto entity = m_children.back();
 		entity->release();
-		m_entities.pop_back();
+		m_children.pop_back();
 	}
 
 	while (!m_components.empty()) {
@@ -39,59 +39,59 @@ Entity::~Entity()
 	}
 }
 
-bool Entity::init()
+bool Node::init()
 {
 	return true;
 }
 
-void Entity::processInput(const InputState& inputState)
+void Node::processInput(const InputState& inputState)
 {
-	for (auto& entity : m_entities) {
+	for (auto& entity : m_children) {
 		entity->processInput(inputState);
 	}
 }
 
-void Entity::update(float deltaTime)
+void Node::update(float deltaTime)
 {
 	// コンポーネントを更新
 	updateComponents(deltaTime);
 	// 配下のエンティティを更新
-	updateEntitices(deltaTime);
+	updateNodes(deltaTime);
 
 	//　自身を更新
-	updateEntity(deltaTime);
+	updateNode(deltaTime);
 }
 
-void Entity::updateEntity(float deltaTime)
+void Node::updateNode(float deltaTime)
 {
 }
 
-void Entity::updateComponents(float deltaTime)
+void Node::updateComponents(float deltaTime)
 {
 	for (const auto& comp : m_components) {
 		comp->update(deltaTime);
 	}
 }
 
-void Entity::updateEntitices(float deltaTime)
+void Node::updateNodes(float deltaTime)
 {
-	for (const auto& entity : m_entities) {
-		entity->update(deltaTime);
+	for (const auto& child : m_children) {
+		child->update(deltaTime);
 	}
 
-	std::vector<Entity*> deadEntities;
-	for (const auto& entity : m_entities) {
-		if (entity->getState() == Entity::Dead) {
-			deadEntities.emplace_back(entity);
+	std::vector<Node*> deadNodes;
+	for (const auto& child : m_children) {
+		if (child->getState() == Node::Dead) {
+			deadNodes.emplace_back(child);
 		}
 	}
 
-	for (auto entity : deadEntities) {
-		removeChild(entity);
+	for (auto child : deadNodes) {
+		removeChild(child);
 	}
 }
 
-void Entity::updateTransform()
+void Node::updateTransform()
 {
 	if (m_transformDirty) {
 		m_transformDirty = false;
@@ -102,118 +102,118 @@ void Entity::updateTransform()
 	}
 }
 
-void Entity::draw(Renderer* renderer, const glm::mat4& transform)
+void Node::draw(Renderer* renderer, const glm::mat4& transform)
 {
 }
 
-void Entity::setPosition(const glm::vec2& position)
+void Node::setPosition(const glm::vec2& position)
 {
 	m_position = position;
 	m_transformUpdated = m_transformDirty = true;
 }
 
-void Entity::setPosition(float x, float y)
+void Node::setPosition(float x, float y)
 {
 	m_position = { x, y };
 	m_transformUpdated = m_transformDirty = true;
 }
 
-glm::vec2 Entity::getPosition() const
+glm::vec2 Node::getPosition() const
 {
 	return m_position;
 }
 
-void Entity::setSize(float width, float height)
+void Node::setSize(float width, float height)
 {
 	m_size.x = width;
 	m_size.y = height;
 	m_transformUpdated = m_transformDirty = true;
 }
 
-glm::vec2 Entity::getSize() const
+glm::vec2 Node::getSize() const
 {
 	return m_size;
 }
 
-void Entity::setRotation(float rotation)
+void Node::setRotation(float rotation)
 {
 	m_rotation = rotation;
 	m_transformUpdated = m_transformDirty = true;
 }
 
-float Entity::getRotation() const
+float Node::getRotation() const
 {
 	return m_rotation;
 }
 
-void Entity::setScale(float scale)
+void Node::setScale(float scale)
 {
 	m_scaleX = m_scaleY = m_scaleZ = scale;
 	m_transformUpdated = m_transformDirty = true;
 }
 
-void Entity::setScaleX(float scaleX)
+void Node::setScaleX(float scaleX)
 {
 	m_scaleX = scaleX;
 	m_transformUpdated = m_transformDirty = true;
 }
 
-void Entity::setScaleY(float scaleY)
+void Node::setScaleY(float scaleY)
 {
 	m_scaleY = scaleY;
 	m_transformUpdated = m_transformDirty = true;
 }
 
-void Entity::setScaleZ(float scaleZ)
+void Node::setScaleZ(float scaleZ)
 {
 	m_scaleZ = scaleZ;
 	m_transformUpdated = m_transformDirty = true;
 }
 
-float Entity::getScale() const
+float Node::getScale() const
 {
 	return m_scaleX;
 }
 
-void Entity::addChild(Entity* pEntity)
+void Node::addChild(Node* pEntity)
 {
-	m_entities.emplace_back(pEntity);
+	m_children.emplace_back(pEntity);
 
 	pEntity->setParent(this);
 }
 
-void Entity::removeChild(Entity* pEntity)
+void Node::removeChild(Node* pEntity)
 {
-	auto iter = std::find(m_entities.begin(), m_entities.end(), pEntity);
-	if (iter != m_entities.end()) {
-		m_entities.erase(iter);
+	auto iter = std::find(m_children.begin(), m_children.end(), pEntity);
+	if (iter != m_children.end()) {
+		m_children.erase(iter);
 		delete pEntity;
 		pEntity = nullptr;
 	}
 }
 
-size_t Entity::getChildCount() const
+size_t Node::getChildCount() const
 {
-	return m_entities.size();
+	return m_children.size();
 }
 
-void Entity::setParent(Entity* pEntity)
+void Node::setParent(Node* pEntity)
 {
 	m_pParent = pEntity;
 }
 
-void Entity::setCameraMask(uint16_t mask, bool applyChildren)
+void Node::setCameraMask(uint16_t mask, bool applyChildren)
 {
 	m_cameraMask = mask;
 
 	if (applyChildren) {
-		for (const auto& child : m_entities) {
+		for (const auto& child : m_children) {
 			child->setCameraMask(mask, applyChildren);
 		}
 	}
 }
 
-void Entity::addComponent(Component* pComponent)
+void Node::addComponent(Component* pComponent)
 {
 	int myOrder = pComponent->getUpdateOrder();
 	auto iter = m_components.begin();
@@ -226,7 +226,7 @@ void Entity::addComponent(Component* pComponent)
 	m_components.insert(iter, pComponent);
 }
 
-void Entity::removeComponent(Component* pComponent)
+void Node::removeComponent(Component* pComponent)
 {
 	auto iter = std::find(m_components.begin(), m_components.end(), pComponent);
 	if (iter != m_components.end()) {
@@ -234,7 +234,7 @@ void Entity::removeComponent(Component* pComponent)
 	}
 }
 
-const glm::mat4& Entity::getEntityToParentTransform()
+const glm::mat4& Node::getNodeToParentTransform()
 {
 	if (m_transformDirty) {
 		glm::mat4 transform = glm::translate(glm::vec3(m_position, 0));
@@ -249,7 +249,7 @@ const glm::mat4& Entity::getEntityToParentTransform()
 	return m_transform;
 }
 
-void Entity::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags)
+void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags)
 {
 	uint32_t flags = processParentFlag(parentTransform, parentFlags);
 
@@ -258,14 +258,14 @@ void Entity::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32
 
 	const bool visibleByCamera = isVisitableByVisitingCamera();
 
-	if (!m_entities.empty()) {
+	if (!m_children.empty()) {
 		// 自身を描画
 		if (visibleByCamera) {
 			this->draw(pRenderer, m_modelVewTransform);
 		}
 
 		// 子エンティティを描画
-		for (auto iter = m_entities.cbegin(); iter != m_entities.cend(); ++iter) {
+		for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
 			(*iter)->visit(pRenderer, m_modelVewTransform, flags);
 		}
 	}
@@ -279,19 +279,19 @@ void Entity::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32
 	m_pGame->popMatrix(MatrixStack::ModelView);
 }
 
-bool Entity::isVisitableByVisitingCamera() const
+bool Node::isVisitableByVisitingCamera() const
 {
 	Camera* pCamera = Camera::getVisitingCamera();
 	bool visibleByCamera = (pCamera != nullptr) ? static_cast<uint16_t>(pCamera->getCameraFlag()) & m_cameraMask : true;
 	return visibleByCamera;
 }
 
-glm::mat4 Entity::transform(const glm::mat4& parentTransform)
+glm::mat4 Node::transform(const glm::mat4& parentTransform)
 {
-	return parentTransform * this->getEntityToParentTransform();
+	return parentTransform * this->getNodeToParentTransform();
 }
 
-uint32_t Entity::processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag)
+uint32_t Node::processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag)
 {
 	if (!isVisitableByVisitingCamera()) {
 		return parentFlag;

@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h"
+#include "Node.h"
 
 OCF_BEGIN
 
@@ -13,7 +13,7 @@ enum class CameraFlag : uint16_t {
 	User4  = 1 << 4,
 };
 
-class Camera : public Entity {
+class Camera : public Node {
 	friend class Scene;
 
 public:

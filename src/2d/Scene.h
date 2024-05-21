@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
-#include "2d/Entity.h"
+#include "2d/Node.h"
 
 OCF_BEGIN
 
 class Camera;
 
-class Scene : public Entity {
+class Scene : public Node {
 public:
 	Scene();
 	virtual ~Scene();

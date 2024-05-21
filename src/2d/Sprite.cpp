@@ -93,17 +93,17 @@ int Sprite::getDrawOrder() const
 
 void Sprite::setPosition(const glm::vec2& position)
 {
-	Entity::setPosition(position);
+	Node::setPosition(position);
 }
 
 void Sprite::setPosition(float x, float y)
 {
-	Entity::setPosition(x, y);
+	Node::setPosition(x, y);
 }
 
 void Sprite::setSize(float width, float height)
 {
-	Entity::setSize(width, height);
+	Node::setSize(width, height);
 	updatePolygon();
 
 	m_isDirty = true;

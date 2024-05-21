@@ -12,7 +12,7 @@ public:
 	Laser();
 	virtual ~Laser();
 
-	void updateEntity(float deltaTime) override;
+	void updateNode(float deltaTime) override;
 
 	MoveComponent* m_pMoveComponent;
 	CircleComponent* m_pCircleComponent;
@@ -23,7 +23,7 @@ class Asteroid : public Sprite {
 public:
 	Asteroid();
 
-	void updateEntity(float deltaTime) override;
+	void updateNode(float deltaTime) override;
 
 	MoveComponent* m_pMoveComponent;
 	CircleComponent* m_pCircleComponent;

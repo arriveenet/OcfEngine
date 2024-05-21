@@ -30,7 +30,7 @@ Laser::~Laser()
 {
 }
 
-void Laser::updateEntity(float deltaTime)
+void Laser::updateNode(float deltaTime)
 {
 	m_deathTimer -= deltaTime;
 	if (m_deathTimer <= 0.0f) {
@@ -72,7 +72,7 @@ Asteroid::Asteroid()
 	setPosition(x, y);
 }
 
-void Asteroid::updateEntity(float deltaTime)
+void Asteroid::updateNode(float deltaTime)
 {
 	glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
 

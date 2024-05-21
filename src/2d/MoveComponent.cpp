@@ -1,10 +1,10 @@
 #include "MoveComponent.h"
 #include <glm/glm.hpp>
-#include "Entity.h"
+#include "Node.h"
 
 OCF_BEGIN
 
-MoveComponent::MoveComponent(Entity* pEntity, int updateOrder)
+MoveComponent::MoveComponent(Node* pEntity, int updateOrder)
 	: m_angularSpeed(0.0f)
 	, m_forwardSpeed(0.0f)
 	, Component(pEntity, updateOrder)

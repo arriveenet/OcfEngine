@@ -1,9 +1,9 @@
 #include "CircleComponent.h"
-#include "2d/Entity.h"
+#include "2d/Node.h"
 
 OCF_BEGIN
 
-CircleComponent::CircleComponent(Entity* pEntity)
+CircleComponent::CircleComponent(Node* pEntity)
 	: Component(pEntity)
 	, m_radius(0.0f)
 {
