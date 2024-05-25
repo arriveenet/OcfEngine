@@ -30,12 +30,17 @@ public:
 
 		FLAGS_DIRTY_MASK = (FLAGS_TRANSFORM_DIRTY | FLAGS_CONTENT_SIZE_DIRTY),
 	};
-
+	/** コンストラクタ */
 	Node();
+	/** デストラクタ */
 	virtual ~Node();
 
 	virtual bool init();
 
+	/**
+	 * @brief 入力処理
+	 * @param inputState 入力状態
+	 */
 	virtual void processInput(const InputState& inputState);
 
 	virtual void update(float deltaTime);
@@ -65,13 +70,42 @@ public:
 	virtual void setScaleZ(float scaleZ);
 	virtual float getScale() const;
 
-	virtual void addChild(Node* pEntity);
-	virtual void removeChild(Node* pEntity);
+	/**
+	 * @brief 子ノードを追加
+	 * @param pNode 追加する子ノード
+	 */
+	virtual void addChild(Node* pNode);
+	/**
+	 * @brief 子ノードを削除
+	 * @param pNode 削除する子ノード
+	 */
+	virtual void removeChild(Node* pNode);
+	/**
+	 * @brief 子ノードの数を取得
+	 * @return 子ノードの数
+	 */
 	virtual size_t getChildCount() const;
-	virtual void setParent(Node* pEntity);
+	/**
+	 * @brief 親ノードを設定
+	 * @param pNode 設定する親ノード
+	 */
+	virtual void setParent(Node* pNode);
+	/**
+	 * @brief 親ノードを取得
+	 * @return pNode 親ノード
+	 */
 	virtual Node* getParent() { return m_pParent; }
 
+	/**
+	 * @brief カメラのマスクを取得
+	 * @return カメラのマスク
+	 */
 	uint16_t getCameraMask() const { return m_cameraMask; }
+	/**
+	 * @brief カメラのマスクを設定
+	 * @param uint16_t カメラのマスク
+	 * @param applyChildren 子ノードにもカメラマスクをせっていするかどうか
+	 */
 	virtual void setCameraMask(uint16_t mask, bool applyChildren = true);
 
 	void addComponent(Component* pComponent);
@@ -87,30 +121,30 @@ protected:
 	uint32_t processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag);
 	
 protected:
-	State m_state;
+	State m_state;			//!< ノードの状態
 
-	Node* m_pParent;
-	Game* m_pGame;
+	Node* m_pParent;		//!< 親ノード
+	Game* m_pGame;			//!< シングルトンのゲームクラス
 
-	uint16_t m_cameraMask;
+	uint16_t m_cameraMask;	//!< カメラマスク
 
-	glm::vec2 m_position;
-	glm::vec2 m_size;
+	glm::vec2 m_position;	//!< ノードの位置
+	glm::vec2 m_size;		//!< コンテンツサイズ
 
-	float m_rotation;
+	float m_rotation;		//!< Z軸の回転角度
 	
-	float m_scaleX;
-	float m_scaleY;
-	float m_scaleZ;
+	float m_scaleX;			//!< X軸の倍率
+	float m_scaleY;			//!< Y軸の倍率
+	float m_scaleZ;			//!< Z軸の倍率
 
-	glm::mat4 m_transform;
-	glm::mat4 m_modelVewTransform;
-	bool m_transformDirty;
-	bool m_transformUpdated;
-	bool m_contentSizeDirty;
+	glm::mat4 m_transform;			//!< 変換行列
+	glm::mat4 m_modelVewTransform;	//!< モデルビュー行列
+	bool m_transformDirty;			//!< 変換のダーティーフラグ
+	bool m_transformUpdated;		//!< 変換の更新のダーティーフラグ
+	bool m_contentSizeDirty;		//!< コンテンツサイズのダーティーフラグ
 
-	std::vector<Node*> m_children;
-	std::vector<Component*> m_components;
+	std::vector<Node*> m_children;			//!< 子ノードの配列
+	std::vector<Component*> m_components;	//!< コンポーネント
 };
 
 OCF_END
