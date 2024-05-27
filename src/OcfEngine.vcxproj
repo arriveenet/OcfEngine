@@ -219,6 +219,16 @@
     <ClInclude Include="renderer\VertexArray.h" />
     <ClInclude Include="renderer\VertexBuffer.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\shaders\basic.frag" />
+    <None Include="..\assets\shaders\basic.vert" />
+    <None Include="..\assets\shaders\drawShape.frag" />
+    <None Include="..\assets\shaders\drawShape.vert" />
+    <None Include="..\assets\shaders\label.frag" />
+    <None Include="..\assets\shaders\label.vert" />
+    <None Include="..\assets\shaders\positionTexture.frag" />
+    <None Include="..\assets\shaders\positionTexture.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -35,7 +35,7 @@ void Scene::render(Renderer* renderer, const glm::mat4& transform)
 	m_pGame->pushMatrix(MatrixStack::Projection);
 	m_pGame->loadMatrix(MatrixStack::Projection, Camera::s_pVisitingCamera->getProjectionMatrix());
 
-	Node::visit(renderer, modelView, 0);
+	Node::visit(renderer, transform, 0);
 
 	renderer->draw();
 
