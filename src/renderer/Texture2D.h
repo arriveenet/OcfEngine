@@ -16,6 +16,7 @@ public:
 
 	int getWidth() const;
 	int getHeight() const;
+	glm::vec2 getSize() const;
 
 private:
 	unsigned int m_textureId;

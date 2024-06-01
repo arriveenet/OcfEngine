@@ -80,4 +80,13 @@ int Texture2D::getHeight() const
 	return m_height;
 }
 
+glm::vec2 Texture2D::getSize() const
+{
+	glm::vec2 result(0.0f, 0.0f);
+	result.x = m_width;
+	result.y = m_height;
+
+	return result;
+}
+
 OCF_END
