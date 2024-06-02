@@ -58,8 +58,12 @@ public:
 	virtual void setPosition(float x, float y);
 	virtual glm::vec2 getPosition() const;
 
+	virtual void setSize(const glm::vec2& size);
 	virtual void setSize(float width, float height);
 	virtual glm::vec2 getSize() const;
+
+	virtual void setAnchorPoint(const glm::vec2& point);
+	virtual const glm::vec2& getAnchorPoint() const;
 
 	virtual void setRotation(float rotation);
 	virtual float getRotation() const;
@@ -131,6 +135,9 @@ protected:
 	glm::vec2 m_position;	//!< ノードの位置
 	glm::vec2 m_size;		//!< コンテンツサイズ
 
+	glm::vec2 m_anchorPointInPoints;	//!< ポイントのアンカーポイント
+	glm::vec2 m_anchorPoint;			//!< 正規化されたアンカーポイント
+
 	float m_rotation;		//!< Z軸の回転角度
 	
 	float m_scaleX;			//!< X軸の倍率
@@ -139,9 +146,11 @@ protected:
 
 	glm::mat4 m_transform;			//!< 変換行列
 	glm::mat4 m_modelVewTransform;	//!< モデルビュー行列
-	bool m_transformDirty;			//!< 変換のダーティーフラグ
-	bool m_transformUpdated;		//!< 変換の更新のダーティーフラグ
-	bool m_contentSizeDirty;		//!< コンテンツサイズのダーティーフラグ
+
+	bool m_ignoreAnchorPointForPosition;	//!< ノードの基準点がvec2(0,0)の場合はtrue、それ以外の場合はfalse
+	bool m_transformDirty;					//!< 変換のダーティーフラグ
+	bool m_transformUpdated;				//!< 変換の更新のダーティーフラグ
+	bool m_contentSizeDirty;				//!< コンテンツサイズのダーティーフラグ
 
 	std::vector<Node*> m_children;			//!< 子ノードの配列
 	std::vector<Component*> m_components;	//!< コンポーネント

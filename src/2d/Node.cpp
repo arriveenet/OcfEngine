@@ -11,12 +11,15 @@ Node::Node()
 	, m_cameraMask(1)
 	, m_position()
 	, m_size()
+	, m_anchorPointInPoints()
+	, m_anchorPoint()
 	, m_rotation(0.0f)
 	, m_scaleX(1.0f)
 	, m_scaleY(1.0f)
 	, m_scaleZ(1.0f)
 	, m_transform(1.0f)
 	, m_modelVewTransform(1.0f)
+	, m_ignoreAnchorPointForPosition(false)
 	, m_transformDirty(true)
 	, m_transformUpdated(true)
 	, m_contentSizeDirty(true)
@@ -123,16 +126,37 @@ glm::vec2 Node::getPosition() const
 	return m_position;
 }
 
+void Node::setSize(const glm::vec2& size)
+{
+	if (size != m_size) {
+		m_size = size;
+		m_anchorPointInPoints = { m_size.x * m_anchorPoint.x, m_size.y * m_anchorPoint.y };
+		m_transformUpdated = m_transformDirty = true;
+	}
+}
+
 void Node::setSize(float width, float height)
 {
-	m_size.x = width;
-	m_size.y = height;
-	m_transformUpdated = m_transformDirty = true;
+	setSize(glm::vec2(width, height));
 }
 
 glm::vec2 Node::getSize() const
 {
 	return m_size;
+}
+
+void Node::setAnchorPoint(const glm::vec2& point)
+{
+	if (point != m_anchorPoint) {
+		m_anchorPoint = point;
+		m_anchorPointInPoints = {m_size.x * m_anchorPoint.x, m_size.y * m_anchorPoint.y};
+		m_transformUpdated = m_transformDirty = true;
+	}
+}
+
+const glm::vec2& Node::getAnchorPoint() const
+{
+	return m_anchorPoint;
 }
 
 void Node::setRotation(float rotation)
@@ -237,11 +261,27 @@ void Node::removeComponent(Component* pComponent)
 const glm::mat4& Node::getNodeToParentTransform()
 {
 	if (m_transformDirty) {
-		glm::mat4 transform = glm::translate(glm::vec3(m_position, 0));
+		float x = m_position.x;
+		float y = m_position.y;
+		float z = 0.0f;
+
+		if (m_ignoreAnchorPointForPosition) {
+			x += m_anchorPointInPoints.x;
+			y += m_anchorPointInPoints.y;
+		}
+
+		glm::mat4 transform = glm::translate(glm::vec3(x, y, z));
 		transform = glm::rotate(transform, glm::radians(m_rotation), glm::vec3(0, 0, 1));
 		transform = glm::scale(transform, glm::vec3(m_scaleX, m_scaleY, m_scaleZ));
 
 		m_transform = transform;
+
+		// äÓèÄì_Çí≤êÆ
+		if (m_anchorPointInPoints != glm::vec2(0.0f, 0.0f)) {
+			m_transform[3][0] = m_transform[0][0] * m_anchorPointInPoints.x + m_transform[1][0] * m_anchorPointInPoints.y;
+			m_transform[3][1] = m_transform[0][1] * m_anchorPointInPoints.x + m_transform[1][1] * m_anchorPointInPoints.y;
+			m_transform[3][2] = m_transform[0][2] * m_anchorPointInPoints.x + m_transform[1][2] * m_anchorPointInPoints.y;
+		}
 	}
 
 	m_transformDirty = false;

@@ -12,6 +12,8 @@ Camera::Camera()
 	: m_cameraFlag(CameraFlag::Default)
 	, m_projection(1.0f)
 	, m_view(1.0f)
+	, m_zNear(0.0f)
+	, m_zFar(0.0f)
 	, m_type(Type::Orthographic)
 {
 }
@@ -51,12 +53,26 @@ Camera::~Camera()
 
 bool Camera::init()
 {
-	glm::ivec2 windowSize = Applicaiton::getInstance()->getWindowSize();
+	glm::ivec2 size = Applicaiton::getInstance()->getWindowSize();
+	switch (m_type) {
+		case ocf::Camera::Type::Perspective:
+		{
+			m_zNear = 0.5f;
+			m_zFar = 100.0f;
+			initPerspective(60.0f, (float)size.x / size.y, m_zNear, m_zFar);
+			break;
+		}
+		case ocf::Camera::Type::Orthographic:
+		{
+			m_zNear = -1024.0f;
+			m_zFar  = 1024.0f;
+			const float halfWidth = static_cast<float>(size.x / 2);
+			const float halfHeight = static_cast<float>(size.y / 2);
 
-	const float halfWidth = static_cast<float>(windowSize.x / 2);
-	const float halfHeight = static_cast<float>(windowSize.y / 2);
-
-	initOrthographic(-halfWidth, halfWidth, -halfHeight, halfHeight);
+			initOrthographic(-halfWidth, halfWidth, -halfHeight, halfHeight, m_zNear, m_zFar);
+			break;
+		}
+	}
 
 	return true;
 }

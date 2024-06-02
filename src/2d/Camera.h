@@ -51,6 +51,8 @@ protected:
 	CameraFlag m_cameraFlag;
 	glm::mat4 m_projection;
 	glm::mat4 m_view;
+	float m_zNear;
+	float m_zFar;
 	Type m_type;
 };
 

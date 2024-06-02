@@ -146,20 +146,11 @@ bool MainScene::init()
 {
 	Scene::init();
 
-	for (int i = 0; i < 1; i++) {
-		g_pAsteroid.emplace_back(new Asteroid());
-		addChild(g_pAsteroid[i]);
-	}
-
-	Ship* ship = new Ship();
-	addChild(ship);
-
-	Label* label = new Label();
-	//label->setPosition(100, 100);
-	label->setTextColor(Color4f::GREEN);
-	label->setString("Hello World!");
-
-	addChild(label);
+	auto sprite1 = Sprite::create("..\\assets\\textures\\25_Crono.png");
+	addChild(sprite1);
+	//auto sprite2 = Sprite::create("..\\assets\\textures\\28_Frog.png");
+	//sprite1->addChild(sprite2);
+	//sprite2->setPosition(100, 100);
 
 	return true;
 }

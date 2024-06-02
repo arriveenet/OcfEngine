@@ -33,26 +33,6 @@ Sprite::Sprite(int drawOrder)
 	, m_flippedY(false)
 	, m_texture(nullptr)
 {
-	m_size = { 2.0f, 2.0f };
-
-	// 頂点を設定
-	m_quad.topLeft.position		= { -0.5f,  0.5f, 0.0f };
-	m_quad.bottomLeft.position	= { -0.5f, -0.5f, 0.0f };
-	m_quad.topRight.position	= {  0.5f,  0.5f, 0.0f };
-	m_quad.bottomRight.position	= {  0.5f, -0.5f, 0.0f };
-
-	// 色を設定
-	m_quad.topLeft.color		= { 1.0f, 1.0f, 1.0f };
-	m_quad.bottomLeft.color		= { 1.0f, 1.0f, 1.0f };
-	m_quad.topRight.color		= { 1.0f, 1.0f, 1.0f };
-	m_quad.bottomRight.color	= { 1.0f, 1.0f, 1.0f };
-
-	// テクスチャ座標を設定
-	m_quad.topLeft.texCoord		= { 0.0f, 0.0f };
-	m_quad.bottomLeft.texCoord	= { 0.0f, 1.0f };
-	m_quad.topRight.texCoord	= { 1.0f, 0.0f };
-	m_quad.bottomRight.texCoord	= { 1.0f, 1.0f };
-
 	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
 	m_trianglesCommand.getProgramState().setProgram(pProgram);
 
@@ -73,17 +53,46 @@ bool Sprite::init()
 
 bool Sprite::initWithFile(const std::string& filename)
 {
-	m_texture = Game::getInstance()->getTextureManager()->addImage(filename);
-
-	if (!m_texture) {
-		delete m_texture;
-		m_texture = nullptr;
-		return false;
+	Texture2D* texture = Game::getInstance()->getTextureManager()->addImage(filename);
+	if (texture != nullptr) {
+		Rect rect;
+		rect.m_size = texture->getSize();
+		return initWithTexture(texture, rect);
 	}
 
-	setSize((float)m_texture->getWidth(), (float)m_texture->getHeight());
-
 	return true;
+}
+
+bool Sprite::initWithTexture(Texture2D* texture, const Rect& rect)
+{
+	bool result = false;
+	if (Node::init()) {
+		m_flippedX = m_flippedY = false;
+
+		setAnchorPoint(glm::vec2(0.5f, 0.5f));
+
+		// 色を設定
+		m_quad.topLeft.color     = { 1.0f, 1.0f, 1.0f };
+		m_quad.bottomLeft.color  = { 1.0f, 1.0f, 1.0f };
+		m_quad.topRight.color    = { 1.0f, 1.0f, 1.0f };
+		m_quad.bottomRight.color = { 1.0f, 1.0f, 1.0f };
+
+		m_rect = rect;
+
+		setTexture(texture);
+		setTextureRect(rect, rect.m_size);
+
+		result = true;
+	}
+
+	return result;
+}
+
+void Sprite::setTexture(Texture2D* texture)
+{
+	if (texture != nullptr) {
+		m_texture = texture;
+	}
 }
 
 int Sprite::getDrawOrder() const
@@ -172,20 +181,57 @@ bool Sprite::isFlippedY() const
 
 void Sprite::updatePolygon()
 {
-	float offsetX = m_size.x / 2.0f;
-	float offsetY = m_size.y / 2.0f;
-	glm::vec2 lb = { m_position.x - offsetX, m_position.y - offsetY };
-	glm::vec2 rt = { m_position.x + offsetX, m_position.y + offsetY };
+	Rect copyRect;
+	copyRect.m_position = glm::vec2(0.0f, 0.0f);
+	copyRect.m_size = m_size;
 
-	m_quad.topLeft.position = { lb.x, rt.y, 0.0f };
-	m_quad.bottomLeft.position = { lb , 0.0f };
-	m_quad.topRight.position = { rt, 0.0f };
-	m_quad.bottomRight.position = { rt.x, lb.y, 0.0f };
+	setTextureCoords(m_rect, &m_quad);
+	setVertexCoords(copyRect, &m_quad);
 
 	m_triangles.vertices = &m_quad.topLeft;
 	m_triangles.vertexCount = 4;
 	m_triangles.indices = indices;
 	m_triangles.indexCount = 6;
+}
+
+void Sprite::setTextureRect(const Rect& rect, const glm::vec2& size)
+{
+	Node::setSize(size);
+
+	updatePolygon();
+}
+
+void Sprite::setTextureCoords(const Rect& rectInPoints, QuadV3fC3fT2f* outQuad)
+{
+	if (m_texture == nullptr) {
+		return;
+	}
+
+	const float atlasWidth = static_cast<float>(m_texture->getWidth());
+	const float atlasHeight = static_cast<float>(m_texture->getHeight());
+
+	float left   = rectInPoints.m_position.x / atlasWidth;
+	float right  = (rectInPoints.m_position.x + rectInPoints.m_size.x) / atlasWidth;
+	float top    = rectInPoints.m_position.y / atlasHeight;
+	float bottom = (rectInPoints.m_position.y + rectInPoints.m_size.y) / atlasHeight;
+
+	outQuad->bottomLeft.texCoord  = { left, bottom };
+	outQuad->bottomRight.texCoord = { right, bottom };
+	outQuad->topLeft.texCoord     = { left, top };
+	outQuad->topRight.texCoord    = { right, top };
+}
+
+void Sprite::setVertexCoords(const Rect& rect, QuadV3fC3fT2f* outQuad)
+{
+	const float x1 = 0.0f;
+	const float y1 = 0.0f;
+	const float x2 = x1 + m_size.x;
+	const float y2 = y1 + m_size.y;
+
+	outQuad->bottomLeft.position  = { x1, y1, 0.0f };
+	outQuad->bottomRight.position = { x2, y1, 0.0f };
+	outQuad->topLeft.position     = { x1, y2, 0.0f };
+	outQuad->topRight.position    = { x2, y2, 0.0f };
 }
 
 void Sprite::flipX()
