@@ -99,7 +99,7 @@ void Node::updateTransform()
 	if (m_transformDirty) {
 		m_transformDirty = false;
 
-		m_transform = glm::translate(glm::vec3(m_position, 0));
+		m_transform = glm::translate(m_position);
 		m_transform *= glm::rotate(glm::radians(m_rotation), glm::vec3(0, 0, 1));
 		m_transform *= glm::scale(glm::vec3(m_scaleX, m_scaleY, m_scaleZ));
 	}
@@ -109,19 +109,32 @@ void Node::draw(Renderer* renderer, const glm::mat4& transform)
 {
 }
 
+void Node::setPosition(const glm::vec3& position)
+{
+	if (m_position != position) {
+		m_position = position;
+		m_transformUpdated = m_transformDirty = true;
+	}
+}
+
 void Node::setPosition(const glm::vec2& position)
 {
-	m_position = position;
+	m_position.x = position.x;
+	m_position.y = position.y;
 	m_transformUpdated = m_transformDirty = true;
+}
+
+void Node::setPosition(float x, float y, float z)
+{
+	setPosition(glm::vec3(x, y, z));
 }
 
 void Node::setPosition(float x, float y)
 {
-	m_position = { x, y };
-	m_transformUpdated = m_transformDirty = true;
+	setPosition(glm::vec2(x, y));
 }
 
-glm::vec2 Node::getPosition() const
+glm::vec3 Node::getPosition() const
 {
 	return m_position;
 }

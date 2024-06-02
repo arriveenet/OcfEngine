@@ -54,9 +54,11 @@ public:
 	void setState(State state) { m_state = state; }
 	State getState() const { return m_state; }
 
+	virtual void setPosition(const glm::vec3& position);
 	virtual void setPosition(const glm::vec2& position);
+	virtual void setPosition(float x, float y, float z);
 	virtual void setPosition(float x, float y);
-	virtual glm::vec2 getPosition() const;
+	virtual glm::vec3 getPosition() const;
 
 	virtual void setSize(const glm::vec2& size);
 	virtual void setSize(float width, float height);
@@ -132,7 +134,7 @@ protected:
 
 	uint16_t m_cameraMask;	//!< カメラマスク
 
-	glm::vec2 m_position;	//!< ノードの位置
+	glm::vec3 m_position;	//!< ノードの位置
 	glm::vec2 m_size;		//!< コンテンツサイズ
 
 	glm::vec2 m_anchorPointInPoints;	//!< ポイントのアンカーポイント
