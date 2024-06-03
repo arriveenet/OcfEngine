@@ -37,11 +37,10 @@ void Scene::render(Renderer* renderer, const glm::mat4& eyeProjection)
 
 	Camera::s_pVisitingCamera = pCamera;
 
-	//const auto& transform = getNodeToParentTransform();
-	const auto& transform = pCamera->getViewMatrix();
+	const auto& transform = getNodeToParentTransform();
 
 	m_pGame->pushMatrix(MatrixStack::Projection);
-	m_pGame->loadMatrix(MatrixStack::Projection, Camera::s_pVisitingCamera->getProjectionMatrix());
+	m_pGame->loadMatrix(MatrixStack::Projection, Camera::s_pVisitingCamera->getViewProjectionMatrix());
 
 	Node::visit(renderer, transform, 0);
 

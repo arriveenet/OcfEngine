@@ -117,7 +117,9 @@ public:
 	void addComponent(Component* pComponent);
 	void removeComponent(Component* pComponent);
 
-	const glm::mat4& getNodeToParentTransform();
+	virtual const glm::mat4& getNodeToParentTransform() const;
+	virtual glm::mat4 getNodeToParentTransform(Node* ancestor) const;
+	virtual glm::mat4 getNodeToWorldTransform();
 
 	virtual void visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags);
 
@@ -146,11 +148,11 @@ protected:
 	float m_scaleY;			//!< Y軸の倍率
 	float m_scaleZ;			//!< Z軸の倍率
 
-	glm::mat4 m_transform;			//!< 変換行列
-	glm::mat4 m_modelVewTransform;	//!< モデルビュー行列
+	mutable glm::mat4 m_transform;			//!< 変換行列
+	mutable glm::mat4 m_modelVewTransform;	//!< モデルビュー行列
 
 	bool m_ignoreAnchorPointForPosition;	//!< ノードの基準点がvec2(0,0)の場合はtrue、それ以外の場合はfalse
-	bool m_transformDirty;					//!< 変換のダーティーフラグ
+	mutable bool m_transformDirty;			//!< 変換のダーティーフラグ
 	bool m_transformUpdated;				//!< 変換の更新のダーティーフラグ
 	bool m_contentSizeDirty;				//!< コンテンツサイズのダーティーフラグ
 

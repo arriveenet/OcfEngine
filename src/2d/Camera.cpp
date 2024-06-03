@@ -29,7 +29,7 @@ Camera* Camera::createPerspective(float fovy, float aspect, float zNear, float z
 Camera* Camera::createOrthographic(float left, float right, float bottom, float top, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
 {
 	Camera* pCamera = new Camera();
-	pCamera->initOrthographic(left, right, bottom, top, zNear, zFar);
+	pCamera->initOrthographic(left, right, zNear, zFar);
 
 	return pCamera;
 }
@@ -53,8 +53,6 @@ Camera::~Camera()
 
 bool Camera::init()
 {
-	m_type = Camera::Type::Perspective;
-
 	glm::ivec2 size = Applicaiton::getInstance()->getWindowSize();
 	switch (m_type) {
 		case ocf::Camera::Type::Perspective:
@@ -76,7 +74,8 @@ bool Camera::init()
 			const float halfWidth = static_cast<float>(size.x / 2);
 			const float halfHeight = static_cast<float>(size.y / 2);
 
-			initOrthographic(-halfWidth, halfWidth, -halfHeight, halfHeight, m_zNear, m_zFar);
+			initOrthographic((float)size.x, (float)size.y, m_zNear, m_zFar);
+			setPosition(glm::vec3(size.x / 2.0f, size.y / 2.0f, 0.0f));
 			break;
 		}
 	}
@@ -93,12 +92,13 @@ bool Camera::initPerspective(float fovy, float aspect, float zNear, float zFar)
 	return true;
 }
 
-bool Camera::initOrthographic(float left, float right, float bottom, float top, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
+bool Camera::initOrthographic(float width, float height, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
 {
 	m_type = Type::Orthographic;
 
-	m_projection = glm::ortho(left, right, bottom, top, zNear, zFar);
-	m_view = glm::lookAt(glm::vec3(right, top, 1), glm::vec3(right, top, 0), glm::vec3(0, 1, 0));
+	const float halfWidth = width / 2.0f;
+	const float halfHeight = height / 2.0f;
+	m_projection = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight, zNear, zFar);
 
 	return true;
 }

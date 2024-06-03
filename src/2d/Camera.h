@@ -33,7 +33,7 @@ public:
 
 	bool init() override;
 	bool initPerspective(float fovy, float aspect, float zNear, float zFar);
-	bool initOrthographic(float left, float right, float bottom, float top, float zNear = -1.0f, float zFar = 1.0f);
+	bool initOrthographic(float width, float height, float zNear = -1.0f, float zFar = 1.0f);
 
 	virtual void lookAt(const glm::vec3& center, const glm::vec3& up = glm::vec3(0, 1, 0));
 

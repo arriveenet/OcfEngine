@@ -271,7 +271,7 @@ void Node::removeComponent(Component* pComponent)
 	}
 }
 
-const glm::mat4& Node::getNodeToParentTransform()
+const glm::mat4& Node::getNodeToParentTransform() const
 {
 	if (m_transformDirty) {
 		float x = m_position.x;
@@ -300,6 +300,22 @@ const glm::mat4& Node::getNodeToParentTransform()
 	m_transformDirty = false;
 
 	return m_transform;
+}
+
+glm::mat4 Node::getNodeToParentTransform(Node* ancestor) const
+{
+	glm::mat4 t(this->getNodeToParentTransform());
+
+	for (Node* p = m_pParent; p != nullptr && p != ancestor; p->getParent()) {
+		t = p->getNodeToParentTransform() * t;
+	}
+
+	return t;
+}
+
+glm::mat4 Node::getNodeToWorldTransform()
+{
+	return getNodeToParentTransform(nullptr);
 }
 
 void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags)
