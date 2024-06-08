@@ -34,13 +34,12 @@ void Laser::updateNode(float deltaTime)
 {
 	m_deathTimer -= deltaTime;
 	if (m_deathTimer <= 0.0f) {
-		setState(Dead);
+		m_pParent->removeChild(this);
 	}
 	else {
 		for (auto astroid : g_pAsteroid) {
 			if (intersectCircle(*m_pCircleComponent, *astroid->m_pCircleComponent)) {
-				setState(Dead);
-				astroid->setState(Dead);
+				m_pParent->removeChild(astroid);
 
 				auto iter = std::find(g_pAsteroid.begin(), g_pAsteroid.end(), astroid);
 				if (iter != g_pAsteroid.end()) {

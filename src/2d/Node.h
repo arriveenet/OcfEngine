@@ -15,14 +15,6 @@ class Renderer;
  */
 class Node : public GameObject {
 public:
-	/**
-	 * @brief エンティティの状態
-	 */
-	enum State {
-		Active,	//!< 生存中
-		Dead	//!< 死亡
-	};
-
 	enum {
 		FLAGS_TRANSFORM_DIRTY		= (1 << 0),
 		FLAGS_CONTENT_SIZE_DIRTY	= (1 << 1),
@@ -30,7 +22,7 @@ public:
 
 		FLAGS_DIRTY_MASK = (FLAGS_TRANSFORM_DIRTY | FLAGS_CONTENT_SIZE_DIRTY),
 	};
-	/** コンストラクタ */
+	/** デフォルトコンストラクタ */
 	Node();
 	/** デストラクタ */
 	virtual ~Node();
@@ -50,9 +42,6 @@ public:
 	virtual void updateTransform();
 
 	virtual void draw(Renderer* renderer, const glm::mat4& transform);
-
-	void setState(State state) { m_state = state; }
-	State getState() const { return m_state; }
 
 	virtual void setPosition(const glm::vec3& position);
 	virtual void setPosition(const glm::vec2& position);
@@ -110,7 +99,7 @@ public:
 	/**
 	 * @brief カメラのマスクを設定
 	 * @param uint16_t カメラのマスク
-	 * @param applyChildren 子ノードにもカメラマスクをせっていするかどうか
+	 * @param applyChildren 子ノードにもカメラマスクを設定するかどうか
 	 */
 	virtual void setCameraMask(uint16_t mask, bool applyChildren = true);
 
@@ -129,8 +118,6 @@ protected:
 	uint32_t processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag);
 	
 protected:
-	State m_state;			//!< ノードの状態
-
 	Node* m_pParent;		//!< 親ノード
 	Game* m_pGame;			//!< シングルトンのゲームクラス
 

@@ -27,6 +27,7 @@ Sprite* Sprite::create(const std::string& filenam, int drawOrder/*= 100*/)
 
 Sprite::Sprite(int drawOrder)
 	: m_drawOrder(drawOrder)
+	, m_quad()
 	, m_isDirty(true)
 	, m_modelView(1.0f)
 	, m_flippedX(false)

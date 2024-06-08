@@ -6,8 +6,7 @@
 OCF_BEGIN
 
 Node::Node()
-	: m_state(State::Active)
-	, m_pParent(nullptr)
+	: m_pParent(nullptr)
 	, m_cameraMask(1)
 	, m_position()
 	, m_size()
@@ -80,17 +79,6 @@ void Node::updateNodes(float deltaTime)
 {
 	for (const auto& child : m_children) {
 		child->update(deltaTime);
-	}
-
-	std::vector<Node*> deadNodes;
-	for (const auto& child : m_children) {
-		if (child->getState() == Node::Dead) {
-			deadNodes.emplace_back(child);
-		}
-	}
-
-	for (auto child : deadNodes) {
-		removeChild(child);
 	}
 }
 

@@ -6,6 +6,7 @@
 OCF_BEGIN
 
 Scene::Scene()
+	: m_pDefaultCamera(nullptr)
 {
 	m_ignoreAnchorPointForPosition = true;
 	setAnchorPoint(glm::vec2(0.5f, 0.5f));
