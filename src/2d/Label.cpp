@@ -72,8 +72,7 @@ void Label::draw(Renderer* renderer, const glm::mat4& transform)
 
 	glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
 	auto& programState = m_quadCommand.getProgramState();
-	programState.setUniform("uViewProj", projection);
-	programState.setUniform("uWorldTransform", glm::mat4(1.0f));
+	programState.setUniform("uMVPMatrix", projection);
 
 	m_quadCommand.init(m_texture, m_quads.data(), m_indices.data(), m_quads.size(), transform);
 	renderer->addCommand(&m_quadCommand);
