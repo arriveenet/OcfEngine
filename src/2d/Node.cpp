@@ -279,9 +279,9 @@ const glm::mat4& Node::getNodeToParentTransform() const
 
 		// äÓèÄì_Çí≤êÆ
 		if (m_anchorPointInPoints != glm::vec2(0.0f, 0.0f)) {
-			m_transform[3][0] = m_transform[0][0] * m_anchorPointInPoints.x + m_transform[1][0] * m_anchorPointInPoints.y;
-			m_transform[3][1] = m_transform[0][1] * m_anchorPointInPoints.x + m_transform[1][1] * m_anchorPointInPoints.y;
-			m_transform[3][2] = m_transform[0][2] * m_anchorPointInPoints.x + m_transform[1][2] * m_anchorPointInPoints.y;
+			m_transform[3][0] += m_transform[0][0] * -m_anchorPointInPoints.x + m_transform[1][0] * -m_anchorPointInPoints.y;
+			m_transform[3][1] += m_transform[0][1] * -m_anchorPointInPoints.x + m_transform[1][1] * -m_anchorPointInPoints.y;
+			m_transform[3][2] += m_transform[0][2] * -m_anchorPointInPoints.x + m_transform[1][2] * -m_anchorPointInPoints.y;
 		}
 	}
 
