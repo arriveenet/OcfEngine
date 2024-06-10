@@ -50,7 +50,9 @@ protected:
 	static Camera* s_pVisitingCamera;
 	CameraFlag m_cameraFlag;
 	glm::mat4 m_projection;
-	glm::mat4 m_view;
+	mutable glm::mat4 m_view;
+	mutable glm::mat4 m_viewInverse;
+	mutable glm::mat4 m_viewProjection;
 	float m_zNear;
 	float m_zFar;
 	Type m_type;

@@ -12,6 +12,8 @@ Camera::Camera()
 	: m_cameraFlag(CameraFlag::Default)
 	, m_projection(1.0f)
 	, m_view(1.0f)
+	, m_viewInverse(1.0f)
+	, m_viewProjection(1.0f)
 	, m_zNear(0.0f)
 	, m_zFar(0.0f)
 	, m_type(Type::Orthographic)
@@ -71,8 +73,6 @@ bool Camera::init()
 		{
 			m_zNear = -1024.0f;
 			m_zFar  = 1024.0f;
-			const float halfWidth = static_cast<float>(size.x / 2);
-			const float halfHeight = static_cast<float>(size.y / 2);
 
 			initOrthographic((float)size.x, (float)size.y, m_zNear, m_zFar);
 			setPosition(glm::vec3(size.x / 2.0f, size.y / 2.0f, 0.0f));
@@ -115,12 +115,22 @@ const glm::mat4 Camera::getProjectionMatrix() const
 
 const glm::mat4 Camera::getViewMatrix() const
 {
+	//glm::mat4 viewInv = getNodeToWorldTransform();
+	//if (viewInv != m_viewInverse) {
+	//	m_viewInverse = viewInv;
+	//	m_view = glm::inverse(viewInv);
+	//}
+	m_view = glm::lookAt(glm::vec3(m_position.x, m_position.y, 1.0f), glm::vec3(m_position.x, m_position.y, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	
 	return m_view;
 }
 
 const glm::mat4 Camera::getViewProjectionMatrix() const
 {
-	return m_projection * m_view;
+	getViewMatrix();
+	m_viewProjection = m_projection * m_view;
+
+	return m_viewProjection;
 }
 
 OCF_END
