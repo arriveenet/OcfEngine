@@ -294,14 +294,14 @@ glm::mat4 Node::getNodeToParentTransform(Node* ancestor) const
 {
 	glm::mat4 t(this->getNodeToParentTransform());
 
-	for (Node* p = m_pParent; p != nullptr && p != ancestor; p->getParent()) {
+	for (Node* p = m_pParent; p != nullptr && p != ancestor; p = p->getParent()) {
 		t = p->getNodeToParentTransform() * t;
 	}
 
 	return t;
 }
 
-glm::mat4 Node::getNodeToWorldTransform()
+glm::mat4 Node::getNodeToWorldTransform() const
 {
 	return getNodeToParentTransform(nullptr);
 }

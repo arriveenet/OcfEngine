@@ -108,7 +108,7 @@ public:
 
 	virtual const glm::mat4& getNodeToParentTransform() const;
 	virtual glm::mat4 getNodeToParentTransform(Node* ancestor) const;
-	virtual glm::mat4 getNodeToWorldTransform();
+	virtual glm::mat4 getNodeToWorldTransform() const;
 
 	virtual void visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags);
 
