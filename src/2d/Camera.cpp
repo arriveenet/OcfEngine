@@ -120,7 +120,7 @@ const glm::mat4 Camera::getViewMatrix() const
 	//	m_viewInverse = viewInv;
 	//	m_view = glm::inverse(viewInv);
 	//}
-	m_view = glm::lookAt(glm::vec3(m_position.x, m_position.y, 1.0f), glm::vec3(m_position.x, m_position.y, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	m_view = glm::lookAt(glm::vec3(m_position), glm::vec3(m_position.x, m_position.y, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	
 	return m_view;
 }
