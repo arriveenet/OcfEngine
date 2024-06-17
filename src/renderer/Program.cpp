@@ -43,7 +43,7 @@ void Program::setUniform(int location, const glm::mat4& matrix) const
 {
 	assert(location != -1);
 
-	glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(matrix));
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void Program::setUniform(const std::string& name, const glm::mat4& matrix) const
@@ -51,7 +51,7 @@ void Program::setUniform(const std::string& name, const glm::mat4& matrix) const
 	const int location = getUniformLocation(name);
 	assert(location != -1);
 
-	glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(matrix));
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void Program::compileProgram()

@@ -12,7 +12,7 @@ void main()
 {
 	vec4 pos = vec4(inPosition, 0.0, 1.0);
 
-	gl_Position = pos * uModelView * uProjection;
+	gl_Position = uProjection * uModelView * pos;
 
 	fragColor = inColor;
 }
