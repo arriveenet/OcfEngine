@@ -27,7 +27,7 @@ void ProgramState::setUniform(int location, const glm::mat4& matrix)
 {
 	assert(location != -1);
 
-	m_uniforms.emplace(location, matrix);
+	m_uniforms.insert_or_assign(location, matrix);
 }
 
 void ProgramState::setUniform(const std::string& name, const glm::mat4& matrix)
