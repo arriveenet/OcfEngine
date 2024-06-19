@@ -30,13 +30,14 @@ Font::~Font()
 
 bool Font::init(const std::string& filename)
 {
-	if (!parseFntFile(filename)) {
+	auto fullpath = FileUtils::getInstance()->fullPathForFilename(filename);
+	if (!parseFntFile(fullpath)) {
 		return false;
 	}
 
 	m_texture = new Texture2D();
 	
-	std::string parentPath = FileUtils::getInstance()->getParentFullPath(filename);
+	std::string parentPath = FileUtils::getInstance()->getParentFullPath(fullpath);
 	if (!m_texture->initWithFile(parentPath + "\\" + m_pageName)) {
 		delete m_texture;
 		m_texture = nullptr;

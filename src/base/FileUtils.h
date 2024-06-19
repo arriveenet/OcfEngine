@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "Macros.h"
 
 OCF_BEGIN
@@ -33,18 +34,59 @@ public:
 	std::string getParentFullPath(const std::string& filename) const;
 
 	/**
-	 * @brief assetsフォルダのパスを取得す
+	 * @brief サーチパスにパスを追加する
+	 * @param path 追加するパス
+	 * @param front 一番前に追加するかどうか
+	 */
+	void addSearchPath(const std::string& path, bool front = false);
+
+	/**
+	 * @brief サーチパスを取得する
+	 * @return サーチパス
+	 */
+	const std::vector <std::string>& getSearchPath() const;
+
+	/**
+	 * @brief assetsフォルダのパスを取得する
 	 * @return assetsフォルダのパス
 	 */
 	std::string getAssetsPath() const;
+
+	/**
+	 * @brief ファイル名からフルパスを取得する
+	 * @param ファイル名
+	 * @return フルパス。存在しなかった場合空文字を返却する
+	 */
+	std::string fullPathForFilename(const std::string& filename) const;
 
 protected:
 	/** デフォルトコンストラクター */
 	FileUtils();
 
+	/**
+	 * @brief FileUtilsのインスタンスを初期化する
+	 */
+	bool init();
+
+	/**
+	 * @brief ファイル名からパスを取得
+	 * @param filename ファイル名
+	 * @param searchPath 検索パス
+	 * @return ファイルが存在した場合そのパスを返却、存在しなかった場合空文字を返却する
+	 */
+	std::string getPathForFilename(const std::string& filename, const std::string& searchPath) const;
+
 private:
 	/** FileUtilsのシングルトンポインター */
 	static FileUtils* s_sharedFileUtils;
+	
+	/** exeのあるディレクトリ */
+	static std::string s_exeDirectory;
+
+	/** ファイルを検索するパスの配列 */
+	std::vector<std::string> m_searchPathArray;
+	/** デフォルトのassetsのルートパス */
+	std::string m_defaultAssetsRootPath;
 };
 
 OCF_END

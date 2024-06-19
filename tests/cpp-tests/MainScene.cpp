@@ -16,7 +16,7 @@ std::vector<Asteroid*> g_pAsteroid;
 Laser::Laser()
 	: m_deathTimer(1.0f)
 {
-	initWithFile("..\\assets\\textures\\Laser.png");
+	initWithFile("textures\\Laser.png");
 	m_pMoveComponent = new MoveComponent(this);
 	m_pMoveComponent->setForwardSpeed(800.0f);
 	addComponent(m_pMoveComponent);
@@ -53,7 +53,7 @@ void Laser::updateNode(float deltaTime)
 
 Asteroid::Asteroid()
 {
-	initWithFile("..\\assets\\textures\\Asteroid.png");
+	initWithFile("textures\\Asteroid.png");
 	m_pMoveComponent = new MoveComponent(this);
 	addComponent(m_pMoveComponent);
 	m_pCircleComponent = new CircleComponent(this);
@@ -91,7 +91,7 @@ void Asteroid::updateNode(float deltaTime)
 
 Ship::Ship()
 {
-	initWithFile("..\\assets\\textures\\Ship.png");
+	initWithFile("textures\\Ship.png");
 
 	m_pMoveComponent = new MoveComponent(this);
 	addComponent(m_pMoveComponent);
@@ -145,11 +145,20 @@ bool MainScene::init()
 {
 	Scene::init();
 
-	auto sprite1 = Sprite::create("..\\assets\\textures\\25_Crono.png");
-	addChild(sprite1);
-	//auto sprite2 = Sprite::create("..\\assets\\textures\\28_Frog.png");
-	//sprite1->addChild(sprite2);
-	//sprite2->setPosition(100, 100);
+	auto ship = new Ship();
+	addChild(ship);
+
+	for (int i = 0; i < 10; i++) {
+		auto asteroid = new Asteroid;
+		addChild(asteroid);
+	}
+
+	//auto sprite1 = Sprite::create("textures\\25_Crono.png");
+	//addChild(sprite1);
+
+	auto shape = DrawShape::create();
+	shape->drawRect(glm::vec2(0, 0), glm::vec2(100, 100), Color4f::WHITE);
+	addChild(shape);
 
 	return true;
 }

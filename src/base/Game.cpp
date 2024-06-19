@@ -73,7 +73,7 @@ bool Game::init()
 	m_textureManager = new TextureManager();
 
 	m_font = new Font();
-	m_font->init("..\\assets\\fonts\\Consolas.fnt");
+	m_font->init("fonts\\Consolas.fnt");
 
 	m_input = new Input();
 	m_input->init();

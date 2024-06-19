@@ -7,9 +7,14 @@ OCF_BEGIN
 Program::Program(const std::string& vertexShader, const std::string& fragmentShader)
 {
 	// 頂点シェーダーと、フラグメントシェーダーを読み込む
+	const std::string shaderPath("shaders\\");
+	auto fileUtils    = FileUtils::getInstance();
+	auto vertexFile   = fileUtils->fullPathForFilename(shaderPath + vertexShader);
+	auto fragmentFile = fileUtils->fullPathForFilename(shaderPath + fragmentShader);
+
 	std::string assetsPath = FileUtils::getInstance()->getAssetsPath();
-	m_vertexShader.load(ShaderStage::Vertex, assetsPath + "\\shaders\\" + vertexShader);
-	m_fragmentShader.load(ShaderStage::Fragment, assetsPath + "\\shaders\\" + fragmentShader);
+	m_vertexShader.load(ShaderStage::Vertex, vertexFile);
+	m_fragmentShader.load(ShaderStage::Fragment, fragmentFile);
 
 	// シェーダーをコンパイル
 	compileProgram();
