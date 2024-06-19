@@ -146,6 +146,13 @@ glm::vec2 Node::getSize() const
 	return m_size;
 }
 
+bool Node::hitTest(const glm::vec2& worldPoint) const
+{
+	glm::vec2 point = this->convertToNodeSpace(worldPoint);
+	glm::vec2 size = this->getSize();
+	return Rect(0.0f, 0.0f, size.x, size.y).intersect(point);
+}
+
 void Node::setAnchorPoint(const glm::vec2& point)
 {
 	if (point != m_anchorPoint) {
@@ -304,6 +311,27 @@ glm::mat4 Node::getNodeToParentTransform(Node* ancestor) const
 glm::mat4 Node::getNodeToWorldTransform() const
 {
 	return getNodeToParentTransform(nullptr);
+}
+
+glm::mat4 Node::getWorldToNodeTransform() const
+{
+	return glm::inverse(getNodeToWorldTransform());
+}
+
+glm::vec2 Node::convertToNodeSpace(const glm::vec2& worldPoint) const
+{
+	glm::mat4 transform = getWorldToNodeTransform();
+	glm::vec4 point(worldPoint, 0.0f, 1.0f);
+	glm::vec2 result = transform * point;
+	return result;
+}
+
+glm::vec2 Node::convertToWorldSpace(const glm::vec2& nodePoint) const
+{
+	glm::mat4 transform = getNodeToWorldTransform();
+	glm::vec4 point(nodePoint, 0.0f, 1.0f);
+	glm::vec2 result = transform * point;
+	return result;
 }
 
 void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags)

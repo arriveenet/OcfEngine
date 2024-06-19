@@ -53,6 +53,8 @@ public:
 	virtual void setSize(float width, float height);
 	virtual glm::vec2 getSize() const;
 
+	virtual bool hitTest(const glm::vec2& worldPoint) const;
+
 	virtual void setAnchorPoint(const glm::vec2& point);
 	virtual const glm::vec2& getAnchorPoint() const;
 
@@ -109,6 +111,10 @@ public:
 	virtual const glm::mat4& getNodeToParentTransform() const;
 	virtual glm::mat4 getNodeToParentTransform(Node* ancestor) const;
 	virtual glm::mat4 getNodeToWorldTransform() const;
+	virtual glm::mat4 getWorldToNodeTransform() const;
+
+	glm::vec2 convertToNodeSpace(const glm::vec2& worldPoint) const;
+	glm::vec2 convertToWorldSpace(const glm::vec2& nodePoint) const;
 
 	virtual void visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags);
 
