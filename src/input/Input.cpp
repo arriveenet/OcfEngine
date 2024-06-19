@@ -22,7 +22,12 @@ void Input::update()
 	memcpy(m_inputState.keyboard.m_prevState, m_inputState.keyboard.m_currentState, KEY_CODE_MAX);
 
 	// マウスの座標を設定
-	m_inputState.mouse.m_position = Applicaiton::getInstance()->getCursorPosition();
+	auto app = Applicaiton::getInstance();
+	auto windowSize = app->getWindowSize();
+	auto cursorPos = app->getCursorPosition();
+	float cursorX = cursorPos.x;
+	float cursorY = windowSize.y - cursorPos.y;
+	m_inputState.mouse.m_position = { cursorX, cursorY };
 
 	// マウスボタンの状態を保持
 	m_inputState.mouse.m_previousButton = m_inputState.mouse.m_currentButton;
