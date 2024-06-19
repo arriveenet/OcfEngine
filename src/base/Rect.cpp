@@ -59,7 +59,7 @@ bool Rect::equals(const Rect& rect) const
 
 bool Rect::intersect(const glm::vec2& point) const
 {
-	if (point.x >= getMinX() && point.x < getMinY() && point.y >= getMinY() && point.y <= getMaxY()) {
+	if (point.x >= getMinX() && point.x <= getMaxX() && point.y >= getMinY() && point.y <= getMaxY()) {
 		return true;
 	}
 
