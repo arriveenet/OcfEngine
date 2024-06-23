@@ -83,8 +83,8 @@ int Texture2D::getHeight() const
 glm::vec2 Texture2D::getSize() const
 {
 	glm::vec2 result(0.0f, 0.0f);
-	result.x = m_width;
-	result.y = m_height;
+	result.x = static_cast<float>(m_width);
+	result.y = static_cast<float>(m_height);
 
 	return result;
 }
