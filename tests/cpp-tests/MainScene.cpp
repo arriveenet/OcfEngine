@@ -9,8 +9,11 @@
 #include "2d/Label.h"
 #include "2d/MoveComponent.h"
 #include "2d/CircleComponent.h"
+#include "ui/UIButton.h"
 
 OCF_BEGIN
+
+using namespace ocf::ui;
 
 std::vector<Asteroid*> g_pAsteroid;
 
@@ -142,6 +145,11 @@ MainScene::~MainScene()
 {
 }
 
+void onClick()
+{
+	int a = 0;
+}
+
 bool MainScene::init()
 {
 	Scene::init();
@@ -160,6 +168,11 @@ bool MainScene::init()
 	auto shape = DrawShape::create();
 	shape->drawRect(glm::vec2(0, 0), glm::vec2(100, 100), Color4f::WHITE);
 	addChild(shape);
+
+	auto button = Button::create();
+	addChild(button);
+	button->setPosition(300, 300);
+	button->setOnClickCallback(onClick);
 
 	return true;
 }

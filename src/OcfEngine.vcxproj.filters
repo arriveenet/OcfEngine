@@ -46,6 +46,12 @@
     <Filter Include="ヘッダー ファイル\input">
       <UniqueIdentifier>{29e16d27-e2bd-448a-8cf0-c95e0fb23fd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\ui">
+      <UniqueIdentifier>{2c81bc3a-dbec-46ad-ac6e-cce4d0bcdf4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ui">
+      <UniqueIdentifier>{afc63a73-84c6-4268-8380-36cd102fbf5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="renderer\Image.cpp">
@@ -161,6 +167,12 @@
     </ClCompile>
     <ClCompile Include="platform\ApplicationBase.cpp">
       <Filter>ヘッダー ファイル\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\UIWidget.cpp">
+      <Filter>ソース ファイル\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\UIButton.cpp">
+      <Filter>ソース ファイル\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +304,12 @@
     </ClInclude>
     <ClInclude Include="base\Config.h">
       <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\UIWidget.h">
+      <Filter>ヘッダー ファイル\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\UIButton.h">
+      <Filter>ヘッダー ファイル\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

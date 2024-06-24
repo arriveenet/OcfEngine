@@ -173,6 +173,8 @@
     <ClCompile Include="renderer\TrianglesCommand.cpp" />
     <ClCompile Include="renderer\VertexArray.cpp" />
     <ClCompile Include="renderer\VertexBuffer.cpp" />
+    <ClCompile Include="ui\UIButton.cpp" />
+    <ClCompile Include="ui\UIWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\Camera.h" />
@@ -218,6 +220,8 @@
     <ClInclude Include="renderer\Types.h" />
     <ClInclude Include="renderer\VertexArray.h" />
     <ClInclude Include="renderer\VertexBuffer.h" />
+    <ClInclude Include="ui\UIButton.h" />
+    <ClInclude Include="ui\UIWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\assets\shaders\basic.frag" />
