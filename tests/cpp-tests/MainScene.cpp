@@ -170,9 +170,10 @@ bool MainScene::init()
 	addChild(shape);
 
 	auto button = Button::create();
-	addChild(button);
-	button->setPosition(300, 300);
+	button->setText("Enter Text");
+	button->setPosition(300, 200);
 	button->setOnClickCallback(onClick);
+	addChild(button);
 
 	return true;
 }
