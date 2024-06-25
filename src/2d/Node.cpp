@@ -1,4 +1,5 @@
 #include "Node.h"
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 #include "base/Game.h"
 #include "2d/Camera.h"

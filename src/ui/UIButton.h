@@ -7,6 +7,7 @@ OCF_BEGIN
 
 class Sprite;
 class Label;
+class DrawShape;
 
 namespace ui {
 
@@ -26,10 +27,12 @@ public:
 protected:
 	void initRenderer() override;
 	bool createTextRendererIfNull();
+	void updateTextLocation();
 
 protected:
 	Sprite* m_pButtonNormalRenderer;
-	Label* m_pTextLabel;
+	DrawShape* m_pLineRenderer;
+	Label* m_pTextRenderer;
 	std::function<void()> m_onClick;
 };
 

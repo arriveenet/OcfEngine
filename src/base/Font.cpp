@@ -2,6 +2,7 @@
 #include <memory>
 #include <stdio.h>
 #include <stdarg.h>
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 #include "Game.h"
 #include "base/FileUtils.h"

@@ -135,7 +135,10 @@ void Ship::processInput(const InputState& inputState)
 	}
 }
 
-
+static void onClick()
+{
+	Game::getInstance()->exit();
+}
 
 MainScene::MainScene()
 {
@@ -143,11 +146,6 @@ MainScene::MainScene()
 
 MainScene::~MainScene()
 {
-}
-
-void onClick()
-{
-	int a = 0;
 }
 
 bool MainScene::init()
@@ -170,7 +168,7 @@ bool MainScene::init()
 	addChild(shape);
 
 	auto button = Button::create();
-	button->setText("Enter Text");
+	button->setText("EXIT");
 	button->setPosition(300, 200);
 	button->setOnClickCallback(onClick);
 	addChild(button);

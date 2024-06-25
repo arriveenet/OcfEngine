@@ -10,6 +10,7 @@
 OCF_BEGIN
 
 class Texture2D;
+class DrawShape;
 
 class Label : public Node {
 public:
@@ -41,6 +42,9 @@ protected:
 	std::vector<QuadV3fC3fT2f> m_quads;
 	std::vector<unsigned short> m_indices;
 	QuadCommand m_quadCommand;
+#if OCF_LABEL_DEBUG_DRAW
+	DrawShape* m_pDebugDrawShape = nullptr;
+#endif
 };
 
 OCF_END
