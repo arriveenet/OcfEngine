@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include "base/Macros.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 enum class PixelFormat {
 	GRAY,
@@ -75,4 +75,4 @@ struct QuadV3fC3fT2f {
 	Vertex3fC3fT2f bottomRight;
 };
 
-OCF_END
+NS_OCF_END

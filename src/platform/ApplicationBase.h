@@ -1,7 +1,7 @@
 #pragma once
 #include "base/Macros.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class ApplicationBase {
 public:
@@ -10,4 +10,4 @@ public:
 	virtual bool applicationDidFinishLaunching() = 0;
 };
 
-OCF_END
+NS_OCF_END

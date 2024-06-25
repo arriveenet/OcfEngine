@@ -8,7 +8,7 @@
 #include "2d/Sprite.h"
 #include "2d/Label.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 /**
  * @brief レンダラークラス
@@ -81,4 +81,4 @@ private:
 	VertexArray* m_pVertexArray;
 };
 
-OCF_END
+NS_OCF_END

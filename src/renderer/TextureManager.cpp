@@ -2,7 +2,7 @@
 #include "Image.h"
 #include "base/FileUtils.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 TextureManager::TextureManager()
 {
@@ -43,4 +43,4 @@ Texture2D* TextureManager::addImage(const std::string& filePath)
 	return texture;
 }
 
-OCF_END
+NS_OCF_END

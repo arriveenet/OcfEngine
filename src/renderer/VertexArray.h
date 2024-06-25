@@ -6,7 +6,7 @@
 #include "base/Macros.h"
 #include "base/Types.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class VertexArray {
 public:
@@ -63,4 +63,4 @@ private:
 	std::unordered_map<std::string, Attribute> m_attributes;
 };
 
-OCF_END
+NS_OCF_END

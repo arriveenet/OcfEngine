@@ -1,7 +1,7 @@
 #include "TextureAtlas.h"
 #include "base/Game.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 TextureAtlas* TextureAtlas::create(const std::string& filename, size_t capacity)
 {
@@ -125,4 +125,4 @@ void TextureAtlas::setupIndices()
 	}
 }
 
-OCF_END
+NS_OCF_END

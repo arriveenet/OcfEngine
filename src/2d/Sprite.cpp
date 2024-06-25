@@ -1,6 +1,5 @@
 #include "Sprite.h"
 
-#include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "base/Game.h"
 #include "renderer/Texture2D.h"
@@ -9,7 +8,7 @@
 
 using namespace glm;
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 static unsigned short indices[] = { 0, 1, 2, 3, 2, 1 };
 
@@ -254,4 +253,4 @@ void Sprite::setMVPMarixUniform()
 	programState.setUniform("uMVPMatrix", projection);
 }
 
-OCF_END
+NS_OCF_END

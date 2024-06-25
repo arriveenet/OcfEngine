@@ -1,7 +1,7 @@
 #include "base/GameObject.h"
 #include <iostream>
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 GameObject::GameObject()
 {
@@ -28,4 +28,4 @@ void GameObject::release()
 	}
 }
 
-OCF_END
+NS_OCF_END

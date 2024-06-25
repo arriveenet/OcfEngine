@@ -4,7 +4,7 @@
 #include "base/GameObject.h"
 #include "Texture2D.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class TextureManager : public GameObject {
 public:
@@ -17,4 +17,4 @@ private:
 	std::unordered_map<std::string, Texture2D*> m_textures;
 };
 
-OCF_END
+NS_OCF_END

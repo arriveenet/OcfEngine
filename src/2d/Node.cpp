@@ -1,9 +1,11 @@
 #include "Node.h"
+
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 #include "base/Game.h"
 #include "2d/Camera.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 Node::Node()
 	: m_pParent(nullptr)
@@ -396,4 +398,4 @@ uint32_t Node::processParentFlag(const glm::mat4& parentTransform, uint32_t pare
 	return flags;
 }
 
-OCF_END
+NS_OCF_END

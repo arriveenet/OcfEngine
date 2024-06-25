@@ -1,7 +1,7 @@
 #include "ProgramState.h"
 #include "VertexArray.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 ProgramState::ProgramState()
 	: m_pProgram(nullptr)
@@ -50,4 +50,4 @@ void ProgramState::bindUniforms()
 	}
 }
 
-OCF_END
+NS_OCF_END

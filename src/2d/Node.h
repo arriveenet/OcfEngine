@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Game;
 class Renderer;
@@ -153,4 +153,4 @@ protected:
 	std::vector<Component*> m_components;	//!< コンポーネント
 };
 
-OCF_END
+NS_OCF_END

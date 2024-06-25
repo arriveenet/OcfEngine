@@ -3,7 +3,7 @@
 #include <string>
 #include "Program.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Texture2D;
 class VertexArray;
@@ -28,4 +28,4 @@ private:
 	std::unordered_map<int, glm::mat4> m_uniforms;
 };
 
-OCF_END
+NS_OCF_END

@@ -4,7 +4,7 @@
 #include "Shader.h"
 #include "base/Macros.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Shader;
 
@@ -31,4 +31,4 @@ private:
 	Shader m_fragmentShader;
 };
 
-OCF_END
+NS_OCF_END

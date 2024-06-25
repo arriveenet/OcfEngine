@@ -2,7 +2,7 @@
 #include "renderer/OpenGLInclude.h"
 #include "base/Macros.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Window {
 public:
@@ -24,4 +24,4 @@ private:
 	GLFWwindow* m_pWindow;
 };
 
-OCF_END
+NS_OCF_END

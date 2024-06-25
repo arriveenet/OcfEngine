@@ -1,7 +1,7 @@
 #pragma once
 #include "Node.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Scene;
 
@@ -58,4 +58,4 @@ protected:
 	Type m_type;
 };
 
-OCF_END
+NS_OCF_END

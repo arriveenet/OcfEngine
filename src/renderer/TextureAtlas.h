@@ -4,7 +4,7 @@
 #include "Texture2D.h"
 #include "base/Types.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class TextureAtlas : public GameObject {
 public:
@@ -36,4 +36,4 @@ protected:
 	unsigned short* m_pIndices = nullptr;
 };
 
-OCF_END
+NS_OCF_END

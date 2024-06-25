@@ -1,7 +1,7 @@
 #pragma once
 #include "RenderCommand.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class TrianglesCommand : public RenderCommand {
 public:
@@ -44,4 +44,4 @@ protected:
 	Texture2D* m_texture;
 };
 
-OCF_END
+NS_OCF_END

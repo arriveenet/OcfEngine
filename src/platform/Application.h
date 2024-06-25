@@ -4,7 +4,7 @@
 #include "Window.h"
 #include "2d/Scene.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Applicaiton : public ApplicationBase {
 public:
@@ -36,4 +36,4 @@ private:
 	int m_windowHeight;
 };
 
-OCF_END
+NS_OCF_END

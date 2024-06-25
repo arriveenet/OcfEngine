@@ -2,7 +2,7 @@
 #include "base/Game.h"
 #include "2d/Scene.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 Applicaiton* g_pApplication = nullptr;
 
@@ -126,4 +126,4 @@ void Applicaiton::onWindowSize(GLFWwindow* window, int width, int height)
 	Game::getInstance()->onWindowSize(width, height);
 }
 
-OCF_END
+NS_OCF_END

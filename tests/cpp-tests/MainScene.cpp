@@ -10,7 +10,7 @@
 #include "2d/MoveComponent.h"
 #include "2d/CircleComponent.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 std::vector<Asteroid*> g_pAsteroid;
 
@@ -164,4 +164,4 @@ bool MainScene::init()
 	return true;
 }
 
-OCF_END
+NS_OCF_END

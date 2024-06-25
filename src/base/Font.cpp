@@ -1,12 +1,16 @@
 #include "Font.h"
+
 #include <memory>
 #include <stdio.h>
 #include <stdarg.h>
+
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
+
 #include "Game.h"
 #include "base/FileUtils.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 using namespace glm;
 
@@ -171,4 +175,4 @@ void Font::setupTextureAtlas(const std::string& filename)
 	
 }
 
-OCF_END
+NS_OCF_END

@@ -4,7 +4,7 @@
 #include "platform/Application.h"
 #include "base/Game.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 Camera* Camera::s_pVisitingCamera = nullptr;
 
@@ -133,4 +133,4 @@ const glm::mat4 Camera::getViewProjectionMatrix() const
 	return m_viewProjection;
 }
 
-OCF_END
+NS_OCF_END

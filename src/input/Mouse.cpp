@@ -1,7 +1,7 @@
 #include "Mouse.h"
 #include <GLFW/glfw3.h>
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 uint32_t Mouse::m_currentButton = 0;
 uint32_t Mouse::m_previousButton = 0;
@@ -49,4 +49,4 @@ ButtonState Mouse::getButtonState(MouseButton button) const
 	}
 }
 
-OCF_END
+NS_OCF_END

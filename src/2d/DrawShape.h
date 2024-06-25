@@ -4,7 +4,7 @@
 #include "renderer/VertexArray.h"
 #include "renderer/CustomCommand.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class DrawShape : public Node {
 public:
@@ -36,4 +36,4 @@ protected:
 	CustomCommand m_customCommandLine;
 };
 
-OCF_END
+NS_OCF_END

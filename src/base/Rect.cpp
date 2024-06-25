@@ -1,6 +1,6 @@
 #include "Rect.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 Rect::Rect()
 {
@@ -78,4 +78,4 @@ bool Rect::intersect(const Rect& rect) const
 	return false;
 }
 
-OCF_END
+NS_OCF_END

@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <GLFW/glfw3.h>
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 uint8_t Keyboard::m_currentState[KEY_CODE_MAX];
 uint8_t Keyboard::m_prevState[KEY_CODE_MAX];
@@ -41,4 +41,4 @@ ButtonState Keyboard::getKeyState(int key) const
 	}
 }
 
-OCF_END
+NS_OCF_END

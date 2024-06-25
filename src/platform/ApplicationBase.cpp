@@ -1,9 +1,9 @@
 #include "ApplicationBase.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 ApplicationBase::~ApplicationBase()
 {
 }
 
-OCF_END
+NS_OCF_END

@@ -3,7 +3,7 @@
 #include "base/GameObject.h"
 #include "base/types.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Image : public GameObject {
 public:
@@ -43,4 +43,4 @@ protected:
 	std::string m_filePath;
 };
 
-OCF_END
+NS_OCF_END

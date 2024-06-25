@@ -7,7 +7,7 @@
 #include "VertexArray.h"
 #include "base/Types.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class RenderCommand {
 public:
@@ -34,4 +34,4 @@ protected:
 };
 
 
-OCF_END
+NS_OCF_END

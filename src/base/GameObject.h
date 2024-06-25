@@ -1,7 +1,7 @@
 #pragma once
 #include "base/Macros.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class GameObject {
 public:
@@ -16,4 +16,4 @@ private:
 	unsigned int m_id;
 };
 
-OCF_END
+NS_OCF_END

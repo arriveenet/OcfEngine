@@ -1,8 +1,9 @@
 #pragma once
 
-#define OCF_BEGIN namespace ocf {
-#define OCF_END   }
-#define USING_OCF using namespace ocf;
+#define NS_OCF_BEGIN namespace ocf {
+#define NS_OCF_END   }
+#define USING_NS_OCF using namespace ocf
+#define NS_OCF ::ocf
 
 #define OCF_SAFE_DELETE(p) \
     do                    \

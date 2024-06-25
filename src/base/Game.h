@@ -10,7 +10,7 @@
 #include "renderer/Renderer.h"
 #include "renderer/TextureManager.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 /**
  * @brief ƒQ[ƒ€ƒNƒ‰ƒX
@@ -159,4 +159,4 @@ private:
 	std::stack<glm::mat4> m_modelViewMatrixStack;
 };
 
-OCF_END
+NS_OCF_END

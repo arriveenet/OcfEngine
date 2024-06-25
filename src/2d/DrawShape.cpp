@@ -2,7 +2,7 @@
 #include "base/Game.h"
 #include "renderer/ShaderManager.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 DrawShape* DrawShape::create()
 {
@@ -123,4 +123,4 @@ void DrawShape::updateUniforms(const glm::mat4& transform, CustomCommand& cmd)
 	programState.setUniform("uModelView", transform);
 }
 
-OCF_END
+NS_OCF_END

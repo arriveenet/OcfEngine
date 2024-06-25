@@ -1,6 +1,6 @@
 #include "RenderCommand.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 void RenderCommand::init(const glm::mat4& modelViewMatrix)
 {
@@ -17,4 +17,4 @@ RenderCommand::~RenderCommand()
 {
 }
 
-OCF_END
+NS_OCF_END

@@ -2,7 +2,7 @@
 #include "2d/Sprite.h"
 #include "2d/Label.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class MoveComponent;
 class CircleComponent;
@@ -48,4 +48,4 @@ public:
 	Asteroid* m_astroid;
 };
 
-OCF_END
+NS_OCF_END

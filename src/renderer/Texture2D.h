@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 #include <string>
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Texture2D : public GameObject {
 public:
@@ -26,4 +26,4 @@ private:
 	glm::vec2 m_size;
 };
 
-OCF_END
+NS_OCF_END

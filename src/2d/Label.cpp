@@ -2,7 +2,7 @@
 #include "base/Game.h"
 #include "renderer/OpenGLInclude.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 Label* Label::create(const std::string& text)
 {
@@ -139,4 +139,4 @@ void Label::updateQuads()
 	}
 }
 
-OCF_END
+NS_OCF_END

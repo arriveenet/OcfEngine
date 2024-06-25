@@ -8,7 +8,7 @@
 #include"renderer/TextureAtlas.h"
 #include "fnt.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Font : GameObject {
 public:
@@ -46,4 +46,4 @@ private:
 	std::vector<QuadV3fT2f> m_quads;
 };
 
-OCF_END
+NS_OCF_END

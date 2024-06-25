@@ -5,7 +5,7 @@
 #include "renderer/CustomCommand.h"
 #include <glm/gtc/type_ptr.hpp>
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 #ifdef _DEBUG
 /**
@@ -308,4 +308,4 @@ void Renderer::drawCustomCommand(RenderCommand* command)
 	cmd->getVertexArray()->unbind();
 }
 
-OCF_END
+NS_OCF_END

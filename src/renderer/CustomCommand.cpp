@@ -1,6 +1,6 @@
 #include "CustomCommand.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 CustomCommand::CustomCommand()
 	: m_pVertexArray(nullptr)
 	, m_drawType(DrawType::Element)
@@ -24,4 +24,4 @@ void CustomCommand::init(const glm::mat4& modelView)
 	RenderCommand::init(modelView);
 }
 
-OCF_END
+NS_OCF_END

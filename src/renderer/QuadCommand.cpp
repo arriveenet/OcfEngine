@@ -1,6 +1,6 @@
 #include "QuadCommand.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 QuadCommand::QuadCommand()
 {
@@ -21,4 +21,4 @@ void QuadCommand::init(Texture2D* texture, QuadV3fC3fT2f* pQuads, unsigned short
 	TrianglesCommand::init(texture, triangles, modelView);
 }
 
-OCF_END
+NS_OCF_END

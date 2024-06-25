@@ -3,7 +3,7 @@
 #include "input/Keyboard.h"
 #include "input/Mouse.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 struct InputState {
 	Keyboard keyboard;
@@ -23,4 +23,4 @@ private:
 	InputState m_inputState;
 };
 
-OCF_END
+NS_OCF_END

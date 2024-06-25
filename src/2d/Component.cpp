@@ -1,6 +1,6 @@
 #include "Component.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 Component::Component(Node* pEntity, int updateOrder)
 	: m_pOwner(pEntity)
@@ -21,4 +21,4 @@ int Component::getUpdateOrder() const
 	return m_updateOrder;
 }
 
-OCF_END
+NS_OCF_END

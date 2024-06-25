@@ -4,7 +4,7 @@
 
 struct GLFWwindow;
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Mouse {
 public:
@@ -38,4 +38,4 @@ private:
 	static uint32_t m_previousButton;
 };
 
-OCF_END
+NS_OCF_END

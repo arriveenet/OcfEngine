@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include "Node.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 MoveComponent::MoveComponent(Node* pEntity, int updateOrder)
 	: m_angularSpeed(0.0f)
@@ -29,5 +29,5 @@ void MoveComponent::update(float deltaTime)
 }
 
 
-OCF_END
+NS_OCF_END
 

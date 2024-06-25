@@ -2,7 +2,7 @@
 #define XXH_INLINE_ALL
 #include "xxhash.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 TrianglesCommand::TrianglesCommand()
 	: m_materialID(0)
@@ -30,4 +30,4 @@ void TrianglesCommand::genarateMaterialID()
 	m_materialID = XXH32(m_texture, sizeof(Texture2D), 0);
 }
 
-OCF_END
+NS_OCF_END

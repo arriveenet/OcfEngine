@@ -2,7 +2,7 @@
 #include <cstring>
 #include "base/Game.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 bool Input::init()
 {
@@ -33,4 +33,4 @@ void Input::update()
 	m_inputState.mouse.m_previousButton = m_inputState.mouse.m_currentButton;
 }
 
-OCF_END
+NS_OCF_END

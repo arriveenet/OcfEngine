@@ -2,7 +2,7 @@
 #include <vector>
 #include "2d/Node.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Camera;
 
@@ -21,4 +21,4 @@ protected:
 	Camera* m_pDefaultCamera;
 };
 
-OCF_END
+NS_OCF_END

@@ -2,7 +2,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "base/FileUtils.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 Program::Program(const std::string& vertexShader, const std::string& fragmentShader)
 {
@@ -97,4 +97,4 @@ bool Program::isValidProgram()
 	return true;
 }
 
-OCF_END
+NS_OCF_END

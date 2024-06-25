@@ -3,7 +3,7 @@
 #include "input/Keyboard.h"
 #include "input/Mouse.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 Window::Window()
 	: m_pWindow(nullptr)
@@ -71,4 +71,4 @@ void Window::swapBuffers()
 	glfwSwapBuffers(m_pWindow);
 }
 
-OCF_END
+NS_OCF_END

@@ -1,7 +1,7 @@
 #pragma once
 #include "base/Types.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 enum class PrimitiveType {
 	Point,
@@ -10,4 +10,4 @@ enum class PrimitiveType {
 	Max
 };
 
-OCF_END
+NS_OCF_END

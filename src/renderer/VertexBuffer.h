@@ -2,7 +2,7 @@
 #include "OpenGLInclude.h"
 #include "base/Macros.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 enum class BufferType {
 	Vertex,
@@ -36,4 +36,4 @@ private:
 	BufferUsage m_usage;
 };
 
-OCF_END
+NS_OCF_END

@@ -5,7 +5,7 @@
 
 struct GLFWwindow;
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Keyboard {
 public:
@@ -20,4 +20,4 @@ private:
 	static uint8_t m_prevState[KEY_CODE_MAX];
 };
 
-OCF_END
+NS_OCF_END

@@ -1,6 +1,6 @@
 #include "OpenGLUtility.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 GLenum OpenGLUtility::toGLPrimitive(PrimitiveType primitiveType)
 {
@@ -47,4 +47,4 @@ GLenum OpenGLUtility::toGLFormat(PixelFormat format)
 	return result;
 }
 
-OCF_END
+NS_OCF_END

@@ -2,7 +2,7 @@
 #include "Types.h"
 #include "RenderCommand.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class CustomCommand : public RenderCommand {
 public:
@@ -51,4 +51,4 @@ protected:
 	PrimitiveType m_primitiveType;
 };
 
-OCF_END
+NS_OCF_END

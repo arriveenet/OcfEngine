@@ -7,7 +7,7 @@
 #include "renderer/VertexArray.h"
 #include "renderer/QuadCommand.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Texture2D;
 
@@ -42,4 +42,4 @@ protected:
 	QuadCommand m_quadCommand;
 };
 
-OCF_END
+NS_OCF_END

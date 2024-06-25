@@ -3,11 +3,11 @@
 #include "Types.h"
 #include "base/Macros.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 struct OpenGLUtility {
 	static GLenum toGLPrimitive(PrimitiveType primitiveType);
 	static GLenum toGLFormat(PixelFormat format);
 };
 
-OCF_END
+NS_OCF_END

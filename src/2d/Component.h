@@ -1,7 +1,7 @@
 #pragma once
 #include"base/Macros.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Node;
 
@@ -18,4 +18,4 @@ protected:
 	int m_updateOrder;
 };
 
-OCF_END
+NS_OCF_END

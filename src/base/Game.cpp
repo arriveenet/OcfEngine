@@ -5,7 +5,7 @@
 
 #define FPS_UPDATE_INTERVAL	(0.5f)
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 Game* Game::s_sharedGame = nullptr;
 
@@ -340,4 +340,4 @@ void Game::onWindowSize(int width, int height)
 	m_renderer->setViewPort(0, 0, width, height);
 }
 
-OCF_END
+NS_OCF_END

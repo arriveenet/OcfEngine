@@ -3,7 +3,7 @@
 #include "base/Game.h"
 #include "renderer/Renderer.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 Scene::Scene()
 	: m_pDefaultCamera(nullptr)
@@ -52,4 +52,4 @@ void Scene::render(Renderer* renderer, const glm::mat4& eyeProjection)
 	Camera::s_pVisitingCamera = nullptr;
 }
 
-OCF_END
+NS_OCF_END

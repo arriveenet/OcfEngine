@@ -1,7 +1,7 @@
 #include "FileUtils.h"
 #include <filesystem>
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 namespace fs = std::filesystem;
 
@@ -145,4 +145,4 @@ std::string FileUtils::getPathForFilename(const std::string& filename, const std
 	return result;
 }
 
-OCF_END
+NS_OCF_END
