@@ -1,7 +1,7 @@
 #pragma once
 #include "2d/Node.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 namespace ui {
 
@@ -18,4 +18,4 @@ protected:
 
 }
 
-OCF_END
+NS_OCF_END

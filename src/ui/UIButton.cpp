@@ -3,7 +3,7 @@
 #include "2d/DrawShape.h"
 #include "2d/Label.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 namespace ui {
 
@@ -111,4 +111,4 @@ void Button::updateTextLocation()
 
 }
 
-OCF_END
+NS_OCF_END

@@ -1,6 +1,6 @@
 #include "UIWidget.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 namespace ui {
 
@@ -28,4 +28,4 @@ void Widget::initRenderer()
 
 }
 
-OCF_END
+NS_OCF_END

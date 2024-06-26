@@ -3,7 +3,7 @@
 #include <functional>
 #include "ui/UIWidget.h"
 
-OCF_BEGIN
+NS_OCF_BEGIN
 
 class Sprite;
 class Label;
@@ -38,4 +38,4 @@ protected:
 
 }
 
-OCF_END
+NS_OCF_END
