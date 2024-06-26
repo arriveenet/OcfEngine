@@ -1,5 +1,6 @@
 #pragma once
 #include "base/Macros.h"
+#include "base/Config.h"
 
 NS_OCF_BEGIN
 

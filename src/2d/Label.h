@@ -10,6 +10,7 @@
 NS_OCF_BEGIN
 
 class Texture2D;
+class DrawShape;
 
 class Label : public Node {
 public:
@@ -21,6 +22,7 @@ public:
 	bool init();
 
 	void setString(const std::string& text);
+	std::string getString() const { return m_text; }
 	void setTextColor(const glm::vec3& textColor);
 	void setTextColor(unsigned char r, unsigned char g, unsigned b);
 	const glm::vec3& getTextColor() const { return m_textColor; }
@@ -40,6 +42,9 @@ protected:
 	std::vector<QuadV3fC3fT2f> m_quads;
 	std::vector<unsigned short> m_indices;
 	QuadCommand m_quadCommand;
+#if OCF_LABEL_DEBUG_DRAW
+	DrawShape* m_pDebugDrawShape = nullptr;
+#endif
 };
 
 NS_OCF_END

@@ -1,4 +1,5 @@
 #include "Label.h"
+#include "2d/DrawShape.h"
 #include "base/Game.h"
 #include "renderer/OpenGLInclude.h"
 
@@ -21,6 +22,10 @@ Label::Label()
 
 	Font* pFont = Game::getInstance()->getFont();
 	m_texture = pFont->getTexture();
+#if OCF_LABEL_DEBUG_DRAW
+	m_pDebugDrawShape = DrawShape::create();
+	addChild(m_pDebugDrawShape);
+#endif
 }
 
 Label::~Label()
@@ -89,6 +94,8 @@ void Label::updateQuads()
 	m_indices.resize(m_text.size() * 6);
 
 	int x = 0, y = 0;
+	int lineWidth = 0;
+	int numberOfLines = 1;
 
 	for (int i = 0; i < m_text.size(); i++) {
 
@@ -97,6 +104,7 @@ void Label::updateQuads()
 		if (p == '\n') {
 			x = 0;
 			y -= common.lineHeight;
+			numberOfLines++;
 			continue;
 		}
 
@@ -130,6 +138,8 @@ void Label::updateQuads()
 
 		x += pChar.xadvance;
 
+		lineWidth = (std::max)(x, lineWidth);
+
 		m_indices[(size_t)i * 6 + 0] = (unsigned short)i * 4 + 0;
 		m_indices[(size_t)i * 6 + 1] = (unsigned short)i * 4 + 1;
 		m_indices[(size_t)i * 6 + 2] = (unsigned short)i * 4 + 2;
@@ -137,6 +147,15 @@ void Label::updateQuads()
 		m_indices[(size_t)i * 6 + 4] = (unsigned short)i * 4 + 2;
 		m_indices[(size_t)i * 6 + 5] = (unsigned short)i * 4 + 1;
 	}
+
+	const float sizeWidth = static_cast<float>(lineWidth) + 2.0f;
+	const float sizeHeight = static_cast<float>(common.lineHeight) * numberOfLines;
+	setSize(sizeWidth, sizeHeight);
+
+#if OCF_LABEL_DEBUG_DRAW
+	m_pDebugDrawShape->clear();
+	m_pDebugDrawShape->drawRect(glm::vec2(0.0f, 0.0f), glm::vec2(m_size), Color4f::WHITE);
+#endif
 }
 
 NS_OCF_END

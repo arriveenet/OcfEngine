@@ -9,8 +9,11 @@
 #include "2d/Label.h"
 #include "2d/MoveComponent.h"
 #include "2d/CircleComponent.h"
+#include "ui/UIButton.h"
 
 NS_OCF_BEGIN
+
+using namespace ocf::ui;
 
 std::vector<Asteroid*> g_pAsteroid;
 
@@ -132,7 +135,10 @@ void Ship::processInput(const InputState& inputState)
 	}
 }
 
-
+static void onClick()
+{
+	Game::getInstance()->exit();
+}
 
 MainScene::MainScene()
 {
@@ -160,6 +166,12 @@ bool MainScene::init()
 	auto shape = DrawShape::create();
 	shape->drawRect(glm::vec2(0, 0), glm::vec2(100, 100), Color4f::WHITE);
 	addChild(shape);
+
+	auto button = Button::create();
+	button->setText("EXIT");
+	button->setPosition(300, 200);
+	button->setOnClickCallback(onClick);
+	addChild(button);
 
 	return true;
 }
