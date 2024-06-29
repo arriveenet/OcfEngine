@@ -16,7 +16,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 		return false;
 	}
 
-	ocf::MainScene* scene = new ocf::MainScene();
+	MainScene* scene = new MainScene();
 	scene->init();
 	ocf::Game::getInstance()->runWithScene(scene);
 
