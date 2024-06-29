@@ -21,3 +21,12 @@
             (p) = nullptr;      \
         }                       \
     } while (0)
+
+#define OCF_SAFE_RELEASE(p) \
+    do                      \
+    {                       \
+        if(p)               \
+        {                   \
+            (p)->release(); \
+        }                   \
+    } while (0);            \

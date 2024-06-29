@@ -26,10 +26,8 @@ Font::~Font()
 {
 	m_chars.clear();
 
-	m_textureAtlas->release();
-
-	delete m_texture;
-	m_texture = nullptr;
+	OCF_SAFE_RELEASE(m_textureAtlas)
+	OCF_SAFE_RELEASE(m_texture)
 }
 
 bool Font::init(const std::string& filename)

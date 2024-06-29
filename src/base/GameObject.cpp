@@ -4,6 +4,7 @@
 NS_OCF_BEGIN
 
 GameObject::GameObject()
+	: m_referenceCount(1)
 {
 	static unsigned int objectCount = 0;
 
@@ -21,11 +22,29 @@ unsigned int GameObject::getID() const
 	return m_id;
 }
 
+void GameObject::retain()
+{
+	m_referenceCount++;
+}
+
 void GameObject::release()
 {
-	if (this) {
+	m_referenceCount--;
+
+	if (m_referenceCount == 0) {
 		delete this;
 	}
+}
+
+GameObject* GameObject::autorelease()
+{
+	//@Todo オートリリース機能を追加
+	return this;
+}
+
+unsigned int GameObject::getReferenceCount()
+{
+	return m_referenceCount;
 }
 
 NS_OCF_END
