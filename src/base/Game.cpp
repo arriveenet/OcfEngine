@@ -14,7 +14,8 @@ Game::Game()
 	, m_deltaTime(0.0f)
 	, m_lastUpdate()
 	, m_renderer(nullptr)
-	, m_scene(nullptr)
+	, m_currentScene(nullptr)
+	, m_nextScene(nullptr)
 	, m_textureManager(nullptr)
 	, m_font(nullptr)
 	, m_input(nullptr)
@@ -32,8 +33,8 @@ Game::~Game()
 	m_input = nullptr;
 
 	// シーンを解放
-	delete m_scene;
-	m_scene = nullptr;
+	delete m_currentScene;
+	m_currentScene = nullptr;
 
 	// フォントを解放
 	delete m_font;
@@ -98,11 +99,6 @@ void Game::mainLoop()
 	Applicaiton* app = Applicaiton::getInstance();
 	m_running = true;
 
-	if (m_scene == nullptr) {
-		release();
-		return;
-	}
-
 	while (app->windowShouldClose()) {
 		update();
 		draw();
@@ -123,7 +119,44 @@ void Game::exit()
 
 void Game::runWithScene(Scene* pScene)
 {
-	m_scene = pScene;
+	pushScene(pScene);
+}
+
+void Game::replaceScene(Scene* pScene)
+{
+	assert(pScene != nullptr);
+
+	if (m_currentScene == nullptr) {
+		runWithScene(pScene);
+		return;
+	}
+
+	const size_t index = m_sceneStack.size() - 1;
+	m_sceneStack[index] = pScene;
+
+	m_nextScene = pScene;
+}
+
+void Game::pushScene(Scene* pScene)
+{
+	m_sceneStack.emplace_back(pScene);
+	m_nextScene = pScene;
+}
+
+void Game::popScene()
+{
+	m_sceneStack.pop_back();
+}
+
+void Game::setNextScene()
+{
+	if (m_currentScene != nullptr) {
+		m_currentScene->release();
+	}
+
+	m_currentScene = m_nextScene;
+
+	m_nextScene = nullptr;
 }
 
 glm::vec2 Game::getVisibleSize() const
@@ -242,7 +275,7 @@ void Game::processInput()
 		exit();
 	}
 
-	m_scene->processInput(inputState);
+	m_currentScene->processInput(inputState);
 
 	m_input->update();
 }
@@ -250,13 +283,14 @@ void Game::processInput()
 void Game::update()
 {
 	calculateDeltaTime();
-	//printf("deltaTime: %f\n", m_deltaTime);
-
-	processInput();
 
 	m_frameRate = 1.0f / m_deltaTime;
 
-	m_scene->update(m_deltaTime);
+	if (m_currentScene != nullptr) {
+		processInput();
+
+		m_currentScene->update(m_deltaTime);
+	}
 }
 
 void Game::draw()
@@ -265,12 +299,22 @@ void Game::draw()
 
 	m_renderer->clear();
 
+	if (m_nextScene != nullptr) {
+		setNextScene();
+	}
+
+	pushMatrix(MatrixStack::ModelView);
+
 	// シーンを描画
-	m_scene->render(m_renderer, glm::mat4(1.0f));
+	if (m_currentScene != nullptr) {
+		m_currentScene->render(m_renderer, glm::mat4(1.0f));
+	}
 
 	// ステータスを描画
 	showStats();
 	m_renderer->draw();
+
+	popMatrix(MatrixStack::ModelView);
 
 	m_renderer->endFrame();
 }
@@ -321,7 +365,7 @@ void Game::showStats()
 	m_pDrawCallLabel->update(m_deltaTime);
 	m_pDrawVertexLabel->update(m_deltaTime);
 
-	Camera* pCamera = m_scene->getDefaultCamera();
+	Camera* pCamera = m_currentScene->getDefaultCamera();
 	glm::mat4 modelView = pCamera->getViewMatrix();
 
 	pushMatrix(MatrixStack::Projection);

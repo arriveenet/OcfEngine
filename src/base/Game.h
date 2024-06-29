@@ -39,6 +39,18 @@ public:
 	/** 起動時のシーンを設定する */
 	void runWithScene(Scene* pScene);
 
+	/** シーンを入れ替える */
+	void replaceScene(Scene* pScene);
+
+	/** シーンスタックにプッシュする */
+	void pushScene(Scene* pScene);
+
+	/** シーンスタックをポップする */
+	void popScene();
+
+	/** 次のシーンを設定する */
+	void setNextScene();
+
 	glm::vec2 getVisibleSize() const;
 
 	/**
@@ -51,7 +63,7 @@ public:
 	 * @brief 現在設定されているシーンを取得する
 	 * @return 現在のシーンのポインタ
 	 */
-	Scene* getCurrentScene() const { return m_scene; }
+	Scene* getCurrentScene() const { return m_currentScene; }
 
 	/**
 	 * @brief テクスチャ管理クラスを取得する
@@ -145,7 +157,9 @@ private:
 	float m_frameRate = 0.0f;
 
 	Renderer* m_renderer;
-	Scene* m_scene;
+	Scene* m_currentScene;
+	Scene* m_nextScene;
+	std::vector<Scene*> m_sceneStack;
 	TextureManager* m_textureManager;
 
 	Font* m_font;
