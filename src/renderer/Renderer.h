@@ -1,10 +1,11 @@
 #pragma once
 #include <vector>
 #include <glm/glm.hpp>
-#include "VertexBuffer.h"
-#include "ShaderManager.h"
-#include "RenderCommand.h"
-#include "TrianglesCommand.h"
+#include "renderer/VertexBuffer.h"
+#include "renderer/ShaderManager.h"
+#include "renderer/RenderCommand.h"
+#include "renderer/TrianglesCommand.h"
+#include "renderer/RenderQueue.h"
 #include "2d/Sprite.h"
 #include "2d/Label.h"
 
@@ -45,6 +46,8 @@ public:
 	/** バッファをクリアする */
 	void clear();
 
+	void clean();
+
 	/** 描画処理を行う */
 	void draw();
 
@@ -53,6 +56,9 @@ public:
 
 protected:
 	void flush();
+	void visitRenderQueue(RenderQueue& queue);
+	void doVisitRenderQueue(const std::vector<RenderCommand*>& renderCommands);
+	void processRenderCommand(RenderCommand* command);
 	void trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int vertexBufferOffset);
 	void drawTrianglesCommand();
 	void drawCustomCommand(RenderCommand* command);
@@ -60,8 +66,8 @@ protected:
 private:
 	glm::ivec4 m_viewport;
 	ShaderManager* m_shaderManager;
-	std::vector<RenderCommand*> m_renderCommands;
 	std::vector<TrianglesCommand*> m_trianglesCommands;
+	std::vector<RenderQueue> m_renderGroups;
 
 	uint32_t m_drawCallCount;
 	uint32_t m_drawVertexCount;

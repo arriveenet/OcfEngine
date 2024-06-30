@@ -9,6 +9,7 @@ void RenderCommand::init(const glm::mat4& modelViewMatrix)
 
 RenderCommand::RenderCommand()
 	: m_Type(Type::UnknownCommand)
+	, m_globalOrder(0.0f)
 	, m_modelVew(1.0f)
 {
 }

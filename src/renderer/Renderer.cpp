@@ -55,6 +55,7 @@ Renderer::Renderer()
 	, m_drawCallCount(0)
 	, m_drawVertexCount(0)
 {
+	m_renderGroups.emplace_back();
 	m_triangleBatchToDrawSize = 256;
 	m_pTriangleBatchToDraw = static_cast<TriangleBatchToDraw*>(std::malloc(sizeof(TriangleBatchToDraw) * m_triangleBatchToDrawSize));
 }
@@ -135,7 +136,7 @@ glm::ivec4 Renderer::getViewport() const
 
 void Renderer::addCommand(RenderCommand* command)
 {
-	m_renderCommands.push_back(command);
+	m_renderGroups[0].emplace_back(command);
 }
 
 void Renderer::clear()
@@ -143,44 +144,78 @@ void Renderer::clear()
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Renderer::draw()
+void Renderer::clean()
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	for (const auto& command : m_renderCommands) {
-
-		const auto commandType = command->getType();
-
-		switch (commandType) {
-		case RenderCommand::Type::TrianglesCommand:
-		{
-			TrianglesCommand* cmd = static_cast<TrianglesCommand*>(command);
-			m_trianglesCommands.emplace_back(cmd);
-		}
-		break;
-		case RenderCommand::Type::CustomCommand:
-		{
-			flush();
-			drawCustomCommand(command);
-		}
-			break;
-		default:
-			assert(false);
-			break;
-		}
+	for (auto&& renderQueue : m_renderGroups) {
+		renderQueue.clear();
 	}
 
-	flush();
+	m_trianglesCommands.clear();
+}
 
-	glDisable(GL_BLEND);
+void Renderer::draw()
+{
+	for (auto&& renderQueue : m_renderGroups) {
+		renderQueue.sort();
+	}
+	visitRenderQueue(m_renderGroups[0]);
 
-	m_renderCommands.clear();
+	clean();
 }
 
 void Renderer::flush()
 {
 	drawTrianglesCommand();
+}
+
+void Renderer::visitRenderQueue(RenderQueue& queue)
+{
+	doVisitRenderQueue(queue.getSubQueue(RenderQueue::QueueGroup::GLOBALZ_NEG));
+	doVisitRenderQueue(queue.getSubQueue(RenderQueue::QueueGroup::GLOBALZ_ZERO));
+	doVisitRenderQueue(queue.getSubQueue(RenderQueue::QueueGroup::GLOBALZ_POS));
+}
+
+void Renderer::doVisitRenderQueue(const std::vector<RenderCommand*>& renderCommands)
+{
+	for (const auto& command : renderCommands) {
+		processRenderCommand(command);
+	}
+	flush();
+}
+
+void Renderer::processRenderCommand(RenderCommand* command)
+{
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	const auto commandType = command->getType();
+
+	switch (commandType) {
+	case RenderCommand::Type::TrianglesCommand:
+	{
+		TrianglesCommand* cmd = static_cast<TrianglesCommand*>(command);
+
+		if ((m_triangleVertexCount + cmd->getVertexCount() > VBO_SIZE)
+			|| (m_triangleIndexCount + cmd->getIndexCount() > INDEX_VBO_SIZE)) {
+			drawTrianglesCommand();
+		}
+
+		m_trianglesCommands.emplace_back(cmd);
+	}
+	break;
+	case RenderCommand::Type::CustomCommand:
+	{
+		flush();
+		drawCustomCommand(command);
+	}
+	break;
+	default:
+		assert(false);
+		break;
+	}
+	flush();
+
+	glDisable(GL_BLEND);
 }
 
 void Renderer::trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int vertexBufferOffset)
@@ -213,6 +248,7 @@ void Renderer::drawTrianglesCommand()
 	if (m_trianglesCommands.empty())
 		return;
 
+	/*------------- 1: 頂点とインデックスをセットアップする -------------*/
 	m_pTriangleBatchToDraw[0].pCommand = nullptr;
 	m_pTriangleBatchToDraw[0].indicesToDraw = 0;
 	m_pTriangleBatchToDraw[0].offset = 0;
@@ -257,6 +293,7 @@ void Renderer::drawTrianglesCommand()
 	m_pVertexArray->updateVertexBuffer(m_triangleVertices, sizeof(m_triangleVertices[0]) * m_triangleVertexCount);
 	m_pVertexArray->updateIndexBuffer(m_triangleIndices, sizeof(m_triangleIndices[0]) * m_triangleIndexCount);
 
+	/*------------- 2: 描画 -------------*/
 	for (int i = 0; i < batchTotal; i++) {
 		auto& drawInfo = m_pTriangleBatchToDraw[i];
 		if (drawInfo.pCommand == nullptr)
@@ -280,6 +317,7 @@ void Renderer::drawTrianglesCommand()
 	}
 	m_pVertexArray->unbind();
 
+	/*------------- 3: クリーンアップ -------------*/
 	m_trianglesCommands.clear();
 }
 

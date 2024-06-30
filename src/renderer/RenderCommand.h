@@ -19,6 +19,8 @@ public:
 
 	void init(const glm::mat4& modelViewMatrix);
 
+	float getGlobalOrder() const { return m_globalOrder; }
+
 	Type getType() const { return m_Type; }
 
 	const glm::mat4& getModelView() const { return m_modelVew; }
@@ -29,6 +31,7 @@ protected:
 	virtual ~RenderCommand();
 
 	Type m_Type;
+	float m_globalOrder;
 	glm::mat4 m_modelVew;
 	ProgramState m_programState;
 };

@@ -164,6 +164,7 @@
     <ClCompile Include="renderer\QuadCommand.cpp" />
     <ClCompile Include="renderer\RenderCommand.cpp" />
     <ClCompile Include="renderer\Renderer.cpp" />
+    <ClCompile Include="renderer\RenderQueue.cpp" />
     <ClCompile Include="renderer\Shader.cpp" />
     <ClCompile Include="renderer\Program.cpp" />
     <ClCompile Include="renderer\ShaderManager.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="renderer\QuadCommand.h" />
     <ClInclude Include="renderer\RenderCommand.h" />
     <ClInclude Include="renderer\Renderer.h" />
+    <ClInclude Include="renderer\RenderQueue.h" />
     <ClInclude Include="renderer\Shader.h" />
     <ClInclude Include="renderer\Program.h" />
     <ClInclude Include="renderer\ShaderManager.h" />
