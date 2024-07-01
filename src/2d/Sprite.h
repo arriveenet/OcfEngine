@@ -19,10 +19,10 @@ class Texture2D;
 class Sprite : public Node {
 public:
 	/** スプライトを作成*/
-	static Sprite* create(const std::string& filenam, int drawOrder = 100);
+	static Sprite* create(const std::string& filenam);
 
 	/** コンストラクタ */
-	Sprite(int drawOrder = 100);
+	Sprite();
 	/** デストラクタ */
 	virtual ~Sprite();
 
@@ -35,9 +35,6 @@ public:
 
 	/** テクスチャを設定 */
 	virtual void setTexture(Texture2D* texture);
-
-	/** 描画順序を取得 */
-	int getDrawOrder() const;
 	
 	/** スプライトの位置を設定 */
 	void setPosition(const glm::vec2& position) override;
@@ -68,7 +65,6 @@ protected:
 	void setMVPMarixUniform();
 
 protected:
-	int m_drawOrder;
 	bool m_isDirty;
 	QuadV3fC3fT2f m_quad;
 	Rect m_rect;

@@ -12,9 +12,9 @@ NS_OCF_BEGIN
 
 static unsigned short indices[] = { 0, 1, 2, 3, 2, 1 };
 
-Sprite* Sprite::create(const std::string& filenam, int drawOrder/*= 100*/)
+Sprite* Sprite::create(const std::string& filenam)
 {
-	Sprite* pSprite = new Sprite(drawOrder);
+	Sprite* pSprite = new Sprite();
 
 	if (pSprite) {
 		pSprite->initWithFile(filenam);
@@ -24,9 +24,8 @@ Sprite* Sprite::create(const std::string& filenam, int drawOrder/*= 100*/)
 	return nullptr;
 }
 
-Sprite::Sprite(int drawOrder)
-	: m_drawOrder(drawOrder)
-	, m_quad()
+Sprite::Sprite()
+	: m_quad()
 	, m_isDirty(true)
 	, m_modelView(1.0f)
 	, m_flippedX(false)
@@ -93,11 +92,6 @@ void Sprite::setTexture(Texture2D* texture)
 	if (texture != nullptr) {
 		m_texture = texture;
 	}
-}
-
-int Sprite::getDrawOrder() const
-{
-	return m_drawOrder;
 }
 
 void Sprite::setPosition(const glm::vec2& position)
