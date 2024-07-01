@@ -98,11 +98,19 @@ public:
 	 */
 	virtual Node* getParent() { return m_pParent; }
 
+	/**
+	 * @brief 子ノードをすべてソートする
+	 */
 	virtual void sortAllChildren();
-	
+
+	/**
+	 * @brief ソートのヘルパ関数
+	 * @param nodes ノードの配列
+	 */
 	template<typename T>
 	inline static void sortNodes(std::vector<T*>& nodes)
 	{
+		static_assert(std::is_base_of<Node, T>::value, "Node::sortNodes: Only accept derived of Node!");
 		std::sort(std::begin(nodes), std::end(nodes),
 			[](T* n1, T* n2) { return (n1->m_localZOrder < n1->m_localZOrder); });
 	}
