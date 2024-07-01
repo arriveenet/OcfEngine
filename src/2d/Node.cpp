@@ -20,6 +20,8 @@ Node::Node()
 	, m_scaleZ(1.0f)
 	, m_transform(1.0f)
 	, m_modelVewTransform(1.0f)
+	, m_localZOrder(0)
+	, m_globalZOrder(0.0f)
 	, m_ignoreAnchorPointForPosition(false)
 	, m_transformDirty(true)
 	, m_transformUpdated(true)
@@ -209,6 +211,13 @@ float Node::getScale() const
 	return m_scaleX;
 }
 
+void Node::setGlobalZOrder(float globalZorder)
+{
+	if (m_globalZOrder != globalZorder) {
+		m_globalZOrder = globalZorder;
+	}
+}
+
 void Node::addChild(Node* pEntity)
 {
 	m_children.emplace_back(pEntity);
@@ -234,6 +243,11 @@ size_t Node::getChildCount() const
 void Node::setParent(Node* pEntity)
 {
 	m_pParent = pEntity;
+}
+
+void Node::sortAllChildren()
+{
+	sortNodes(m_children);
 }
 
 void Node::setCameraMask(uint16_t mask, bool applyChildren)
@@ -346,6 +360,17 @@ void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t
 	const bool visibleByCamera = isVisitableByVisitingCamera();
 
 	if (!m_children.empty()) {
+		sortAllChildren();
+
+		for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
+			if ((*iter)->m_localZOrder < 0) {
+				(*iter)->visit(pRenderer, m_modelVewTransform, flags);
+			}
+			else {
+				break;
+			}
+		}
+
 		// Ž©g‚ð•`‰æ
 		if (visibleByCamera) {
 			this->draw(pRenderer, m_modelVewTransform);

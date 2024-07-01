@@ -1,9 +1,11 @@
 #pragma once
-#include "Component.h"
+#include <cstdint>
+#include <algorithm>
+#include <vector>
+#include <glm/glm.hpp>
+#include "2d/Component.h"
 #include "base/GameObject.h"
 #include "input/Input.h"
-#include <glm/glm.hpp>
-#include <vector>
 
 NS_OCF_BEGIN
 
@@ -67,6 +69,9 @@ public:
 	virtual void setScaleZ(float scaleZ);
 	virtual float getScale() const;
 
+	virtual void setGlobalZOrder(float globalZorder);
+	virtual float getGlobalZOrder() const { return m_globalZOrder; }
+
 	/**
 	 * @brief 子ノードを追加
 	 * @param pNode 追加する子ノード
@@ -92,6 +97,15 @@ public:
 	 * @return pNode 親ノード
 	 */
 	virtual Node* getParent() { return m_pParent; }
+
+	virtual void sortAllChildren();
+	
+	template<typename T>
+	inline static void sortNodes(std::vector<T*>& nodes)
+	{
+		std::sort(std::begin(nodes), std::end(nodes),
+			[](T* n1, T* n2) { return (n1->m_localZOrder < n1->m_localZOrder); });
+	}
 
 	/**
 	 * @brief カメラのマスクを取得
@@ -143,6 +157,9 @@ protected:
 
 	mutable glm::mat4 m_transform;			//!< 変換行列
 	mutable glm::mat4 m_modelVewTransform;	//!< モデルビュー行列
+
+	std::int32_t m_localZOrder;	//!< ローカルZオーダー
+	float m_globalZOrder;		//!< グローバルZオーダー
 
 	bool m_ignoreAnchorPointForPosition;	//!< ノードの基準点がvec2(0,0)の場合はtrue、それ以外の場合はfalse
 	mutable bool m_transformDirty;			//!< 変換のダーティーフラグ
