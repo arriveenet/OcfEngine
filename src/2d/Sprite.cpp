@@ -121,7 +121,7 @@ void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
 {
 	setMVPMarixUniform();
 
-	m_trianglesCommand.init(m_texture, m_triangles, transform);
+	m_trianglesCommand.init(m_globalZOrder, m_texture, m_triangles, transform);
 
 	renderer->addCommand(&m_trianglesCommand);
 

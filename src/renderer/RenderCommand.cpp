@@ -2,8 +2,9 @@
 
 NS_OCF_BEGIN
 
-void RenderCommand::init(const glm::mat4& modelViewMatrix)
+void RenderCommand::init(float globalZOrder, const glm::mat4& modelViewMatrix)
 {
+	m_globalOrder = globalZOrder;
 	m_modelVew = modelViewMatrix;
 }
 

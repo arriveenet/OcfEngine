@@ -17,7 +17,7 @@ public:
 		CustomCommand,
 	};
 
-	void init(const glm::mat4& modelViewMatrix);
+	void init(float globalZOrder, const glm::mat4& modelViewMatrix);
 
 	float getGlobalOrder() const { return m_globalOrder; }
 

@@ -104,7 +104,7 @@ void DrawShape::draw(Renderer* renderer, const glm::mat4& transform)
 {
 	if (!m_lineBuffers.empty()) {
 		updateUniforms(transform, m_customCommandLine);
-		m_customCommandLine.init(transform);
+		m_customCommandLine.init(m_globalZOrder, transform);
 		renderer->addCommand(&m_customCommandLine);
 	}
 

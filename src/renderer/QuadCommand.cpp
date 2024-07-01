@@ -10,7 +10,7 @@ QuadCommand::~QuadCommand()
 {
 }
 
-void QuadCommand::init(Texture2D* texture, QuadV3fC3fT2f* pQuads, unsigned short* pIndices, size_t quadCount, const glm::mat4& modelView)
+void QuadCommand::init(float globalZOrder, Texture2D* texture, QuadV3fC3fT2f* pQuads, unsigned short* pIndices, size_t quadCount, const glm::mat4& modelView)
 {
 	Triangles triangles;
 	triangles.vertices = &pQuads->topLeft;
@@ -18,7 +18,7 @@ void QuadCommand::init(Texture2D* texture, QuadV3fC3fT2f* pQuads, unsigned short
 	triangles.indices = pIndices;
 	triangles.indexCount = static_cast<unsigned int>(quadCount * 6);
 
-	TrianglesCommand::init(texture, triangles, modelView);
+	TrianglesCommand::init(globalZOrder, texture, triangles, modelView);
 }
 
 NS_OCF_END

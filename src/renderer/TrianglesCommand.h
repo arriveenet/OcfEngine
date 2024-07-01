@@ -25,7 +25,7 @@ public:
 	TrianglesCommand();
 	~TrianglesCommand();
 
-	void init(Texture2D* texture, const Triangles& triangles, const glm::mat4& modelView);
+	void init(float globalZOrder, Texture2D* texture, const Triangles& triangles, const glm::mat4& modelView);
 
 	uint32_t getMaterialID() const { return m_materialID; }
 	const Triangles& getTriangles() const { return m_triangles; }

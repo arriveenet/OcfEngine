@@ -79,7 +79,7 @@ void Label::draw(Renderer* renderer, const glm::mat4& transform)
 	auto& programState = m_quadCommand.getProgramState();
 	programState.setUniform("uMVPMatrix", projection);
 
-	m_quadCommand.init(m_texture, m_quads.data(), m_indices.data(), m_quads.size(), transform);
+	m_quadCommand.init(m_globalZOrder, m_texture, m_quads.data(), m_indices.data(), m_quads.size(), transform);
 	renderer->addCommand(&m_quadCommand);
 }
 

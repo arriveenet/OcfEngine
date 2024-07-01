@@ -8,7 +8,7 @@ public:
 	QuadCommand();
 	~QuadCommand();
 
-	void init(Texture2D* texture, QuadV3fC3fT2f* pQuads, unsigned short* pIndices, size_t quadCount, const glm::mat4& modelView);
+	void init(float globalZOrder, Texture2D* texture, QuadV3fC3fT2f* pQuads, unsigned short* pIndices, size_t quadCount, const glm::mat4& modelView);
 
 };
 

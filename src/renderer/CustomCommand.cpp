@@ -19,9 +19,9 @@ CustomCommand::~CustomCommand()
 	OCF_SAFE_DELETE(m_pVertexArray);
 }
 
-void CustomCommand::init(const glm::mat4& modelView)
+void CustomCommand::init(float globalZOrder, const glm::mat4& modelView)
 {
-	RenderCommand::init(modelView);
+	RenderCommand::init(globalZOrder, modelView);
 }
 
 NS_OCF_END

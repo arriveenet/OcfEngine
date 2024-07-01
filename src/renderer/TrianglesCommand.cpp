@@ -15,9 +15,9 @@ TrianglesCommand::~TrianglesCommand()
 {
 }
 
-void TrianglesCommand::init(Texture2D* texture, const Triangles& triangles, const glm::mat4& modelView)
+void TrianglesCommand::init(float globalZOrder, Texture2D* texture, const Triangles& triangles, const glm::mat4& modelView)
 {
-	RenderCommand::init(modelView);
+	RenderCommand::init(globalZOrder, modelView);
 
 	m_texture = texture;
 	m_triangles = triangles;
