@@ -175,7 +175,7 @@
       <Filter>ソース ファイル\ui</Filter>
     </ClCompile>
     <ClCompile Include="renderer\RenderQueue.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -315,7 +315,7 @@
       <Filter>ヘッダー ファイル\ui</Filter>
     </ClInclude>
     <ClInclude Include="renderer\RenderQueue.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

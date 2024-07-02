@@ -1,6 +1,7 @@
 #include "MainScene.h"
 
 #include "SpriteTest/SpriteTest.h"
+#include "ComponentTest/ComponentTest.h"
 
 USING_NS_OCF;
 
@@ -28,9 +29,19 @@ bool MainScene::init()
 			});
 		addChild(button1);
 
+		auto button2 = Button::create();
+		button2->setText("CompoTest");
+		button2->setPosition(100, button1->getPosition().y - 60.0f);
+		button2->setOnClickCallback([=]() {
+			auto scene = new ComponentTest();
+			scene->init();
+			m_pGame->replaceScene(scene);
+			});
+		addChild(button2);
+
 		auto button = Button::create();
 		button->setText("Exit");
-		button->setPosition(100, button1->getPosition().y -60.0f);
+		button->setPosition(100, button2->getPosition().y -60.0f);
 		button->setOnClickCallback([=]() {
 			m_pGame->exit();
 			});

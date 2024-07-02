@@ -12,6 +12,9 @@
     <Filter Include="Source\SpriteTest">
       <UniqueIdentifier>{6d086665-cdcc-4d51-898a-c3e0fed0ce37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\ComponentTest">
+      <UniqueIdentifier>{7b4b9f39-1947-4adf-b39d-5442d4093a21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -29,6 +32,9 @@
     <ClCompile Include="SpriteTest\SpriteTest.cpp">
       <Filter>Source\SpriteTest</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentTest\ComponentTest.cpp">
+      <Filter>Source\ComponentTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainScene.h">
@@ -42,6 +48,9 @@
     </ClInclude>
     <ClInclude Include="SpriteTest\SpriteTest.h">
       <Filter>Source\SpriteTest</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentTest\ComponentTest.h">
+      <Filter>Source\ComponentTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
