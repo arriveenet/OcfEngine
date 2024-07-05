@@ -145,6 +145,7 @@
     <ClCompile Include="2d\MoveComponent.cpp" />
     <ClCompile Include="2d\Scene.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
+    <ClCompile Include="2d\SpriteSheetLoader.cpp" />
     <ClCompile Include="base\FileUtils.cpp" />
     <ClCompile Include="base\Font.cpp" />
     <ClCompile Include="base\Game.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="2d\MoveComponent.h" />
     <ClInclude Include="2d\Scene.h" />
     <ClInclude Include="2d\Sprite.h" />
+    <ClInclude Include="2d\SpriteSheetLoader.h" />
     <ClInclude Include="base\Config.h" />
     <ClInclude Include="base\FileUtils.h" />
     <ClInclude Include="base\fnt.h" />
