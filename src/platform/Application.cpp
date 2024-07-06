@@ -36,7 +36,7 @@ bool Applicaiton::init()
 	m_windowHeight = 720;
 	m_windowWidth = m_windowHeight * 4 / 3;	
 
-	m_window.create(m_windowWidth, m_windowHeight, "Happy Birthday to oocfuu!");
+	m_window.create(m_windowWidth, m_windowHeight, "Ocf Engine");
 
 	const int displayWidth = GetSystemMetrics(SM_CXSCREEN);
 	const int displayHeight = GetSystemMetrics(SM_CYSCREEN);
