@@ -18,7 +18,9 @@ NS_OCF_BEGIN
  */
 class Game : public GameObject {
 public:
+	/** コンストラクタ */
 	Game();
+	/** デストラクタ */
 	~Game();
 
 	/**
@@ -26,6 +28,11 @@ public:
 	 * @return ゲームクラスのインスタンス
 	 */
 	static Game* getInstance();
+
+	/**
+	 * @brief ゲームのインスタンスを破棄する
+	 */
+	static void destroyInstance();
 
 	/** ゲームを初期化 */
 	bool init();

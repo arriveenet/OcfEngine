@@ -24,32 +24,27 @@ Game::Game()
 
 Game::~Game()
 {
-	m_pFPSLabel->release();
-	m_pDrawCallLabel->release();
-	m_pDrawVertexLabel->release();
+	OCF_SAFE_RELEASE(m_pFPSLabel);
+	OCF_SAFE_RELEASE(m_pDrawCallLabel);
+	OCF_SAFE_RELEASE(m_pDrawVertexLabel);
 
 	// 入力クラスを解放
-	delete m_input;
-	m_input = nullptr;
+	OCF_SAFE_DELETE(m_input);
 
 	// シーンを解放
-	delete m_currentScene;
-	m_currentScene = nullptr;
+	OCF_SAFE_RELEASE(m_currentScene);
 
 	// フォントを解放
-	delete m_font;
-	m_font = nullptr;
+	OCF_SAFE_DELETE(m_font);
 
 	// テクスチャーマネージャーを解放
-	delete m_textureManager;
-	m_textureManager = nullptr;
+	OCF_SAFE_DELETE(m_textureManager);
 
 	// ファイルユーティリティを解放
 	FileUtils::destroyInstance();
 
 	// レンダラーを解放
-	delete m_renderer;
-	m_renderer = nullptr;
+	OCF_SAFE_DELETE(m_renderer);
 
 	s_sharedGame = nullptr;
 }
@@ -62,6 +57,11 @@ Game* Game::getInstance()
 	}
 
 	return s_sharedGame;
+}
+
+void Game::destroyInstance()
+{
+	OCF_SAFE_DELETE(s_sharedGame);
 }
 
 bool Game::init()
@@ -96,19 +96,8 @@ bool Game::init()
 
 void Game::mainLoop()
 {
-	Applicaiton* app = Applicaiton::getInstance();
-	m_running = true;
-
-	while (app->windowShouldClose()) {
-		update();
-		draw();
-
-		app->pollEvents();
-		app->swapBuffers();
-	}
-
-	// delete Game instance
-	release();
+	update();
+	draw();
 }
 
 void Game::exit()
@@ -315,6 +304,8 @@ void Game::draw()
 	m_renderer->draw();
 
 	popMatrix(MatrixStack::ModelView);
+
+	Applicaiton::getInstance()->swapBuffers();
 
 	m_renderer->endFrame();
 }

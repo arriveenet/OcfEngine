@@ -22,6 +22,8 @@ Applicaiton::Applicaiton()
 
 Applicaiton::~Applicaiton()
 {
+	assert(this == g_pApplication);
+	g_pApplication = nullptr;
 }
 
 bool Applicaiton::init()
@@ -62,8 +64,6 @@ void Applicaiton::destroy()
 {
 	m_window.destroy();
 	glfwTerminate();
-
-	g_pApplication = nullptr;
 }
 
 int Applicaiton::run()
@@ -75,7 +75,11 @@ int Applicaiton::run()
 	auto game = Game::getInstance();
 
 	// Main loop
-	game->mainLoop();
+	while (m_window.windowShouldClose())
+	{
+		game->mainLoop();
+		m_window.pollEvents();
+	}
 
 	// Destroy application
 	destroy();
