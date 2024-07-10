@@ -55,7 +55,6 @@ bool DrawShape::init()
 
 void DrawShape::clear()
 {
-	m_lineBuffers.clear();
 	m_bufferCountLine = 0;
 	m_dirtyLine = true;
 }
@@ -75,8 +74,8 @@ void DrawShape::drawLine(const glm::vec2& origin, const glm::vec2& destanation, 
 {
 	ensureCapacityGLLine(2);
 
-	m_lineBuffers.push_back({ origin, color });
-	m_lineBuffers.push_back({ destanation, color });
+	m_lineBuffers[m_bufferCountLine] = {origin, color};
+	m_lineBuffers[m_bufferCountLine + 1] = { destanation, color };
 
 	VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
 	pVertexArray->updateVertexBuffer(m_lineBuffers.data() + m_bufferCountLine, sizeof(Vertex2fC4) * m_bufferCountLine, sizeof(Vertex2fC4) * 2);
@@ -102,7 +101,7 @@ void DrawShape::update(float deltaTime)
 
 void DrawShape::draw(Renderer* renderer, const glm::mat4& transform)
 {
-	if (!m_lineBuffers.empty()) {
+	if (m_bufferCountLine > 0) {
 		updateUniforms(transform, m_customCommandLine);
 		m_customCommandLine.init(m_globalZOrder, transform);
 		renderer->addCommand(&m_customCommandLine);
