@@ -31,9 +31,6 @@
     <Filter Include="ヘッダー ファイル\2d">
       <UniqueIdentifier>{c35ca194-a9dc-4ae5-aec5-668e84ed69d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\third_party">
-      <UniqueIdentifier>{29e7d863-ec8a-46c4-b19a-c03f50a5ef03}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\platform">
       <UniqueIdentifier>{981fa186-852d-4f8e-8a03-0c5c83696301}</UniqueIdentifier>
     </Filter>
@@ -86,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="renderer\TextureManager.cpp">
       <Filter>ソース ファイル\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\third_party\glad\src\glad.c">
-      <Filter>ソース ファイル\third_party</Filter>
     </ClCompile>
     <ClCompile Include="renderer\TextureAtlas.cpp">
       <Filter>ソース ファイル\renderer</Filter>

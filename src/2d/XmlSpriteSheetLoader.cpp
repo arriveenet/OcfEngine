@@ -5,8 +5,6 @@
 #include "base/FileUtils.h"
 #include <tinyxml2.h>
 
-#pragma comment(lib, "TinyXML2.lib")
-
 NS_OCF_BEGIN
 
 void XmlSpriteSheetLoader::load(std::string_view filePath, SpriteFrameManager& manager)
