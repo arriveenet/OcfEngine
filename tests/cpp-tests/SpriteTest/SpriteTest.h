@@ -4,7 +4,7 @@
 class SpriteTestDemo : public TestCase {
 public:
 	SpriteTestDemo();
-	virtual ~SpriteTestDemo();
+	~SpriteTestDemo();
 
 	bool init() override;
 };
