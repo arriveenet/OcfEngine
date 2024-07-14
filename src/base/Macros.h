@@ -1,9 +1,18 @@
 #pragma once
+#include <assert.h>
 
-#define NS_OCF_BEGIN namespace ocf {
-#define NS_OCF_END   }
-#define USING_NS_OCF using namespace ocf
-#define NS_OCF ::ocf
+#define OCF_ASSERT(expression)    assert(expression)
+
+#ifndef OCFASSERT
+#define OCFASSERT(expression, msg)    \
+    do                                \
+    {                                 \
+        OCF_ASSERT(expression);       \
+    }                                 \
+    while(0)
+#endif // !OCFASSERT
+
+#include "base/Config.h"
 
 #define OCF_SAFE_DELETE(p) \
     do                    \
