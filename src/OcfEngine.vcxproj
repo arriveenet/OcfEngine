@@ -76,13 +76,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)third_party\glm\;$(SolutionDir)third_party\xxHash\;$(SolutionDir)third_party\glad\include\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)third_party\TinyXml2\;$(SolutionDir)third_party\glm\;$(SolutionDir)third_party\xxHash\;$(SolutionDir)third_party\glad\include\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -92,7 +95,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)third_party\glm\;$(SolutionDir)third_party\xxHash\;$(SolutionDir)third_party\glad\include\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)third_party\TinyXml2\;$(SolutionDir)third_party\glm\;$(SolutionDir)third_party\xxHash\;$(SolutionDir)third_party\glad\include\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -101,6 +104,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -108,13 +114,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)third_party\glm\;$(SolutionDir)third_party\xxHash\;$(SolutionDir)third_party\glad\include\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)third_party\TinyXml2\;$(SolutionDir)third_party\glm\;$(SolutionDir)third_party\xxHash\;$(SolutionDir)third_party\glad\include\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -124,7 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)third_party\glm\;$(SolutionDir)third_party\xxHash\;$(SolutionDir)third_party\glad\include\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)third_party\TinyXml2\;$(SolutionDir)third_party\glm\;$(SolutionDir)third_party\xxHash\;$(SolutionDir)third_party\glad\include\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -133,6 +142,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\third_party\glad\src\glad.c" />
@@ -145,6 +157,10 @@
     <ClCompile Include="2d\MoveComponent.cpp" />
     <ClCompile Include="2d\Scene.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
+    <ClCompile Include="2d\SpriteFrame.cpp" />
+    <ClCompile Include="2d\SpriteFrameManager.cpp" />
+    <ClCompile Include="2d\SpriteSheetLoader.cpp" />
+    <ClCompile Include="2d\XmlSpriteSheetLoader.cpp" />
     <ClCompile Include="base\FileUtils.cpp" />
     <ClCompile Include="base\Font.cpp" />
     <ClCompile Include="base\Game.cpp" />
@@ -187,6 +203,10 @@
     <ClInclude Include="2d\MoveComponent.h" />
     <ClInclude Include="2d\Scene.h" />
     <ClInclude Include="2d\Sprite.h" />
+    <ClInclude Include="2d\SpriteFrame.h" />
+    <ClInclude Include="2d\SpriteFrameManager.h" />
+    <ClInclude Include="2d\SpriteSheetLoader.h" />
+    <ClInclude Include="2d\XmlSpriteSheetLoader.h" />
     <ClInclude Include="base\Config.h" />
     <ClInclude Include="base\FileUtils.h" />
     <ClInclude Include="base\fnt.h" />

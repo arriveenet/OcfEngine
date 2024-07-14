@@ -177,6 +177,18 @@
     <ClCompile Include="renderer\RenderQueue.cpp">
       <Filter>ソース ファイル\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="2d\SpriteFrame.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\SpriteSheetLoader.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\SpriteFrameManager.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\XmlSpriteSheetLoader.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer\Image.h">
@@ -316,6 +328,18 @@
     </ClInclude>
     <ClInclude Include="renderer\RenderQueue.h">
       <Filter>ヘッダー ファイル\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\SpriteSheetLoader.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\SpriteFrame.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\SpriteFrameManager.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\XmlSpriteSheetLoader.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

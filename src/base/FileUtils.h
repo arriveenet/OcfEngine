@@ -59,6 +59,13 @@ public:
 	 */
 	std::string fullPathForFilename(const std::string& filename) const;
 
+	/**
+	 * @brief ファイルが存在するかチェックする
+	 * @param ファイル名
+	 * @return ファイルが存在する場合true、存在しない場合falseを返却
+	 */
+	bool isFileExist(const std::string& filename) const;
+
 protected:
 	/** デフォルトコンストラクター */
 	FileUtils();

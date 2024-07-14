@@ -1,6 +1,7 @@
 #include "Sprite.h"
 
 #include <glm/gtc/type_ptr.hpp>
+#include "2d/SpriteFrameManager.h"
 #include "base/Game.h"
 #include "renderer/Texture2D.h"
 #include "renderer/OpenGLInclude.h"
@@ -15,13 +16,31 @@ static unsigned short indices[] = { 0, 1, 2, 3, 2, 1 };
 Sprite* Sprite::create(const std::string& filenam)
 {
 	Sprite* pSprite = new Sprite();
-
-	if (pSprite) {
-		pSprite->initWithFile(filenam);
+	if (pSprite->initWithFile(filenam)) {
+		pSprite->autorelease();
 		return pSprite;
 	}
-
+	OCF_SAFE_DELETE(pSprite);
 	return nullptr;
+}
+
+Sprite* Sprite::createWithSpriteFrame(SpriteFrame* spriteFrame)
+{
+	Sprite* pSprite = new Sprite();
+	if (pSprite->initWithSpriteFrame(spriteFrame)) {
+		pSprite->autorelease();
+		return pSprite;
+	}
+	OCF_SAFE_DELETE(pSprite);
+	return nullptr;
+}
+
+
+Sprite* Sprite::createWithSpriteFrameName(std::string_view spriteFrameName)
+{
+	SpriteFrame* frame = SpriteFrameManager::getInstance()->getSpriteFrameByName(spriteFrameName);
+
+	return createWithSpriteFrame(frame);
 }
 
 Sprite::Sprite()
@@ -31,6 +50,7 @@ Sprite::Sprite()
 	, m_flippedX(false)
 	, m_flippedY(false)
 	, m_texture(nullptr)
+	, m_spriteFrame(nullptr)
 {
 	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
 	m_trianglesCommand.getProgramState().setProgram(pProgram);
@@ -43,6 +63,7 @@ Sprite::Sprite()
 
 Sprite::~Sprite()
 {
+	OCF_SAFE_RELEASE(m_texture);
 }
 
 bool Sprite::init()
@@ -87,11 +108,46 @@ bool Sprite::initWithTexture(Texture2D* texture, const Rect& rect)
 	return result;
 }
 
+bool Sprite::initWithSpriteFrame(SpriteFrame* spriteFrame)
+{
+	if (spriteFrame == nullptr) {
+		return false;
+	}
+
+	bool result = initWithTexture(spriteFrame->getTexture(), spriteFrame->getRect());
+	setSpriteFrame(spriteFrame);
+
+	return result;
+}
+
 void Sprite::setTexture(Texture2D* texture)
 {
-	if (texture != nullptr) {
+	if (m_texture != texture) {
+		OCF_SAFE_RETAIN(texture);
+		OCF_SAFE_RELEASE(m_texture);
 		m_texture = texture;
 	}
+}
+
+void Sprite::setSpriteFrame(SpriteFrame* spriteFrame)
+{
+	if (m_spriteFrame != spriteFrame) {
+		OCF_SAFE_RELEASE(m_spriteFrame);
+		m_spriteFrame = spriteFrame;
+		spriteFrame->retain();
+	}
+
+	Texture2D* texture = spriteFrame->getTexture();
+	if (m_texture != texture) {
+		setTexture(texture);
+	}
+
+	setTextureRect(spriteFrame->getRect(), spriteFrame->getOriginalSize());
+}
+
+SpriteFrame* Sprite::getSpriteFrame() const
+{
+	return m_spriteFrame;
 }
 
 void Sprite::setPosition(const glm::vec2& position)
@@ -190,7 +246,7 @@ void Sprite::updatePolygon()
 
 void Sprite::setTextureRect(const Rect& rect, const glm::vec2& size)
 {
-	Node::setSize(size);
+	Node::setSize(rect.m_size);
 
 	updatePolygon();
 }

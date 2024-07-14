@@ -1,4 +1,5 @@
 #include "SpriteTest.h"
+#include "2d/SpriteFrameManager.h"
 
 USING_NS_OCF;
 
@@ -25,7 +26,11 @@ bool SpriteTestDemo::init()
 		sprite2->setPosition((size / 2.0f) * 0.5f);
 		this->addChild(sprite2);
 
-
+		SpriteFrameManager::getInstance()->addSpriteFramesWithFile("texture.xml");
+		auto sprirte3 = Sprite::createWithSpriteFrameName("Kirby_1.png");
+		sprirte3->setPosition(100, 100);
+		sprirte3->setScale(10.0f);
+		this->addChild(sprirte3);
 		return true;
 	}
 

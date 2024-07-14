@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+Format:
+n  => name
+x  => x pos
+y  => y pos
+w  => width
+h  => height
+pX => x pos of the pivot point
+pY => y pos of the pivot point
+oX => x-corner offset
+oY => y-corner offset
+oW => original width
+oH => original height
+r => 'y' if sprite is rotated-->
+<TextureAtlas imagePath="texture.png" width="16" height="80" scale="1" format="RGBA8888">
+  <sprite n="Kirby_1.png" x="0" y="0" w="16" h="16" pX="0.5" pY="0.5"/>
+  <sprite n="Kirby_2.png" x="0" y="16" w="16" h="16" pX="0.5" pY="0.5"/>
+  <sprite n="Kirby_3.png" x="0" y="32" w="16" h="16" pX="0.5" pY="0.5"/>
+  <sprite n="Kirby_4.png" x="0" y="48" w="16" h="16" pX="0.5" pY="0.5"/>
+  <sprite n="Kirby_5.png" x="0" y="64" w="16" h="16" pX="0.5" pY="0.5"/>
+  <sprite n="Kirby_6.png" x="0" y="48" w="16" h="16" pX="0.5" pY="0.5"/>
+</TextureAtlas>

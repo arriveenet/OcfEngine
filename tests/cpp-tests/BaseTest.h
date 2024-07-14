@@ -5,7 +5,7 @@
 class TestCase : public ocf::Scene {
 public:
 	TestCase();
-	~TestCase();
+	virtual ~TestCase();
 
 	bool init() override;
 

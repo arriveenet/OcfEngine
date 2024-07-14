@@ -112,6 +112,11 @@ std::string FileUtils::fullPathForFilename(const std::string& filename) const
 	return std::string();
 }
 
+bool FileUtils::isFileExist(const std::string& filename) const
+{
+	return fs::exists(filename);
+}
+
 FileUtils::FileUtils()
 {
 }

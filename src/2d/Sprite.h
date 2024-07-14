@@ -12,6 +12,7 @@
 NS_OCF_BEGIN
 
 class Texture2D;
+class SpriteFrame;
 
 /**
  * @brief スプライトクラス
@@ -20,6 +21,8 @@ class Sprite : public Node {
 public:
 	/** スプライトを作成*/
 	static Sprite* create(const std::string& filenam);
+	static Sprite* createWithSpriteFrame(SpriteFrame* spriteFrame);
+	static Sprite* createWithSpriteFrameName(std::string_view spriteFrameName);
 
 	/** コンストラクタ */
 	Sprite();
@@ -32,9 +35,16 @@ public:
 	virtual bool initWithFile(const std::string& filename);
 	/** テクスチャからスプライトを初期化 */
 	virtual bool initWithTexture(Texture2D* texture, const Rect& rect);
+	/** スプライトフレームからスプライトを初期化 */
+	virtual bool initWithSpriteFrame(SpriteFrame* spriteFrame);
 
 	/** テクスチャを設定 */
 	virtual void setTexture(Texture2D* texture);
+	
+	/** スプライトフレームを設定 */
+	virtual void setSpriteFrame(SpriteFrame* spriteFrame);
+	/** スプライトフレームを取得 */
+	virtual SpriteFrame* getSpriteFrame() const;
 	
 	/** スプライトの位置を設定 */
 	void setPosition(const glm::vec2& position) override;
@@ -74,6 +84,7 @@ protected:
 	bool m_flippedY;
 
 	Texture2D* m_texture;
+	SpriteFrame* m_spriteFrame;
 	TrianglesCommand::Triangles m_triangles;
 	TrianglesCommand m_trianglesCommand;
 

@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "2d/Camera.h"
+#include "2d/SpriteFrameManager.h"
 #include "platform/Application.h"
 #include "base/FileUtils.h"
 
@@ -42,6 +43,7 @@ Game::~Game()
 
 	// ファイルユーティリティを解放
 	FileUtils::destroyInstance();
+	SpriteFrameManager::destroyInstance();
 
 	// レンダラーを解放
 	OCF_SAFE_DELETE(m_renderer);

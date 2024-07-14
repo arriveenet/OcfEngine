@@ -30,3 +30,12 @@
             (p)->release(); \
         }                   \
     } while (0);            \
+
+#define OCF_SAFE_RETAIN(p) \
+    do                      \
+    {                       \
+        if(p)               \
+        {                   \
+            (p)->retain();  \
+        }                   \
+    } while (0);            \
