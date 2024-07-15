@@ -183,6 +183,9 @@
     <ClCompile Include="2d\XmlSpriteSheetLoader.cpp">
       <Filter>ソース ファイル\2d</Filter>
     </ClCompile>
+    <ClCompile Include="base\Console.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer\Image.h">
@@ -334,6 +337,12 @@
     </ClInclude>
     <ClInclude Include="2d\XmlSpriteSheetLoader.h">
       <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Console.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="platform\PlatformMacros.h">
+      <Filter>ヘッダー ファイル\platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -176,6 +176,7 @@
     <ClCompile Include="2d\SpriteFrameManager.cpp" />
     <ClCompile Include="2d\SpriteSheetLoader.cpp" />
     <ClCompile Include="2d\XmlSpriteSheetLoader.cpp" />
+    <ClCompile Include="base\Console.cpp" />
     <ClCompile Include="base\FileUtils.cpp" />
     <ClCompile Include="base\Font.cpp" />
     <ClCompile Include="base\Game.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="2d\SpriteSheetLoader.h" />
     <ClInclude Include="2d\XmlSpriteSheetLoader.h" />
     <ClInclude Include="base\Config.h" />
+    <ClInclude Include="base\Console.h" />
     <ClInclude Include="base\FileUtils.h" />
     <ClInclude Include="base\fnt.h" />
     <ClInclude Include="base\Font.h" />
@@ -237,6 +239,7 @@
     <ClInclude Include="OcfEngine.h" />
     <ClInclude Include="platform\Application.h" />
     <ClInclude Include="platform\ApplicationBase.h" />
+    <ClInclude Include="platform\PlatformMacros.h" />
     <ClInclude Include="platform\Window.h" />
     <ClInclude Include="renderer\CustomCommand.h" />
     <ClInclude Include="renderer\Image.h" />

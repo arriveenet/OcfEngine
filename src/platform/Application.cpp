@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "base/Game.h"
 #include "2d/Scene.h"
+#include "platform/PlatformMacros.h"
 
 NS_OCF_BEGIN
 
@@ -53,7 +54,7 @@ bool Applicaiton::init()
 	if (status != 1) {
 		return false;
 	}
-	printf("GL %d.%d\n", GLVersion.major, GLVersion.minor);
+	OCFLOG("OpenGL %d.%d\n", GLVersion.major, GLVersion.minor);
 
 	glfwSwapInterval(1);
 
