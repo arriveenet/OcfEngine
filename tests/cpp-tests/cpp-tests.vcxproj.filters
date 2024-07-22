@@ -15,6 +15,9 @@
     <Filter Include="Source\ComponentTest">
       <UniqueIdentifier>{7b4b9f39-1947-4adf-b39d-5442d4093a21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\TiledMapTest">
+      <UniqueIdentifier>{116e7e27-e4c4-4cc5-8145-915b5b3eb459}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,6 +38,9 @@
     <ClCompile Include="ComponentTest\ComponentTest.cpp">
       <Filter>Source\ComponentTest</Filter>
     </ClCompile>
+    <ClCompile Include="TiledMapTest\TiledMapTest.cpp">
+      <Filter>Source\TiledMapTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainScene.h">
@@ -51,6 +57,9 @@
     </ClInclude>
     <ClInclude Include="ComponentTest\ComponentTest.h">
       <Filter>Source\ComponentTest</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapTest\TiledMapTest.h">
+      <Filter>Source\TiledMapTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

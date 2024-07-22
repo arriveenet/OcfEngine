@@ -1,0 +1,64 @@
+#pragma once
+#include <string>
+#include <vector>
+#include <glm/glm.hpp>
+#include <tinyxml2.h>
+#include "base/GameObject.h"
+
+NS_OCF_BEGIN
+
+class TMXLayerInfo : public GameObject {
+public:
+	TMXLayerInfo();
+	virtual ~TMXLayerInfo();
+
+	uint32_t* m_pTiles;
+};
+
+class TMXTilesetInfo : public GameObject {
+public:
+	TMXTilesetInfo();
+	virtual ~TMXTilesetInfo();
+
+public:
+	std::string m_name;
+	int m_firstgid;
+	glm::vec2 m_tileSize;
+	std::string m_imageSource;
+	glm::vec2 m_imageSize;
+};
+
+class TMXMapInfo : public GameObject {
+public:
+	static TMXMapInfo* create(const std::string& tmxFile);
+
+	TMXMapInfo();
+	virtual ~TMXMapInfo();
+
+	bool initWithTMXFile(const std::string& tmxFile);
+
+	const glm::ivec2& getMapSize() const { return m_mapSize; }
+	void setMapSize(const glm::ivec2& mapSize) { m_mapSize = mapSize; }
+
+	const glm::ivec2& getTileSize() const { return m_tileSize; }
+	void setTileSize(const glm::ivec2& tileSize) { m_tileSize = tileSize; }
+
+	const std::vector<TMXTilesetInfo*>& getTilesets() const { return m_tilesets; }
+	std::vector<TMXTilesetInfo*>& getTilesets() { return m_tilesets; }
+
+	const std::vector<TMXLayerInfo*>& getLayers() const { return m_layers; }
+	std::vector<TMXLayerInfo*>& getLayers() { return m_layers; }
+
+protected:
+	bool parseXMLFile(const std::string& xmlFile);
+	void parseLayer(tinyxml2::XMLElement* element);
+
+	glm::ivec2 m_mapSize;
+	glm::ivec2 m_tileSize;
+	TMXTilesetInfo m_tilesetInfo;
+	TMXLayerInfo m_tileLayerInfo;
+	std::vector<TMXTilesetInfo*> m_tilesets;
+	std::vector<TMXLayerInfo*> m_layers;
+};
+
+NS_OCF_END
