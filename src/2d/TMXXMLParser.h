@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <tinyxml2.h>
 #include "base/GameObject.h"
+#include "base/Rect.h"
 
 NS_OCF_BEGIN
 
@@ -12,6 +13,8 @@ public:
 	TMXLayerInfo();
 	virtual ~TMXLayerInfo();
 
+	std::string m_name;
+	glm::ivec2 m_layerSize;
 	uint32_t* m_pTiles;
 };
 
@@ -20,9 +23,11 @@ public:
 	TMXTilesetInfo();
 	virtual ~TMXTilesetInfo();
 
+	Rect getRectForGID(uint32_t gid);
+
 public:
 	std::string m_name;
-	int m_firstgid;
+	int m_firstGid;
 	glm::vec2 m_tileSize;
 	std::string m_imageSource;
 	glm::vec2 m_imageSize;
@@ -45,6 +50,7 @@ public:
 
 	const std::vector<TMXTilesetInfo*>& getTilesets() const { return m_tilesets; }
 	std::vector<TMXTilesetInfo*>& getTilesets() { return m_tilesets; }
+	TMXTilesetInfo* getTileset() const { return m_tilesetInfo; }
 
 	const std::vector<TMXLayerInfo*>& getLayers() const { return m_layers; }
 	std::vector<TMXLayerInfo*>& getLayers() { return m_layers; }
@@ -55,7 +61,7 @@ protected:
 
 	glm::ivec2 m_mapSize;
 	glm::ivec2 m_tileSize;
-	TMXTilesetInfo m_tilesetInfo;
+	TMXTilesetInfo* m_tilesetInfo;
 	TMXLayerInfo m_tileLayerInfo;
 	std::vector<TMXTilesetInfo*> m_tilesets;
 	std::vector<TMXLayerInfo*> m_layers;

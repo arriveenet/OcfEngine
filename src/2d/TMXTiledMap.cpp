@@ -50,7 +50,7 @@ void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
 
 	auto& layers = mapInfo->getLayers();
 	for (const auto& layerInfo : layers) {
-		TMXLayer* layer = TMXLayer::create(layerInfo);
+		TMXLayer* layer = TMXLayer::create(mapInfo->getTileset(), layerInfo, mapInfo);
 		if (layer == nullptr) {
 			continue;
 		}

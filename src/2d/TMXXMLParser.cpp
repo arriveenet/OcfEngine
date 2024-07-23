@@ -6,6 +6,7 @@ NS_OCF_BEGIN
 
 TMXLayerInfo::TMXLayerInfo()
 	: m_pTiles(nullptr)
+	, m_layerSize(0, 0)
 {
 }
 
@@ -18,7 +19,7 @@ TMXLayerInfo::~TMXLayerInfo()
 }
 
 TMXTilesetInfo::TMXTilesetInfo()
-	: m_firstgid(0)
+	: m_firstGid(0)
 	, m_tileSize(0, 0)
 	, m_imageSize(0, 0)
 {
@@ -26,6 +27,17 @@ TMXTilesetInfo::TMXTilesetInfo()
 
 TMXTilesetInfo::~TMXTilesetInfo()
 {
+}
+
+Rect TMXTilesetInfo::getRectForGID(uint32_t gid)
+{
+	Rect rect;
+	rect.m_size = m_tileSize;
+
+	rect.m_position.x = (gid % (int)m_tileSize.x) * m_tileSize.x;
+	rect.m_position.y = (gid / (int)m_tileSize.y) * m_tileSize.y;
+
+	return rect;
 }
 
 TMXMapInfo* TMXMapInfo::create(const std::string& tmxFile)
@@ -47,6 +59,7 @@ TMXMapInfo::TMXMapInfo()
 
 TMXMapInfo::~TMXMapInfo()
 {
+	OCF_SAFE_DELETE(m_tilesetInfo);
 }
 
 bool TMXMapInfo::initWithTMXFile(const std::string& tmxFile)
@@ -69,15 +82,16 @@ bool TMXMapInfo::parseXMLFile(const std::string& xmlFile)
 	m_tileSize.x = mapElement->IntAttribute("tilewidth");
 	m_tileSize.y = mapElement->IntAttribute("tileheight");
 
+	m_tilesetInfo = new TMXTilesetInfo();
 	auto tilesetElement = mapElement->FirstChildElement("tileset");
-	m_tilesetInfo.m_name = tilesetElement->Attribute("name");
-	m_tilesetInfo.m_firstgid = tilesetElement->IntAttribute("firstgid");
-	m_tilesetInfo.m_tileSize.x = tilesetElement->FloatAttribute("tilewidth");
-	m_tilesetInfo.m_tileSize.y = tilesetElement->FloatAttribute("tileheight");
+	m_tilesetInfo->m_name = tilesetElement->Attribute("name");
+	m_tilesetInfo->m_firstGid = tilesetElement->IntAttribute("firstgid");
+	m_tilesetInfo->m_tileSize.x = tilesetElement->FloatAttribute("tilewidth");
+	m_tilesetInfo->m_tileSize.y = tilesetElement->FloatAttribute("tileheight");
 	auto imageElement = tilesetElement->FirstChildElement("image");
-	m_tilesetInfo.m_imageSource = imageElement->Attribute("source");
-	m_tilesetInfo.m_imageSize.x = imageElement->FloatAttribute("width");
-	m_tilesetInfo.m_imageSize.y = imageElement->FloatAttribute("height");
+	m_tilesetInfo->m_imageSource = imageElement->Attribute("source");
+	m_tilesetInfo->m_imageSize.x = imageElement->FloatAttribute("width");
+	m_tilesetInfo->m_imageSize.y = imageElement->FloatAttribute("height");
 
 	parseLayer(mapElement);
 
@@ -90,6 +104,10 @@ void TMXMapInfo::parseLayer(tinyxml2::XMLElement* element)
 		layerElement != nullptr;
 		layerElement = layerElement->NextSiblingElement()) {
 		TMXLayerInfo* layer = new TMXLayerInfo();
+
+		layer->m_name = layerElement->Attribute("name");
+		layer->m_layerSize.x = layerElement->IntAttribute("width");
+		layer->m_layerSize.y = layerElement->IntAttribute("height");
 
 		auto dataElement = layerElement->FirstChildElement("data");
 		std::string datString = dataElement->GetText();
