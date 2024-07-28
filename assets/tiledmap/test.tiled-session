@@ -1,0 +1,43 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "test2.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "Overworld.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "test2.tmx": {
+            "scale": 1.6189583333333333,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.27795650495435,
+                "y": 79.06318363145027
+            }
+        }
+    },
+    "last.exportedFilePath": "C:/Users/diceke/source/repos/OcfEngine/assets/tiledmap",
+    "last.imagePath": "C:/Users/diceke/source/repos/OcfEngine/assets/tiledmap",
+    "map.lastUsedExportFilter": "すべてのファイル (*)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "test2.tmx",
+        "Overworld.tsx"
+    ],
+    "project": "test.tiled-project",
+    "recentFiles": [
+        "Overworld.tsx",
+        "test2.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

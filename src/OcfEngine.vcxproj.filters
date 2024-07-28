@@ -186,6 +186,15 @@
     <ClCompile Include="base\Console.cpp">
       <Filter>ソース ファイル\base</Filter>
     </ClCompile>
+    <ClCompile Include="2d\TMXLayer.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\TMXTiledMap.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\TMXXMLParser.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer\Image.h">
@@ -343,6 +352,15 @@
     </ClInclude>
     <ClInclude Include="platform\PlatformMacros.h">
       <Filter>ヘッダー ファイル\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\TMXLayer.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\TMXTiledMap.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\TMXXMLParser.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

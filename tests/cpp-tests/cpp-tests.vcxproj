@@ -145,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="SpriteTest\SpriteTest.cpp" />
+    <ClCompile Include="TiledMapTest\TiledMapTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppDelegate.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="ComponentTest\ComponentTest.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="SpriteTest\SpriteTest.h" />
+    <ClInclude Include="TiledMapTest\TiledMapTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

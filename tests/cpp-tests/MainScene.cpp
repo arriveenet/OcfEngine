@@ -2,6 +2,7 @@
 
 #include "SpriteTest/SpriteTest.h"
 #include "ComponentTest/ComponentTest.h"
+#include "TiledMapTest/TiledMapTest.h"
 
 USING_NS_OCF;
 
@@ -39,9 +40,19 @@ bool MainScene::init()
 			});
 		addChild(button2);
 
+		auto button3 = Button::create();
+		button3->setText("TiledMapTest");
+		button3->setPosition(100, button2->getPosition().y - 60.0f);
+		button3->setOnClickCallback([=]() {
+			auto scene = new TiledMapTest();
+			scene->init();
+			m_pGame->replaceScene(scene);
+			});
+		addChild(button3);
+
 		auto button = Button::create();
 		button->setText("Exit");
-		button->setPosition(100, button2->getPosition().y -60.0f);
+		button->setPosition(100, button3->getPosition().y -60.0f);
 		button->setOnClickCallback([=]() {
 			m_pGame->exit();
 			});

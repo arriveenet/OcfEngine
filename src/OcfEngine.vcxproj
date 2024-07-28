@@ -175,6 +175,9 @@
     <ClCompile Include="2d\SpriteFrame.cpp" />
     <ClCompile Include="2d\SpriteFrameManager.cpp" />
     <ClCompile Include="2d\SpriteSheetLoader.cpp" />
+    <ClCompile Include="2d\TMXLayer.cpp" />
+    <ClCompile Include="2d\TMXTiledMap.cpp" />
+    <ClCompile Include="2d\TMXXMLParser.cpp" />
     <ClCompile Include="2d\XmlSpriteSheetLoader.cpp" />
     <ClCompile Include="base\Console.cpp" />
     <ClCompile Include="base\FileUtils.cpp" />
@@ -222,6 +225,9 @@
     <ClInclude Include="2d\SpriteFrame.h" />
     <ClInclude Include="2d\SpriteFrameManager.h" />
     <ClInclude Include="2d\SpriteSheetLoader.h" />
+    <ClInclude Include="2d\TMXLayer.h" />
+    <ClInclude Include="2d\TMXTiledMap.h" />
+    <ClInclude Include="2d\TMXXMLParser.h" />
     <ClInclude Include="2d\XmlSpriteSheetLoader.h" />
     <ClInclude Include="base\Config.h" />
     <ClInclude Include="base\Console.h" />
