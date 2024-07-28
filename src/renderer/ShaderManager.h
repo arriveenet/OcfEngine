@@ -19,7 +19,10 @@ public:
 	static void destroyInstance();
 
 	Program* getProgram(ProgramType type);
-	void removeAllPrograms();
+
+protected:
+	ShaderManager();
+	virtual ~ShaderManager();
 
 private:
 	bool init();

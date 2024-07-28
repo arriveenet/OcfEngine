@@ -55,7 +55,7 @@ Camera::~Camera()
 
 bool Camera::init()
 {
-	glm::ivec2 size = Applicaiton::getInstance()->getWindowSize();
+	glm::ivec2 size = m_pGame->getVisibleSize();
 	switch (m_type) {
 		case ocf::Camera::Type::Perspective:
 		{

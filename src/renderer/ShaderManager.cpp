@@ -30,7 +30,11 @@ Program* ShaderManager::getProgram(ProgramType type)
 	return nullptr;
 }
 
-void ShaderManager::removeAllPrograms()
+ShaderManager::ShaderManager()
+{
+}
+
+ShaderManager::~ShaderManager()
 {
 	for (auto& program : m_programs) {
 		delete program.second;

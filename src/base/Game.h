@@ -12,6 +12,8 @@
 
 NS_OCF_BEGIN
 
+class GLView;
+
 /**
  * @brief ゲームクラス
  * ゲームの状態管理などを行うシングルトンクラス。
@@ -71,6 +73,10 @@ public:
 	 * @return 現在のシーンのポインタ
 	 */
 	Scene* getCurrentScene() const { return m_currentScene; }
+
+	GLView* getGLView() { return m_glView; }
+
+	void setGLView(GLView* glView);
 
 	/**
 	 * @brief テクスチャ管理クラスを取得する
@@ -147,6 +153,8 @@ protected:
 	/** デバッグ用の状態(FPSなど)を表示 */
 	void showStats();
 
+	void createStatsLabel();
+
 private:
 	friend Applicaiton;
 	void onWindowSize(int width, int height);
@@ -167,6 +175,7 @@ private:
 	Scene* m_currentScene;
 	Scene* m_nextScene;
 	std::vector<Scene*> m_sceneStack;
+	GLView* m_glView;
 	TextureManager* m_textureManager;
 
 	Font* m_font;
