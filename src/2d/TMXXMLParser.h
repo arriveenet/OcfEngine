@@ -8,6 +8,22 @@
 
 NS_OCF_BEGIN
 
+enum class TMXLayerAttribute {
+	None   = 1 << 0,
+	Base64 = 1 << 1,
+	Gzip   = 1 << 2,
+	Zlib   = 1 << 3,
+	CSV    = 1 << 4,
+};
+
+enum class TMXTileFlag : uint32_t {
+	Horizontal = 0x80000000,
+	Vertical   = 0x40000000,
+	Diagonal   = 0x20000000,
+	FipedAll   = (Horizontal | Vertical | Diagonal),
+	FippedMask = ~(FipedAll)
+};
+
 class TMXLayerInfo : public GameObject {
 public:
 	TMXLayerInfo();

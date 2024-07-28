@@ -33,9 +33,11 @@ Rect TMXTilesetInfo::getRectForGID(uint32_t gid)
 {
 	Rect rect;
 	rect.m_size = m_tileSize;
+	gid = gid - m_firstGid;
 
-	rect.m_position.x = (gid % (int)m_tileSize.x) * m_tileSize.x;
-	rect.m_position.y = (gid / (int)m_tileSize.y) * m_tileSize.y;
+	int max = static_cast<int>(m_imageSize.x / m_tileSize.x);
+	rect.m_position.x = (gid % max) * m_tileSize.x;
+	rect.m_position.y = (gid / max) * m_tileSize.y;
 
 	return rect;
 }
@@ -54,6 +56,7 @@ TMXMapInfo* TMXMapInfo::create(const std::string& tmxFile)
 TMXMapInfo::TMXMapInfo()
 	: m_mapSize(0, 0)
 	, m_tileSize(0, 0)
+	, m_tilesetInfo(nullptr)
 {
 }
 
@@ -82,6 +85,7 @@ bool TMXMapInfo::parseXMLFile(const std::string& xmlFile)
 	m_tileSize.x = mapElement->IntAttribute("tilewidth");
 	m_tileSize.y = mapElement->IntAttribute("tileheight");
 
+	// タイルセットを解析
 	m_tilesetInfo = new TMXTilesetInfo();
 	auto tilesetElement = mapElement->FirstChildElement("tileset");
 	m_tilesetInfo->m_name = tilesetElement->Attribute("name");
@@ -93,6 +97,7 @@ bool TMXMapInfo::parseXMLFile(const std::string& xmlFile)
 	m_tilesetInfo->m_imageSize.x = imageElement->FloatAttribute("width");
 	m_tilesetInfo->m_imageSize.y = imageElement->FloatAttribute("height");
 
+	// レイヤーを解析
 	parseLayer(mapElement);
 
 	return true;
@@ -110,34 +115,60 @@ void TMXMapInfo::parseLayer(tinyxml2::XMLElement* element)
 		layer->m_layerSize.y = layerElement->IntAttribute("height");
 
 		auto dataElement = layerElement->FirstChildElement("data");
-		std::string datString = dataElement->GetText();
+		std::string encoding = dataElement->Attribute("encoding");
+		std::string dataString = dataElement->GetText();
 
-		std::vector<std::string> gidTokens;
-		std::stringstream filestr;
-		filestr << datString;
-		std::string row;
-		while (std::getline(filestr, row, '\n')) {
-			std::string gid;
-			std::istringstream rowstr(row);
-			while (std::getline(rowstr, gid, ',')) {
-				gidTokens.emplace_back(gid);
+		uint32_t atribute = 0;
+		if (encoding == "none") {
+			atribute |= static_cast<uint32_t>(TMXLayerAttribute::None);
+		}
+		else if (encoding == "base64") {
+			atribute |= static_cast<uint32_t>(TMXLayerAttribute::Base64);
+		}
+		else if (encoding == "gzip") {
+			atribute |= static_cast<uint32_t>(TMXLayerAttribute::Gzip);
+		}
+		else if (encoding == "zlib") {
+			atribute |= static_cast<uint32_t>(TMXLayerAttribute::Zlib);
+		}
+		else if (encoding == "csv") {
+			atribute |= static_cast<uint32_t>(TMXLayerAttribute::CSV);
+		}
+		else {
+			OCF_ASSERT(false);
+		}
+
+		if (atribute & static_cast<uint32_t>(TMXLayerAttribute::CSV)) {
+			std::vector<std::string> gidTokens;
+			std::stringstream filestr;
+			filestr << dataString;
+			std::string row;
+			while (std::getline(filestr, row, '\n')) {
+				std::string gid;
+				std::istringstream rowstr(row);
+				while (std::getline(rowstr, gid, ',')) {
+					gidTokens.emplace_back(gid);
+				}
 			}
-		}
 
-		int bufferSize = m_mapSize.x * m_mapSize.y;
-		uint32_t* buffer = static_cast<uint32_t*>(malloc(sizeof(uint32_t) * bufferSize));
-		if (buffer == nullptr) {
-			break;
-		}
-		
-		uint32_t* bufferPtr = buffer;
-		for (const auto& gidToken : gidTokens) {
-			uint32_t tileGid = strtoul(gidToken.c_str(), nullptr, 10);
-			*bufferPtr = tileGid;
-			bufferPtr++;
-		}
+			int bufferSize = m_mapSize.x * m_mapSize.y;
+			uint32_t* buffer = static_cast<uint32_t*>(malloc(sizeof(uint32_t) * bufferSize));
+			if (buffer == nullptr) {
+				break;
+			}
 
-		layer->m_pTiles = buffer;
+			uint32_t* bufferPtr = buffer;
+			for (const auto& gidToken : gidTokens) {
+				uint32_t tileGid = strtoul(gidToken.c_str(), nullptr, 10);
+				*bufferPtr = tileGid;
+				bufferPtr++;
+			}
+
+			layer->m_pTiles = buffer;
+		}
+		else {
+			OCFLOG("OcfEngile: TMX data encoding format is currently not supported");
+		}
 
 		m_layers.emplace_back(layer);
 	}
