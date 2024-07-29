@@ -133,8 +133,8 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
 #ifdef _WIN32
     const int displayWidth = GetSystemMetrics(SM_CXSCREEN);
     const int displayHeight = GetSystemMetrics(SM_CYSCREEN);
-    const int windowPosX = (int)(displayWidth / 2) - (windowSize.x / 2);
-    const int windowPosY = (int)(displayHeight / 2) - (windowSize.y / 2);
+    const int windowPosX = static_cast<int>((displayWidth / 2.0f) - (windowSize.x / 2.0f));
+    const int windowPosY = static_cast<int>((displayHeight / 2.0f) - (windowSize.y / 2.0f));
     glfwSetWindowPos(m_pMainWindow, windowPosX, windowPosY);
 #endif
 
@@ -161,7 +161,7 @@ void GLViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, int a
 void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* window, double xpos, double ypos)
 {
     m_mousePosition.x = static_cast<float>(xpos);
-    m_mousePosition.y = static_cast<float>(ypos);
+    m_mousePosition.y = static_cast<float>(m_screenSize.y - ypos);
 }
 
 void GLViewImpl::onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
