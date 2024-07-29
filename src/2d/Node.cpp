@@ -22,6 +22,7 @@ Node::Node()
 	, m_modelVewTransform(1.0f)
 	, m_localZOrder(0)
 	, m_globalZOrder(0.0f)
+	, m_visible(true)
 	, m_ignoreAnchorPointForPosition(false)
 	, m_transformDirty(true)
 	, m_transformUpdated(true)
@@ -34,6 +35,7 @@ Node::~Node()
 {
 	while (!m_children.empty()) {
 		auto entity = m_children.back();
+		entity->onExit();
 		entity->release();
 		m_children.pop_back();
 	}
@@ -97,6 +99,20 @@ void Node::updateTransform()
 	}
 }
 
+void Node::onEnter()
+{
+	for (const auto& child : m_children) {
+		child->onEnter();
+	}
+}
+
+void Node::onExit()
+{
+	for (const auto& child : m_children) {
+		child->onExit();
+	}
+}
+
 void Node::draw(Renderer* renderer, const glm::mat4& transform)
 {
 }
@@ -155,6 +171,20 @@ bool Node::hitTest(const glm::vec2& worldPoint) const
 	glm::vec2 point = this->convertToNodeSpace(worldPoint);
 	glm::vec2 size = this->getSize();
 	return Rect(0.0f, 0.0f, size.x, size.y).intersect(point);
+}
+
+void Node::setVisible(bool visible)
+{
+	if (visible != m_visible) {
+		m_visible = visible;
+		if (m_visible)
+			m_transformUpdated = m_transformDirty = true;
+	}
+}
+
+bool Node::isVisible() const
+{
+	return m_visible;
 }
 
 void Node::setAnchorPoint(const glm::vec2& point)
@@ -218,11 +248,15 @@ void Node::setGlobalZOrder(float globalZorder)
 	}
 }
 
-void Node::addChild(Node* pEntity)
+void Node::addChild(Node* pNode)
 {
-	m_children.emplace_back(pEntity);
+	OCFASSERT(pNode != nullptr, "The pointer to the node to be added is NULL.");
 
-	pEntity->setParent(this);
+	m_children.emplace_back(pNode);
+
+	pNode->setParent(this);
+
+	pNode->onEnter();
 }
 
 void Node::removeChild(Node* pEntity)
@@ -352,6 +386,10 @@ glm::vec2 Node::convertToWorldSpace(const glm::vec2& nodePoint) const
 
 void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags)
 {
+	if (!m_visible) {
+		return;
+	}
+
 	uint32_t flags = processParentFlag(parentTransform, parentFlags);
 
 	m_pGame->pushMatrix(MatrixStack::ModelView);

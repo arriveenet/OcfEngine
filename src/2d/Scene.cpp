@@ -33,23 +33,35 @@ bool Scene::init()
 
 void Scene::render(Renderer* renderer, const glm::mat4& eyeProjection)
 {
-	Scene* pCurrentScene = Game::getInstance()->getCurrentScene();
-	Camera* pCamera = pCurrentScene->getDefaultCamera();
+	Camera* defaultCamera = nullptr;
+	for (const auto& camera : getCameras()) {
+		if (!camera->isVisible()) {
+			continue;
+		}
 
-	Camera::s_pVisitingCamera = pCamera;
+		Camera::s_pVisitingCamera = camera;
+		if (Camera::s_pVisitingCamera->getCameraFlag() == CameraFlag::Default) {
+			defaultCamera = Camera::s_pVisitingCamera;
+		}
 
-	const auto& transform = getNodeToParentTransform();
+		const auto& transform = getNodeToParentTransform();
 
-	m_pGame->pushMatrix(MatrixStack::Projection);
-	m_pGame->loadMatrix(MatrixStack::Projection, Camera::s_pVisitingCamera->getViewProjectionMatrix());
+		m_pGame->pushMatrix(MatrixStack::Projection);
+		m_pGame->loadMatrix(MatrixStack::Projection, Camera::s_pVisitingCamera->getViewProjectionMatrix());
 
-	Node::visit(renderer, transform, 0);
+		Node::visit(renderer, transform, 0);
 
-	renderer->draw();
+		renderer->draw();
 
-	m_pGame->popMatrix(MatrixStack::Projection);
+		m_pGame->popMatrix(MatrixStack::Projection);
+	}
 
 	Camera::s_pVisitingCamera = nullptr;
+}
+
+const std::vector<Camera*>& Scene::getCameras()
+{
+	return m_cameras;
 }
 
 NS_OCF_END

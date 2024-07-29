@@ -17,6 +17,7 @@ Camera::Camera()
 	, m_zNear(0.0f)
 	, m_zFar(0.0f)
 	, m_type(Type::Orthographic)
+	, m_scene(nullptr)
 {
 }
 
@@ -131,6 +132,49 @@ const glm::mat4 Camera::getViewProjectionMatrix() const
 	m_viewProjection = m_projection * m_view;
 
 	return m_viewProjection;
+}
+
+void Camera::onEnter()
+{
+	if (m_scene == nullptr) {
+		auto scene = getScene();
+		if (scene) {
+			// シーンにこのカメラを追加
+			setScene(scene);
+		}
+	}
+	Node::onEnter();
+}
+
+void Camera::onExit()
+{
+	// シーンからこのカメラを削除
+	setScene(nullptr);
+	Node::onExit();
+}
+
+void Camera::setScene(Scene* scene)
+{
+	if (m_scene != scene) {
+		// シーンからこのカメラを削除
+		if (scene == nullptr) {
+			auto& cameras = m_scene->m_cameras;
+			auto iter = std::find(cameras.begin(), cameras.end(), this);
+			if (iter != cameras.end()) {
+				cameras.erase(iter);
+			}
+			m_scene = nullptr;
+		}
+		// シーンにこのカメラを追加
+		else {
+			m_scene = scene;
+			auto& cameras = m_scene->m_cameras;
+			auto iter = std::find(cameras.begin(), cameras.end(), this);
+			if (iter == cameras.end()) {
+				cameras.emplace_back(this);
+			}
+		}
+	}
 }
 
 NS_OCF_END

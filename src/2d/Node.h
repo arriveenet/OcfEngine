@@ -44,6 +44,9 @@ public:
 	virtual void updateNodes(float deltaTime);
 	virtual void updateTransform();
 
+	virtual void onEnter();
+	virtual void onExit();
+
 	virtual void draw(Renderer* renderer, const glm::mat4& transform);
 
 	virtual void setPosition(const glm::vec3& position);
@@ -57,6 +60,9 @@ public:
 	virtual glm::vec2 getSize() const;
 
 	virtual bool hitTest(const glm::vec2& worldPoint) const;
+
+	virtual void setVisible(bool visible);
+	virtual bool isVisible() const;
 
 	virtual void setAnchorPoint(const glm::vec2& point);
 	virtual const glm::vec2& getAnchorPoint() const;
@@ -172,6 +178,7 @@ protected:
 	std::int32_t m_localZOrder;	//!< ローカルZオーダー
 	float m_globalZOrder;		//!< グローバルZオーダー
 
+	bool m_visible;							//!< ノード表示フラグ
 	bool m_ignoreAnchorPointForPosition;	//!< ノードの基準点がvec2(0,0)の場合はtrue、それ以外の場合はfalse
 	mutable bool m_transformDirty;			//!< 変換のダーティーフラグ
 	bool m_transformUpdated;				//!< 変換の更新のダーティーフラグ

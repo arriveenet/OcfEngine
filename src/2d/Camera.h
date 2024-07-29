@@ -46,6 +46,11 @@ public:
 	CameraFlag getCameraFlag() const { return m_cameraFlag; }
 	void setCameraFlag(CameraFlag flag) { m_cameraFlag = flag; }
 
+	void onEnter() override;
+	void onExit() override;
+
+	void setScene(Scene* scene);
+
 protected:
 	static Camera* s_pVisitingCamera;
 	CameraFlag m_cameraFlag;
@@ -56,6 +61,7 @@ protected:
 	float m_zNear;
 	float m_zFar;
 	Type m_type;
+	Scene* m_scene;
 };
 
 NS_OCF_END

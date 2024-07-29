@@ -142,10 +142,12 @@ void Game::popScene()
 void Game::setNextScene()
 {
 	if (m_currentScene != nullptr) {
+		m_currentScene->onExit();
 		m_currentScene->release();
 	}
 
 	m_currentScene = m_nextScene;
+	m_currentScene->onEnter();
 
 	m_nextScene = nullptr;
 }

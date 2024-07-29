@@ -17,8 +17,13 @@ public:
 
 	virtual Camera* getDefaultCamera() { return m_pDefaultCamera; }
 
+	const std::vector<Camera*>& getCameras();
+
 protected:
+	friend Camera;
+
 	Camera* m_pDefaultCamera;
+	std::vector<Camera*> m_cameras;
 };
 
 NS_OCF_END
