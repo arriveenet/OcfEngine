@@ -391,6 +391,19 @@ void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t
 	m_pGame->popMatrix(MatrixStack::ModelView);
 }
 
+Scene* Node::getScene() const
+{
+	if(m_pParent == nullptr)
+		return nullptr;
+
+	auto* sceneNode = m_pParent;
+	while (sceneNode->m_pParent != nullptr) {
+		sceneNode = sceneNode->m_pParent;
+	}
+
+	return dynamic_cast<Scene*>(sceneNode);
+}
+
 bool Node::isVisitableByVisitingCamera() const
 {
 	Camera* pCamera = Camera::getVisitingCamera();
