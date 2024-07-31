@@ -20,7 +20,7 @@ bool MainScene::init()
 {
 	if (Scene::init()) {
 		auto visibleSize = m_pGame->getVisibleSize();
-		auto button1 = Button::create();
+		auto button1 = Button::create("ButtonNormal.png", "ButtonActive.png");
 		button1->setText("SpriteTest");
 		button1->setPosition(100, visibleSize.y -130.0f);
 		button1->setOnClickCallback([=]() {
@@ -30,7 +30,7 @@ bool MainScene::init()
 			});
 		addChild(button1);
 
-		auto button2 = Button::create();
+		auto button2 = Button::create("ButtonNormal.png", "ButtonActive.png");
 		button2->setText("CompoTest");
 		button2->setPosition(100, button1->getPosition().y - 60.0f);
 		button2->setOnClickCallback([=]() {
@@ -40,7 +40,7 @@ bool MainScene::init()
 			});
 		addChild(button2);
 
-		auto button3 = Button::create();
+		auto button3 = Button::create("ButtonNormal.png", "ButtonActive.png");
 		button3->setText("TiledMapTest");
 		button3->setPosition(100, button2->getPosition().y - 60.0f);
 		button3->setOnClickCallback([=]() {
@@ -50,7 +50,7 @@ bool MainScene::init()
 			});
 		addChild(button3);
 
-		auto button = Button::create();
+		auto button = Button::create("ButtonNormal.png", "ButtonActive.png");
 		button->setText("Exit");
 		button->setPosition(100, button3->getPosition().y -60.0f);
 		button->setOnClickCallback([=]() {

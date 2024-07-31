@@ -22,7 +22,7 @@ bool TestCase::init()
 		m_pTitleLabel->setScale(2.0f);
 		addChild(m_pTitleLabel);
 
-		auto back = ui::Button::create();
+		auto back = ui::Button::create("ButtonNormal.png", "ButtonActive.png");
 		back->setText("Back");
 		back->setPosition(visibleSize.x - 100.0f, 30.0f); 
 		back->setOnClickCallback([=]() {

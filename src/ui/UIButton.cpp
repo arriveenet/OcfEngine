@@ -17,8 +17,19 @@ Button* Button::create()
 	return nullptr;
 }
 
+Button* Button::create(std::string_view normalImage, std::string_view activeImage)
+{
+	Button* button = new Button();
+	if (button->init(normalImage, activeImage)) {
+		return button;
+	}
+	OCF_SAFE_DELETE(button);
+	return nullptr;
+}
+
 Button::Button()
 	: m_pButtonNormalRenderer(nullptr)
+	, m_pButtonActiveRenderer(nullptr)
 	, m_pTextRenderer(nullptr)
 	, m_onClick(nullptr)
 {
@@ -36,17 +47,30 @@ bool Button::init()
 	return false;
 }
 
+bool Button::init(std::string_view normalImage, std::string_view activeImage)
+{
+	m_normalFilename = normalImage;
+	m_activeFilename = activeImage;
+
+	if (Widget::init()) {
+		return true;
+	}
+	return false;
+}
+
 void Button::processInput(const InputState& inputState)
 {
-	m_pLineRenderer->clear();
-
 	glm::vec2 mousePos = inputState.mouse.getPosition();
 	if (this->hitTest(mousePos)) {
+		m_pButtonNormalRenderer->setVisible(false);
+		m_pButtonActiveRenderer->setVisible(true);
 		if (inputState.mouse.getButtonState(Mouse::Left) == ButtonState::Pressed) {
 			m_onClick();
 		}
-
-		m_pLineRenderer->drawRect(glm::vec2(0.0f, 0.0f), m_size, Color4f::WHITE);
+	}
+	else {
+		m_pButtonNormalRenderer->setVisible(true);
+		m_pButtonActiveRenderer->setVisible(false);
 	}
 }
 
@@ -80,12 +104,14 @@ std::string Button::getText() const
 
 void Button::initRenderer()
 {
-	m_pButtonNormalRenderer = Sprite::create("ButtonBlue.png");
-	m_pButtonNormalRenderer->setAnchorPoint(glm::vec2(0.0f, 0.0f));
-	addChild(m_pButtonNormalRenderer);
+	m_pButtonNormalRenderer = Sprite::create(m_normalFilename);
+	m_pButtonActiveRenderer = Sprite::create(m_activeFilename);
 
-	m_pLineRenderer = DrawShape::create();
-	addChild(m_pLineRenderer);
+	m_pButtonNormalRenderer->setAnchorPoint(glm::vec2(0.0f, 0.0f));
+	m_pButtonActiveRenderer->setAnchorPoint(glm::vec2(0.0f, 0.0f));
+
+	addChild(m_pButtonNormalRenderer);
+	addChild(m_pButtonActiveRenderer);
 
 	setSize(m_pButtonNormalRenderer->getSize());
 }
