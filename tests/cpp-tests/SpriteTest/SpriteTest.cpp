@@ -27,10 +27,15 @@ bool SpriteTestDemo::init()
 		this->addChild(sprite2);
 
 		SpriteFrameManager::getInstance()->addSpriteFramesWithFile("texture.xml");
-		auto sprirte3 = Sprite::createWithSpriteFrameName("Kirby_1.png");
-		sprirte3->setPosition(100, 100);
-		sprirte3->setScale(10.0f);
-		this->addChild(sprirte3);
+		auto sprite3 = Sprite::createWithSpriteFrameName("Kirby_1.png");
+		sprite3->setPosition(100, 100);
+		sprite3->setScale(10.0f);
+		this->addChild(sprite3);
+
+
+		auto sprite4 = Sprite::create();
+		sprite4->setSize(100, 100);
+		this->addChild(sprite4);
 		return true;
 	}
 

@@ -20,6 +20,7 @@ class SpriteFrame;
 class Sprite : public Node {
 public:
 	/** スプライトを作成*/
+	static Sprite* create();
 	static Sprite* create(const std::string& filenam);
 	static Sprite* createWithSpriteFrame(SpriteFrame* spriteFrame);
 	static Sprite* createWithSpriteFrameName(std::string_view spriteFrameName);

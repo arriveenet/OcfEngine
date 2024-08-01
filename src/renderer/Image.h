@@ -16,6 +16,8 @@ public:
 	Image();
 	virtual ~Image();
 
+	bool initWithRowData(const uint8_t* pData, size_t dataSize, int width, int height);
+
 	bool loadImageFile(const std::string& path);
 	bool loadImageData(const unsigned char* pData, size_t dataSize);
 
@@ -36,6 +38,7 @@ protected:
 
 protected:
 	unsigned char* m_pData;
+	size_t m_dataSize;
 	int m_width;
 	int m_height;
 	Format m_fileType;

@@ -36,4 +36,8 @@
         }                   \
     } while (0);            \
 
+#define OCF_BREAK_IF(cond) \
+    if (cond)             \
+    break
+
 #define OCFLOG(format, ...) ocf::print(format, ##__VA_ARGS__)

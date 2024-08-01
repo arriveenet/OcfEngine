@@ -13,6 +13,17 @@ NS_OCF_BEGIN
 
 static unsigned short indices[] = { 0, 1, 2, 3, 2, 1 };
 
+Sprite* Sprite::create()
+{
+	Sprite* pSprite = new Sprite();
+	if (pSprite->init()) {
+		pSprite->autorelease();
+		return pSprite;
+	}
+	OCF_SAFE_DELETE(pSprite);
+	return nullptr;
+}
+
 Sprite* Sprite::create(const std::string& filenam)
 {
 	Sprite* pSprite = new Sprite();
@@ -68,6 +79,7 @@ Sprite::~Sprite()
 
 bool Sprite::init()
 {
+	initWithTexture(nullptr, Rect(0, 0, 0, 0));
 	return true;
 }
 
@@ -122,6 +134,10 @@ bool Sprite::initWithSpriteFrame(SpriteFrame* spriteFrame)
 
 void Sprite::setTexture(Texture2D* texture)
 {
+	if (texture == nullptr) {
+		texture = m_pGame->getTextureManager()->getWhiteTexture();
+	}
+
 	if (m_texture != texture) {
 		OCF_SAFE_RETAIN(texture);
 		OCF_SAFE_RELEASE(m_texture);

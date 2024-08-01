@@ -28,6 +28,7 @@ namespace {
 
 Image::Image()
 	: m_pData(nullptr)
+	, m_dataSize(0)
 	, m_width(0)
 	, m_height(0)
 	, m_fileType(Format::UNKNOWN)
@@ -44,6 +45,27 @@ Image::~Image()
 
 	m_width = 0;
 	m_height = 0;
+}
+
+bool Image::initWithRowData(const uint8_t* pData, size_t dataSize, int width, int height)
+{
+	bool result = false;
+	do {
+		OCF_BREAK_IF(width == 0 || height == 0);
+
+		m_width = width;
+		m_height = height;
+		m_pixcelFormat = PixelFormat::RGBA;
+
+		m_dataSize = dataSize;
+		m_pData = new uint8_t[dataSize];
+		OCF_BREAK_IF(pData == nullptr);
+		memcpy(m_pData, pData, m_dataSize);
+
+		result = true;
+	} while (0);
+
+	return result;
 }
 
 bool Image::loadImageFile(const std::string& path)

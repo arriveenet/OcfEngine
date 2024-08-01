@@ -6,12 +6,15 @@
 
 NS_OCF_BEGIN
 
+class Image;
+
 class Texture2D : public GameObject {
 public:
 	Texture2D();
 	virtual ~Texture2D();
 
 	bool initWithFile(const std::string& filename);
+	bool initWithImage(Image* image, PixelFormat format);
 	void setActive() const;
 
 	int getWidth() const;
