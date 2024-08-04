@@ -13,10 +13,8 @@ public:
 	~Applicaiton();
 
 	bool init();
-	void destroy();
 
 	int run();
-	void exit();
 
 private:
 	int m_windowWidth;

@@ -32,10 +32,6 @@ bool Applicaiton::init()
 	return true;
 }
 
-void Applicaiton::destroy()
-{
-}
-
 int Applicaiton::run()
 {
 	if (!applicationDidFinishLaunching()) {
@@ -45,6 +41,8 @@ int Applicaiton::run()
 	auto game = Game::getInstance();
 	auto glView = game->getGLView();
 
+	glView->retain();
+
 	// Main loop
 	while (!glView->windowShouldClose())
 	{
@@ -52,17 +50,14 @@ int Applicaiton::run()
 		glView->pollEvents();
 	}
 
-	// Destroy application
-	destroy();
-
+	if (glView->isOpenGLReady()) {
+		game->exit();
+		game->mainLoop();
+		game = nullptr;
+	}
 	glView->release();
 
 	return 0;
-}
-
-void Applicaiton::exit()
-{
-
 }
 
 NS_OCF_END

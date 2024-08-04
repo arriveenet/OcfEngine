@@ -207,6 +207,17 @@ GLViewImpl* GLViewImpl::createWithRect(std::string_view viewName, const Rect& re
     return nullptr;
 }
 
+void GLViewImpl::end()
+{
+    if (m_pMainWindow != nullptr) {
+        glfwDestroyWindow(m_pMainWindow);
+        glfwSetWindowShouldClose(m_pMainWindow, 1);
+        m_pMainWindow = nullptr;
+    }
+
+    release();
+}
+
 GLViewImpl::GLViewImpl(bool initGlfw)
     : m_pMainWindow(nullptr)
     , m_mousePosition(0, 0)
@@ -225,7 +236,6 @@ GLViewImpl::GLViewImpl(bool initGlfw)
 GLViewImpl::~GLViewImpl()
 {
     GLFWEventHandler::setGLViewImpl(nullptr);
-    glfwDestroyWindow(m_pMainWindow);
     glfwTerminate();
 }
 
@@ -235,7 +245,7 @@ bool GLViewImpl::windowShouldClose()
         return glfwWindowShouldClose(m_pMainWindow) ? true : false;
     }
     else {
-        return false;
+        return true;
     }
 }
 

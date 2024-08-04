@@ -13,6 +13,8 @@ public:
 	static GLViewImpl* create(std::string_view viewName, bool resizable);
 	static GLViewImpl* createWithRect(std::string_view viewName, const Rect& rect, bool resizable = false);
 
+	void end() override;
+
 	bool windowShouldClose() override;
 	void pollEvents() override;
 

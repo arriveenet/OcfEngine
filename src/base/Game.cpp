@@ -71,6 +71,8 @@ void Game::destroyInstance()
 
 bool Game::init()
 {
+	m_running = true;
+
 	m_lastUpdate = std::chrono::steady_clock::now();
 
 	m_renderer = new Renderer();
@@ -89,14 +91,21 @@ bool Game::init()
 
 void Game::mainLoop()
 {
-	update();
-	draw();
+	if (!m_running) {
+		if (m_glView != nullptr) {
+			m_glView->end();
+			m_glView = nullptr;
+		}
+	}
+	else {
+		update();
+		draw();
+	}
 }
 
 void Game::exit()
 {
 	m_running = false;
-	Applicaiton::getInstance()->exit();
 }
 
 void Game::runWithScene(Scene* pScene)
@@ -266,11 +275,6 @@ const glm::mat4& Game::getMatrix(MatrixStack type)
 void Game::processInput()
 {
 	const InputState& inputState = m_input->getState();
-
-	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_ESCAPE) == ButtonState::Pressed) {
-		exit();
-	}
-
 	m_currentScene->processInput(inputState);
 
 	m_input->update();

@@ -15,7 +15,7 @@ AppDelegate::~AppDelegate()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
-	int windowWidth = 920, windowHeight = 720;
+	const float windowWidth = 920, windowHeight = 720;
 
 	auto game = Game::getInstance();
 	auto glView = game->getGLView();
