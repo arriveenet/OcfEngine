@@ -1,7 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "ApplicationBase.h"
-#include "Window.h"
 #include "2d/Scene.h"
 
 NS_OCF_BEGIN
@@ -18,20 +17,8 @@ public:
 
 	int run();
 	void exit();
-	void swapBuffers();
-	void pollEvents();
-	bool windowShouldClose();
-	double getTime();
-
-	glm::ivec2 getWindowSize() const;
-	glm::vec2 getCursorPosition() const;
 
 private:
-	friend Window;
-	static void onWindowSize(GLFWwindow* window, int width, int height);
-
-private:
-	Window m_window;
 	int m_windowWidth;
 	int m_windowHeight;
 };

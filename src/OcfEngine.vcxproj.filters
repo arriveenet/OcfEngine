@@ -117,9 +117,6 @@
     <ClCompile Include="platform\Application.cpp">
       <Filter>ソース ファイル\platform</Filter>
     </ClCompile>
-    <ClCompile Include="platform\Window.cpp">
-      <Filter>ソース ファイル\platform</Filter>
-    </ClCompile>
     <ClCompile Include="base\GameObject.cpp">
       <Filter>ソース ファイル\base</Filter>
     </ClCompile>
@@ -159,9 +156,6 @@
     <ClCompile Include="2d\Scene.cpp">
       <Filter>ソース ファイル\2d</Filter>
     </ClCompile>
-    <ClCompile Include="platform\ApplicationBase.cpp">
-      <Filter>ヘッダー ファイル\platform</Filter>
-    </ClCompile>
     <ClCompile Include="ui\UIWidget.cpp">
       <Filter>ソース ファイル\ui</Filter>
     </ClCompile>
@@ -194,6 +188,15 @@
     </ClCompile>
     <ClCompile Include="2d\TMXXMLParser.cpp">
       <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="platform\ApplicationBase.cpp">
+      <Filter>ソース ファイル\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="platform\GLView.cpp">
+      <Filter>ソース ファイル\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="platform\GLViewImpl.cpp">
+      <Filter>ソース ファイル\platform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,9 +278,6 @@
     <ClInclude Include="platform\Application.h">
       <Filter>ヘッダー ファイル\platform</Filter>
     </ClInclude>
-    <ClInclude Include="platform\Window.h">
-      <Filter>ヘッダー ファイル\platform</Filter>
-    </ClInclude>
     <ClInclude Include="base\GameObject.h">
       <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
@@ -320,9 +320,6 @@
     <ClInclude Include="2d\Scene.h">
       <Filter>ヘッダー ファイル\2d</Filter>
     </ClInclude>
-    <ClInclude Include="platform\ApplicationBase.h">
-      <Filter>ソース ファイル\platform</Filter>
-    </ClInclude>
     <ClInclude Include="base\Config.h">
       <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
@@ -361,6 +358,15 @@
     </ClInclude>
     <ClInclude Include="2d\TMXXMLParser.h">
       <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="platform\ApplicationBase.h">
+      <Filter>ヘッダー ファイル\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="platform\GLView.h">
+      <Filter>ヘッダー ファイル\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="platform\GLViewImpl.h">
+      <Filter>ヘッダー ファイル\platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

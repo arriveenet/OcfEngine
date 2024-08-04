@@ -1,6 +1,9 @@
 #include "AppDelegate.h"
 #include <base/Game.h>
+#include <platform/GLViewImpl.h>
 #include "MainScene.h"
+
+USING_NS_OCF;
 
 AppDelegate::AppDelegate()
 {
@@ -12,13 +15,19 @@ AppDelegate::~AppDelegate()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
-	if (!init()) {
-		return false;
+	auto game = Game::getInstance();
+	auto glView = game->getGLView();
+	if (glView == nullptr) {
+		glView = GLViewImpl::createWithRect("Ocf Engine", Rect(0, 0, 920, 720));
+		game->setGLView(glView);
 	}
+
+	// @TODO ƒtƒHƒ“ƒg‰Šú‰»ˆ—‚ðŒ©’¼‚·
+	game->getFont()->init("fonts\\Consolas.fnt");
 
 	MainScene* scene = new MainScene();
 	scene->init();
-	ocf::Game::getInstance()->runWithScene(scene);
+	game->runWithScene(scene);
 
 	return true;
 }

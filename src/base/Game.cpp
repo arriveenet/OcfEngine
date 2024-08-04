@@ -2,6 +2,7 @@
 #include "2d/Camera.h"
 #include "2d/SpriteFrameManager.h"
 #include "platform/Application.h"
+#include "platform/GLView.h"
 #include "base/FileUtils.h"
 
 #define FPS_UPDATE_INTERVAL	(0.5f)
@@ -17,6 +18,7 @@ Game::Game()
 	, m_renderer(nullptr)
 	, m_currentScene(nullptr)
 	, m_nextScene(nullptr)
+	, m_glView(nullptr)
 	, m_textureManager(nullptr)
 	, m_font(nullptr)
 	, m_input(nullptr)
@@ -44,6 +46,7 @@ Game::~Game()
 	// ファイルユーティリティを解放
 	FileUtils::destroyInstance();
 	SpriteFrameManager::destroyInstance();
+	ShaderManager::destroyInstance();
 
 	// レンダラーを解放
 	OCF_SAFE_DELETE(m_renderer);
@@ -71,25 +74,13 @@ bool Game::init()
 	m_lastUpdate = std::chrono::steady_clock::now();
 
 	m_renderer = new Renderer();
-	m_renderer->init();
 
 	m_textureManager = new TextureManager();
 
 	m_font = new Font();
-	m_font->init("fonts\\Consolas.fnt");
 
 	m_input = new Input();
 	m_input->init();
-
-	m_pFPSLabel = Label::create("FPS: 0.0");
-	m_pDrawCallLabel = Label::create("Draw call: 0");
-	m_pDrawVertexLabel = Label::create("Draw vert: 0");
-
-	glm::vec2 visibleSize = getVisibleSize();
-	unsigned short fontHeight = m_font->getFntCommon().lineHeight;
-	m_pFPSLabel->setPosition(0, visibleSize.y - fontHeight);
-	m_pDrawCallLabel->setPosition(0, visibleSize.y - fontHeight * 2);
-	m_pDrawVertexLabel->setPosition(0, visibleSize.y - fontHeight* 3);
 
 	initMatrixStack();
 
@@ -154,7 +145,19 @@ void Game::setNextScene()
 
 glm::vec2 Game::getVisibleSize() const
 {
-	return Applicaiton::getInstance()->getWindowSize();
+	if (m_glView) {
+		return m_glView->getVisibleSize();
+	}
+
+	return glm::vec2(0, 0);
+}
+
+void Game::setGLView(GLView* glView)
+{
+	if (m_glView != glView) {
+		m_renderer->init();
+		m_glView = glView;
+	}
 }
 
 void Game::initMatrixStack()
@@ -309,7 +312,9 @@ void Game::draw()
 
 	popMatrix(MatrixStack::ModelView);
 
-	Applicaiton::getInstance()->swapBuffers();
+	if (m_glView) {
+		m_glView->swapBuffers();
+	}
 
 	m_renderer->endFrame();
 }
@@ -323,6 +328,12 @@ void Game::calculateDeltaTime()
 
 void Game::showStats()
 {
+	static bool isCreate = false;
+	if (!isCreate) {
+		createStatsLabel();
+		isCreate = true;
+	}
+
 	m_frames++;
 	m_accumulator += m_deltaTime;
 
@@ -371,6 +382,19 @@ void Game::showStats()
 	m_pDrawVertexLabel->visit(m_renderer, modelView, 0);
 
 	popMatrix(MatrixStack::Projection);
+}
+
+void Game::createStatsLabel()
+{
+	m_pFPSLabel = Label::create("FPS: 0.0");
+	m_pDrawCallLabel = Label::create("Draw call: 0");
+	m_pDrawVertexLabel = Label::create("Draw vert: 0");
+
+	glm::vec2 visibleSize = getVisibleSize();
+	unsigned short fontHeight = m_font->getFntCommon().lineHeight;
+	m_pFPSLabel->setPosition(0, visibleSize.y - fontHeight);
+	m_pDrawCallLabel->setPosition(0, visibleSize.y - fontHeight * 2);
+	m_pDrawVertexLabel->setPosition(0, visibleSize.y - fontHeight * 3);
 }
 
 void Game::onWindowSize(int width, int height)

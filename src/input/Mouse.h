@@ -2,8 +2,6 @@
 #include <glm/glm.hpp>
 #include "base/types.h"
 
-struct GLFWwindow;
-
 NS_OCF_BEGIN
 
 class Mouse {
@@ -25,7 +23,7 @@ public:
 		Middle = Button3
 	};
 
-	static void onMouseButton(GLFWwindow* window, int button, int action, int mods);
+	static void onMouseButton(int button, int action, int mods);
 
 	Mouse();
 

@@ -6,7 +6,7 @@ NS_OCF_BEGIN
 uint32_t Mouse::m_currentButton = 0;
 uint32_t Mouse::m_previousButton = 0;
 
-void Mouse::onMouseButton(GLFWwindow* window, int button, int action, int mods)
+void Mouse::onMouseButton(int button, int action, int mods)
 {
 	constexpr int offset = MouseButton::Button1 - GLFW_MOUSE_BUTTON_1;
 	button += offset;

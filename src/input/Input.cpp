@@ -1,6 +1,7 @@
 #include "Input.h"
 #include <cstring>
 #include "base/Game.h"
+#include "platform/GLViewImpl.h"
 
 NS_OCF_BEGIN
 
@@ -22,12 +23,8 @@ void Input::update()
 	memcpy(m_inputState.keyboard.m_prevState, m_inputState.keyboard.m_currentState, KEY_CODE_MAX);
 
 	// マウスの座標を設定
-	auto app = Applicaiton::getInstance();
-	auto windowSize = app->getWindowSize();
-	auto cursorPos = app->getCursorPosition();
-	float cursorX = cursorPos.x;
-	float cursorY = windowSize.y - cursorPos.y;
-	m_inputState.mouse.m_position = { cursorX, cursorY };
+	GLViewImpl* view = dynamic_cast<GLViewImpl*>(Game::getInstance()->getGLView());
+	m_inputState.mouse.m_position = view->getMousePosition();
 
 	// マウスボタンの状態を保持
 	m_inputState.mouse.m_previousButton = m_inputState.mouse.m_currentButton;

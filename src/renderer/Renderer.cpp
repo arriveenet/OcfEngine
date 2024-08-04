@@ -45,7 +45,6 @@ static void debugMessageCallback(GLenum source, GLenum type, GLuint id,
 
 Renderer::Renderer()
 	: m_viewport(0, 0, 0, 0)
-	, m_shaderManager(nullptr)
 	, m_pTriangleBatchToDraw(nullptr)
 	, m_triangleVertices()
 	, m_triangleIndices()
@@ -67,9 +66,6 @@ Renderer::~Renderer()
 
 bool Renderer::init()
 {
-	// シェーダーを初期化
-	m_shaderManager = ShaderManager::getInstance();
-
 	m_pVertexArray = new VertexArray();
 	m_pVertexArray->bind();
 
@@ -103,10 +99,6 @@ bool Renderer::init()
 
 void Renderer::destroy()
 {
-	// シェーダーの後始末
-	m_shaderManager->removeAllPrograms();
-	m_shaderManager->destroyInstance();
-
 	std::free(m_pTriangleBatchToDraw);
 
 	delete m_pVertexArray;

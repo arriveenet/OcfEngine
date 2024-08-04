@@ -65,7 +65,6 @@ protected:
 
 private:
 	glm::ivec4 m_viewport;
-	ShaderManager* m_shaderManager;
 	std::vector<TrianglesCommand*> m_trianglesCommands;
 	std::vector<RenderQueue> m_renderGroups;
 

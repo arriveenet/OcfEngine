@@ -191,7 +191,8 @@
     <ClCompile Include="input\Mouse.cpp" />
     <ClCompile Include="platform\Application.cpp" />
     <ClCompile Include="platform\ApplicationBase.cpp" />
-    <ClCompile Include="platform\Window.cpp" />
+    <ClCompile Include="platform\GLView.cpp" />
+    <ClCompile Include="platform\GLViewImpl.cpp" />
     <ClCompile Include="renderer\CustomCommand.cpp" />
     <ClCompile Include="renderer\Image.cpp" />
     <ClCompile Include="renderer\OpenGLUtility.cpp" />
@@ -245,8 +246,9 @@
     <ClInclude Include="OcfEngine.h" />
     <ClInclude Include="platform\Application.h" />
     <ClInclude Include="platform\ApplicationBase.h" />
+    <ClInclude Include="platform\GLView.h" />
+    <ClInclude Include="platform\GLViewImpl.h" />
     <ClInclude Include="platform\PlatformMacros.h" />
-    <ClInclude Include="platform\Window.h" />
     <ClInclude Include="renderer\CustomCommand.h" />
     <ClInclude Include="renderer\Image.h" />
     <ClInclude Include="renderer\OpenGLInclude.h" />
