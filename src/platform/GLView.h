@@ -9,6 +9,15 @@ NS_OCF_BEGIN
 class Scene;
 class Renderer;
 
+struct GLContextAttributes {
+	int redBits;
+	int greenBits;
+	int blueBits;
+	int alphaBits;
+	int depthBits;
+	bool vsync = true;
+};
+
 class GLView : public GameObject {
 public:
 	GLView();
@@ -29,6 +38,12 @@ public:
 	std::string_view getViewName() const;
 
 	void renderScene(Scene* scene, Renderer* renderer);
+
+	static void setGLContextAttributes(GLContextAttributes& glContextAttribues);
+
+	static GLContextAttributes getGLContextAttributes();
+
+	static GLContextAttributes m_glContextAttributes;
 
 protected:
 	glm::vec2 m_screenSize;

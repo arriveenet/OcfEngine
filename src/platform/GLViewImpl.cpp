@@ -1,7 +1,6 @@
 #include "GLViewImpl.h"
 
 #include <unordered_map>
-#include <windows.h>
 #include "input/Keyboard.h"
 #include "input/Mouse.h"
 
@@ -255,6 +254,13 @@ void GLViewImpl::swapBuffers()
     glfwSwapBuffers(m_pMainWindow);
 }
 
+void GLViewImpl::setWindowPosition(int xpos, int ypos)
+{
+    if (m_pMainWindow != nullptr) {
+        glfwSetWindowPos(m_pMainWindow, xpos, ypos);
+    }
+}
+
 bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool resizable)
 {
     setViewName(viewName);
@@ -266,6 +272,11 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, resizable ? GL_TRUE : GL_FALSE);
+    glfwWindowHint(GLFW_RED_BITS, m_glContextAttributes.redBits);
+    glfwWindowHint(GLFW_GREEN_BITS, m_glContextAttributes.greenBits);
+    glfwWindowHint(GLFW_BLUE_BITS, m_glContextAttributes.blueBits);
+    glfwWindowHint(GLFW_ALPHA_BITS, m_glContextAttributes.alphaBits);
+    glfwWindowHint(GLFW_DEPTH_BITS, m_glContextAttributes.depthBits);
 
     m_pMainWindow = glfwCreateWindow(static_cast<int>(windowSize.x), static_cast<int>(windowSize.y), 
                                      m_viewName.c_str(), nullptr, nullptr);
@@ -275,14 +286,6 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
     }
 
     glfwMakeContextCurrent(m_pMainWindow);
-
-#ifdef _WIN32
-    const int displayWidth = GetSystemMetrics(SM_CXSCREEN);
-    const int displayHeight = GetSystemMetrics(SM_CYSCREEN);
-    const int windowPosX = static_cast<int>((displayWidth / 2.0f) - (windowSize.x / 2.0f));
-    const int windowPosY = static_cast<int>((displayHeight / 2.0f) - (windowSize.y / 2.0f));
-    glfwSetWindowPos(m_pMainWindow, windowPosX, windowPosY);
-#endif
 
     glfwSetMouseButtonCallback(m_pMainWindow, GLFWEventHandler::onGLFWMouseButtonCallback);
     glfwSetCursorPosCallback(m_pMainWindow, GLFWEventHandler::onGLFWMouseMoveCallback);
@@ -294,7 +297,7 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
         return false;
     }
 
-    glfwSwapInterval(1);
+    glfwSwapInterval(m_glContextAttributes.vsync ? 1 : 0);
 
     return true;
 }

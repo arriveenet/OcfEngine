@@ -19,7 +19,9 @@ public:
 	bool isOpenGLReady() override;
 	void swapBuffers() override;
 
-	glm::vec2 getMousePosition() { return m_mousePosition; }
+	void setWindowPosition(int xpos, int ypos);
+
+	glm::vec2 getMousePosition() const { return m_mousePosition; }
 
 protected:
 	GLViewImpl(bool initGlfw = true);

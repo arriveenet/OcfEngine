@@ -2,6 +2,8 @@
 
 NS_OCF_BEGIN
 
+GLContextAttributes GLView::m_glContextAttributes = { 8, 8, 8, 8, 24 };
+
 GLView::GLView()
 	: m_screenSize(0.0f, 0.0f)
 	, m_resolutionSize(0.0f, 0.0f)
@@ -33,6 +35,16 @@ std::string_view GLView::getViewName() const
 
 void GLView::renderScene(Scene* scene, Renderer* renderer)
 {
+}
+
+void GLView::setGLContextAttributes(GLContextAttributes& glContextAttribues)
+{
+	m_glContextAttributes = glContextAttribues;
+}
+
+GLContextAttributes GLView::getGLContextAttributes()
+{
+	return m_glContextAttributes;
 }
 
 NS_OCF_END
