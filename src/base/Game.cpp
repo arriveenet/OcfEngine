@@ -267,7 +267,7 @@ void Game::processInput()
 {
 	const InputState& inputState = m_input->getState();
 
-	if (inputState.keyboard.getKeyState(GLFW_KEY_ESCAPE) == ButtonState::Pressed) {
+	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_ESCAPE) == ButtonState::Pressed) {
 		exit();
 	}
 

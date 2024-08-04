@@ -20,7 +20,7 @@ void Input::prepareUpdate()
 void Input::update()
 {
 	// キーボードの状態を保持
-	memcpy(m_inputState.keyboard.m_prevState, m_inputState.keyboard.m_currentState, KEY_CODE_MAX);
+	memcpy(m_inputState.keyboard.m_prevState, m_inputState.keyboard.m_currentState, sizeof(m_inputState.keyboard.m_prevState));
 
 	// マウスの座標を設定
 	GLViewImpl* view = dynamic_cast<GLViewImpl*>(Game::getInstance()->getGLView());

@@ -118,18 +118,18 @@ Ship::Ship()
 void Ship::processInput(const ocf::InputState& inputState)
 {
 	float fowardSpeed = 0.0f;
-	if (inputState.keyboard.getKeyState(GLFW_KEY_W) == ButtonState::Hold) {
+	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_W) == ButtonState::Hold) {
 		fowardSpeed = 300.0f;
 	}
-	if (inputState.keyboard.getKeyState(GLFW_KEY_S) == ButtonState::Hold) {
+	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_S) == ButtonState::Hold) {
 		fowardSpeed = -300.0f;
 	}
 
 	float rotation = getRotation();
-	if (inputState.keyboard.getKeyState(GLFW_KEY_Q) == ButtonState::Hold) {
+	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_Q) == ButtonState::Hold) {
 		rotation += 3.0f;
 	}
-	if (inputState.keyboard.getKeyState(GLFW_KEY_E) == ButtonState::Hold) {
+	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_E) == ButtonState::Hold) {
 		rotation -= 3.0f;
 	}
 	setRotation(rotation);
@@ -137,7 +137,7 @@ void Ship::processInput(const ocf::InputState& inputState)
 	m_pMoveComponent->setForwardSpeed(fowardSpeed);
 
 
-	if (inputState.keyboard.getKeyState(GLFW_KEY_SPACE) == ButtonState::Pressed) {
+	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_SPACE) == ButtonState::Pressed) {
 		Laser* pLaser = new Laser();
 		pLaser->setPosition(getPosition());
 		pLaser->setRotation(getRotation());

@@ -33,16 +33,16 @@ void TiledMapTest::processInput(const InputState& inputState)
 {
 	auto pos = m_camera->getPosition();
 
-	if (inputState.keyboard.getKeyState(GLFW_KEY_W) == ButtonState::Hold) {
+	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_W) == ButtonState::Hold) {
 		m_camera->setPosition(pos.x, pos.y + 2.0f);
 	}
-	if (inputState.keyboard.getKeyState(GLFW_KEY_S) == ButtonState::Hold) {
+	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_S) == ButtonState::Hold) {
 		m_camera->setPosition(pos.x, pos.y - 2.0f);
 	}
-	if (inputState.keyboard.getKeyState(GLFW_KEY_A) == ButtonState::Hold) {
+	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_A) == ButtonState::Hold) {
 		m_camera->setPosition(pos.x + 2.0f, pos.y);
 	}
-	if (inputState.keyboard.getKeyState(GLFW_KEY_D) == ButtonState::Hold) {
+	if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_D) == ButtonState::Hold) {
 		m_camera->setPosition(pos.x - 2.0f, pos.y);
 	}
 }

@@ -5,12 +5,12 @@
 
 NS_OCF_BEGIN
 
-uint8_t Keyboard::m_currentState[KEY_CODE_MAX];
-uint8_t Keyboard::m_prevState[KEY_CODE_MAX];
+uint8_t Keyboard::m_currentState[static_cast<int>(KeyCode::KEY_LAST)];
+uint8_t Keyboard::m_prevState[static_cast<int>(KeyCode::KEY_LAST)];
 
-void Keyboard::onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
+void Keyboard::onKeyEvent(KeyCode key, int action)
 {
-	m_currentState[key] = action;
+	m_currentState[static_cast<int>(key)] = action;
 }
 
 bool Keyboard::init()
@@ -21,8 +21,10 @@ bool Keyboard::init()
 	return true;
 }
 
-ButtonState Keyboard::getKeyState(int key) const
+ButtonState Keyboard::getKeyState(KeyCode keyCode) const
 {
+	const int key = static_cast<int>(keyCode);
+
 	if (m_prevState[key] == GLFW_RELEASE) {
 		if (m_currentState[key] == GLFW_RELEASE) {
 			return ButtonState::None;
