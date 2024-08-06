@@ -87,6 +87,10 @@ bool Renderer::init()
 
 	m_trianglesCommands.reserve(64);
 
+	// アルファブレンディングを有効にする
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	// OpenGLのデバッグメッセージを有効にする
 #ifdef _DEBUG
 	glEnable(GL_DEBUG_OUTPUT);
@@ -177,9 +181,6 @@ void Renderer::doVisitRenderQueue(const std::vector<RenderCommand*>& renderComma
 
 void Renderer::processRenderCommand(RenderCommand* command)
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	const auto commandType = command->getType();
 
 	switch (commandType) {
@@ -205,9 +206,6 @@ void Renderer::processRenderCommand(RenderCommand* command)
 		assert(false);
 		break;
 	}
-	flush();
-
-	glDisable(GL_BLEND);
 }
 
 void Renderer::trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int vertexBufferOffset)
@@ -272,6 +270,7 @@ void Renderer::drawTrianglesCommand()
 
 		if (batchTotal + 1 >= m_triangleBatchToDrawSize) {
 			m_triangleBatchToDrawSize = static_cast<int>(m_triangleBatchToDrawSize * 1.4);
+
 			m_pTriangleBatchToDraw = static_cast<TriangleBatchToDraw*>(std::realloc(m_pTriangleBatchToDraw, sizeof(TriangleBatchToDraw) * m_triangleBatchToDrawSize));
 		}
 
