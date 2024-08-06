@@ -60,7 +60,17 @@ public:
 	/** 次のシーンを設定する */
 	void setNextScene();
 
+	/**
+	 * @brief 表示サイズを取得する
+	 * @return 表示サイズ
+	 */
 	glm::vec2 getVisibleSize() const;
+
+	/**
+	 * @brief カメラと近くのクリッピング フレーム間の距離を取得
+	 * @return フレーム間の距離
+	 */
+	float getZEye() const;
 
 	/**
 	 * @brief レンダラーを取得する
@@ -74,8 +84,16 @@ public:
 	 */
 	Scene* getCurrentScene() const { return m_currentScene; }
 
+	/**
+	 * @brief OpenGLのビューを取得
+	 * @return OpenGLのビュー
+	 */
 	GLView* getGLView() { return m_glView; }
 
+	/**
+	 * @brief OpenGLのビューを設定
+	 * @param[in] OpenGLのビュー
+	 */
 	void setGLView(GLView* glView);
 
 	/**

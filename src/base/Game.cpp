@@ -161,6 +161,12 @@ glm::vec2 Game::getVisibleSize() const
 	return glm::vec2(0, 0);
 }
 
+float Game::getZEye() const
+{
+	// FOV‚ª60‹‚Ìê‡‚Ì‹——£
+	return (m_glView->getVisibleSize().y / 1.154700538379252f);	//(2 * tanf(M_PI/6))
+}
+
 void Game::setGLView(GLView* glView)
 {
 	if (m_glView != glView) {

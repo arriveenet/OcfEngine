@@ -16,7 +16,7 @@ Camera::Camera()
 	, m_viewProjection(1.0f)
 	, m_zNear(0.0f)
 	, m_zFar(0.0f)
-	, m_type(Type::Orthographic)
+	, m_type(Type::Perspective)
 	, m_scene(nullptr)
 {
 }
@@ -60,10 +60,10 @@ bool Camera::init()
 	switch (m_type) {
 		case ocf::Camera::Type::Perspective:
 		{
-			float zEye = 10.0f;
+			float zEye = m_pGame->getZEye();
 			m_zNear = 0.5f;
-			m_zFar = 100.0f;
-			initPerspective(60.0f, (float)size.x / size.y, m_zNear, m_zFar);
+			m_zFar = zEye + size.y / 2.0f;
+			initPerspective(glm::radians(60.0f), (float)size.x / size.y, m_zNear, m_zFar);
 			glm::vec3 eye(size.x / 2.0f, size.y / 2.0f, zEye);
 			glm::vec3 center(size.x / 2.0f, size.y / 2.0f, 0.0f);
 			setPosition(eye);
