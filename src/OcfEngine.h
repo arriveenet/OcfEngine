@@ -8,6 +8,8 @@
 #include "2d/MoveComponent.h"
 #include "2d/CircleComponent.h"
 
+#include "audio/AudioEngine.h"
+
 #include "base/Game.h"
 #include "base/FileUtils.h"
 #include "base/fnt.h"

@@ -49,6 +49,12 @@
     <Filter Include="ヘッダー ファイル\ui">
       <UniqueIdentifier>{afc63a73-84c6-4268-8380-36cd102fbf5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\audio">
+      <UniqueIdentifier>{da6b03f0-442c-40c1-8b29-91473d312f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\audio">
+      <UniqueIdentifier>{9ec37796-4eb7-4936-8ad0-8e709be8c22f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="renderer\Image.cpp">
@@ -197,6 +203,24 @@
     </ClCompile>
     <ClCompile Include="platform\GLViewImpl.cpp">
       <Filter>ソース ファイル\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\AudioEngine.cpp">
+      <Filter>ソース ファイル\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\AudioEngineImpl.cpp">
+      <Filter>ソース ファイル\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\AudioCache.cpp">
+      <Filter>ソース ファイル\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\AudioDecoder.cpp">
+      <Filter>ソース ファイル\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\AudioDecoderWav.cpp">
+      <Filter>ソース ファイル\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\AudioDecoderManager.cpp">
+      <Filter>ソース ファイル\audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +391,24 @@
     </ClInclude>
     <ClInclude Include="platform\GLViewImpl.h">
       <Filter>ヘッダー ファイル\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioEngine.h">
+      <Filter>ヘッダー ファイル\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioEngineImpl.h">
+      <Filter>ヘッダー ファイル\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioCache.h">
+      <Filter>ヘッダー ファイル\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioDecoder.h">
+      <Filter>ヘッダー ファイル\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioDecoderWav.h">
+      <Filter>ヘッダー ファイル\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioDecoderManager.h">
+      <Filter>ヘッダー ファイル\audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

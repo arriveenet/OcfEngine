@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "2d/Camera.h"
 #include "2d/SpriteFrameManager.h"
+#include "audio/AudioEngine.h"
 #include "platform/Application.h"
 #include "platform/GLView.h"
 #include "base/FileUtils.h"
@@ -47,6 +48,8 @@ Game::~Game()
 	FileUtils::destroyInstance();
 	SpriteFrameManager::destroyInstance();
 	ShaderManager::destroyInstance();
+
+	AudioEngine::end();
 
 	// ƒŒƒ“ƒ_ƒ‰[‚ğ‰ğ•ú
 	OCF_SAFE_DELETE(m_renderer);
