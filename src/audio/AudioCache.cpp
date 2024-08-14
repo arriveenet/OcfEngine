@@ -13,6 +13,14 @@ NS_OCF_BEGIN
 AudioCache::AudioCache()
     : m_state(State::Inital)
     , m_alBufferId(AL_INVALID)
+    , m_totalFrames(0)
+    , m_sampleRate(0)
+    , m_queBufferSize()
+    , m_queBufferFrames(0)
+    , m_framesRead(0)
+    , m_format(AL_FORMAT_STEREO16)
+    , m_duration(0.0f)
+    , m_queBuffers()
 {
 }
 
