@@ -18,9 +18,31 @@ public:
 	static bool lazyInit();
 	static void end();
 
+	static void setLoop(AUDIO_ID audioID, bool loop);
+
+	static bool isLoop(AUDIO_ID audioID);
+
+	static void setVolume(AUDIO_ID audioID, float volume);
+
+	static float getVolume(AUDIO_ID audioID);
+
 	static AUDIO_ID play(std::string_view filename, bool loop = false, float volume = 1.0f);
 
 	static void stop(AUDIO_ID audioID);
+
+	static void stopAll();
+
+	static void pause(AUDIO_ID audioID);
+
+	static void pauseAll();
+
+	static void resume(AUDIO_ID audioID);
+
+	static void resumeAll();
+
+	static void uncache(std::string_view filePath);
+
+	static void uncacheAll();
 
 private:
 	struct AudioInfo {

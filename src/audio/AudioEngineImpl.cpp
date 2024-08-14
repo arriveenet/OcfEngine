@@ -74,7 +74,42 @@ bool AudioEngineImpl::init()
     return result;
 }
 
-AUDIO_ID AudioEngineImpl::play(std::string_view fileFullPath)
+void AudioEngineImpl::setVolume(AUDIO_ID audioID, float volume)
+{
+    auto iter = m_audioPlayers.find(audioID);
+    if (iter != m_audioPlayers.end()) {
+        AudioPlayer* player = iter->second;
+
+        alSourcef(player->m_alSource, AL_GAIN, volume);
+
+        ALenum error = alGetError();
+        if (error != AL_NO_ERROR) {
+            OCFLOG("%s: audio id = , error = %xn", __FUNCTION__, audioID, error);
+        }
+    }
+}
+
+void AudioEngineImpl::setLoop(AUDIO_ID audioID, bool loop)
+{
+    auto iter = m_audioPlayers.find(audioID);
+    if (iter != m_audioPlayers.end()) {
+        AudioPlayer* player = iter->second;
+
+        if (player->m_streamingSource) {
+            player->setLoop(loop);
+        }
+        else {
+            alSourcei(player->m_alSource, AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
+        }
+
+        ALenum error = alGetError();
+        if (error != AL_NO_ERROR) {
+            OCFLOG("%s: audio id = , error = %xn", __FUNCTION__, audioID, error);
+        }
+    }
+}
+
+AUDIO_ID AudioEngineImpl::play(std::string_view fileFullPath, bool loop, float volume, float time)
 {
     if (s_pALDevice == nullptr) {
         return AudioEngine::AUDIO_ID_INVALID;
@@ -88,6 +123,11 @@ AUDIO_ID AudioEngineImpl::play(std::string_view fileFullPath)
     AudioPlayer* pAudioPlayer = new AudioPlayer();
 
     pAudioPlayer->m_alSource = alSource;
+    pAudioPlayer->m_loop = loop;
+    pAudioPlayer->m_volume = volume;
+    if (time > 0.0f) {
+        pAudioPlayer->m_currentTime = time;
+    }
 
     AudioCache* pAudioCache = preload(fileFullPath);
     if (pAudioCache == nullptr) {
@@ -112,6 +152,59 @@ void AudioEngineImpl::stop(AUDIO_ID audioID)
     }
 }
 
+void AudioEngineImpl::stopAll()
+{
+    for (auto&& player : m_audioPlayers) {
+        player.second->destroy();
+    }
+
+    updatePlayers(true);
+}
+
+bool AudioEngineImpl::pause(AUDIO_ID audioID)
+{
+    bool result = false;
+
+    auto iter = m_audioPlayers.find(audioID);
+    if (iter != m_audioPlayers.end()) {
+        AudioPlayer* player = iter->second;
+
+        alSourcePause(player->m_alSource);
+
+        ALenum error = alGetError();
+        if (error != AL_NO_ERROR) {
+            OCFLOG("%s: audio id = , error = %xn", __FUNCTION__, audioID, error);
+            return false;
+        }
+
+        result = true;
+    }
+
+    return result;
+}
+
+bool AudioEngineImpl::resume(AUDIO_ID audioID)
+{
+    bool result = false;
+
+    auto iter = m_audioPlayers.find(audioID);
+    if (iter != m_audioPlayers.end()) {
+        AudioPlayer* player = iter->second;
+
+        alSourcePlay(player->m_alSource);
+
+        ALenum error = alGetError();
+        if (error != AL_NO_ERROR) {
+            OCFLOG("%s: audio id = , error = %xn", __FUNCTION__, audioID, error);
+            return false;
+        }
+
+        result = true;
+    }
+
+    return result;
+}
+
 AudioCache* AudioEngineImpl::preload(std::string_view filePath)
 {
     AudioCache* pAudioCach = nullptr;
@@ -130,6 +223,43 @@ AudioCache* AudioEngineImpl::preload(std::string_view filePath)
     }
 
     return pAudioCach;
+}
+
+void AudioEngineImpl::updatePlayers(bool forStop)
+{
+    AUDIO_ID audioID;
+    AudioPlayer* player;
+    ALuint alSource;
+
+    for (auto iter = m_audioPlayers.begin(); iter != m_audioPlayers.end();) {
+        audioID = iter->first;
+        player = iter->second;
+        alSource = player->m_alSource;
+
+        if (player->m_removeByAudioEngine) {
+
+            iter = m_audioPlayers.erase(iter);
+            delete player;
+            m_unusedSourcesPool.push(alSource);
+        }
+        else {
+            ++iter;
+        }
+    }
+}
+
+void AudioEngineImpl::unchache(std::string_view filePath)
+{
+    m_audioCaches.erase(filePath.data());
+}
+
+void AudioEngineImpl::unchacheAll()
+{
+    for (auto&& player : m_audioPlayers) {
+        player.second->setCache(nullptr);
+    }
+
+    m_audioPlayers.clear();
 }
 
 ALuint AudioEngineImpl::findSource()

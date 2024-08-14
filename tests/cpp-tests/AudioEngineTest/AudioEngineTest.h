@@ -9,4 +9,5 @@ public:
 	bool init() override;
 
 	ocf::AUDIO_ID m_audioID;
+	ocf::Label* m_volumeLabel;
 };

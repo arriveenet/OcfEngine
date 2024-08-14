@@ -34,8 +34,10 @@ protected:
     bool m_isRotateThreadExited;
 
     float m_currentTime;
+    float m_volume;
     bool m_loop;
     bool m_isDestory;
+    bool m_removeByAudioEngine;
     bool m_streamingSource;
 
     friend class AudioEngineImpl;

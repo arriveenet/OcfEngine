@@ -9,10 +9,15 @@ NS_OCF_BEGIN
 AudioPlayer::AudioPlayer()
     : m_pAudioCache(nullptr)
     , m_currentTime(0.0f)
+    , m_volume(1.0f)
     , m_loop(false)
     , m_isDestory(false)
+    , m_removeByAudioEngine(false)
     , m_streamingSource(false)
     , m_isRotateThreadExited(false)
+    , m_alSource(0)
+    , m_bufferIds{0}
+    , m_rotateBufferThread(nullptr)
 {
 }
 
@@ -51,6 +56,8 @@ void AudioPlayer::destroy()
 
     alSourceStop(m_alSource);
     alSourcei(m_alSource, AL_BUFFER, 0);
+
+    m_removeByAudioEngine = true;
 }
 
 bool AudioPlayer::setLoop(bool loop)
@@ -173,7 +180,7 @@ bool AudioPlayer::play()
 
         alSourcei(m_alSource, AL_BUFFER, 0);
         alSourcef(m_alSource, AL_PITCH, 1.0f);
-        alSourcef(m_alSource, AL_GAIN, 0.1f);
+        alSourcef(m_alSource, AL_GAIN, m_volume);
         alSourcei(m_alSource, AL_LOOPING, AL_FALSE);
 
         if (m_pAudioCache->m_queBufferFrames == 0) {
@@ -221,6 +228,10 @@ bool AudioPlayer::play()
         result = true;
 
     } while (false);
+
+    if (!result) {
+        m_removeByAudioEngine = true;
+    }
 
     return result;
 }

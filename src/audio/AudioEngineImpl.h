@@ -17,10 +17,20 @@ public:
     ~AudioEngineImpl();
 
     bool init();
-    AUDIO_ID play(std::string_view fileFullPath);
+    void setVolume(AUDIO_ID audioID, float volume);
+    void setLoop(AUDIO_ID audioID, bool loop);
+    AUDIO_ID play(std::string_view fileFullPath, bool loop, float volume, float time);
     void stop(AUDIO_ID audioID);
+    void stopAll();
+    bool pause(AUDIO_ID audioID);
+    bool resume(AUDIO_ID audioID);
 
     AudioCache* preload(std::string_view filePath);
+
+    void updatePlayers(bool forStop);
+
+    void unchache(std::string_view filePath);
+    void unchacheAll();
 
 private:
     ALuint findSource();
