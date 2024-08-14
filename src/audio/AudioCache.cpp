@@ -113,7 +113,7 @@ void AudioCache::readDate()
             m_state = State::Ready;
         }
         else {
-            m_queBufferFrames = sampleRate * QUEUEBUFFER_TIME_STEP;
+            m_queBufferFrames = static_cast<uint32_t>(sampleRate * QUEUEBUFFER_TIME_STEP);
             if (m_queBufferFrames == 0) {
                 break;
             }
