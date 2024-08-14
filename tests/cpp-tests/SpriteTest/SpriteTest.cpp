@@ -38,8 +38,6 @@ bool SpriteTestDemo::init()
 		sprite4->setSize(100, 100);
 		this->addChild(sprite4);
 
-		AudioEngine::play("タイフーンパレード.mp3");
-
 		return true;
 	}
 

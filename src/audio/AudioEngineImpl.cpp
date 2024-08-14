@@ -12,11 +12,16 @@ static ALCcontext* s_pALContext = nullptr;
 
 AudioEngineImpl::AudioEngineImpl()
     : m_alSources()
+    , m_currentAudioID(0)
 {
 }
 
 AudioEngineImpl::~AudioEngineImpl()
 {
+    for (auto&& player : m_audioPlayers) {
+        player.second->destroy();
+    }
+
     if (s_pALContext != nullptr) {
         alDeleteSources(AUDIO_SOURCE_MAX, m_alSources);
 
@@ -75,12 +80,36 @@ AUDIO_ID AudioEngineImpl::play(std::string_view fileFullPath)
         return AudioEngine::AUDIO_ID_INVALID;
     }
 
-    AudioCache* pAudioCache = preload(fileFullPath);
-    if (pAudioCache == nullptr) {
+    ALuint alSource = findSource();
+    if (alSource == AL_INVALID) {
         return AudioEngine::AUDIO_ID_INVALID;
     }
 
-    return AUDIO_ID();
+    AudioPlayer* pAudioPlayer = new AudioPlayer();
+
+    pAudioPlayer->m_alSource = alSource;
+
+    AudioCache* pAudioCache = preload(fileFullPath);
+    if (pAudioCache == nullptr) {
+        delete pAudioPlayer;
+        return AudioEngine::AUDIO_ID_INVALID;
+    }
+
+    pAudioPlayer->setCache(pAudioCache);
+    m_audioPlayers.emplace(++m_currentAudioID, pAudioPlayer);
+
+    pAudioPlayer->play();
+
+    return m_currentAudioID;
+}
+
+void AudioEngineImpl::stop(AUDIO_ID audioID)
+{
+    auto iter = m_audioPlayers.find(audioID);
+    if (iter != m_audioPlayers.end()) {
+        AudioPlayer* player = iter->second;
+        player->destroy();
+    }
 }
 
 AudioCache* AudioEngineImpl::preload(std::string_view filePath)

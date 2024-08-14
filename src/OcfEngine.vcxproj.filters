@@ -222,6 +222,9 @@
     <ClCompile Include="audio\AudioDecoderManager.cpp">
       <Filter>ソース ファイル\audio</Filter>
     </ClCompile>
+    <ClCompile Include="audio\AudioPlayer.cpp">
+      <Filter>ソース ファイル\audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer\Image.h">
@@ -408,6 +411,12 @@
       <Filter>ヘッダー ファイル\audio</Filter>
     </ClInclude>
     <ClInclude Include="audio\AudioDecoderManager.h">
+      <Filter>ヘッダー ファイル\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioPlayer.h">
+      <Filter>ヘッダー ファイル\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioMacros.h">
       <Filter>ヘッダー ファイル\audio</Filter>
     </ClInclude>
   </ItemGroup>

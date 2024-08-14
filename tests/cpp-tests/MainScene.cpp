@@ -3,6 +3,7 @@
 #include "SpriteTest/SpriteTest.h"
 #include "ComponentTest/ComponentTest.h"
 #include "TiledMapTest/TiledMapTest.h"
+#include "AudioEngineTest/AudioEngineTest.h"
 
 USING_NS_OCF;
 
@@ -50,9 +51,19 @@ bool MainScene::init()
 			});
 		addChild(button3);
 
+		auto button4 = Button::create("ButtonNormal.png", "ButtonActive.png");
+		button4->setText("AudioTest");
+		button4->setPosition(100, button3->getPosition().y - 60.0f);
+		button4->setOnClickCallback([=]() {
+			auto scene = new AudioEngineTest();
+			scene->init();
+			m_pGame->replaceScene(scene);
+			});
+		addChild(button4);
+
 		auto button = Button::create("ButtonNormal.png", "ButtonActive.png");
 		button->setText("Exit");
-		button->setPosition(100, button3->getPosition().y -60.0f);
+		button->setPosition(100, button4->getPosition().y -60.0f);
 		button->setOnClickCallback([=]() {
 			m_pGame->exit();
 			});

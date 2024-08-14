@@ -4,8 +4,19 @@
 NS_OCF_BEGIN
 
 const int AudioEngine::AUDIO_ID_INVALID = -1;
+const float AudioEngine::TIME_UNKNOWN = -1.0f;
 
+std::unordered_map<AUDIO_ID, AudioEngine::AudioInfo> AudioEngine::m_audioIdInfoMap;
 AudioEngineImpl* AudioEngine::m_pAudioEngineImpl = nullptr;
+
+AudioEngine::AudioInfo::AudioInfo()
+    : volume(1.0f), loop(false), duration(TIME_UNKNOWN)
+{
+}
+
+AudioEngine::AudioInfo::~AudioInfo()
+{
+}
 
 bool AudioEngine::lazyInit()
 {
@@ -26,15 +37,34 @@ void AudioEngine::end()
     m_pAudioEngineImpl = nullptr;
 }
 
-AUDIO_ID AudioEngine::play(std::string_view filename)
+AUDIO_ID AudioEngine::play(std::string_view filename, bool loop, float volume)
 {
+    AUDIO_ID result = AudioEngine::AUDIO_ID_INVALID;
+
     if (!lazyInit()) {
         return 0;
     }
 
-    m_pAudioEngineImpl->play(filename);
+    volume = std::min(volume, 1.0f);
+    volume = std::max(volume, 0.0f);
 
-    return 0;
+    result = m_pAudioEngineImpl->play(filename);
+    if (result != AUDIO_ID_INVALID) {
+        auto& audioInfo = m_audioIdInfoMap[result];
+        audioInfo.volume = volume;
+        audioInfo.loop = loop;
+        audioInfo.filePath = filename;
+    }
+
+    return result;
+}
+
+void AudioEngine::stop(AUDIO_ID audioID)
+{
+    auto iter = m_audioIdInfoMap.find(audioID);
+    if (iter != m_audioIdInfoMap.end()) {
+        m_pAudioEngineImpl->stop(audioID);
+    }
 }
 
 NS_OCF_END

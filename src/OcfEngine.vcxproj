@@ -185,6 +185,7 @@
     <ClCompile Include="audio\AudioDecoderWav.cpp" />
     <ClCompile Include="audio\AudioEngine.cpp" />
     <ClCompile Include="audio\AudioEngineImpl.cpp" />
+    <ClCompile Include="audio\AudioPlayer.cpp" />
     <ClCompile Include="base\Console.cpp" />
     <ClCompile Include="base\FileUtils.cpp" />
     <ClCompile Include="base\Font.cpp" />
@@ -242,6 +243,8 @@
     <ClInclude Include="audio\AudioDecoderWav.h" />
     <ClInclude Include="audio\AudioEngine.h" />
     <ClInclude Include="audio\AudioEngineImpl.h" />
+    <ClInclude Include="audio\AudioMacros.h" />
+    <ClInclude Include="audio\AudioPlayer.h" />
     <ClInclude Include="base\Config.h" />
     <ClInclude Include="base\Console.h" />
     <ClInclude Include="base\FileUtils.h" />

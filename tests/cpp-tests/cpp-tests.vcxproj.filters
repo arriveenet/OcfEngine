@@ -18,6 +18,9 @@
     <Filter Include="Source\TiledMapTest">
       <UniqueIdentifier>{116e7e27-e4c4-4cc5-8145-915b5b3eb459}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\AudioEngine">
+      <UniqueIdentifier>{f503e0d3-26ae-4c7b-a0e1-dc86247443f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -41,6 +44,9 @@
     <ClCompile Include="TiledMapTest\TiledMapTest.cpp">
       <Filter>Source\TiledMapTest</Filter>
     </ClCompile>
+    <ClCompile Include="AudioEngineTest\AudioEngineTest.cpp">
+      <Filter>Source\AudioEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainScene.h">
@@ -60,6 +66,9 @@
     </ClInclude>
     <ClInclude Include="TiledMapTest\TiledMapTest.h">
       <Filter>Source\TiledMapTest</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioEngineTest\AudioEngineTest.h">
+      <Filter>Source\AudioEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
