@@ -23,6 +23,7 @@ public:
 
 class ISpriteSheetLoader {
 public:
+	ISpriteSheetLoader();
 	virtual ~ISpriteSheetLoader() = default;
 	virtual uint32_t getFormat()                                              = 0;
 	virtual void load(std::string_view filePath, SpriteFrameManager& manager) = 0;
