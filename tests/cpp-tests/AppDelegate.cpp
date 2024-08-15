@@ -33,8 +33,6 @@ bool AppDelegate::applicationDidFinishLaunching()
 		game->setGLView(glView);
 	}
 
-	// @TODO ƒtƒHƒ“ƒg‰Šú‰»ˆ—‚ğŒ©’¼‚·
-	game->getFont()->init("fonts\\Consolas.fnt");
 
 	MainScene* scene = new MainScene();
 	scene->init();

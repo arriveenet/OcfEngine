@@ -1,27 +1,81 @@
 #include "Label.h"
+#include "2d/FontManager.h"
 #include "2d/DrawShape.h"
 #include "base/Game.h"
 #include "renderer/OpenGLInclude.h"
 
 NS_OCF_BEGIN
 
+static std::u32string convertUtf8ToUtf32(const std::string& utf8String)
+{
+	std::u32string result;
+
+	for (int i = 0; i < utf8String.size(); i++) {
+		char p = utf8String.at(i);
+		char32_t unicode = 0;
+
+		int numBytes = 0;
+		if ((p & 0x80) == 0x00) {
+			numBytes = 1;
+		}
+		else if ((p & 0xE0) == 0xC0) {
+			numBytes = 2;
+		}
+		else if ((p & 0xF0) == 0xE0) {
+			numBytes = 3;
+		}
+		else if ((p & 0xF8) == 0xF0) {
+			numBytes = 4;
+		}
+
+		switch (numBytes) {
+		case 1:
+			unicode = p;
+			result.push_back(unicode);
+			break;
+		case 2:
+			unicode = (p & 0x1F) << 6;
+			unicode |= (utf8String[i + 1] & 0x3F);
+			result.push_back(unicode);
+			break;
+		case 3:
+			unicode = (p & 0x0F) << 12;
+			unicode |= (utf8String[i + 1] & 0x3F) << 6;
+			unicode |= (utf8String[i + 2] & 0x3F);
+			result.push_back(unicode);
+			break;
+		case 4:
+			unicode = (p & 0x07) << 18;
+			unicode |= (utf8String[i + 1] & 0x3F) << 12;
+			unicode |= (utf8String[i + 2] & 0x3F) << 6;
+			unicode |= (utf8String[i + 3] & 0x3F) << 6;
+			result.push_back(unicode);
+			break;
+		default:
+			break;
+		}
+	}
+
+	return result;
+}
+
 Label* Label::create(const std::string& text)
 {
 	Label* label = new Label();
-
-	label->setString(text);
-
-	return label;
+	if (label->init()) {
+		label->autorelease();
+		label->setString(text);
+		return label;
+	}
+	OCF_SAFE_DELETE(label);
+	return nullptr;
 }
 
 Label::Label()
-	: m_isDirty(true)
+	: m_font(nullptr)
+	, m_isDirty(true)
 	, m_textColor(1.0f, 1.0f, 1.0f)
 {
-	init();
-
-	Font* pFont = Game::getInstance()->getFont();
-	m_texture = pFont->getTexture();
 #if OCF_LABEL_DEBUG_DRAW
 	m_pDebugDrawShape = DrawShape::create();
 	addChild(m_pDebugDrawShape);
@@ -34,6 +88,13 @@ Label::~Label()
 
 bool Label::init()
 {
+	m_font = FontManager::getFontFNT("Consolas.fnt");
+	if (m_font == nullptr) {
+		return false;
+	}
+
+	m_texture = m_font->getTexture();
+
 	Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Label);
 	m_quadCommand.getProgramState().setProgram(pProgram);
 
@@ -44,6 +105,7 @@ void Label::setString(const std::string& text)
 {
 	if (m_text != text) {
 		m_text = text;
+		m_utf32Text = convertUtf8ToUtf32(text);
 		m_isDirty = true;
 	}
 }
@@ -85,37 +147,35 @@ void Label::draw(Renderer* renderer, const glm::mat4& transform)
 
 void Label::updateQuads()
 {
-	Font* pFont = Game::getInstance()->getFont();
-	FntCommon common = pFont->getFntCommon();
-
 	m_quads.clear();
 	m_indices.clear();
 
 	m_indices.resize(m_text.size() * 6);
 
-	int x = 0, y = 0;
-	int lineWidth = 0;
+	float x = 0.0f, y = 0.0f;
+	float lineWidth = 0.0f;
+	float lineHeight = m_font->getLineHeight();
 	int numberOfLines = 1;
 
-	for (int i = 0; i < m_text.size(); i++) {
+	for (int i = 0; i < m_utf32Text.size(); i++) {
 
-		const char p = m_text.at(i);
+		const char32_t p = m_utf32Text.at(i);
 
 		if (p == '\n') {
 			x = 0;
-			y -= common.lineHeight;
+			y -= lineHeight;
 			numberOfLines++;
 			continue;
 		}
 
-		const FntChars pChar = pFont->getChar(p);
+		auto& pChar = m_font->m_characterDefinition[p];
 
-		float tx0 = static_cast<float>(pChar.x) / common.scaleW;
-		float ty0 = static_cast<float>(pChar.y) / common.scaleH;
-		float tx1 = static_cast<float>((pChar.x) + pChar.width) / common.scaleW;
-		float ty1 = static_cast<float>((pChar.y) + pChar.height) / common.scaleH;
+		float tx0 = static_cast<float>(pChar.x) / m_texture->getSize().x;
+		float ty0 = static_cast<float>(pChar.y) / m_texture->getSize().y;
+		float tx1 = static_cast<float>((pChar.x) + pChar.width) / m_texture->getSize().x;
+		float ty1 = static_cast<float>((pChar.y) + pChar.height) / m_texture->getSize().y;
 
-		const float offsetY = static_cast<float>(common.lineHeight - pChar.yoffset - pChar.height);
+		const float offsetY = static_cast<float>(lineHeight - pChar.yoffset - pChar.height);
 
 		QuadV3fC3fT2f quad = { };
 		quad.topLeft.position = { x + pChar.xoffset, y + offsetY + pChar.height, 0.0f };
@@ -148,8 +208,8 @@ void Label::updateQuads()
 		m_indices[(size_t)i * 6 + 5] = (unsigned short)i * 4 + 1;
 	}
 
-	const float sizeWidth = static_cast<float>(lineWidth) + 2.0f;
-	const float sizeHeight = static_cast<float>(common.lineHeight) * numberOfLines;
+	const float sizeWidth = lineWidth + 2.0f;
+	const float sizeHeight = lineHeight * numberOfLines;
 	setSize(sizeWidth, sizeHeight);
 
 #if OCF_LABEL_DEBUG_DRAW

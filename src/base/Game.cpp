@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "2d/Camera.h"
 #include "2d/SpriteFrameManager.h"
+#include "2d/FontManager.h"
 #include "audio/AudioEngine.h"
 #include "platform/Application.h"
 #include "platform/GLView.h"
@@ -21,7 +22,6 @@ Game::Game()
 	, m_nextScene(nullptr)
 	, m_glView(nullptr)
 	, m_textureManager(nullptr)
-	, m_font(nullptr)
 	, m_input(nullptr)
 {
 }
@@ -38,9 +38,6 @@ Game::~Game()
 	// シーンを解放
 	OCF_SAFE_RELEASE(m_currentScene);
 
-	// フォントを解放
-	OCF_SAFE_DELETE(m_font);
-
 	// テクスチャーマネージャーを解放
 	OCF_SAFE_DELETE(m_textureManager);
 
@@ -48,7 +45,7 @@ Game::~Game()
 	FileUtils::destroyInstance();
 	SpriteFrameManager::destroyInstance();
 	ShaderManager::destroyInstance();
-
+	FontManager::release();
 	AudioEngine::end();
 
 	// レンダラーを解放
@@ -81,8 +78,6 @@ bool Game::init()
 	m_renderer = new Renderer();
 
 	m_textureManager = new TextureManager();
-
-	m_font = new Font();
 
 	m_input = new Input();
 	m_input->init();
@@ -404,7 +399,7 @@ void Game::createStatsLabel()
 	m_pDrawVertexLabel = Label::create("Draw vert: 0");
 
 	glm::vec2 visibleSize = getVisibleSize();
-	unsigned short fontHeight = m_font->getFntCommon().lineHeight;
+	float fontHeight = m_pFPSLabel->getFont()->getLineHeight();
 	m_pFPSLabel->setPosition(0, visibleSize.y - fontHeight);
 	m_pDrawCallLabel->setPosition(0, visibleSize.y - fontHeight * 2);
 	m_pDrawVertexLabel->setPosition(0, visibleSize.y - fontHeight * 3);

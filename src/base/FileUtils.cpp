@@ -1,4 +1,5 @@
 #include "FileUtils.h"
+#include <fstream>
 #include <filesystem>
 
 NS_OCF_BEGIN
@@ -110,6 +111,27 @@ std::string FileUtils::fullPathForFilename(const std::string& filename) const
 	}
 
 	return std::string();
+}
+
+std::string FileUtils::getStringFromFile(std::string_view filename) const
+{
+	std::string fullPath = fullPathForFilename(filename.data());
+
+	std::string buffer;
+
+	std::ifstream fs(fullPath, std::ios::binary);
+	if (fs) {
+		fs.seekg(0, std::ifstream::end);
+		size_t fileSize = static_cast<size_t>(fs.tellg());
+		fs.seekg(0, std::ifstream::beg);
+
+		buffer.resize(fileSize);
+		fs.read(buffer.data(), fileSize);
+
+		fs.close();
+	}
+
+	return buffer;
 }
 
 bool FileUtils::isFileExist(const std::string& filename) const

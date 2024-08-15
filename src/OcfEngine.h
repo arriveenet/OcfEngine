@@ -12,8 +12,6 @@
 
 #include "base/Game.h"
 #include "base/FileUtils.h"
-#include "base/fnt.h"
-#include "base/Font.h"
 #include "input/Input.h"
 
 #include "renderer/Image.h"

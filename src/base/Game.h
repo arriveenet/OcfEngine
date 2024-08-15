@@ -3,7 +3,6 @@
 #include <stack>
 #include "platform/Application.h"
 #include "base/GameObject.h"
-#include "base/Font.h"
 #include "input/Input.h"
 #include "2d/Scene.h"
 #include "2d/Label.h"
@@ -103,12 +102,6 @@ public:
 	TextureManager* getTextureManager() const { return m_textureManager; }
 
 	/**
-	 * @brief フォントを取得する
-	 * @return フォントのポインタ
-	 */
-	Font* getFont() { return m_font; }
-
-	/**
 	 * @brief フレームレートを取得する
 	 * @return フレームレート
 	 */
@@ -196,7 +189,6 @@ private:
 	GLView* m_glView;
 	TextureManager* m_textureManager;
 
-	Font* m_font;
 	Input* m_input;
 
 	Label* m_pFPSLabel = nullptr;

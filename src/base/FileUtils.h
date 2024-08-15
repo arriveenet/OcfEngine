@@ -60,6 +60,13 @@ public:
 	std::string fullPathForFilename(const std::string& filename) const;
 
 	/**
+	 * @brief ファイル内の文字列を取得する
+	 * @param ファイル名
+	 * @return ファイルのコンテンツ
+	 */
+	std::string getStringFromFile(std::string_view filename) const;
+
+	/**
 	 * @brief ファイルが存在するかチェックする
 	 * @param ファイル名
 	 * @return ファイルが存在する場合true、存在しない場合falseを返却

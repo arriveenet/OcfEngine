@@ -1,5 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
+#include "base/GameObject.h"
 #include "base/Macros.h"
 
 NS_OCF_BEGIN

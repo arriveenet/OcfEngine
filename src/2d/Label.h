@@ -11,6 +11,7 @@ NS_OCF_BEGIN
 
 class Texture2D;
 class DrawShape;
+class Font;
 
 class Label : public Node {
 public:
@@ -20,6 +21,8 @@ public:
 	virtual ~Label();
 
 	bool init();
+
+	Font* getFont() const { return m_font; }
 
 	void setString(const std::string& text);
 	std::string getString() const { return m_text; }
@@ -35,7 +38,9 @@ protected:
 	void updateQuads();
 
 protected:
+	Font* m_font;
 	std::string m_text;
+	std::u32string m_utf32Text;
 	glm::vec3 m_textColor;
 	bool m_isDirty;
 	Texture2D* m_texture = nullptr;

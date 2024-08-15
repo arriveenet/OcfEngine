@@ -69,9 +69,6 @@
     <ClCompile Include="base\Rect.cpp">
       <Filter>ソース ファイル\base</Filter>
     </ClCompile>
-    <ClCompile Include="base\Font.cpp">
-      <Filter>ソース ファイル\base</Filter>
-    </ClCompile>
     <ClCompile Include="2d\Camera.cpp">
       <Filter>ソース ファイル\2d</Filter>
     </ClCompile>
@@ -225,6 +222,15 @@
     <ClCompile Include="audio\AudioPlayer.cpp">
       <Filter>ソース ファイル\audio</Filter>
     </ClCompile>
+    <ClCompile Include="2d\Font.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\FontFNT.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\FontManager.cpp">
+      <Filter>ソース ファイル\2d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer\Image.h">
@@ -240,12 +246,6 @@
       <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
     <ClInclude Include="base\Rect.h">
-      <Filter>ヘッダー ファイル\base</Filter>
-    </ClInclude>
-    <ClInclude Include="base\Font.h">
-      <Filter>ヘッダー ファイル\base</Filter>
-    </ClInclude>
-    <ClInclude Include="base\fnt.h">
       <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
     <ClInclude Include="2d\Camera.h">
@@ -418,6 +418,15 @@
     </ClInclude>
     <ClInclude Include="audio\AudioMacros.h">
       <Filter>ヘッダー ファイル\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Font.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\FontFNT.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\FontManager.h">
+      <Filter>ヘッダー ファイル\2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
