@@ -2,9 +2,9 @@
 
 class MainScene : public ocf::Scene {
 public:
-	MainScene();
-	virtual ~MainScene();
+    MainScene();
+    virtual ~MainScene();
 
-	bool init() override;
+    bool init() override;
 };
 

@@ -7,13 +7,13 @@ namespace ui {
 
 class Widget : public Node {
 public:
-	Widget();
-	virtual ~Widget();
+    Widget();
+    virtual ~Widget();
 
-	virtual bool init();
+    virtual bool init();
 
 protected:
-	virtual void initRenderer();
+    virtual void initRenderer();
 };
 
 }

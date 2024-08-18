@@ -6,30 +6,30 @@
 NS_OCF_BEGIN
 
 enum class ProgramType : uint32_t {
-	Basic,
-	Label,
-	DrawShape,
-	PositionTexture,
-	Max
+    Basic,
+    Label,
+    DrawShape,
+    PositionTexture,
+    Max
 };
 
 class ShaderManager : public GameObject {
 public:
-	static ShaderManager* getInstance();
-	static void destroyInstance();
+    static ShaderManager* getInstance();
+    static void destroyInstance();
 
-	Program* getProgram(ProgramType type);
+    Program* getProgram(ProgramType type);
 
 protected:
-	ShaderManager();
-	virtual ~ShaderManager();
+    ShaderManager();
+    virtual ~ShaderManager();
 
 private:
-	bool init();
+    bool init();
 
-	static ShaderManager* s_sharedShaderManager;
+    static ShaderManager* s_sharedShaderManager;
 
-	std::unordered_map<ProgramType, Program*> m_programs;
+    std::unordered_map<ProgramType, Program*> m_programs;
 };
 
 NS_OCF_END

@@ -6,21 +6,21 @@
 NS_OCF_BEGIN
 
 struct InputState {
-	Keyboard keyboard;
-	Mouse mouse;
+    Keyboard keyboard;
+    Mouse mouse;
 };
 
 class Input {
 public:
-	bool init();
+    bool init();
 
-	void prepareUpdate();
-	void update();
+    void prepareUpdate();
+    void update();
 
-	const InputState& getState() const { return m_inputState; }
+    const InputState& getState() const { return m_inputState; }
 
 private:
-	InputState m_inputState;
+    InputState m_inputState;
 };
 
 NS_OCF_END

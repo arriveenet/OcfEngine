@@ -8,66 +8,66 @@
 NS_OCF_BEGIN
 
 Node::Node()
-	: m_pParent(nullptr)
-	, m_cameraMask(1)
-	, m_position()
-	, m_size()
-	, m_anchorPointInPoints()
-	, m_anchorPoint()
-	, m_rotation(0.0f)
-	, m_scaleX(1.0f)
-	, m_scaleY(1.0f)
-	, m_scaleZ(1.0f)
-	, m_transform(1.0f)
-	, m_modelVewTransform(1.0f)
-	, m_localZOrder(0)
-	, m_globalZOrder(0.0f)
-	, m_visible(true)
-	, m_ignoreAnchorPointForPosition(false)
-	, m_transformDirty(true)
-	, m_transformUpdated(true)
-	, m_contentSizeDirty(true)
+    : m_pParent(nullptr)
+    , m_cameraMask(1)
+    , m_position()
+    , m_size()
+    , m_anchorPointInPoints()
+    , m_anchorPoint()
+    , m_rotation(0.0f)
+    , m_scaleX(1.0f)
+    , m_scaleY(1.0f)
+    , m_scaleZ(1.0f)
+    , m_transform(1.0f)
+    , m_modelVewTransform(1.0f)
+    , m_localZOrder(0)
+    , m_globalZOrder(0.0f)
+    , m_visible(true)
+    , m_ignoreAnchorPointForPosition(false)
+    , m_transformDirty(true)
+    , m_transformUpdated(true)
+    , m_contentSizeDirty(true)
 {
-	m_pGame = Game::getInstance();
+    m_pGame = Game::getInstance();
 }
 
 Node::~Node()
 {
-	while (!m_children.empty()) {
-		auto entity = m_children.back();
-		entity->onExit();
-		entity->release();
-		m_children.pop_back();
-	}
+    while (!m_children.empty()) {
+        auto entity = m_children.back();
+        entity->onExit();
+        entity->release();
+        m_children.pop_back();
+    }
 
-	while (!m_components.empty()) {
-		auto component = m_components.back();
-		delete component;
-		m_components.pop_back();
-	}
+    while (!m_components.empty()) {
+        auto component = m_components.back();
+        delete component;
+        m_components.pop_back();
+    }
 }
 
 bool Node::init()
 {
-	return true;
+    return true;
 }
 
 void Node::processInput(const InputState& inputState)
 {
-	for (auto& entity : m_children) {
-		entity->processInput(inputState);
-	}
+    for (auto& entity : m_children) {
+        entity->processInput(inputState);
+    }
 }
 
 void Node::update(float deltaTime)
 {
-	// コンポーネントを更新
-	updateComponents(deltaTime);
-	// 配下のエンティティを更新
-	updateNodes(deltaTime);
+    // コンポーネントを更新
+    updateComponents(deltaTime);
+    // 配下のエンティティを更新
+    updateNodes(deltaTime);
 
-	//　自身を更新
-	updateNode(deltaTime);
+    //　自身を更新
+    updateNode(deltaTime);
 }
 
 void Node::updateNode(float deltaTime)
@@ -76,41 +76,41 @@ void Node::updateNode(float deltaTime)
 
 void Node::updateComponents(float deltaTime)
 {
-	for (const auto& comp : m_components) {
-		comp->update(deltaTime);
-	}
+    for (const auto& comp : m_components) {
+        comp->update(deltaTime);
+    }
 }
 
 void Node::updateNodes(float deltaTime)
 {
-	for (const auto& child : m_children) {
-		child->update(deltaTime);
-	}
+    for (const auto& child : m_children) {
+        child->update(deltaTime);
+    }
 }
 
 void Node::updateTransform()
 {
-	if (m_transformDirty) {
-		m_transformDirty = false;
+    if (m_transformDirty) {
+        m_transformDirty = false;
 
-		m_transform = glm::translate(m_position);
-		m_transform *= glm::rotate(glm::radians(m_rotation), glm::vec3(0, 0, 1));
-		m_transform *= glm::scale(glm::vec3(m_scaleX, m_scaleY, m_scaleZ));
-	}
+        m_transform = glm::translate(m_position);
+        m_transform *= glm::rotate(glm::radians(m_rotation), glm::vec3(0, 0, 1));
+        m_transform *= glm::scale(glm::vec3(m_scaleX, m_scaleY, m_scaleZ));
+    }
 }
 
 void Node::onEnter()
 {
-	for (const auto& child : m_children) {
-		child->onEnter();
-	}
+    for (const auto& child : m_children) {
+        child->onEnter();
+    }
 }
 
 void Node::onExit()
 {
-	for (const auto& child : m_children) {
-		child->onExit();
-	}
+    for (const auto& child : m_children) {
+        child->onExit();
+    }
 }
 
 void Node::draw(Renderer* renderer, const glm::mat4& transform)
@@ -119,359 +119,359 @@ void Node::draw(Renderer* renderer, const glm::mat4& transform)
 
 void Node::setPosition(const glm::vec3& position)
 {
-	if (m_position != position) {
-		m_position = position;
-		m_transformUpdated = m_transformDirty = true;
-	}
+    if (m_position != position) {
+        m_position = position;
+        m_transformUpdated = m_transformDirty = true;
+    }
 }
 
 void Node::setPosition(const glm::vec2& position)
 {
-	m_position.x = position.x;
-	m_position.y = position.y;
-	m_transformUpdated = m_transformDirty = true;
+    m_position.x = position.x;
+    m_position.y = position.y;
+    m_transformUpdated = m_transformDirty = true;
 }
 
 void Node::setPosition(float x, float y, float z)
 {
-	setPosition(glm::vec3(x, y, z));
+    setPosition(glm::vec3(x, y, z));
 }
 
 void Node::setPosition(float x, float y)
 {
-	setPosition(glm::vec2(x, y));
+    setPosition(glm::vec2(x, y));
 }
 
 glm::vec3 Node::getPosition() const
 {
-	return m_position;
+    return m_position;
 }
 
 void Node::setSize(const glm::vec2& size)
 {
-	if (size != m_size) {
-		m_size = size;
-		m_anchorPointInPoints = { m_size.x * m_anchorPoint.x, m_size.y * m_anchorPoint.y };
-		m_transformUpdated = m_transformDirty = true;
-	}
+    if (size != m_size) {
+        m_size = size;
+        m_anchorPointInPoints = { m_size.x * m_anchorPoint.x, m_size.y * m_anchorPoint.y };
+        m_transformUpdated = m_transformDirty = true;
+    }
 }
 
 void Node::setSize(float width, float height)
 {
-	setSize(glm::vec2(width, height));
+    setSize(glm::vec2(width, height));
 }
 
 glm::vec2 Node::getSize() const
 {
-	return m_size;
+    return m_size;
 }
 
 bool Node::hitTest(const glm::vec2& worldPoint) const
 {
-	glm::vec2 point = this->convertToNodeSpace(worldPoint);
-	glm::vec2 size = this->getSize();
-	return Rect(0.0f, 0.0f, size.x, size.y).intersect(point);
+    glm::vec2 point = this->convertToNodeSpace(worldPoint);
+    glm::vec2 size = this->getSize();
+    return Rect(0.0f, 0.0f, size.x, size.y).intersect(point);
 }
 
 void Node::setVisible(bool visible)
 {
-	if (visible != m_visible) {
-		m_visible = visible;
-		if (m_visible)
-			m_transformUpdated = m_transformDirty = true;
-	}
+    if (visible != m_visible) {
+        m_visible = visible;
+        if (m_visible)
+            m_transformUpdated = m_transformDirty = true;
+    }
 }
 
 bool Node::isVisible() const
 {
-	return m_visible;
+    return m_visible;
 }
 
 void Node::setAnchorPoint(const glm::vec2& point)
 {
-	if (point != m_anchorPoint) {
-		m_anchorPoint = point;
-		m_anchorPointInPoints = {m_size.x * m_anchorPoint.x, m_size.y * m_anchorPoint.y};
-		m_transformUpdated = m_transformDirty = true;
-	}
+    if (point != m_anchorPoint) {
+        m_anchorPoint = point;
+        m_anchorPointInPoints = {m_size.x * m_anchorPoint.x, m_size.y * m_anchorPoint.y};
+        m_transformUpdated = m_transformDirty = true;
+    }
 }
 
 const glm::vec2& Node::getAnchorPoint() const
 {
-	return m_anchorPoint;
+    return m_anchorPoint;
 }
 
 void Node::setRotation(float rotation)
 {
-	m_rotation = rotation;
-	m_transformUpdated = m_transformDirty = true;
+    m_rotation = rotation;
+    m_transformUpdated = m_transformDirty = true;
 }
 
 float Node::getRotation() const
 {
-	return m_rotation;
+    return m_rotation;
 }
 
 void Node::setScale(float scale)
 {
-	m_scaleX = m_scaleY = m_scaleZ = scale;
-	m_transformUpdated = m_transformDirty = true;
+    m_scaleX = m_scaleY = m_scaleZ = scale;
+    m_transformUpdated = m_transformDirty = true;
 }
 
 void Node::setScaleX(float scaleX)
 {
-	m_scaleX = scaleX;
-	m_transformUpdated = m_transformDirty = true;
+    m_scaleX = scaleX;
+    m_transformUpdated = m_transformDirty = true;
 }
 
 void Node::setScaleY(float scaleY)
 {
-	m_scaleY = scaleY;
-	m_transformUpdated = m_transformDirty = true;
+    m_scaleY = scaleY;
+    m_transformUpdated = m_transformDirty = true;
 }
 
 void Node::setScaleZ(float scaleZ)
 {
-	m_scaleZ = scaleZ;
-	m_transformUpdated = m_transformDirty = true;
+    m_scaleZ = scaleZ;
+    m_transformUpdated = m_transformDirty = true;
 }
 
 float Node::getScale() const
 {
-	return m_scaleX;
+    return m_scaleX;
 }
 
 void Node::setGlobalZOrder(float globalZorder)
 {
-	if (m_globalZOrder != globalZorder) {
-		m_globalZOrder = globalZorder;
-	}
+    if (m_globalZOrder != globalZorder) {
+        m_globalZOrder = globalZorder;
+    }
 }
 
 void Node::addChild(Node* pNode)
 {
-	OCFASSERT(pNode != nullptr, "The pointer to the node to be added is NULL.");
+    OCFASSERT(pNode != nullptr, "The pointer to the node to be added is NULL.");
 
-	m_children.emplace_back(pNode);
+    m_children.emplace_back(pNode);
 
-	pNode->setParent(this);
+    pNode->setParent(this);
 
-	pNode->onEnter();
+    pNode->onEnter();
 }
 
 void Node::removeChild(Node* pEntity)
 {
-	auto iter = std::find(m_children.begin(), m_children.end(), pEntity);
-	if (iter != m_children.end()) {
-		m_children.erase(iter);
-		delete pEntity;
-		pEntity = nullptr;
-	}
+    auto iter = std::find(m_children.begin(), m_children.end(), pEntity);
+    if (iter != m_children.end()) {
+        m_children.erase(iter);
+        delete pEntity;
+        pEntity = nullptr;
+    }
 }
 
 size_t Node::getChildCount() const
 {
-	return m_children.size();
+    return m_children.size();
 }
 
 void Node::setParent(Node* pEntity)
 {
-	m_pParent = pEntity;
+    m_pParent = pEntity;
 }
 
 void Node::sortAllChildren()
 {
-	sortNodes(m_children);
+    sortNodes(m_children);
 }
 
 void Node::setCameraMask(uint16_t mask, bool applyChildren)
 {
-	m_cameraMask = mask;
+    m_cameraMask = mask;
 
-	if (applyChildren) {
-		for (const auto& child : m_children) {
-			child->setCameraMask(mask, applyChildren);
-		}
-	}
+    if (applyChildren) {
+        for (const auto& child : m_children) {
+            child->setCameraMask(mask, applyChildren);
+        }
+    }
 }
 
 void Node::addComponent(Component* pComponent)
 {
-	int myOrder = pComponent->getUpdateOrder();
-	auto iter = m_components.begin();
-	for (; iter != m_components.end(); ++iter) {
-		if (myOrder < (*iter)->getUpdateOrder()) {
-			break;
-		}
-	}
+    int myOrder = pComponent->getUpdateOrder();
+    auto iter = m_components.begin();
+    for (; iter != m_components.end(); ++iter) {
+        if (myOrder < (*iter)->getUpdateOrder()) {
+            break;
+        }
+    }
 
-	m_components.insert(iter, pComponent);
+    m_components.insert(iter, pComponent);
 }
 
 void Node::removeComponent(Component* pComponent)
 {
-	auto iter = std::find(m_components.begin(), m_components.end(), pComponent);
-	if (iter != m_components.end()) {
-		m_components.erase(iter);
-	}
+    auto iter = std::find(m_components.begin(), m_components.end(), pComponent);
+    if (iter != m_components.end()) {
+        m_components.erase(iter);
+    }
 }
 
 const glm::mat4& Node::getNodeToParentTransform() const
 {
-	if (m_transformDirty) {
-		float x = m_position.x;
-		float y = m_position.y;
-		float z = 0.0f;
+    if (m_transformDirty) {
+        float x = m_position.x;
+        float y = m_position.y;
+        float z = 0.0f;
 
-		if (m_ignoreAnchorPointForPosition) {
-			x += m_anchorPointInPoints.x;
-			y += m_anchorPointInPoints.y;
-		}
+        if (m_ignoreAnchorPointForPosition) {
+            x += m_anchorPointInPoints.x;
+            y += m_anchorPointInPoints.y;
+        }
 
-		glm::mat4 transform = glm::translate(glm::vec3(x, y, z));
-		transform = glm::rotate(transform, glm::radians(m_rotation), glm::vec3(0, 0, 1));
-		transform = glm::scale(transform, glm::vec3(m_scaleX, m_scaleY, m_scaleZ));
+        glm::mat4 transform = glm::translate(glm::vec3(x, y, z));
+        transform = glm::rotate(transform, glm::radians(m_rotation), glm::vec3(0, 0, 1));
+        transform = glm::scale(transform, glm::vec3(m_scaleX, m_scaleY, m_scaleZ));
 
-		m_transform = transform;
+        m_transform = transform;
 
-		// 基準点を調整
-		if (m_anchorPointInPoints != glm::vec2(0.0f, 0.0f)) {
-			m_transform[3][0] += m_transform[0][0] * -m_anchorPointInPoints.x + m_transform[1][0] * -m_anchorPointInPoints.y;
-			m_transform[3][1] += m_transform[0][1] * -m_anchorPointInPoints.x + m_transform[1][1] * -m_anchorPointInPoints.y;
-			m_transform[3][2] += m_transform[0][2] * -m_anchorPointInPoints.x + m_transform[1][2] * -m_anchorPointInPoints.y;
-		}
-	}
+        // 基準点を調整
+        if (m_anchorPointInPoints != glm::vec2(0.0f, 0.0f)) {
+            m_transform[3][0] += m_transform[0][0] * -m_anchorPointInPoints.x + m_transform[1][0] * -m_anchorPointInPoints.y;
+            m_transform[3][1] += m_transform[0][1] * -m_anchorPointInPoints.x + m_transform[1][1] * -m_anchorPointInPoints.y;
+            m_transform[3][2] += m_transform[0][2] * -m_anchorPointInPoints.x + m_transform[1][2] * -m_anchorPointInPoints.y;
+        }
+    }
 
-	m_transformDirty = false;
+    m_transformDirty = false;
 
-	return m_transform;
+    return m_transform;
 }
 
 glm::mat4 Node::getNodeToParentTransform(Node* ancestor) const
 {
-	glm::mat4 t(this->getNodeToParentTransform());
+    glm::mat4 t(this->getNodeToParentTransform());
 
-	for (Node* p = m_pParent; p != nullptr && p != ancestor; p = p->getParent()) {
-		t = p->getNodeToParentTransform() * t;
-	}
+    for (Node* p = m_pParent; p != nullptr && p != ancestor; p = p->getParent()) {
+        t = p->getNodeToParentTransform() * t;
+    }
 
-	return t;
+    return t;
 }
 
 glm::mat4 Node::getNodeToWorldTransform() const
 {
-	return getNodeToParentTransform(nullptr);
+    return getNodeToParentTransform(nullptr);
 }
 
 glm::mat4 Node::getWorldToNodeTransform() const
 {
-	return glm::inverse(getNodeToWorldTransform());
+    return glm::inverse(getNodeToWorldTransform());
 }
 
 glm::vec2 Node::convertToNodeSpace(const glm::vec2& worldPoint) const
 {
-	glm::mat4 transform = getWorldToNodeTransform();
-	glm::vec4 point(worldPoint, 0.0f, 1.0f);
-	glm::vec2 result = transform * point;
-	return result;
+    glm::mat4 transform = getWorldToNodeTransform();
+    glm::vec4 point(worldPoint, 0.0f, 1.0f);
+    glm::vec2 result = transform * point;
+    return result;
 }
 
 glm::vec2 Node::convertToWorldSpace(const glm::vec2& nodePoint) const
 {
-	glm::mat4 transform = getNodeToWorldTransform();
-	glm::vec4 point(nodePoint, 0.0f, 1.0f);
-	glm::vec2 result = transform * point;
-	return result;
+    glm::mat4 transform = getNodeToWorldTransform();
+    glm::vec4 point(nodePoint, 0.0f, 1.0f);
+    glm::vec2 result = transform * point;
+    return result;
 }
 
 void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags)
 {
-	if (!m_visible) {
-		return;
-	}
+    if (!m_visible) {
+        return;
+    }
 
-	uint32_t flags = processParentFlag(parentTransform, parentFlags);
+    uint32_t flags = processParentFlag(parentTransform, parentFlags);
 
-	m_pGame->pushMatrix(MatrixStack::ModelView);
-	m_pGame->loadMatrix(MatrixStack::ModelView, m_modelVewTransform);
+    m_pGame->pushMatrix(MatrixStack::ModelView);
+    m_pGame->loadMatrix(MatrixStack::ModelView, m_modelVewTransform);
 
-	const bool visibleByCamera = isVisitableByVisitingCamera();
+    const bool visibleByCamera = isVisitableByVisitingCamera();
 
-	if (!m_children.empty()) {
-		sortAllChildren();
+    if (!m_children.empty()) {
+        sortAllChildren();
 
-		for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
-			if ((*iter)->m_localZOrder < 0) {
-				(*iter)->visit(pRenderer, m_modelVewTransform, flags);
-			}
-			else {
-				break;
-			}
-		}
+        for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
+            if ((*iter)->m_localZOrder < 0) {
+                (*iter)->visit(pRenderer, m_modelVewTransform, flags);
+            }
+            else {
+                break;
+            }
+        }
 
-		// 自身を描画
-		if (visibleByCamera) {
-			this->draw(pRenderer, m_modelVewTransform);
-		}
+        // 自身を描画
+        if (visibleByCamera) {
+            this->draw(pRenderer, m_modelVewTransform);
+        }
 
-		// 子エンティティを描画
-		for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
-			(*iter)->visit(pRenderer, m_modelVewTransform, flags);
-		}
-	}
-	else if (visibleByCamera) {
-		this->draw(pRenderer, m_modelVewTransform);
-	}
-	else {
-		// 何もしない
-	}
+        // 子エンティティを描画
+        for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
+            (*iter)->visit(pRenderer, m_modelVewTransform, flags);
+        }
+    }
+    else if (visibleByCamera) {
+        this->draw(pRenderer, m_modelVewTransform);
+    }
+    else {
+        // 何もしない
+    }
 
-	m_pGame->popMatrix(MatrixStack::ModelView);
+    m_pGame->popMatrix(MatrixStack::ModelView);
 }
 
 Scene* Node::getScene() const
 {
-	if(m_pParent == nullptr)
-		return nullptr;
+    if(m_pParent == nullptr)
+        return nullptr;
 
-	auto* sceneNode = m_pParent;
-	while (sceneNode->m_pParent != nullptr) {
-		sceneNode = sceneNode->m_pParent;
-	}
+    auto* sceneNode = m_pParent;
+    while (sceneNode->m_pParent != nullptr) {
+        sceneNode = sceneNode->m_pParent;
+    }
 
-	return dynamic_cast<Scene*>(sceneNode);
+    return dynamic_cast<Scene*>(sceneNode);
 }
 
 bool Node::isVisitableByVisitingCamera() const
 {
-	Camera* pCamera = Camera::getVisitingCamera();
-	bool visibleByCamera = (pCamera != nullptr) ? static_cast<uint16_t>(pCamera->getCameraFlag()) & m_cameraMask : true;
-	return visibleByCamera;
+    Camera* pCamera = Camera::getVisitingCamera();
+    bool visibleByCamera = (pCamera != nullptr) ? static_cast<uint16_t>(pCamera->getCameraFlag()) & m_cameraMask : true;
+    return visibleByCamera;
 }
 
 glm::mat4 Node::transform(const glm::mat4& parentTransform)
 {
-	return parentTransform * this->getNodeToParentTransform();
+    return parentTransform * this->getNodeToParentTransform();
 }
 
 uint32_t Node::processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag)
 {
-	if (!isVisitableByVisitingCamera()) {
-		return parentFlag;
-	}
+    if (!isVisitableByVisitingCamera()) {
+        return parentFlag;
+    }
 
-	uint32_t flags = parentFlag;
-	flags |= (m_transformUpdated ? FLAGS_TRANSFORM_DIRTY : 0);
-	flags |= (m_contentSizeDirty ? FLAGS_CONTENT_SIZE_DIRTY : 0);
+    uint32_t flags = parentFlag;
+    flags |= (m_transformUpdated ? FLAGS_TRANSFORM_DIRTY : 0);
+    flags |= (m_contentSizeDirty ? FLAGS_CONTENT_SIZE_DIRTY : 0);
 
-	if (flags & FLAGS_TRANSFORM_DIRTY) {
-		m_modelVewTransform = this->transform(parentTransform);
-	}
+    if (flags & FLAGS_TRANSFORM_DIRTY) {
+        m_modelVewTransform = this->transform(parentTransform);
+    }
 
-	m_transformUpdated = false;
-	m_contentSizeDirty = false;
+    m_transformUpdated = false;
+    m_contentSizeDirty = false;
 
-	return flags;
+    return flags;
 }
 
 NS_OCF_END

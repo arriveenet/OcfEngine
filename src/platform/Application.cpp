@@ -10,54 +10,54 @@ Applicaiton* g_pApplication = nullptr;
 
 Applicaiton* Applicaiton::getInstance()
 {
-	assert(g_pApplication);
-	return g_pApplication;
+    assert(g_pApplication);
+    return g_pApplication;
 }
 
 Applicaiton::Applicaiton()
-	: m_windowWidth(720)
-	, m_windowHeight(480)
+    : m_windowWidth(720)
+    , m_windowHeight(480)
 {
-	g_pApplication = this;
+    g_pApplication = this;
 }
 
 Applicaiton::~Applicaiton()
 {
-	assert(this == g_pApplication);
-	g_pApplication = nullptr;
+    assert(this == g_pApplication);
+    g_pApplication = nullptr;
 }
 
 bool Applicaiton::init()
 {
-	return true;
+    return true;
 }
 
 int Applicaiton::run()
 {
-	if (!applicationDidFinishLaunching()) {
-		return 1;
-	}
+    if (!applicationDidFinishLaunching()) {
+        return 1;
+    }
 
-	auto game = Game::getInstance();
-	auto glView = game->getGLView();
+    auto game = Game::getInstance();
+    auto glView = game->getGLView();
 
-	glView->retain();
+    glView->retain();
 
-	// Main loop
-	while (!glView->windowShouldClose())
-	{
-		game->mainLoop();
-		glView->pollEvents();
-	}
+    // Main loop
+    while (!glView->windowShouldClose())
+    {
+        game->mainLoop();
+        glView->pollEvents();
+    }
 
-	if (glView->isOpenGLReady()) {
-		game->exit();
-		game->mainLoop();
-		game = nullptr;
-	}
-	glView->release();
+    if (glView->isOpenGLReady()) {
+        game->exit();
+        game->mainLoop();
+        game = nullptr;
+    }
+    glView->release();
 
-	return 0;
+    return 0;
 }
 
 NS_OCF_END

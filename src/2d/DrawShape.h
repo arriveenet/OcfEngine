@@ -8,32 +8,32 @@ NS_OCF_BEGIN
 
 class DrawShape : public Node {
 public:
-	static DrawShape* create();
+    static DrawShape* create();
 
-	DrawShape();
-	virtual ~DrawShape();
+    DrawShape();
+    virtual ~DrawShape();
 
-	bool init() override;
-	void clear();
+    bool init() override;
+    void clear();
 
-	void ensureCapacityGLLine(int count);
+    void ensureCapacityGLLine(int count);
 
-	void drawLine(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
-	void drawRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
+    void drawLine(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
+    void drawRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
 
-	void update(float deltaTime) override;
-	void draw(Renderer* renderer, const glm::mat4& transform) override;
-
-protected:
-	void updateVertexBuffer();
-	void updateUniforms(const glm::mat4& transform, CustomCommand& cmd);
+    void update(float deltaTime) override;
+    void draw(Renderer* renderer, const glm::mat4& transform) override;
 
 protected:
-	bool m_dirtyLine;
-	int m_bufferCapacityLine;
-	int m_bufferCountLine;
-	std::vector<Vertex2fC4> m_lineBuffers;
-	CustomCommand m_customCommandLine;
+    void updateVertexBuffer();
+    void updateUniforms(const glm::mat4& transform, CustomCommand& cmd);
+
+protected:
+    bool m_dirtyLine;
+    int m_bufferCapacityLine;
+    int m_bufferCountLine;
+    std::vector<Vertex2fC4> m_lineBuffers;
+    CustomCommand m_customCommandLine;
 };
 
 NS_OCF_END

@@ -6,8 +6,8 @@
 NS_OCF_BEGIN
 
 struct OpenGLUtility {
-	static GLenum toGLPrimitive(PrimitiveType primitiveType);
-	static GLenum toGLFormat(PixelFormat format);
+    static GLenum toGLPrimitive(PrimitiveType primitiveType);
+    static GLenum toGLFormat(PixelFormat format);
 };
 
 NS_OCF_END

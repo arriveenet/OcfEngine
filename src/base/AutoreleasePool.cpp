@@ -114,7 +114,7 @@ void PoolManager::push(AutoreleasePool* pool)
 
 void PoolManager::pop()
 {
-    OCFASSERT(!m_releasePoolStack.empty());
+    OCFASSERT(!m_releasePoolStack.empty(), "");
     m_releasePoolStack.pop_back();
 }
 

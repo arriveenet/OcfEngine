@@ -5,9 +5,9 @@ NS_OCF_BEGIN
 
 class ApplicationBase {
 public:
-	virtual ~ApplicationBase();
+    virtual ~ApplicationBase();
 
-	virtual bool applicationDidFinishLaunching() = 0;
+    virtual bool applicationDidFinishLaunching() = 0;
 };
 
 NS_OCF_END

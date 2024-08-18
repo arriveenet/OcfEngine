@@ -5,7 +5,7 @@ NS_OCF_BEGIN
 
 ApplicationBase::~ApplicationBase()
 {
-	Game::destroyInstance();
+    Game::destroyInstance();
 }
 
 NS_OCF_END

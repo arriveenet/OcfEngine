@@ -11,43 +11,43 @@ NS_OCF_BEGIN
  */
 class GameObject {
 public:
-	/** コンストラクタ */
-	GameObject();
-	/** デストラクタ */
-	virtual ~GameObject();
+    /** コンストラクタ */
+    GameObject();
+    /** デストラクタ */
+    virtual ~GameObject();
 
-	/**
-	 * @brief 固有のIDを取得する
-	 * @return ID
-	 */
-	unsigned int getID() const;
+    /**
+     * @brief 固有のIDを取得する
+     * @return ID
+     */
+    unsigned int getID() const;
 
-	/**
-	 * @brief 参照カウントをインクリメントする
-	 */
-	void retain();
+    /**
+     * @brief 参照カウントをインクリメントする
+     */
+    void retain();
 
-	/**
-	 * @brief 参照カウントをデクリメントする
-	 * もし、デクリメントし参照カウントが0の場合、ゲームオブジェクトを解放する
-	 */
-	void release();
+    /**
+     * @brief 参照カウントをデクリメントする
+     * もし、デクリメントし参照カウントが0の場合、ゲームオブジェクトを解放する
+     */
+    void release();
 
-	/**
-	 * @brief 自動解放を行う
-	 */
-	GameObject* autorelease();
+    /**
+     * @brief 自動解放を行う
+     */
+    GameObject* autorelease();
 
-	/**
-	 * @brief 参照カウントを取得する
-	 */
-	unsigned int getReferenceCount();
+    /**
+     * @brief 参照カウントを取得する
+     */
+    unsigned int getReferenceCount();
 
 protected:
-	unsigned int m_referenceCount;	//!< 参照カウント
+    unsigned int m_referenceCount;	//!< 参照カウント
 
 private:
-	unsigned int m_id;	//!< ID
+    unsigned int m_id;	//!< ID
 };
 
 NS_OCF_END

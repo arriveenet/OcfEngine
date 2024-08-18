@@ -3,8 +3,8 @@
 
 class SpriteTestDemo : public TestCase {
 public:
-	SpriteTestDemo();
-	~SpriteTestDemo();
+    SpriteTestDemo();
+    ~SpriteTestDemo();
 
-	bool init() override;
+    bool init() override;
 };

@@ -6,39 +6,39 @@ NS_OCF_BEGIN
 
 class GLFWEventHandler;
 class GLViewImpl : public GLView {
-	friend GLFWEventHandler;
+    friend GLFWEventHandler;
 
 public:
-	static GLViewImpl* create(std::string_view viewName);
-	static GLViewImpl* create(std::string_view viewName, bool resizable);
-	static GLViewImpl* createWithRect(std::string_view viewName, const Rect& rect, bool resizable = false);
+    static GLViewImpl* create(std::string_view viewName);
+    static GLViewImpl* create(std::string_view viewName, bool resizable);
+    static GLViewImpl* createWithRect(std::string_view viewName, const Rect& rect, bool resizable = false);
 
-	void end() override;
+    void end() override;
 
-	bool windowShouldClose() override;
-	void pollEvents() override;
+    bool windowShouldClose() override;
+    void pollEvents() override;
 
-	bool isOpenGLReady() override;
-	void swapBuffers() override;
+    bool isOpenGLReady() override;
+    void swapBuffers() override;
 
-	void setWindowPosition(int xpos, int ypos);
+    void setWindowPosition(int xpos, int ypos);
 
-	glm::vec2 getMousePosition() const { return m_mousePosition; }
-
-protected:
-	GLViewImpl(bool initGlfw = true);
-	virtual ~GLViewImpl();
-
-	bool initWithRect(std::string_view viewName, const Rect& rect, bool resizable);
-
-	void onGLFWMouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
-	void onGLFWMouseMoveCallback(GLFWwindow* window, double xpos, double ypos);
-	void onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-	void onGLFWWindowSizeCallback(GLFWwindow* window, int width, int height);
+    glm::vec2 getMousePosition() const { return m_mousePosition; }
 
 protected:
-	GLFWwindow* m_pMainWindow;
-	glm::vec2 m_mousePosition;
+    GLViewImpl(bool initGlfw = true);
+    virtual ~GLViewImpl();
+
+    bool initWithRect(std::string_view viewName, const Rect& rect, bool resizable);
+
+    void onGLFWMouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+    void onGLFWMouseMoveCallback(GLFWwindow* window, double xpos, double ypos);
+    void onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    void onGLFWWindowSizeCallback(GLFWwindow* window, int width, int height);
+
+protected:
+    GLFWwindow* m_pMainWindow;
+    glm::vec2 m_mousePosition;
 };
 
 NS_OCF_END

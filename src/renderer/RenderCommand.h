@@ -11,29 +11,29 @@ NS_OCF_BEGIN
 
 class RenderCommand {
 public:
-	enum class Type {
-		UnknownCommand,
-		TrianglesCommand,
-		CustomCommand,
-	};
+    enum class Type {
+        UnknownCommand,
+        TrianglesCommand,
+        CustomCommand,
+    };
 
-	void init(float globalZOrder, const glm::mat4& modelViewMatrix);
+    void init(float globalZOrder, const glm::mat4& modelViewMatrix);
 
-	float getGlobalOrder() const { return m_globalOrder; }
+    float getGlobalOrder() const { return m_globalOrder; }
 
-	Type getType() const { return m_Type; }
+    Type getType() const { return m_Type; }
 
-	const glm::mat4& getModelView() const { return m_modelVew; }
-	ProgramState& getProgramState() { return m_programState; }
+    const glm::mat4& getModelView() const { return m_modelVew; }
+    ProgramState& getProgramState() { return m_programState; }
 
 protected:
-	RenderCommand();
-	virtual ~RenderCommand();
+    RenderCommand();
+    virtual ~RenderCommand();
 
-	Type m_Type;
-	float m_globalOrder;
-	glm::mat4 m_modelVew;
-	ProgramState m_programState;
+    Type m_Type;
+    float m_globalOrder;
+    glm::mat4 m_modelVew;
+    ProgramState m_programState;
 };
 
 

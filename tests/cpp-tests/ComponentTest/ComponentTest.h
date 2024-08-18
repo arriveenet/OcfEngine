@@ -3,39 +3,39 @@
 
 class ComponentTest : public TestCase {
 public:
-	ComponentTest();
-	~ComponentTest();
+    ComponentTest();
+    ~ComponentTest();
 
-	bool init() override;
+    bool init() override;
 };
 
 class Laser : public ocf::Sprite {
 public:
-	Laser();
-	virtual ~Laser();
+    Laser();
+    virtual ~Laser();
 
-	void updateNode(float deltaTime) override;
+    void updateNode(float deltaTime) override;
 
-	ocf::MoveComponent* m_pMoveComponent;
-	ocf::CircleComponent* m_pCircleComponent;
-	float m_deathTimer;
+    ocf::MoveComponent* m_pMoveComponent;
+    ocf::CircleComponent* m_pCircleComponent;
+    float m_deathTimer;
 };
 
 class Asteroid : public ocf::Sprite {
 public:
-	Asteroid();
+    Asteroid();
 
-	void updateNode(float deltaTime) override;
+    void updateNode(float deltaTime) override;
 
-	ocf::MoveComponent* m_pMoveComponent;
-	ocf::CircleComponent* m_pCircleComponent;
+    ocf::MoveComponent* m_pMoveComponent;
+    ocf::CircleComponent* m_pCircleComponent;
 };
 
 class Ship : public ocf::Sprite {
 public:
-	Ship();
+    Ship();
 
-	void processInput(const ocf::InputState& inputState) override;
+    void processInput(const ocf::InputState& inputState) override;
 
-	ocf::MoveComponent* m_pMoveComponent;
+    ocf::MoveComponent* m_pMoveComponent;
 };

@@ -7,18 +7,18 @@ NS_OCF_BEGIN
 
 class Applicaiton : public ApplicationBase {
 public:
-	static Applicaiton* getInstance();
+    static Applicaiton* getInstance();
 
-	Applicaiton();
-	~Applicaiton();
+    Applicaiton();
+    ~Applicaiton();
 
-	bool init();
+    bool init();
 
-	int run();
+    int run();
 
 private:
-	int m_windowWidth;
-	int m_windowHeight;
+    int m_windowWidth;
+    int m_windowHeight;
 };
 
 NS_OCF_END

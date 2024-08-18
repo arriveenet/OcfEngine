@@ -3,12 +3,12 @@
 
 class TiledMapTest : public TestCase {
 public:
-	TiledMapTest();
-	~TiledMapTest();
+    TiledMapTest();
+    ~TiledMapTest();
 
-	bool init() override;
-	void processInput(const ocf::InputState& inputState) override;
+    bool init() override;
+    void processInput(const ocf::InputState& inputState) override;
 
 protected:
-	ocf::Camera* m_camera;
+    ocf::Camera* m_camera;
 };

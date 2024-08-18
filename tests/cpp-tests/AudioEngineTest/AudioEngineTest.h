@@ -3,11 +3,11 @@
 
 class AudioEngineTest : public TestCase {
 public:
-	AudioEngineTest();
-	~AudioEngineTest();
+    AudioEngineTest();
+    ~AudioEngineTest();
 
-	bool init() override;
+    bool init() override;
 
-	ocf::AUDIO_ID m_audioID;
-	ocf::Label* m_volumeLabel;
+    ocf::AUDIO_ID m_audioID;
+    ocf::Label* m_volumeLabel;
 };

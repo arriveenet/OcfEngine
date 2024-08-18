@@ -12,50 +12,50 @@ FileUtils* FileUtils::s_sharedFileUtils = nullptr;
 std::string FileUtils::s_exeDirectory;
 
 namespace {
-	std::string checkExePath()
-	{
-		return fs::current_path().generic_string();
-	}
+    std::string checkExePath()
+    {
+        return fs::current_path().generic_string();
+    }
 
-	std::string checkAssetsPath()
-	{
-		std::string result;
+    std::string checkAssetsPath()
+    {
+        std::string result;
 
-		fs::path currentPath = fs::current_path();
-		fs::path rootPath = currentPath.root_path();
+        fs::path currentPath = fs::current_path();
+        fs::path rootPath = currentPath.root_path();
 
-		while (currentPath != rootPath) {
-			fs::path assetsPath = currentPath;
-			assetsPath.append(OCF_ASSETS_DIR);
-			if (fs::exists(assetsPath)) {
-				result = assetsPath.string();
-				break;
-			}
+        while (currentPath != rootPath) {
+            fs::path assetsPath = currentPath;
+            assetsPath.append(OCF_ASSETS_DIR);
+            if (fs::exists(assetsPath)) {
+                result = assetsPath.string();
+                break;
+            }
 
-			currentPath = currentPath.parent_path();
-		}
+            currentPath = currentPath.parent_path();
+        }
 
-		return result;
-	}
+        return result;
+    }
 }
 
 FileUtils* FileUtils::getInstance()
 {
-	if (s_sharedFileUtils == nullptr) {
-		s_sharedFileUtils = new FileUtils;
-		if (!s_sharedFileUtils->init()) {
-			delete s_sharedFileUtils;
-			s_sharedFileUtils = nullptr;
-		}
-	}
+    if (s_sharedFileUtils == nullptr) {
+        s_sharedFileUtils = new FileUtils;
+        if (!s_sharedFileUtils->init()) {
+            delete s_sharedFileUtils;
+            s_sharedFileUtils = nullptr;
+        }
+    }
 
-	return s_sharedFileUtils;
+    return s_sharedFileUtils;
 }
 
 void FileUtils::destroyInstance()
 {
-	delete s_sharedFileUtils;
-	s_sharedFileUtils = nullptr;
+    delete s_sharedFileUtils;
+    s_sharedFileUtils = nullptr;
 }
 
 FileUtils::~FileUtils()
@@ -64,16 +64,16 @@ FileUtils::~FileUtils()
 
 std::string FileUtils::getFullPath(const std::string& filename) const
 {
-	std::filesystem::path fullPaht = std::filesystem::absolute(filename);
+    std::filesystem::path fullPaht = std::filesystem::absolute(filename);
 
-	return fullPaht.string();
+    return fullPaht.string();
 }
 
 std::string FileUtils::getParentFullPath(const std::string& filename) const
 {
-	std::filesystem::path parentPath = std::filesystem::path(filename).parent_path();
+    std::filesystem::path parentPath = std::filesystem::path(filename).parent_path();
 
-	return std::filesystem::absolute(parentPath).string();
+    return std::filesystem::absolute(parentPath).string();
 }
 
 void FileUtils::addSearchPath(const std::string& path, bool front)
@@ -82,61 +82,61 @@ void FileUtils::addSearchPath(const std::string& path, bool front)
 
 const std::vector<std::string>& FileUtils::getSearchPath() const
 {
-	return m_searchPathArray;
+    return m_searchPathArray;
 }
 
 std::string FileUtils::getAssetsPath() const
 {
-	return m_defaultAssetsRootPath;
+    return m_defaultAssetsRootPath;
 }
 
 std::string FileUtils::fullPathForFilename(const std::string& filename) const
 {
-	if (filename.empty()) {
-		return "";
-	}
+    if (filename.empty()) {
+        return "";
+    }
 
-	const fs::path p(filename);
-	if (p.is_absolute()) {
-		return filename;
-	}
+    const fs::path p(filename);
+    if (p.is_absolute()) {
+        return filename;
+    }
 
-	std::string fullpath;
-	for (const auto& searchIter : m_searchPathArray) {
-		fullpath = this->getPathForFilename(filename, searchIter);
+    std::string fullpath;
+    for (const auto& searchIter : m_searchPathArray) {
+        fullpath = this->getPathForFilename(filename, searchIter);
 
-		if (!fullpath.empty()) {
-			return fullpath;
-		}
-	}
+        if (!fullpath.empty()) {
+            return fullpath;
+        }
+    }
 
-	return std::string();
+    return std::string();
 }
 
 std::string FileUtils::getStringFromFile(std::string_view filename) const
 {
-	std::string fullPath = fullPathForFilename(filename.data());
+    std::string fullPath = fullPathForFilename(filename.data());
 
-	std::string buffer;
+    std::string buffer;
 
-	std::ifstream fs(fullPath, std::ios::binary);
-	if (fs) {
-		fs.seekg(0, std::ifstream::end);
-		size_t fileSize = static_cast<size_t>(fs.tellg());
-		fs.seekg(0, std::ifstream::beg);
+    std::ifstream fs(fullPath, std::ios::binary);
+    if (fs) {
+        fs.seekg(0, std::ifstream::end);
+        size_t fileSize = static_cast<size_t>(fs.tellg());
+        fs.seekg(0, std::ifstream::beg);
 
-		buffer.resize(fileSize);
-		fs.read(buffer.data(), fileSize);
+        buffer.resize(fileSize);
+        fs.read(buffer.data(), fileSize);
 
-		fs.close();
-	}
+        fs.close();
+    }
 
-	return buffer;
+    return buffer;
 }
 
 bool FileUtils::isFileExist(const std::string& filename) const
 {
-	return fs::exists(filename);
+    return fs::exists(filename);
 }
 
 FileUtils::FileUtils()
@@ -145,31 +145,31 @@ FileUtils::FileUtils()
 
 bool FileUtils::init()
 {
-	if (s_exeDirectory.empty()) {
-		s_exeDirectory = checkExePath();
-	}
+    if (s_exeDirectory.empty()) {
+        s_exeDirectory = checkExePath();
+    }
 
-	m_searchPathArray.emplace_back(s_exeDirectory);
+    m_searchPathArray.emplace_back(s_exeDirectory);
 
-	m_defaultAssetsRootPath = checkAssetsPath();
-	if (!m_defaultAssetsRootPath.empty()) {
-		m_searchPathArray.emplace_back(m_defaultAssetsRootPath);
-		m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "\\fonts");
-		m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "\\shaders");
-		m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "\\textures");
-	}
+    m_defaultAssetsRootPath = checkAssetsPath();
+    if (!m_defaultAssetsRootPath.empty()) {
+        m_searchPathArray.emplace_back(m_defaultAssetsRootPath);
+        m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "\\fonts");
+        m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "\\shaders");
+        m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "\\textures");
+    }
 
-	return true;
+    return true;
 }
 
 std::string FileUtils::getPathForFilename(const std::string& filename, const std::string& searchPath) const
 {
-	fs::path path(searchPath);
-	path.append(filename);
+    fs::path path(searchPath);
+    path.append(filename);
 
-	std::string result = fs::exists(path) ? path.generic_string() : "";
+    std::string result = fs::exists(path) ? path.generic_string() : "";
 
-	return result;
+    return result;
 }
 
 NS_OCF_END
