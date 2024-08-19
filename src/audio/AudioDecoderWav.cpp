@@ -131,8 +131,9 @@ uint32_t AudioDecoderWav::bytesToFrames(uint32_t bytes) const
 uint32_t AudioDecoderWav::read(uint32_t framesToRead, char* pcmBuffer)
 {
     uint32_t bytesToRead = framesToBytes(framesToRead);
-    size_t bytesRead = fread(pcmBuffer, bytesToRead, 1, m_wavFile.pFile);
-    return bytesToFrames(bytesToRead);
+    size_t readCount = fread(pcmBuffer, bytesToRead, 1, m_wavFile.pFile);
+    uint32_t bytesRead = static_cast<uint32_t>(bytesToRead * readCount);
+    return bytesToFrames(bytesRead);
 }
 
 bool AudioDecoderWav::seek(uint32_t frameOffset)
@@ -146,6 +147,7 @@ bool AudioDecoderWav::seek(uint32_t frameOffset)
 }
 
 AudioDecoderWav::AudioDecoderWav()
+    : m_wavFile()
 {
 }
 
