@@ -21,6 +21,9 @@
     <Filter Include="Source\AudioEngine">
       <UniqueIdentifier>{f503e0d3-26ae-4c7b-a0e1-dc86247443f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\MeshRendererTest">
+      <UniqueIdentifier>{45c89396-76ef-47cf-aa74-5859aab815ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -47,6 +50,9 @@
     <ClCompile Include="AudioEngineTest\AudioEngineTest.cpp">
       <Filter>Source\AudioEngine</Filter>
     </ClCompile>
+    <ClCompile Include="MeshRendererTest\MeshRendererTest.cpp">
+      <Filter>Source\MeshRendererTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainScene.h">
@@ -69,6 +75,9 @@
     </ClInclude>
     <ClInclude Include="AudioEngineTest\AudioEngineTest.h">
       <Filter>Source\AudioEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRendererTest\MeshRendererTest.h">
+      <Filter>Source\MeshRendererTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -18,6 +18,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TinyXML2", "third_party\Tin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glad", "third_party\glad\glad.vcxproj", "{FEA80335-1B05-4F45-AB54-30C1E21FC762}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tinyobjloader", "third_party\tinyobjloader\tinyobjloader.vcxproj", "{FB32F725-DD7B-4943-912C-A599C37E62C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -58,6 +60,14 @@ Global
 		{FEA80335-1B05-4F45-AB54-30C1E21FC762}.Release|x64.Build.0 = Release|x64
 		{FEA80335-1B05-4F45-AB54-30C1E21FC762}.Release|x86.ActiveCfg = Release|Win32
 		{FEA80335-1B05-4F45-AB54-30C1E21FC762}.Release|x86.Build.0 = Release|Win32
+		{FB32F725-DD7B-4943-912C-A599C37E62C5}.Debug|x64.ActiveCfg = Debug|x64
+		{FB32F725-DD7B-4943-912C-A599C37E62C5}.Debug|x64.Build.0 = Debug|x64
+		{FB32F725-DD7B-4943-912C-A599C37E62C5}.Debug|x86.ActiveCfg = Debug|Win32
+		{FB32F725-DD7B-4943-912C-A599C37E62C5}.Debug|x86.Build.0 = Debug|Win32
+		{FB32F725-DD7B-4943-912C-A599C37E62C5}.Release|x64.ActiveCfg = Release|x64
+		{FB32F725-DD7B-4943-912C-A599C37E62C5}.Release|x64.Build.0 = Release|x64
+		{FB32F725-DD7B-4943-912C-A599C37E62C5}.Release|x86.ActiveCfg = Release|Win32
+		{FB32F725-DD7B-4943-912C-A599C37E62C5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +76,7 @@ Global
 		{F2A1E4E3-DD3D-4CE0-8931-0BE16CDF1BEE} = {D45CCAE9-1E9B-48F1-8C55-F75796531807}
 		{28408653-A1A0-41B1-B29D-8A972EF54901} = {3D49C5ED-ACBB-435C-A698-E41165B4FAC4}
 		{FEA80335-1B05-4F45-AB54-30C1E21FC762} = {3D49C5ED-ACBB-435C-A698-E41165B4FAC4}
+		{FB32F725-DD7B-4943-912C-A599C37E62C5} = {3D49C5ED-ACBB-435C-A698-E41165B4FAC4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E951132-8C5C-43C0-883F-E30A158DF8AF}

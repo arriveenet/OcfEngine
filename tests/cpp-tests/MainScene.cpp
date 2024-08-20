@@ -4,12 +4,14 @@
 #include "ComponentTest/ComponentTest.h"
 #include "TiledMapTest/TiledMapTest.h"
 #include "AudioEngineTest/AudioEngineTest.h"
+#include"MeshRendererTest/MeshRendererTest.h"
 
 USING_NS_OCF;
 
 using namespace ocf::ui;
 
 MainScene::MainScene()
+    : m_buttonPosY(600.0f)
 {
 }
 
@@ -19,59 +21,41 @@ MainScene::~MainScene()
 
 bool MainScene::init()
 {
-    if (Scene::init()) {
-        auto visibleSize = m_pGame->getVisibleSize();
-        auto button1 = Button::create("ButtonNormal.png", "ButtonActive.png");
-        button1->setText("SpriteTest");
-        button1->setPosition(100, visibleSize.y -130.0f);
-        button1->setOnClickCallback([=]() {
-            auto scene = new SpriteTestDemo();
-            scene->init();
-            m_pGame->replaceScene(scene);
-            });
-        addChild(button1);
-
-        auto button2 = Button::create("ButtonNormal.png", "ButtonActive.png");
-        button2->setText("CompoTest");
-        button2->setPosition(100, button1->getPosition().y - 60.0f);
-        button2->setOnClickCallback([=]() {
-            auto scene = new ComponentTest();
-            scene->init();
-            m_pGame->replaceScene(scene);
-            });
-        addChild(button2);
-
-        auto button3 = Button::create("ButtonNormal.png", "ButtonActive.png");
-        button3->setText("TiledMapTest");
-        button3->setPosition(100, button2->getPosition().y - 60.0f);
-        button3->setOnClickCallback([=]() {
-            auto scene = new TiledMapTest();
-            scene->init();
-            m_pGame->replaceScene(scene);
-            });
-        addChild(button3);
-
-        auto button4 = Button::create("ButtonNormal.png", "ButtonActive.png");
-        button4->setText("AudioTest");
-        button4->setPosition(100, button3->getPosition().y - 60.0f);
-        button4->setOnClickCallback([=]() {
-            auto scene = new AudioEngineTest();
-            scene->init();
-            m_pGame->replaceScene(scene);
-            });
-        addChild(button4);
-
-        auto button = Button::create("ButtonNormal.png", "ButtonActive.png");
-        button->setText("Exit");
-        button->setPosition(100, button4->getPosition().y -60.0f);
-        button->setOnClickCallback([=]() {
-            m_pGame->exit();
-            });
-        addChild(button);
-
-        return true;
+    if (!Scene::init()) {
+        return false;
     }
 
-    return false;
+    addTest("SpriteTest", []() {return new SpriteTestDemo(); });
+    addTest("CompTest", []() {return new ComponentTest(); });
+    addTest("TiledMapTest", []() {return new TiledMapTest(); });
+    addTest("AudioTest", []() {return new AudioEngineTest(); });
+    addTest("MeshTest", []() {return new MeshRendererTest(); });
+
+    glm::vec2 visibleSize = m_pGame->getVisibleSize();
+
+    auto button = Button::create("ButtonNormal.png", "ButtonActive.png");
+    button->setText("Exit");
+    button->setPosition(visibleSize.x - 100.0f, 30.0f);
+    button->setOnClickCallback([=]() {
+        m_pGame->exit();
+        });
+    addChild(button);
+
+    return true;
+}
+
+void MainScene::addTest(std::string_view testName, std::function<TestCase*()> callback)
+{
+    auto button = Button::create("ButtonNormal.png", "ButtonActive.png");
+    button->setText(testName.data());
+    button->setPosition(120.0f, m_buttonPosY);
+    button->setOnClickCallback([=]() {
+        auto test = callback();
+        test->init();
+        m_pGame->replaceScene(test);
+        });
+    addChild(button);
+
+    m_buttonPosY -= 60.0f;
 }
 

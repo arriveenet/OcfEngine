@@ -55,6 +55,12 @@
     <Filter Include="ヘッダー ファイル\audio">
       <UniqueIdentifier>{9ec37796-4eb7-4936-8ad0-8e709be8c22f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\3d">
+      <UniqueIdentifier>{97170bc6-8efc-435a-a8fa-b121a79d06b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\3d">
+      <UniqueIdentifier>{e89d4b07-6627-444e-bd65-70ffb1627d84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="renderer\Image.cpp">
@@ -233,6 +239,12 @@
     </ClCompile>
     <ClCompile Include="base\AutoreleasePool.cpp">
       <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\Mesh.cpp">
+      <Filter>ソース ファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="3d\MeshRenderer.cpp">
+      <Filter>ソース ファイル\3d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -433,6 +445,12 @@
     </ClInclude>
     <ClInclude Include="base\AutoreleasePool.h">
       <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Mesh.h">
+      <Filter>ヘッダー ファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\MeshRenderer.h">
+      <Filter>ヘッダー ファイル\3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

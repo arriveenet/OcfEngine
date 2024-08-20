@@ -8,6 +8,9 @@
 #include "2d/MoveComponent.h"
 #include "2d/CircleComponent.h"
 
+#include "3d/Mesh.h"
+#include "3d/MeshRenderer.h"
+
 #include "audio/AudioEngine.h"
 
 #include "base/Game.h"
