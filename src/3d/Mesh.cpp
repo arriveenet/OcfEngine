@@ -29,17 +29,17 @@ bool Mesh::setupMesh()
     VertexArray* pVertexArray = m_meshCommand.getVertexArray();
     pVertexArray->bind();
 
-    pVertexArray->setStride(sizeof(glm::vec3));
-
     pVertexArray->createVertexBuffer(BufferUsage::Static);
-    pVertexArray->setAttribute("inPosition", 0, 3, false, 0);
-    pVertexArray->bindVertexBuffer();
-
-    pVertexArray->unbind();
 
     pVertexArray->updateVertexBuffer(m_data.data(), m_data.size() * sizeof(glm::vec3));
     m_meshCommand.setVertexDrawInfo(0, static_cast<unsigned int>(m_data.size()));
 
+    pVertexArray->setStride(sizeof(glm::vec3));
+
+    pVertexArray->setAttribute("inPosition", 0, 3, false, 0);
+    pVertexArray->bindVertexBuffer();
+
+    pVertexArray->unbind();
 
     return true;
 }
@@ -49,7 +49,7 @@ void Mesh::draw(Renderer* renderer, float globalZOrder, const glm::mat4& transfo
     glm::mat4 projection = Game::getInstance()->getMatrix(MatrixStack::Projection);
     auto& programState = m_meshCommand.getProgramState();
 
-    programState.setUniform("uMVPMatrix", glm::mat4(1.0f));
+    programState.setUniform("uMVPMatrix", projection);
 
     m_meshCommand.init(globalZOrder, transform);
     renderer->addCommand(&m_meshCommand);

@@ -7,4 +7,6 @@ public:
     ~MeshRendererTest();
 
     bool init() override;
+
+    ocf::Camera* m_pCamera;
 };

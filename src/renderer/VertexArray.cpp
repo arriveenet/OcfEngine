@@ -8,6 +8,7 @@ VertexArray::VertexArray()
     , m_indexCount(0)
     , m_vertexBuffer(nullptr)
     , m_indexBuffer(nullptr)
+    , m_isVertexBufferCreated(false)
     , m_stride(0)
 {
     glGenVertexArrays(1, &m_vertexArray);
@@ -17,28 +18,6 @@ VertexArray::~VertexArray()
 {
     OCF_SAFE_DELETE(m_vertexBuffer);
     OCF_SAFE_DELETE(m_indexBuffer);
-}
-
-void VertexArray::init(Vertex3fC3fT2f* vertices, unsigned short* indices, unsigned int vertexCount, unsigned int indexCount)
-{
-    // Create vertex array
-    bind();
-
-    // Create vertex buffer
-    m_vertexBuffer->updateData(vertices, sizeof(Vertex3fC3fT2f) * vertexCount);
-
-    // Create index buffer
-    m_indexBuffer->updateData(indices, sizeof(unsigned short) * indexCount);
-
-    // Specify the vertex attributes
-    setStride(sizeof(Vertex3fC3fT2f));
-    setAttribute("inPosition", 0, 3, false, 0);
-    setAttribute("inNormal", 1, 3, false, sizeof(float) * 3);
-    setAttribute("inTexCoord", 2, 2, false, sizeof(float) * 6);
-
-    bindVertexBuffer();
-
-    unbind();
 }
 
 void VertexArray::bind()
@@ -59,6 +38,8 @@ void VertexArray::setStride(std::size_t stride)
 void VertexArray::createVertexBuffer(BufferUsage usage)
 {
     OCF_SAFE_DELETE(m_vertexBuffer);
+
+    m_isVertexBufferCreated = true;
 
     m_vertexBuffer = new VertexBuffer(BufferType::Vertex, usage);
 }
@@ -96,6 +77,8 @@ void VertexArray::updateIndexBuffer(void* pData, size_t offset, size_t size)
 
 void VertexArray::bindVertexBuffer()
 {
+    OCFASSERT(m_isVertexBufferCreated, "Vertex buffer not created");
+
     for (const auto& attributeInfo : m_attributes) {
         const auto& attribute = attributeInfo.second;
 
