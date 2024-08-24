@@ -56,12 +56,15 @@ public:
 
 protected:
     void flush();
+    void flush2D();
+    void flush3D();
     void visitRenderQueue(RenderQueue& queue);
     void doVisitRenderQueue(const std::vector<RenderCommand*>& renderCommands);
     void processRenderCommand(RenderCommand* command);
     void trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int vertexBufferOffset);
     void drawTrianglesCommand();
     void drawCustomCommand(RenderCommand* command);
+    void drawMeshCommand(RenderCommand* command);
 
 private:
     glm::ivec4 m_viewport;

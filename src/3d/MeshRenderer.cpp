@@ -60,6 +60,9 @@ bool MeshRenderer::initWithObjFile(std::string_view objFile)
                 tinyobj::real_t vy = attrib.vertices[3 * static_cast<size_t>(index.vertex_index) + 1];
                 tinyobj::real_t vz = attrib.vertices[3 * static_cast<size_t>(index.vertex_index) + 2];
 
+                glm::vec3 pos(vx, vy, vz);
+                m_mesh.m_data.push_back(pos);
+
                 // 法線データがあるかチェック
                 if (index.normal_index >= 0) {
                     tinyobj::real_t nx = attrib.normals[3 * static_cast<size_t>(index.normal_index) + 0];
@@ -78,7 +81,14 @@ bool MeshRenderer::initWithObjFile(std::string_view objFile)
         }
     }
 
+    m_mesh.setupMesh();
+
     return true;
+}
+
+void MeshRenderer::draw(Renderer* renderer, const glm::mat4& transform)
+{
+    m_mesh.draw(renderer, m_globalZOrder, transform);
 }
 
 NS_OCF_END

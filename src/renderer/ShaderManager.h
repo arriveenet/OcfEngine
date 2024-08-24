@@ -10,6 +10,7 @@ enum class ProgramType : uint32_t {
     Label,
     DrawShape,
     PositionTexture,
+    Position3D,
     Max
 };
 

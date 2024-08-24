@@ -14,6 +14,8 @@ public:
 
     bool initWithObjFile(std::string_view objFile);
 
+    void draw(Renderer* renderer, const glm::mat4& transform) override;
+
 protected:
     Mesh m_mesh;
 };

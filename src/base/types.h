@@ -62,12 +62,6 @@ struct Vertex3fC3fT2f {
     glm::vec2 texCoord;
 };
 
-struct Vertex3fN3fT2f {
-    glm::vec3 position;
-    glm::vec3 normal;
-    glm::vec2 texCoord;
-};
-
 struct QuadV3fT2f {
     Vertex3fT2f topLeft;
     Vertex3fT2f bottomLeft;

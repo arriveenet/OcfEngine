@@ -207,6 +207,7 @@
     <ClCompile Include="platform\GLViewImpl.cpp" />
     <ClCompile Include="renderer\CustomCommand.cpp" />
     <ClCompile Include="renderer\Image.cpp" />
+    <ClCompile Include="renderer\MeshCommand.cpp" />
     <ClCompile Include="renderer\OpenGLUtility.cpp" />
     <ClCompile Include="renderer\ProgramState.cpp" />
     <ClCompile Include="renderer\QuadCommand.cpp" />
@@ -275,6 +276,7 @@
     <ClInclude Include="platform\PlatformMacros.h" />
     <ClInclude Include="renderer\CustomCommand.h" />
     <ClInclude Include="renderer\Image.h" />
+    <ClInclude Include="renderer\MeshCommand.h" />
     <ClInclude Include="renderer\OpenGLInclude.h" />
     <ClInclude Include="renderer\OpenGLUtility.h" />
     <ClInclude Include="renderer\ProgramState.h" />
@@ -298,10 +300,12 @@
   <ItemGroup>
     <None Include="..\assets\shaders\basic.frag" />
     <None Include="..\assets\shaders\basic.vert" />
+    <None Include="..\assets\shaders\color.frag" />
     <None Include="..\assets\shaders\drawShape.frag" />
     <None Include="..\assets\shaders\drawShape.vert" />
     <None Include="..\assets\shaders\label.frag" />
     <None Include="..\assets\shaders\label.vert" />
+    <None Include="..\assets\shaders\position.vert" />
     <None Include="..\assets\shaders\positionTexture.frag" />
     <None Include="..\assets\shaders\positionTexture.vert" />
   </ItemGroup>

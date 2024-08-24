@@ -58,6 +58,9 @@ bool ShaderManager::init()
     program = new Program("positionTexture.vert", "positionTexture.frag");
     m_programs.emplace(ProgramType::PositionTexture, program);
 
+    program = new Program("position.vert", "color.frag");
+    m_programs.emplace(ProgramType::Position3D, program);
+
     return true;
 }
 

@@ -14,7 +14,7 @@ public:
     CustomCommand();
     ~CustomCommand();
 
-    void init(float globalZOrder,const glm::mat4& modelView);
+    void init(float globalZOrder, const glm::mat4& modelView);
 
     VertexArray* getVertexArray() const { return m_pVertexArray; }
 

@@ -10,6 +10,7 @@ void RenderCommand::init(float globalZOrder, const glm::mat4& modelViewMatrix)
 
 RenderCommand::RenderCommand()
     : m_Type(Type::UnknownCommand)
+    , m_is3D(false)
     , m_globalOrder(0.0f)
     , m_modelVew(1.0f)
 {

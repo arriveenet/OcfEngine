@@ -161,7 +161,17 @@ void Renderer::draw()
 
 void Renderer::flush()
 {
+    flush2D();
+    flush3D();
+}
+
+void Renderer::flush2D()
+{
     drawTrianglesCommand();
+}
+
+void Renderer::flush3D()
+{
 }
 
 void Renderer::visitRenderQueue(RenderQueue& queue)
@@ -186,6 +196,8 @@ void Renderer::processRenderCommand(RenderCommand* command)
     switch (commandType) {
     case RenderCommand::Type::TrianglesCommand:
     {
+        flush3D();
+
         TrianglesCommand* cmd = static_cast<TrianglesCommand*>(command);
 
         if ((m_triangleVertexCount + cmd->getVertexCount() > VBO_SIZE)
@@ -200,6 +212,12 @@ void Renderer::processRenderCommand(RenderCommand* command)
     {
         flush();
         drawCustomCommand(command);
+    }
+    break;
+    case RenderCommand::Type::MeshCommand:
+    {
+        flush2D();
+        drawMeshCommand(command);
     }
     break;
     default:
@@ -335,6 +353,11 @@ void Renderer::drawCustomCommand(RenderCommand* command)
     m_drawVertexCount += cmd->getVertexDrawCount();
 
     cmd->getVertexArray()->unbind();
+}
+
+void Renderer::drawMeshCommand(RenderCommand* command)
+{
+    drawCustomCommand(command);
 }
 
 NS_OCF_END
