@@ -19,6 +19,7 @@ public:
     void ensureCapacityGLLine(int count);
 
     void drawLine(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
+    void drawLine(const glm::vec3& origin, const glm::vec3& destanation, const glm::vec4& color);
     void drawRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
 
     void update(float deltaTime) override;
@@ -32,7 +33,7 @@ protected:
     bool m_dirtyLine;
     int m_bufferCapacityLine;
     int m_bufferCountLine;
-    std::vector<Vertex2fC4> m_lineBuffers;
+    std::vector<Vertex3fC4f> m_lineBuffers;
     CustomCommand m_customCommandLine;
 };
 

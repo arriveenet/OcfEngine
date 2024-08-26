@@ -47,11 +47,12 @@ bool Mesh::setupMesh()
 void Mesh::draw(Renderer* renderer, float globalZOrder, const glm::mat4& transform)
 {
     glm::mat4 projection = Game::getInstance()->getMatrix(MatrixStack::Projection);
+    glm::mat4 mvp = projection * transform;
     auto& programState = m_meshCommand.getProgramState();
 
-    programState.setUniform("uMVPMatrix", projection);
+    programState.setUniform("uMVPMatrix", mvp);
 
-    m_meshCommand.init(globalZOrder, transform);
+    m_meshCommand.init(globalZOrder);
     renderer->addCommand(&m_meshCommand);
 }
 

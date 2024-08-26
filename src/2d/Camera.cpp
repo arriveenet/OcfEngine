@@ -11,6 +11,7 @@ Camera* Camera::s_pVisitingCamera = nullptr;
 Camera::Camera()
     : m_cameraFlag(CameraFlag::Default)
     , m_projection(1.0f)
+    , m_center(0.0f)
     , m_view(1.0f)
     , m_viewInverse(1.0f)
     , m_viewProjection(1.0f)
@@ -67,7 +68,7 @@ bool Camera::init()
             glm::vec3 eye(size.x / 2.0f, size.y / 2.0f, zEye);
             glm::vec3 center(size.x / 2.0f, size.y / 2.0f, 0.0f);
             setPosition(eye);
-            lookAt(center);
+            lookAt(center, glm::vec3(0.0f, 1.0f, 0.0f));
             break;
         }
         case ocf::Camera::Type::Orthographic:
@@ -106,6 +107,7 @@ bool Camera::initOrthographic(float width, float height, float zNear /*=-1.0f*/,
 
 void Camera::lookAt(const glm::vec3& center, const glm::vec3& up)
 {
+    m_center = center;
     m_view = glm::lookAt(m_position, center, up);
 }
 
@@ -116,12 +118,12 @@ const glm::mat4 Camera::getProjectionMatrix() const
 
 const glm::mat4 Camera::getViewMatrix() const
 {
-    //glm::mat4 viewInv = getNodeToWorldTransform();
+    //glm::mat4 viewInv(getNodeToWorldTransform());
     //if (viewInv != m_viewInverse) {
     //	m_viewInverse = viewInv;
     //	m_view = glm::inverse(viewInv);
     //}
-    m_view = glm::lookAt(glm::vec3(m_position), glm::vec3(m_position.x, m_position.y, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    m_view = glm::lookAt(m_position, m_center, glm::vec3(0.0f, 1.0f, 0.0f));
     
     return m_view;
 }

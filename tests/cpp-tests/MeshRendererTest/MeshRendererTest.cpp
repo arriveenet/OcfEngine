@@ -18,10 +18,17 @@ bool MeshRendererTest::init()
     }
 
     glm::vec2 size = Game::getInstance()->getVisibleSize();
-    m_pCamera = Camera::createPerspective(60.0f, size.x / size.y, 0.1f, 1000.0f);
+    m_pCamera = Camera::createPerspective(glm::radians(60.0f), size.x / size.y, 0.1f, 1000.0f);
     m_pCamera->setCameraFlag(CameraFlag::User1);
-    m_pCamera->setPosition(3, 3, 3);
+    m_pCamera->setPosition(5, 3, 8);
     addChild(m_pCamera);
+    
+    DrawShape* shape = DrawShape::create();
+    shape->drawLine(glm::vec3(0, 0, 0), glm::vec3(100, 0, 0), Color4f::RED);
+    shape->drawLine(glm::vec3(0, 0, 0), glm::vec3(0, 100, 0), Color4f::GREEN);
+    shape->drawLine(glm::vec3(0, 0, 0), glm::vec3(0, 0, 100), Color4f::BLUE);
+    shape->setCameraMask((uint16_t)CameraFlag::User1);
+    addChild(shape);
 
    auto mesh = MeshRenderer::create("teapot.obj");
    mesh->setCameraMask((uint16_t)CameraFlag::User1);

@@ -38,13 +38,13 @@ bool DrawShape::init()
     VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
     pVertexArray->bind();
 
-    pVertexArray->setStride(sizeof(Vertex2fC4));
+    pVertexArray->setStride(sizeof(Vertex3fC4f));
 
     pVertexArray->createVertexBuffer(BufferUsage::Dynamic);
     ensureCapacityGLLine(256);
 
-    pVertexArray->setAttribute("inPosition", 0, 2, false, 0);
-    pVertexArray->setAttribute("inColor", 1, 4, false, sizeof(float) * 2);
+    pVertexArray->setAttribute("inPosition", 0, 3, false, 0);
+    pVertexArray->setAttribute("inColor", 1, 4, false, sizeof(float) * 3);
 
     pVertexArray->bindVertexBuffer();
 
@@ -62,23 +62,28 @@ void DrawShape::clear()
 void DrawShape::ensureCapacityGLLine(int count)
 {
     if (m_bufferCountLine + count > m_bufferCapacityLine) {
-        m_bufferCapacityLine += max(m_bufferCapacityLine, count);
+        m_bufferCapacityLine += std::max<int>(m_bufferCapacityLine, count);
         m_lineBuffers.resize(m_bufferCapacityLine);
 
         VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
-        pVertexArray->updateVertexBuffer(m_lineBuffers.data(), sizeof(Vertex2fC4) * m_bufferCapacityLine);
+        pVertexArray->updateVertexBuffer(m_lineBuffers.data(), sizeof(Vertex3fC4f) * m_bufferCapacityLine);
     }
 }
 
 void DrawShape::drawLine(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color)
 {
+    drawLine(glm::vec3(origin, 0.0f), glm::vec3(destanation, 0.0f), color);
+}
+
+void DrawShape::drawLine(const glm::vec3& origin, const glm::vec3& destanation, const glm::vec4& color)
+{
     ensureCapacityGLLine(2);
 
-    m_lineBuffers[m_bufferCountLine] = {origin, color};
+    m_lineBuffers[m_bufferCountLine] = { origin, color };
     m_lineBuffers[m_bufferCountLine + 1] = { destanation, color };
 
     VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
-    pVertexArray->updateVertexBuffer(m_lineBuffers.data() + m_bufferCountLine, sizeof(Vertex2fC4) * m_bufferCountLine, sizeof(Vertex2fC4) * 2);
+    pVertexArray->updateVertexBuffer(m_lineBuffers.data() + m_bufferCountLine, sizeof(Vertex3fC4f) * m_bufferCountLine, sizeof(Vertex3fC4f) * 2);
 
 
     m_bufferCountLine += 2;

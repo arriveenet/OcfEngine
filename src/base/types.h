@@ -46,7 +46,7 @@ struct Vertex2fT2f {
     glm::vec2 texCoord;
 };
 
-struct Vertex2fC4 {
+struct Vertex2fC4f {
     glm::vec2 position;
     glm::vec4 color;
 };
@@ -54,6 +54,11 @@ struct Vertex2fC4 {
 struct Vertex3fT2f {
     glm::vec3 position;
     glm::vec2 texCoord;
+};
+
+struct Vertex3fC4f {
+    glm::vec3 position;
+    glm::vec4 color;
 };
 
 struct Vertex3fC3fT2f {
