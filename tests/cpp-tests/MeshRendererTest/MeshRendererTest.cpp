@@ -18,7 +18,7 @@ bool MeshRendererTest::init()
     }
 
     glm::vec2 size = Game::getInstance()->getVisibleSize();
-    m_pCamera = Camera::createPerspective(glm::radians(60.0f), size.x / size.y, 0.1f, 1000.0f);
+    m_pCamera = Camera::createPerspective(60.0f, size.x / size.y, 0.1f, 1000.0f);
     m_pCamera->setCameraFlag(CameraFlag::User1);
     m_pCamera->setPosition(5, 3, 8);
     addChild(m_pCamera);

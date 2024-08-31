@@ -25,7 +25,7 @@ Camera::Camera()
 Camera* Camera::createPerspective(float fovy, float aspect, float zNear, float zFar)
 {
     Camera* pCamera = new Camera();
-    pCamera->initPerspective(fovy, aspect, zNear, zFar);
+    pCamera->initPerspective(glm::radians(fovy), aspect, zNear, zFar);
 
     return pCamera;
 }
