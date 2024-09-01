@@ -23,6 +23,8 @@ void Input::update()
     memcpy(m_inputState.keyboard.m_prevState, m_inputState.keyboard.m_currentState, sizeof(m_inputState.keyboard.m_prevState));
 
     // マウスの座標を設定
+    m_inputState.mouse.m_lastPosition = m_inputState.mouse.m_position;
+
     GLViewImpl* view = dynamic_cast<GLViewImpl*>(Game::getInstance()->getGLView());
     m_inputState.mouse.m_position = view->getMousePosition();
 

@@ -28,10 +28,12 @@ public:
     Mouse();
 
     const glm::vec2& getPosition() const { return m_position; }
+    glm::vec2 getDelta() const;
     ButtonState getButtonState(MouseButton button) const;
 
 private:
     glm::vec2 m_position;
+    glm::vec2 m_lastPosition;
     static uint32_t m_currentButton;
     static uint32_t m_previousButton;
 };

@@ -20,7 +20,13 @@ void Mouse::onMouseButton(int button, int action, int mods)
 
 Mouse::Mouse()
     : m_position(0.0f, 0.0f)
+    , m_lastPosition(0.0f, 0.0f)
 {
+}
+
+glm::vec2 Mouse::getDelta() const
+{
+    return m_lastPosition - m_position;
 }
 
 ButtonState Mouse::getButtonState(MouseButton button) const
