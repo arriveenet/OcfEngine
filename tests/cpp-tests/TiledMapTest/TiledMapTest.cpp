@@ -22,7 +22,6 @@ bool TiledMapTest::init()
         addChild(m_camera);
 
         auto tiledMap = TMXTiledMap::create("tiledmap\\test.tmx");
-        tiledMap->setCameraMask(2);
         addChild(tiledMap);
         return true;
     }

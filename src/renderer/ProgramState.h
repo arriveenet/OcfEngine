@@ -16,9 +16,8 @@ public:
     void setProgram(Program* program);
     void setTexture(Texture2D* pTexture);
 
-    void setUniform(int location, const glm::mat4& matrix);
-    void setUniform(const std::string& name, const glm::mat4& matrix);
-    void bindUniforms();
+    void setUniform(std::string_view name, const void* pData, size_t size);
+    char* getUniformBuffers() const;
 
     Program* getProgram() const { return m_pProgram; }
 
@@ -26,6 +25,7 @@ private:
     Program* m_pProgram;
     Texture2D* m_pTexture;
     std::unordered_map<int, glm::mat4> m_uniforms;
+    char* m_pUniformBuffers;
 };
 
 NS_OCF_END

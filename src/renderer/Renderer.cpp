@@ -312,7 +312,8 @@ void Renderer::drawTrianglesCommand()
         Program* pProgram = programState.getProgram();
         pProgram->use();
 
-        programState.bindUniforms();
+        char* buffer = programState.getUniformBuffers();
+        pProgram->bindUniformBuffers(buffer);
 
         Texture2D* pTexture = drawInfo.pCommand->getTexture();
         if (pTexture) {
@@ -338,7 +339,8 @@ void Renderer::drawCustomCommand(RenderCommand* command)
     Program* pProgram = programState.getProgram();
     pProgram->use();
 
-    programState.bindUniforms();
+    char* buffer = programState.getUniformBuffers();
+    pProgram->bindUniformBuffers(buffer);
 
     cmd->getVertexArray()->bind();
 

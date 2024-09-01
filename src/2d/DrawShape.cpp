@@ -123,8 +123,8 @@ void DrawShape::updateUniforms(const glm::mat4& transform, CustomCommand& cmd)
     glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
     auto& programState = cmd.getProgramState();
 
-    programState.setUniform("uProjection", projection);
-    programState.setUniform("uModelView", transform);
+    programState.setUniform("uProjection", &projection, sizeof(projection));
+    programState.setUniform("uModelView", &transform, sizeof(transform));
 }
 
 NS_OCF_END

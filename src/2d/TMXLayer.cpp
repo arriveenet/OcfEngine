@@ -55,7 +55,7 @@ void TMXLayer::draw(Renderer* renderer, const glm::mat4& transform)
 
     glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
     auto& programState = m_quadCommand.getProgramState();
-    programState.setUniform("uMVPMatrix", projection);
+    programState.setUniform("uMVPMatrix", &projection, sizeof(projection));
 
     m_quadCommand.init(m_globalZOrder, m_pTexture, m_totalQuads.data(), m_indices.data(), m_totalQuads.size(), transform);
     renderer->addCommand(&m_quadCommand);

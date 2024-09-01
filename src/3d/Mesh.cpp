@@ -50,7 +50,7 @@ void Mesh::draw(Renderer* renderer, float globalZOrder, const glm::mat4& transfo
     glm::mat4 mvp = projection * transform;
     auto& programState = m_meshCommand.getProgramState();
 
-    programState.setUniform("uMVPMatrix", mvp);
+    programState.setUniform("uMVPMatrix", &mvp, sizeof(mvp));
 
     m_meshCommand.init(globalZOrder);
     renderer->addCommand(&m_meshCommand);

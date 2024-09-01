@@ -316,7 +316,7 @@ void Sprite::setMVPMarixUniform()
 {
     glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
     auto& programState = m_trianglesCommand.getProgramState();
-    programState.setUniform("uMVPMatrix", projection);
+    programState.setUniform("uMVPMatrix", &projection, sizeof(projection));
 }
 
 NS_OCF_END

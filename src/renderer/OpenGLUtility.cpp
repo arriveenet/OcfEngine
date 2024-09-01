@@ -47,4 +47,51 @@ GLenum OpenGLUtility::toGLFormat(PixelFormat format)
     return result;
 }
 
+GLsizei OpenGLUtility::getGLDataTypeSize(GLenum type)
+{
+    GLsizei size = 0;
+    switch (type) {
+    case GL_BOOL:
+    case GL_BYTE:
+    case GL_UNSIGNED_BYTE:
+        size = sizeof(GLbyte);
+        break;
+    case GL_BOOL_VEC2:
+    case GL_SHORT:
+    case GL_UNSIGNED_SHORT:
+        size = sizeof(GLshort);
+        break;
+    case GL_BOOL_VEC3:
+        size = sizeof(GLboolean);
+        break;
+    case GL_BOOL_VEC4:
+    case GL_INT:
+    case GL_UNSIGNED_INT:
+    case GL_FLOAT:
+        size = sizeof(GLfloat);
+    case GL_FLOAT_VEC2:
+    case GL_INT_VEC2:
+        size = sizeof(GLfloat) * 2;
+        break;
+    case GL_FLOAT_VEC3:
+    case GL_INT_VEC3:
+        size = sizeof(GLfloat) * 3;
+        break;
+    case GL_FLOAT_MAT2:
+    case GL_FLOAT_VEC4:
+    case GL_INT_VEC4:
+        size = sizeof(GLfloat) * 4;
+        break;
+    case GL_FLOAT_MAT3:
+        size = sizeof(GLfloat) * 9;
+        break;
+    case GL_FLOAT_MAT4:
+        size = sizeof(GLfloat) * 16;
+        break;
+    default:
+        break;
+    }
+    return size;
+}
+
 NS_OCF_END

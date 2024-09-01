@@ -1,10 +1,30 @@
 #include "Program.h"
 #include <glm/gtc/type_ptr.hpp>
 #include "base/FileUtils.h"
+#include "renderer/OpenGLUtility.h"
+
+namespace {
+void setUniform(GLuint location, unsigned int size, GLenum uniformType, void* data)
+{
+    GLsizei count = size;
+    switch (uniformType) {
+    case GL_FLOAT_VEC3:
+        glUniform3fv(location, 1, (GLfloat*)data);
+        break;
+    case GL_FLOAT_MAT4:
+        glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat*)data);
+        break;
+    default:
+        OCFASSERT(false, "Invalidate uniform data type\n");
+        break;
+    }
+}
+}
 
 NS_OCF_BEGIN
 
 Program::Program(const std::string& vertexShader, const std::string& fragmentShader)
+    : m_uniformBufferSize(0)
 {
     // 頂点シェーダーと、フラグメントシェーダーを読み込む
     const std::string shaderPath("shaders\\");
@@ -18,6 +38,7 @@ Program::Program(const std::string& vertexShader, const std::string& fragmentSha
 
     // シェーダーをコンパイル
     compileProgram();
+    computeUniformInfos();
 }
 
 Program::~Program()
@@ -39,24 +60,30 @@ int Program::getUniformLocation(const std::string& name) const
     return glGetUniformLocation(m_program, name.c_str());
 }
 
-void Program::use()
+void Program::use() const
 {
     glUseProgram(m_program);
 }
 
-void Program::setUniform(int location, const glm::mat4& matrix) const
+void Program::bindUniformBuffers(const char* data)
 {
-    assert(location != -1);
+    for (auto&& iter : m_activeUniformInfos) {
+        auto& uniformInfo = iter.second;
+        if (uniformInfo.size <= 0)
+            continue;
 
-    glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+        ::setUniform(uniformInfo.location, uniformInfo.size, uniformInfo.type, (void*)(data + uniformInfo.bufferOffset));
+    }
 }
 
-void Program::setUniform(const std::string& name, const glm::mat4& matrix) const
+UniformInfo Program::getUniformInfo(std::string_view name)
 {
-    const int location = getUniformLocation(name);
-    assert(location != -1);
+    return m_activeUniformInfos[name.data()];
+}
 
-    glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+size_t Program::getUniformBufferSize() const
+{
+    return m_uniformBufferSize;
 }
 
 void Program::compileProgram()
@@ -81,7 +108,30 @@ void Program::compileProgram()
     }
 }
 
-bool Program::isValidProgram()
+void Program::computeUniformInfos()
+{
+    GLint uniformCount;
+    glGetProgramiv(m_program, GL_ACTIVE_UNIFORMS, &uniformCount);
+
+    for (int i = 0; i < uniformCount; i++) {
+        UniformInfo uniform;
+        char buffer[512] = { 0 };
+        GLint nameLength;
+        glGetActiveUniform(m_program, i, 511, &nameLength, &uniform.count, &uniform.type, buffer);
+
+        uniform.size = OpenGLUtility::getGLDataTypeSize(uniform.type);
+        uniform.bufferOffset = static_cast<unsigned int>(m_uniformBufferSize);
+        m_uniformBufferSize += uniform.size;
+
+        std::string uniformName(buffer);
+
+        uniform.location = glGetUniformLocation(m_program, uniformName.c_str());
+
+        m_activeUniformInfos[uniformName] = uniform;
+    }
+}
+
+bool Program::isValidProgram() const
 {
     GLint status;
 
