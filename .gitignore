@@ -364,3 +364,5 @@ FodyWeavers.xsd
 
 # Cmake build folder
 build/
+
+!assets/*

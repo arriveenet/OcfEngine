@@ -30,7 +30,7 @@ bool MeshRendererTest::init()
     shape->setCameraMask((uint16_t)CameraFlag::User1);
     addChild(shape);
 
-   auto mesh = MeshRenderer::create("teapot.obj");
+   auto mesh = MeshRenderer::create("model/teapot.obj");
    mesh->setCameraMask((uint16_t)CameraFlag::User1);
    addChild(mesh);
 

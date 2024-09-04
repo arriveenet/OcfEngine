@@ -20,7 +20,7 @@ bool AudioEngineTest::init()
     float leftX = 300.0f;
     float leftX2 = 550.0f;
 
-    std::string audioFileName = "05 Strength & Guile.wav";
+    std::string audioFileName = "audio/05 Strength & Guile.wav";
 
     auto fileNameLabel = Label::create(audioFileName);
     fileNameLabel->setPosition(leftX, 550);
