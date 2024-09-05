@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <string>
 #include "2d/Node.h"
 #include "3d/Mesh.h"
@@ -17,7 +18,7 @@ public:
     void draw(Renderer* renderer, const glm::mat4& transform) override;
 
 protected:
-    Mesh m_mesh;
+    std::vector<Mesh* >m_meshes;
 };
 
 NS_OCF_END

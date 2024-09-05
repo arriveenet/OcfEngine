@@ -63,7 +63,7 @@ Sprite::Sprite()
     , m_texture(nullptr)
     , m_spriteFrame(nullptr)
 {
-    Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
+    Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::Basic);
     m_trianglesCommand.getProgramState().setProgram(pProgram);
 
 #if OCF_SPRITE_DEBUG_DRAW

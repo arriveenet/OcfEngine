@@ -11,6 +11,7 @@ enum class ProgramType : uint32_t {
     DrawShape,
     PositionTexture,
     Position3D,
+    Phong,
     Max
 };
 
@@ -19,7 +20,8 @@ public:
     static ShaderManager* getInstance();
     static void destroyInstance();
 
-    Program* getProgram(ProgramType type);
+    Program* getBuiltinProgram(ProgramType type);
+    Program* loadProgram(std::string_view vsName, std::string_view fsName);
 
 protected:
     ShaderManager();

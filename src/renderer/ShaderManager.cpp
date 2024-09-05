@@ -20,13 +20,18 @@ void ShaderManager::destroyInstance()
     s_sharedShaderManager = nullptr;
 }
 
-Program* ShaderManager::getProgram(ProgramType type)
+Program* ShaderManager::getBuiltinProgram(ProgramType type)
 {
     const auto& iter = m_programs.find(type);
     if (iter != m_programs.end()) {
         return iter->second;
     }
 
+    return nullptr;
+}
+
+Program* ShaderManager::loadProgram(std::string_view vsName, std::string_view fsName)
+{
     return nullptr;
 }
 
@@ -60,6 +65,9 @@ bool ShaderManager::init()
 
     program = new Program("position.vert", "color.frag");
     m_programs.emplace(ProgramType::Position3D, program);
+
+    program = new Program("phong.vert", "phong.frag");
+    m_programs.emplace(ProgramType::Phong, program);
 
     return true;
 }

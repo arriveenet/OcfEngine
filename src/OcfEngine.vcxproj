@@ -305,6 +305,8 @@
     <None Include="..\assets\shaders\drawShape.vert" />
     <None Include="..\assets\shaders\label.frag" />
     <None Include="..\assets\shaders\label.vert" />
+    <None Include="..\assets\shaders\phong.frag" />
+    <None Include="..\assets\shaders\phong.vert" />
     <None Include="..\assets\shaders\position.vert" />
     <None Include="..\assets\shaders\positionTexture.frag" />
     <None Include="..\assets\shaders\positionTexture.vert" />

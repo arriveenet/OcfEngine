@@ -95,7 +95,7 @@ bool Label::init()
 
     m_texture = m_font->getTexture();
 
-    Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Label);
+    Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::Label);
     m_quadCommand.getProgramState().setProgram(pProgram);
 
     return true;

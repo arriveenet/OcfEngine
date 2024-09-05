@@ -30,7 +30,7 @@ bool DrawShape::init()
     m_customCommandLine.setDrawType(CustomCommand::DrawType::Array);
     m_customCommandLine.setPrimitiveType(PrimitiveType::Line);
 
-    Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::DrawShape);
+    Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::DrawShape);
 
     auto& programState = m_customCommandLine.getProgramState();
     programState.setProgram(pProgram);

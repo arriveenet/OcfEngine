@@ -43,7 +43,7 @@ bool TMXLayer::init(TMXTilesetInfo* tilesetInfo, TMXLayerInfo* layerInfo, TMXMap
 
     m_pTexture = m_pGame->getTextureManager()->addImage("tiledmap\\" + m_pTileset->m_imageSource);
 
-    Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Basic);
+    Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::Basic);
     m_quadCommand.getProgramState().setProgram(pProgram);
 
     return true;

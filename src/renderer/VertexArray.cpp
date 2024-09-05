@@ -78,6 +78,7 @@ void VertexArray::updateIndexBuffer(void* pData, size_t offset, size_t size)
 void VertexArray::bindVertexBuffer()
 {
     OCFASSERT(m_isVertexBufferCreated, "Vertex buffer not created");
+    OCFASSERT(m_stride != 0, "not set stride");
 
     for (const auto& attributeInfo : m_attributes) {
         const auto& attribute = attributeInfo.second;

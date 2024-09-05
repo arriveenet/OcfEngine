@@ -13,6 +13,8 @@ class Renderer;
 class Mesh : public GameObject {
     friend class MeshRenderer;
 public:
+    static Mesh* create();
+
     Mesh();
     virtual ~Mesh();
 
@@ -24,7 +26,9 @@ public:
     Texture2D* getTexture() const { return m_pTexture; }
 
 protected:
-    std::vector<glm::vec3> m_data;
+    std::vector<float> m_data;
+    bool m_hasNormal;
+    bool m_hasTexCoord;
     Texture2D* m_pTexture;
     MeshCommand m_meshCommand;
 };

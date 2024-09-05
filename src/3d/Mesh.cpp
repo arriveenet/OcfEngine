@@ -7,8 +7,17 @@
 
 NS_OCF_BEGIN
 
+Mesh* Mesh::create()
+{
+    Mesh* mesh = new Mesh();
+    mesh->autorelease();
+    return mesh;
+}
+
 Mesh::Mesh()
     : m_pTexture(nullptr)
+    , m_hasNormal(false)
+    , m_hasTexCoord(false)
 {
 }
 
@@ -21,7 +30,7 @@ bool Mesh::setupMesh()
     m_meshCommand.setDrawType(CustomCommand::DrawType::Array);
     m_meshCommand.setPrimitiveType(PrimitiveType::Triangle);
 
-    Program* pProgram = ShaderManager::getInstance()->getProgram(ProgramType::Position3D);
+    Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::Phong);
 
     auto& programState = m_meshCommand.getProgramState();
     programState.setProgram(pProgram);
@@ -31,12 +40,20 @@ bool Mesh::setupMesh()
 
     pVertexArray->createVertexBuffer(BufferUsage::Static);
 
-    pVertexArray->updateVertexBuffer(m_data.data(), m_data.size() * sizeof(glm::vec3));
+    pVertexArray->updateVertexBuffer(m_data.data(), sizeof(float) * m_data.size());
     m_meshCommand.setVertexDrawInfo(0, static_cast<unsigned int>(m_data.size()));
 
-    pVertexArray->setStride(sizeof(glm::vec3));
-
+    size_t stride = 3;
     pVertexArray->setAttribute("inPosition", 0, 3, false, 0);
+    if (m_hasNormal) {
+        stride += 3;
+        pVertexArray->setAttribute("inNormal", 1, 3, false, sizeof(float) * 3);
+    }
+    if (m_hasTexCoord) {
+        stride += 2;
+        pVertexArray->setAttribute("inTexCoord", 2, 2, false, sizeof(float) * 6);
+    }
+    pVertexArray->setStride(sizeof(float) * stride);
     pVertexArray->bindVertexBuffer();
 
     pVertexArray->unbind();
