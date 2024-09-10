@@ -236,9 +236,24 @@ void Node::setScaleZ(float scaleZ)
     m_transformUpdated = m_transformDirty = true;
 }
 
-float Node::getScale() const
+float Node::getScaleX() const
 {
     return m_scaleX;
+}
+
+float Node::getScaleY() const
+{
+    return m_scaleY;
+}
+
+float Node::getScaleZ() const
+{
+    return m_scaleZ;
+}
+
+glm::vec3 Node::getScale() const
+{
+    return glm::vec3(m_scaleX, m_scaleY, m_scaleZ);
 }
 
 void Node::setGlobalZOrder(float globalZorder)

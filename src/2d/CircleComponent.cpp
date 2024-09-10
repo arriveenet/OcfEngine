@@ -11,7 +11,7 @@ CircleComponent::CircleComponent(Node* pEntity)
 
 float CircleComponent::getRadius() const
 {
-    return m_pOwner->getScale() * m_radius;
+    return m_radius;
 }
 
 glm::vec2 CircleComponent::getCenter() const

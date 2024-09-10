@@ -74,7 +74,10 @@ public:
     virtual void setScaleX(float scaleX);
     virtual void setScaleY(float scaleY);
     virtual void setScaleZ(float scaleZ);
-    virtual float getScale() const;
+    virtual float getScaleX() const;
+    virtual float getScaleY() const;
+    virtual float getScaleZ() const;
+    virtual glm::vec3 getScale() const;
 
     virtual void setGlobalZOrder(float globalZorder);
     virtual float getGlobalZOrder() const { return m_globalZOrder; }
