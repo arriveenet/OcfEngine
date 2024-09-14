@@ -1,12 +1,17 @@
 #pragma once
+#include <vector>
 #include <glm/glm.hpp>
 #include "2d/Component.h"
 
 NS_OCF_BEGIN
 
+class Animation;
+class SpriteFrame;
+
 class ActionComponent : public Component {
 public:
     ActionComponent(Node* pNode);
+    virtual ~ActionComponent();
 
     bool initWithDuration(float duration);
 
@@ -21,6 +26,24 @@ protected:
     float m_elapsed;
     bool m_firstTick;
     bool m_done;
+};
+
+class AnimateComponent : public ActionComponent {
+public:
+    AnimateComponent(Node* pNode);
+    virtual ~AnimateComponent();
+
+    bool initWithAnimation(Animation* pAnimation);
+
+    void step(float time) override;
+
+protected:
+    Animation* m_pAnimation;
+    SpriteFrame* m_pOriginFrame;
+    std::vector<float> m_splitTimes;
+    int m_nextFrame;
+    int m_currentFrameIndex;
+    unsigned int m_excutedLoops;
 };
 
 class BlinkComponent : public ActionComponent {

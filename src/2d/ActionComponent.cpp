@@ -1,6 +1,9 @@
 #include "ActionComponent.h"
 #include <algorithm>
 #include "2d/Node.h"
+#include "2d/Animation.h"
+#include "2d/SpriteFrame.h"
+#include "2d/Sprite.h"
 
 NS_OCF_BEGIN
 
@@ -10,6 +13,10 @@ ActionComponent::ActionComponent(Node* pNode)
     , m_elapsed(0.0f)
     , m_firstTick(true)
     , m_done(false)
+{
+}
+
+ActionComponent::~ActionComponent()
 {
 }
 
@@ -29,7 +36,7 @@ void ActionComponent::update(float deltaTime)
         m_elapsed += deltaTime;
     }
 
-    const float updateDelta = std::max(0.0f, std::min(1.0f, m_elapsed / m_duration));
+    const float updateDelta = (std::max)(0.0f, (std::min)(1.0f, m_elapsed / m_duration));
 
     this->step(updateDelta);
 
@@ -43,6 +50,79 @@ void ActionComponent::step(float time)
 bool ActionComponent::isDone() const
 {
     return m_done;
+}
+
+AnimateComponent::AnimateComponent(Node* pNode)
+    : ActionComponent(pNode)
+    , m_pAnimation(nullptr)
+    , m_pOriginFrame(nullptr)
+    , m_nextFrame(0)
+    , m_currentFrameIndex(0)
+    , m_excutedLoops(0)
+{
+}
+
+AnimateComponent::~AnimateComponent()
+{
+    OCF_SAFE_RELEASE(m_pAnimation);
+}
+
+bool AnimateComponent::initWithAnimation(Animation* pAnimation)
+{
+    float singleDuration = pAnimation->getDuration();
+
+    if (ActionComponent::initWithDuration(singleDuration * pAnimation->getLoops())) {
+        m_pAnimation = pAnimation;
+
+        float accumUnitsOftime = 0.0f;
+        const float newUnitOfTimeValue = singleDuration / pAnimation->getTotalDelayUnits();
+
+        auto& frames = pAnimation->getFrames();
+        m_splitTimes.reserve(frames.size());
+        
+        for (auto&& frame : frames) {
+            float value = (accumUnitsOftime * newUnitOfTimeValue) / singleDuration;
+            accumUnitsOftime += frame.delayUnits;
+            m_splitTimes.emplace_back(value);
+        }
+    }
+
+    return false;
+}
+
+void AnimateComponent::step(float time)
+{
+    if (time < 1.0f) {
+        time *= m_pAnimation->getLoops();
+
+        const unsigned int loopNumber = static_cast<unsigned int>(time);
+        if (loopNumber > m_excutedLoops) {
+            m_nextFrame = 0;
+            m_excutedLoops++;
+        }
+
+        time = fmodf(time, 1.0f);
+    }
+
+    auto& frames = m_pAnimation->getFrames();
+    size_t numberOfFrames = frames.size();
+    SpriteFrame* frameToDisplay = nullptr;
+
+    for (int i = m_nextFrame; i < numberOfFrames; i++) {
+        const float splitTime = m_splitTimes.at(i);
+
+        if (splitTime <= time) {
+            m_currentFrameIndex = i;
+            AnimationFrame frame = frames.at(m_currentFrameIndex);
+            frameToDisplay = frame.spriteFrame;
+            static_cast<Sprite*>(m_pOwner)->setSpriteFrame(frameToDisplay);
+
+            m_nextFrame = i + 1;
+        }
+        else {
+            break;
+        }
+    }
 }
 
 BlinkComponent::BlinkComponent(Node* pNode)
