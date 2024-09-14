@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionTest\ActionTest.cpp" />
     <ClCompile Include="AppDelegate.cpp" />
     <ClCompile Include="AudioEngineTest\AudioEngineTest.cpp" />
     <ClCompile Include="BaseTest.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="TiledMapTest\TiledMapTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionTest\ActionTest.h" />
     <ClInclude Include="AppDelegate.h" />
     <ClInclude Include="AudioEngineTest\AudioEngineTest.h" />
     <ClInclude Include="BaseTest.h" />

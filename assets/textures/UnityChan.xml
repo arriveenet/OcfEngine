@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+Format:
+n  => name
+x  => x pos
+y  => y pos
+w  => width
+h  => height
+pX => x pos of the pivot point
+pY => y pos of the pivot point
+oX => x-corner offset
+oY => y-corner offset
+oW => original width
+oH => original height
+r => 'y' if sprite is rotated-->
+<TextureAtlas imagePath="UnityChan.png" width="512" height="512" scale="1" format="RGBA8888">
+  <sprite n="Unitychan_Jump_Fall_2.png" x="0" y="0" w="35" h="62" pX="0.5" pY="0.5" oX="17" oY="1" oW="72" oH="72"/>
+  <sprite n="Unitychan_Jump_Fall_1.png" x="0" y="62" w="34" h="62" pX="0.5" pY="0.5" oX="18" oY="1" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_8.png" x="0" y="124" w="33" h="52" pX="0.5" pY="0.5" oX="37" oY="15" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_9.png" x="0" y="176" w="33" h="52" pX="0.5" pY="0.5" oX="39" oY="15" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_3.png" x="0" y="228" w="32" h="51" pX="0.5" pY="0.5" oX="26" oY="16" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_5.png" x="0" y="279" w="32" h="51" pX="0.5" pY="0.5" oX="26" oY="16" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_7.png" x="0" y="330" w="32" h="51" pX="0.5" pY="0.5" oX="26" oY="16" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_2.png" x="0" y="381" w="36" h="50" pX="0.5" pY="0.5" oX="23" oY="17" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_4.png" x="0" y="431" w="36" h="50" pX="0.5" pY="0.5" oX="23" oY="17" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_13.png" x="0" y="481" w="38" h="31" pX="0.5" pY="0.5" oX="11" oY="37" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_14.png" x="38" y="481" w="38" h="31" pX="0.5" pY="0.5" oX="11" oY="37" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_6.png" x="32" y="228" w="36" h="50" pX="0.5" pY="0.5" oX="23" oY="17" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_10.png" x="32" y="278" w="30" h="50" pX="0.5" pY="0.5" oX="35" oY="17" oW="72" oH="72"/>
+  <sprite n="Unitychan_Jump_MidAir_3.png" x="32" y="328" w="41" h="48" pX="0.5" pY="0.5" oX="11" oY="8" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_11.png" x="62" y="278" w="35" h="47" pX="0.5" pY="0.5" oX="32" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_13.png" x="33" y="124" w="30" h="47" pX="0.5" pY="0.5" oX="16" oY="19" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_5.png" x="33" y="171" w="30" h="47" pX="0.5" pY="0.5" oX="16" oY="19" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_10.png" x="34" y="62" w="25" h="47" pX="0.5" pY="0.5" oX="17" oY="19" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_2.png" x="59" y="62" w="25" h="47" pX="0.5" pY="0.5" oX="17" oY="19" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_9.png" x="35" y="0" w="25" h="47" pX="0.5" pY="0.5" oX="17" oY="19" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_12.png" x="60" y="0" w="39" h="46" pX="0.5" pY="0.5" oX="21" oY="21" oW="72" oH="72"/>
+  <sprite n="Unitychan_Jump_Up_1.png" x="36" y="376" w="38" h="46" pX="0.5" pY="0.5" oX="12" oY="16" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_11.png" x="73" y="325" w="31" h="46" pX="0.5" pY="0.5" oX="16" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_3.png" x="36" y="422" w="31" h="46" pX="0.5" pY="0.5" oX="16" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_14.png" x="67" y="422" w="29" h="46" pX="0.5" pY="0.5" oX="19" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_15.png" x="76" y="468" w="41" h="44" pX="0.5" pY="0.5" oX="26" oY="22" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_4.png" x="117" y="468" w="35" h="44" pX="0.5" pY="0.5" oX="13" oY="21" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_6.png" x="74" y="371" w="29" h="46" pX="0.5" pY="0.5" oX="19" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Idle_2.png" x="96" y="417" w="26" h="46" pX="0.5" pY="0.5" oX="18" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_12.png" x="103" y="371" w="26" h="46" pX="0.5" pY="0.5" oX="17" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_4.png" x="122" y="417" w="26" h="46" pX="0.5" pY="0.5" oX="17" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Crouch_1.png" x="63" y="109" w="24" h="46" pX="0.5" pY="0.5" oX="19" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_1.png" x="84" y="46" w="24" h="46" pX="0.5" pY="0.5" oX="19" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Idle_1.png" x="104" y="0" w="24" h="46" pX="0.5" pY="0.5" oX="19" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Idle_3.png" x="128" y="0" w="24" h="46" pX="0.5" pY="0.5" oX="19" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_1.png" x="152" y="0" w="24" h="46" pX="0.5" pY="0.5" oX="19" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_7.png" x="63" y="155" w="24" h="46" pX="0.5" pY="0.5" oX="19" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_11.png" x="63" y="201" w="51" h="18" pX="0.5" pY="0.5" oX="13" oY="50" oW="72" oH="72"/>
+  <sprite n="Unitychan_Walk_8.png" x="68" y="219" w="24" h="46" pX="0.5" pY="0.5" oX="19" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Idle_4.png" x="92" y="219" w="23" h="46" pX="0.5" pY="0.5" oX="20" oY="20" oW="72" oH="72"/>
+  <sprite n="Unitychan_Jump_Up_2.png" x="97" y="265" w="40" h="45" pX="0.5" pY="0.5" oX="10" oY="17" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_9.png" x="104" y="310" w="38" h="45" pX="0.5" pY="0.5" oX="22" oY="23" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_13.png" x="129" y="355" w="36" h="45" pX="0.5" pY="0.5" oX="21" oY="22" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_2.png" x="148" y="400" w="35" h="45" pX="0.5" pY="0.5" oX="10" oY="21" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_3.png" x="165" y="445" w="35" h="45" pX="0.5" pY="0.5" oX="9" oY="21" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_14.png" x="87" y="92" w="33" h="45" pX="0.5" pY="0.5" oX="31" oY="22" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_5.png" x="115" y="46" w="35" h="44" pX="0.5" pY="0.5" oX="11" oY="21" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_19.png" x="87" y="137" w="24" h="44" pX="0.5" pY="0.5" oX="17" oY="22" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_14.png" x="111" y="137" w="42" h="43" pX="0.5" pY="0.5" oX="9" oY="23" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_13.png" x="114" y="180" w="46" h="39" pX="0.5" pY="0.5" oX="7" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_5.png" x="160" y="180" w="46" h="39" pX="0.5" pY="0.5" oX="7" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_6.png" x="115" y="219" w="42" h="43" pX="0.5" pY="0.5" oX="9" oY="23" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_10.png" x="120" y="90" w="42" h="42" pX="0.5" pY="0.5" oX="9" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_2.png" x="153" y="46" w="42" h="42" pX="0.5" pY="0.5" oX="9" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_11.png" x="176" y="0" w="39" h="42" pX="0.5" pY="0.5" oX="12" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_3.png" x="153" y="132" w="39" h="42" pX="0.5" pY="0.5" oX="12" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Jump_Landing.png" x="162" y="88" w="35" h="42" pX="0.5" pY="0.5" oX="11" oY="25" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_16.png" x="195" y="42" w="42" h="41" pX="0.5" pY="0.5" oX="16" oY="25" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_17.png" x="215" y="0" w="42" h="41" pX="0.5" pY="0.5" oX="11" oY="25" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_18.png" x="137" y="262" w="42" h="41" pX="0.5" pY="0.5" oX="11" oY="25" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_8.png" x="157" y="219" w="42" h="41" pX="0.5" pY="0.5" oX="11" oY="25" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_15.png" x="192" y="130" w="38" h="41" pX="0.5" pY="0.5" oX="13" oY="25" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_16.png" x="206" y="83" w="38" h="41" pX="0.5" pY="0.5" oX="13" oY="25" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_7.png" x="237" y="41" w="38" h="41" pX="0.5" pY="0.5" oX="13" oY="25" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_1.png" x="257" y="0" w="44" h="40" pX="0.5" pY="0.5" oX="7" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Brake_17.png" x="142" y="303" w="44" h="40" pX="0.5" pY="0.5" oX="18" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_1.png" x="179" y="260" w="44" h="40" pX="0.5" pY="0.5" oX="7" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_9.png" x="199" y="219" w="44" h="40" pX="0.5" pY="0.5" oX="7" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_12.png" x="223" y="171" w="40" h="40" pX="0.5" pY="0.5" oX="11" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Run_4.png" x="230" y="124" w="40" h="40" pX="0.5" pY="0.5" oX="11" oY="24" oW="72" oH="72"/>
+  <sprite n="Unitychan_Crouch_3.png" x="263" y="82" w="34" h="40" pX="0.5" pY="0.5" oX="16" oY="26" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_18.png" x="275" y="40" w="29" h="39" pX="0.5" pY="0.5" oX="14" oY="27" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_6.png" x="301" y="0" w="38" h="37" pX="0.5" pY="0.5" oX="8" oY="29" oW="72" oH="72"/>
+  <sprite n="Unitychan_Jump_MidAir_2.png" x="165" y="343" w="44" h="36" pX="0.5" pY="0.5" oX="10" oY="15" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_7.png" x="200" y="300" w="39" h="36" pX="0.5" pY="0.5" oX="7" oY="32" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_8.png" x="223" y="259" w="39" h="36" pX="0.5" pY="0.5" oX="7" oY="31" oW="72" oH="72"/>
+  <sprite n="Unitychan_Crouch_2.png" x="243" y="211" w="36" h="36" pX="0.5" pY="0.5" oX="13" oY="30" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_10.png" x="263" y="164" w="42" h="34" pX="0.5" pY="0.5" oX="22" oY="34" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_17.png" x="279" y="122" w="32" h="34" pX="0.5" pY="0.5" oX="12" oY="34" oW="72" oH="72"/>
+  <sprite n="Unitychan_Jump_MidAir_1.png" x="297" y="79" w="44" h="33" pX="0.5" pY="0.5" oX="8" oY="19" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_15.png" x="311" y="37" w="38" h="31" pX="0.5" pY="0.5" oX="11" oY="37" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_16.png" x="341" y="0" w="38" h="31" pX="0.5" pY="0.5" oX="11" oY="37" oW="72" oH="72"/>
+  <sprite n="Unitychan_Damage_12.png" x="349" y="31" w="38" h="28" pX="0.5" pY="0.5" oX="11" oY="40" oW="72" oH="72"/>
+  <sprite n="Unitychan_Crouch_4.png" x="379" y="0" w="37" h="28" pX="0.5" pY="0.5" oX="12" oY="38" oW="72" oH="72"/>
+  <sprite n="Unitychan_Crouch_5.png" x="183" y="379" w="34" h="28" pX="0.5" pY="0.5" oX="15" oY="38" oW="72" oH="72"/>
+</TextureAtlas>

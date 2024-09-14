@@ -1,6 +1,7 @@
 #include "MainScene.h"
 
 #include "SpriteTest/SpriteTest.h"
+#include "ActionTest/ActionTest.h"
 #include "ComponentTest/ComponentTest.h"
 #include "TiledMapTest/TiledMapTest.h"
 #include "AudioEngineTest/AudioEngineTest.h"
@@ -26,6 +27,7 @@ bool MainScene::init()
     }
 
     addTest("SpriteTest", []() {return new SpriteTestDemo(); });
+    addTest("ActionTest", []() {return new ActionTest(); });
     addTest("CompTest", []() {return new ComponentTest(); });
     addTest("TiledMapTest", []() {return new TiledMapTest(); });
     addTest("AudioTest", []() {return new AudioEngineTest(); });

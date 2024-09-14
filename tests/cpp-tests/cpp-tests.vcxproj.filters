@@ -24,6 +24,9 @@
     <Filter Include="Source\MeshRendererTest">
       <UniqueIdentifier>{45c89396-76ef-47cf-aa74-5859aab815ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\ActionTest">
+      <UniqueIdentifier>{b1553437-cf83-416d-876e-cc7414e5e056}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,6 +56,9 @@
     <ClCompile Include="MeshRendererTest\MeshRendererTest.cpp">
       <Filter>Source\MeshRendererTest</Filter>
     </ClCompile>
+    <ClCompile Include="ActionTest\ActionTest.cpp">
+      <Filter>Source\ActionTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainScene.h">
@@ -78,6 +84,9 @@
     </ClInclude>
     <ClInclude Include="MeshRendererTest\MeshRendererTest.h">
       <Filter>Source\MeshRendererTest</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionTest\ActionTest.h">
+      <Filter>Source\ActionTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
