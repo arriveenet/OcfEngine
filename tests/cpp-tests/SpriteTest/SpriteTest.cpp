@@ -24,32 +24,15 @@ bool SpriteTestDemo::init()
         sprite1->setGlobalZOrder(1.0f);
         this->addChild(sprite1);
 
-        RotateByComponent* rotateBy = new RotateByComponent(sprite1);
-        rotateBy->initWithDuration(3.0f, 360.0f);
-        sprite1->addComponent(rotateBy);
-
-        //BlinkComponent* blink = new BlinkComponent(sprite1);
-        //blink->initWithDuration(2.0f, 3);
-        //sprite1->addComponent(blink);
-
         auto sprite2 = Sprite::create("textures\\28_Frog.png");
         sprite2->setPosition((size / 2.0f) * 0.5f);
         this->addChild(sprite2);
-
-        MoveByComponent* moveBy = new MoveByComponent(sprite2);
-        moveBy->initWithDuration(6.0f, glm::vec2(500, 0));
-        sprite2->addComponent(moveBy);
 
         SpriteFrameManager::getInstance()->addSpriteFramesWithFile("texture.xml");
         auto sprite3 = Sprite::createWithSpriteFrameName("Kirby_1.png");
         sprite3->setPosition(100, 100);
         sprite3->setScale(10.0f);
         this->addChild(sprite3);
-
-        ScaleToComponent* scale = new ScaleToComponent(sprite3);
-        scale->initWithDuration(3.0f, 20.0f);
-        sprite3->addComponent(scale);
-
 
         auto sprite4 = Sprite::create();
         sprite4->setSize(100, 100);
