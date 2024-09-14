@@ -69,6 +69,7 @@ public:
 protected:
     void updatePolygon();
     void setTextureRect(const Rect& rect, const glm::vec2& size);
+    void setVertexRect(const Rect& rect);
     void setTextureCoords(const Rect& rectInPoints, QuadV3fC3fT2f* outQuad);
     void setVertexCoords(const Rect& rect, QuadV3fC3fT2f* outQuad);
     void flipX();

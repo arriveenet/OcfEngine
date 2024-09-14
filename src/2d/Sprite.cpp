@@ -158,7 +158,7 @@ void Sprite::setSpriteFrame(SpriteFrame* spriteFrame)
         setTexture(texture);
     }
 
-    setTextureRect(spriteFrame->getRect(), spriteFrame->getOriginalSize());
+    setTextureRect(spriteFrame->getRect(), spriteFrame->getRect().m_size);
 }
 
 SpriteFrame* Sprite::getSpriteFrame() const
@@ -262,9 +262,15 @@ void Sprite::updatePolygon()
 
 void Sprite::setTextureRect(const Rect& rect, const glm::vec2& size)
 {
-    Node::setSize(rect.m_size);
+    Node::setSize(size);
 
+    setVertexRect(rect);
     updatePolygon();
+}
+
+void Sprite::setVertexRect(const Rect& rect)
+{
+    m_rect = rect;
 }
 
 void Sprite::setTextureCoords(const Rect& rectInPoints, QuadV3fC3fT2f* outQuad)
