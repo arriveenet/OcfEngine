@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="2d\ActionComponent.cpp" />
+    <ClCompile Include="2d\Animation.cpp" />
     <ClCompile Include="2d\Camera.cpp" />
     <ClCompile Include="2d\CircleComponent.cpp" />
     <ClCompile Include="2d\Component.cpp" />
@@ -229,6 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\ActionComponent.h" />
+    <ClInclude Include="2d\Animation.h" />
     <ClInclude Include="2d\Camera.h" />
     <ClInclude Include="2d\CircleComponent.h" />
     <ClInclude Include="2d\Component.h" />
