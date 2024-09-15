@@ -36,3 +36,17 @@ bool MeshRendererTest::init()
 
     return true;
 }
+
+void MeshRendererTest::processInput(const ocf::InputState& inputState)
+{
+    static float angle = 0.0f;
+    if (inputState.mouse.getButtonState(Mouse::MouseButton::Left) == ButtonState::Hold) {
+        angle += 1.2f;
+        angle = fmodf(angle, 360.0f);
+        float x = cosf(glm::radians(angle)) * 5.0f;
+        float z = sinf(glm::radians(angle)) * 5.0f;
+        m_pCamera->setPosition(x ,4.5f ,z);
+    }
+
+    Scene::processInput(inputState);
+}

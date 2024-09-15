@@ -137,7 +137,7 @@ void Renderer::addCommand(RenderCommand* command)
 
 void Renderer::clear()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Renderer::clean()
@@ -359,7 +359,9 @@ void Renderer::drawCustomCommand(RenderCommand* command)
 
 void Renderer::drawMeshCommand(RenderCommand* command)
 {
+    glEnable(GL_DEPTH_TEST);
     drawCustomCommand(command);
+    glDisable(GL_DEPTH_TEST);
 }
 
 NS_OCF_END
