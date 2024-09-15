@@ -47,6 +47,17 @@ void ActionComponent::step(float time)
 {
 }
 
+void ActionComponent::start()
+{
+    m_elapsed = 0.0f;
+    m_firstTick = true;
+    m_done = false;
+}
+
+void ActionComponent::stop()
+{
+}
+
 bool ActionComponent::isDone() const
 {
     return m_done;
@@ -65,6 +76,7 @@ AnimateComponent::AnimateComponent(Node* pNode)
 AnimateComponent::~AnimateComponent()
 {
     OCF_SAFE_RELEASE(m_pAnimation);
+    OCF_SAFE_RELEASE(m_pOriginFrame);
 }
 
 bool AnimateComponent::initWithAnimation(Animation* pAnimation)
@@ -85,9 +97,28 @@ bool AnimateComponent::initWithAnimation(Animation* pAnimation)
             accumUnitsOftime += frame.delayUnits;
             m_splitTimes.emplace_back(value);
         }
+
+        start();
     }
 
     return false;
+}
+
+void AnimateComponent::start()
+{
+    ActionComponent::start();
+
+    Sprite* sprite = static_cast<Sprite*>(m_pOwner);
+    if (m_pAnimation->getResetOriginalFrame()) {
+        m_pOriginFrame = sprite->getSpriteFrame();
+        m_pOriginFrame->retain();
+    }
+    m_nextFrame = 0;
+    m_excutedLoops = 0;
+}
+
+void AnimateComponent::stop()
+{
 }
 
 void AnimateComponent::step(float time)
@@ -226,6 +257,42 @@ void ScaleToComponent::step(float time)
     m_pOwner->setScaleX(m_startScale.x + m_deltaScale.x * time);
     m_pOwner->setScaleY(m_startScale.y + m_deltaScale.y * time);
     m_pOwner->setScaleX(m_startScale.z + m_deltaScale.z * time);
+}
+
+RepeatForever::RepeatForever(Node* pNode)
+    : ActionComponent(pNode)
+{
+}
+
+RepeatForever::~RepeatForever()
+{
+    OCF_SAFE_DELETE(m_pInnerlAction);
+}
+
+bool RepeatForever::initWithAction(ActionComponent* pAction)
+{
+    m_pInnerlAction = pAction;
+    return true;
+}
+
+void RepeatForever::update(float deltaTime)
+{
+    m_pInnerlAction->update(deltaTime);
+
+    if (m_pInnerlAction->isDone() && m_pInnerlAction->getDuration() > 0) {
+        float diff = m_pInnerlAction->getElapsed() - m_pInnerlAction->getDuration();
+        if (diff > m_pInnerlAction->getDuration()) {
+            diff = fmodf(diff, m_pInnerlAction->getDuration());
+        }
+        m_pInnerlAction->start();
+        m_pInnerlAction->update(0.0f);
+        m_pInnerlAction->update(diff);
+    }
+}
+
+bool RepeatForever::isDone() const
+{
+    return false;
 }
 
 NS_OCF_END

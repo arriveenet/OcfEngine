@@ -19,7 +19,15 @@ public:
 
     virtual void step(float time);
 
+    virtual void start();
+
+    virtual void stop();
+
     virtual bool isDone() const;
+
+    virtual float getDuration() const { return m_duration; }
+
+    virtual float getElapsed() const { return m_elapsed; }
 
 protected:
     float m_duration;
@@ -34,6 +42,10 @@ public:
     virtual ~AnimateComponent();
 
     bool initWithAnimation(Animation* pAnimation);
+
+    void start() override;
+
+    void stop() override;
 
     void step(float time) override;
 
@@ -97,6 +109,21 @@ protected:
     glm::vec3 m_startScale;
     glm::vec3 m_endScale;
     glm::vec3 m_deltaScale;
+};
+
+class RepeatForever : public ActionComponent {
+public:
+    RepeatForever(Node* pNode);
+    virtual ~RepeatForever();
+
+    bool initWithAction(ActionComponent* pAction);
+
+    void update(float deltaTime) override;
+
+    bool isDone() const override;
+
+protected:
+    ActionComponent* m_pInnerlAction;
 };
 
 NS_OCF_END

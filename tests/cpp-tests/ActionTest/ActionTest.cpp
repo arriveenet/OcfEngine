@@ -23,20 +23,22 @@ bool ActionTest::init()
     SpriteFrameManager::getInstance()->addSpriteFramesWithFile("UnityChan.xml");
     std::vector<SpriteFrame*> animationFrames;
     char fileName[256] = { 0 };
-    for (int i = 1; i < 19; i++) {
-        sprintf_s(fileName, "Unitychan_Run_%d.png", i);
+    for (int i = 1; i < 14; i++) {
+        sprintf_s(fileName, "Unitychan_Walk_%d.png", i);
         auto frame = SpriteFrameManager::getInstance()->getSpriteFrameByName(fileName);
         animationFrames.push_back(frame);
     }
 
-    Sprite* unityChan = Sprite::createWithSpriteFrameName("Unitychan_Run_1.png");
+    Sprite* unityChan = Sprite::createWithSpriteFrameName("Unitychan_Walk_1.png");
     unityChan->setPosition(200, 200);
     unityChan->setScale(10);
     Animation* pAnimation = Animation::createWithSpriteFrames(animationFrames, 0.2f);
     AnimateComponent* pAnimate = new AnimateComponent(unityChan);
     pAnimate->initWithAnimation(pAnimation);
+    RepeatForever* repeat = new RepeatForever(unityChan);
+    repeat->initWithAction(pAnimate);
 
-    unityChan->addComponent(pAnimate);
+    unityChan->addComponent(repeat);
 
     this->addChild(unityChan);
 

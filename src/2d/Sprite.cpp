@@ -163,7 +163,11 @@ void Sprite::setSpriteFrame(SpriteFrame* spriteFrame)
 
 SpriteFrame* Sprite::getSpriteFrame() const
 {
-    return m_spriteFrame;
+    if (this->m_spriteFrame != nullptr) {
+        return m_spriteFrame;
+    }
+
+    return SpriteFrame::createWithTexture(m_texture, m_rect, false, glm::vec2(), m_size);
 }
 
 void Sprite::setPosition(const glm::vec2& position)
