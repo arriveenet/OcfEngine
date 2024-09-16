@@ -3,6 +3,7 @@
 #include "2d/SpriteFrameManager.h"
 #include "base/Game.h"
 #include "base/FileUtils.h"
+#include "renderer/TextureManager.h"
 #include <tinyxml2.h>
 
 NS_OCF_BEGIN

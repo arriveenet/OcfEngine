@@ -1,10 +1,11 @@
 #include "Sprite.h"
 
 #include <glm/gtc/type_ptr.hpp>
-#include "2d/SpriteFrameManager.h"
 #include "base/Game.h"
+#include "2d/SpriteFrameManager.h"
+#include "renderer/Renderer.h"
 #include "renderer/Texture2D.h"
-#include "renderer/OpenGLInclude.h"
+#include "renderer/TextureManager.h"
 #include "renderer/ShaderManager.h"
 
 using namespace glm;

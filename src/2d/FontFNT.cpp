@@ -1,6 +1,7 @@
 #include "FontFNT.h"
 #include "base/FileUtils.h"
 #include "base/Game.h"
+#include "renderer/TextureManager.h"
 
 NS_OCF_BEGIN
 

@@ -2,7 +2,8 @@
 #include "2d/FontManager.h"
 #include "2d/DrawShape.h"
 #include "base/Game.h"
-#include "renderer/OpenGLInclude.h"
+#include "renderer/ShaderManager.h"
+#include "renderer/Renderer.h"
 
 NS_OCF_BEGIN
 

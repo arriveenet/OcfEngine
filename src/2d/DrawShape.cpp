@@ -1,5 +1,6 @@
 #include "DrawShape.h"
 #include "base/Game.h"
+#include "renderer/Renderer.h"
 #include "renderer/ShaderManager.h"
 
 NS_OCF_BEGIN

@@ -1,11 +1,16 @@
 #include "Game.h"
+#include "audio/AudioEngine.h"
 #include "2d/Camera.h"
+#include "2d/Label.h"
 #include "2d/SpriteFrameManager.h"
 #include "2d/FontManager.h"
-#include "audio/AudioEngine.h"
+#include "base/EventDispatcher.h"
+#include "base/FileUtils.h"
+#include "renderer/Renderer.h"
+#include "renderer/TextureManager.h"
 #include "platform/Application.h"
 #include "platform/GLView.h"
-#include "base/FileUtils.h"
+#include "input/Input.h"
 
 #define FPS_UPDATE_INTERVAL	(0.5f)
 
@@ -22,6 +27,7 @@ Game::Game()
     , m_nextScene(nullptr)
     , m_glView(nullptr)
     , m_textureManager(nullptr)
+    , m_eventDispatcher(nullptr)
     , m_input(nullptr)
 {
 }
@@ -39,7 +45,10 @@ Game::~Game()
     OCF_SAFE_RELEASE(m_currentScene);
 
     // テクスチャーマネージャーを解放
-    OCF_SAFE_DELETE(m_textureManager);
+    OCF_SAFE_RELEASE(m_textureManager);
+
+    // イベントディスパッチャを解放
+    OCF_SAFE_RELEASE(m_eventDispatcher);
 
     // ファイルユーティリティを解放
     FileUtils::destroyInstance();
@@ -78,6 +87,8 @@ bool Game::init()
     m_renderer = new Renderer();
 
     m_textureManager = new TextureManager();
+
+    m_eventDispatcher = new EventDispatcher();
 
     m_input = new Input();
     m_input->init();
@@ -403,12 +414,6 @@ void Game::createStatsLabel()
     m_pFPSLabel->setPosition(0, visibleSize.y - fontHeight);
     m_pDrawCallLabel->setPosition(0, visibleSize.y - fontHeight * 2);
     m_pDrawVertexLabel->setPosition(0, visibleSize.y - fontHeight * 3);
-}
-
-void Game::onWindowSize(int width, int height)
-{
-    // ウィンドウ全体をビューポートに設定
-    m_renderer->setViewPort(0, 0, width, height);
 }
 
 NS_OCF_END

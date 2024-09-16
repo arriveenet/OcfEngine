@@ -1,17 +1,19 @@
 #pragma once
 #include <chrono>
 #include <stack>
-#include "platform/Application.h"
+#include <vector>
+#include "base/types.h"
 #include "base/GameObject.h"
-#include "input/Input.h"
-#include "2d/Scene.h"
-#include "2d/Label.h"
-#include "renderer/Renderer.h"
-#include "renderer/TextureManager.h"
 
 NS_OCF_BEGIN
 
+class Scene;
+class Label;
+class Input;
+class Renderer;
 class GLView;
+class TextureManager;
+class EventDispatcher;
 
 /**
  * @brief ゲームクラス
@@ -102,6 +104,12 @@ public:
     TextureManager* getTextureManager() const { return m_textureManager; }
 
     /**
+     * @brief イベントディスパッチャを取得する
+     * @return イベントディスパッチャのポインタ
+     */
+    EventDispatcher* getEventDispatcher() const { return m_eventDispatcher; }
+
+    /**
      * @brief フレームレートを取得する
      * @return フレームレート
      */
@@ -167,10 +175,6 @@ protected:
     void createStatsLabel();
 
 private:
-    friend Applicaiton;
-    void onWindowSize(int width, int height);
-
-private:
     /** ゲームクラスのインスタンス */
     static Game* s_sharedGame;
     bool m_running;
@@ -188,6 +192,8 @@ private:
     std::vector<Scene*> m_sceneStack;
     GLView* m_glView;
     TextureManager* m_textureManager;
+
+    EventDispatcher* m_eventDispatcher;
 
     Input* m_input;
 

@@ -3,7 +3,9 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 #include "base/Game.h"
+#include "base/Rect.h"
 #include "2d/Camera.h"
+#include "2d/Scene.h"
 
 NS_OCF_BEGIN
 

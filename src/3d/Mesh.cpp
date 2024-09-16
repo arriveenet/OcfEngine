@@ -4,6 +4,7 @@
 #include "base/FileUtils.h"
 #include "renderer/Renderer.h"
 #include "renderer/Texture2D.h"
+#include "renderer/TextureManager.h"
 #include <tiny_obj_loader.h>
 
 NS_OCF_BEGIN

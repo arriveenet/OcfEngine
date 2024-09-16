@@ -1,5 +1,6 @@
 #include "TextureAtlas.h"
 #include "base/Game.h"
+#include "renderer/TextureManager.h"
 
 NS_OCF_BEGIN
 

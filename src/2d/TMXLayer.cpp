@@ -3,6 +3,7 @@
 #include "2d/TMXTiledMap.h"
 #include "base/Game.h"
 #include "renderer/Renderer.h"
+#include "renderer/TextureManager.h"
 
 NS_OCF_BEGIN
 
