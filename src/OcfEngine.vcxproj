@@ -195,6 +195,8 @@
     <ClCompile Include="audio\AudioPlayer.cpp" />
     <ClCompile Include="base\AutoreleasePool.cpp" />
     <ClCompile Include="base\Console.cpp" />
+    <ClCompile Include="base\Event.cpp" />
+    <ClCompile Include="base\EventDispatcher.cpp" />
     <ClCompile Include="base\FileUtils.cpp" />
     <ClCompile Include="base\Game.cpp" />
     <ClCompile Include="base\GameObject.cpp" />
@@ -263,6 +265,8 @@
     <ClInclude Include="base\AutoreleasePool.h" />
     <ClInclude Include="base\Config.h" />
     <ClInclude Include="base\Console.h" />
+    <ClInclude Include="base\Event.h" />
+    <ClInclude Include="base\EventDispatcher.h" />
     <ClInclude Include="base\FileUtils.h" />
     <ClInclude Include="base\Game.h" />
     <ClInclude Include="base\GameObject.h" />
