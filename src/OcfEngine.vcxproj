@@ -197,6 +197,7 @@
     <ClCompile Include="base\Console.cpp" />
     <ClCompile Include="base\Event.cpp" />
     <ClCompile Include="base\EventDispatcher.cpp" />
+    <ClCompile Include="base\EventListener.cpp" />
     <ClCompile Include="base\FileUtils.cpp" />
     <ClCompile Include="base\Game.cpp" />
     <ClCompile Include="base\GameObject.cpp" />
@@ -267,6 +268,7 @@
     <ClInclude Include="base\Console.h" />
     <ClInclude Include="base\Event.h" />
     <ClInclude Include="base\EventDispatcher.h" />
+    <ClInclude Include="base\EventListener.h" />
     <ClInclude Include="base\FileUtils.h" />
     <ClInclude Include="base\Game.h" />
     <ClInclude Include="base\GameObject.h" />

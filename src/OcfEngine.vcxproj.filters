@@ -261,6 +261,9 @@
     <ClCompile Include="base\EventDispatcher.cpp">
       <Filter>ソース ファイル\base</Filter>
     </ClCompile>
+    <ClCompile Include="base\EventListener.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer\Image.h">
@@ -480,6 +483,9 @@
       <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
     <ClInclude Include="base\EventDispatcher.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\EventListener.h">
       <Filter>ヘッダー ファイル\base</Filter>
     </ClInclude>
   </ItemGroup>
