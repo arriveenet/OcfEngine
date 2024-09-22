@@ -144,6 +144,7 @@
     <ClCompile Include="AudioEngineTest\AudioEngineTest.cpp" />
     <ClCompile Include="BaseTest.cpp" />
     <ClCompile Include="ComponentTest\ComponentTest.cpp" />
+    <ClCompile Include="EventTest\EventTest.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MeshRendererTest\MeshRendererTest.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="AudioEngineTest\AudioEngineTest.h" />
     <ClInclude Include="BaseTest.h" />
     <ClInclude Include="ComponentTest\ComponentTest.h" />
+    <ClInclude Include="EventTest\EventTest.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="MeshRendererTest\MeshRendererTest.h" />
     <ClInclude Include="SpriteTest\SpriteTest.h" />

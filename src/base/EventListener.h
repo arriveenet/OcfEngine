@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include <functional>
 #include "base/GameObject.h"
 #include "input/Keyboard.h"
@@ -6,32 +7,30 @@
 NS_OCF_BEGIN
 
 class Event;
+class Node;
 
 class EventListener : public GameObject {
 public:
-	enum class Type {
-		Unknown,
-		Keyboard,
-		Mouse
-	};
+    enum class Type {
+        Unknown,
+        Keyboard,
+        Mouse
+    };
 
-	EventListener();
-	virtual ~EventListener();
+    EventListener();
+    virtual ~EventListener();
 
-	bool init(Type type, const std::function<void(Event*)>& callback);
+    bool init(Type type, const std::function<void(Event*)>& callback);
 
-	Type m_type;
-	std::function<void(Event*)> m_onEvent;
-};
+    virtual std::string getListenerId() = 0;
 
+    void setAssociatedNode(Node* pNode) { m_pNode = pNode; }
 
-class EventListenerKeyboard : public EventListener {
-public:
-	static EventListenerKeyboard* create();
+    Node* getAssociatedNode() const { return m_pNode; }
 
-	bool init();
-
-	std::function<void(Keyboard::KeyCode, Event*)> m_onKeyPressed;
+    Type m_type;
+    Node* m_pNode;
+    std::function<void(Event*)> m_onEvent;
 };
 
 NS_OCF_END 

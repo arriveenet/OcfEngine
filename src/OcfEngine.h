@@ -15,6 +15,9 @@
 
 #include "base/Game.h"
 #include "base/FileUtils.h"
+#include "base/Event.h"
+#include "base/EventListener.h"
+#include "base/EventDispatcher.h"
 #include "input/Input.h"
 
 #include "renderer/Image.h"

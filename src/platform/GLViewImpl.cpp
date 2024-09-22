@@ -3,6 +3,9 @@
 #include <unordered_map>
 #include "input/Keyboard.h"
 #include "input/Mouse.h"
+#include "base/Game.h"
+#include "base/EventKeyboard.h"
+#include "base/EventDispatcher.h"
 
 NS_OCF_BEGIN
 
@@ -327,6 +330,9 @@ void GLViewImpl::onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, in
 {
     auto keyCode = g_keyCodeMap[key];
     Keyboard::onKeyEvent(keyCode, action);
+
+    EventKeyboard event(g_keyCodeMap[key], action);
+    Game::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 }
 
 void GLViewImpl::onGLFWWindowSizeCallback(GLFWwindow* window, int width, int height)

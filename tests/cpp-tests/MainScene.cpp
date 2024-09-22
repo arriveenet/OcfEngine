@@ -5,7 +5,8 @@
 #include "ComponentTest/ComponentTest.h"
 #include "TiledMapTest/TiledMapTest.h"
 #include "AudioEngineTest/AudioEngineTest.h"
-#include"MeshRendererTest/MeshRendererTest.h"
+#include "MeshRendererTest/MeshRendererTest.h"
+#include "EventTest/EventTest.h"
 
 USING_NS_OCF;
 
@@ -32,6 +33,7 @@ bool MainScene::init()
     addTest("TiledMapTest", []() {return new TiledMapTest(); });
     addTest("AudioTest", []() {return new AudioEngineTest(); });
     addTest("MeshTest", []() {return new MeshRendererTest(); });
+    addTest("EventTest", []() {return new EventTest(); });
 
     glm::vec2 visibleSize = m_pGame->getVisibleSize();
 

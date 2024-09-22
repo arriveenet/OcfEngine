@@ -6,16 +6,16 @@ NS_OCF_BEGIN
 class Node;
 
 enum class EventType {
-	None,
-	KeyEvent,
+	KeyboardEvent,
 	MouseEvent,
 };
 
 class Event : public GameObject {
 public:
-	Event(Node* target, EventType eventType);
+	Event(EventType eventType);
 	virtual ~Event();
 
+	void setTarget(Node* pTarget) { m_pTarget = pTarget; }
 	Node* getTarget() const { return m_pTarget; }
 
 	EventType getEventType() const { return m_eventType; }

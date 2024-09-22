@@ -27,6 +27,9 @@
     <Filter Include="Source\ActionTest">
       <UniqueIdentifier>{b1553437-cf83-416d-876e-cc7414e5e056}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\EventTest">
+      <UniqueIdentifier>{6ba79e11-0a8e-45e6-9a78-5a79e7bc8a9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -59,6 +62,9 @@
     <ClCompile Include="ActionTest\ActionTest.cpp">
       <Filter>Source\ActionTest</Filter>
     </ClCompile>
+    <ClCompile Include="EventTest\EventTest.cpp">
+      <Filter>Source\EventTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainScene.h">
@@ -87,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="ActionTest\ActionTest.h">
       <Filter>Source\ActionTest</Filter>
+    </ClInclude>
+    <ClInclude Include="EventTest\EventTest.h">
+      <Filter>Source\EventTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

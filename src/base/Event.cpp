@@ -3,8 +3,8 @@
 
 NS_OCF_BEGIN
 
-Event::Event(Node* target, EventType eventType)
-	: m_pTarget(target)
+Event::Event(EventType eventType)
+	: m_pTarget(nullptr)
 	, m_eventType(eventType)
 {
 }
