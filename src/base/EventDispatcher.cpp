@@ -37,6 +37,11 @@ void EventDispatcher::EventLisnnerVector::clear()
     m_eventListeners.clear();
 }
 
+std::vector<EventListener*>::iterator EventDispatcher::EventLisnnerVector::erase(std::vector<EventListener*>::iterator iterator)
+{
+    return m_eventListeners.erase(iterator);
+}
+
 void EventDispatcher::EventLisnnerVector::emplace_back(EventListener* eventListener)
 {
     m_eventListeners.emplace_back(eventListener);
@@ -66,8 +71,29 @@ void EventDispatcher::dispatchEvent(Event* pEvent)
 
 void EventDispatcher::addEventListener(EventListener* pEventListener, Node* pTarget)
 {
+    OCF_ASSERT(pEventListener != nullptr);
+    OCF_ASSERT(pTarget != nullptr);
+
+    pEventListener->setAssociatedNode(pTarget);
     auto listenerId = pEventListener->getListenerId();
     m_listenerMap[listenerId].emplace_back(pEventListener);
+
+    pEventListener->retain();
+}
+
+void EventDispatcher::removeEventLisnerForTarget(Node* pTarget)
+{
+    for (auto& listenerVector : m_listenerMap) {
+        auto& listeners = listenerVector.second;
+        for (auto iter = listeners.begin(); iter != listeners.end();) {
+            if ((*iter)->getAssociatedNode() == pTarget) {
+                iter = listeners.erase(iter);
+            }
+            else {
+                ++iter;
+            }
+        }
+    }
 }
 
 NS_OCF_END

@@ -4,6 +4,7 @@
 #include <glm/gtx/transform.hpp>
 #include "base/Game.h"
 #include "base/Rect.h"
+#include "base/EventDispatcher.h"
 #include "2d/Camera.h"
 #include "2d/Scene.h"
 
@@ -35,6 +36,8 @@ Node::Node()
 
 Node::~Node()
 {
+    m_pGame->getEventDispatcher()->removeEventLisnerForTarget(this);
+
     while (!m_children.empty()) {
         auto entity = m_children.back();
         entity->onExit();

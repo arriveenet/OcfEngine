@@ -26,6 +26,7 @@ public:
 		}
 
 		void clear();
+		std::vector<EventListener*>::iterator erase(std::vector<EventListener*>::iterator iterator);
 		void emplace_back(EventListener* pEvent);
 
 		std::vector<EventListener*> m_eventListeners;
@@ -37,6 +38,8 @@ public:
 	void dispatchEvent(Event* event);
 
 	void addEventListener(EventListener* pEventListener, Node* pTarget);
+
+	void removeEventLisnerForTarget(Node* pTarget);
 
 private:
 	std::unordered_map <std::string, EventLisnnerVector> m_listenerMap;

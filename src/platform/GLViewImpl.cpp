@@ -5,6 +5,7 @@
 #include "input/Mouse.h"
 #include "base/Game.h"
 #include "base/EventKeyboard.h"
+#include "base/EventMouse.h"
 #include "base/EventDispatcher.h"
 
 NS_OCF_BEGIN
@@ -318,12 +319,35 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
 void GLViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     Mouse::onMouseButton(button, action, mods);
+
+    double xpos, ypos;
+    glfwGetCursorPos(window, &xpos, &ypos);
+
+    EventMouse::MouseEventType eventType = EventMouse::MouseEventType::None;
+    switch (action) {
+    case GLFW_PRESS:
+        eventType = eventType = EventMouse::MouseEventType::Down;
+        break;
+    case GLFW_RELEASE:
+        eventType = eventType = EventMouse::MouseEventType::Up;
+        break;
+    default:
+        break;
+    }
+
+    EventMouse mouseEvent(eventType);
+    mouseEvent.setPosition(static_cast<float>(xpos), static_cast<float>(ypos));
+    Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 
 void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* window, double xpos, double ypos)
 {
     m_mousePosition.x = static_cast<float>(xpos);
     m_mousePosition.y = static_cast<float>(m_screenSize.y - ypos);
+
+    EventMouse mouseEvent(EventMouse::MouseEventType::Move);
+    mouseEvent.setPosition(static_cast<float>(xpos), static_cast<float>(ypos));
+    Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 
 void GLViewImpl::onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
