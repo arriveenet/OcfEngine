@@ -32,11 +32,12 @@ Node::Node()
     , m_contentSizeDirty(true)
 {
     m_pGame = Game::getInstance();
+    m_pEventDispatcher = Game::getInstance()->getEventDispatcher();
 }
 
 Node::~Node()
 {
-    m_pGame->getEventDispatcher()->removeEventLisnerForTarget(this);
+    m_pEventDispatcher->removeEventLisnerForTarget(this);
 
     while (!m_children.empty()) {
         auto entity = m_children.back();

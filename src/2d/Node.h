@@ -10,6 +10,7 @@
 NS_OCF_BEGIN
 
 class Game;
+class EventDispatcher;
 class Renderer;
 class Scene;
 
@@ -158,8 +159,9 @@ protected:
     uint32_t processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag);
     
 protected:
-    Node* m_pParent;		//!< 親ノード
-    Game* m_pGame;			//!< シングルトンのゲームクラス
+    Node* m_pParent;                        //!< 親ノード
+    Game* m_pGame;                          //!< シングルトンのゲームクラス
+    EventDispatcher* m_pEventDispatcher;    // イベントディスパッチ
 
     uint16_t m_cameraMask;	//!< カメラマスク
 
