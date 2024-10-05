@@ -9,6 +9,8 @@ public:
 
     void onKeyPressed(ocf::Keyboard::KeyCode key, ocf::Event* pEvent);
 
+    void onKeyReleased(ocf::Keyboard::KeyCode key, ocf::Event* pEvent);
+
     void onMouseMove(ocf::Event* pEvent);
 
     ocf::Label* m_pKeyboardLabel;

@@ -28,7 +28,9 @@ bool EventListenerKeyboard::init()
             }
         }
         else {
-            m_onKeyPressed(keyboardEvent->m_keyCode, event);
+            if (m_onKeyReleased) {
+                m_onKeyReleased(keyboardEvent->m_keyCode, event);
+          }
         }
     };
 

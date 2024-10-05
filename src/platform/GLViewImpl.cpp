@@ -356,6 +356,7 @@ void GLViewImpl::onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, in
     Keyboard::onKeyEvent(keyCode, action);
 
     EventKeyboard event(g_keyCodeMap[key], action);
+    event.m_isPressed = (action == GLFW_PRESS || action == GLFW_REPEAT);
     Game::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 }
 
