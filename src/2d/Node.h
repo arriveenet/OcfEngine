@@ -33,12 +33,6 @@ public:
 
     virtual bool init();
 
-    /**
-     * @brief “ü—Íˆ—
-     * @param inputState “ü—Íó‘Ô
-     */
-    virtual void processInput(const InputState& inputState);
-
     virtual void update(float deltaTime);
     virtual void updateNode(float deltaTime);
     virtual void updateComponents(float deltaTime);

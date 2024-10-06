@@ -21,7 +21,7 @@ public:
 
     bool init() override;
     bool init(std::string_view normalImage, std::string_view activeImage);
-    void processInput(const InputState& inputState) override;
+    void updateNode(float deltaTime) override;
     void setOnClickCallback(std::function<void()> onClick);
     void setText(const std::string& text);
     std::string getText() const;

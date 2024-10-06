@@ -35,7 +35,5 @@ class Ship : public ocf::Sprite {
 public:
     Ship();
 
-    void processInput(const ocf::InputState& inputState) override;
-
     ocf::MoveComponent* m_pMoveComponent;
 };

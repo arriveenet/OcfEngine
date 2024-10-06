@@ -58,13 +58,6 @@ bool Node::init()
     return true;
 }
 
-void Node::processInput(const InputState& inputState)
-{
-    for (auto& entity : m_children) {
-        entity->processInput(inputState);
-    }
-}
-
 void Node::update(float deltaTime)
 {
     // コンポーネントを更新

@@ -157,9 +157,6 @@ public:
     const glm::mat4& getMatrix(MatrixStack type);
 
 protected:
-    /** 入力システムを処理 */
-    void processInput();
-
     /** ゲームの更新処理を行う */
     void update();
 
@@ -194,8 +191,6 @@ private:
     TextureManager* m_textureManager;
 
     EventDispatcher* m_eventDispatcher;
-
-    Input* m_input;
 
     Label* m_pFPSLabel = nullptr;
     Label* m_pDrawCallLabel = nullptr;

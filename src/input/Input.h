@@ -5,22 +5,21 @@
 
 NS_OCF_BEGIN
 
-struct InputState {
-    Keyboard keyboard;
-    Mouse mouse;
-};
-
 class Input {
 public:
-    bool init();
+    static bool init();
 
-    void prepareUpdate();
-    void update();
+    static void prepareUpdate();
+    static void update();
 
-    const InputState& getState() const { return m_inputState; }
+    static ButtonState getKeyState(Keyboard::KeyCode keyCode);
+
+    static glm::vec2 getMousePosition();
+    static ButtonState getMouseButtonState(Mouse::MouseButton button);
 
 private:
-    InputState m_inputState;
+    static Keyboard m_keyboard;
+    static Mouse m_mouse;
 };
 
 NS_OCF_END

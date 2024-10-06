@@ -5,9 +5,12 @@
 
 NS_OCF_BEGIN
 
+Keyboard Input::m_keyboard;
+Mouse Input::m_mouse;
+
 bool Input::init()
 {
-    m_inputState.keyboard.init();
+    m_keyboard.init();
 
     return true;
 }
@@ -20,16 +23,31 @@ void Input::prepareUpdate()
 void Input::update()
 {
     // キーボードの状態を保持
-    memcpy(m_inputState.keyboard.m_prevState, m_inputState.keyboard.m_currentState, sizeof(m_inputState.keyboard.m_prevState));
+    memcpy(m_keyboard.m_prevState, m_keyboard.m_currentState, sizeof(m_keyboard.m_prevState));
 
     // マウスの座標を設定
-    m_inputState.mouse.m_lastPosition = m_inputState.mouse.m_position;
+    m_mouse.m_lastPosition = m_mouse.m_position;
 
     GLViewImpl* view = dynamic_cast<GLViewImpl*>(Game::getInstance()->getGLView());
-    m_inputState.mouse.m_position = view->getMousePosition();
+    m_mouse.m_position = view->getMousePosition();
 
     // マウスボタンの状態を保持
-    m_inputState.mouse.m_previousButton = m_inputState.mouse.m_currentButton;
+    m_mouse.m_previousButton = m_mouse.m_currentButton;
+}
+
+ButtonState Input::getKeyState(Keyboard::KeyCode keyCode)
+{
+    return m_keyboard.getKeyState(keyCode);
+}
+
+glm::vec2 Input::getMousePosition()
+{
+    return m_mouse.getPosition();
+}
+
+ButtonState Input::getMouseButtonState(Mouse::MouseButton button)
+{
+    return m_mouse.getButtonState(button);
 }
 
 NS_OCF_END

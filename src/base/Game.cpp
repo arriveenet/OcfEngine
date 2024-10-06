@@ -28,7 +28,6 @@ Game::Game()
     , m_glView(nullptr)
     , m_textureManager(nullptr)
     , m_eventDispatcher(nullptr)
-    , m_input(nullptr)
 {
 }
 
@@ -37,9 +36,6 @@ Game::~Game()
     OCF_SAFE_RELEASE(m_pFPSLabel);
     OCF_SAFE_RELEASE(m_pDrawCallLabel);
     OCF_SAFE_RELEASE(m_pDrawVertexLabel);
-
-    // 入力クラスを解放
-    OCF_SAFE_DELETE(m_input);
 
     // シーンを解放
     OCF_SAFE_RELEASE(m_currentScene);
@@ -90,8 +86,7 @@ bool Game::init()
 
     m_eventDispatcher = new EventDispatcher();
 
-    m_input = new Input();
-    m_input->init();
+    Input::init();
 
     initMatrixStack();
 
@@ -287,14 +282,6 @@ const glm::mat4& Game::getMatrix(MatrixStack type)
     return m_modelViewMatrixStack.top();
 }
 
-void Game::processInput()
-{
-    const InputState& inputState = m_input->getState();
-    m_currentScene->processInput(inputState);
-
-    m_input->update();
-}
-
 void Game::update()
 {
     calculateDeltaTime();
@@ -302,9 +289,9 @@ void Game::update()
     m_frameRate = 1.0f / m_deltaTime;
 
     if (m_currentScene != nullptr) {
-        processInput();
-
         m_currentScene->update(m_deltaTime);
+
+        Input::update();
     }
 }
 

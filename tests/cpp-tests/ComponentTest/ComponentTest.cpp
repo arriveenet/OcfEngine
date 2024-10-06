@@ -1,5 +1,6 @@
 #include "ComponentTest.h"
 #include "2d/MoveComponent.h"
+#include "base/EventListenerKeyboard.h"
 
 USING_NS_OCF;
 
@@ -113,35 +114,29 @@ Ship::Ship()
 
     glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
     setPosition(visibleSize.x / 2, visibleSize.y / 2);
-}
 
-void Ship::processInput(const ocf::InputState& inputState)
-{
-    float fowardSpeed = 0.0f;
-    if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_W) == ButtonState::Hold) {
-        fowardSpeed = 300.0f;
-    }
-    if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_S) == ButtonState::Hold) {
-        fowardSpeed = -300.0f;
-    }
+    auto keyboardEvent = EventListenerKeyboard::create();
+    keyboardEvent->m_onKeyPressed = [this](Keyboard::KeyCode key, Event* pEvent) {
+        float fowardSpeed = 0.0f;
+        if (key == Keyboard::KeyCode::KEY_W) {
+            fowardSpeed = 300.0f;
+        }
+        if (key == Keyboard::KeyCode::KEY_S) {
+            fowardSpeed = -300.0f;
+        }
 
-    float rotation = getRotation();
-    if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_Q) == ButtonState::Hold) {
-        rotation += 3.0f;
-    }
-    if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_E) == ButtonState::Hold) {
-        rotation -= 3.0f;
-    }
-    setRotation(rotation);
+        float rotation = getRotation();
+        if (key == Keyboard::KeyCode::KEY_Q) {
+            rotation += 3.0f;
+        }
+        if (key == Keyboard::KeyCode::KEY_E) {
+            rotation -= 3.0f;
+        }
+        setRotation(rotation);
 
-    m_pMoveComponent->setForwardSpeed(fowardSpeed);
+        m_pMoveComponent->setForwardSpeed(fowardSpeed);
+        };
 
-
-    if (inputState.keyboard.getKeyState(Keyboard::KeyCode::KEY_SPACE) == ButtonState::Pressed) {
-        Laser* pLaser = new Laser();
-        pLaser->setPosition(getPosition());
-        pLaser->setRotation(getRotation());
-        this->addChild(pLaser);
-    }
+    m_pEventDispatcher->addEventListener(keyboardEvent, this);
 }
 

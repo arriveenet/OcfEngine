@@ -7,8 +7,8 @@ public:
     ~MeshRendererTest();
 
     bool init() override;
-
-    void processInput(const ocf::InputState& inputState) override;
+    
+    void updateNode(float deltaTime) override;
 
     ocf::Camera* m_pCamera;
 };

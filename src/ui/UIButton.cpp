@@ -58,13 +58,13 @@ bool Button::init(std::string_view normalImage, std::string_view activeImage)
     return false;
 }
 
-void Button::processInput(const InputState& inputState)
+void Button::updateNode(float deltaTime)
 {
-    glm::vec2 mousePos = inputState.mouse.getPosition();
+    glm::vec2 mousePos = Input::getMousePosition();
     if (this->hitTest(mousePos)) {
         m_pButtonNormalRenderer->setVisible(false);
         m_pButtonActiveRenderer->setVisible(true);
-        if (inputState.mouse.getButtonState(Mouse::Left) == ButtonState::Pressed) {
+        if (Input::getMouseButtonState(Mouse::Left) == ButtonState::Pressed) {
             m_onClick();
         }
     }
