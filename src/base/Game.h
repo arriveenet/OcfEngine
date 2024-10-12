@@ -21,6 +21,11 @@ class EventDispatcher;
  */
 class Game : public GameObject {
 public:
+    enum class Projection {
+        _2D,
+        _3D
+    };
+
     /** コンストラクタ */
     Game();
     /** デストラクタ */
@@ -68,10 +73,28 @@ public:
     glm::vec2 getVisibleSize() const;
 
     /**
+     * @brief ウィンドウサイズを取得する
+     * @return ウィンドウサイズ
+     */
+    const glm::vec2& getWindowSize() const;
+
+    /**
      * @brief カメラと近くのクリッピング フレーム間の距離を取得
      * @return フレーム間の距離
      */
     float getZEye() const;
+
+    /**
+     * @brief 投影方法を設定する
+     * @param[in] 投影方法
+     */
+    void setProjection(Projection projection);
+
+    /**
+     * @brief 投影方法を取得する
+     * @return 投影方法
+     */
+    Projection getProjection() const { return m_projection; }
 
     /**
      * @brief レンダラーを取得する
@@ -179,9 +202,13 @@ private:
     float m_deltaTime;
     std::chrono::steady_clock::time_point m_lastUpdate;
 
+    Projection m_projection;
+
     unsigned int m_frames = 0;
     float m_accumulator = 0.0f;
     float m_frameRate = 0.0f;
+
+    glm::vec2 m_windowSize;
 
     Renderer* m_renderer;
     Scene* m_currentScene;
@@ -198,6 +225,8 @@ private:
 
     std::stack<glm::mat4> m_projectionMatrixStack;
     std::stack<glm::mat4> m_modelViewMatrixStack;
+
+    friend class GLView;
 };
 
 NS_OCF_END

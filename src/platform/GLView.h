@@ -33,7 +33,13 @@ public:
 
     virtual void pollEvents();
 
+    virtual void setFrameSize(float widht, float height);
+
     virtual glm::vec2 getVisibleSize() const;
+
+    virtual void setDesignResolutionSize(float width, float height);
+
+    virtual const glm::vec2& getDesignResolutionSize() const;
 
     virtual void setViewName(std::string_view viewname);
 
@@ -48,9 +54,12 @@ public:
     static GLContextAttributes m_glContextAttributes;
 
 protected:
-    glm::vec2 m_screenSize;
-    glm::vec2 m_resolutionSize;
-    std::string m_viewName;
+    void updateDesignResolutionSize();
+
+protected:
+    glm::vec2 m_screenSize;             //!< 実際のスクリーンサイズ
+    glm::vec2 m_designResolutionSize;   //!< ゲーム内の解像度
+    std::string m_viewName;             //!< ビューの名前
 };
 
 NS_OCF_END

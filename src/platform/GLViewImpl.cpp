@@ -280,7 +280,6 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
     setViewName(viewName);
 
     glm::vec2 windowSize = rect.m_size;
-    m_screenSize = windowSize;
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
@@ -300,6 +299,10 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
     }
 
     glfwMakeContextCurrent(m_pMainWindow);
+
+    int actualWidth, actualHeight;
+    glfwGetWindowSize(m_pMainWindow, &actualWidth, &actualHeight);
+    setFrameSize(actualWidth, actualHeight);
 
     glfwSetMouseButtonCallback(m_pMainWindow, GLFWEventHandler::onGLFWMouseButtonCallback);
     glfwSetCursorPosCallback(m_pMainWindow, GLFWEventHandler::onGLFWMouseMoveCallback);

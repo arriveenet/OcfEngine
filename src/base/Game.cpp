@@ -22,6 +22,8 @@ Game::Game()
     : m_running(false)
     , m_deltaTime(0.0f)
     , m_lastUpdate()
+    , m_projection(Projection::_3D)
+    , m_windowSize(0, 0)
     , m_renderer(nullptr)
     , m_currentScene(nullptr)
     , m_nextScene(nullptr)
@@ -165,10 +167,20 @@ glm::vec2 Game::getVisibleSize() const
     return glm::vec2(0, 0);
 }
 
+const glm::vec2& Game::getWindowSize() const
+{
+    return m_windowSize;
+}
+
 float Game::getZEye() const
 {
     // FOV‚ª60‹‚Ìê‡‚Ì‹——£
     return (m_glView->getVisibleSize().y / 1.154700538379252f);	//(2 * tanf(M_PI/6))
+}
+
+void Game::setProjection(Projection projection)
+{
+
 }
 
 void Game::setGLView(GLView* glView)
