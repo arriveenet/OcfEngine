@@ -31,6 +31,8 @@ protected:
 
     bool initWithRect(std::string_view viewName, const Rect& rect, bool resizable);
 
+    void handleWindowSize(int width, int height);
+
     void onGLFWMouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
     void onGLFWMouseMoveCallback(GLFWwindow* window, double xpos, double ypos);
     void onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);

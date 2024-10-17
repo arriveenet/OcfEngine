@@ -77,7 +77,7 @@ GLContextAttributes GLView::getGLContextAttributes()
 void GLView::updateDesignResolutionSize()
 {
     Game* pGame = Game::getInstance();
-    pGame->m_windowSize = getDesignResolutionSize();
+    pGame->m_windowSizeInPoints = getDesignResolutionSize();
     pGame->setProjection(pGame->getProjection());
 }
 

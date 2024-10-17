@@ -63,6 +63,7 @@ protected:
     float m_zFar;
     Type m_type;
     Scene* m_scene;
+    mutable bool m_viewProjectionDirty;
 };
 
 NS_OCF_END
