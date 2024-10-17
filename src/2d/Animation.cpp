@@ -8,6 +8,7 @@ Animation::Animation()
     , m_duration(0.0f)
     , m_totalDelayUnits(0.0f)
     , m_delayPerUnit(0.0f)
+    , m_resetOriginalFrame(false)
 {
 }
 
