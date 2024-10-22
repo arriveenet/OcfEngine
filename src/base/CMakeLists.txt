@@ -1,18 +1,25 @@
 set(OCF_BASE_HEADER
+    "base/AutoreleasePool.h"
+    "base/Config.h"
+    "base/Console.h"
+    "base/Event.h"
+    "base/EventDispatcher.h"
     "base/FileUtils.h"
-    "base/fnt.h"
-    "base/Font.h"
     "base/Game.h"
     "base/GameObject.h"
     "base/Macros.h"
     "base/Rect.h"
-    "base/Types.h"
+    "base/types.h"
     )
 
 set(OCF_BASE_SRC
+    "base/AutoreleasePool.cpp"
+    "base/Console.cpp"
+    "base/Event.cpp"
+    "base/EventDispatcher.cpp"
     "base/FileUtils.cpp"
-    "base/Font.cpp"
     "base/Game.cpp"
     "base/GameObject.cpp"
     "base/Rect.cpp"
+    "base/Types.cpp"
     )

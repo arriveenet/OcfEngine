@@ -1,0 +1,20 @@
+set(OCF_AUDIO_HEADER
+    "audio/AudioCache.h"
+    "audio/AudioDecoder.h"
+    "audio/AudioDecoderManager.h"
+    "audio/AudioDecoderWav.h"
+    "audio/AudioEngine.h"
+    "audio/AudioEngineImpl.h"
+    "audio/AudioMacros.h"
+    "audio/AudioPlayer.h"
+    )
+
+set(OCF_AUDIO_SRC
+    "audio/AudioCache.cpp"
+    "audio/AudioDecoder.cpp"
+    "audio/AudioDecoderManager.cpp"
+    "audio/AudioDecoderWav.cpp"
+    "audio/AudioEngine.cpp"
+    "audio/AudioEngineImpl.cpp"
+    "audio/AudioPlayer.cpp"
+    )
