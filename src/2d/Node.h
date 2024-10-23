@@ -13,6 +13,8 @@ class Game;
 class EventDispatcher;
 class Renderer;
 class Scene;
+class Rect;
+class Camera;
 
 /**
  * @brief ノードクラス
@@ -186,5 +188,8 @@ protected:
     std::vector<Node*> m_children;			//!< 子ノードの配列
     std::vector<Component*> m_components;	//!< コンポーネント
 };
+
+bool isScreenPointInRect(const glm::vec2& pt, const Camera* pCamera, const glm::mat4& worldToLocal,
+                         const Rect& rect, glm::vec3* p);
 
 NS_OCF_END

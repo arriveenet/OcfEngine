@@ -51,6 +51,8 @@ public:
 
     void setScene(Scene* scene);
 
+    glm::vec3 unProjectGL(const glm::vec3& src) const;
+
 protected:
     static Camera* s_pVisitingCamera;
     CameraFlag m_cameraFlag;

@@ -488,4 +488,42 @@ uint32_t Node::processParentFlag(const glm::mat4& parentTransform, uint32_t pare
     return flags;
 }
 
+bool isScreenPointInRect(const glm::vec2& pt, const Camera* pCamera, const glm::mat4& worldToLocal,
+                         const Rect& rect, glm::vec3* p)
+{
+    if (pCamera == nullptr || rect.m_size.x <= 0 || rect.m_size.y <= 0) {
+        return false;
+    }
+
+    glm::vec3 Pn(pt.x, pt.y, -1.0f), Pf(pt.x, pt.y, 1.0f);
+    Pn = pCamera->unProjectGL(Pn);
+    Pf = pCamera->unProjectGL(Pf);
+
+    Pn = worldToLocal * glm::vec4(Pn, 1.0f);
+    Pf = worldToLocal * glm::vec4(Pf, 1.0f);
+
+    glm::vec3 E = Pf - Pn;
+
+    glm::vec3 A = glm::vec3(rect.m_position.x, rect.m_position.y, 0);
+    glm::vec3 B = glm::vec3(rect.m_position.x + rect.m_size.x, rect.m_position.y, 0);
+    glm::vec3 C = glm::vec3(rect.m_position.x, rect.m_position.y + rect.m_size.y, 0);
+
+    B = B - A;
+    C = C - A;
+
+    glm::vec3 BxC = glm::cross(B, C);
+    float BxCdotE = glm::dot(BxC, E);
+    if (BxCdotE == 0)
+    {
+        return false;
+    }
+    float t = (glm::dot(BxC, A) - glm::dot(BxC, Pn)) / BxCdotE;
+    glm::vec3 P = Pn + t * E;
+    if (p) {
+        *p = P;
+    }
+
+    return rect.intersect(glm::vec2(P.x, P.y));
+}
+
 NS_OCF_END

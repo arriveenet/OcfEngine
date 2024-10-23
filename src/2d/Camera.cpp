@@ -191,4 +191,12 @@ void Camera::setScene(Scene* scene)
     }
 }
 
+glm::vec3 Camera::unProjectGL(const glm::vec3& src) const
+{
+    const glm::vec2& size = m_pGame->getWindowSize();
+    glm::vec4 viewport(0.0f, 0.0f, size.x, size.y);
+
+    return glm::unProject(src, m_view, m_projection, viewport);
+}
+
 NS_OCF_END
