@@ -16,11 +16,13 @@ class Font;
 class Label : public Node {
 public:
     static Label* create(const std::string& text);
+    static Label* createWithBMFont(std::string_view bmFontPath, std::string_view text);
 
     Label();
     virtual ~Label();
 
     bool init();
+    bool initWithBMFont(std::string_view bmFontPath);
 
     Font* getFont() const { return m_font; }
 

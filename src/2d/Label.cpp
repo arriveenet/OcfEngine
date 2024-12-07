@@ -72,6 +72,18 @@ Label* Label::create(const std::string& text)
     return nullptr;
 }
 
+Label* Label::createWithBMFont(std::string_view bmFontPath, std::string_view text)
+{
+    Label* label = new Label();
+    if (label->initWithBMFont(bmFontPath)) {
+        label->autorelease();
+        label->setString(text.data());
+        return label;
+    }
+    OCF_SAFE_DELETE(label);
+    return nullptr;
+}
+
 Label::Label()
     : m_font(nullptr)
     , m_isDirty(true)
@@ -90,6 +102,21 @@ Label::~Label()
 bool Label::init()
 {
     m_font = FontManager::getFontFNT("Consolas.fnt");
+    if (m_font == nullptr) {
+        return false;
+    }
+
+    m_texture = m_font->getTexture();
+
+    Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::Label);
+    m_quadCommand.getProgramState().setProgram(pProgram);
+
+    return true;
+}
+
+bool Label::initWithBMFont(std::string_view bmFontPath)
+{
+    m_font = FontManager::getFontFNT(bmFontPath);
     if (m_font == nullptr) {
         return false;
     }
