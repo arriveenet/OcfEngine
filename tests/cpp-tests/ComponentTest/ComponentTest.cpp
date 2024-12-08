@@ -119,10 +119,10 @@ Ship::Ship()
     keyboardEvent->m_onKeyPressed = [this](Keyboard::KeyCode key, Event* pEvent) {
         float fowardSpeed = 0.0f;
         if (key == Keyboard::KeyCode::KEY_W) {
-            fowardSpeed = 300.0f;
+            fowardSpeed += 300.0f;
         }
         if (key == Keyboard::KeyCode::KEY_S) {
-            fowardSpeed = -300.0f;
+            fowardSpeed -= 300.0f;
         }
 
         float rotation = getRotation();
@@ -133,6 +133,18 @@ Ship::Ship()
             rotation -= 3.0f;
         }
         setRotation(rotation);
+
+        m_pMoveComponent->setForwardSpeed(fowardSpeed);
+        };
+
+    keyboardEvent->m_onKeyReleased = [this](Keyboard::KeyCode key, Event* pEvent) {
+        float fowardSpeed = 0.0f;
+        if (key == Keyboard::KeyCode::KEY_W) {
+            fowardSpeed = 0.0f;
+        }
+        if (key == Keyboard::KeyCode::KEY_S) {
+            fowardSpeed = 0.0f;
+        }
 
         m_pMoveComponent->setForwardSpeed(fowardSpeed);
         };
