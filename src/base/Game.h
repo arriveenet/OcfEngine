@@ -208,7 +208,7 @@ private:
     float m_accumulator = 0.0f;
     float m_frameRate = 0.0f;
 
-    glm::vec2 m_windowSize;
+    glm::vec2 m_windowSizeInPoints;
 
     Renderer* m_renderer;
     Scene* m_currentScene;

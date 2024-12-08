@@ -302,7 +302,7 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
 
     int actualWidth, actualHeight;
     glfwGetWindowSize(m_pMainWindow, &actualWidth, &actualHeight);
-    setFrameSize(actualWidth, actualHeight);
+    handleWindowSize(static_cast<int>(windowSize.x), static_cast<int>(windowSize.y));
 
     glfwSetMouseButtonCallback(m_pMainWindow, GLFWEventHandler::onGLFWMouseButtonCallback);
     glfwSetCursorPosCallback(m_pMainWindow, GLFWEventHandler::onGLFWMouseMoveCallback);
@@ -317,6 +317,13 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
     glfwSwapInterval(m_glContextAttributes.vsync ? 1 : 0);
 
     return true;
+}
+
+void GLViewImpl::handleWindowSize(int width, int height)
+{
+    GLView::setFrameSize(width / 1.0f, height / 1.0f);
+
+    updateDesignResolutionSize();
 }
 
 void GLViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
@@ -365,6 +372,8 @@ void GLViewImpl::onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, in
 
 void GLViewImpl::onGLFWWindowSizeCallback(GLFWwindow* window, int width, int height)
 {
+    handleWindowSize(width, height);
+    glViewport(0, 0, width, height);
 }
 
 NS_OCF_END

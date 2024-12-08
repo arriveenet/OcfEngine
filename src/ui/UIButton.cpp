@@ -2,6 +2,8 @@
 #include "2d/Sprite.h"
 #include "2d/DrawShape.h"
 #include "2d/Label.h"
+#include "2d/Camera.h"
+#include "2d/Scene.h"
 
 NS_OCF_BEGIN
 
@@ -61,6 +63,14 @@ bool Button::init(std::string_view normalImage, std::string_view activeImage)
 void Button::updateNode(float deltaTime)
 {
     glm::vec2 mousePos = Input::getMousePosition();
+
+    Camera* pCamera = getScene()->getDefaultCamera();
+    Rect rect;
+    rect.m_size = getSize();
+    bool ret = isScreenPointInRect(mousePos, pCamera, getWorldToNodeTransform(), rect, nullptr);
+    if (ret) {
+        int a = 0;
+    }
     if (this->hitTest(mousePos)) {
         m_pButtonNormalRenderer->setVisible(false);
         m_pButtonActiveRenderer->setVisible(true);

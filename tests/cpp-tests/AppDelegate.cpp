@@ -33,6 +33,7 @@ bool AppDelegate::applicationDidFinishLaunching()
         game->setGLView(glView);
     }
 
+    glView->setDesignResolutionSize(windowWidth, windowHeight);
 
     MainScene* scene = new MainScene();
     scene->init();

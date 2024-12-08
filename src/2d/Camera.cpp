@@ -19,6 +19,7 @@ Camera::Camera()
     , m_zFar(0.0f)
     , m_type(Type::Perspective)
     , m_scene(nullptr)
+    , m_viewProjectionDirty(true)
 {
 }
 
@@ -57,9 +58,9 @@ Camera::~Camera()
 
 bool Camera::init()
 {
-    glm::ivec2 size = m_pGame->getVisibleSize();
-    switch (m_type) {
-        case ocf::Camera::Type::Perspective:
+    glm::ivec2 size = m_pGame->getWindowSize();
+    switch (m_pGame->getProjection()) {
+        case Game::Projection::_3D:
         {
             float zEye = m_pGame->getZEye();
             m_zNear = 0.5f;
@@ -71,7 +72,7 @@ bool Camera::init()
             lookAt(center, glm::vec3(0.0f, 1.0f, 0.0f));
             break;
         }
-        case ocf::Camera::Type::Orthographic:
+        case Game::Projection::_2D:
         {
             m_zNear = -1024.0f;
             m_zFar  = 1024.0f;
@@ -91,6 +92,8 @@ bool Camera::initPerspective(float fovy, float aspect, float zNear, float zFar)
 
     m_projection = glm::perspective(fovy, aspect, zNear, zFar);
 
+    m_viewProjectionDirty = true;
+
     return true;
 }
 
@@ -101,6 +104,8 @@ bool Camera::initOrthographic(float width, float height, float zNear /*=-1.0f*/,
     const float halfWidth = width / 2.0f;
     const float halfHeight = height / 2.0f;
     m_projection = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight, zNear, zFar);
+
+    m_viewProjectionDirty = true;
 
     return true;
 }
@@ -123,15 +128,22 @@ const glm::mat4 Camera::getViewMatrix() const
     //	m_viewInverse = viewInv;
     //	m_view = glm::inverse(viewInv);
     //}
-    m_view = glm::lookAt(m_position, m_center, glm::vec3(0.0f, 1.0f, 0.0f));
-    
+    glm::mat4 view = glm::lookAt(m_position, m_center, glm::vec3(0.0f, 1.0f, 0.0f));
+    if (view != m_view) {
+        m_viewProjectionDirty = true;
+        m_view = view;
+    }
+
     return m_view;
 }
 
 const glm::mat4 Camera::getViewProjectionMatrix() const
 {
     getViewMatrix();
-    m_viewProjection = m_projection * m_view;
+    if (m_viewProjectionDirty) {
+        m_viewProjectionDirty = false;
+        m_viewProjection = m_projection * m_view;
+    }
 
     return m_viewProjection;
 }
@@ -177,6 +189,14 @@ void Camera::setScene(Scene* scene)
             }
         }
     }
+}
+
+glm::vec3 Camera::unProjectGL(const glm::vec3& src) const
+{
+    const glm::vec2& size = m_pGame->getWindowSize();
+    glm::vec4 viewport(0.0f, 0.0f, size.x, size.y);
+
+    return glm::unProject(src, m_view, m_projection, viewport);
 }
 
 NS_OCF_END

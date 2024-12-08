@@ -23,7 +23,7 @@ Game::Game()
     , m_deltaTime(0.0f)
     , m_lastUpdate()
     , m_projection(Projection::_3D)
-    , m_windowSize(0, 0)
+    , m_windowSizeInPoints(0, 0)
     , m_renderer(nullptr)
     , m_currentScene(nullptr)
     , m_nextScene(nullptr)
@@ -169,7 +169,7 @@ glm::vec2 Game::getVisibleSize() const
 
 const glm::vec2& Game::getWindowSize() const
 {
-    return m_windowSize;
+    return m_windowSizeInPoints;
 }
 
 float Game::getZEye() const
@@ -180,7 +180,22 @@ float Game::getZEye() const
 
 void Game::setProjection(Projection projection)
 {
+    m_projection = projection;
 
+    switch (projection) {
+    case ocf::Game::Projection::_2D:
+
+        break;
+    case ocf::Game::Projection::_3D:
+
+        break;
+    default:
+        break;
+    }
+
+    if (m_currentScene) {
+        m_currentScene->getDefaultCamera()->init();
+    }
 }
 
 void Game::setGLView(GLView* glView)
