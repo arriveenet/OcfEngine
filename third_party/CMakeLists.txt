@@ -98,7 +98,4 @@ set_target_properties(zlib
                       )
 add_library(ZLIB::ZLIB ALIAS zlib)
 
-set(PNG_TESTS OFF)
-set(PNG_TOOLS OFF)
-add_subdirectory(libpng)
 
