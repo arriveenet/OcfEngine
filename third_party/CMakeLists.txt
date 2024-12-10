@@ -85,7 +85,6 @@ set_target_properties(xxhash
                       FOLDER "ThirdParty"
                       )
 
-set(ZLIB_BUILD_EXAMPLES OFF)
 add_subdirectory(zlib)
 target_include_directories(thirdparty INTERFACE "zlib")
 set_target_properties(zlib
@@ -96,6 +95,13 @@ set_target_properties(zlib
                       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
                       FOLDER "ThirdParty"
                       )
-add_library(ZLIB::ZLIB ALIAS zlib)
 
-
+add_subdirectory(libpng)
+target_include_directories(thirdparty INTERFACE "libpng")
+set_target_properties(libpng
+                      PROPERTIES
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      FOLDER "ThirdParty"
+                      )
