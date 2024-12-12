@@ -1,6 +1,21 @@
 #pragma once
 #include "audio/AudioDecoder.h"
+
+#if !defined(_WIN32)
+typedef struct _GUID
+{
+    uint32_t Data1;
+    unsigned short Data2;
+    unsigned short Data3;
+    unsigned char Data4[8];
+} GUID;
+__inline int IsEqualGUID(const GUID& rguid1, const GUID& rguid2)
+{
+    return !::memcmp(&rguid1, &rguid2, sizeof(GUID));
+}
+#else
 #include <guiddef.h>
+#endif
 
 NS_OCF_BEGIN
 
