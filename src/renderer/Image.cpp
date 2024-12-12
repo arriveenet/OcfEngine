@@ -2,7 +2,7 @@
 #include <fstream>
 #include <Windows.h>
 
-#include <libpng16/png.h>
+#include <png.h>
 
 NS_OCF_BEGIN
 

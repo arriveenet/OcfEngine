@@ -56,7 +56,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_SOURCE_DIR})
 
 set(ZLIB_PUBLIC_HDRS
     ${CMAKE_CURRENT_BINARY_DIR}/zconf.h
-    zlib.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/zlib.h
 )
 set(ZLIB_PRIVATE_HDRS
     crc32.h
@@ -93,3 +93,6 @@ add_library(zlibstatic STATIC ${ZLIB_SRCS} ${ZLIB_PUBLIC_HDRS} ${ZLIB_PRIVATE_HD
 target_include_directories(zlibstatic PUBLIC ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(zlib PROPERTIES DEFINE_SYMBOL ZLIB_DLL)
 set_target_properties(zlib PROPERTIES SOVERSION 1)
+
+set(ZLIB_INCLUDE_DIR "${zlib_INC_DIR}" CACHE STRING "zlib include dir" FORCE)
+set(ZLIB_LIBRARY "zlib" CACHE INTERNAL "zlib library" FORCE)

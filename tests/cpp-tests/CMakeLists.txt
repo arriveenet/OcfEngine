@@ -14,6 +14,7 @@ list(APPEND GAME_HEADER
     ActionTest/ActionTest.h
     AudioEngineTest/AudioEngineTest.h
     ComponentTest/ComponentTest.h
+    EventTest/EventTest.h
     MeshRendererTest/MeshRendererTest.h
     SpriteTest/SpriteTest.h
     TiledMapTest/TiledMapTest.h
@@ -26,6 +27,7 @@ list(APPEND GAME_SOURCE
     ActionTest/ActionTest.cpp
     AudioEngineTest/AudioEngineTest.cpp
     ComponentTest/ComponentTest.cpp
+    EventTest/EventTest.cpp
     MeshRendererTest/MeshRendererTest.cpp
     SpriteTest/SpriteTest.cpp
     TiledMapTest/TiledMapTest.cpp

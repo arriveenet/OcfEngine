@@ -4,11 +4,9 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 add_library(thirdparty INTERFACE)
 
-set(ZLIB_INCLUDE_DIR "zlib/include")
-set(ZLIB_LIBRARY "zlib/lib/zlib.lib")
-
 add_subdirectory(glad)
 target_include_directories(thirdparty INTERFACE "glad/include")
+target_link_libraries(thirdparty INTERFACE glad)
 set_target_properties(glad
                       PROPERTIES
                       ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
@@ -20,6 +18,7 @@ set_target_properties(glad
 set(GLFW_BUILD_DOCS OFF)
 set(GLFW_INSTALL OFF)
 add_subdirectory(glfw)
+target_link_libraries(thirdparty INTERFACE glfw)
 target_include_directories(thirdparty INTERFACE "glfw/include")
 set_target_properties(glfw
                       PROPERTIES
@@ -45,6 +44,7 @@ set(ALSOFT_EXAMPLES OFF)
 set(ALSOFT_INSTALL OFF)
 add_subdirectory(OpenAL)
 target_include_directories(thirdparty INTERFACE "OpenAL/include")
+target_link_libraries(thirdparty INTERFACE OpenAL common ex-common)
 set_target_properties(OpenAL
                       common
                       ex-common
@@ -57,6 +57,7 @@ set_target_properties(OpenAL
 
 add_subdirectory(tinyobjloader)
 target_include_directories(thirdparty INTERFACE "tinyobjloader")
+target_link_libraries(thirdparty INTERFACE tinyobjloader)
 set_target_properties(tinyobjloader
                       PROPERTIES
                       ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
@@ -67,6 +68,7 @@ set_target_properties(tinyobjloader
 
 add_subdirectory(TinyXML2)
 target_include_directories(thirdparty INTERFACE "tinyxml2")
+target_link_libraries(thirdparty INTERFACE tinyxml2)
 set_target_properties(tinyxml2
                       PROPERTIES
                       ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
@@ -87,6 +89,7 @@ set_target_properties(xxhash
 
 add_subdirectory(zlib)
 target_include_directories(thirdparty INTERFACE "zlib")
+target_link_libraries(thirdparty INTERFACE zlib)
 set_target_properties(zlib
                       zlibstatic
                       PROPERTIES
@@ -98,6 +101,7 @@ set_target_properties(zlib
 
 add_subdirectory(libpng)
 target_include_directories(thirdparty INTERFACE "libpng")
+target_link_libraries(thirdparty INTERFACE libpng)
 set_target_properties(libpng
                       PROPERTIES
                       ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"

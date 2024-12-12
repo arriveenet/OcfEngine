@@ -17,19 +17,6 @@ set(PNG_PREFIX ""
 set(PNG_DEBUG_POSTFIX "d"
     CACHE STRING "Postfix to append to library file names under the Debug configuration")
 
-if(NOT PNG_BUILD_ZLIB)
-  find_package(ZLIB REQUIRED)
-elseif(POLICY CMP0074)
-  if("x${ZLIB_ROOT}" STREQUAL "x")
-    message(DEPRECATION
-            "The option PNG_BUILD_ZLIB has been deprecated; please use ZLIB_ROOT instead")
-  else()
-    message(SEND_ERROR
-            "The option PNG_BUILD_ZLIB=${PNG_BUILD_ZLIB} and "
-            "the variable ZLIB_ROOT=\"${ZLIB_ROOT}\" are mutually exclusive")
-  endif()
-endif()
-
 if(UNIX AND NOT APPLE AND NOT BEOS AND NOT HAIKU AND NOT EMSCRIPTEN)
   find_library(M_LIBRARY m)
   if(M_LIBRARY)
@@ -236,3 +223,5 @@ if(PNG_DEBUG)
 endif()
 
 add_library(libpng STATIC ${lib_srcs} ${lib_hdrs})
+target_include_directories(libpng PRIVATE ${ZLIB_INCLUDE_DIR})
+target_link_libraries(libpng ${ZLIB_LIBRARY})
