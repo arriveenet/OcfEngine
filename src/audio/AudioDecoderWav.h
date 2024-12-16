@@ -1,4 +1,5 @@
 #pragma once
+#include <string.h>
 #include "audio/AudioDecoder.h"
 
 #if !defined(_WIN32)

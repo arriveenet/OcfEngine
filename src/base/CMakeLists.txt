@@ -14,7 +14,7 @@ set(OCF_BASE_HEADER
     "base/GameObject.h"
     "base/Macros.h"
     "base/Rect.h"
-    "base/types.h"
+    "base/Types.h"
     )
 
 set(OCF_BASE_SRC

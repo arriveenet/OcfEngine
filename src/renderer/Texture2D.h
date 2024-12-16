@@ -1,6 +1,6 @@
 #pragma once
 #include "base/GameObject.h"
-#include "base/types.h"
+#include "base/Types.h"
 #include <glm/glm.hpp>
 #include <string>
 

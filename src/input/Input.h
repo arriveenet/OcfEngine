@@ -1,5 +1,5 @@
 #pragma once
-#include "base/types.h"
+#include "base/Types.h"
 #include "input/Keyboard.h"
 #include "input/Mouse.h"
 

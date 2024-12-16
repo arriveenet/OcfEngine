@@ -1,6 +1,6 @@
 #include <string>
 #include <glm/glm.hpp>
-#include "base/types.h"
+#include "base/Types.h"
 #include "base/GameObject.h"
 #include "base/Rect.h"
 

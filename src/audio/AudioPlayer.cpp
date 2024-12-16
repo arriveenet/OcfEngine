@@ -2,6 +2,7 @@
 #include "audio/AudioCache.h"
 #include "audio/AudioDecoder.h"
 #include "AudioDecoderManager.h"
+#include <string.h>
 #include <cassert>
 
 NS_OCF_BEGIN

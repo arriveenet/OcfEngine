@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <cassert>
+#include <string.h>
 #include "audio/AudioDecoderManager.h"
 #include "audio/AudioDecoder.h"
 #include <AL/alext.h>

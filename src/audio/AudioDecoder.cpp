@@ -1,4 +1,5 @@
 #include "AudioDecoder.h"
+#include <string.h>
 
 NS_OCF_BEGIN
 

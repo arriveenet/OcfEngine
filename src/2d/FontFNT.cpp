@@ -2,6 +2,7 @@
 #include "base/FileUtils.h"
 #include "base/Game.h"
 #include "renderer/TextureManager.h"
+#include <string.h>
 
 NS_OCF_BEGIN
 

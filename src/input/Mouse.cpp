@@ -1,5 +1,5 @@
 #include "Mouse.h"
-#include <GLFW/glfw3.h>
+#include "renderer/OpenGLInclude.h"
 
 NS_OCF_BEGIN
 

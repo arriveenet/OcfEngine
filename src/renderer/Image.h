@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "base/GameObject.h"
-#include "base/types.h"
+#include "base/Types.h"
 
 NS_OCF_BEGIN
 
@@ -26,7 +26,7 @@ public:
     int getHeight() { return m_height; }
     Format getFileType()const { return m_fileType; }
     PixelFormat getPixelFormat()const { return m_pixcelFormat; }
-    std::string getFilePath() const { m_filePath; }
+    std::string getFilePath() const { return m_filePath; }
 
 protected:
     Format detectFormat(const unsigned char* pData, size_t dataSize);

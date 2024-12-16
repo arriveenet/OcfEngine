@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <set>
+#include <stdint.h>
 #include "base/GameObject.h"
 
 NS_OCF_BEGIN

@@ -1,7 +1,7 @@
 #include "Keyboard.h"
+#include "renderer/OpenGLInclude.h"
 #include <cstring>
 #include <cstdio>
-#include <GLFW/glfw3.h>
 
 NS_OCF_BEGIN
 

@@ -1,5 +1,4 @@
 project(libpng
-        VERSION ${PNGLIB_VERSION}
         LANGUAGES C ASM)
 
 include(CheckCSourceCompiles)

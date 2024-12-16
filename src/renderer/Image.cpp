@@ -1,6 +1,6 @@
 #include "Image.h"
 #include <fstream>
-#include <Windows.h>
+#include <string.h>
 
 #include <png.h>
 

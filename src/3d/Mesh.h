@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "base/types.h"
+#include "base/Types.h"
 #include "base/GameObject.h"
 #include "renderer/MeshCommand.h"
 

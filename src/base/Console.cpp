@@ -2,7 +2,9 @@
 #include <string>
 #include <stdio.h>
 #include <stdarg.h>
+#ifdef _WIN32
 #include <Windows.h>
+#endif
 
 NS_OCF_BEGIN
 
@@ -20,6 +22,7 @@ static std::string vformat(const char* format, va_list ap)
 
 static void print_impl(std::string buf)
 {
+#ifdef _WIN32
     buf.push_back('\0');
 
     OutputDebugStringA(buf.c_str());
@@ -29,6 +32,7 @@ static void print_impl(std::string buf)
         DWORD ch = static_cast<DWORD>(buf.size());
         ::WriteConsoleA(hStdout, buf.c_str(), ch, nullptr, 0);
     }
+#endif
 }
 
 void print(const char* format, ...)

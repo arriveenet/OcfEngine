@@ -281,8 +281,8 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
 
     glm::vec2 windowSize = rect.m_size;
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, resizable ? GL_TRUE : GL_FALSE);
     glfwWindowHint(GLFW_RED_BITS, m_glContextAttributes.redBits);

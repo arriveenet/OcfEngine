@@ -84,9 +84,16 @@ static bool openWav(std::string_view filename, WavFile& wavFile)
 
 bool AudioDecoderWav::open(std::string_view filename)
 {
+#ifdef _WIN32
     if (fopen_s(&m_wavFile.pFile, filename.data(), "rb") != 0) {
         return false;
     }
+#else
+    m_wavFile.pFile = fopen64(filename.data(), "rb");
+    if (m_wavFile.pFile == nullptr) {
+        return false;
+    }
+#endif
 
     if (openWav(filename, m_wavFile)) {
        const WAVE_FMT_CHUNK& fmtInfo =  m_wavFile.fileHeader.fmt;
