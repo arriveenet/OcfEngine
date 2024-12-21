@@ -38,14 +38,14 @@ bool EventTest::init()
 void EventTest::onKeyPressed(Keyboard::KeyCode key, Event* pEvent)
 {
     char str[256];
-    sprintf(str, "Key pressed code: %d", (int)key);
+    snprintf(str, sizeof(str), "Key pressed code: %d", (int)key);
     m_pKeyboardLabel->setString(str);
 }
 
 void EventTest::onKeyReleased(ocf::Keyboard::KeyCode key, ocf::Event* pEvent)
 {
     char str[256];
-    sprintf(str, "Key released code: %d", (int)key);
+    snprintf(str, sizeof(str), "Key released code: %d", (int)key);
     m_pKeyboardLabel->setString(str);
 }
 
@@ -54,6 +54,6 @@ void EventTest::onMouseMove(ocf::Event* pEvent)
     EventMouse* mouseEvent = static_cast<EventMouse*>(pEvent);
 
     char str[256];
-    sprintf(str, "Mouse position: %.1f, %.1f", mouseEvent->getPosition().x, mouseEvent->getPosition().y);
+    snprintf(str, sizeof(str), "Mouse position: %.1f, %.1f", mouseEvent->getPosition().x, mouseEvent->getPosition().y);
     m_pMousePositionLabel->setString(str);
 }

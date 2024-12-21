@@ -24,7 +24,7 @@ bool ActionTest::init()
     std::vector<SpriteFrame*> animationFrames;
     char fileName[256] = { 0 };
     for (int i = 1; i < 14; i++) {
-        sprintf(fileName, "Unitychan_Walk_%d.png", i);
+        snprintf(fileName, sizeof(fileName), "Unitychan_Walk_%d.png", i);
         auto frame = SpriteFrameManager::getInstance()->getSpriteFrameByName(fileName);
         animationFrames.push_back(frame);
     }

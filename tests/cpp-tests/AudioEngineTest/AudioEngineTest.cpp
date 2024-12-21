@@ -70,7 +70,7 @@ bool AudioEngineTest::init()
         voluem += 0.1f;
         AudioEngine::setVolume(m_audioID, voluem);
         char str[128];
-        sprintf(str, "Volume: %f", AudioEngine::getVolume(m_audioID));
+        snprintf(str, sizeof(str), "Volume: %f", AudioEngine::getVolume(m_audioID));
         m_volumeLabel->setString(str);
         });
     addChild(voluemUp);
@@ -83,7 +83,7 @@ bool AudioEngineTest::init()
         voluem -= 0.1f;
         AudioEngine::setVolume(m_audioID, voluem);
         char str[128];
-        sprintf(str, "Volume: %f", AudioEngine::getVolume(m_audioID));
+        snprintf(str, sizeof(str), "Volume: %f", AudioEngine::getVolume(m_audioID));
         m_volumeLabel->setString(str);
         });
     addChild(voluemDown);
