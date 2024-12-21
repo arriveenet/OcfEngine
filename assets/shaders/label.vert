@@ -1,4 +1,4 @@
-#version 460
+#version 330
 
 // Uniforms for world transform and view-proj
 uniform mat4 uMVPMatrix;

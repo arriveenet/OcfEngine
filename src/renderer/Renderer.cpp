@@ -7,42 +7,6 @@
 
 NS_OCF_BEGIN
 
-#ifdef _DEBUG
-/**
- * @brief OpenGLデバッグメッセージのコールバック関数
- * 
- * @param[in] source
- * @param[in] type
- * @param[in] id
- * @param[in] severity
- * @param[in] length
- * @param[in] message
- * @param[in] user_param
- * 
- */
-static void debugMessageCallback(GLenum source, GLenum type, GLuint id,
-                                    GLenum severity, GLsizei length, 
-                                    GLchar const* message, void const* user_param)
-{
-    switch (severity) {
-    case GL_DEBUG_SEVERITY_HIGH:
-        printf("OpenGL: %s\n", message);
-        break;
-    case GL_DEBUG_SEVERITY_MEDIUM:
-        printf("OpenGL error: %s\n", message);
-        break;
-    case GL_DEBUG_SEVERITY_LOW:
-        printf("OpenGL warning: %s\n", message);
-        break;
-    case GL_DEBUG_SEVERITY_NOTIFICATION:
-        //printf("OpenGL info: %s\n", message);
-        break;
-    default:
-        break;
-    }
-}
-#endif
-
 Renderer::Renderer()
     : m_viewport(0, 0, 0, 0)
     , m_pTriangleBatchToDraw(nullptr)
@@ -90,13 +54,6 @@ bool Renderer::init()
     // アルファブレンディングを有効にする
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    // OpenGLのデバッグメッセージを有効にする
-#ifdef _DEBUG
-    glEnable(GL_DEBUG_OUTPUT);
-    glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-    glDebugMessageCallback(debugMessageCallback, nullptr);
-#endif
 
     return true;
 }

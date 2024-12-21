@@ -1,4 +1,4 @@
-#version 460
+#version 330
 
 uniform vec3 lightPosition;
 uniform vec3 viewPosition;

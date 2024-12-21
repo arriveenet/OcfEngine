@@ -22,6 +22,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     if (glView == nullptr) {
         glView = GLViewImpl::createWithRect("Ocf Engine", Rect(0, 0, windowWidth, windowHeight));
 
+        if (glView == nullptr) {
+            return false;
+        }
+
         // ウィンドウの位置をディスプレイの中央に設定
 #ifdef _WIN32
         const int displayWidth = GetSystemMetrics(SM_CXSCREEN);
