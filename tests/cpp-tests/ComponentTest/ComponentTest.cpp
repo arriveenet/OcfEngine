@@ -32,7 +32,7 @@ bool ComponentTest::init()
 
 Laser::Laser()
 {
-    initWithFile("textures\\Laser.png");
+    initWithFile("textures/Laser.png");
     m_pMoveComponent = new MoveComponent(this);
     m_pMoveComponent->setForwardSpeed(800.0f);
     addComponent(m_pMoveComponent);
@@ -69,7 +69,7 @@ void Laser::updateNode(float deltaTime)
 
 Asteroid::Asteroid()
 {
-    initWithFile("textures\\Asteroid.png");
+    initWithFile("textures/Asteroid.png");
     m_pMoveComponent = new MoveComponent(this);
     addComponent(m_pMoveComponent);
     m_pCircleComponent = new CircleComponent(this);
@@ -107,7 +107,7 @@ void Asteroid::updateNode(float deltaTime)
 
 Ship::Ship()
 {
-    initWithFile("textures\\Ship.png");
+    initWithFile("textures/Ship.png");
 
     m_pMoveComponent = new MoveComponent(this);
     addComponent(m_pMoveComponent);

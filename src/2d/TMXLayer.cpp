@@ -42,7 +42,7 @@ bool TMXLayer::init(TMXTilesetInfo* tilesetInfo, TMXLayerInfo* layerInfo, TMXMap
     m_layerSize = layerInfo->m_layerSize;
     m_pTiles = layerInfo->m_pTiles;
 
-    m_pTexture = m_pGame->getTextureManager()->addImage("tiledmap\\" + m_pTileset->m_imageSource);
+    m_pTexture = m_pGame->getTextureManager()->addImage("tiledmap/" + m_pTileset->m_imageSource);
 
     Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::Basic);
     m_quadCommand.getProgramState().setProgram(pProgram);

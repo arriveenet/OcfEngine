@@ -22,7 +22,7 @@ bool TiledMapTest::init()
         m_camera->setCameraFlag(CameraFlag::User1);
         addChild(m_camera);
 
-        auto tiledMap = TMXTiledMap::create("tiledmap\\test.tmx");
+        auto tiledMap = TMXTiledMap::create("tiledmap/test.tmx");
         addChild(tiledMap);
         return true;
     }

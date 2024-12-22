@@ -27,7 +27,7 @@ Program::Program(const std::string& vertexShader, const std::string& fragmentSha
     : m_uniformBufferSize(0)
 {
     // 頂点シェーダーと、フラグメントシェーダーを読み込む
-    const std::string shaderPath("shaders\\");
+    const std::string shaderPath("shaders/");
     auto fileUtils    = FileUtils::getInstance();
     auto vertexFile   = fileUtils->fullPathForFilename(shaderPath + vertexShader);
     auto fragmentFile = fileUtils->fullPathForFilename(shaderPath + fragmentShader);

@@ -154,9 +154,9 @@ bool FileUtils::init()
     m_defaultAssetsRootPath = checkAssetsPath();
     if (!m_defaultAssetsRootPath.empty()) {
         m_searchPathArray.emplace_back(m_defaultAssetsRootPath);
-        m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "\\fonts");
-        m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "\\shaders");
-        m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "\\textures");
+        m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "/fonts");
+        m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "/shaders");
+        m_searchPathArray.emplace_back(m_defaultAssetsRootPath + "/textures");
     }
 
     return true;
