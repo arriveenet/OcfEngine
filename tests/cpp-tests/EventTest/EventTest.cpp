@@ -6,6 +6,8 @@
 USING_NS_OCF;
 
 EventTest::EventTest()
+    : m_pKeyboardLabel(nullptr)
+    , m_pMousePositionLabel(nullptr)
 {
     setTestCaseName("EventTest");
 }
