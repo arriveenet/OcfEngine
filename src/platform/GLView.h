@@ -35,7 +35,9 @@ public:
 
     virtual void setFrameSize(float widht, float height);
 
-    virtual glm::vec2 getVisibleSize() const;
+    virtual void setViewport(float x, float y, float w, float h);
+
+    virtual glm::vec2 getWindowSize() const;
 
     virtual void setDesignResolutionSize(float width, float height);
 
@@ -57,9 +59,12 @@ protected:
     void updateDesignResolutionSize();
 
 protected:
-    glm::vec2 m_screenSize;             //!< 実際のスクリーンサイズ
+    glm::vec2 m_windowSize;             //!< ウィンドウサイズ
     glm::vec2 m_designResolutionSize;   //!< ゲーム内の解像度
     std::string m_viewName;             //!< ビューの名前
+    Rect m_viewportRect;                //!< ビューポートの矩形
+    float m_scaleX;
+    float m_scaleY;
 };
 
 NS_OCF_END

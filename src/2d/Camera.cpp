@@ -3,10 +3,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "platform/Application.h"
 #include "base/Game.h"
+#include "renderer/Renderer.h"
 
 NS_OCF_BEGIN
 
 Camera* Camera::s_pVisitingCamera = nullptr;
+glm::vec4 Camera::s_defaultViewport = glm::vec4(0.0f);
 
 Camera::Camera()
     : m_cameraFlag(CameraFlag::Default)
@@ -52,13 +54,23 @@ Camera* Camera::getVisitingCamera()
     return s_pVisitingCamera;
 }
 
+const glm::vec4& Camera::getDefaultViewpot()
+{
+    return s_defaultViewport;
+}
+
+void Camera::setDefaultViewport(const glm::vec4& viewport)
+{
+    s_defaultViewport = viewport;
+}
+
 Camera::~Camera()
 {
 }
 
 bool Camera::init()
 {
-    glm::ivec2 size = m_pGame->getWindowSize();
+    glm::ivec2 size = m_pGame->getResolutionSize();
     switch (m_pGame->getProjection()) {
         case Game::Projection::_3D:
         {
@@ -167,6 +179,14 @@ void Camera::onExit()
     Node::onExit();
 }
 
+void Camera::apply()
+{
+    m_pGame->getRenderer()->setViewPort(static_cast<int>(s_defaultViewport.x),
+                                        static_cast<int>(s_defaultViewport.y),
+                                        static_cast<int>(s_defaultViewport.z),
+                                        static_cast<int>(s_defaultViewport.w));
+}
+
 void Camera::setScene(Scene* scene)
 {
     if (m_scene != scene) {
@@ -193,7 +213,7 @@ void Camera::setScene(Scene* scene)
 
 glm::vec3 Camera::unProjectGL(const glm::vec3& src) const
 {
-    const glm::vec2& size = m_pGame->getWindowSize();
+    const glm::vec2& size = m_pGame->getResolutionSize();
     glm::vec4 viewport(0.0f, 0.0f, size.x, size.y);
 
     return glm::unProject(src, m_view, m_projection, viewport);

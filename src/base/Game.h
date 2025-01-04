@@ -76,7 +76,7 @@ public:
      * @brief ウィンドウサイズを取得する
      * @return ウィンドウサイズ
      */
-    const glm::vec2& getWindowSize() const;
+    const glm::vec2& getResolutionSize() const;
 
     /**
      * @brief カメラと近くのクリッピング フレーム間の距離を取得
@@ -95,6 +95,11 @@ public:
      * @return 投影方法
      */
     Projection getProjection() const { return m_projection; }
+
+    /**
+     * @brief ビューポートを設定する
+     */
+    void setViewport();
 
     /**
      * @brief レンダラーを取得する
@@ -208,7 +213,8 @@ private:
     float m_accumulator = 0.0f;
     float m_frameRate = 0.0f;
 
-    glm::vec2 m_windowSizeInPoints;
+    glm::vec2 m_windowSize;
+    glm::vec2 m_resolutionSize;
 
     Renderer* m_renderer;
     Scene* m_currentScene;

@@ -353,7 +353,7 @@ void GLViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, int a
 void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* window, double xpos, double ypos)
 {
     m_mousePosition.x = static_cast<float>(xpos);
-    m_mousePosition.y = static_cast<float>(m_screenSize.y - ypos);
+    m_mousePosition.y = static_cast<float>(m_windowSize.y - ypos);
 
     EventMouse mouseEvent(EventMouse::MouseEventType::Move);
     mouseEvent.setPosition(static_cast<float>(xpos), static_cast<float>(ypos));

@@ -29,7 +29,7 @@ TMXTilesetInfo::~TMXTilesetInfo()
 {
 }
 
-Rect TMXTilesetInfo::getRectForGID(uint32_t gid)
+Rect TMXTilesetInfo::getRectForGID(uint32_t gid) const
 {
     Rect rect;
     rect.m_size = m_tileSize;

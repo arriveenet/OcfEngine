@@ -39,7 +39,7 @@ public:
     TMXTilesetInfo();
     virtual ~TMXTilesetInfo();
 
-    Rect getRectForGID(uint32_t gid);
+    Rect getRectForGID(uint32_t gid) const;
 
 public:
     std::string m_name;

@@ -23,7 +23,8 @@ Game::Game()
     , m_deltaTime(0.0f)
     , m_lastUpdate()
     , m_projection(Projection::_3D)
-    , m_windowSizeInPoints(0, 0)
+    , m_windowSize(0.0f, 0.0f)
+    , m_resolutionSize(0.0f, 0.0f)
     , m_renderer(nullptr)
     , m_currentScene(nullptr)
     , m_nextScene(nullptr)
@@ -161,40 +162,52 @@ void Game::setNextScene()
 glm::vec2 Game::getVisibleSize() const
 {
     if (m_glView) {
-        return m_glView->getVisibleSize();
+        return m_glView->getDesignResolutionSize();
     }
 
     return glm::vec2(0, 0);
 }
 
-const glm::vec2& Game::getWindowSize() const
+const glm::vec2& Game::getResolutionSize() const
 {
-    return m_windowSizeInPoints;
+    return m_resolutionSize;
 }
 
 float Game::getZEye() const
 {
     // FOV‚ª60‹‚Ìê‡‚Ì‹——£
-    return (m_glView->getVisibleSize().y / 1.154700538379252f);	//(2 * tanf(M_PI/6))
+    return (m_resolutionSize.y / 1.154700538379252f);	//(2 * tanf(M_PI/6))
 }
 
 void Game::setProjection(Projection projection)
 {
-    m_projection = projection;
+    const glm::vec2 size = m_resolutionSize;
+
+    if (size.x == 0 || size.y == 0) {
+        OCFLOG("failed because size is 0");
+        return;
+    }
+
+    setViewport();
 
     switch (projection) {
     case ocf::Game::Projection::_2D:
 
         break;
     case ocf::Game::Projection::_3D:
-
+        loadIdentityMatrix(MatrixStack::ModelView);
         break;
     default:
         break;
     }
 
-    if (m_currentScene) {
-        m_currentScene->getDefaultCamera()->init();
+    m_projection = projection;
+}
+
+void Game::setViewport()
+{
+    if (m_glView != nullptr) {
+        m_glView->setViewport(0, 0, m_resolutionSize.x, m_resolutionSize.y);
     }
 }
 

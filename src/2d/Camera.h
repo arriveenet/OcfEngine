@@ -28,6 +28,9 @@ public:
 
     static Camera* getVisitingCamera();
 
+    static const glm::vec4& getDefaultViewpot();
+    static void setDefaultViewport(const glm::vec4& viewport);
+
     Camera();
     ~Camera();
 
@@ -49,12 +52,15 @@ public:
     void onEnter() override;
     void onExit() override;
 
+    void apply();
+
     void setScene(Scene* scene);
 
     glm::vec3 unProjectGL(const glm::vec3& src) const;
 
 protected:
     static Camera* s_pVisitingCamera;
+    static glm::vec4 s_defaultViewport;
     CameraFlag m_cameraFlag;
     glm::mat4 m_projection;
     glm::vec3 m_center;
