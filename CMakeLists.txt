@@ -16,6 +16,18 @@ project ("OcfEngine")
 
 set(OCF_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
+if (CMAKE_GENERATOR MATCHES "Visual Studio")
+    set(VS TRUE)
+else()
+    set(VS FALSE)
+endif()
+
+if (CMAKE_GENERATOR MATCHES "Xcode")
+    set(XCODE TRUE)
+else()
+    set(XCODE FALSE)
+endif()
+
 option(OCF_BUILD_TESTS "Build cpp-tests" ON)
 
 # サブプロジェクトを含めます。

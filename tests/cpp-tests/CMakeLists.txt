@@ -44,6 +44,15 @@ set(all_code_files
 
 add_executable(${APP_NAME} ${all_code_files})
 
+if(XCODE OR VS)
+    foreach(_source IN ITEMS ${all_code_files})
+        get_filename_component(_source_path "${_source}" PATH)
+        string(REPLACE "${CMAKE_SOURCE_DIR}" "" _group_path "${_source_path}")
+        string(REPLACE "/" "\\" _group_path "${_group_path}")
+        source_group("${_group_path}" FILES "${_source}")
+    endforeach()
+endif()
+
 target_link_libraries(${APP_NAME} ocfengine)
 
 target_include_directories(${APP_NAME} PRIVATE ${GAME_INC_DIRS})

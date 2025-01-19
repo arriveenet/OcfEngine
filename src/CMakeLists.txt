@@ -47,6 +47,15 @@ add_library(${_OCF_ENGINE_LIB} ${OCF_SRC})
 add_subdirectory(${OCF_ROOT_PATH}/third_party ${ENGINE_BINARY_PATH}/thirdparty)
 target_link_libraries(${_OCF_ENGINE_LIB} thirdparty)
 
+if(XCODE OR VS)
+    foreach(_source IN ITEMS ${OCF_SRC})
+        get_filename_component(_source_path "${_source}" PATH)
+        string(REPLACE "${CMAKE_SOURCE_DIR}" "" _group_path "${_source_path}")
+        string(REPLACE "/" "\\" _group_path "${_group_path}")
+        source_group("${_group_path}" FILES "${_source}")
+    endforeach()
+endif()
+
 target_include_directories(${_OCF_ENGINE_LIB}
     PUBLIC ${OCF_ROOT_PATH}
     PUBLIC ${OCF_ROOT_PATH}/src
