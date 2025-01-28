@@ -1,5 +1,4 @@
 #include "AudioEngineTest.h"
-#include "ui/UISlider.h"
 
 USING_NS_OCF;
 using namespace ocf::ui;
@@ -90,10 +89,6 @@ bool AudioEngineTest::init()
         m_volumeLabel->setString(str);
         });
     addChild(voluemDown);
-
-    auto slider = Slider::create("SliderBar.png", "SliderThumb.png");
-    slider->setPosition(leftX, 200);
-    addChild(slider);
 
     return true;
 }
