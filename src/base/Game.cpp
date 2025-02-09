@@ -162,7 +162,7 @@ void Game::setNextScene()
 glm::vec2 Game::getVisibleSize() const
 {
     if (m_glView) {
-        return m_glView->getDesignResolutionSize();
+        return m_glView->getWindowSize();
     }
 
     return glm::vec2(0, 0);

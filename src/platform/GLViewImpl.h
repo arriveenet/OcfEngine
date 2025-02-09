@@ -24,6 +24,7 @@ public:
     void setWindowPosition(int xpos, int ypos);
 
     glm::vec2 getMousePosition() const { return m_mousePosition; }
+    void setCursolPosition(float x, float y);
 
 protected:
     GLViewImpl(bool initGlfw = true);
@@ -41,6 +42,7 @@ protected:
 protected:
     GLFWwindow* m_pMainWindow;
     glm::vec2 m_mousePosition;
+    glm::vec2 m_lastMousePosition;
 };
 
 NS_OCF_END

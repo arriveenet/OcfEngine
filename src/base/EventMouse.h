@@ -23,11 +23,13 @@ public:
     void setPosition(float x, float y) { m_position.x = x, m_position.y = y; }
     void setPosition(const glm::vec2& position) { m_position = position; }
     glm::vec2 getPosition() const { return m_position; }
+    glm::vec2 getDelta() const;
 
 
     MouseEventType m_mouseEventType;
     Mouse::MouseButton m_mouseButton;
     glm::vec2 m_position;
+    glm::vec2 m_lastPosition;
 };
 
 NS_OCF_END
