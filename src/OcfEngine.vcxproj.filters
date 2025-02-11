@@ -276,6 +276,9 @@
     <ClCompile Include="base\EventListenerMouse.cpp">
       <Filter>ソース ファイル\base</Filter>
     </ClCompile>
+    <ClCompile Include="3d\FirstPersonCamera.cpp">
+      <Filter>ソース ファイル\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer\Image.h">
@@ -511,6 +514,9 @@
     </ClInclude>
     <ClInclude Include="base\EventListenerMouse.h">
       <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\FirstPersonCamera.h">
+      <Filter>ヘッダー ファイル\3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

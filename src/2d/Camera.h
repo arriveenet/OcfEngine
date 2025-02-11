@@ -35,14 +35,14 @@ public:
     ~Camera();
 
     bool init() override;
-    bool initPerspective(float fovy, float aspect, float zNear, float zFar);
-    bool initOrthographic(float width, float height, float zNear = -1.0f, float zFar = 1.0f);
+    virtual bool initPerspective(float fovy, float aspect, float zNear, float zFar);
+    virtual bool initOrthographic(float width, float height, float zNear = -1.0f, float zFar = 1.0f);
 
     virtual void lookAt(const glm::vec3& center, const glm::vec3& up = glm::vec3(0, 1, 0));
 
-    const glm::mat4 getProjectionMatrix() const;
-    const glm::mat4 getViewMatrix() const;
-    const glm::mat4 getViewProjectionMatrix() const;
+    virtual const glm::mat4 getProjectionMatrix() const;
+    virtual const glm::mat4 getViewMatrix() const;
+    virtual const glm::mat4 getViewProjectionMatrix() const;
 
     Camera::Type getType() const { return m_type; }
 

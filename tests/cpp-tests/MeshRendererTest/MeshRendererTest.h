@@ -1,5 +1,6 @@
 #pragma once
 #include "../BaseTest.h"
+#include "3d/FirstPersonCamera.h"
 
 class MeshRendererTest : public TestCase {
 public:
@@ -10,5 +11,6 @@ public:
     
     void updateNode(float deltaTime) override;
 
-    ocf::Camera* m_pCamera;
+    ocf::FirstPersonCamera* m_pCamera;
+    ocf::Label* m_pStatusLabel;
 };

@@ -225,6 +225,7 @@ void GLViewImpl::end()
 GLViewImpl::GLViewImpl(bool initGlfw)
     : m_pMainWindow(nullptr)
     , m_mousePosition(0, 0)
+    , m_lastMousePosition(0, 0)
 {
     g_keyCodeMap.clear();
     for (auto&& item : g_keyCodeStructArray) {
@@ -272,6 +273,13 @@ void GLViewImpl::setWindowPosition(int xpos, int ypos)
 {
     if (m_pMainWindow != nullptr) {
         glfwSetWindowPos(m_pMainWindow, xpos, ypos);
+    }
+}
+
+void GLViewImpl::setCursolPosition(float x, float y)
+{
+    if (m_pMainWindow != nullptr) {
+        glfwSetCursorPos(m_pMainWindow, x, y);
     }
 }
 
@@ -354,6 +362,8 @@ void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* window, double xpos, double
 {
     m_mousePosition.x = static_cast<float>(xpos);
     m_mousePosition.y = static_cast<float>(m_windowSize.y - ypos);
+
+    m_lastMousePosition = m_mousePosition;
 
     EventMouse mouseEvent(EventMouse::MouseEventType::Move);
     mouseEvent.setPosition(static_cast<float>(xpos), static_cast<float>(ypos));
