@@ -187,6 +187,7 @@
     <ClCompile Include="3d\FirstPersonCamera.cpp" />
     <ClCompile Include="3d\Mesh.cpp" />
     <ClCompile Include="3d\MeshRenderer.cpp" />
+    <ClCompile Include="3d\Skybox.cpp" />
     <ClCompile Include="audio\AudioCache.cpp" />
     <ClCompile Include="audio\AudioDecoder.cpp" />
     <ClCompile Include="audio\AudioDecoderManager.cpp" />
@@ -229,6 +230,7 @@
     <ClCompile Include="renderer\ShaderManager.cpp" />
     <ClCompile Include="renderer\Texture2D.cpp" />
     <ClCompile Include="renderer\TextureAtlas.cpp" />
+    <ClCompile Include="renderer\TextureCube.cpp" />
     <ClCompile Include="renderer\TextureManager.cpp" />
     <ClCompile Include="renderer\TrianglesCommand.cpp" />
     <ClCompile Include="renderer\VertexArray.cpp" />
@@ -261,6 +263,7 @@
     <ClInclude Include="3d\FirstPersonCamera.h" />
     <ClInclude Include="3d\Mesh.h" />
     <ClInclude Include="3d\MeshRenderer.h" />
+    <ClInclude Include="3d\Skybox.h" />
     <ClInclude Include="audio\AudioCache.h" />
     <ClInclude Include="audio\AudioDecoder.h" />
     <ClInclude Include="audio\AudioDecoderManager.h" />
@@ -309,6 +312,7 @@
     <ClInclude Include="renderer\ShaderManager.h" />
     <ClInclude Include="renderer\Texture2D.h" />
     <ClInclude Include="renderer\TextureAtlas.h" />
+    <ClInclude Include="renderer\TextureCube.h" />
     <ClInclude Include="renderer\TextureManager.h" />
     <ClInclude Include="renderer\TrianglesCommand.h" />
     <ClInclude Include="renderer\Types.h" />
@@ -330,6 +334,8 @@
     <None Include="..\assets\shaders\position.vert" />
     <None Include="..\assets\shaders\positionTexture.frag" />
     <None Include="..\assets\shaders\positionTexture.vert" />
+    <None Include="..\assets\shaders\skybox.frag" />
+    <None Include="..\assets\shaders\skybox.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

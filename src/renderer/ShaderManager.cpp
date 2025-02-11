@@ -69,6 +69,9 @@ bool ShaderManager::init()
     program = new Program("phong.vert", "phong.frag");
     m_programs.emplace(ProgramType::Phong, program);
 
+    program = new Program("skybox.vert", "skybox.frag");
+    m_programs.emplace(ProgramType::Skybox, program);
+
     return true;
 }
 

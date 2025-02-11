@@ -279,6 +279,12 @@
     <ClCompile Include="3d\FirstPersonCamera.cpp">
       <Filter>ソース ファイル\3d</Filter>
     </ClCompile>
+    <ClCompile Include="3d\Skybox.cpp">
+      <Filter>ソース ファイル\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\TextureCube.cpp">
+      <Filter>ソース ファイル\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer\Image.h">
@@ -518,6 +524,12 @@
     <ClInclude Include="3d\FirstPersonCamera.h">
       <Filter>ヘッダー ファイル\3d</Filter>
     </ClInclude>
+    <ClInclude Include="3d\Skybox.h">
+      <Filter>ヘッダー ファイル\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\TextureCube.h">
+      <Filter>ヘッダー ファイル\renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\assets\shaders\basic.frag">
@@ -554,6 +566,12 @@
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="..\assets\shaders\phong.vert">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="..\assets\shaders\skybox.frag">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="..\assets\shaders\skybox.vert">
       <Filter>リソース ファイル</Filter>
     </None>
   </ItemGroup>

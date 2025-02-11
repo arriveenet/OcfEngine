@@ -114,6 +114,7 @@ bool Image::loadImageData(const unsigned char* pData, size_t dataSize)
         break;
     case Format::PNG:
         result = initWidhtPngData(pData, dataSize);
+        break;
     default:
         break;
     }

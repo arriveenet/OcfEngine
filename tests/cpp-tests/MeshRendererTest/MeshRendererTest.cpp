@@ -1,6 +1,7 @@
 #include "MeshRendererTest.h"
 #include "base/EventKeyboard.h"
 #include "base/EventListenerKeyboard.h"
+#include "3d/Skybox.h"
 
 USING_NS_OCF;
 
@@ -51,6 +52,15 @@ bool MeshRendererTest::init()
        };
 
    m_pGame->getEventDispatcher()->addEventListener(keyboardListener, this);
+
+   Skybox* skybox = Skybox::create("skybox/right.png",
+                                   "skybox/left.png",
+                                   "skybox/top.png",
+                                   "skybox/bottom.png",
+                                   "skybox/front.png",
+                                   "skybox/back.png");
+   skybox->setCameraMask((uint16_t)CameraFlag::User1);
+   addChild(skybox);
 
     return true;
 }

@@ -9,6 +9,7 @@ VertexArray::VertexArray()
     , m_vertexBuffer(nullptr)
     , m_indexBuffer(nullptr)
     , m_isVertexBufferCreated(false)
+    , m_isIndexBufferCreated(false)
     , m_stride(0)
 {
     glGenVertexArrays(1, &m_vertexArray);
@@ -47,6 +48,8 @@ void VertexArray::createVertexBuffer(BufferUsage usage)
 void VertexArray::createIndexBuffer(BufferUsage usage)
 {
     OCF_SAFE_DELETE(m_indexBuffer);
+
+    m_isIndexBufferCreated = true;
 
     m_indexBuffer = new VertexBuffer(BufferType::Index, usage);
 }

@@ -12,6 +12,7 @@ enum class ProgramType : uint32_t {
     PositionTexture,
     Position3D,
     Phong,
+    Skybox,
     Max
 };
 

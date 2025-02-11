@@ -92,6 +92,20 @@ public:
      */
     void setAttribute(const std::string& name, int index, int size, bool needToBeNormallized, std::size_t offset);
 
+    /**
+     * @brief 頂点バッファが作成されているかどうかを返す
+     * @retval true 頂点バッファが作成されている
+     * @retval false 頂点バッファが作成されていない
+     */
+    bool isVertexBufferCreated() const { return m_isVertexBufferCreated; }
+
+    /**
+     * @brief インデックスバッファが作成されているかどうかを返す
+     * @retval true インデックスバッファが作成されている
+     * @retval false インデックスバッファが作成されていない
+     */
+    bool isIndexBufferCreated() const { return m_isIndexBufferCreated; }
+
 private:
     GLuint m_vertexArray;
 
@@ -102,6 +116,7 @@ private:
     unsigned int m_indexCount;
 
     bool m_isVertexBufferCreated;
+    bool m_isIndexBufferCreated;
 
     std::size_t m_stride;
     std::unordered_map<std::string, Attribute> m_attributes;
