@@ -13,6 +13,8 @@ public:
         Backward,
         Left,
         Right,
+        Up,
+        Down
     };
 
     static FirstPersonCamera* create(float fovy, float aspect, float zNear, float zFar);
@@ -54,7 +56,7 @@ protected:
     glm::vec3 m_up;
     glm::vec3 m_worldUp;
     glm::vec3 m_right;
-    bool m_keyStates[4];
+    bool m_keyStates[6];
     bool m_isCameraControl;
 
 };

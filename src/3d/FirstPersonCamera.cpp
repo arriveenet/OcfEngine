@@ -64,18 +64,25 @@ void FirstPersonCamera::updateNode(float deltaTime)
     }
 
     const float velocity = m_moveSpeed * deltaTime;
+    const glm::vec3 direction = glm::vec3(m_front.x, 0.0f, m_front.z);
 
     if (m_keyStates[static_cast<int>(Movement::Forward)]) {
-        m_position += m_front * velocity;
+        m_position += direction * velocity;
     }
     if (m_keyStates[static_cast<int>(Movement::Backward)]) {
-        m_position -= m_front * velocity;
+        m_position -= direction * velocity;
     }
     if (m_keyStates[static_cast<int>(Movement::Left)]) {
         m_position -= m_right * velocity;
     }
     if (m_keyStates[static_cast<int>(Movement::Right)]) {
         m_position += m_right * velocity;
+    }
+    if (m_keyStates[static_cast<int>(Movement::Up)]) {
+        m_position.y += 1.0f * velocity;
+    }
+    if (m_keyStates[static_cast<int>(Movement::Down)]) {
+        m_position.y -= 1.0f * velocity;
     }
 }
 
@@ -100,6 +107,11 @@ void FirstPersonCamera::onMouseMove(Event* pEvent)
         m_yaw += xOffset;
         m_pitch += yOffset;
 
+        // ヨー角度の制限
+        if (m_yaw > 360.0f || m_yaw < -360.0f) {
+            m_yaw = 0.0f;
+        }
+
         // ピッチ角度の制限
         m_pitch = glm::clamp(m_pitch, -89.0f, 89.0f);
     }
@@ -123,6 +135,12 @@ void FirstPersonCamera::onKeyPressed(Keyboard::KeyCode key, Event* /* pEvent */)
     else if (key == Keyboard::KeyCode::KEY_D) {
         m_keyStates[static_cast<int>(Movement::Right)] = true;
     }
+    else if (key == Keyboard::KeyCode::KEY_SPACE) {
+        m_keyStates[static_cast<int>(Movement::Up)] = true;
+    }
+    else if (key == Keyboard::KeyCode::KEY_X) {
+        m_keyStates[static_cast<int>(Movement::Down)] = true;
+    }
 }
 
 void FirstPersonCamera::onKeyReleased(Keyboard::KeyCode key, Event* /* pEvent */)
@@ -139,11 +157,17 @@ void FirstPersonCamera::onKeyReleased(Keyboard::KeyCode key, Event* /* pEvent */
     else if (key == Keyboard::KeyCode::KEY_D) {
         m_keyStates[static_cast<int>(Movement::Right)] = false;
     }
+    else if (key == Keyboard::KeyCode::KEY_SPACE) {
+        m_keyStates[static_cast<int>(Movement::Up)] = false;
+    }
+    else if (key == Keyboard::KeyCode::KEY_X) {
+        m_keyStates[static_cast<int>(Movement::Down)] = false;
+    }
 }
 
 const glm::mat4 FirstPersonCamera::getViewMatrix() const
 {
-    glm::mat4 view = glm::lookAt(m_position, m_position + m_front, glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 view = glm::lookAt(m_position, m_position + m_front, m_worldUp);
     if (view != m_view) {
         m_viewProjectionDirty = true;
         m_view = view;
