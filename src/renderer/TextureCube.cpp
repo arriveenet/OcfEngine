@@ -72,7 +72,7 @@ bool TextureCube::init(std::string_view positive_x,
     }
 
     glGenTextures(1, &m_textureId);
-    glBindTexture(GL_TEXTURE_2D, m_textureId);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureId);
 
     for (int i = 0; i < 6; i++) {
         Image* image = images[i];
@@ -92,7 +92,7 @@ bool TextureCube::init(std::string_view positive_x,
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
     for (auto&& image : images)
     {
@@ -100,6 +100,12 @@ bool TextureCube::init(std::string_view positive_x,
     }
 
     return true;
+}
+
+void TextureCube::setActive() const
+{
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureId);
 }
 
 Image* TextureCube::createImage(std::string_view filename)

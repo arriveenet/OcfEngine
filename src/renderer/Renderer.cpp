@@ -3,6 +3,7 @@
 #include "renderer/OpenGLInclude.h"
 #include "renderer/OpenGLUtility.h"
 #include "renderer/CustomCommand.h"
+#include "renderer/TextureCube.h"
 #include <glm/gtc/type_ptr.hpp>
 
 NS_OCF_BEGIN
@@ -298,6 +299,11 @@ void Renderer::drawCustomCommand(RenderCommand* command)
 
     char* buffer = programState.getUniformBuffers();
     pProgram->bindUniformBuffers(buffer);
+
+    TextureCube* pTextureCube = cmd->getTextureCube();
+    if (pTextureCube) {
+        pTextureCube->setActive();
+    }
 
     cmd->getVertexArray()->bind();
 

@@ -4,6 +4,8 @@
 
 NS_OCF_BEGIN
 
+class TextureCube;
+
 class CustomCommand : public RenderCommand {
 public:
     enum class DrawType {
@@ -40,12 +42,17 @@ public:
     unsigned int getIndexDrawCount() const { return m_indexDrawCount; }
     unsigned int getIndexDrawOffset() const { return m_indexDrawOffset; }
 
+    void setTextureCube(TextureCube* textureCube) { m_textureCube = textureCube; }
+    TextureCube* getTextureCube() const { return m_textureCube; }
+
 protected:
     VertexArray* m_pVertexArray;
     unsigned int m_vertexDrawStart;
     unsigned int m_vertexDrawCount;
     unsigned int m_indexDrawOffset;
     unsigned int m_indexDrawCount;
+
+    TextureCube* m_textureCube;
 
     DrawType m_drawType;
     PrimitiveType m_primitiveType;

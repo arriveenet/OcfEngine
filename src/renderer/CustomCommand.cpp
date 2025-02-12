@@ -9,6 +9,7 @@ CustomCommand::CustomCommand()
     , m_vertexDrawCount(0)
     , m_indexDrawOffset(0)
     , m_indexDrawCount(0)
+    , m_textureCube(nullptr)
 {
     m_Type = Type::CustomCommand;
     m_pVertexArray = new VertexArray();

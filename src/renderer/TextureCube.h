@@ -27,6 +27,8 @@ public:
               std::string_view positive_z,
               std::string_view negative_z);
 
+    void setActive() const;
+
 protected:
     Image* createImage(std::string_view filename);
 

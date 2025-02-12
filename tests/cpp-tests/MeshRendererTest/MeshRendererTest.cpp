@@ -27,6 +27,15 @@ bool MeshRendererTest::init()
     m_pCamera->setPosition(-5, 3, -8);
     addChild(m_pCamera);
 
+    Skybox* skybox = Skybox::create("skybox/right.png",
+        "skybox/left.png",
+        "skybox/top.png",
+        "skybox/bottom.png",
+        "skybox/front.png",
+        "skybox/back.png");
+    skybox->setCameraMask((uint16_t)CameraFlag::User1);
+    addChild(skybox);
+
     DrawShape* shape = DrawShape::create();
     shape->drawLine(glm::vec3(0, 0, 0), glm::vec3(100, 0, 0), Color4f::RED);
     shape->drawLine(glm::vec3(0, 0, 0), glm::vec3(0, 100, 0), Color4f::GREEN);
@@ -52,15 +61,6 @@ bool MeshRendererTest::init()
        };
 
    m_pGame->getEventDispatcher()->addEventListener(keyboardListener, this);
-
-   Skybox* skybox = Skybox::create("skybox/right.png",
-                                   "skybox/left.png",
-                                   "skybox/top.png",
-                                   "skybox/bottom.png",
-                                   "skybox/front.png",
-                                   "skybox/back.png");
-   skybox->setCameraMask((uint16_t)CameraFlag::User1);
-   addChild(skybox);
 
     return true;
 }

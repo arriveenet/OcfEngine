@@ -2,6 +2,53 @@
 #include "2d/Camera.h"
 #include "renderer/Renderer.h"
 #include "renderer/ShaderManager.h"
+#include <glm/gtc/matrix_transform.hpp>
+
+namespace {
+    float skyboxVertices[] = {
+        -1.0f,  1.0f, -1.0f,
+        -1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+
+        -1.0f, -1.0f,  1.0f,
+        -1.0f, -1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f,  1.0f,
+        -1.0f, -1.0f,  1.0f,
+
+         1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+
+        -1.0f, -1.0f,  1.0f,
+        -1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f, -1.0f,  1.0f,
+        -1.0f, -1.0f,  1.0f,
+
+        -1.0f,  1.0f, -1.0f,
+         1.0f,  1.0f, -1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+        -1.0f,  1.0f,  1.0f,
+        -1.0f,  1.0f, -1.0f,
+
+        -1.0f, -1.0f, -1.0f,
+        -1.0f, -1.0f,  1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+        -1.0f, -1.0f,  1.0f,
+         1.0f, -1.0f,  1.0f
+    };
+}
 
 NS_OCF_BEGIN
 
@@ -41,6 +88,12 @@ bool Skybox::init(std::string_view positive_x,
                   std::string_view negative_z)
 {
     m_textureCube = TextureCube::create(positive_x, negative_x, positive_y, negative_y, positive_z, negative_z);
+    if (!m_textureCube)
+    {
+        return false;
+    }
+
+    m_customCommand.setTextureCube(m_textureCube);
 
     Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::Skybox);
 
@@ -56,33 +109,23 @@ bool Skybox::init(std::string_view positive_x,
 
 void Skybox::initBuffer()
 {
-    glm::vec3 vertexBuffer[] = {
-        glm::vec3( 1, -1, -1),
-        glm::vec3( 1,  1, -1),
-        glm::vec3(-1,  1, -1),
-        glm::vec3(-1, -1, -1),
-    };
-
-    unsigned short indexBuffer[] = { 0,1,2,0,2,3 };
+    m_customCommand.setDrawType(CustomCommand::DrawType::Array);
+    m_customCommand.setPrimitiveType(PrimitiveType::Triangle);
 
     VertexArray* vertexArray = m_customCommand.getVertexArray();
     vertexArray->bind();
 
     vertexArray->createVertexBuffer(BufferUsage::Static);
-    vertexArray->updateVertexBuffer(vertexBuffer, sizeof(vertexBuffer));
-
-    vertexArray->createIndexBuffer(BufferUsage::Static);
-    vertexArray->updateIndexBuffer(indexBuffer, sizeof(indexBuffer));
+    vertexArray->updateVertexBuffer(skyboxVertices, sizeof(skyboxVertices));
 
     vertexArray->setAttribute("inPosition", 0, 3, false, 0);
 
-    vertexArray->setStride(sizeof(glm::vec3));
+    vertexArray->setStride(sizeof(float) * 3);
     vertexArray->bindVertexBuffer();
 
     vertexArray->unbind();
 
-    m_customCommand.setVertexDrawInfo(0, 4);
-    m_customCommand.setIndexDrawInfo(0, 6);
+    m_customCommand.setVertexDrawInfo(0, 36);
 }
 
 void Skybox::draw(Renderer* renderer, const glm::mat4& transform)
@@ -90,9 +133,13 @@ void Skybox::draw(Renderer* renderer, const glm::mat4& transform)
     m_customCommand.init(m_globalZOrder, transform);
 
     Camera* camera = Camera::getVisitingCamera();
+
+    glm::mat4 viewMatrix = glm::mat4(glm::mat3(camera->getViewMatrix()));
+    glm::mat4 projection = camera->getProjectionMatrix();
+    glm::mat4 viewProjection = projection * viewMatrix;
+
     auto& programState = m_customCommand.getProgramState();
-    glm::mat4 projection = camera->getViewProjectionMatrix();
-    programState.setUniform("uMVPMatrix", &projection, sizeof(glm::mat4));
+    programState.setUniform("uMVPMatrix", &viewProjection, sizeof(viewProjection));
 
     renderer->addCommand(&m_customCommand);
 }
