@@ -40,23 +40,23 @@ Game::~Game()
     OCF_SAFE_RELEASE(m_pDrawCallLabel);
     OCF_SAFE_RELEASE(m_pDrawVertexLabel);
 
-    // ƒV[ƒ“‚ğ‰ğ•ú
+    // ã‚·ãƒ¼ãƒ³ã‚’è§£æ”¾
     OCF_SAFE_RELEASE(m_currentScene);
 
-    // ƒeƒNƒXƒ`ƒƒ[ƒ}ƒl[ƒWƒƒ[‚ğ‰ğ•ú
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‚’è§£æ”¾
     OCF_SAFE_RELEASE(m_textureManager);
 
-    // ƒCƒxƒ“ƒgƒfƒBƒXƒpƒbƒ`ƒƒ‚ğ‰ğ•ú
+    // ã‚¤ãƒ™ãƒ³ãƒˆãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒãƒ£ã‚’è§£æ”¾
     OCF_SAFE_RELEASE(m_eventDispatcher);
 
-    // ƒtƒ@ƒCƒ‹ƒ†[ƒeƒBƒŠƒeƒB‚ğ‰ğ•ú
+    // ãƒ•ã‚¡ã‚¤ãƒ«ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚’è§£æ”¾
     FileUtils::destroyInstance();
     SpriteFrameManager::destroyInstance();
     ShaderManager::destroyInstance();
     FontManager::release();
     AudioEngine::end();
 
-    // ƒŒƒ“ƒ_ƒ‰[‚ğ‰ğ•ú
+    // ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚’è§£æ”¾
     OCF_SAFE_DELETE(m_renderer);
 
     s_sharedGame = nullptr;
@@ -175,7 +175,7 @@ const glm::vec2& Game::getResolutionSize() const
 
 float Game::getZEye() const
 {
-    // FOV‚ª60‹‚Ìê‡‚Ì‹——£
+    // FOVãŒ60Â°ã®å ´åˆã®è·é›¢
     return (m_resolutionSize.y / 1.154700538379252f);	//(2 * tanf(M_PI/6))
 }
 
@@ -347,12 +347,12 @@ void Game::draw()
 
     pushMatrix(MatrixStack::ModelView);
 
-    // ƒV[ƒ“‚ğ•`‰æ
+    // ã‚·ãƒ¼ãƒ³ã‚’æç”»
     if (m_currentScene != nullptr) {
         m_currentScene->render(m_renderer, glm::mat4(1.0f));
     }
 
-    // ƒXƒe[ƒ^ƒX‚ğ•`‰æ
+    // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’æç”»
     showStats();
     m_renderer->draw();
 

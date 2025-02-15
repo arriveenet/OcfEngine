@@ -16,8 +16,8 @@ class TextureManager;
 class EventDispatcher;
 
 /**
- * @brief ƒQ[ƒ€ƒNƒ‰ƒX
- * ƒQ[ƒ€‚Ìó‘ÔŠÇ—‚È‚Ç‚ğs‚¤ƒVƒ“ƒOƒ‹ƒgƒ“ƒNƒ‰ƒXB
+ * @brief ã‚²ãƒ¼ãƒ ã‚¯ãƒ©ã‚¹
+ * ã‚²ãƒ¼ãƒ ã®çŠ¶æ…‹ç®¡ç†ãªã©ã‚’è¡Œã†ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã‚¯ãƒ©ã‚¹ã€‚
  */
 class Game : public GameObject {
 public:
@@ -26,181 +26,181 @@ public:
         _3D
     };
 
-    /** ƒRƒ“ƒXƒgƒ‰ƒNƒ^ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     Game();
-    /** ƒfƒXƒgƒ‰ƒNƒ^ */
+    /** ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     ~Game();
 
     /**
-     * @brief ƒQ[ƒ€‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é
-     * @return ƒQ[ƒ€ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+     * @brief ã‚²ãƒ¼ãƒ ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹
+     * @return ã‚²ãƒ¼ãƒ ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
      */
     static Game* getInstance();
 
     /**
-     * @brief ƒQ[ƒ€‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ”jŠü‚·‚é
+     * @brief ã‚²ãƒ¼ãƒ ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç ´æ£„ã™ã‚‹
      */
     static void destroyInstance();
 
-    /** ƒQ[ƒ€‚ğ‰Šú‰» */
+    /** ã‚²ãƒ¼ãƒ ã‚’åˆæœŸåŒ– */
     bool init();
 
-    /** ƒQ[ƒ€‚ÌƒƒCƒ“ƒ‹[ƒv‚ğŠJn‚·‚é */
+    /** ã‚²ãƒ¼ãƒ ã®ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‚’é–‹å§‹ã™ã‚‹ */
     void mainLoop();
 
-    /** ƒQ[ƒ€‚ÌƒƒCƒ“ƒ‹[ƒv‚©‚ç”²‚¯‚é */
+    /** ã‚²ãƒ¼ãƒ ã®ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‹ã‚‰æŠœã‘ã‚‹ */
     void exit();
 
-    /** ‹N“®‚ÌƒV[ƒ“‚ğİ’è‚·‚é */
+    /** èµ·å‹•æ™‚ã®ã‚·ãƒ¼ãƒ³ã‚’è¨­å®šã™ã‚‹ */
     void runWithScene(Scene* pScene);
 
-    /** ƒV[ƒ“‚ğ“ü‚ê‘Ö‚¦‚é */
+    /** ã‚·ãƒ¼ãƒ³ã‚’å…¥ã‚Œæ›¿ãˆã‚‹ */
     void replaceScene(Scene* pScene);
 
-    /** ƒV[ƒ“ƒXƒ^ƒbƒN‚ÉƒvƒbƒVƒ…‚·‚é */
+    /** ã‚·ãƒ¼ãƒ³ã‚¹ã‚¿ãƒƒã‚¯ã«ãƒ—ãƒƒã‚·ãƒ¥ã™ã‚‹ */
     void pushScene(Scene* pScene);
 
-    /** ƒV[ƒ“ƒXƒ^ƒbƒN‚ğƒ|ƒbƒv‚·‚é */
+    /** ã‚·ãƒ¼ãƒ³ã‚¹ã‚¿ãƒƒã‚¯ã‚’ãƒãƒƒãƒ—ã™ã‚‹ */
     void popScene();
 
-    /** Ÿ‚ÌƒV[ƒ“‚ğİ’è‚·‚é */
+    /** æ¬¡ã®ã‚·ãƒ¼ãƒ³ã‚’è¨­å®šã™ã‚‹ */
     void setNextScene();
 
     /**
-     * @brief •\¦ƒTƒCƒY‚ğæ“¾‚·‚é
-     * @return •\¦ƒTƒCƒY
+     * @brief è¡¨ç¤ºã‚µã‚¤ã‚ºã‚’å–å¾—ã™ã‚‹
+     * @return è¡¨ç¤ºã‚µã‚¤ã‚º
      */
     glm::vec2 getVisibleSize() const;
 
     /**
-     * @brief ƒEƒBƒ“ƒhƒEƒTƒCƒY‚ğæ“¾‚·‚é
-     * @return ƒEƒBƒ“ƒhƒEƒTƒCƒY
+     * @brief ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã‚’å–å¾—ã™ã‚‹
+     * @return ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚º
      */
     const glm::vec2& getResolutionSize() const;
 
     /**
-     * @brief ƒJƒƒ‰‚Æ‹ß‚­‚ÌƒNƒŠƒbƒsƒ“ƒO ƒtƒŒ[ƒ€ŠÔ‚Ì‹——£‚ğæ“¾
-     * @return ƒtƒŒ[ƒ€ŠÔ‚Ì‹——£
+     * @brief ã‚«ãƒ¡ãƒ©ã¨è¿‘ãã®ã‚¯ãƒªãƒƒãƒ”ãƒ³ã‚° ãƒ•ãƒ¬ãƒ¼ãƒ é–“ã®è·é›¢ã‚’å–å¾—
+     * @return ãƒ•ãƒ¬ãƒ¼ãƒ é–“ã®è·é›¢
      */
     float getZEye() const;
 
     /**
-     * @brief “Š‰e•û–@‚ğİ’è‚·‚é
-     * @param[in] “Š‰e•û–@
+     * @brief æŠ•å½±æ–¹æ³•ã‚’è¨­å®šã™ã‚‹
+     * @param[in] æŠ•å½±æ–¹æ³•
      */
     void setProjection(Projection projection);
 
     /**
-     * @brief “Š‰e•û–@‚ğæ“¾‚·‚é
-     * @return “Š‰e•û–@
+     * @brief æŠ•å½±æ–¹æ³•ã‚’å–å¾—ã™ã‚‹
+     * @return æŠ•å½±æ–¹æ³•
      */
     Projection getProjection() const { return m_projection; }
 
     /**
-     * @brief ƒrƒ…[ƒ|[ƒg‚ğİ’è‚·‚é
+     * @brief ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’è¨­å®šã™ã‚‹
      */
     void setViewport();
 
     /**
-     * @brief ƒŒƒ“ƒ_ƒ‰[‚ğæ“¾‚·‚é
-     * @return ƒŒƒ“ƒ_ƒ‰[‚Ìƒ|ƒCƒ“ƒ^
+     * @brief ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚’å–å¾—ã™ã‚‹
+     * @return ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿
      */
     Renderer* getRenderer() const { return m_renderer; }
 
     /**
-     * @brief Œ»İİ’è‚³‚ê‚Ä‚¢‚éƒV[ƒ“‚ğæ“¾‚·‚é
-     * @return Œ»İ‚ÌƒV[ƒ“‚Ìƒ|ƒCƒ“ƒ^
+     * @brief ç¾åœ¨è¨­å®šã•ã‚Œã¦ã„ã‚‹ã‚·ãƒ¼ãƒ³ã‚’å–å¾—ã™ã‚‹
+     * @return ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã®ãƒã‚¤ãƒ³ã‚¿
      */
     Scene* getCurrentScene() const { return m_currentScene; }
 
     /**
-     * @brief OpenGL‚Ìƒrƒ…[‚ğæ“¾
-     * @return OpenGL‚Ìƒrƒ…[
+     * @brief OpenGLã®ãƒ“ãƒ¥ãƒ¼ã‚’å–å¾—
+     * @return OpenGLã®ãƒ“ãƒ¥ãƒ¼
      */
     GLView* getGLView() { return m_glView; }
 
     /**
-     * @brief OpenGL‚Ìƒrƒ…[‚ğİ’è
-     * @param[in] OpenGL‚Ìƒrƒ…[
+     * @brief OpenGLã®ãƒ“ãƒ¥ãƒ¼ã‚’è¨­å®š
+     * @param[in] OpenGLã®ãƒ“ãƒ¥ãƒ¼
      */
     void setGLView(GLView* glView);
 
     /**
-     * @brief ƒeƒNƒXƒ`ƒƒŠÇ—ƒNƒ‰ƒX‚ğæ“¾‚·‚é
-     * @return ƒeƒNƒXƒ`ƒƒŠÇ—ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+     * @brief ãƒ†ã‚¯ã‚¹ãƒãƒ£ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’å–å¾—ã™ã‚‹
+     * @return ãƒ†ã‚¯ã‚¹ãƒãƒ£ç®¡ç†ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
      */
     TextureManager* getTextureManager() const { return m_textureManager; }
 
     /**
-     * @brief ƒCƒxƒ“ƒgƒfƒBƒXƒpƒbƒ`ƒƒ‚ğæ“¾‚·‚é
-     * @return ƒCƒxƒ“ƒgƒfƒBƒXƒpƒbƒ`ƒƒ‚Ìƒ|ƒCƒ“ƒ^
+     * @brief ã‚¤ãƒ™ãƒ³ãƒˆãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒãƒ£ã‚’å–å¾—ã™ã‚‹
+     * @return ã‚¤ãƒ™ãƒ³ãƒˆãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒãƒ£ã®ãƒã‚¤ãƒ³ã‚¿
      */
     EventDispatcher* getEventDispatcher() const { return m_eventDispatcher; }
 
     /**
-     * @brief ƒtƒŒ[ƒ€ƒŒ[ƒg‚ğæ“¾‚·‚é
-     * @return ƒtƒŒ[ƒ€ƒŒ[ƒg
+     * @brief ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
+     * @return ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆ
      */
     float getFrameRate() const { return m_frameRate; }
 
-    /** @brief s—ñƒXƒ^ƒbƒN‚ğ‰Šú‰» */
+    /** @brief è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã‚’åˆæœŸåŒ– */
     void initMatrixStack();
 
     /**
-     * @brief s—ñƒXƒ^ƒbƒN‚ğ’PˆÊs—ñ‚É’u‚«Š·‚¦‚é
-     * @param[in] type s—ñƒXƒ^ƒbƒN‚Ìí—Ş
+     * @brief è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã‚’å˜ä½è¡Œåˆ—ã«ç½®ãæ›ãˆã‚‹
+     * @param[in] type è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã®ç¨®é¡
      */
     void loadIdentityMatrix(MatrixStack type);
 
     /**
-     * @brief s—ñƒXƒ^ƒbƒN‚ğw’è‚³‚ê‚½s—ñ‚É’u‚«Š·‚¦‚é
-     * @param[in] type s—ñƒXƒ^ƒbƒN‚Ìí—Ş
-     * @param[in] matrix ’u‚«Š·‚¦‚és—ñ
+     * @brief è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã‚’æŒ‡å®šã•ã‚ŒãŸè¡Œåˆ—ã«ç½®ãæ›ãˆã‚‹
+     * @param[in] type è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã®ç¨®é¡
+     * @param[in] matrix ç½®ãæ›ãˆã‚‹è¡Œåˆ—
      */
     void loadMatrix(MatrixStack type, const glm::mat4& matrix);
 
     /**
-     * @brief s—ñƒXƒ^ƒbƒN‚ğw’è‚³‚ê‚½s—ñ‚ÅæZ‚µ’u‚«Š·‚¦‚é
-     * @param[in] type s—ñƒXƒ^ƒbƒN‚Ìí—Ş
-     * @param[in] matrix æZ‚·‚és—ñ
+     * @brief è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã‚’æŒ‡å®šã•ã‚ŒãŸè¡Œåˆ—ã§ä¹—ç®—ã—ç½®ãæ›ãˆã‚‹
+     * @param[in] type è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã®ç¨®é¡
+     * @param[in] matrix ä¹—ç®—ã™ã‚‹è¡Œåˆ—
      */
     void multiplyMatrix(MatrixStack type, const glm::mat4& matrix);
 
     /**
-     * @brief s—ñƒXƒ^ƒbƒN‚ğƒvƒbƒVƒ…‚·‚é
-     * @param[in] type s—ñƒXƒ^ƒbƒN‚Ìí•Ê
+     * @brief è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã‚’ãƒ—ãƒƒã‚·ãƒ¥ã™ã‚‹
+     * @param[in] type è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã®ç¨®åˆ¥
      */
     void pushMatrix(MatrixStack type);
 
     /**
-     * @brief s—ñƒXƒ^ƒbƒN‚ğƒ|ƒbƒv‚·‚é
-     * @param[in] type s—ñƒXƒ^ƒbƒN‚Ìí•Ê
+     * @brief è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã‚’ãƒãƒƒãƒ—ã™ã‚‹
+     * @param[in] type è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã®ç¨®åˆ¥
      */
     void popMatrix(MatrixStack type);
 
     /**
-     * @brief s—ñ‚ğæ“¾‚·‚é
-     * @param[in] type s—ñƒXƒ^ƒbƒN‚Ìí•Ê
+     * @brief è¡Œåˆ—ã‚’å–å¾—ã™ã‚‹
+     * @param[in] type è¡Œåˆ—ã‚¹ã‚¿ãƒƒã‚¯ã®ç¨®åˆ¥
      */
     const glm::mat4& getMatrix(MatrixStack type);
 
 protected:
-    /** ƒQ[ƒ€‚ÌXVˆ—‚ğs‚¤ */
+    /** ã‚²ãƒ¼ãƒ ã®æ›´æ–°å‡¦ç†ã‚’è¡Œã† */
     void update();
 
-    /** ƒQ[ƒ€‚Ì•`‰æˆ—‚ğs‚¤ */
+    /** ã‚²ãƒ¼ãƒ ã®æç”»å‡¦ç†ã‚’è¡Œã† */
     void draw();
 
-    /** ƒfƒ‹ƒ^ƒ^ƒCƒ€‚ğŒvZ‚·‚é */
+    /** ãƒ‡ãƒ«ã‚¿ã‚¿ã‚¤ãƒ ã‚’è¨ˆç®—ã™ã‚‹ */
     void calculateDeltaTime();
 
-    /** ƒfƒoƒbƒO—p‚Ìó‘Ô(FPS‚È‚Ç)‚ğ•\¦ */
+    /** ãƒ‡ãƒãƒƒã‚°ç”¨ã®çŠ¶æ…‹(FPSãªã©)ã‚’è¡¨ç¤º */
     void showStats();
 
     void createStatsLabel();
 
 private:
-    /** ƒQ[ƒ€ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX */
+    /** ã‚²ãƒ¼ãƒ ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ */
     static Game* s_sharedGame;
     bool m_running;
 

@@ -4,7 +4,7 @@
 NS_OCF_BEGIN
 
 /**
- * @brief ƒfƒoƒbƒOƒƒbƒZ[ƒW‚ğo—Í‚·‚é
+ * @brief ãƒ‡ãƒãƒƒã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºåŠ›ã™ã‚‹
  */
 void print(const char* format, ...);
 

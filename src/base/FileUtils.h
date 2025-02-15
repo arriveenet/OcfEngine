@@ -6,100 +6,100 @@
 NS_OCF_BEGIN
 
 /**
- * @brief ƒtƒ@ƒCƒ‹ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
+ * @brief ãƒ•ã‚¡ã‚¤ãƒ«ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
  */
 class FileUtils {
 public:
-    /** FileUtils‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é */
+    /** FileUtilsã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹ */
     static FileUtils* getInstance();
 
-    /** FileUtils‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ”jŠü‚·‚é */
+    /** FileUtilsã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç ´æ£„ã™ã‚‹ */
     static void destroyInstance();
 
-    /** ƒfƒXƒgƒ‰ƒNƒ^[ */
+    /** ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ */
     ~FileUtils();
 
     /**
-     * @brief ƒtƒ@ƒCƒ‹–¼‚©‚çâ‘ÎƒpƒX‚ğæ“¾‚·‚é
-     * @param filename ƒtƒ@ƒCƒ‹–¼
-     * @return •ÏŠ·‚³‚ê‚½â‘ÎƒpƒX
+     * @brief ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰çµ¶å¯¾ãƒ‘ã‚¹ã‚’å–å¾—ã™ã‚‹
+     * @param filename ãƒ•ã‚¡ã‚¤ãƒ«å
+     * @return å¤‰æ›ã•ã‚ŒãŸçµ¶å¯¾ãƒ‘ã‚¹
      */
     std::string getFullPath(const std::string& filename) const;
 
     /**
-     * @brief ƒtƒ@ƒCƒ‹–¼‚©‚çe‚Ìâ‘ÎƒpƒX‚ğæ“¾‚·‚é
-     * @param filename ƒtƒ@ƒCƒ‹–¼
-     * @return •ÏŠ·‚³‚ê‚½e‚Ìâ‘ÎƒpƒX
+     * @brief ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰è¦ªã®çµ¶å¯¾ãƒ‘ã‚¹ã‚’å–å¾—ã™ã‚‹
+     * @param filename ãƒ•ã‚¡ã‚¤ãƒ«å
+     * @return å¤‰æ›ã•ã‚ŒãŸè¦ªã®çµ¶å¯¾ãƒ‘ã‚¹
      */
     std::string getParentFullPath(const std::string& filename) const;
 
     /**
-     * @brief ƒT[ƒ`ƒpƒX‚ÉƒpƒX‚ğ’Ç‰Á‚·‚é
-     * @param path ’Ç‰Á‚·‚éƒpƒX
-     * @param front ˆê”Ô‘O‚É’Ç‰Á‚·‚é‚©‚Ç‚¤‚©
+     * @brief ã‚µãƒ¼ãƒãƒ‘ã‚¹ã«ãƒ‘ã‚¹ã‚’è¿½åŠ ã™ã‚‹
+     * @param path è¿½åŠ ã™ã‚‹ãƒ‘ã‚¹
+     * @param front ä¸€ç•ªå‰ã«è¿½åŠ ã™ã‚‹ã‹ã©ã†ã‹
      */
     void addSearchPath(const std::string& path, bool front = false);
 
     /**
-     * @brief ƒT[ƒ`ƒpƒX‚ğæ“¾‚·‚é
-     * @return ƒT[ƒ`ƒpƒX
+     * @brief ã‚µãƒ¼ãƒãƒ‘ã‚¹ã‚’å–å¾—ã™ã‚‹
+     * @return ã‚µãƒ¼ãƒãƒ‘ã‚¹
      */
     const std::vector <std::string>& getSearchPath() const;
 
     /**
-     * @brief assetsƒtƒHƒ‹ƒ_‚ÌƒpƒX‚ğæ“¾‚·‚é
-     * @return assetsƒtƒHƒ‹ƒ_‚ÌƒpƒX
+     * @brief assetsãƒ•ã‚©ãƒ«ãƒ€ã®ãƒ‘ã‚¹ã‚’å–å¾—ã™ã‚‹
+     * @return assetsãƒ•ã‚©ãƒ«ãƒ€ã®ãƒ‘ã‚¹
      */
     std::string getAssetsPath() const;
 
     /**
-     * @brief ƒtƒ@ƒCƒ‹–¼‚©‚çƒtƒ‹ƒpƒX‚ğæ“¾‚·‚é
-     * @param ƒtƒ@ƒCƒ‹–¼
-     * @return ƒtƒ‹ƒpƒXB‘¶İ‚µ‚È‚©‚Á‚½ê‡‹ó•¶š‚ğ•Ô‹p‚·‚é
+     * @brief ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰ãƒ•ãƒ«ãƒ‘ã‚¹ã‚’å–å¾—ã™ã‚‹
+     * @param ãƒ•ã‚¡ã‚¤ãƒ«å
+     * @return ãƒ•ãƒ«ãƒ‘ã‚¹ã€‚å­˜åœ¨ã—ãªã‹ã£ãŸå ´åˆç©ºæ–‡å­—ã‚’è¿”å´ã™ã‚‹
      */
     std::string fullPathForFilename(const std::string& filename) const;
 
     /**
-     * @brief ƒtƒ@ƒCƒ‹“à‚Ì•¶š—ñ‚ğæ“¾‚·‚é
-     * @param ƒtƒ@ƒCƒ‹–¼
-     * @return ƒtƒ@ƒCƒ‹‚ÌƒRƒ“ƒeƒ“ƒc
+     * @brief ãƒ•ã‚¡ã‚¤ãƒ«å†…ã®æ–‡å­—åˆ—ã‚’å–å¾—ã™ã‚‹
+     * @param ãƒ•ã‚¡ã‚¤ãƒ«å
+     * @return ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚³ãƒ³ãƒ†ãƒ³ãƒ„
      */
     std::string getStringFromFile(std::string_view filename) const;
 
     /**
-     * @brief ƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚é‚©ƒ`ƒFƒbƒN‚·‚é
-     * @param ƒtƒ@ƒCƒ‹–¼
-     * @return ƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚éê‡trueA‘¶İ‚µ‚È‚¢ê‡false‚ğ•Ô‹p
+     * @brief ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹
+     * @param ãƒ•ã‚¡ã‚¤ãƒ«å
+     * @return ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹å ´åˆtrueã€å­˜åœ¨ã—ãªã„å ´åˆfalseã‚’è¿”å´
      */
     bool isFileExist(const std::string& filename) const;
 
 protected:
-    /** ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^[ */
+    /** ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ */
     FileUtils();
 
     /**
-     * @brief FileUtils‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ‰Šú‰»‚·‚é
+     * @brief FileUtilsã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’åˆæœŸåŒ–ã™ã‚‹
      */
     bool init();
 
     /**
-     * @brief ƒtƒ@ƒCƒ‹–¼‚©‚çƒpƒX‚ğæ“¾
-     * @param filename ƒtƒ@ƒCƒ‹–¼
-     * @param searchPath ŒŸõƒpƒX
-     * @return ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚½ê‡‚»‚ÌƒpƒX‚ğ•Ô‹pA‘¶İ‚µ‚È‚©‚Á‚½ê‡‹ó•¶š‚ğ•Ô‹p‚·‚é
+     * @brief ãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰ãƒ‘ã‚¹ã‚’å–å¾—
+     * @param filename ãƒ•ã‚¡ã‚¤ãƒ«å
+     * @param searchPath æ¤œç´¢ãƒ‘ã‚¹
+     * @return ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãŸå ´åˆãã®ãƒ‘ã‚¹ã‚’è¿”å´ã€å­˜åœ¨ã—ãªã‹ã£ãŸå ´åˆç©ºæ–‡å­—ã‚’è¿”å´ã™ã‚‹
      */
     std::string getPathForFilename(const std::string& filename, const std::string& searchPath) const;
 
 private:
-    /** FileUtils‚ÌƒVƒ“ƒOƒ‹ƒgƒ“ƒ|ƒCƒ“ƒ^[ */
+    /** FileUtilsã®ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ãƒã‚¤ãƒ³ã‚¿ãƒ¼ */
     static FileUtils* s_sharedFileUtils;
     
-    /** exe‚Ì‚ ‚éƒfƒBƒŒƒNƒgƒŠ */
+    /** exeã®ã‚ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª */
     static std::string s_exeDirectory;
 
-    /** ƒtƒ@ƒCƒ‹‚ğŒŸõ‚·‚éƒpƒX‚Ì”z—ñ */
+    /** ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ¤œç´¢ã™ã‚‹ãƒ‘ã‚¹ã®é…åˆ— */
     std::vector<std::string> m_searchPathArray;
-    /** ƒfƒtƒHƒ‹ƒg‚Ìassets‚Ìƒ‹[ƒgƒpƒX */
+    /** ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®assetsã®ãƒ«ãƒ¼ãƒˆãƒ‘ã‚¹ */
     std::string m_defaultAssetsRootPath;
 };
 

@@ -26,7 +26,7 @@ NS_OCF_BEGIN
 Program::Program(const std::string& vertexShader, const std::string& fragmentShader)
     : m_uniformBufferSize(0)
 {
-    // ’¸“_ƒVƒF[ƒ_[‚ÆAƒtƒ‰ƒOƒƒ“ƒgƒVƒF[ƒ_[‚ğ“Ç‚İ‚Ş
+    // é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¨ã€ãƒ•ãƒ©ã‚°ãƒ¡ãƒ³ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’èª­ã¿è¾¼ã‚€
     const std::string shaderPath("shaders/");
     auto fileUtils    = FileUtils::getInstance();
     auto vertexFile   = fileUtils->fullPathForFilename(shaderPath + vertexShader);
@@ -36,7 +36,7 @@ Program::Program(const std::string& vertexShader, const std::string& fragmentSha
     m_vertexShader.load(ShaderStage::Vertex, vertexFile);
     m_fragmentShader.load(ShaderStage::Fragment, fragmentFile);
 
-    // ƒVƒF[ƒ_[‚ğƒRƒ“ƒpƒCƒ‹
+    // ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
     compileProgram();
     computeUniformInfos();
 }
@@ -88,7 +88,7 @@ size_t Program::getUniformBufferSize() const
 
 void Program::compileProgram()
 {
-    // ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ‚ª¬Œ÷‚µ‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+    // ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®èª­ã¿è¾¼ã¿ãŒæˆåŠŸã—ã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
     GLuint vertex = m_vertexShader.getShader();
     GLuint fragment = m_fragmentShader.getShader();
     if (vertex == 0 || fragment == 0) {

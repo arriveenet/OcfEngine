@@ -26,7 +26,7 @@ bool AppDelegate::applicationDidFinishLaunching()
             return false;
         }
 
-        // ƒEƒBƒ“ƒhƒE‚ÌˆÊ’u‚ğƒfƒBƒXƒvƒŒƒC‚Ì’†‰›‚Éİ’è
+        // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½ç½®ã‚’ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ã®ä¸­å¤®ã«è¨­å®š
 #ifdef _WIN32
         const int displayWidth = GetSystemMetrics(SM_CXSCREEN);
         const int displayHeight = GetSystemMetrics(SM_CYSCREEN);

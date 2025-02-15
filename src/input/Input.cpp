@@ -23,16 +23,16 @@ void Input::prepareUpdate()
 
 void Input::update()
 {
-    // ƒL[ƒ{[ƒh‚Ìó‘Ô‚ğ•Û
+    // ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®çŠ¶æ…‹ã‚’ä¿æŒ
     memcpy(m_keyboard.m_prevState, m_keyboard.m_currentState, sizeof(m_keyboard.m_prevState));
 
-    // ƒ}ƒEƒX‚ÌÀ•W‚ğİ’è
+    // ãƒã‚¦ã‚¹ã®åº§æ¨™ã‚’è¨­å®š
     m_mouse.m_lastPosition = m_mouse.m_position;
 
     GLViewImpl* view = dynamic_cast<GLViewImpl*>(Game::getInstance()->getGLView());
     m_mouse.m_position = view->getMousePosition();
 
-    // ƒ}ƒEƒXƒ{ƒ^ƒ“‚Ìó‘Ô‚ğ•Û
+    // ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã‚’ä¿æŒ
     m_mouse.m_previousButton = m_mouse.m_currentButton;
 
     if (m_mouseMode == Input::MouseMode::Captured) {

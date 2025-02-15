@@ -18,8 +18,8 @@ class Camera : public Node {
 
 public:
     enum class Type {
-        Perspective,	//!< “§Ž‹“Š‰e
-        Orthographic	//!< •½s“Š‰e
+        Perspective,	//!< é€è¦–æŠ•å½±
+        Orthographic	//!< å¹³è¡ŒæŠ•å½±
     };
 
     static Camera* createPerspective(float fovy, float aspect, float zNear, float zFar);

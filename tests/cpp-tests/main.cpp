@@ -17,7 +17,7 @@ int main(int argc, char** argv)
 #endif
     int result = EXIT_SUCCESS;
 
-    // アプリケーションのインスタンスを作成
+    // 繧｢繝励Μ繧ｱ繝ｼ繧ｷ繝ｧ繝ｳ縺ｮ繧､繝ｳ繧ｹ繧ｿ繝ｳ繧ｹ繧剃ｽ懈��
     AppDelegate app;
     result = Applicaiton::getInstance()->run();
 

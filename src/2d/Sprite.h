@@ -15,52 +15,52 @@ class Texture2D;
 class SpriteFrame;
 
 /**
- * @brief ƒXƒvƒ‰ƒCƒgƒNƒ‰ƒX
+ * @brief ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚¯ãƒ©ã‚¹
  */
 class Sprite : public Node {
 public:
-    /** ƒXƒvƒ‰ƒCƒg‚ğì¬*/
+    /** ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’ä½œæˆ*/
     static Sprite* create();
     static Sprite* create(const std::string& filenam);
     static Sprite* createWithSpriteFrame(SpriteFrame* spriteFrame);
     static Sprite* createWithSpriteFrameName(std::string_view spriteFrameName);
 
-    /** ƒRƒ“ƒXƒgƒ‰ƒNƒ^ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     Sprite();
-    /** ƒfƒXƒgƒ‰ƒNƒ^ */
+    /** ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     virtual ~Sprite();
 
-    /** ƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰» */
+    /** ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ– */
     virtual bool init();
-    /** ƒtƒ@ƒCƒ‹‚©‚çƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰» */
+    /** ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ– */
     virtual bool initWithFile(const std::string& filename);
-    /** ƒeƒNƒXƒ`ƒƒ‚©‚çƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰» */
+    /** ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‹ã‚‰ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ– */
     virtual bool initWithTexture(Texture2D* texture, const Rect& rect);
-    /** ƒXƒvƒ‰ƒCƒgƒtƒŒ[ƒ€‚©‚çƒXƒvƒ‰ƒCƒg‚ğ‰Šú‰» */
+    /** ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åˆæœŸåŒ– */
     virtual bool initWithSpriteFrame(SpriteFrame* spriteFrame);
 
-    /** ƒeƒNƒXƒ`ƒƒ‚ğİ’è */
+    /** ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è¨­å®š */
     virtual void setTexture(Texture2D* texture);
     
-    /** ƒXƒvƒ‰ƒCƒgƒtƒŒ[ƒ€‚ğİ’è */
+    /** ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ã‚’è¨­å®š */
     virtual void setSpriteFrame(SpriteFrame* spriteFrame);
-    /** ƒXƒvƒ‰ƒCƒgƒtƒŒ[ƒ€‚ğæ“¾ */
+    /** ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å–å¾— */
     virtual SpriteFrame* getSpriteFrame() const;
     
-    /** ƒXƒvƒ‰ƒCƒg‚ÌˆÊ’u‚ğİ’è */
+    /** ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ä½ç½®ã‚’è¨­å®š */
     void setPosition(const glm::vec2& position) override;
     void setPosition(float x, float y) override;
 
-    /** ƒXƒvƒ‰ƒCƒg‚ÌƒTƒCƒY‚ğİ’è */
+    /** ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚µã‚¤ã‚ºã‚’è¨­å®š */
     void setSize(float width, float height) override;
 
-    /** ƒXƒvƒ‰ƒCƒg‚Ì‹éŒ`‚ğæ“¾ */
+    /** ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®çŸ©å½¢ã‚’å–å¾— */
     virtual Rect getRect() const;
 
-    /** ƒXƒvƒ‰ƒCƒg‚ğ•`‰æ */
+    /** ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’æç”» */
     void draw(Renderer* renderer, const glm::mat4& transform) override;
 
-    /** ƒXƒvƒ‰ƒCƒg‚ğ”½“] */
+    /** ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’åè»¢ */
     void setFlippedX(bool flippedX);
     void setFlippedY(bool flippedY);
     bool isFlippedX() const;

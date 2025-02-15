@@ -38,7 +38,7 @@ void GameObject::release()
 
 GameObject* GameObject::autorelease()
 {
-    //@Todo オートリリース機能を追加
+    //@Todo 繧ｪ繝ｼ繝医Μ繝ｪ繝ｼ繧ｹ讖溯�ｽ繧定ｿｽ蜉
     return this;
 }
 

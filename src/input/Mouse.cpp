@@ -31,24 +31,24 @@ glm::vec2 Mouse::getDelta() const
 
 ButtonState Mouse::getButtonState(MouseButton button) const
 {
-    // ‘O‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢ê‡
+    // å‰ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãªã„å ´åˆ
     if ((m_previousButton & button) == 0) {
-        // Œ»İ‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢ê‡
+        // ç¾åœ¨ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãªã„å ´åˆ
         if ((m_currentButton & button) == 0) {
             return ButtonState::None;
         }
-        // Œ»İ‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éê‡
+        // ç¾åœ¨ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆ
         else {
             return ButtonState::Pressed;
         }
     }
-    // ‘O‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éê‡
+    // å‰ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆ
     else {
-        // Œ»İ‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢ê‡
+        // ç¾åœ¨ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãªã„å ´åˆ
         if ((m_currentButton & button) == 0) {
             return ButtonState::Released;
         }
-        // Œ»İ‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éê‡
+        // ç¾åœ¨ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹å ´åˆ
         else {
             return ButtonState::Hold;
         }

@@ -12,43 +12,43 @@
 NS_OCF_BEGIN
 
 /**
- * @brief ƒŒƒ“ƒ_ƒ‰[ƒNƒ‰ƒX
+ * @brief ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚¯ãƒ©ã‚¹
  */
 class Renderer {
 public:
     static constexpr int VBO_SIZE = 0x10000;
     static constexpr int INDEX_VBO_SIZE = VBO_SIZE * 6 / 4;
 
-    /** ƒRƒ“ƒXƒgƒ‰ƒNƒ^[ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ */
     Renderer();
-    /** ƒfƒXƒgƒ‰ƒNƒ^[ */
+    /** ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ */
     ~Renderer();
 
-    /** ƒŒƒ“ƒ_ƒ‰[‚Ì‰Šú‰»‚ğs‚¤ */
+    /** ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã®åˆæœŸåŒ–ã‚’è¡Œã† */
     bool init();
-    /** ƒŒƒ“ƒ_ƒ‰[‚ğ”jŠü‚·‚é */
+    /** ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã‚’ç ´æ£„ã™ã‚‹ */
     void destroy();
 
-    /** ƒtƒŒ[ƒ€‚Ì•`‰æ‚ğn‚ß‚é */
+    /** ãƒ•ãƒ¬ãƒ¼ãƒ ã®æç”»ã‚’å§‹ã‚ã‚‹ */
     void beginFrame();
-    /** ƒtƒŒ[ƒ€‚Ì•`‰æ‚ğI‚í‚é */
+    /** ãƒ•ãƒ¬ãƒ¼ãƒ ã®æç”»ã‚’çµ‚ã‚ã‚‹ */
     void endFrame();
 
-    /** ƒrƒ…[ƒ|[ƒg‚ğİ’è‚·‚é */
+    /** ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’è¨­å®šã™ã‚‹ */
     void setViewPort(int x, int y, int width, int height);
 
-    /** ƒrƒ…[ƒ|[ƒg‚ğæ“¾‚·‚é */
+    /** ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹ */
     glm::ivec4 getViewport() const;
 
-    /** ƒŒƒ“ƒ_[ƒRƒ}ƒ“ƒh‚ğ’Ç‰Á‚·‚é */
+    /** ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚³ãƒãƒ³ãƒ‰ã‚’è¿½åŠ ã™ã‚‹ */
     void addCommand(RenderCommand* command);
 
-    /** ƒoƒbƒtƒ@‚ğƒNƒŠƒA‚·‚é */
+    /** ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹ */
     void clear();
 
     void clean();
 
-    /** •`‰æˆ—‚ğs‚¤ */
+    /** æç”»å‡¦ç†ã‚’è¡Œã† */
     void draw();
 
     uint32_t getDrawCallCount() const { return m_drawCallCount; }

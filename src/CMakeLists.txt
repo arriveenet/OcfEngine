@@ -4,6 +4,11 @@ endif()
 
 project("OcfEngine_lib")
 
+if(WIN32)
+    add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
+    add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+endif()
+
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(ENGINE_BINARY_PATH ${PROJECT_BINARY_DIR}/engine)

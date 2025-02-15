@@ -5,46 +5,46 @@
 NS_OCF_BEGIN
 
 /**
- * @brief ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg
+ * @brief ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
  * 
- * QÆƒJƒEƒ“ƒg‚É‚æ‚èƒƒ‚ƒŠ‚ğŠÇ—‚·‚é
+ * å‚ç…§ã‚«ã‚¦ãƒ³ãƒˆã«ã‚ˆã‚Šãƒ¡ãƒ¢ãƒªã‚’ç®¡ç†ã™ã‚‹
  */
 class GameObject {
 public:
-    /** ƒRƒ“ƒXƒgƒ‰ƒNƒ^ */
+    /** ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     GameObject();
-    /** ƒfƒXƒgƒ‰ƒNƒ^ */
+    /** ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     virtual ~GameObject();
 
     /**
-     * @brief ŒÅ—L‚ÌID‚ğæ“¾‚·‚é
+     * @brief å›ºæœ‰ã®IDã‚’å–å¾—ã™ã‚‹
      * @return ID
      */
     unsigned int getID() const;
 
     /**
-     * @brief QÆƒJƒEƒ“ƒg‚ğƒCƒ“ƒNƒŠƒƒ“ƒg‚·‚é
+     * @brief å‚ç…§ã‚«ã‚¦ãƒ³ãƒˆã‚’ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆã™ã‚‹
      */
     void retain();
 
     /**
-     * @brief QÆƒJƒEƒ“ƒg‚ğƒfƒNƒŠƒƒ“ƒg‚·‚é
-     * ‚à‚µAƒfƒNƒŠƒƒ“ƒg‚µQÆƒJƒEƒ“ƒg‚ª0‚Ìê‡AƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‰ğ•ú‚·‚é
+     * @brief å‚ç…§ã‚«ã‚¦ãƒ³ãƒˆã‚’ãƒ‡ã‚¯ãƒªãƒ¡ãƒ³ãƒˆã™ã‚‹
+     * ã‚‚ã—ã€ãƒ‡ã‚¯ãƒªãƒ¡ãƒ³ãƒˆã—å‚ç…§ã‚«ã‚¦ãƒ³ãƒˆãŒ0ã®å ´åˆã€ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è§£æ”¾ã™ã‚‹
      */
     void release();
 
     /**
-     * @brief ©“®‰ğ•ú‚ğs‚¤
+     * @brief è‡ªå‹•è§£æ”¾ã‚’è¡Œã†
      */
     GameObject* autorelease();
 
     /**
-     * @brief QÆƒJƒEƒ“ƒg‚ğæ“¾‚·‚é
+     * @brief å‚ç…§ã‚«ã‚¦ãƒ³ãƒˆã‚’å–å¾—ã™ã‚‹
      */
     unsigned int getReferenceCount();
 
 protected:
-    unsigned int m_referenceCount;	//!< QÆƒJƒEƒ“ƒg
+    unsigned int m_referenceCount;	//!< å‚ç…§ã‚«ã‚¦ãƒ³ãƒˆ
 
 private:
     unsigned int m_id;	//!< ID

@@ -17,7 +17,7 @@ class Rect;
 class Camera;
 
 /**
- * @brief ƒm[ƒhƒNƒ‰ƒX
+ * @brief ãƒãƒ¼ãƒ‰ã‚¯ãƒ©ã‚¹
  */
 class Node : public GameObject {
 public:
@@ -28,9 +28,9 @@ public:
 
         FLAGS_DIRTY_MASK = (FLAGS_TRANSFORM_DIRTY | FLAGS_CONTENT_SIZE_DIRTY),
     };
-    /** ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^ */
+    /** ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     Node();
-    /** ƒfƒXƒgƒ‰ƒNƒ^ */
+    /** ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     virtual ~Node();
 
     virtual bool init();
@@ -80,39 +80,39 @@ public:
     virtual float getGlobalZOrder() const { return m_globalZOrder; }
 
     /**
-     * @brief qƒm[ƒh‚ğ’Ç‰Á
-     * @param pNode ’Ç‰Á‚·‚éqƒm[ƒh
+     * @brief å­ãƒãƒ¼ãƒ‰ã‚’è¿½åŠ 
+     * @param pNode è¿½åŠ ã™ã‚‹å­ãƒãƒ¼ãƒ‰
      */
     virtual void addChild(Node* pNode);
     /**
-     * @brief qƒm[ƒh‚ğíœ
-     * @param pNode íœ‚·‚éqƒm[ƒh
+     * @brief å­ãƒãƒ¼ãƒ‰ã‚’å‰Šé™¤
+     * @param pNode å‰Šé™¤ã™ã‚‹å­ãƒãƒ¼ãƒ‰
      */
     virtual void removeChild(Node* pNode);
     /**
-     * @brief qƒm[ƒh‚Ì”‚ğæ“¾
-     * @return qƒm[ƒh‚Ì”
+     * @brief å­ãƒãƒ¼ãƒ‰ã®æ•°ã‚’å–å¾—
+     * @return å­ãƒãƒ¼ãƒ‰ã®æ•°
      */
     virtual size_t getChildCount() const;
     /**
-     * @brief eƒm[ƒh‚ğİ’è
-     * @param pNode İ’è‚·‚éeƒm[ƒh
+     * @brief è¦ªãƒãƒ¼ãƒ‰ã‚’è¨­å®š
+     * @param pNode è¨­å®šã™ã‚‹è¦ªãƒãƒ¼ãƒ‰
      */
     virtual void setParent(Node* pNode);
     /**
-     * @brief eƒm[ƒh‚ğæ“¾
-     * @return pNode eƒm[ƒh
+     * @brief è¦ªãƒãƒ¼ãƒ‰ã‚’å–å¾—
+     * @return pNode è¦ªãƒãƒ¼ãƒ‰
      */
     virtual Node* getParent() { return m_pParent; }
 
     /**
-     * @brief qƒm[ƒh‚ğ‚·‚×‚Äƒ\[ƒg‚·‚é
+     * @brief å­ãƒãƒ¼ãƒ‰ã‚’ã™ã¹ã¦ã‚½ãƒ¼ãƒˆã™ã‚‹
      */
     virtual void sortAllChildren();
 
     /**
-     * @brief ƒ\[ƒg‚Ìƒwƒ‹ƒpŠÖ”
-     * @param nodes ƒm[ƒh‚Ì”z—ñ
+     * @brief ã‚½ãƒ¼ãƒˆã®ãƒ˜ãƒ«ãƒ‘é–¢æ•°
+     * @param nodes ãƒãƒ¼ãƒ‰ã®é…åˆ—
      */
     template<typename T>
     inline static void sortNodes(std::vector<T*>& nodes)
@@ -123,14 +123,14 @@ public:
     }
 
     /**
-     * @brief ƒJƒƒ‰‚Ìƒ}ƒXƒN‚ğæ“¾
-     * @return ƒJƒƒ‰‚Ìƒ}ƒXƒN
+     * @brief ã‚«ãƒ¡ãƒ©ã®ãƒã‚¹ã‚¯ã‚’å–å¾—
+     * @return ã‚«ãƒ¡ãƒ©ã®ãƒã‚¹ã‚¯
      */
     uint16_t getCameraMask() const { return m_cameraMask; }
     /**
-     * @brief ƒJƒƒ‰‚Ìƒ}ƒXƒN‚ğİ’è
-     * @param uint16_t ƒJƒƒ‰‚Ìƒ}ƒXƒN
-     * @param applyChildren qƒm[ƒh‚É‚àƒJƒƒ‰ƒ}ƒXƒN‚ğİ’è‚·‚é‚©‚Ç‚¤‚©
+     * @brief ã‚«ãƒ¡ãƒ©ã®ãƒã‚¹ã‚¯ã‚’è¨­å®š
+     * @param uint16_t ã‚«ãƒ¡ãƒ©ã®ãƒã‚¹ã‚¯
+     * @param applyChildren å­ãƒãƒ¼ãƒ‰ã«ã‚‚ã‚«ãƒ¡ãƒ©ãƒã‚¹ã‚¯ã‚’è¨­å®šã™ã‚‹ã‹ã©ã†ã‹
      */
     virtual void setCameraMask(uint16_t mask, bool applyChildren = true);
 
@@ -155,38 +155,38 @@ protected:
     uint32_t processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag);
     
 protected:
-    Node* m_pParent;                        //!< eƒm[ƒh
-    Game* m_pGame;                          //!< ƒVƒ“ƒOƒ‹ƒgƒ“‚ÌƒQ[ƒ€ƒNƒ‰ƒX
-    EventDispatcher* m_pEventDispatcher;    // ƒCƒxƒ“ƒgƒfƒBƒXƒpƒbƒ`
+    Node* m_pParent;                        //!< è¦ªãƒãƒ¼ãƒ‰
+    Game* m_pGame;                          //!< ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã®ã‚²ãƒ¼ãƒ ã‚¯ãƒ©ã‚¹
+    EventDispatcher* m_pEventDispatcher;    // ã‚¤ãƒ™ãƒ³ãƒˆãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
 
-    uint16_t m_cameraMask;	//!< ƒJƒƒ‰ƒ}ƒXƒN
+    uint16_t m_cameraMask;	//!< ã‚«ãƒ¡ãƒ©ãƒã‚¹ã‚¯
 
-    glm::vec3 m_position;	//!< ƒm[ƒh‚ÌˆÊ’u
-    glm::vec2 m_size;		//!< ƒRƒ“ƒeƒ“ƒcƒTƒCƒY
+    glm::vec3 m_position;	//!< ãƒãƒ¼ãƒ‰ã®ä½ç½®
+    glm::vec2 m_size;		//!< ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚µã‚¤ã‚º
 
-    glm::vec2 m_anchorPointInPoints;	//!< ƒ|ƒCƒ“ƒg‚ÌƒAƒ“ƒJ[ƒ|ƒCƒ“ƒg
-    glm::vec2 m_anchorPoint;			//!< ³‹K‰»‚³‚ê‚½ƒAƒ“ƒJ[ƒ|ƒCƒ“ƒg
+    glm::vec2 m_anchorPointInPoints;	//!< ãƒã‚¤ãƒ³ãƒˆã®ã‚¢ãƒ³ã‚«ãƒ¼ãƒã‚¤ãƒ³ãƒˆ
+    glm::vec2 m_anchorPoint;			//!< æ­£è¦åŒ–ã•ã‚ŒãŸã‚¢ãƒ³ã‚«ãƒ¼ãƒã‚¤ãƒ³ãƒˆ
 
-    float m_rotation;		//!< Z²‚Ì‰ñ“]Šp“x
+    float m_rotation;		//!< Zè»¸ã®å›è»¢è§’åº¦
     
-    float m_scaleX;			//!< X²‚Ì”{—¦
-    float m_scaleY;			//!< Y²‚Ì”{—¦
-    float m_scaleZ;			//!< Z²‚Ì”{—¦
+    float m_scaleX;			//!< Xè»¸ã®å€ç‡
+    float m_scaleY;			//!< Yè»¸ã®å€ç‡
+    float m_scaleZ;			//!< Zè»¸ã®å€ç‡
 
-    mutable glm::mat4 m_transform;			//!< •ÏŠ·s—ñ
-    mutable glm::mat4 m_modelVewTransform;	//!< ƒ‚ƒfƒ‹ƒrƒ…[s—ñ
+    mutable glm::mat4 m_transform;			//!< å¤‰æ›è¡Œåˆ—
+    mutable glm::mat4 m_modelVewTransform;	//!< ãƒ¢ãƒ‡ãƒ«ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
 
-    std::int32_t m_localZOrder;	//!< ƒ[ƒJƒ‹ZƒI[ƒ_[
-    float m_globalZOrder;		//!< ƒOƒ[ƒoƒ‹ZƒI[ƒ_[
+    std::int32_t m_localZOrder;	//!< ãƒ­ãƒ¼ã‚«ãƒ«Zã‚ªãƒ¼ãƒ€ãƒ¼
+    float m_globalZOrder;		//!< ã‚°ãƒ­ãƒ¼ãƒãƒ«Zã‚ªãƒ¼ãƒ€ãƒ¼
 
-    bool m_visible;							//!< ƒm[ƒh•\¦ƒtƒ‰ƒO
-    bool m_ignoreAnchorPointForPosition;	//!< ƒm[ƒh‚ÌŠî€“_‚ªvec2(0,0)‚Ìê‡‚ÍtrueA‚»‚êˆÈŠO‚Ìê‡‚Ífalse
-    mutable bool m_transformDirty;			//!< •ÏŠ·‚Ìƒ_[ƒeƒB[ƒtƒ‰ƒO
-    bool m_transformUpdated;				//!< •ÏŠ·‚ÌXV‚Ìƒ_[ƒeƒB[ƒtƒ‰ƒO
-    bool m_contentSizeDirty;				//!< ƒRƒ“ƒeƒ“ƒcƒTƒCƒY‚Ìƒ_[ƒeƒB[ƒtƒ‰ƒO
+    bool m_visible;							//!< ãƒãƒ¼ãƒ‰è¡¨ç¤ºãƒ•ãƒ©ã‚°
+    bool m_ignoreAnchorPointForPosition;	//!< ãƒãƒ¼ãƒ‰ã®åŸºæº–ç‚¹ãŒvec2(0,0)ã®å ´åˆã¯trueã€ãã‚Œä»¥å¤–ã®å ´åˆã¯false
+    mutable bool m_transformDirty;			//!< å¤‰æ›ã®ãƒ€ãƒ¼ãƒ†ã‚£ãƒ¼ãƒ•ãƒ©ã‚°
+    bool m_transformUpdated;				//!< å¤‰æ›ã®æ›´æ–°ã®ãƒ€ãƒ¼ãƒ†ã‚£ãƒ¼ãƒ•ãƒ©ã‚°
+    bool m_contentSizeDirty;				//!< ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚µã‚¤ã‚ºã®ãƒ€ãƒ¼ãƒ†ã‚£ãƒ¼ãƒ•ãƒ©ã‚°
 
-    std::vector<Node*> m_children;			//!< qƒm[ƒh‚Ì”z—ñ
-    std::vector<Component*> m_components;	//!< ƒRƒ“ƒ|[ƒlƒ“ƒg
+    std::vector<Node*> m_children;			//!< å­ãƒãƒ¼ãƒ‰ã®é…åˆ—
+    std::vector<Component*> m_components;	//!< ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 };
 
 bool isScreenPointInRect(const glm::vec2& pt, const Camera* pCamera, const glm::mat4& worldToLocal,

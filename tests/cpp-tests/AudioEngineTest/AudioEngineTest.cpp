@@ -22,7 +22,7 @@ bool AudioEngineTest::init()
     float leftX = 300.0f;
     float leftX2 = 550.0f;
 
-    std::string audioFileName = "audio/タイフーンパレード.wav";
+    std::string audioFileName = "audio/05 Strength & Guile.wav";
 
     auto fileNameLabel = Label::createWithBMFont("MS Gothic.fnt", audioFileName);
     fileNameLabel->setPosition(leftX, 550);

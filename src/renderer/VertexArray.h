@@ -23,9 +23,9 @@ public:
         std::size_t offset = 0;
     };
 
-    /** ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^ */
+    /** ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     VertexArray();
-    /** ƒfƒXƒgƒ‰ƒNƒ^ */
+    /** ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ */
     ~VertexArray();
 
     unsigned int getVertexCount() const { return m_vertexCount; }
@@ -40,69 +40,69 @@ public:
     void setStride(std::size_t stride);
 
     /**
-     * @brief ’¸“_ƒoƒbƒtƒ@‚ğì¬‚·‚é
-     * @param usage —\‘z‚³‚ê‚ég—pƒpƒ^[ƒ“
+     * @brief é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+     * @param usage äºˆæƒ³ã•ã‚Œã‚‹ä½¿ç”¨ãƒ‘ã‚¿ãƒ¼ãƒ³
      */
     void createVertexBuffer(BufferUsage usage);
     /**
-     * @brief ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğì¬‚·‚é
-     * @param usage —\‘z‚³‚ê‚ég—pƒpƒ^[ƒ“
+     * @brief ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+     * @param usage äºˆæƒ³ã•ã‚Œã‚‹ä½¿ç”¨ãƒ‘ã‚¿ãƒ¼ãƒ³
      */
     void createIndexBuffer(BufferUsage usage);
  
     /**
-     * @bfief ’¸“_ƒoƒbƒtƒ@ƒf[ƒ^‚ğì¬‚µA‰Šú‰»‚·‚é
-     * @param pData ‰Šú‰»‚Ì‚½‚ß‚ÉƒRƒs[‚³‚ê‚éƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
-     * @param size ƒf[ƒ^‚ÌƒTƒCƒY(ƒoƒCƒg’PˆÊ)
+     * @bfief é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆã—ã€åˆæœŸåŒ–ã™ã‚‹
+     * @param pData åˆæœŸåŒ–ã®ãŸã‚ã«ã‚³ãƒ”ãƒ¼ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
+     * @param size ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚º(ãƒã‚¤ãƒˆå˜ä½)
      */
     void updateVertexBuffer(void* pData, size_t size);
     /**
-     * @bfief ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ƒf[ƒ^‚ğì¬‚µA‰Šú‰»‚·‚é
-     * @param pData ‰Šú‰»‚Ì‚½‚ß‚ÉƒRƒs[‚³‚ê‚éƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
-     * @param size ƒf[ƒ^‚ÌƒTƒCƒY(ƒoƒCƒg’PˆÊ)
+     * @bfief ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆã—ã€åˆæœŸåŒ–ã™ã‚‹
+     * @param pData åˆæœŸåŒ–ã®ãŸã‚ã«ã‚³ãƒ”ãƒ¼ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
+     * @param size ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚º(ãƒã‚¤ãƒˆå˜ä½)
      */
     void updateIndexBuffer(void* pData, size_t size);
     /**
-     * @bfief ’¸“_ƒoƒbƒtƒ@ƒf[ƒ^‚ğXV‚·‚é
-     * @param pData ƒRƒs[‚³‚ê‚éƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
-     * @param offset ƒIƒtƒZƒbƒg
-     * @param size ƒf[ƒ^‚ÌƒTƒCƒY(ƒoƒCƒg’PˆÊ)
+     * @bfief é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ‡ãƒ¼ã‚¿ã‚’æ›´æ–°ã™ã‚‹
+     * @param pData ã‚³ãƒ”ãƒ¼ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
+     * @param offset ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+     * @param size ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚º(ãƒã‚¤ãƒˆå˜ä½)
      */
     void updateVertexBuffer(void* pData, size_t offset, size_t size);
     /**
-     * @bfief ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ƒf[ƒ^‚ğXV‚·‚é
-     * @param pData ƒRƒs[‚³‚ê‚éƒf[ƒ^‚Ìƒ|ƒCƒ“ƒ^
-     * @param offset ƒIƒtƒZƒbƒg
-     * @param size ƒf[ƒ^‚ÌƒTƒCƒY(ƒoƒCƒg’PˆÊ)
+     * @bfief ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ‡ãƒ¼ã‚¿ã‚’æ›´æ–°ã™ã‚‹
+     * @param pData ã‚³ãƒ”ãƒ¼ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
+     * @param offset ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+     * @param size ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚º(ãƒã‚¤ãƒˆå˜ä½)
      */
     void updateIndexBuffer(void* pData, size_t offset, size_t size);
 
     /**
-     * @brief İ’è‚µ‚½’¸“_‘®«ƒf[ƒ^‚ğƒoƒCƒ“ƒh‚·‚é
+     * @brief è¨­å®šã—ãŸé ‚ç‚¹å±æ€§ãƒ‡ãƒ¼ã‚¿ã‚’ãƒã‚¤ãƒ³ãƒ‰ã™ã‚‹
      */
     void bindVertexBuffer();
     /**
-     * @brief ’¸“_‘®«ƒf[ƒ^‚Ì”z—ñ‚ğİ’è‚·‚é
+     * @brief é ‚ç‚¹å±æ€§ãƒ‡ãƒ¼ã‚¿ã®é…åˆ—ã‚’è¨­å®šã™ã‚‹
      * @param name 
-     * @param index ’¸“_‘®«‚ÌƒCƒ“ƒfƒbƒNƒX
-     * @param size ’¸“_‘®«‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg”B1,2,3,4‚Å‚ ‚é•K—v‚ª‚ ‚é
-     * @param needToBeNormallized ƒf[ƒ^‚ğ³‹K‰»‚·‚éê‡trueA’¼Úw’è‚·‚éê‡false
-     * @param offset ƒoƒbƒtƒ@ƒf[ƒ^“à‚ÌƒIƒtƒZƒbƒg
-     * @attention ‚±‚ÌŠÖ”‚ğƒR[ƒ‹‚·‚é‘O‚É’¸“_ƒoƒbƒtƒ@‚ğİ’è‚·‚é•K—v‚ª‚ ‚éB
+     * @param index é ‚ç‚¹å±æ€§ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+     * @param size é ‚ç‚¹å±æ€§ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆæ•°ã€‚1,2,3,4ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚‹
+     * @param needToBeNormallized ãƒ‡ãƒ¼ã‚¿ã‚’æ­£è¦åŒ–ã™ã‚‹å ´åˆtrueã€ç›´æ¥æŒ‡å®šã™ã‚‹å ´åˆfalse
+     * @param offset ãƒãƒƒãƒ•ã‚¡ãƒ‡ãƒ¼ã‚¿å†…ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+     * @attention ã“ã®é–¢æ•°ã‚’ã‚³ãƒ¼ãƒ«ã™ã‚‹å‰ã«é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’è¨­å®šã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
      */
     void setAttribute(const std::string& name, int index, int size, bool needToBeNormallized, std::size_t offset);
 
     /**
-     * @brief ’¸“_ƒoƒbƒtƒ@‚ªì¬‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ•Ô‚·
-     * @retval true ’¸“_ƒoƒbƒtƒ@‚ªì¬‚³‚ê‚Ä‚¢‚é
-     * @retval false ’¸“_ƒoƒbƒtƒ@‚ªì¬‚³‚ê‚Ä‚¢‚È‚¢
+     * @brief é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãŒä½œæˆã•ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’è¿”ã™
+     * @retval true é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãŒä½œæˆã•ã‚Œã¦ã„ã‚‹
+     * @retval false é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãŒä½œæˆã•ã‚Œã¦ã„ãªã„
      */
     bool isVertexBufferCreated() const { return m_isVertexBufferCreated; }
 
     /**
-     * @brief ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ªì¬‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ•Ô‚·
-     * @retval true ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ªì¬‚³‚ê‚Ä‚¢‚é
-     * @retval false ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ªì¬‚³‚ê‚Ä‚¢‚È‚¢
+     * @brief ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãŒä½œæˆã•ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’è¿”ã™
+     * @retval true ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãŒä½œæˆã•ã‚Œã¦ã„ã‚‹
+     * @retval false ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãŒä½œæˆã•ã‚Œã¦ã„ãªã„
      */
     bool isIndexBufferCreated() const { return m_isIndexBufferCreated; }
 
