@@ -96,7 +96,7 @@ std::string FileUtils::fullPathForFilename(const std::string& filename) const
         return "";
     }
 
-    const fs::path p(filename);
+    const fs::path p = fs::u8path(filename);
     if (p.is_absolute()) {
         return filename;
     }
@@ -164,8 +164,8 @@ bool FileUtils::init()
 
 std::string FileUtils::getPathForFilename(const std::string& filename, const std::string& searchPath) const
 {
-    fs::path path(searchPath);
-    path.append(filename);
+    const std::string appendPath = searchPath + "/" + filename;
+    fs::path path = fs::u8path(appendPath);
 
     std::string result = fs::exists(path) ? path.generic_string() : "";
 

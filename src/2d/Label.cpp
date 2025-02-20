@@ -10,8 +10,9 @@ NS_OCF_BEGIN
 static std::u32string convertUtf8ToUtf32(const std::string& utf8String)
 {
     std::u32string result;
+    result.reserve(utf8String.size());
 
-    for (int i = 0; i < utf8String.size(); i++) {
+    for (size_t i = 0, size = utf8String.size(); i < size; i++) {
         char p = utf8String.at(i);
         char32_t unicode = 0;
 

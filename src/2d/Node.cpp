@@ -69,7 +69,7 @@ void Node::update(float deltaTime)
     updateNode(deltaTime);
 }
 
-void Node::updateNode(float deltaTime)
+void Node::updateNode(float /*deltaTime*/)
 {
 }
 
@@ -112,7 +112,7 @@ void Node::onExit()
     }
 }
 
-void Node::draw(Renderer* renderer, const glm::mat4& transform)
+void Node::draw(Renderer* /*renderer*/, const glm::mat4& /*transform*/)
 {
 }
 

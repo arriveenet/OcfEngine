@@ -35,19 +35,19 @@ bool MeshRenderer::initWithObjFile(std::string_view objFile)
 
     if (!reader.ParseFromFile(fullPath, readerConfig)) {
         if (!reader.Error().empty()) {
-            OCFLOG("[TinyObjReader] %s\n", reader.Error());
+            OCFLOG("[TinyObjReader] %s\n", reader.Error().c_str());
         }
 
         return false;
     }
 
     if (!reader.Warning().empty()) {
-        OCFLOG("[TinyObjReader] %s\n", reader.Warning());
+        OCFLOG("[TinyObjReader] %s\n", reader.Warning().c_str());
     }
 
     const tinyobj::attrib_t& attrib                   = reader.GetAttrib();
     const std::vector<tinyobj::shape_t>& shapes       = reader.GetShapes();
-    const std::vector<tinyobj::material_t>& materials = reader.GetMaterials();
+    //const std::vector<tinyobj::material_t>& materials = reader.GetMaterials();
 
 
     for (size_t s = 0; s < shapes.size(); s++) {

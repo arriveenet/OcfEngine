@@ -119,7 +119,7 @@ public:
     {
         static_assert(std::is_base_of<Node, T>::value, "Node::sortNodes: Only accept derived of Node!");
         std::sort(std::begin(nodes), std::end(nodes),
-            [](T* n1, T* n2) { return (n1->m_localZOrder < n1->m_localZOrder); });
+            [](T* n1, T* n2) { return (n1->m_localZOrder < n2->m_localZOrder); });
     }
 
     /**

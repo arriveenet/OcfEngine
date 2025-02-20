@@ -302,8 +302,8 @@ void Sprite::setVertexCoords(const Rect& rect, QuadV3fC3fT2f* outQuad)
 {
     const float x1 = 0.0f;
     const float y1 = 0.0f;
-    const float x2 = x1 + m_size.x;
-    const float y2 = y1 + m_size.y;
+    const float x2 = x1 + rect.m_size.x;
+    const float y2 = y1 + rect.m_size.y;
 
     outQuad->bottomLeft.position  = { x1, y1, 0.0f };
     outQuad->bottomRight.position = { x2, y1, 0.0f };
