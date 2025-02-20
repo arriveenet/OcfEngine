@@ -60,12 +60,12 @@ bool Node::init()
 
 void Node::update(float deltaTime)
 {
-    // ƒRƒ“ƒ|[ƒlƒ“ƒg‚ðXV
+    // ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’æ›´æ–°
     updateComponents(deltaTime);
-    // ”z‰º‚ÌƒGƒ“ƒeƒBƒeƒB‚ðXV
+    // é…ä¸‹ã®ã‚¨ãƒ³ãƒ†ã‚£ãƒ†ã‚£ã‚’æ›´æ–°
     updateNodes(deltaTime);
 
-    //@Ž©g‚ðXV
+    //ã€€è‡ªèº«ã‚’æ›´æ–°
     updateNode(deltaTime);
 }
 
@@ -348,7 +348,7 @@ const glm::mat4& Node::getNodeToParentTransform() const
 
         m_transform = transform;
 
-        // Šî€“_‚ð’²®
+        // åŸºæº–ç‚¹ã‚’èª¿æ•´
         if (m_anchorPointInPoints != glm::vec2(0.0f, 0.0f)) {
             m_transform[3][0] += m_transform[0][0] * -m_anchorPointInPoints.x + m_transform[1][0] * -m_anchorPointInPoints.y;
             m_transform[3][1] += m_transform[0][1] * -m_anchorPointInPoints.x + m_transform[1][1] * -m_anchorPointInPoints.y;
@@ -423,12 +423,12 @@ void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t
             }
         }
 
-        // Ž©g‚ð•`‰æ
+        // è‡ªèº«ã‚’æç”»
         if (visibleByCamera) {
             this->draw(pRenderer, m_modelVewTransform);
         }
 
-        // ŽqƒGƒ“ƒeƒBƒeƒB‚ð•`‰æ
+        // å­ã‚¨ãƒ³ãƒ†ã‚£ãƒ†ã‚£ã‚’æç”»
         for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
             (*iter)->visit(pRenderer, m_modelVewTransform, flags);
         }
@@ -437,7 +437,7 @@ void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t
         this->draw(pRenderer, m_modelVewTransform);
     }
     else {
-        // ‰½‚à‚µ‚È‚¢
+        // ä½•ã‚‚ã—ãªã„
     }
 
     m_pGame->popMatrix(MatrixStack::ModelView);

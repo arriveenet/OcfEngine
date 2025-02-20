@@ -40,7 +40,7 @@ FirstPersonCamera::~FirstPersonCamera()
 
 bool FirstPersonCamera::initPerspective(float fovy, float aspect, float zNear, float zFar)
 {
-    // ƒCƒxƒ“ƒgƒŠƒXƒi[‚Ì“o˜^
+    // ã‚¤ãƒ™ãƒ³ãƒˆãƒªã‚¹ãƒŠãƒ¼ã®ç™»éŒ²
     auto mouseListener = EventListenerMouse::create();
     mouseListener->m_onEvent = std::bind(&FirstPersonCamera::onMouseMove, this, std::placeholders::_1);
 
@@ -51,7 +51,7 @@ bool FirstPersonCamera::initPerspective(float fovy, float aspect, float zNear, f
     m_pGame->getEventDispatcher()->addEventListener(mouseListener, this);
     m_pGame->getEventDispatcher()->addEventListener(keyboardListener, this);
 
-    // ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ð’†‰›‚É
+    // ãƒžã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã‚’ä¸­å¤®ã«
     Input::setMouseMode(Input::MouseMode::Captured);
 
     return Camera::initPerspective(fovy, aspect, zNear, zFar);
@@ -107,16 +107,16 @@ void FirstPersonCamera::onMouseMove(Event* pEvent)
         m_yaw += xOffset;
         m_pitch += yOffset;
 
-        // ƒˆ[Šp“x‚Ì§ŒÀ
+        // ãƒ¨ãƒ¼è§’åº¦ã®åˆ¶é™
         if (m_yaw > 360.0f || m_yaw < -360.0f) {
             m_yaw = 0.0f;
         }
 
-        // ƒsƒbƒ`Šp“x‚Ì§ŒÀ
+        // ãƒ”ãƒƒãƒè§’åº¦ã®åˆ¶é™
         m_pitch = glm::clamp(m_pitch, -89.0f, 89.0f);
     }
 
-    // ƒJƒƒ‰‚ÌŒü‚«‚ðXV
+    // ã‚«ãƒ¡ãƒ©ã®å‘ãã‚’æ›´æ–°
     updateCameraVectors();
 
 }

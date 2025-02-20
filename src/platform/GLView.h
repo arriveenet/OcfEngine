@@ -59,10 +59,10 @@ protected:
     void updateDesignResolutionSize();
 
 protected:
-    glm::vec2 m_windowSize;             //!< �E�B���h�E�T�C�Y
-    glm::vec2 m_designResolutionSize;   //!< �Q�[�����̉𑜓x
-    std::string m_viewName;             //!< �r���[�̖��O
-    Rect m_viewportRect;                //!< �r���[�|�[�g�̋�`
+    glm::vec2 m_windowSize;             //!< ウィンドウサイズ
+    glm::vec2 m_designResolutionSize;   //!< ゲーム内の解像度
+    std::string m_viewName;             //!< ビューの名前
+    Rect m_viewportRect;                //!< ビューポートの矩形
     float m_scaleX;
     float m_scaleY;
 };

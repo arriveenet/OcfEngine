@@ -2,6 +2,11 @@ set(APP_NAME cpp-tests)
 
 project(${APP_NAME})
 
+if(WIN32)
+    add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
+    add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+endif()
+
 # record sources, headers, resources...
 file(GLOB GAME_SOURCE *.cpp)
 file(GLOB GAME_HEADER *.h)

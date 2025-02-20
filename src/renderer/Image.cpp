@@ -75,28 +75,28 @@ bool Image::loadImageFile(const std::string& path)
     std::ifstream ifs;
     ifs.open(path, std::ios_base::binary);
 
-    // ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“¸”s
+    // ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³å¤±æ•—
     if (!ifs) {
         return false;
     }
 
-    // ƒtƒ@ƒCƒ‹ƒTƒCƒYæ“¾
+    // ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºå–å¾—
     ifs.seekg(0, std::ios_base::end);
     size_t size = ifs.tellg();
 
-    // ƒtƒ@ƒCƒ‹ˆÊ’u‚ğæ“ª‚É–ß‚·
+    // ãƒ•ã‚¡ã‚¤ãƒ«ä½ç½®ã‚’å…ˆé ­ã«æˆ»ã™
     ifs.seekg(0, std::ios_base::beg);
 
-    // ƒf[ƒ^“Ç‚İ‚İ
+    // ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
     unsigned char* pData = new unsigned char[size];
     ifs.read(reinterpret_cast<char*>(pData), size);
 
     ifs.close();
 
-    // ƒf[ƒ^‚©‚ç‰æ‘œƒf[ƒ^‚ğ“Ç‚İ‚Ş
+    // ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€
     loadImageData(pData, size);
 
-    // ƒƒ‚ƒŠ‰ğ•ú
+    // ãƒ¡ãƒ¢ãƒªè§£æ”¾
     delete[] pData;
 
     return true;
@@ -151,28 +151,28 @@ bool Image::initWidhtPngData(const unsigned char* pData, size_t dataSize)
     do {
         if (dataSize < 8) break;
 
-        // PNGƒf[ƒ^‚©”»’è
+        // PNGãƒ‡ãƒ¼ã‚¿ã‹åˆ¤å®š
         memcpy(header, pData, PNG_SIG_SIZE);
         if (png_sig_cmp(header, 0, PNG_SIG_SIZE) != 0) break;
 
-        // png_ptr‚ğ‰Šú‰»
+        // png_ptrã‚’åˆæœŸåŒ–
         png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
         if (png_ptr == nullptr) break;
 
-        // info_ptr‚ğ‰Šú‰»
+        // info_ptrã‚’åˆæœŸåŒ–
         info_ptr = png_create_info_struct(png_ptr);
         if (info_ptr == nullptr) break;
 
         setjmp(png_jmpbuf(png_ptr));
 
-        // ƒR[ƒ‹ƒoƒbƒNŠÖ”‚ğİ’è
+        // ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã‚’è¨­å®š
         ImageSource imageSource = {};
         imageSource.pData = pData;
         imageSource.size = dataSize;
         imageSource.offset = 0;
         png_set_read_fn(png_ptr, &imageSource, pngReadCallback);
 
-        // PNG‚Ìƒtƒ@ƒCƒ‹î•ñ‚ğ“Ç‚İ‚Ş
+        // PNGã®ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ã‚’èª­ã¿è¾¼ã‚€
         png_read_info(png_ptr, info_ptr);
 
         m_width = png_get_image_width(png_ptr, info_ptr);
@@ -180,7 +180,7 @@ bool Image::initWidhtPngData(const unsigned char* pData, size_t dataSize)
         const png_byte bitDepth = png_get_bit_depth(png_ptr, info_ptr);
         const png_uint_32 colorType = png_get_color_type(png_ptr, info_ptr);
 
-        // ƒsƒNƒZƒ‹ƒtƒH[ƒ}ƒbƒg‚ğİ’è
+        // ãƒ”ã‚¯ã‚»ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’è¨­å®š
         switch (colorType) {
         case PNG_COLOR_TYPE_GRAY:
             m_pixcelFormat = PixelFormat::GRAY;
@@ -195,7 +195,7 @@ bool Image::initWidhtPngData(const unsigned char* pData, size_t dataSize)
             break;
         }
 
-        // PNGƒf[ƒ^‚æ‚æ“Ç‚İ‚İ
+        // PNGãƒ‡ãƒ¼ã‚¿ã‚ˆã‚ˆèª­ã¿è¾¼ã¿
         png_size_t rowbytes;
         png_bytep* row_pointers = new png_bytep[m_height];
 

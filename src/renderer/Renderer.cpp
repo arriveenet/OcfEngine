@@ -52,7 +52,7 @@ bool Renderer::init()
 
     m_trianglesCommands.reserve(64);
 
-    // ƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒfƒBƒ“ƒO‚ð—LŒø‚É‚·‚é
+    // ã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã‚’æœ‰åŠ¹ã«ã™ã‚‹
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -186,18 +186,18 @@ void Renderer::processRenderCommand(RenderCommand* command)
 
 void Renderer::trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int vertexBufferOffset)
 {
-    // ’¸“_ƒf[ƒ^‚ð”z—ñ‚É’Ç‰Á
+    // é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’é…åˆ—ã«è¿½åŠ 
     unsigned int vertexCount = pCmd->getTriangles().vertexCount;
     memcpy(&m_triangleVertices[m_triangleVertexCount], pCmd->getTriangles().vertices, sizeof(Vertex3fC3fT2f) * vertexCount);
     
-    // ƒ[ƒJƒ‹À•W‚©‚çƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·
+    // ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›
     const glm::mat4& modelView = pCmd->getModelView();
     for (unsigned int i = 0; i < vertexCount; i++) {
         Vertex3fC3fT2f vertex = m_triangleVertices[m_triangleVertexCount + i];
         m_triangleVertices[m_triangleVertexCount + i].position = modelView * glm::vec4(vertex.position, 1.0f);
     }
 
-    // ƒCƒ“ƒfƒbƒNƒX‚ð”z—ñ‚É’Ç‰Á
+    // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’é…åˆ—ã«è¿½åŠ 
     unsigned short* indices = pCmd->getTriangles().indices;
     unsigned int indexCount = pCmd->getTriangles().indexCount;
     for (unsigned int i = 0; i < indexCount; i++) {
@@ -214,7 +214,7 @@ void Renderer::drawTrianglesCommand()
     if (m_trianglesCommands.empty())
         return;
 
-    /*------------- 1: ’¸“_‚ÆƒCƒ“ƒfƒbƒNƒX‚ðƒZƒbƒgƒAƒbƒv‚·‚é -------------*/
+    /*------------- 1: é ‚ç‚¹ã¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã™ã‚‹ -------------*/
     m_pTriangleBatchToDraw[0].pCommand = nullptr;
     m_pTriangleBatchToDraw[0].indicesToDraw = 0;
     m_pTriangleBatchToDraw[0].offset = 0;
@@ -260,7 +260,7 @@ void Renderer::drawTrianglesCommand()
     m_pVertexArray->updateVertexBuffer(m_triangleVertices, sizeof(m_triangleVertices[0]) * m_triangleVertexCount);
     m_pVertexArray->updateIndexBuffer(m_triangleIndices, sizeof(m_triangleIndices[0]) * m_triangleIndexCount);
 
-    /*------------- 2: •`‰æ -------------*/
+    /*------------- 2: æç”» -------------*/
     for (int i = 0; i < batchTotal; i++) {
         auto& drawInfo = m_pTriangleBatchToDraw[i];
         if (drawInfo.pCommand == nullptr)
@@ -285,7 +285,7 @@ void Renderer::drawTrianglesCommand()
     }
     m_pVertexArray->unbind();
 
-    /*------------- 3: ƒNƒŠ[ƒ“ƒAƒbƒv -------------*/
+    /*------------- 3: ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ— -------------*/
     m_trianglesCommands.clear();
 }
 

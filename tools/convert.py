@@ -8,7 +8,7 @@ import codecs
 def convert_file_encoding(file_path, encoding) -> bool:
     # ファイルのエンコードがUTF-8か確認
     with open(file_path, "rb") as f:
-        raw = f.read(1024)
+        raw = f.read()
         try:
             raw.decode('utf-8')
             return False

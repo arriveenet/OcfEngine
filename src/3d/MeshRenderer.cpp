@@ -60,7 +60,7 @@ bool MeshRenderer::initWithObjFile(std::string_view objFile)
             for (size_t v = 0; v < fv; v++) {
                 tinyobj::index_t index = shapes[s].mesh.indices[indexOffset + v];
 
-                // ’¸“_À•W‚ðŽæ“¾
+                // é ‚ç‚¹åº§æ¨™ã‚’å–å¾—
                 tinyobj::real_t vx = attrib.vertices[3 * static_cast<size_t>(index.vertex_index) + 0];
                 tinyobj::real_t vy = attrib.vertices[3 * static_cast<size_t>(index.vertex_index) + 1];
                 tinyobj::real_t vz = attrib.vertices[3 * static_cast<size_t>(index.vertex_index) + 2];
@@ -69,7 +69,7 @@ bool MeshRenderer::initWithObjFile(std::string_view objFile)
                 pMesh->m_data.emplace_back(vy);
                 pMesh->m_data.emplace_back(vz);
 
-                // –@üƒf[ƒ^‚ª‚ ‚é‚©ƒ`ƒFƒbƒN
+                // æ³•ç·šãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
                 if (index.normal_index >= 0) {
                     tinyobj::real_t nx = attrib.normals[3 * static_cast<size_t>(index.normal_index) + 0];
                     tinyobj::real_t ny = attrib.normals[3 * static_cast<size_t>(index.normal_index) + 1];
@@ -80,7 +80,7 @@ bool MeshRenderer::initWithObjFile(std::string_view objFile)
                     pMesh->m_data.emplace_back(ny);
                     pMesh->m_data.emplace_back(nz);
                 }
-                // ƒeƒNƒXƒ`ƒƒÀ•W‚ª‚ ‚é‚©ƒ`ƒFƒbƒN
+                // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ãŒã‚ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
                 if (index.texcoord_index >= 0) {
                     tinyobj::real_t tx = attrib.texcoords[2 * static_cast<size_t>(index.texcoord_index) + 0];
                     tinyobj::real_t ty = attrib.texcoords[2 * static_cast<size_t>(index.texcoord_index) + 1];

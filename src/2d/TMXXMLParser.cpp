@@ -85,7 +85,7 @@ bool TMXMapInfo::parseXMLFile(const std::string& xmlFile)
     m_tileSize.x = mapElement->IntAttribute("tilewidth");
     m_tileSize.y = mapElement->IntAttribute("tileheight");
 
-    // ƒ^ƒCƒ‹ƒZƒbƒg‚ğ‰ğÍ
+    // ã‚¿ã‚¤ãƒ«ã‚»ãƒƒãƒˆã‚’è§£æ
     m_tilesetInfo = new TMXTilesetInfo();
     auto tilesetElement = mapElement->FirstChildElement("tileset");
     m_tilesetInfo->m_name = tilesetElement->Attribute("name");
@@ -97,7 +97,7 @@ bool TMXMapInfo::parseXMLFile(const std::string& xmlFile)
     m_tilesetInfo->m_imageSize.x = imageElement->FloatAttribute("width");
     m_tilesetInfo->m_imageSize.y = imageElement->FloatAttribute("height");
 
-    // ƒŒƒCƒ„[‚ğ‰ğÍ
+    // ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è§£æ
     parseLayer(mapElement);
 
     return true;

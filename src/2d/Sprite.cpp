@@ -104,7 +104,7 @@ bool Sprite::initWithTexture(Texture2D* texture, const Rect& rect)
 
         setAnchorPoint(glm::vec2(0.5f, 0.5f));
 
-        // F‚ğİ’è
+        // è‰²ã‚’è¨­å®š
         m_quad.topLeft.color     = { 1.0f, 1.0f, 1.0f };
         m_quad.bottomLeft.color  = { 1.0f, 1.0f, 1.0f };
         m_quad.topRight.color    = { 1.0f, 1.0f, 1.0f };

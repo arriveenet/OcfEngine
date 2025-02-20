@@ -365,4 +365,7 @@ FodyWeavers.xsd
 # Cmake build folder
 build/
 
+# vscode
+.vscode
+
 !assets/*/*

@@ -100,7 +100,7 @@ void GLView::updateDesignResolutionSize()
 
     m_scaleX = m_scaleY = std::min(m_scaleX, m_scaleY);
 
-    // ƒrƒ…[ƒ|[ƒg‚Ì‹éŒ`‚ğİ’è
+    // ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®çŸ©å½¢ã‚’è¨­å®š
     const float viewportWidth = m_designResolutionSize.x * m_scaleX;
     const float viewportHeight = m_designResolutionSize.y * m_scaleY;
 

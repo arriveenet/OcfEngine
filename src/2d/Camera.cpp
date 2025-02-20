@@ -165,7 +165,7 @@ void Camera::onEnter()
     if (m_scene == nullptr) {
         auto scene = getScene();
         if (scene) {
-            // �V�[���ɂ��̃J������ǉ�
+            // シーンにこのカメラを追加
             setScene(scene);
         }
     }
@@ -174,7 +174,7 @@ void Camera::onEnter()
 
 void Camera::onExit()
 {
-    // �V�[�����炱�̃J�������폜
+    // シーンからこのカメラを削除
     setScene(nullptr);
     Node::onExit();
 }
@@ -190,7 +190,7 @@ void Camera::apply()
 void Camera::setScene(Scene* scene)
 {
     if (m_scene != scene) {
-        // �V�[�����炱�̃J�������폜
+        // シーンからこのカメラを削除
         if (scene == nullptr) {
             auto& cameras = m_scene->m_cameras;
             auto iter = std::find(cameras.begin(), cameras.end(), this);
@@ -199,7 +199,7 @@ void Camera::setScene(Scene* scene)
             }
             m_scene = nullptr;
         }
-        // �V�[���ɂ��̃J������ǉ�
+        // シーンにこのカメラを追加
         else {
             m_scene = scene;
             auto& cameras = m_scene->m_cameras;
