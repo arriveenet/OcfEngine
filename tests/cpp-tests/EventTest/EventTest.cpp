@@ -37,17 +37,19 @@ bool EventTest::init()
     return true;
 }
 
-void EventTest::onKeyPressed(Keyboard::KeyCode key, Event* pEvent)
+void EventTest::onKeyPressed(Keyboard::KeyCode key, Event* /* pEvent */)
 {
     char str[256];
-    snprintf(str, sizeof(str), "Key pressed code: %d", (int)key);
+    snprintf(str, sizeof(str), "Key pressed code: %s",
+             ocf::Keyboard::getString(key).c_str());
     m_pKeyboardLabel->setString(str);
 }
 
-void EventTest::onKeyReleased(ocf::Keyboard::KeyCode key, ocf::Event* pEvent)
+void EventTest::onKeyReleased(ocf::Keyboard::KeyCode key, ocf::Event* /* pEvent */)
 {
     char str[256];
-    snprintf(str, sizeof(str), "Key released code: %d", (int)key);
+    snprintf(str, sizeof(str), "Key released code: %s",
+             ocf::Keyboard::getString(key).c_str());
     m_pKeyboardLabel->setString(str);
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "base/Types.h"
+#include <string>
 
 #define KEY_CODE_MAX	348
 
@@ -134,6 +135,8 @@ public:
 
     friend class Input;
     static void onKeyEvent(KeyCode key, int action);
+
+    static std::string getString(KeyCode key);
 
     bool init();
 
