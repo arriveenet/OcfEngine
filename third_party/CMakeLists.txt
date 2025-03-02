@@ -4,6 +4,17 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 add_library(thirdparty INTERFACE)
 
+add_subdirectory(freetype)
+target_include_directories(thirdparty INTERFACE "freetype/include")
+target_link_libraries(thirdparty INTERFACE freetype)
+set_target_properties(freetype
+                      PROPERTIES
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      FOLDER "ThirdParty"
+                      )
+
 add_subdirectory(glad)
 target_include_directories(thirdparty INTERFACE "glad/include")
 target_link_libraries(thirdparty INTERFACE glad)
