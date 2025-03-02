@@ -33,10 +33,10 @@ Camera* Camera::createPerspective(float fovy, float aspect, float zNear, float z
     return pCamera;
 }
 
-Camera* Camera::createOrthographic(float left, float right, float bottom, float top, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
+Camera* Camera::createOrthographic(float width, float height, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
 {
     Camera* pCamera = new Camera();
-    pCamera->initOrthographic(left, right, zNear, zFar);
+    pCamera->initOrthographic(width, height, zNear, zFar);
 
     return pCamera;
 }

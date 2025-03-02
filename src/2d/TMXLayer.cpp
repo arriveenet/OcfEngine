@@ -33,7 +33,7 @@ TMXLayer::~TMXLayer()
     OCF_SAFE_RELEASE(m_pLayerInfo);
 }
 
-bool TMXLayer::init(TMXTilesetInfo* tilesetInfo, TMXLayerInfo* layerInfo, TMXMapInfo* mapInfo)
+bool TMXLayer::init(TMXTilesetInfo* tilesetInfo, TMXLayerInfo* layerInfo, TMXMapInfo* /*mapInfo*/)
 {
     m_pTileset = tilesetInfo;
 

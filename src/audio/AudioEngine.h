@@ -58,6 +58,8 @@ private:
 
 	static std::unordered_map<AUDIO_ID, AudioInfo> m_audioIdInfoMap;
 
+    static std::unordered_map<std::string, AUDIO_ID> m_audioPathIdMap;
+
 	static AudioEngineImpl* m_pAudioEngineImpl;
 };
 

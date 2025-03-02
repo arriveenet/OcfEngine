@@ -32,7 +32,8 @@ Program* ShaderManager::getBuiltinProgram(ProgramType type)
 
 Program* ShaderManager::loadProgram(std::string_view vsName, std::string_view fsName)
 {
-    return nullptr;
+    Program* program = new Program(vsName.data(), fsName.data());
+    return program;
 }
 
 ShaderManager::ShaderManager()

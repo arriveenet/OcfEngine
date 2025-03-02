@@ -358,7 +358,7 @@ void GLViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, int a
     Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 
-void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* window, double xpos, double ypos)
+void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* /* window */, double xpos, double ypos)
 {
     m_mousePosition.x = static_cast<float>(xpos);
     m_mousePosition.y = static_cast<float>(m_windowSize.y - ypos);
@@ -370,7 +370,7 @@ void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* window, double xpos, double
     Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 
-void GLViewImpl::onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void GLViewImpl::onGLFWKeyCallback(GLFWwindow* /* window */, int key, int /* scancode */, int action, int /* mods */)
 {
     auto keyCode = g_keyCodeMap[key];
     Keyboard::onKeyEvent(keyCode, action);
@@ -380,7 +380,7 @@ void GLViewImpl::onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, in
     Game::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 }
 
-void GLViewImpl::onGLFWWindowSizeCallback(GLFWwindow* window, int width, int height)
+void GLViewImpl::onGLFWWindowSizeCallback(GLFWwindow* /* window */, int width, int height)
 {
     handleWindowSize(width, height);
     glViewport(0, 0, width, height);

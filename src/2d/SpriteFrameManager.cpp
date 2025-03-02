@@ -58,7 +58,7 @@ SpriteFrame* SpriteFrameManager::getSpriteFrameByName(std::string_view name)
     return frame;
 }
 
-void SpriteFrameManager::insertFrame(const std::shared_ptr<SpriteSheet>& spriteSheet, std::string_view frameName, SpriteFrame* spriteFrame)
+void SpriteFrameManager::insertFrame(const std::shared_ptr<SpriteSheet>& /*spriteSheet*/, std::string_view frameName, SpriteFrame* spriteFrame)
 {
     //spriteSheet->frames.insert(std::string(frameName));
     std::pair<std::string, std::shared_ptr<SpriteFrame>> frameItem(frameName, spriteFrame);

@@ -225,7 +225,7 @@ AudioCache* AudioEngineImpl::preload(std::string_view filePath)
     return pAudioCach;
 }
 
-void AudioEngineImpl::updatePlayers(bool forStop)
+void AudioEngineImpl::updatePlayers(bool /* forStop */)
 {
     AUDIO_ID audioID;
     AudioPlayer* player;
@@ -248,7 +248,7 @@ void AudioEngineImpl::updatePlayers(bool forStop)
     }
 }
 
-void AudioEngineImpl::unchache(std::string_view filePath)
+void AudioEngineImpl::uncache(std::string_view filePath)
 {
     m_audioCaches.erase(filePath.data());
 }
@@ -264,7 +264,7 @@ void AudioEngineImpl::unchacheAll()
 
 ALuint AudioEngineImpl::findSource()
 {
-    ALuint sourceId = AL_INVALID;
+    ALuint sourceId = static_cast<ALuint>(AL_INVALID);
     if (!m_unusedSourcesPool.empty()) {
         sourceId = m_unusedSourcesPool.front();
         m_unusedSourcesPool.pop();

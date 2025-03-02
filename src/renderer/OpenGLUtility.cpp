@@ -69,6 +69,7 @@ GLsizei OpenGLUtility::getGLDataTypeSize(GLenum type)
     case GL_UNSIGNED_INT:
     case GL_FLOAT:
         size = sizeof(GLfloat);
+        break;
     case GL_FLOAT_VEC2:
     case GL_INT_VEC2:
         size = sizeof(GLfloat) * 2;

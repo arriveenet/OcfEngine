@@ -60,17 +60,10 @@ bool Button::init(std::string_view normalImage, std::string_view activeImage)
     return false;
 }
 
-void Button::updateNode(float deltaTime)
+void Button::updateNode(float /* deltaTime */)
 {
     glm::vec2 mousePos = Input::getMousePosition();
 
-    Camera* pCamera = getScene()->getDefaultCamera();
-    Rect rect;
-    rect.m_size = getSize();
-    bool ret = isScreenPointInRect(mousePos, pCamera, getWorldToNodeTransform(), rect, nullptr);
-    if (ret) {
-        int a = 0;
-    }
     if (this->hitTest(mousePos)) {
         m_pButtonNormalRenderer->setVisible(false);
         m_pButtonActiveRenderer->setVisible(true);
@@ -140,7 +133,6 @@ bool Button::createTextRendererIfNull()
 
 void Button::updateTextLocation()
 {
-    float x = (m_size.x - m_pTextRenderer->getSize().x) / 2.0f;
     glm::vec2 pos = (m_size - m_pTextRenderer->getSize()) / 2.0f;
     m_pTextRenderer->setPosition(pos);
 }

@@ -7,6 +7,7 @@ EventMouse::EventMouse(MouseEventType mouseEventType)
     , m_mouseEventType(mouseEventType)
     , m_mouseButton(Mouse::Button1)
     , m_position(0.0f, 0.0f)
+    , m_lastPosition(0.0f, 0.0f)
 {
 }
 

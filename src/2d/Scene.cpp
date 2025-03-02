@@ -31,7 +31,7 @@ bool Scene::init()
     return true;
 }
 
-void Scene::render(Renderer* renderer, const glm::mat4& eyeProjection)
+void Scene::render(Renderer* renderer, const glm::mat4& /* eyeProjection */)
 {
     Camera* defaultCamera = nullptr;
     for (const auto& camera : getCameras()) {
@@ -40,7 +40,8 @@ void Scene::render(Renderer* renderer, const glm::mat4& eyeProjection)
         }
 
         Camera::s_pVisitingCamera = camera;
-        if (Camera::s_pVisitingCamera->getCameraFlag() == CameraFlag::Default) {
+        const uint16_t cameraFlag = static_cast<uint16_t>(Camera::s_pVisitingCamera->getCameraFlag());
+        if (cameraFlag & static_cast<uint16_t>(CameraFlag::Default)) {
             defaultCamera = Camera::s_pVisitingCamera;
         }
 

@@ -9,10 +9,10 @@ void setUniform(GLuint location, unsigned int size, GLenum uniformType, void* da
     GLsizei count = size;
     switch (uniformType) {
     case GL_FLOAT_VEC3:
-        glUniform3fv(location, 1, (GLfloat*)data);
+        glUniform3fv(location, count, (GLfloat*)data);
         break;
     case GL_FLOAT_MAT4:
-        glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat*)data);
+        glUniformMatrix4fv(location, count, GL_FALSE, (GLfloat*)data);
         break;
     default:
         OCFASSERT(false, "Invalidate uniform data type\n");
@@ -72,7 +72,8 @@ void Program::bindUniformBuffers(const char* data)
         if (uniformInfo.size <= 0)
             continue;
 
-        ::setUniform(uniformInfo.location, uniformInfo.size, uniformInfo.type, (void*)(data + uniformInfo.bufferOffset));
+        const int elementCount = uniformInfo.count;
+        ::setUniform(uniformInfo.location, elementCount, uniformInfo.type, (void*)(data + uniformInfo.bufferOffset));
     }
 }
 

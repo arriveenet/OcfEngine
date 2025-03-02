@@ -134,7 +134,7 @@ Image::Format Image::detectFormat(const unsigned char* pData, size_t dataSize)
     }
 }
 
-bool Image::initWithBmpData(const unsigned char* pData, size_t dataSize)
+bool Image::initWithBmpData(const unsigned char* /* pData */, size_t /* dataSize */)
 {
     return false;
 }
@@ -177,7 +177,6 @@ bool Image::initWidhtPngData(const unsigned char* pData, size_t dataSize)
 
         m_width = png_get_image_width(png_ptr, info_ptr);
         m_height = png_get_image_height(png_ptr, info_ptr);
-        const png_byte bitDepth = png_get_bit_depth(png_ptr, info_ptr);
         const png_uint_32 colorType = png_get_color_type(png_ptr, info_ptr);
 
         // ピクセルフォーマットを設定

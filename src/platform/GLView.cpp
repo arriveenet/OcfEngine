@@ -74,7 +74,7 @@ std::string_view GLView::getViewName() const
     return m_viewName;
 }
 
-void GLView::renderScene(Scene* scene, Renderer* renderer)
+void GLView::renderScene(Scene* /* scene */, Renderer* /* renderer */)
 {
 }
 

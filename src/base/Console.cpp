@@ -14,7 +14,7 @@ static std::string vformat(const char* format, va_list ap)
 
     va_list args;
     va_copy(args, ap);
-    int ret = vsnprintf(&buf.front(), buf.length() + 1, format, args);
+    vsnprintf(&buf.front(), buf.length() + 1, format, args);
     va_end(args);
 
     return buf;

@@ -36,7 +36,7 @@ static bool scanWavChunk(WavFile& wavFile, uint32_t chunkID, WAV_CHUNK_HEADER* h
     return false;
 }
 
-static bool openWav(std::string_view filename, WavFile& wavFile)
+static bool openWav(WavFile& wavFile)
 {
     FILE* pFile = wavFile.pFile;
     wavFile.pcmDataOffset = 0;
@@ -95,7 +95,7 @@ bool AudioDecoderWav::open(std::string_view filename)
     }
 #endif
 
-    if (openWav(filename, m_wavFile)) {
+    if (openWav(m_wavFile)) {
        const WAVE_FMT_CHUNK& fmtInfo =  m_wavFile.fileHeader.fmt;
        m_sampleRate                  = fmtInfo.sampleRate;
        m_channelCount                = fmtInfo.numChannels;

@@ -116,13 +116,13 @@ void TextureAtlas::setupIndices()
     if (m_capacity == 0) return;
 
     for (int i = 0; i < m_capacity; i++) {
-        m_pIndices[i * 6 + 0] = i * 4 + 0;
-        m_pIndices[i * 6 + 1] = i * 4 + 1;
-        m_pIndices[i * 6 + 2] = i * 4 + 2;
+        m_pIndices[i * 6 + 0] = static_cast<unsigned short>(i * 4 + 0);
+        m_pIndices[i * 6 + 1] = static_cast<unsigned short>(i * 4 + 1);
+        m_pIndices[i * 6 + 2] = static_cast<unsigned short>(i * 4 + 2);
 
-        m_pIndices[i * 6 + 3] = i * 4 + 3;
-        m_pIndices[i * 6 + 4] = i * 4 + 2;
-        m_pIndices[i * 6 + 5] = i * 4 + 1;
+        m_pIndices[i * 6 + 3] = static_cast<unsigned short>(i * 4 + 3);
+        m_pIndices[i * 6 + 4] = static_cast<unsigned short>(i * 4 + 2);
+        m_pIndices[i * 6 + 5] = static_cast<unsigned short>(i * 4 + 1);
     }
 }
 

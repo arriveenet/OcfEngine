@@ -198,11 +198,11 @@ void Renderer::trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int 
     }
 
     // インデックスを配列に追加
-    unsigned short* indices = pCmd->getTriangles().indices;
-    unsigned int indexCount = pCmd->getTriangles().indexCount;
+    const unsigned short* indices = pCmd->getTriangles().indices;
+    const unsigned int indexCount = pCmd->getTriangles().indexCount;
+    const unsigned int offset = m_triangleVertexCount + vertexBufferOffset;
     for (unsigned int i = 0; i < indexCount; i++) {
-        int a = m_triangleVertexCount + indices[i];
-        m_triangleIndices[m_triangleIndexCount + i] = m_triangleVertexCount + indices[i];
+        m_triangleIndices[m_triangleIndexCount + i] = static_cast<unsigned short>(offset + indices[i]);
     }
 
     m_triangleVertexCount += vertexCount;
@@ -215,6 +215,8 @@ void Renderer::drawTrianglesCommand()
         return;
 
     /*------------- 1: 頂点とインデックスをセットアップする -------------*/
+    unsigned int vertexBufferOffset = 0;
+
     m_pTriangleBatchToDraw[0].pCommand = nullptr;
     m_pTriangleBatchToDraw[0].indicesToDraw = 0;
     m_pTriangleBatchToDraw[0].offset = 0;
@@ -227,7 +229,7 @@ void Renderer::drawTrianglesCommand()
     uint32_t prevMaterialID = 0;
 
     for (const auto& cmd : m_trianglesCommands) {
-        trianglesVerticesAndIndices(cmd, 0);
+        trianglesVerticesAndIndices(cmd, vertexBufferOffset);
 
         uint32_t currentMaterialID = cmd->getMaterialID();
 

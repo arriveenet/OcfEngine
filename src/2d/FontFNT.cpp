@@ -128,7 +128,7 @@ std::set<unsigned int>* BMFontConfiguration::parseConfigFile(std::string_view co
     return nullptr;
 }
 
-std::set<unsigned int>* BMFontConfiguration::parseBinaryConfigFile(unsigned char* pData, uint32_t size, std::string_view controlFile)
+std::set<unsigned int>* BMFontConfiguration::parseBinaryConfigFile(unsigned char* pData, uint32_t size, std::string_view /* controlFile */)
 {
     std::set<unsigned int>* validCharsString = new std::set<unsigned int>();
 

@@ -151,7 +151,7 @@ void Label::setTextColor(unsigned char r, unsigned char g, unsigned b)
     m_textColor.b = b / 255.0f;
 }
 
-void Label::update(float deltaTime)
+void Label::update(float /* deltaTime */)
 {
     if (m_isDirty) {
         updateQuads();

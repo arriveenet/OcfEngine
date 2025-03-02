@@ -138,7 +138,7 @@ uint8_t Keyboard::m_prevState[static_cast<int>(KeyCode::KEY_LAST)];
 
 void Keyboard::onKeyEvent(KeyCode key, int action)
 {
-    m_currentState[static_cast<int>(key)] = action;
+    m_currentState[static_cast<int>(key)] = static_cast<uint8_t>(action);
 }
 
 std::string Keyboard::getString(KeyCode key)
@@ -155,7 +155,9 @@ std::string Keyboard::getString(KeyCode key)
         keyCodeText++;
     }
 
-    codestr = static_cast<char32_t>(key);
+    char charstr[8] = { 0 };
+    snprintf(charstr, sizeof(charstr), "0x%x", static_cast<char>(key));
+    codestr = charstr;
 
     return codestr;
 }

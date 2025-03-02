@@ -13,7 +13,7 @@ NS_OCF_BEGIN
 
 AudioCache::AudioCache()
     : m_state(State::Inital)
-    , m_alBufferId(AL_INVALID)
+    , m_alBufferId(static_cast<ALuint>(AL_INVALID))
     , m_totalFrames(0)
     , m_sampleRate(0)
     , m_queBufferSize()
@@ -30,7 +30,7 @@ AudioCache::~AudioCache()
     if (m_state == State::Ready) {
         if (m_alBufferId != AL_INVALID && alIsBuffer(m_alBufferId)) {
             alDeleteBuffers(1, &m_alBufferId);
-            m_alBufferId = AL_INVALID;
+            m_alBufferId = static_cast<ALuint>(AL_INVALID);
         }
     }
 

@@ -78,6 +78,15 @@ std::string FileUtils::getParentFullPath(const std::string& filename) const
 
 void FileUtils::addSearchPath(const std::string& path, bool front)
 {
+    auto iter = std::find(m_searchPathArray.begin(), m_searchPathArray.end(), path);
+    if (iter == m_searchPathArray.end()) {
+        if (front) {
+            m_searchPathArray.insert(m_searchPathArray.begin(), path);
+        }
+        else {
+            m_searchPathArray.emplace_back(path);
+        }
+    }
 }
 
 const std::vector<std::string>& FileUtils::getSearchPath() const

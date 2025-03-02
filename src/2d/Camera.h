@@ -23,7 +23,7 @@ public:
     };
 
     static Camera* createPerspective(float fovy, float aspect, float zNear, float zFar);
-    static Camera* createOrthographic(float left, float right, float bottom, float top, float zNear = -1.0f, float zFar = 1.0f);
+    static Camera* createOrthographic(float width, float height, float zNear = -1.0f, float zFar = 1.0f);
     static Camera* getDefaultCamera();
 
     static Camera* getVisitingCamera();

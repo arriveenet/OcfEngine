@@ -101,7 +101,7 @@ void DrawShape::drawRect(const glm::vec2& origin, const glm::vec2& destanation, 
     drawLine(glm::vec2(origin.x, destanation.y), origin, color);
 }
 
-void DrawShape::update(float deltaTime)
+void DrawShape::update(float /* deltaTime */)
 {
 }
 

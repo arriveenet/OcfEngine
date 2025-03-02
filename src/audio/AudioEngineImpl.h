@@ -29,7 +29,7 @@ public:
 
     void updatePlayers(bool forStop);
 
-    void unchache(std::string_view filePath);
+    void uncache(std::string_view filePath);
     void unchacheAll();
 
 private:

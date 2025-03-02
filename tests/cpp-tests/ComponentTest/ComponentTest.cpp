@@ -87,7 +87,7 @@ Asteroid::Asteroid()
     setPosition(x, y);
 }
 
-void Asteroid::updateNode(float deltaTime)
+void Asteroid::updateNode(float /*deltaTime*/)
 {
     glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
 
@@ -116,7 +116,7 @@ Ship::Ship()
     setPosition(visibleSize.x / 2, visibleSize.y / 2);
 
     auto keyboardEvent = EventListenerKeyboard::create();
-    keyboardEvent->m_onKeyPressed = [this](Keyboard::KeyCode key, Event* pEvent) {
+    keyboardEvent->m_onKeyPressed = [this](Keyboard::KeyCode key, Event* ) {
         float fowardSpeed = 0.0f;
         if (key == Keyboard::KeyCode::KEY_W) {
             fowardSpeed += 300.0f;
@@ -137,7 +137,7 @@ Ship::Ship()
         m_pMoveComponent->setForwardSpeed(fowardSpeed);
         };
 
-    keyboardEvent->m_onKeyReleased = [this](Keyboard::KeyCode key, Event* pEvent) {
+    keyboardEvent->m_onKeyReleased = [this](Keyboard::KeyCode key, Event* ) {
         float fowardSpeed = 0.0f;
         if (key == Keyboard::KeyCode::KEY_W) {
             fowardSpeed = 0.0f;

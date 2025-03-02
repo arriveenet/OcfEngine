@@ -7,6 +7,7 @@ const int AudioEngine::AUDIO_ID_INVALID = -1;
 const float AudioEngine::TIME_UNKNOWN = -1.0f;
 
 std::unordered_map<AUDIO_ID, AudioEngine::AudioInfo> AudioEngine::m_audioIdInfoMap;
+std::unordered_map<std::string, AUDIO_ID> AudioEngine::m_audioPathIdMap;
 AudioEngineImpl* AudioEngine::m_pAudioEngineImpl = nullptr;
 
 AudioEngine::AudioInfo::AudioInfo()
@@ -95,6 +96,8 @@ AUDIO_ID AudioEngine::play(std::string_view filename, bool loop, float volume)
 
     result = m_pAudioEngineImpl->play(filename, loop, volume, 0.0f);
     if (result != AUDIO_ID_INVALID) {
+        m_audioPathIdMap[filename.data()] = result;
+
         auto& audioInfo = m_audioIdInfoMap[result];
         audioInfo.volume = volume;
         audioInfo.loop = loop;
@@ -155,6 +158,18 @@ void AudioEngine::resumeAll()
 
 void AudioEngine::uncache(std::string_view filePath)
 {
+    if (m_pAudioEngineImpl == nullptr) {
+        return;
+    }
+
+    auto audioIdIter = m_audioPathIdMap.find(filePath.data());
+    if (audioIdIter != m_audioPathIdMap.end()) {
+        m_pAudioEngineImpl->stop(audioIdIter->second);
+        m_audioIdInfoMap.erase(audioIdIter->second);
+        m_audioPathIdMap.erase(audioIdIter);
+    }
+
+    m_pAudioEngineImpl->uncache(filePath);
 }
 
 void AudioEngine::uncacheAll()

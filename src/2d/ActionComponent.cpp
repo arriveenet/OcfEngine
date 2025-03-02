@@ -43,7 +43,7 @@ void ActionComponent::update(float deltaTime)
     m_done = m_elapsed >= m_duration;
 }
 
-void ActionComponent::step(float time)
+void ActionComponent::step(float /* time */)
 {
 }
 
@@ -261,6 +261,7 @@ void ScaleToComponent::step(float time)
 
 RepeatForever::RepeatForever(Node* pNode)
     : ActionComponent(pNode)
+    , m_pInnerlAction(nullptr)
 {
 }
 
