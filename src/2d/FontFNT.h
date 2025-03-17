@@ -15,6 +15,7 @@ public:
         short xOffset;
         short yOffset;
         short xAdvance;
+        unsigned char page;
 
         BMFontDef() : charID(0), xOffset(0), yOffset(0), xAdvance(0) {}
     };
@@ -40,22 +41,23 @@ protected:
 public:
     std::unordered_map<int, BMFontDef> m_fontDefDictionary;
     int m_commonHeight;
+    unsigned short m_pages;
     BMFontPadding m_padding;
     std::set<unsigned int>* m_charactorSet;
     int m_fontSize;
     std::string m_fontName;
-    std::string m_atlasName;
+    std::vector<std::string> m_atlasNames;
 };
 
 class FontFNT : public Font {
 public:
     static FontFNT* create(std::string_view fntFilePath);
 
+    FontAtlas* createFontAtlas() override;
+
 protected:
     FontFNT(BMFontConfiguration* config);
     ~FontFNT();
-
-    bool init();
 
     BMFontConfiguration* m_pConfiguration;
 };

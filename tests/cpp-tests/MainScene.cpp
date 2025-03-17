@@ -7,6 +7,7 @@
 #include "AudioEngineTest/AudioEngineTest.h"
 #include "MeshRendererTest/MeshRendererTest.h"
 #include "EventTest/EventTest.h"
+#include "FontTest/FontTest.h"
 
 USING_NS_OCF;
 
@@ -34,6 +35,7 @@ bool MainScene::init()
     addTest("AudioTest", []() {return new AudioEngineTest(); });
     addTest("MeshTest", []() {return new MeshRendererTest(); });
     addTest("EventTest", []() {return new EventTest(); });
+    addTest("FontTest", []() {return new FontTest(); });
 
     glm::vec2 visibleSize = m_pGame->getVisibleSize();
 

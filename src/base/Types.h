@@ -24,6 +24,12 @@ enum class MatrixStack {
     ModelView
 };
 
+enum class GlyphCollection {
+    Dynamic,
+    Ascii,
+    Custom,
+};
+
 struct Color3b {
     static const glm::u8vec3 BLACK;
     static const glm::u8vec3 WHITE;

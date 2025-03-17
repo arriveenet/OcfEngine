@@ -1,26 +1,40 @@
 #pragma once
 #include "2d/Font.h"
+#include "2d/IFontEngine.h"
 
 NS_OCF_BEGIN
 
+struct FontFreeTypeConfig {
+    std::string fontPath;
+    int fontSize = 0;
+    GlyphCollection glyphs = GlyphCollection::Ascii;
+};
+
 class FontFreeType : public Font {
 public:
-    static FontFreeType* create(const std::string& fontFileName, int fontSize);
+    static FontFreeType* create(const std::string& fontPath, int fontSize, GlyphCollection glyphs);
+
+    static void terminateFreeType();
 
     FontFreeType();
     virtual ~FontFreeType();
+
+    FontAtlas* createFontAtlas() override;
 
 private:
     static FT_Library s_ftLibrary;
     static bool s_ftInitialized;
     
     static bool initFreeType();
-    static void releaseFreeType();
     static FT_Library getFTLibrary();
 
+    bool initFont(const std::string_view fontPath, int fontSize);
+
+    void setGlyphCollection(GlyphCollection glyphs) { m_glyphCollection = glyphs; }
+
 private:
-    std::string m_fontName;
     int m_fontSize;
+    GlyphCollection m_glyphCollection;
 };
 
 NS_OCF_END

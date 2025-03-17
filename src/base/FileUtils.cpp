@@ -1,6 +1,7 @@
 #include "FileUtils.h"
 #include <fstream>
 #include <filesystem>
+#include <algorithm>
 
 NS_OCF_BEGIN
 
