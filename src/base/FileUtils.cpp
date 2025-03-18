@@ -59,6 +59,19 @@ void FileUtils::destroyInstance()
     s_sharedFileUtils = nullptr;
 }
 
+std::string FileUtils::getExtension(std::string_view filename)
+{
+    std::string fileExtension;
+    size_t pos = filename.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        fileExtension = filename.substr(pos, filename.length());
+        std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
+    }
+
+    return fileExtension;
+}
+
 FileUtils::~FileUtils()
 {
 }

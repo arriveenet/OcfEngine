@@ -16,6 +16,13 @@ public:
     /** FileUtilsのインスタンスを破棄する */
     static void destroyInstance();
 
+    /**
+     * @brief ファイル名から拡張子を取得する
+     * @param filename ファイル名
+     * @return 拡張子
+     */
+    static std::string getExtension(std::string_view filename);
+
     /** デストラクター */
     ~FileUtils();
 
