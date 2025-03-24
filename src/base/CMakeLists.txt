@@ -13,7 +13,9 @@ set(OCF_BASE_HEADER
     "base/Game.h"
     "base/GameObject.h"
     "base/Macros.h"
+    "base/MaxRectsBinPack.h"
     "base/Rect.h"
+    "base/RectBinPack.h"
     "base/Types.h"
     )
 
@@ -30,6 +32,7 @@ set(OCF_BASE_SRC
     "base/FileUtils.cpp"
     "base/Game.cpp"
     "base/GameObject.cpp"
+    "base/MaxRectsBinPack.cpp"
     "base/Rect.cpp"
     "base/Types.cpp"
     )

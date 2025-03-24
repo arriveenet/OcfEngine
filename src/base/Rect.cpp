@@ -78,4 +78,16 @@ bool Rect::intersect(const Rect& rect) const
     return false;
 }
 
+bool Rect::contain(const Rect& rect) const
+{
+    if (getMinX() <= rect.getMinX()
+        && getMinY() <= rect.getMinY()
+        && getMaxX() >= rect.getMaxX()
+        && getMaxY() >= rect.getMaxY()
+        ) {
+        return true;
+    }
+    return false;
+}
+
 NS_OCF_END
