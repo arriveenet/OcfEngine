@@ -64,7 +64,8 @@ Image::~Image()
     m_height = 0;
 }
 
-bool Image::initWithRowData(const uint8_t* pData, size_t dataSize, int width, int height)
+bool Image::initWithRawData(const uint8_t* pData, size_t dataSize,
+                            int width, int height, PixelFormat format)
 {
     bool result = false;
     do {
@@ -72,7 +73,7 @@ bool Image::initWithRowData(const uint8_t* pData, size_t dataSize, int width, in
 
         m_width = width;
         m_height = height;
-        m_pixelFormat = PixelFormat::RGBA;
+        m_pixelFormat = format;
 
         m_dataSize = dataSize;
         m_pData = new uint8_t[dataSize];

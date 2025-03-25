@@ -39,7 +39,11 @@ Font* FontManager::getFontTTF(const FontFreeTypeConfig& config)
                                                   config.fontSize,
                                                   config.glyphs);
         if (font != nullptr) {
-            m_fontMap.emplace(fileName, font);
+            const auto fontAtlas = font->createFontAtlas();
+            if (fontAtlas != nullptr) {
+                font->m_pFontAtlas = fontAtlas;
+                m_fontMap.emplace(fileName, font);
+            }
             return font;
         }
     }

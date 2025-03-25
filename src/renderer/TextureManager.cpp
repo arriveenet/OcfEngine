@@ -103,7 +103,7 @@ Texture2D* TextureManager::getWhiteTexture(const std::string& key, uint8_t luma)
     };
 
     Image image;
-    bool isOK = image.initWithRowData(texls, sizeof(texls), 2, 2);
+    bool isOK = image.initWithRawData(texls, sizeof(texls), 2, 2, PixelFormat::RGBA);
     OCFASSERT(isOK, "The 2x2 empty texture was created unsuccessfully.");
 
     texture = addImage(&image, key);

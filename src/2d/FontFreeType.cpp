@@ -1,4 +1,4 @@
-#include "FontFreeType.h"
+﻿#include "FontFreeType.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -8,8 +8,16 @@
 
 #include "2d/FontAtlas.h"
 #include "base/FileUtils.h"
+#include "base/StringUtils.h"
 
 NS_OCF_BEGIN
+
+using namespace std::string_view_literals;
+
+static constexpr std::string_view GLYPH_ASCII =
+    "\"!#$%&'()*+,-./"
+    "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+    "¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþ "sv;
 
 FT_Library FontFreeType::s_ftLibrary = nullptr;
 bool FontFreeType::s_ftInitialized = false;
@@ -50,12 +58,19 @@ FontFreeType::~FontFreeType()
 FontAtlas* FontFreeType::createFontAtlas()
 {
     auto fontAtlas = new FontAtlas();
+    fontAtlas->createNewPage();
 
     if (m_glyphCollection != GlyphCollection::Dynamic) {
-
+        std::u32string utf32Text = StringUtils::convertUtf8ToUtf32(getGlyphCollection());
+        prepareLetterDefinitions(utf32Text);
     }
 
     return fontAtlas;
+}
+
+bool FontFreeType::prepareLetterDefinitions(const std::u32string& utf32Text)
+{
+    return false;
 }
 
 bool FontFreeType::initFreeType()
@@ -93,6 +108,25 @@ bool FontFreeType::initFont(const std::string_view fontPath, int fontSize)
     FT_Set_Pixel_Sizes(face, 0, fontSize);
 
     return true;
+}
+
+std::string_view FontFreeType::getGlyphCollection() const
+{
+    std::string_view collection;
+
+    switch (m_glyphCollection) {
+    case GlyphCollection::Dynamic:
+        break;
+    case GlyphCollection::Ascii:
+        collection = GLYPH_ASCII;
+        break;
+    case GlyphCollection::Custom:
+        break;
+    default:
+        break;
+    }
+
+    return collection;
 }
 
 NS_OCF_END

@@ -43,26 +43,20 @@ bool Texture2D::initWithFile(const std::string& filename)
     if (!img.loadImageFile(filename))
         return false;
 
-    m_width = img.getWidth();
-    m_height = img.getHeight();
-    m_pixelFormat = img.getPixelFormat();
+    return initWithImage(&img, img.getPixelFormat());
+}
 
-    const GLenum format = OpenGLUtility::toGLFormat(m_pixelFormat);
-    const int alignment = getPixelAlignment(m_pixelFormat);
-    
-    glGenTextures(1, &m_textureId);
+bool Texture2D::initWithData(uint8_t* data, size_t dataSize,
+    int width, int height, PixelFormat format)
+{
+    if (data == nullptr || width <= 0 || height <= 0) {
+        return false;
+    }
 
-    glBindTexture(GL_TEXTURE_2D, m_textureId);
+    Image img;
+    img.initWithRawData(data, dataSize, width, height, format);
 
-    glPixelStorei(GL_UNPACK_ALIGNMENT, alignment);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, format, m_width, m_height, 0, format, GL_UNSIGNED_BYTE, img.getData());
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    return true;
+    return initWithImage(&img, format);
 }
 
 bool Texture2D::initWithImage(Image* image, PixelFormat format)
@@ -84,7 +78,8 @@ bool Texture2D::initWithImage(Image* image, PixelFormat format)
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, alignment);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, renderFormat, m_width, m_height, 0, renderFormat, GL_UNSIGNED_BYTE, image->getData());
+    glTexImage2D(GL_TEXTURE_2D, 0, renderFormat, m_width, m_height,
+                 0, renderFormat, GL_UNSIGNED_BYTE, image->getData());
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
@@ -96,6 +91,13 @@ bool Texture2D::initWithImage(Image* image, PixelFormat format)
 void Texture2D::setActive() const
 {
     glBindTexture(GL_TEXTURE_2D, m_textureId);
+}
+
+void Texture2D::updateSubData(uint8_t* data, int xoffset, int yoffset, int width, int height) const
+{
+    const GLenum glFormat = OpenGLUtility::toGLFormat(m_pixelFormat);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, xoffset, yoffset,
+                    width, height, glFormat, GL_UNSIGNED_BYTE, data);
 }
 
 int Texture2D::getWidth() const

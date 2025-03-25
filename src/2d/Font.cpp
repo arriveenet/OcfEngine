@@ -12,9 +12,7 @@ Font::Font()
 
 Font::~Font()
 {
-    if (m_pFontAtlas != nullptr) {
-        m_pFontAtlas->release();
-    }
+    OCF_SAFE_RELEASE(m_pFontAtlas);
 }
 
 void Font::addCharacterDefinition(char32_t utf32char, const FontCharacterDefinition& defintition)

@@ -4,64 +4,11 @@
 #include "2d/FontFreeType.h"
 #include "2d/DrawShape.h"
 #include "base/Game.h"
+#include "base/StringUtils.h"
 #include "renderer/ShaderManager.h"
 #include "renderer/Renderer.h"
 
 NS_OCF_BEGIN
-
-static std::u32string convertUtf8ToUtf32(const std::string& utf8String)
-{
-    std::u32string result;
-    result.reserve(utf8String.size());
-
-    for (size_t i = 0, size = utf8String.size(); i < size; i++) {
-        char p = utf8String.at(i);
-        char32_t unicode = 0;
-
-        int numBytes = 0;
-        if ((p & 0x80) == 0x00) {
-            numBytes = 1;
-        }
-        else if ((p & 0xE0) == 0xC0) {
-            numBytes = 2;
-        }
-        else if ((p & 0xF0) == 0xE0) {
-            numBytes = 3;
-        }
-        else if ((p & 0xF8) == 0xF0) {
-            numBytes = 4;
-        }
-
-        switch (numBytes) {
-        case 1:
-            unicode = p;
-            result.push_back(unicode);
-            break;
-        case 2:
-            unicode = (p & 0x1F) << 6;
-            unicode |= (utf8String[i + 1] & 0x3F);
-            result.push_back(unicode);
-            break;
-        case 3:
-            unicode = (p & 0x0F) << 12;
-            unicode |= (utf8String[i + 1] & 0x3F) << 6;
-            unicode |= (utf8String[i + 2] & 0x3F);
-            result.push_back(unicode);
-            break;
-        case 4:
-            unicode = (p & 0x07) << 18;
-            unicode |= (utf8String[i + 1] & 0x3F) << 12;
-            unicode |= (utf8String[i + 2] & 0x3F) << 6;
-            unicode |= (utf8String[i + 3] & 0x3F) << 6;
-            result.push_back(unicode);
-            break;
-        default:
-            break;
-        }
-    }
-
-    return result;
-}
 
 Label* Label::create(const std::string& text)
 {
@@ -159,6 +106,10 @@ bool Label::initWithTTF(std::string_view ttfPath, int fontSize)
         return false;
     }
 
+    m_fontAtlas = m_font->getFontAtlas();
+
+    updateContent();
+
     ShaderManager* shaderManager = ShaderManager::getInstance();
     setProgram(shaderManager->getBuiltinProgram(ProgramType::Label));
 
@@ -169,7 +120,7 @@ void Label::setString(const std::string& text)
 {
     if (m_text != text) {
         m_text = text;
-        m_utf32Text = convertUtf8ToUtf32(text);
+        m_utf32Text = StringUtils::convertUtf8ToUtf32(text);
         m_isDirty = true;
     }
 }

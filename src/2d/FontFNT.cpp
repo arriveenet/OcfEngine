@@ -96,6 +96,7 @@ BMFontConfiguration::BMFontConfiguration()
     , m_commonHeight(0)
     , m_fontSize(0)
     , m_padding()
+    , m_pages(0)
 {
 }
 

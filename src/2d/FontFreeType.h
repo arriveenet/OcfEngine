@@ -21,6 +21,8 @@ public:
 
     FontAtlas* createFontAtlas() override;
 
+    bool prepareLetterDefinitions(const std::u32string& utf32Text);
+
 private:
     static FT_Library s_ftLibrary;
     static bool s_ftInitialized;
@@ -31,6 +33,7 @@ private:
     bool initFont(const std::string_view fontPath, int fontSize);
 
     void setGlyphCollection(GlyphCollection glyphs) { m_glyphCollection = glyphs; }
+    std::string_view getGlyphCollection() const;
 
 private:
     int m_fontSize;
