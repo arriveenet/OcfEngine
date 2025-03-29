@@ -1,14 +1,17 @@
 ﻿#include "FontFreeType.h"
 
+#include "2d/FontAtlas.h"
+#include "base/FileUtils.h"
+#include "base/Rect.h"
+#include "base/StringUtils.h"
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_STROKER_H
 #include FT_BBOX_H
 #include FT_FONT_FORMATS_H
 
-#include "2d/FontAtlas.h"
-#include "base/FileUtils.h"
-#include "base/StringUtils.h"
+#include <iterator>
 
 NS_OCF_BEGIN
 
@@ -47,18 +50,23 @@ void FontFreeType::terminateFreeType()
 
 FontFreeType::FontFreeType()
     : m_fontSize(0)
+    , m_fontFace(nullptr)
     , m_glyphCollection(GlyphCollection::Dynamic)
 {
 }
 
 FontFreeType::~FontFreeType()
 {
+    if (s_ftInitialized) {
+        FT_Done_Face(m_fontFace);
+    }
 }
 
 FontAtlas* FontFreeType::createFontAtlas()
 {
     auto fontAtlas = new FontAtlas();
     fontAtlas->createNewPage();
+    m_pFontAtlas = fontAtlas;
 
     if (m_glyphCollection != GlyphCollection::Dynamic) {
         std::u32string utf32Text = StringUtils::convertUtf8ToUtf32(getGlyphCollection());
@@ -70,7 +78,48 @@ FontAtlas* FontFreeType::createFontAtlas()
 
 bool FontFreeType::prepareLetterDefinitions(const std::u32string& utf32Text)
 {
-    return false;
+    OCF_ASSERT(m_pFontAtlas != nullptr);
+    OCF_ASSERT(m_fontFace != nullptr);
+
+    std::unordered_set<char32_t> charCodeSet;
+    findNewCharacters(utf32Text, charCodeSet);
+    if (charCodeSet.empty()) {
+        return false;
+    }
+
+    for (auto&& charCode : charCodeSet) {
+        auto glyphIndex = FT_Get_Char_Index(m_fontFace, static_cast<FT_ULong>(charCode));
+        if (glyphIndex == 0) {
+            continue;
+        }
+
+        if (FT_Load_Glyph(m_fontFace, glyphIndex, FT_LOAD_RENDER | FT_LOAD_NO_AUTOHINT) != 0) {
+            continue;
+        }
+
+        uint8_t* bitmap = m_fontFace->glyph->bitmap.buffer;
+        int width = m_fontFace->glyph->bitmap.width;
+        int height = m_fontFace->glyph->bitmap.rows;
+
+        Rect tempRect;
+        m_pFontAtlas->insert(tempRect, bitmap, width, height);
+
+        FontCharacterDefinition definition = {};
+        definition.x = tempRect.m_position.x;
+        definition.y = tempRect.m_position.y;
+        definition.width = tempRect.m_size.x;
+        definition.height = tempRect.m_size.y;
+        definition.xoffset = static_cast<float>(m_fontFace->glyph->bitmap_left);
+        definition.yoffset = static_cast<float>(-m_fontFace->glyph->bitmap_top);
+        definition.xadvance = static_cast<float>(m_fontFace->glyph->advance.x >> 6);
+        definition.page = m_pFontAtlas->getCurrentPage();
+
+        addCharacterDefinition(charCode, definition);
+    }
+
+    m_pFontAtlas->updateTexture();
+
+    return true;
 }
 
 bool FontFreeType::initFreeType()
@@ -105,9 +154,27 @@ bool FontFreeType::initFont(const std::string_view fontPath, int fontSize)
         return false;
     }
 
+    m_fontFace = face;
+
     FT_Set_Pixel_Sizes(face, 0, fontSize);
 
     return true;
+}
+
+void FontFreeType::findNewCharacters(const std::u32string& utf32Text,
+                                     std::unordered_set<char32_t>& charset)
+{
+    if (m_characterDefinition.empty()) {
+        std::copy(utf32Text.begin(), utf32Text.end(),
+                  std::inserter(charset, charset.end()));
+    }
+    else {
+        for (auto&& charCode : utf32Text) {
+            if (m_characterDefinition.find(charCode) == m_characterDefinition.end()) {
+                charset.insert(charCode);
+            }
+        }
+    }
 }
 
 std::string_view FontFreeType::getGlyphCollection() const

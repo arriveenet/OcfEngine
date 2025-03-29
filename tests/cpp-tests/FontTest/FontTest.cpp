@@ -34,6 +34,7 @@ bool FontTest::init()
 
     m_pLabel = ocf::Label::createWithTTF("fonts/cour.ttf", "Hello, World!", 24);
     addChild(m_pLabel);
+    m_pLabel->setPosition(100, 100);
 
     m_pDrawShape = DrawShape::create();
     addChild(m_pDrawShape);

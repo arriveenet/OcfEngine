@@ -95,9 +95,13 @@ void Texture2D::setActive() const
 
 void Texture2D::updateSubData(uint8_t* data, int xoffset, int yoffset, int width, int height) const
 {
+    glBindTexture(GL_TEXTURE_2D, m_textureId);
+
     const GLenum glFormat = OpenGLUtility::toGLFormat(m_pixelFormat);
     glTexSubImage2D(GL_TEXTURE_2D, 0, xoffset, yoffset,
                     width, height, glFormat, GL_UNSIGNED_BYTE, data);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 int Texture2D::getWidth() const

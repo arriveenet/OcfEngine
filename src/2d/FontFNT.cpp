@@ -293,6 +293,8 @@ FontAtlas* FontFNT::createFontAtlas()
         slot++;
     }
 
+    m_pFontAtlas = fontAtlas;
+
     return fontAtlas;
 }
 

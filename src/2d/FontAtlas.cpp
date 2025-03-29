@@ -1,6 +1,7 @@
 #include "FontAtlas.h"
 #include "base/MaxRectsBinPack.h"
 #include "renderer/Texture2D.h"
+#include "renderer/Image.h"
 
 NS_OCF_BEGIN
 
@@ -15,10 +16,8 @@ FontAtlas::FontAtlas(int width, int height)
     , m_currentPageData(nullptr)
     , m_currentPageDataSize(0)
     , m_currentPage(-1)
-    , m_updateOffsetX(0)
-    , m_updateOffsetY(0)
-    , m_updateWidth(0)
-    , m_updateHeight(0)
+    , m_updateRangePosition(0, 0)
+    , m_updateRangetSize(0, 0)
 {
     m_binPack = std::make_unique<MaxRectsBinPack>();
 }
@@ -40,6 +39,7 @@ void FontAtlas::createNewPage()
 void FontAtlas::addNewPage()
 {
     m_binPack->init(static_cast<float>(m_width), static_cast<float>(m_height));
+    m_binPack->setHeuristic(MaxRectsBinPack::FreeRectChoiceHeuristic::RectBottomLeftRule);
 
     memset(m_currentPageData, 0, m_currentPageDataSize);
 
@@ -47,38 +47,45 @@ void FontAtlas::addNewPage()
     texture->initWithData(m_currentPageData, m_currentPageDataSize,
                           m_width, m_height, PixelFormat::GRAY);
 
-    setTexure(++m_currentPage, texture);
+    m_atlasTextures[++m_currentPage] = texture;
 }
 
-bool FontAtlas::insertCharactor(uint8_t* bitmap, int width, int height)
+bool FontAtlas::insert(Rect& outRect, uint8_t* bitmap, int width, int height)
 {
-    Rect outRect = m_binPack->insert(static_cast<float>(width), static_cast<float>(height));
-    if (outRect.m_size.x == 0 || outRect.m_size.y == 0) {
+    Rect result = m_binPack->insert(static_cast<float>(width), static_cast<float>(height));
+    if (result.m_size.x == 0 || result.m_size.y == 0) {
         return false;
     }
 
-    // ƒrƒbƒgƒ}ƒbƒv‚ğƒRƒs[
+    const int resultX = static_cast<int>(result.m_position.x);
+    const int resultY = static_cast<int>(result.m_position.y);
+
+    // ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ã‚’ã‚³ãƒ”ãƒ¼
     for (int y = 0; y < height; y++) {
-        const auto destIndex = m_height * y + static_cast<int>(outRect.m_position.x);
+        const int destIndex = (resultY + y) * m_width + resultX;
         const auto srcIndex = width * y;
-        memcpy(m_currentPageData + destIndex, &bitmap[srcIndex], width);
+        memcpy(&m_currentPageData[destIndex], &bitmap[srcIndex], width);
     }
 
-    // XV‚·‚é”ÍˆÍ‚ğŒvZ
-    m_updateOffsetX = std::min(m_updateOffsetX, static_cast<int>(outRect.m_position.x));
-    m_updateOffsetY = std::min(m_updateOffsetY, static_cast<int>(outRect.m_position.y));
-    m_updateWidth = std::max(m_updateWidth, static_cast<int>(outRect.getMaxX()));
-    m_updateHeight = std::max(m_updateHeight, static_cast<int>(outRect.getMaxY()));
+    // æ›´æ–°ã™ã‚‹ç¯„å›²ã‚’è¨ˆç®—
+    m_updateRangePosition.x = std::min(m_updateRangePosition.x, resultX);
+    m_updateRangePosition.y = std::min(m_updateRangePosition.y, resultY);
+    m_updateRangetSize.x = std::max(m_updateRangetSize.x, static_cast<int>(result.getMaxX()));
+    m_updateRangetSize.y = std::max(m_updateRangetSize.y, static_cast<int>(result.getMaxY()));
+
+    outRect = result;
 
     return true;
 }
 
 void FontAtlas::updateTexture()
 {
-    m_updateOffsetX = 0;
-    m_updateOffsetY = 0;
-    m_updateWidth = 0;
-    m_updateHeight = 0;
+    Texture2D* currentTexture = m_atlasTextures[m_currentPage];
+    currentTexture->updateSubData(m_currentPageData, 0, 0,
+                                  m_width, m_height);
+
+    m_updateRangePosition = glm::ivec2(0, 0);
+    m_updateRangetSize = glm::ivec2(0, 0);
 }
 
 void FontAtlas::releaseTextures()

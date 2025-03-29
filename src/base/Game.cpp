@@ -1,16 +1,16 @@
 #include "Game.h"
-#include "audio/AudioEngine.h"
 #include "2d/Camera.h"
+#include "2d/FontManager.h"
 #include "2d/Label.h"
 #include "2d/SpriteFrameManager.h"
-#include "2d/FontManager.h"
+#include "audio/AudioEngine.h"
 #include "base/EventDispatcher.h"
 #include "base/FileUtils.h"
-#include "renderer/Renderer.h"
-#include "renderer/TextureManager.h"
+#include "input/Input.h"
 #include "platform/Application.h"
 #include "platform/GLView.h"
-#include "input/Input.h"
+#include "renderer/Renderer.h"
+#include "renderer/TextureManager.h"
 
 #define FPS_UPDATE_INTERVAL	(0.5f)
 

@@ -15,11 +15,8 @@ Font* FontManager::getFontFNT(std::string_view fontFileName)
     if (iter == m_fontMap.end()) {
         FontFNT* font = FontFNT::create(fontFileName);
         if (font != nullptr) {
-            const auto fontAtlas = font->createFontAtlas();
-            if (fontAtlas != nullptr) {
-                font->m_pFontAtlas = fontAtlas;
-                return m_fontMap.emplace(std::move(fileName), font).first->second;
-            }
+            font->createFontAtlas();
+            return m_fontMap.emplace(std::move(fileName), font).first->second;
         }
     }
     else {
@@ -39,11 +36,8 @@ Font* FontManager::getFontTTF(const FontFreeTypeConfig& config)
                                                   config.fontSize,
                                                   config.glyphs);
         if (font != nullptr) {
-            const auto fontAtlas = font->createFontAtlas();
-            if (fontAtlas != nullptr) {
-                font->m_pFontAtlas = fontAtlas;
-                m_fontMap.emplace(fileName, font);
-            }
+            font->createFontAtlas();
+            m_fontMap.emplace(std::move(fileName), font);
             return font;
         }
     }
@@ -61,6 +55,8 @@ void FontManager::release()
     }
 
     m_fontMap.clear();
+
+    FontFreeType::terminateFreeType();
 }
 
 NS_OCF_END

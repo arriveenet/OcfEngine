@@ -1,6 +1,7 @@
 #pragma once
 #include "2d/Font.h"
 #include "2d/IFontEngine.h"
+#include <unordered_set>
 
 NS_OCF_BEGIN
 
@@ -32,11 +33,15 @@ private:
 
     bool initFont(const std::string_view fontPath, int fontSize);
 
+    void findNewCharacters(const std::u32string& utf32Text,
+                           std::unordered_set<char32_t>& charset);
+
     void setGlyphCollection(GlyphCollection glyphs) { m_glyphCollection = glyphs; }
     std::string_view getGlyphCollection() const;
 
 private:
     int m_fontSize;
+    FT_Face m_fontFace;
     GlyphCollection m_glyphCollection;
 };
 

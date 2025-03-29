@@ -1,17 +1,19 @@
 #pragma once
-#include <unordered_map>
-#include <memory>
 #include "base/GameObject.h"
+#include <glm/glm.hpp>
+#include <memory>
+#include <unordered_map>
 
 NS_OCF_BEGIN
 
 class Texture2D;
-class RectBinPack;
+class Rect;
+class MaxRectsBinPack;
 
 class FontAtlas : public GameObject {
 public:
-    static constexpr int DEFAULT_TEXTURE_WIDTH = 1024;
-    static constexpr int DEFAULT_TEXTURE_HEIGHT = 1024;
+    static constexpr int DEFAULT_TEXTURE_WIDTH = 512;
+    static constexpr int DEFAULT_TEXTURE_HEIGHT = 512;
 
     FontAtlas();
     FontAtlas(int width, int height);
@@ -21,7 +23,9 @@ public:
 
     void addNewPage();
 
-    bool insertCharactor(uint8_t* bitmap, int width, int height);
+    int getCurrentPage() const { return m_currentPage; }
+
+    bool insert(Rect& outRect, uint8_t* bitmap, int width, int height);
 
     void updateTexture();
 
@@ -39,11 +43,9 @@ private:
     uint8_t* m_currentPageData;
     int m_currentPageDataSize;
     int m_currentPage;
-    std::unique_ptr<RectBinPack> m_binPack;
-    int m_updateOffsetX;
-    int m_updateOffsetY;
-    int m_updateWidth;
-    int m_updateHeight;
+    std::unique_ptr<MaxRectsBinPack> m_binPack;
+    glm::ivec2 m_updateRangePosition;
+    glm::ivec2 m_updateRangetSize;
 
 };
 
