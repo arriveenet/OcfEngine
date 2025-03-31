@@ -39,7 +39,6 @@ void FontAtlas::createNewPage()
 void FontAtlas::addNewPage()
 {
     m_binPack->init(static_cast<float>(m_width), static_cast<float>(m_height));
-    m_binPack->setHeuristic(MaxRectsBinPack::FreeRectChoiceHeuristic::RectBottomLeftRule);
 
     memset(m_currentPageData, 0, m_currentPageDataSize);
 

@@ -21,6 +21,8 @@ static glm::ivec2 rects[] = {
     { 32, 32 },
 };
 
+static size_t index = 0;
+
 FontTest::FontTest()
     : m_pLabel(nullptr)
     , m_pDrawShape(nullptr)
@@ -39,11 +41,8 @@ bool FontTest::init()
     m_pDrawShape = DrawShape::create();
     addChild(m_pDrawShape);
 
-    m_pDrawShape->drawRect(glm::vec2(0, 0), glm::vec2(512, 512), Color4f::GREEN);
-
     m_maxRectsBinPack.init(512, 512);
-
-    static size_t index = 0;
+    m_maxRectsBinPack.setHeuristic(MaxRectsBinPack::FreeRectChoiceHeuristic::RectBestsShortSideFit);
 
     auto keyboardListener = EventListenerKeyboard::create();
     keyboardListener->m_onKeyPressed = [&](Keyboard::KeyCode key, Event* /* pEvent */) {
@@ -53,14 +52,31 @@ bool FontTest::init()
 
             Rect rect = m_maxRectsBinPack.insert(static_cast<float>(rects[index].x), 
                                                  static_cast<float>(rects[index].y));
-            m_pDrawShape->drawRect(glm::vec2(rect.m_position.x, rect.m_position.y),
-                                   glm::vec2(rect.getMaxX(), rect.getMaxY()), Color4f::RED);
-
+            OCFLOG("Packed to (x,y)=(%f,%f), (w,h)=(%f,%f)\n", rect.m_position.x, rect.m_position.y, rect.m_size.x, rect.m_size.y);
             index++;
         }
+        m_pDrawShape->clear();
+
+        for (const auto& rect : m_maxRectsBinPack.getUsedRects()) {
+            m_pDrawShape->drawRect(glm::vec2(rect.m_position.x - 1.f, rect.m_position.y - 1.f),
+                glm::vec2(rect.getMaxX() - 1.f, rect.getMaxY()) - 1.f, Color4f::ORANGE);
+        }
+
+        for (const auto& rect : m_maxRectsBinPack.getFreeRects()) {
+            m_pDrawShape->drawRect(glm::vec2(rect.m_position.x - 1.f, rect.m_position.y - 1.f),
+                glm::vec2(rect.getMaxX() - 1.f, rect.getMaxY()) - 1.f, Color4f::GRAY);
+        }
+
+        m_pDrawShape->drawRect(glm::vec2(0, 0), glm::vec2(512, 512), Color4f::GREEN);
         };
 
     m_pGame->getEventDispatcher()->addEventListener(keyboardListener, this);
 
     return true;
+}
+
+void FontTest::onExit()
+{
+    index = 0;
+    TestCase::onExit();
 }

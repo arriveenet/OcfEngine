@@ -8,6 +8,8 @@ public:
 
     bool init() override;
 
+    void onExit() override;
+
     ocf::Label* m_pLabel;
     ocf::DrawShape* m_pDrawShape;
     ocf::MaxRectsBinPack m_maxRectsBinPack;

@@ -343,34 +343,36 @@ bool MaxRectsBinPack::splitFreeNode(const Rect& freeNode, const Rect& usedNode)
 
     m_newFreeRectsLastSize = m_newFreeRects.size();
 
-    if (usedNode.getMinX() < freeNode.getMaxX() && usedNode.getMaxX() >= freeNode.getMinX()) {
-
+    if (usedNode.getMinX() < freeNode.getMaxX() && usedNode.getMaxX() > freeNode.getMinX()) {
+        // 使用済みノードの上側にある新しい空きノード
         if (usedNode.getMinY() > freeNode.getMinY() && usedNode.getMinY() < freeNode.getMaxY()) {
             Rect newNode = freeNode;
             newNode.m_size.y = usedNode.m_position.y - newNode.m_position.y;
             insertNewFreeRects(newNode);
         }
 
+        // 使用済みノードの下側にある新しい空きノード
         if (usedNode.getMaxY() < freeNode.getMaxY()) {
             Rect newNode = freeNode;
-            newNode.m_position.y = usedNode.m_position.y + usedNode.m_size.y;
-            newNode.m_size.y = freeNode.m_position.y + freeNode.m_size.y - (usedNode.m_position.y + usedNode.m_size.y);
+            newNode.m_position.y = usedNode.getMaxY();
+            newNode.m_size.y = freeNode.getMaxY() - usedNode.getMaxY();
             insertNewFreeRects(newNode);
         }
     }
 
-    if (usedNode.getMinY() < freeNode.getMaxX() && usedNode.getMaxY() >= freeNode.getMinY()) {
-
+    if (usedNode.getMinY() < freeNode.getMaxX() && usedNode.getMaxY() > freeNode.getMinY()) {
+        // 使用済みノードの左側にある新しい空きノード
         if (usedNode.getMinX() > freeNode.getMinX() && usedNode.getMinX() < freeNode.getMaxX()) {
             Rect newNode = freeNode;
             newNode.m_size.x = usedNode.m_position.x - newNode.m_position.x;
             insertNewFreeRects(newNode);
         }
 
+        // 使用済みノードの右側にある新しい空きノード
         if (usedNode.getMaxX() < freeNode.getMaxX()) {
             Rect newNode = freeNode;
-            newNode.m_position.x = usedNode.m_position.x + usedNode.m_size.x;
-            newNode.m_size.x = freeNode.m_position.x + freeNode.m_size.x - (usedNode.m_position.x + usedNode.m_size.x);
+            newNode.m_position.x = usedNode.getMaxX();
+            newNode.m_size.x = freeNode.getMaxX() - usedNode.getMaxX();
             insertNewFreeRects(newNode);
         }
     }
@@ -385,10 +387,10 @@ void MaxRectsBinPack::insertNewFreeRects(const Rect& newFreeRect)
 
     for (size_t i = 0; i < m_newFreeRectsLastSize;) {
 
-        if (newFreeRect.contain(m_newFreeRects[i]))
+        if (m_newFreeRects[i].contain(newFreeRect))
             return;
 
-        if (m_newFreeRects[i].contain(newFreeRect)) {
+        if (newFreeRect.contain(m_newFreeRects[i])) {
             m_newFreeRects[i] = m_newFreeRects[--m_newFreeRectsLastSize];
             m_newFreeRects[m_newFreeRectsLastSize] = m_newFreeRects.back();
             m_newFreeRects.pop_back();
@@ -404,8 +406,7 @@ void MaxRectsBinPack::insertNewFreeRects(const Rect& newFreeRect)
 void MaxRectsBinPack::pruneFreeList()
 {
     for (size_t i = 0; i < m_freeRects.size(); i++) {
-        for (size_t j = 0; j < m_newFreeRectsLastSize;) {
-
+        for (size_t j = 0; j < m_newFreeRects.size();) {
             if (m_newFreeRects[j].contain(m_freeRects[i])) {
                 m_newFreeRects[j] = m_newFreeRects.back();
                 m_newFreeRects.pop_back();

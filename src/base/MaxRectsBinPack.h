@@ -28,6 +28,9 @@ public:
     void setHeuristic(FreeRectChoiceHeuristic heuristic) { m_heuristic = heuristic; }
     FreeRectChoiceHeuristic getHeuristic() const { return m_heuristic; }
 
+    const std::vector<Rect>& getUsedRects() { return m_usedRects; }
+    const std::vector<Rect>& getFreeRects() { return m_freeRects; }
+
 private:
     Rect findPositionForShortSideFit(float width, float height,
                                      float& bestShortSideFit, float& bestLongSideFit) const;

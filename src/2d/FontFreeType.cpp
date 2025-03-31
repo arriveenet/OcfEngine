@@ -18,9 +18,8 @@ NS_OCF_BEGIN
 using namespace std::string_view_literals;
 
 static constexpr std::string_view GLYPH_ASCII =
-    "\"!#$%&'()*+,-./"
-    "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
-    "¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþ "sv;
+    "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "[\\] ^ _`abcdefghijklmnopqrstuvwxyz{|}~ "sv;
 
 FT_Library FontFreeType::s_ftLibrary = nullptr;
 bool FontFreeType::s_ftInitialized = false;
