@@ -1,16 +1,18 @@
 #include "Font.h"
+#include "2d/FontAtlas.h"
 #include "renderer/Texture2D.h"
 
 NS_OCF_BEGIN
 
 Font::Font()
-    : m_pTexture(nullptr)
+    : m_pFontAtlas(nullptr)
     , m_lineHeight(0.0f)
 {
 }
 
 Font::~Font()
 {
+    OCF_SAFE_RELEASE(m_pFontAtlas);
 }
 
 void Font::addCharacterDefinition(char32_t utf32char, const FontCharacterDefinition& defintition)
@@ -40,8 +42,4 @@ std::string_view Font::getFontName() const
     return m_fontName;
 }
 
-Texture2D* Font::getTexture()
-{
-    return m_pTexture;
-}
 NS_OCF_END

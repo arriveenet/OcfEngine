@@ -1,5 +1,7 @@
 #include "FontManager.h"
+#include "2d/FontAtlas.h"
 #include "2d/FontFNT.h"
+#include "2d/FontFreeType.h"
 
 NS_OCF_BEGIN
 
@@ -13,7 +15,29 @@ Font* FontManager::getFontFNT(std::string_view fontFileName)
     if (iter == m_fontMap.end()) {
         FontFNT* font = FontFNT::create(fontFileName);
         if (font != nullptr) {
-            m_fontMap.emplace(fileName, font);
+            font->createFontAtlas();
+            return m_fontMap.emplace(std::move(fileName), font).first->second;
+        }
+    }
+    else {
+        return iter->second;
+    }
+
+    return nullptr;
+}
+
+Font* FontManager::getFontTTF(const FontFreeTypeConfig& config)
+{
+    std::string fileName = config.fontPath;
+
+    auto iter = m_fontMap.find(fileName);
+    if (iter == m_fontMap.end()) {
+        FontFreeType* font = FontFreeType::create(fileName,
+                                                  config.fontSize,
+                                                  config.glyphs);
+        if (font != nullptr) {
+            font->createFontAtlas();
+            m_fontMap.emplace(std::move(fileName), font);
             return font;
         }
     }
@@ -31,6 +55,8 @@ void FontManager::release()
     }
 
     m_fontMap.clear();
+
+    FontFreeType::terminateFreeType();
 }
 
 NS_OCF_END

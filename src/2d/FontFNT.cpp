@@ -1,4 +1,5 @@
 #include "FontFNT.h"
+#include "2d/FontAtlas.h"
 #include "base/FileUtils.h"
 #include "base/Game.h"
 #include "renderer/TextureManager.h"
@@ -95,6 +96,7 @@ BMFontConfiguration::BMFontConfiguration()
     , m_commonHeight(0)
     , m_fontSize(0)
     , m_padding()
+    , m_pages(0)
 {
 }
 
@@ -162,13 +164,21 @@ std::set<unsigned int>* BMFontConfiguration::parseBinaryConfigFile(unsigned char
         else if (blockId == FntBlockType::Common) {
             FntCommon common = { 0 };
             memcpy(&common, pData, sizeof(FntInfo));
+            m_pages = common.pages;
             m_commonHeight = common.lineHeight;
+
+            m_atlasNames.reserve(static_cast<size_t>(m_pages));
         }
         else if (blockId == FntBlockType::Pages) {
-            const char* value = (const char*)pData;
-            OCFASSERT(strlen(value) < blockSize, "Block size should be less then string");
+            size_t offset = 0;
+            while (offset < blockSize) {
+                const char* value = (const char*)pData + offset;
+                auto atlasName = FileUtils::getInstance()->fullPathForFilename(value);
+                m_atlasNames.emplace_back(atlasName);
+                offset += strlen(value) + 1;
 
-            m_atlasName = FileUtils::getInstance()->fullPathForFilename(value);
+               OCFASSERT(offset <= blockSize, "Block size should be less then string");
+            }
         }
         else if (blockId == FntBlockType::Chars) {
             FntChars fntChar = { 0 };
@@ -185,6 +195,7 @@ std::set<unsigned int>* BMFontConfiguration::parseBinaryConfigFile(unsigned char
                 fontDef.xOffset           = fntChar.xoffset;
                 fontDef.yOffset           = fntChar.yoffset;
                 fontDef.xAdvance          = fntChar.xadvance;
+                fontDef.page              = fntChar.page;
 
                 validCharsString->insert(fontDef.charID);
             }
@@ -200,6 +211,8 @@ std::set<unsigned int>* BMFontConfiguration::parseBinaryConfigFile(unsigned char
         remains -= blockSize;
     }
 
+    OCF_ASSERT(m_pages == m_atlasNames.size());
+
     return validCharsString;
 }
 
@@ -210,18 +223,17 @@ FontFNT* FontFNT::create(std::string_view fntFilePath)
         return nullptr;
     }
 
-    Texture2D* texture = Game::getInstance()->getTextureManager()->addImage(config->m_atlasName);
-    if (texture == nullptr) {
-        return nullptr;
+    for (auto&& atlasName : config->m_atlasNames) {
+        Texture2D* texture = Game::getInstance()->getTextureManager()->addImage(atlasName);
+        if (texture == nullptr) {
+            return nullptr;
+        }
     }
     
     FontFNT* font = new FontFNT(config);
-    if (font->init()) {
-        font->autorelease();
-        return font;
-    }
-    OCF_SAFE_DELETE(font);
-    return nullptr;
+    font->autorelease();
+
+    return font;
 }
 
 FontFNT::FontFNT(BMFontConfiguration* config)
@@ -234,13 +246,21 @@ FontFNT::~FontFNT()
     m_pConfiguration->release();
 }
 
-bool FontFNT::init()
+FontAtlas* FontFNT::createFontAtlas()
 {
     if (m_pConfiguration == nullptr) {
-        return false;
+        return nullptr;
     }
-    
-    m_fontName = m_pConfiguration->m_fontName;
+
+    if (m_pConfiguration->m_fontDefDictionary.empty()) {
+        return nullptr;
+    }
+
+    if (m_pConfiguration->m_charactorSet->empty()) {
+        return nullptr;
+    }
+
+    FontAtlas* fontAtlas = new FontAtlas();
 
     setLineHeight(static_cast<float>(m_pConfiguration->m_commonHeight));
 
@@ -256,14 +276,26 @@ bool FontFNT::init()
         definition.xoffset = fontDef.xOffset;
         definition.yoffset = fontDef.yOffset;
         definition.xadvance = fontDef.xAdvance;
+        definition.page = fontDef.page;
 
         addCharacterDefinition(fontDef.charID, definition);
     }
 
-    Texture2D* texture = Game::getInstance()->getTextureManager()->addImage(m_pConfiguration->m_atlasName);
-    m_pTexture = texture;
+    unsigned int slot = 0;
+    for (auto&& atlasName : m_pConfiguration->m_atlasNames) {
+        Texture2D* texture = Game::getInstance()->getTextureManager()->addImage(atlasName);
+        if (texture == nullptr) {
+            OCF_SAFE_DELETE(fontAtlas);
+            return nullptr;
+        }
 
-    return true;
+        fontAtlas->setTexure(slot, texture);
+        slot++;
+    }
+
+    m_pFontAtlas = fontAtlas;
+
+    return fontAtlas;
 }
 
 NS_OCF_END

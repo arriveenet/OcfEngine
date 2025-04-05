@@ -4,6 +4,8 @@
 
 #include <png.h>
 
+#include "base/FileUtils.h"
+
 NS_OCF_BEGIN
 
 namespace {
@@ -24,6 +26,21 @@ namespace {
             png_error(png_ptr, "pngReadCallback failed");
         }
     }
+
+    void pngWriteCallback(png_structp png_ptr, png_bytep data, size_t length)
+    {
+        if (png_ptr == nullptr) {
+            return;
+        }
+
+        auto fileStream = static_cast<std::ofstream*>(png_get_io_ptr(png_ptr));
+
+        fileStream->write(reinterpret_cast<char*>(data), length);
+
+        if (fileStream->fail()) {
+            png_error(png_ptr, "Write Error");
+        }
+    }
 }
 
 Image::Image()
@@ -32,7 +49,7 @@ Image::Image()
     , m_width(0)
     , m_height(0)
     , m_fileType(Format::UNKNOWN)
-    , m_pixcelFormat(PixelFormat::NONE)
+    , m_pixelFormat(PixelFormat::NONE)
 {
 }
 
@@ -47,7 +64,8 @@ Image::~Image()
     m_height = 0;
 }
 
-bool Image::initWithRowData(const uint8_t* pData, size_t dataSize, int width, int height)
+bool Image::initWithRawData(const uint8_t* pData, size_t dataSize,
+                            int width, int height, PixelFormat format)
 {
     bool result = false;
     do {
@@ -55,7 +73,7 @@ bool Image::initWithRowData(const uint8_t* pData, size_t dataSize, int width, in
 
         m_width = width;
         m_height = height;
-        m_pixcelFormat = PixelFormat::RGBA;
+        m_pixelFormat = format;
 
         m_dataSize = dataSize;
         m_pData = new uint8_t[dataSize];
@@ -113,13 +131,23 @@ bool Image::loadImageData(const unsigned char* pData, size_t dataSize)
         result = initWithBmpData(pData, dataSize);
         break;
     case Format::PNG:
-        result = initWidhtPngData(pData, dataSize);
+        result = initWithPngData(pData, dataSize);
         break;
     default:
         break;
     }
 
     return result;
+}
+
+bool Image::save(std::string_view filename)
+{
+    std::string fileExtension = FileUtils::getExtension(filename);
+    if (fileExtension == ".png") {
+        return savePng(filename);
+    }
+
+    return false;
 }
 
 
@@ -139,7 +167,7 @@ bool Image::initWithBmpData(const unsigned char* /* pData */, size_t /* dataSize
     return false;
 }
 
-bool Image::initWidhtPngData(const unsigned char* pData, size_t dataSize)
+bool Image::initWithPngData(const unsigned char* pData, size_t dataSize)
 {
     bool result = false;
     static constexpr int PNG_SIG_SIZE = 8;
@@ -182,13 +210,13 @@ bool Image::initWidhtPngData(const unsigned char* pData, size_t dataSize)
         // ピクセルフォーマットを設定
         switch (colorType) {
         case PNG_COLOR_TYPE_GRAY:
-            m_pixcelFormat = PixelFormat::GRAY;
+            m_pixelFormat = PixelFormat::GRAY;
             break;
         case PNG_COLOR_TYPE_RGB:
-            m_pixcelFormat = PixelFormat::RGB;
+            m_pixelFormat = PixelFormat::RGB;
             break;
         case PNG_COLOR_TYPE_RGBA:
-            m_pixcelFormat = PixelFormat::RGBA;
+            m_pixelFormat = PixelFormat::RGBA;
             break;
         default:
             break;
@@ -242,6 +270,60 @@ bool Image::isPng(const unsigned char* pData, size_t dataSize)
     static const unsigned char PNG_SIGNATURE[] = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
 
     return memcmp(PNG_SIGNATURE, pData, sizeof(PNG_SIGNATURE)) == 0;
+}
+
+bool Image::savePng(std::string_view filename)
+{
+    bool result = false;
+
+    do {
+        std::ofstream outStream(filename.data(), std::ios::binary);
+        OCF_BREAK_IF(!outStream);
+
+        png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+        OCF_BREAK_IF(png_ptr == nullptr);
+
+        png_infop info_ptr = png_create_info_struct(png_ptr);
+        OCF_BREAK_IF(info_ptr == nullptr);
+
+        if (setjmp(png_jmpbuf(png_ptr))) {
+            png_destroy_write_struct(&png_ptr, &info_ptr);
+            break;
+        }
+
+        png_set_write_fn(png_ptr, &outStream, pngWriteCallback, nullptr);
+
+        png_set_IHDR(png_ptr, info_ptr, m_width, m_height, 8, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE,
+                     PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
+
+        png_write_info(png_ptr, info_ptr);
+
+        png_set_packing(png_ptr);
+
+        std::unique_ptr<png_bytep[]> row_pointers(new png_bytep[m_height]);
+
+        if (row_pointers == nullptr) {
+            png_destroy_write_struct(&png_ptr, &info_ptr);
+            break;
+        }
+
+        for (int i = 0; i < m_height; i++) {
+            row_pointers[i] = m_pData + i * m_width * 3;
+        }
+
+        png_write_image(png_ptr, row_pointers.get());
+
+        png_write_end(png_ptr, info_ptr);
+
+        png_destroy_write_struct(&png_ptr, &info_ptr);
+
+        outStream.close();
+
+        result = true;
+
+    } while (false);
+
+    return result;
 }
 
 NS_OCF_END

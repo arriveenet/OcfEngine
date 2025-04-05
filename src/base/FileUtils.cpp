@@ -1,6 +1,7 @@
 #include "FileUtils.h"
 #include <fstream>
 #include <filesystem>
+#include <algorithm>
 
 NS_OCF_BEGIN
 
@@ -56,6 +57,19 @@ void FileUtils::destroyInstance()
 {
     delete s_sharedFileUtils;
     s_sharedFileUtils = nullptr;
+}
+
+std::string FileUtils::getExtension(std::string_view filename)
+{
+    std::string fileExtension;
+    size_t pos = filename.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        fileExtension = filename.substr(pos, filename.length());
+        std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
+    }
+
+    return fileExtension;
 }
 
 FileUtils::~FileUtils()

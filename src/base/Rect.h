@@ -29,6 +29,8 @@ public:
     bool intersect(const glm::vec2& point) const;
 
     bool intersect(const Rect& rect) const;
+
+    bool contain(const Rect& rect) const;
 };
 
 NS_OCF_END

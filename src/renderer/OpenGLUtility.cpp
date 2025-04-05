@@ -30,8 +30,7 @@ GLenum OpenGLUtility::toGLFormat(PixelFormat format)
 
     switch (format) {
     case PixelFormat::GRAY:
-        result = GL_LUMINANCE;
-        //result = GL_ALPHA;
+        result = GL_RED;
         break;
     case PixelFormat::RGB:
         result = GL_RGB;

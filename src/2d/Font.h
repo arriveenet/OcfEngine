@@ -6,6 +6,7 @@
 NS_OCF_BEGIN
 
 class Texture2D;
+class FontAtlas;
 
 struct FontCharacterDefinition {
     float x;
@@ -15,6 +16,7 @@ struct FontCharacterDefinition {
     float xoffset;
     float yoffset;
     float xadvance;
+    int page;
 };
 
 class Font : public GameObject {
@@ -28,15 +30,20 @@ public:
     float getLineHeight() const { return m_lineHeight; }
     void setLineHeight(float lineHeight);
 
+    virtual FontAtlas* createFontAtlas() = 0;
+
     std::string_view getFontName() const;
-    Texture2D* getTexture();
+
+    FontAtlas* getFontAtlas() const { return m_pFontAtlas; }
+
 protected:
     std::string m_fontName;
-    Texture2D* m_pTexture;
+    FontAtlas* m_pFontAtlas;
     float m_lineHeight;
     std::unordered_map<char32_t, FontCharacterDefinition> m_characterDefinition;
 
     friend class Label;
+    friend class FontManager;
 };
 
 NS_OCF_END

@@ -20,6 +20,7 @@ list(APPEND GAME_HEADER
     AudioEngineTest/AudioEngineTest.h
     ComponentTest/ComponentTest.h
     EventTest/EventTest.h
+    FontTest/FontTest.h
     MeshRendererTest/MeshRendererTest.h
     SpriteTest/SpriteTest.h
     TiledMapTest/TiledMapTest.h
@@ -33,6 +34,7 @@ list(APPEND GAME_SOURCE
     AudioEngineTest/AudioEngineTest.cpp
     ComponentTest/ComponentTest.cpp
     EventTest/EventTest.cpp
+    FontTest/FontTest.cpp
     MeshRendererTest/MeshRendererTest.cpp
     SpriteTest/SpriteTest.cpp
     TiledMapTest/TiledMapTest.cpp
