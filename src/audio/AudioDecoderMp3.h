@@ -25,8 +25,6 @@ protected:
 private:
     Mp3DecHandle m_handle;
     std::unique_ptr<std::ifstream> m_fileStream;
-    //FILE* m_file;
-
 
     friend class AudioDecoderManager;
 };

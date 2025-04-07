@@ -11,9 +11,6 @@ struct Mp3DecImpl {
 static size_t readMiniMp3(void* buf, size_t size, void* user_data)
 {
     auto stream = static_cast<std::ifstream*>(user_data);
-    if (!stream->is_open()) {
-        return 0;
-    }
     stream->read(static_cast<char*>(buf), size);
 
     return stream->gcount();
@@ -22,23 +19,13 @@ static size_t readMiniMp3(void* buf, size_t size, void* user_data)
 static int seekMiniMp3(uint64_t position, void* user_data)
 {
     auto stream = static_cast<std::ifstream*>(user_data);
-    if (!stream->is_open()) {
-        return -1;
+    // EOFの場合、clear()を呼び出して状態をリセットする
+    // これにより、次の読み取り操作が正常に動作するようになります
+    if (stream->eof()) {
+        stream->clear();
     }
-    // Check if the stream is seekable
-    if (!stream->seekg(0, std::ios::end)) {
-        return -1;
-    }
-    // Check if the position is valid
-    if (position > static_cast<uint64_t>(stream->tellg())) {
-        return -1;
-    }
-    // Seek to the specified position
+
     stream->seekg(position, std::ios::beg);
-    // Check if the seek was successful
-    if (stream->fail()) {
-        return -1;
-    }
 
     return 0;
 }
@@ -62,7 +49,6 @@ bool AudioDecoderMp3::open(std::string_view filename)
         handle->mp3decIO.read_data = m_fileStream.get();
         handle->mp3decIO.seek_data = m_fileStream.get();
 
-        //if (mp3dec_ex_open(&handle->mp3dec, filename.data(), MP3D_SEEK_TO_SAMPLE) != 0) {
         if (mp3dec_ex_open_cb(&handle->mp3dec, &handle->mp3decIO, MP3D_SEEK_TO_SAMPLE) != 0) {
             OCFLOG("Failed to open MP3 decoder");
             delete handle;
