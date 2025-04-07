@@ -27,6 +27,10 @@ static int seekMiniMp3(uint64_t position, void* user_data)
 
     stream->seekg(position, std::ios::beg);
 
+    if (stream->fail()) {
+        return -1;
+    }
+
     return 0;
 }
 
