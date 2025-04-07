@@ -82,7 +82,7 @@ void AudioPlayer::rotateBufferThread(int offsetFrame)
     AudioDecoder* decoder = AudioDecoderManager::createDecoder(fullPath);
     long long rotateSleepTime = static_cast<long long>(QUEUEBUFFER_TIME_STEP * 1000) / 2;
     do {
-        if (!decoder->open(fullPath)) {
+        if (decoder == nullptr || !decoder->open(fullPath)) {
             break;
         }
 
