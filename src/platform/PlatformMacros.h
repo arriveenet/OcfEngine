@@ -1,5 +1,6 @@
 #pragma once
 #include "base/Config.h"
+#include "base/Console.h"
 #include <stdint.h>
 #include <string.h>
 

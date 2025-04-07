@@ -22,7 +22,8 @@ bool AudioEngineTest::init()
     float leftX = 300.0f;
     float leftX2 = 550.0f;
 
-    std::string audioFileName = "audio/タイフーンパレード.wav";
+    std::string audioFileName = "audio/Canon in D Major.mp3";
+    //std::string audioFileName = "audio/タイフーンパレード.wav";
 
     auto fileNameLabel = Label::createWithBMFont("MS Gothic.fnt", audioFileName);
     fileNameLabel->setPosition(leftX, 550);
@@ -64,31 +65,38 @@ bool AudioEngineTest::init()
     m_volumeLabel->setPosition(leftX, 330);
     addChild(m_volumeLabel);
 
-    auto voluemUp = Button::create("ButtonNormal.png", "ButtonActive.png");
-    voluemUp->setText("+");
-    voluemUp->setPosition(leftX, 300);
-    voluemUp->setOnClickCallback([=]() {
-        float voluem = AudioEngine::getVolume(m_audioID);
-        voluem += 0.1f;
-        AudioEngine::setVolume(m_audioID, voluem);
+    auto volumeUp = Button::create("ButtonNormal.png", "ButtonActive.png");
+    volumeUp->setText("+");
+    volumeUp->setPosition(leftX, 300);
+    volumeUp->setOnClickCallback([=]() {
+        float volume = AudioEngine::getVolume(m_audioID);
+        volume += 0.1f;
+        AudioEngine::setVolume(m_audioID, volume);
         char str[128];
         snprintf(str, sizeof(str), "Volume: %f", AudioEngine::getVolume(m_audioID));
         m_volumeLabel->setString(str);
         });
-    addChild(voluemUp);
+    addChild(volumeUp);
 
-    auto voluemDown = Button::create("ButtonNormal.png", "ButtonActive.png");
-    voluemDown->setText("-");
-    voluemDown->setPosition(leftX2, 300);
-    voluemDown->setOnClickCallback([=]() {
-        float voluem = AudioEngine::getVolume(m_audioID);
-        voluem -= 0.1f;
-        AudioEngine::setVolume(m_audioID, voluem);
+    auto volumeDown = Button::create("ButtonNormal.png", "ButtonActive.png");
+    volumeDown->setText("-");
+    volumeDown->setPosition(leftX2, 300);
+    volumeDown->setOnClickCallback([=]() {
+        float volume = AudioEngine::getVolume(m_audioID);
+        volume -= 0.1f;
+        AudioEngine::setVolume(m_audioID, volume);
         char str[128];
         snprintf(str, sizeof(str), "Volume: %f", AudioEngine::getVolume(m_audioID));
         m_volumeLabel->setString(str);
         });
-    addChild(voluemDown);
+    addChild(volumeDown);
 
     return true;
+}
+
+void AudioEngineTest::onExit()
+{
+    AudioEngine::stop(m_audioID);
+
+    Node::onExit();
 }

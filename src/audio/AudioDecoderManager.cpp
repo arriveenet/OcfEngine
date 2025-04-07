@@ -1,6 +1,7 @@
 #include "AudioDecoderManager.h"
 #include <filesystem>
 #include "audio/AudioDecoderWav.h"
+#include "audio/AudioDecoderMp3.h"
 
 NS_OCF_BEGIN
 
@@ -19,6 +20,9 @@ AudioDecoder* AudioDecoderManager::createDecoder(std::string_view filePath)
     const auto extension = p.extension();
     if (extension == ".wav") {
         return new AudioDecoderWav();
+    }
+    else if (extension == ".mp3") {
+        return new AudioDecoderMp3();
     }
     else {
 

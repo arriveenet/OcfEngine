@@ -51,7 +51,7 @@ uint32_t AudioDecoder::getChannelCount() const
     return m_channelCount;
 }
 
-uint32_t AudioDecoder::getSamplesPerBlcok() const
+uint32_t AudioDecoder::getSamplesPerBlock() const
 {
     return m_samplesPerBlock;
 }

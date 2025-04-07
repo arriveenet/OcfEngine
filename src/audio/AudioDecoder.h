@@ -35,7 +35,7 @@ public:
 
     virtual uint32_t getChannelCount() const;
 
-    uint32_t getSamplesPerBlcok() const;
+    uint32_t getSamplesPerBlock() const;
 
     AudioSourceFormat getSourceFormat() const;
 
