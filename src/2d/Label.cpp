@@ -70,7 +70,7 @@ bool Label::init()
 
     m_fontAtlas = m_font->getFontAtlas();
 
-    updateContent();
+    updateBatchCommands();
 
     ShaderManager* shaderManager = ShaderManager::getInstance();
     setProgram(shaderManager->getBuiltinProgram(ProgramType::Label));
@@ -87,7 +87,7 @@ bool Label::initWithBMFont(std::string_view bmFontPath)
 
     m_fontAtlas = m_font->getFontAtlas();
 
-    updateContent();
+    updateBatchCommands();
 
     ShaderManager* shaderManager = ShaderManager::getInstance();
     setProgram(shaderManager->getBuiltinProgram(ProgramType::Label));
@@ -100,6 +100,7 @@ bool Label::initWithTTF(std::string_view ttfPath, int fontSize)
     FontFreeTypeConfig config;
     config.fontPath = ttfPath;
     config.fontSize = fontSize;
+    config.glyphs = GlyphCollection::Dynamic;
 
     m_font = FontManager::getFontTTF(config);
     if (m_font == nullptr) {
@@ -108,7 +109,7 @@ bool Label::initWithTTF(std::string_view ttfPath, int fontSize)
 
     m_fontAtlas = m_font->getFontAtlas();
 
-    updateContent();
+    updateBatchCommands();
 
     ShaderManager* shaderManager = ShaderManager::getInstance();
     setProgram(shaderManager->getBuiltinProgram(ProgramType::Label));
@@ -140,6 +141,7 @@ void Label::setTextColor(unsigned char r, unsigned char g, unsigned b)
 void Label::update(float /* deltaTime */)
 {
     if (m_isDirty) {
+        updateContent();
         updateQuads();
 
         m_isDirty = false;
@@ -166,6 +168,16 @@ void Label::draw(Renderer* renderer, const glm::mat4& transform)
                                       batchCommand.quads.size(),
                                       transform);
         renderer->addCommand(&batchCommand.quadCommand);
+    }
+}
+
+void Label::updateContent()
+{
+    if (m_fontAtlas != nullptr) {
+        FontFreeType* freeType = dynamic_cast<FontFreeType*>(m_font);
+        if (freeType != nullptr) {
+            freeType->prepareLetterDefinitions(m_utf32Text);
+        }
     }
 }
 
@@ -241,7 +253,7 @@ void Label::updateQuads()
 #endif
 }
 
-void Label::updateContent()
+void Label::updateBatchCommands()
 {
     if (m_fontAtlas == nullptr) {
         return;

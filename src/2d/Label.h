@@ -39,8 +39,9 @@ public:
     void draw(Renderer* renderer, const glm::mat4& transform) override;
 
 protected:
-    void updateQuads();
     void updateContent();
+    void updateQuads();
+    void updateBatchCommands();
 
     void setProgram(Program* program);
 

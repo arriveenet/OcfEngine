@@ -34,7 +34,7 @@ bool FontTest::init()
     if (!TestCase::init())
         return false;
 
-    m_pLabel = ocf::Label::createWithTTF("fonts/cour.ttf", "Hello, World!", 24);
+    m_pLabel = ocf::Label::createWithTTF("fonts/NotoSansJP-Regular.ttf", "こんにちは、世界!", 24);
     addChild(m_pLabel);
     m_pLabel->setPosition(100, 100);
 
