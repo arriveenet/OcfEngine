@@ -205,9 +205,6 @@ void Label::updateQuads()
 
         auto& pChar = m_font->m_characterDefinition[p];
 
-        if (pChar.width == 0 || pChar.height == 0) {
-            continue;
-        }
 
         const float textureWidth = m_fontAtlas->getTexture(pChar.page)->getSize().x;
         const float textureHeight = m_fontAtlas->getTexture(pChar.page)->getSize().y;
