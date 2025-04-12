@@ -19,7 +19,7 @@ public:
 
 	void addEventListener(EventListener* pEventListener, Node* pTarget);
 
-	void removeEventLisnerForTarget(Node* pTarget);
+	void removeEventListenerForTarget(Node* pTarget);
 
 private:
 	std::unordered_map <std::string, EventListenerVecotr> m_listenerMap;

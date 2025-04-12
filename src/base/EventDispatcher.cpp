@@ -53,7 +53,7 @@ void EventDispatcher::addEventListener(EventListener* pEventListener, Node* pTar
     m_listenerMap[listenerId].emplace_back(pEventListener);
 }
 
-void EventDispatcher::removeEventLisnerForTarget(Node* pTarget)
+void EventDispatcher::removeEventListenerForTarget(Node* pTarget)
 {
     for (auto& listenerVector : m_listenerMap) {
 

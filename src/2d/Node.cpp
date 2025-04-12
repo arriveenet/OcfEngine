@@ -37,7 +37,7 @@ Node::Node()
 
 Node::~Node()
 {
-    m_pEventDispatcher->removeEventLisnerForTarget(this);
+    m_pEventDispatcher->removeEventListenerForTarget(this);
 
     while (!m_children.empty()) {
         auto entity = m_children.back();
