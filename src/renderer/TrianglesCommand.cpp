@@ -27,6 +27,11 @@ void TrianglesCommand::init(float globalZOrder, Texture2D* texture, const Triang
 
 void TrianglesCommand::genarateMaterialID()
 {
+    if (m_texture == nullptr) {
+        m_materialID = 0;
+        return;
+    }
+
     m_materialID = XXH32(m_texture, sizeof(Texture2D), 0);
 }
 
