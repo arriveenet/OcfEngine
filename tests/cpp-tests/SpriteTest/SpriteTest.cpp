@@ -19,8 +19,9 @@ bool SpriteTestDemo::init()
     if (TestCase::init()) {
         const auto size = m_pGame->getVisibleSize();
 
-        auto sprite1 = Sprite::create("textures/25_Crono.png");
+        auto sprite1 = Sprite::create("textures/Mario.png");
         sprite1->setPosition(size / 2.0f);
+        sprite1->setScale(10.0f);
         sprite1->setGlobalZOrder(1.0f);
         this->addChild(sprite1);
 
