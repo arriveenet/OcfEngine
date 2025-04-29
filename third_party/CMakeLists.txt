@@ -55,10 +55,12 @@ set(ALSOFT_EXAMPLES OFF)
 set(ALSOFT_INSTALL OFF)
 add_subdirectory(OpenAL)
 target_include_directories(thirdparty INTERFACE "OpenAL/include")
-target_link_libraries(thirdparty INTERFACE OpenAL common ex-common)
+target_link_libraries(thirdparty INTERFACE OpenAL alsoft.common alsoft.excommon)
 set_target_properties(OpenAL
-                      common
-                      ex-common
+                      alsoft.common
+                      alsoft.excommon
+                      alsoft.fmt
+                      clang-tidy-check
                       PROPERTIES
                       ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
