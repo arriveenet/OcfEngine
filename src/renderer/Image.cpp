@@ -8,6 +8,30 @@
 
 NS_OCF_BEGIN
 
+#pragma pack(push, 1)
+struct BitmapFileHeader {
+    uint16_t bfType;       // 0x4D42
+    uint32_t bfSize;       // ファイルサイズ
+    uint16_t bfReserved1;  // 予約領域
+    uint16_t bfReserved2;  // 予約領域
+    uint32_t bfOffBits;    // データオフセット
+};
+
+struct BitmapInfoHeader {
+    uint32_t biSize;            // ヘッダサイズ
+    int32_t biWidth;            // 幅
+    int32_t biHeight;           // 高さ
+    uint16_t biPlanes;          // プレーン数
+    uint16_t biBitCount;        // ビット数
+    uint32_t biCompression;     // 圧縮形式
+    uint32_t biSizeImage;       // 画像サイズ
+    int32_t biXPelsPerMeter;    // 水平解像度
+    int32_t biYPelsPerMeter;    // 垂直解像度
+    uint32_t biClrUsed;         // 使用色数
+    uint32_t biClrImportant;    // 重要色数
+};
+#pragma pack(pop)
+
 namespace {
     struct ImageSource {
         const unsigned char* pData;
@@ -162,9 +186,69 @@ Image::Format Image::detectFormat(const unsigned char* pData, size_t dataSize)
     }
 }
 
-bool Image::initWithBmpData(const unsigned char* /* pData */, size_t /* dataSize */)
+bool Image::initWithBmpData(const unsigned char* pData, size_t dataSize)
 {
-    return false;
+    bool result = false;
+    unsigned char* pDataPtr = const_cast<unsigned char*>(pData);
+
+    do {
+        BitmapFileHeader fileHeader = {};
+        memcpy(&fileHeader, pDataPtr, sizeof(BitmapFileHeader));
+        pDataPtr += sizeof(BitmapFileHeader);
+
+        // BMPデータか判定
+        if (fileHeader.bfType != 0x4D42) {
+            OCF_ASSERT("BMP format is not supported");
+            break;
+        }
+
+        // データサイズが正しいか判定
+        if (fileHeader.bfSize != dataSize) {
+            OCF_ASSERT("BMP data size is not correct");
+            break;
+        }
+
+        BitmapInfoHeader infoHeader = {};
+        memcpy(&infoHeader, pDataPtr, sizeof(BitmapInfoHeader));
+        pDataPtr += sizeof(BitmapInfoHeader);
+
+        // 24bit以外はサポートしない
+        if (infoHeader.biBitCount != 24) {
+            OCF_ASSERT("BMP format is not supported");
+            break;
+        }
+
+        m_width = infoHeader.biWidth;
+        m_height = std::abs(infoHeader.biHeight);
+        m_pixelFormat = PixelFormat::RGB;
+
+        const int rowSize = m_width * (infoHeader.biBitCount / 8);
+        const int padding = (4 - (rowSize % 4)) % 4;
+
+        m_pData = new unsigned char[m_height * rowSize];
+
+        pDataPtr = const_cast<unsigned char*>(pData + fileHeader.bfOffBits);
+
+        for (int y = 0; y < m_height; y++) {
+            // BMPは下から上に描画されるので、Y座標を反転する
+            unsigned char* pRow = m_pData + (m_height - 1 - y) * rowSize;
+            memcpy(pRow, pDataPtr, rowSize);
+
+            // BMPはBGR形式なので、RGBに変換する
+            for (int x = 0; x < m_width; x++) {
+                if (x * 3 + 2 < rowSize) {
+                    std::swap(pRow[x * 3 + 0], pRow[x * 3 + 2]);
+                }
+            }
+
+            // パディング分だけポインタを進める
+            pDataPtr += rowSize + padding;
+        }
+
+        result = true;
+    } while (false);
+
+    return result;
 }
 
 bool Image::initWithPngData(const unsigned char* pData, size_t dataSize)

@@ -61,7 +61,8 @@ bool Texture2D::initWithData(uint8_t* data, size_t dataSize,
 
 bool Texture2D::initWithImage(Image* image, PixelFormat format)
 {
-    if (image == nullptr) {
+    if (image == nullptr || image->getData() == nullptr
+        || image->getWidth() <= 0 || image->getHeight() <= 0) {
         return false;
     }
 
