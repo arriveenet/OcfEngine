@@ -49,7 +49,7 @@ list(APPEND OCF_SRC ${OCF_HEADER})
 
 add_library(${_OCF_ENGINE_LIB} ${OCF_SRC})
 
-add_subdirectory(${OCF_ROOT_PATH}/third_party ${ENGINE_BINARY_PATH}/thirdparty)
+add_subdirectory(${OCF_ROOT_PATH}/thirdparty ${ENGINE_BINARY_PATH}/thirdparty)
 target_link_libraries(${_OCF_ENGINE_LIB} thirdparty)
 
 if(XCODE OR VS)
