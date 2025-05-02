@@ -1,6 +1,6 @@
 #include "AudioDecoderMp3.h"
 #define MINIMP3_IMPLEMENTATION
-#include "minimp3/minimp3_ex.h"
+#include "minimp3_ex.h"
 #include <stdio.h>
 
 struct Mp3DecImpl {

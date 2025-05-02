@@ -4,6 +4,7 @@ set(OCF_PLATFORM_HEADER
     "platform/GLView.h"
     "platform/GLViewImpl.h"
     "platform/PlatformMacros.h"
+    "platform/PlatformConfig.h"
     )
 
 set(OCF_PLATFORM_SRC

@@ -1,6 +1,7 @@
 #pragma once
 #include "base/Config.h"
 #include "base/Console.h"
+#include "platform/PlatformConfig.h"
 #include <stdint.h>
 #include <string.h>
 

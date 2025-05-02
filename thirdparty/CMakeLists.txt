@@ -49,6 +49,8 @@ set_target_properties(glm
                       FOLDER "ThirdParty"
                       )
 
+target_include_directories(thirdparty INTERFACE "minimp3")
+
 set(ALSOFT_DLOPEN OFF)
 set(ALSOFT_UTILS OFF)
 set(ALSOFT_EXAMPLES OFF)

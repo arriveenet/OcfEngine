@@ -27,13 +27,16 @@ bool AppDelegate::applicationDidFinishLaunching()
         }
 
         // ウィンドウの位置をディスプレイの中央に設定
-#ifdef _WIN32
-        const int displayWidth = GetSystemMetrics(SM_CXSCREEN);
-        const int displayHeight = GetSystemMetrics(SM_CYSCREEN);
-        const int windowPosX = static_cast<int>((displayWidth / 2.0f) - (windowWidth / 2.0f));
-        const int windowPosY = static_cast<int>((displayHeight / 2.0f) - (windowHeight / 2.0f));
-        dynamic_cast<GLViewImpl*>(glView)->setWindowPosition(windowPosX, windowPosY);
-#endif
+        GLViewImpl* glViewImpl = dynamic_cast<GLViewImpl*>(glView);
+        if (glViewImpl == nullptr) {
+            return false;
+        }
+
+        auto monitorSize = glViewImpl->getMonitorSize();
+        const int windowPosX = static_cast<int>((monitorSize.x / 2.0f) - (windowWidth / 2.0f));
+        const int windowPosY = static_cast<int>((monitorSize.y / 2.0f) - (windowHeight / 2.0f));
+        glViewImpl->setWindowPosition(windowPosX, windowPosY);
+
         game->setGLView(glView);
     }
 

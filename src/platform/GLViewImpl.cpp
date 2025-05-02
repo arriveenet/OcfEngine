@@ -8,7 +8,15 @@
 #include "base/EventMouse.h"
 #include "base/EventDispatcher.h"
 
+// GLFW/glfw3native.h
+#if (OCF_TARGET_PLATFORM == OCF_PLATFORM_WIN32)
+#   ifndef GLFW_EXPOSE_NATIVE_WIN32
+#       define GLFW_EXPOSE_NATIVE_WIN32
+#   endif
+#endif
 NS_OCF_BEGIN
+
+#include <GLFW/glfw3native.h>
 
 class GLFWEventHandler {
 public:
@@ -276,12 +284,49 @@ void GLViewImpl::setWindowPosition(int xpos, int ypos)
     }
 }
 
+void GLViewImpl::setWindowSize(int* width, int* height)
+{
+    if (m_pMainWindow != nullptr) {
+        glfwGetWindowSize(m_pMainWindow, width, height);
+    }
+}
+
+int GLViewImpl::getMonitorCount() const
+{
+    int count = 0;
+    glfwGetMonitors(&count);
+    return count;
+}
+
+glm::ivec2 GLViewImpl::getMonitorSize() const
+{
+    glm::ivec2 monitorSize(0, 0);
+
+    GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+    if (monitor != nullptr) {
+        const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
+        if (videoMode != nullptr) {
+            monitorSize.x = videoMode->width;
+            monitorSize.y = videoMode->height;
+        }
+    }
+
+    return monitorSize;
+}
+
 void GLViewImpl::setCursolPosition(float x, float y)
 {
     if (m_pMainWindow != nullptr) {
         glfwSetCursorPos(m_pMainWindow, x, y);
     }
 }
+
+#if (OCF_TARGET_PLATFORM == OCF_PLATFORM_WIN32)
+HWND GLViewImpl::getWin32Window()
+{
+    return glfwGetWin32Window(m_pMainWindow);
+}
+#endif
 
 bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool resizable)
 {

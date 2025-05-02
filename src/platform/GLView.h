@@ -1,8 +1,15 @@
-#include <string>
-#include <glm/glm.hpp>
+#pragma once
+
 #include "base/Types.h"
 #include "base/GameObject.h"
 #include "base/Rect.h"
+
+#include <string>
+#include <glm/glm.hpp>
+
+#if (OCF_TARGET_PLATFORM == OCF_PLATFORM_WIN32)
+#   include <windows.h>
+#endif
 
 NS_OCF_BEGIN
 
@@ -54,6 +61,10 @@ public:
     static GLContextAttributes getGLContextAttributes();
 
     static GLContextAttributes m_glContextAttributes;
+
+#if (OCF_TARGET_PLATFORM == OCF_PLATFORM_WIN32)
+    virtual HWND getWin32Window() = 0;
+#endif
 
 protected:
     void updateDesignResolutionSize();

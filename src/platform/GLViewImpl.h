@@ -22,9 +22,17 @@ public:
     void swapBuffers() override;
 
     void setWindowPosition(int xpos, int ypos);
+    void setWindowSize(int* width, int* height);
+
+    int getMonitorCount() const;
+    glm::ivec2 getMonitorSize() const;
 
     glm::vec2 getMousePosition() const { return m_mousePosition; }
     void setCursolPosition(float x, float y);
+
+#if (OCF_TARGET_PLATFORM == OCF_PLATFORM_WIN32)
+    HWND getWin32Window() override;
+#endif
 
 protected:
     GLViewImpl(bool initGlfw = true);
