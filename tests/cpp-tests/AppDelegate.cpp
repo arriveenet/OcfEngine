@@ -20,7 +20,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     auto game = Game::getInstance();
     auto glView = game->getGLView();
     if (glView == nullptr) {
-        glView = GLViewImpl::createWithRect("Ocf Engine", Rect(0, 0, windowWidth, windowHeight));
+        glView = GLViewImpl::createWithRect("Cpp Tests", Rect(0, 0, windowWidth, windowHeight));
 
         if (glView == nullptr) {
             return false;

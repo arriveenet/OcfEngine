@@ -19,7 +19,14 @@ public:
 
 	void addEventListener(EventListener* pEventListener, Node* pTarget);
 
+    void removeEventListener(EventListener* pEventListener);
+
 	void removeEventListenerForTarget(Node* pTarget);
+
+protected:
+    void dispatchEventToListeners(EventListenerVecotr& listeners, Event* event);
+
+    void dispatchMouseEventToListeners(EventListenerVecotr& listeners, Event* event);
 
 private:
 	std::unordered_map <std::string, EventListenerVecotr> m_listenerMap;

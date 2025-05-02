@@ -15,6 +15,7 @@ enum class CameraFlag : uint16_t {
 
 class Camera : public Node {
     friend class Scene;
+    friend class EventDispatcher;
 
 public:
     enum class Type {

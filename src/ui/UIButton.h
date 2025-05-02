@@ -21,7 +21,6 @@ public:
 
     bool init() override;
     bool init(std::string_view normalImage, std::string_view activeImage);
-    void updateNode(float deltaTime) override;
     void setOnClickCallback(std::function<void()> onClick);
     void setText(const std::string& text);
     std::string getText() const;
@@ -37,7 +36,6 @@ protected:
     std::string m_normalFilename;
     std::string m_activeFilename;
     Label* m_pTextRenderer;
-    std::function<void()> m_onClick;
 };
 
 }

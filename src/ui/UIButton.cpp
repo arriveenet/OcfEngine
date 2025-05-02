@@ -33,8 +33,8 @@ Button::Button()
     : m_pButtonNormalRenderer(nullptr)
     , m_pButtonActiveRenderer(nullptr)
     , m_pTextRenderer(nullptr)
-    , m_onClick(nullptr)
 {
+    setMouseEnabled(true);
 }
 
 Button::~Button()
@@ -60,26 +60,9 @@ bool Button::init(std::string_view normalImage, std::string_view activeImage)
     return false;
 }
 
-void Button::updateNode(float /* deltaTime */)
-{
-    glm::vec2 mousePos = Input::getMousePosition();
-
-    if (this->hitTest(mousePos)) {
-        m_pButtonNormalRenderer->setVisible(false);
-        m_pButtonActiveRenderer->setVisible(true);
-        if (Input::getMouseButtonState(Mouse::Left) == ButtonState::Pressed) {
-            m_onClick();
-        }
-    }
-    else {
-        m_pButtonNormalRenderer->setVisible(true);
-        m_pButtonActiveRenderer->setVisible(false);
-    }
-}
-
 void Button::setOnClickCallback(std::function<void()> onClick)
 {
-    m_onClick = onClick;
+    m_onClickCallback = onClick;
 }
 
 void Button::setText(const std::string& text)
@@ -112,6 +95,9 @@ void Button::initRenderer()
 
     m_pButtonNormalRenderer->setAnchorPoint(glm::vec2(0.0f, 0.0f));
     m_pButtonActiveRenderer->setAnchorPoint(glm::vec2(0.0f, 0.0f));
+
+    m_pButtonNormalRenderer->setVisible(true);
+    m_pButtonActiveRenderer->setVisible(false);
 
     addChild(m_pButtonNormalRenderer);
     addChild(m_pButtonActiveRenderer);
