@@ -66,7 +66,8 @@ std::string FileUtils::getExtension(std::string_view filename)
     if (pos != std::string::npos)
     {
         fileExtension = filename.substr(pos, filename.length());
-        std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
+        std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(),
+                      [](char c) {return static_cast<char>(std::tolower(c)); });
     }
 
     return fileExtension;
