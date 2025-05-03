@@ -27,4 +27,5 @@
 #include "platform/Application.h"
 
 #include "ui/UIButton.h"
+#include "ui/UISlider.h"
 
