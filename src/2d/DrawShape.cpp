@@ -17,8 +17,11 @@ DrawShape* DrawShape::create()
 
 DrawShape::DrawShape()
     : m_dirtyLine(false)
+    , m_dirtyTriangle(false)
     , m_bufferCapacityLine(0)
     , m_bufferCountLine(0)
+    , m_bufferCapacityTriangle(0)
+    , m_bufferCountTriangle(0)
 {
 }
 
@@ -28,28 +31,11 @@ DrawShape::~DrawShape()
 
 bool DrawShape::init()
 {
-    m_customCommandLine.setDrawType(CustomCommand::DrawType::Array);
-    m_customCommandLine.setPrimitiveType(PrimitiveType::Line);
+    updateShader(m_customCommandLine, ProgramType::DrawShape, PrimitiveType::Line);
+    updateShader(m_customCommandTriangle, ProgramType::DrawShape, PrimitiveType::Triangle);
 
-    Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::DrawShape);
-
-    auto& programState = m_customCommandLine.getProgramState();
-    programState.setProgram(pProgram);
-
-    VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
-    pVertexArray->bind();
-
-    pVertexArray->setStride(sizeof(Vertex3fC4f));
-
-    pVertexArray->createVertexBuffer(BufferUsage::Dynamic);
     ensureCapacityGLLine(256);
-
-    pVertexArray->setAttribute("inPosition", 0, 3, false, 0);
-    pVertexArray->setAttribute("inColor", 1, 4, false, sizeof(float) * 3);
-
-    pVertexArray->bindVertexBuffer();
-
-    pVertexArray->unbind();
+    ensureCapacityGLTriangle(256);
 
     return true;
 }
@@ -58,6 +44,9 @@ void DrawShape::clear()
 {
     m_bufferCountLine = 0;
     m_dirtyLine = true;
+
+    m_bufferCountTriangle = 0;
+    m_dirtyTriangle = true;
 }
 
 void DrawShape::ensureCapacityGLLine(int count)
@@ -68,6 +57,16 @@ void DrawShape::ensureCapacityGLLine(int count)
 
         VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
         pVertexArray->updateVertexBuffer(m_lineBuffers.data(), sizeof(Vertex3fC4f) * m_bufferCapacityLine);
+    }
+}
+
+void DrawShape::ensureCapacityGLTriangle(int count)
+{
+    if (m_bufferCountTriangle + count > m_bufferCapacityTriangle) {
+        m_bufferCapacityTriangle += std::max<int>(m_bufferCapacityTriangle, count);
+        m_triangleBuffers.resize(m_bufferCapacityTriangle);
+        VertexArray* pVertexArray = m_customCommandTriangle.getVertexArray();
+        pVertexArray->updateVertexBuffer(m_triangleBuffers.data(), sizeof(Vertex3fC4f) * m_bufferCapacityTriangle);
     }
 }
 
@@ -101,8 +100,46 @@ void DrawShape::drawRect(const glm::vec2& origin, const glm::vec2& destanation, 
     drawLine(glm::vec2(origin.x, destanation.y), origin, color);
 }
 
-void DrawShape::update(float /* deltaTime */)
+void DrawShape::drawFilledRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color)
 {
+    std::vector<glm::vec2> vertices = {
+        origin,
+        glm::vec2(destanation.x, origin.y),
+        destanation,
+        glm::vec2(origin.x, destanation.y)
+    };
+
+    drawPolygon(vertices, color);
+}
+
+void DrawShape::drawPolygon(const std::vector<glm::vec2>& vertices, const glm::vec4& color)
+{
+    auto triangles = triangulate(vertices);
+
+    ensureCapacityGLTriangle(static_cast<int>(triangles.size()));
+
+    for (size_t i = 0; i < triangles.size(); ++i) {
+        m_triangleBuffers[m_bufferCountTriangle + i] = { glm::vec3(triangles[i], 0.0f), color };
+    }
+
+    VertexArray* pVertexArray = m_customCommandTriangle.getVertexArray();
+    pVertexArray->updateVertexBuffer(m_triangleBuffers.data() + m_bufferCountTriangle,
+                                     sizeof(Vertex3fC4f) * m_bufferCountTriangle,
+                                     sizeof(Vertex3fC4f) * static_cast<int>(triangles.size()));
+
+    m_bufferCountTriangle += static_cast<int>(triangles.size());
+    m_dirtyTriangle = true;
+
+    m_customCommandTriangle.setVertexDrawInfo(0, m_bufferCountTriangle);
+
+    // Debug print
+    //for (size_t i = 0; i < triangles.size(); ++i) {
+    //    if (i % 3 == 0) {
+    //        OCFLOG("======== Triangle %zu ========\n", i / 3);
+    //    }
+    //    const auto& triangle = triangles[i];
+    //    OCFLOG("Vertex: (%.2f, %.2f)\n", triangle.x, triangle.y);
+    //}
 }
 
 void DrawShape::draw(Renderer* renderer, const glm::mat4& transform)
@@ -113,10 +150,37 @@ void DrawShape::draw(Renderer* renderer, const glm::mat4& transform)
         renderer->addCommand(&m_customCommandLine);
     }
 
+    if (m_bufferCountTriangle > 0) {
+        updateUniforms(transform, m_customCommandTriangle);
+        m_customCommandTriangle.init(m_globalZOrder, transform);
+        renderer->addCommand(&m_customCommandTriangle);
+    }
 }
 
-void DrawShape::updateVertexBuffer()
+void DrawShape::updateShader(CustomCommand& command, ProgramType programType, PrimitiveType primitiveType)
 {
+    command.setDrawType(CustomCommand::DrawType::Array);
+    command.setPrimitiveType(primitiveType);
+
+    Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(programType);
+
+    auto& programState = command.getProgramState();
+    programState.setProgram(pProgram);
+
+    VertexArray* pVertexArray = command.getVertexArray();
+    pVertexArray->bind();
+
+    pVertexArray->setStride(sizeof(Vertex3fC4f));
+
+    pVertexArray->createVertexBuffer(BufferUsage::Dynamic);
+    pVertexArray->updateVertexBuffer(nullptr, 0);
+
+    pVertexArray->setAttribute("inPosition", 0, 3, false, 0);
+    pVertexArray->setAttribute("inColor", 1, 4, false, sizeof(float) * 3);
+
+    pVertexArray->bindVertexBuffer();
+
+    pVertexArray->unbind();
 }
 
 void DrawShape::updateUniforms(const glm::mat4& transform, CustomCommand& cmd)
@@ -126,6 +190,89 @@ void DrawShape::updateUniforms(const glm::mat4& transform, CustomCommand& cmd)
 
     programState.setUniform("uProjection", &projection, sizeof(projection));
     programState.setUniform("uModelView", &transform, sizeof(transform));
+}
+
+bool DrawShape::isConvex(const glm::vec2& prev, const glm::vec2& curr, const glm::vec2& next)
+{
+    auto edge1 = curr - prev;
+    auto edge2 = next - curr;
+
+    // 外積で凸性を判定
+    return (edge1.x * edge2.y - edge1.y * edge2.x) > 0;
+}
+
+bool DrawShape::isPointInTriangle(const glm::vec2& p,
+                                  const glm::vec2& a,
+                                  const glm::vec2& b,
+                                  const glm::vec2& c)
+{
+    auto sign = [](const glm::vec2& p1, const glm::vec2& p2, const glm::vec2& p3) {
+        return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+        };
+    float d1 = sign(p, a, b);
+    float d2 = sign(p, b, c);
+    float d3 = sign(p, c, a);
+
+    bool has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+    bool has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+
+    return !(has_neg && has_pos);
+}
+
+std::vector<glm::vec2> DrawShape::triangulate(const std::vector<glm::vec2>& vertices)
+{
+    OCFASSERT(vertices.size() >= 3, "Triangulation requires at least 3 vertices");
+
+    std::vector<glm::vec2> triangles;
+    std::vector<glm::vec2> remainingVertices = vertices;
+
+    while (remainingVertices.size() > 3) {
+        bool foundTriangle = false;
+
+        for (size_t i = 0; i < remainingVertices.size(); ++i) {
+            glm::vec2 prev = remainingVertices[(i - 1 + remainingVertices.size()) % remainingVertices.size()];
+            glm::vec2 curr = remainingVertices[i];
+            glm::vec2 next = remainingVertices[(i + 1) % remainingVertices.size()];
+
+            // 頂点が凸であるかを確認
+            if (isConvex(prev, curr, next)) {
+                bool isEar = true;
+
+                // 三角形の内部に他の頂点があるかを確認
+                for (const auto& vertex : remainingVertices) {
+                    if (vertex != prev && vertex != curr && vertex != next) {
+                        if (isPointInTriangle(vertex, prev, curr, next)) {
+                            isEar = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (isEar) {
+                    triangles.emplace_back(prev);
+                    triangles.emplace_back(curr);
+                    triangles.emplace_back(next);
+                    remainingVertices.erase(remainingVertices.begin() + i);
+                    foundTriangle = true;
+                    break;
+                }
+            }
+
+            if (foundTriangle) {
+                OCFLOG("Triangulation failed: no ear found");
+                break;
+            }
+        }
+    }
+
+    // 最後の3つの頂点を三角形として追加
+    if (remainingVertices.size() == 3) {
+        triangles.emplace_back(remainingVertices[0]);
+        triangles.emplace_back(remainingVertices[1]);
+        triangles.emplace_back(remainingVertices[2]);
+    }
+
+    return triangles;
 }
 
 NS_OCF_END

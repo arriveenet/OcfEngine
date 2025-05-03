@@ -8,6 +8,7 @@
 #include "MeshRendererTest/MeshRendererTest.h"
 #include "EventTest/EventTest.h"
 #include "FontTest/FontTest.h"
+#include "DrawShapeTest/DrawShapeTest.h"
 
 USING_NS_OCF;
 
@@ -36,6 +37,7 @@ bool MainScene::init()
     addTest("MeshTest", []() {return new MeshRendererTest(); });
     addTest("EventTest", []() {return new EventTest(); });
     addTest("FontTest", []() {return new FontTest(); });
+    addTest("DrawShapeTest", []() {return new DrawShapeTest(); });
 
     glm::vec2 visibleSize = m_pGame->getVisibleSize();
 
