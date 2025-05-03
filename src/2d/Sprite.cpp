@@ -206,19 +206,19 @@ void Sprite::draw(Renderer* renderer, const glm::mat4& transform)
     m_pDebugDrawShape->clear();
 
     int count = m_triangles.indexCount / 3;
-    auto vertices = m_triangles.vertices;
-    auto indices = m_triangles.indices;
+    auto triangleVertices = m_triangles.vertices;
+    auto triangleIndices = m_triangles.indices;
     for (int i = 0; i < count; i++) {
-        glm::vec3 from = vertices[indices[i * 3]].position;
-        glm::vec3 to   = vertices[indices[i * 3 + 1]].position;
+        glm::vec3 from = triangleVertices[triangleIndices[i * 3]].position;
+        glm::vec3 to   = triangleVertices[triangleIndices[i * 3 + 1]].position;
         m_pDebugDrawShape->drawLine(glm::vec2(from.x, from.y), glm::vec2(to.x, to.y), Color4f::WHITE);
 
-        from = vertices[indices[i * 3 + 1]].position;
-        to   = vertices[indices[i * 3 + 2]].position;
+        from = triangleVertices[triangleIndices[i * 3 + 1]].position;
+        to   = triangleVertices[triangleIndices[i * 3 + 2]].position;
         m_pDebugDrawShape->drawLine(glm::vec2(from.x, from.y), glm::vec2(to.x, to.y), Color4f::WHITE);
 
-        from = vertices[indices[i * 3 + 2]].position;
-        to   = vertices[indices[i * 3]].position;
+        from = triangleVertices[triangleIndices[i * 3 + 2]].position;
+        to   = triangleVertices[triangleIndices[i * 3]].position;
         m_pDebugDrawShape->drawLine(glm::vec2(from.x, from.y), glm::vec2(to.x, to.y), Color4f::WHITE);
     }
 #endif
