@@ -1,0 +1,5 @@
+BasedOnStyle: LLVM
+ColumnLimit: 100
+CompactNamespaces: false
+IndentWidth: 4
+TabWidth: 4
