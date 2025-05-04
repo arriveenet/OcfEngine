@@ -81,7 +81,7 @@ void Slider::setSize(const glm::vec2& size)
 
 void Slider::setSize(float width, float height)
 {
-    const float thumbX = width * (m_value - m_minValue) / (m_maxValue - m_minValue);
+    const float thumbX = width * getPercent();
     const float thumbWidth = width * 0.05f;
     const float thumbHeight = height * 2.0f;
     m_thumbRect = Rect(thumbX, -thumbHeight / 4.0f, thumbWidth, thumbHeight);
@@ -101,9 +101,14 @@ void Slider::setValue(int value)
         m_value = m_maxValue;
     }
 
-    m_thumbRect.m_position.x = m_size.x * (m_value - m_minValue) / (m_maxValue - m_minValue);
+    m_thumbRect.m_position.x = m_size.x * getPercent();
 
     m_isDirty = true;
+}
+
+float Slider::getPercent() const
+{
+    return static_cast<float>((m_value - m_minValue)) / (m_maxValue - m_minValue);
 }
 
 void Slider::setOnValueChangedCallback(std::function<void(int)> onValueChanged)
@@ -125,7 +130,7 @@ void Slider::updateSlider()
 
     m_pSliderBackground->clear();
 
-    const float raito = static_cast<float>(m_value - m_minValue) / (m_maxValue - m_minValue);
+    const float raito = getPercent();
 
     m_pSliderBackground->drawFilledRect(
         glm::vec2(0.0f, 0.0f),

@@ -32,6 +32,8 @@ public:
     int getMinValue() const { return m_minValue; }
     int getMaxValue() const { return m_maxValue; }
 
+    float getPercent() const;
+
     void setOnValueChangedCallback(std::function<void(int)> onValueChanged);
 
 protected:
