@@ -1,6 +1,7 @@
 #pragma once
 #include "Types.h"
 #include "RenderCommand.h"
+#include <functional>
 
 NS_OCF_BEGIN
 
@@ -12,6 +13,8 @@ public:
         Array,
         Element
     };
+
+    using CommandCallback = std::function<void()>;
 
     CustomCommand();
     ~CustomCommand();
@@ -45,6 +48,12 @@ public:
     void setTextureCube(TextureCube* textureCube) { m_textureCube = textureCube; }
     TextureCube* getTextureCube() const { return m_textureCube; }
 
+    void setBeforeCallback(CommandCallback callback) { m_beforeCallback = callback; }
+    const CommandCallback &getBeforeCallback() const { return m_beforeCallback; }
+
+    void setAfterCallback(CommandCallback callback) { m_afterCallback = callback; }
+    const CommandCallback &getAfterCallback() const { return m_afterCallback; }
+
 protected:
     VertexArray* m_pVertexArray;
     unsigned int m_vertexDrawStart;
@@ -56,6 +65,9 @@ protected:
 
     DrawType m_drawType;
     PrimitiveType m_primitiveType;
+
+    CommandCallback m_beforeCallback;
+    CommandCallback m_afterCallback;
 };
 
 NS_OCF_END

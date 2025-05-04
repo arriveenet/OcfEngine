@@ -2,6 +2,7 @@
 #include "base/Game.h"
 #include "renderer/Renderer.h"
 #include "renderer/ShaderManager.h"
+#include <glm/gtc/constants.hpp>
 
 NS_OCF_BEGIN
 
@@ -16,12 +17,17 @@ DrawShape* DrawShape::create()
 }
 
 DrawShape::DrawShape()
-    : m_dirtyLine(false)
+    : m_dirtyPoint(false)
+    , m_dirtyLine(false)
     , m_dirtyTriangle(false)
+    , m_bufferCapacityPoint(0)
+    , m_bufferCountPoint(0)
     , m_bufferCapacityLine(0)
     , m_bufferCountLine(0)
     , m_bufferCapacityTriangle(0)
     , m_bufferCountTriangle(0)
+    , m_pointSize(1.0f)
+    , m_lineWidth(1.0f)
 {
 }
 
@@ -31,11 +37,15 @@ DrawShape::~DrawShape()
 
 bool DrawShape::init()
 {
+    updateShader(m_customCommandPoint, ProgramType::DrawShape, PrimitiveType::Point);
     updateShader(m_customCommandLine, ProgramType::DrawShape, PrimitiveType::Line);
     updateShader(m_customCommandTriangle, ProgramType::DrawShape, PrimitiveType::Triangle);
 
-    ensureCapacityGLLine(256);
-    ensureCapacityGLTriangle(256);
+    m_customCommandPoint.setBeforeCallback(
+        [=]() { m_pGame->getRenderer()->setPointSize(m_pointSize);});
+
+    m_customCommandLine.setBeforeCallback(
+        [=]() { m_pGame->getRenderer()->setLineWidth(m_lineWidth); });
 
     return true;
 }
@@ -49,6 +59,17 @@ void DrawShape::clear()
     m_dirtyTriangle = true;
 }
 
+void DrawShape::ensureCapacityGLPoint(int count)
+{
+    if (m_bufferCountPoint + count > m_bufferCapacityPoint) {
+        m_bufferCapacityPoint += std::max<int>(m_bufferCapacityPoint, count);
+        m_pointBuffers.resize(m_bufferCapacityPoint);
+        VertexArray *pVertexArray = m_customCommandPoint.getVertexArray();
+        pVertexArray->updateVertexBuffer(m_pointBuffers.data(),
+                                         sizeof(Vertex3fC4f) * m_bufferCapacityPoint);
+    }
+}
+
 void DrawShape::ensureCapacityGLLine(int count)
 {
     if (m_bufferCountLine + count > m_bufferCapacityLine) {
@@ -56,7 +77,8 @@ void DrawShape::ensureCapacityGLLine(int count)
         m_lineBuffers.resize(m_bufferCapacityLine);
 
         VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
-        pVertexArray->updateVertexBuffer(m_lineBuffers.data(), sizeof(Vertex3fC4f) * m_bufferCapacityLine);
+        pVertexArray->updateVertexBuffer(m_lineBuffers.data(),
+                                         sizeof(Vertex3fC4f) * m_bufferCapacityLine);
     }
 }
 
@@ -66,11 +88,26 @@ void DrawShape::ensureCapacityGLTriangle(int count)
         m_bufferCapacityTriangle += std::max<int>(m_bufferCapacityTriangle, count);
         m_triangleBuffers.resize(m_bufferCapacityTriangle);
         VertexArray* pVertexArray = m_customCommandTriangle.getVertexArray();
-        pVertexArray->updateVertexBuffer(m_triangleBuffers.data(), sizeof(Vertex3fC4f) * m_bufferCapacityTriangle);
+        pVertexArray->updateVertexBuffer(m_triangleBuffers.data(),
+                                         sizeof(Vertex3fC4f) * m_bufferCapacityTriangle);
     }
 }
 
-void DrawShape::drawLine(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color)
+void DrawShape::drawPoint(const glm::vec2 &point, const glm::vec4 &color)
+{
+    ensureCapacityGLPoint(1);
+    m_pointBuffers[m_bufferCountPoint] = {glm::vec3(point, 0.0f), color};
+    VertexArray *pVertexArray = m_customCommandPoint.getVertexArray();
+    pVertexArray->updateVertexBuffer(m_pointBuffers.data() + m_bufferCountPoint,
+                                     sizeof(Vertex3fC4f) * m_bufferCountPoint,
+                                     sizeof(Vertex3fC4f) * 1);
+    m_bufferCountPoint += 1;
+    m_dirtyPoint = true;
+    m_customCommandPoint.setVertexDrawInfo(0, m_bufferCountPoint);
+}
+
+void DrawShape::drawLine(const glm::vec2 &origin, const glm::vec2 &destanation,
+                         const glm::vec4 &color)
 {
     drawLine(glm::vec3(origin, 0.0f), glm::vec3(destanation, 0.0f), color);
 }
@@ -83,7 +120,9 @@ void DrawShape::drawLine(const glm::vec3& origin, const glm::vec3& destanation, 
     m_lineBuffers[m_bufferCountLine + 1] = { destanation, color };
 
     VertexArray* pVertexArray = m_customCommandLine.getVertexArray();
-    pVertexArray->updateVertexBuffer(m_lineBuffers.data() + m_bufferCountLine, sizeof(Vertex3fC4f) * m_bufferCountLine, sizeof(Vertex3fC4f) * 2);
+    pVertexArray->updateVertexBuffer(m_lineBuffers.data() + m_bufferCountLine,
+                                     sizeof(Vertex3fC4f) * m_bufferCountLine,
+                                     sizeof(Vertex3fC4f) * 2);
 
 
     m_bufferCountLine += 2;
@@ -108,6 +147,28 @@ void DrawShape::drawFilledRect(const glm::vec2& origin, const glm::vec2& destana
         destanation,
         glm::vec2(origin.x, destanation.y)
     };
+
+    drawPolygon(vertices, color);
+}
+
+void DrawShape::drawFilledCircle(const glm::vec2& center, float radius, const glm::vec4& color)
+{
+    constexpr int segments = 36; // 円を描くためのセグメント数
+    constexpr float angleIncrement = 2.0f * glm::pi<float>() / segments;
+
+    std::vector<glm::vec2> vertices;
+    vertices.reserve(segments + 1); // セグメント数 + 中心点
+    vertices.push_back(center);     // 中心点を追加
+
+    for (int i = 0; i <= segments; ++i) {
+        float angle = angleIncrement * i;
+        float x = center.x + radius * cos(angle);
+        float y = center.y + radius * sin(angle);
+        vertices.emplace_back(x, y);
+    }
+
+    // 最後の頂点は最初の頂点と同じにする
+    vertices.push_back(vertices[1]);
 
     drawPolygon(vertices, color);
 }
@@ -144,6 +205,12 @@ void DrawShape::drawPolygon(const std::vector<glm::vec2>& vertices, const glm::v
 
 void DrawShape::draw(Renderer* renderer, const glm::mat4& transform)
 {
+    if (m_bufferCountPoint > 0) {
+        updateUniforms(transform, m_customCommandPoint);
+        m_customCommandPoint.init(m_globalZOrder, transform);
+        renderer->addCommand(&m_customCommandPoint);
+    }   
+
     if (m_bufferCountLine > 0) {
         updateUniforms(transform, m_customCommandLine);
         m_customCommandLine.init(m_globalZOrder, transform);
