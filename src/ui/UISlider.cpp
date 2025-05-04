@@ -132,19 +132,19 @@ void Slider::updateSlider()
 
     const float raito = getPercent();
 
-    m_pSliderBackground->drawFilledRect(
+    m_pSliderBackground->drawFillRect(
         glm::vec2(0.0f, 0.0f),
         m_size,
         glm::vec4(0.8f, 0.8f, 0.8f, 1.0f));
 
     if (raito > 0.0f) {
-        m_pSliderBackground->drawFilledRect(
+        m_pSliderBackground->drawFillRect(
             glm::vec2(0.0f, 0.0f),
             glm::vec2(m_size.x * raito, m_size.y),
             glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
     }
 
-    m_pSliderBackground->drawFilledRect(
+    m_pSliderBackground->drawFillRect(
         m_thumbRect.m_position,
         glm::vec2(m_thumbRect.getMaxX(), m_thumbRect.getMaxY()),
         glm::vec4(0.0f, 162.0f / 255.0f, 232.0f / 255.0f, 1.0f));

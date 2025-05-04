@@ -15,11 +15,15 @@ void DrawShapeTest::onEnter()
     m_pDrawShape->drawLine(glm::vec2(480, 480), glm::vec2(600, 200), Color4f::BLUE);
     m_pDrawShape->setLineWidth(5.0f);
 
+    // Draw Triangle
+    m_pDrawShape->drawFillTriangle(glm::vec2(400, 100), glm::vec2(600, 100),
+                                   glm::vec2(500, 250), Color4f::YELLOW);
+
     // Draw Filled Circle
-    m_pDrawShape->drawFilledCircle(glm::vec2(100, 100), 50, Color4f::RED);
+    m_pDrawShape->drawFillCircle(glm::vec2(100, 100), 50, Color4f::RED);
 
     // Draw Filled Rect
-    m_pDrawShape->drawFilledRect(glm::vec2(400, 400), glm::vec2(450, 450), Color4f::GREEN);
+    m_pDrawShape->drawFillRect(glm::vec2(400, 400), glm::vec2(450, 450), Color4f::GREEN);
 
     // Draw Polygon
     std::vector<glm::vec2> vert2 = {

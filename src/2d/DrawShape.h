@@ -33,9 +33,11 @@ public:
     void drawLine(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
     void drawLine(const glm::vec3& origin, const glm::vec3& destanation, const glm::vec4& color);
     void drawRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
-    void drawFilledRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
-    void drawFilledCircle(const glm::vec2 &center, float radius, const glm::vec4 &color);
+    void drawFillRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
+    void drawFillTriangle(const glm::vec2 &a, const glm::vec2 &b, const glm::vec2 &c, const glm::vec4 &color);
+    void drawFillCircle(const glm::vec2 &center, float radius, const glm::vec4 &color);
     void drawPolygon(const std::vector<glm::vec2>& vertices, const glm::vec4& color);
+    void drawPolyline(const std::vector<glm::vec2> &vertices, const glm::vec4 &color);
 
     void draw(Renderer* renderer, const glm::mat4& transform) override;
 

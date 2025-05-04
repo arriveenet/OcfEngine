@@ -139,7 +139,7 @@ void DrawShape::drawRect(const glm::vec2& origin, const glm::vec2& destanation, 
     drawLine(glm::vec2(origin.x, destanation.y), origin, color);
 }
 
-void DrawShape::drawFilledRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color)
+void DrawShape::drawFillRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color)
 {
     std::vector<glm::vec2> vertices = {
         origin,
@@ -151,7 +151,15 @@ void DrawShape::drawFilledRect(const glm::vec2& origin, const glm::vec2& destana
     drawPolygon(vertices, color);
 }
 
-void DrawShape::drawFilledCircle(const glm::vec2& center, float radius, const glm::vec4& color)
+void DrawShape::drawFillTriangle(const glm::vec2 &a, const glm::vec2 &b,
+                                 const glm::vec2 &c, const glm::vec4 &color)
+{
+  std::vector<glm::vec2> vertices = {a, b, c};
+
+   drawPolygon(vertices, color);
+}
+
+void DrawShape::drawFillCircle(const glm::vec2& center, float radius, const glm::vec4& color)
 {
     constexpr int segments = 36; // 円を描くためのセグメント数
     constexpr float angleIncrement = 2.0f * glm::pi<float>() / segments;
@@ -201,6 +209,11 @@ void DrawShape::drawPolygon(const std::vector<glm::vec2>& vertices, const glm::v
     //    const auto& triangle = triangles[i];
     //    OCFLOG("Vertex: (%.2f, %.2f)\n", triangle.x, triangle.y);
     //}
+}
+
+void DrawShape::drawPolyline(const std::vector<glm::vec2> &vertices, const glm::vec4 &color)
+{
+
 }
 
 void DrawShape::draw(Renderer* renderer, const glm::mat4& transform)
