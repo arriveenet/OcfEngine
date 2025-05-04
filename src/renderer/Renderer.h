@@ -40,12 +40,25 @@ public:
     /** ビューポートを取得する */
     glm::ivec4 getViewport() const;
 
+    /** ポイントサイズを設定する */
+    void setPointSize(float size) const;
+
+    /** ポイントサイズを取得する */
+    float getPointSize() const;
+
+    /** ライン幅を設定する */
+    void setLineWidth(float size) const;
+
+    /** ライン幅を取得する */
+    float getLineWidth() const;
+
     /** レンダーコマンドを追加する */
     void addCommand(RenderCommand* command);
 
     /** バッファをクリアする */
     void clear();
 
+    /** バッファをクリアする */
     void clean();
 
     /** 描画処理を行う */

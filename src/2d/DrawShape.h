@@ -18,14 +18,26 @@ public:
     bool init() override;
     void clear();
 
+    void ensureCapacityGLPoint(int count);
     void ensureCapacityGLLine(int count);
     void ensureCapacityGLTriangle(int count);
 
+    void setPointSize(float pointSize) { m_pointSize = pointSize; }
+    float getPointSize() const { return m_pointSize; }
+
+    void setLineWidth(float lineWidth) { m_lineWidth = lineWidth; }
+    float getLineWidth() const { return m_lineWidth; }
+
+
+    void drawPoint(const glm::vec2 &point, const glm::vec4 &color);
     void drawLine(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
     void drawLine(const glm::vec3& origin, const glm::vec3& destanation, const glm::vec4& color);
     void drawRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
-    void drawFilledRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
+    void drawFillRect(const glm::vec2& origin, const glm::vec2& destanation, const glm::vec4& color);
+    void drawFillTriangle(const glm::vec2 &a, const glm::vec2 &b, const glm::vec2 &c, const glm::vec4 &color);
+    void drawFillCircle(const glm::vec2 &center, float radius, const glm::vec4 &color);
     void drawPolygon(const std::vector<glm::vec2>& vertices, const glm::vec4& color);
+    void drawPolyline(const std::vector<glm::vec2> &vertices, const glm::vec4 &color);
 
     void draw(Renderer* renderer, const glm::mat4& transform) override;
 
@@ -62,16 +74,27 @@ protected:
     std::vector<glm::vec2> triangulate(const std::vector<glm::vec2>& vertices);
 
 protected:
+    bool m_dirtyPoint;
     bool m_dirtyLine;
     bool m_dirtyTriangle;
+
+    int m_bufferCapacityPoint;
+    int m_bufferCountPoint;
     int m_bufferCapacityLine;
     int m_bufferCountLine;
     int m_bufferCapacityTriangle;
     int m_bufferCountTriangle;
+
+    std::vector<Vertex3fC4f> m_pointBuffers;
     std::vector<Vertex3fC4f> m_lineBuffers;
     std::vector<Vertex3fC4f> m_triangleBuffers;
+
+    CustomCommand m_customCommandPoint;
     CustomCommand m_customCommandLine;
     CustomCommand m_customCommandTriangle;
+
+    float m_pointSize;
+    float m_lineWidth;
 };
 
 NS_OCF_END

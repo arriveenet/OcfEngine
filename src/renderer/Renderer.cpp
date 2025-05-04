@@ -88,6 +88,30 @@ glm::ivec4 Renderer::getViewport() const
     return m_viewport;
 }
 
+void Renderer::setPointSize(float size) const
+{
+    glPointSize(size);
+}
+
+float Renderer::getPointSize() const
+{
+    float size;
+    glGetFloatv(GL_POINT_SIZE, &size);
+    return size;
+}
+
+void Renderer::setLineWidth(float size) const
+{
+    glLineWidth(size);
+}
+
+float Renderer::getLineWidth() const
+{
+    float size;
+    glGetFloatv(GL_LINE_WIDTH, &size);
+    return size;
+}
+
 void Renderer::addCommand(RenderCommand* command)
 {
     m_renderGroups[0].emplace_back(command);
@@ -296,6 +320,11 @@ void Renderer::drawCustomCommand(RenderCommand* command)
     CustomCommand* cmd = static_cast<CustomCommand*>(command);
     ProgramState& programState = cmd->getProgramState();
 
+    const auto& beforeCallback = cmd->getBeforeCallback();
+    if (beforeCallback) {
+        beforeCallback();
+    }
+
     Program* pProgram = programState.getProgram();
     pProgram->use();
 
@@ -320,6 +349,11 @@ void Renderer::drawCustomCommand(RenderCommand* command)
     m_drawVertexCount += cmd->getVertexDrawCount();
 
     cmd->getVertexArray()->unbind();
+
+    const auto &afterCallback = cmd->getAfterCallback();
+    if (afterCallback) {
+        afterCallback();
+    }
 }
 
 void Renderer::drawMeshCommand(RenderCommand* command)
