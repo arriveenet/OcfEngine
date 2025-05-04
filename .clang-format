@@ -1,5 +1,8 @@
 BasedOnStyle: LLVM
+BreakBeforeBraces: Stroustrup
+BreakConstructorInitializers: BeforeComma
 ColumnLimit: 100
 CompactNamespaces: false
 IndentWidth: 4
 TabWidth: 4
+PackConstructorInitializers: Never
