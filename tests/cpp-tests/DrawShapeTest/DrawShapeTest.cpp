@@ -19,6 +19,4 @@ void DrawShapeTest::onEnter()
     };
 
     m_pDrawShape->drawPolygon(vert2, Color4f::ORANGE);
-
-    m_pDrawShape->clear();
 }

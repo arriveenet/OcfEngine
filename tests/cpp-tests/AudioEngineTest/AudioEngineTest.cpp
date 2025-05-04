@@ -61,35 +61,22 @@ bool AudioEngineTest::init()
         });
     addChild(resumeButton);
 
-    m_volumeLabel = Label::create("Volume: 1.0f");
+    m_volumeLabel = Label::create("Volume: 1.0");
     m_volumeLabel->setPosition(leftX, 330);
     addChild(m_volumeLabel);
 
-    auto volumeUp = Button::create("ButtonNormal.png", "ButtonActive.png");
-    volumeUp->setText("+");
-    volumeUp->setPosition(leftX, 300);
-    volumeUp->setOnClickCallback([=]() {
-        float volume = AudioEngine::getVolume(m_audioID);
-        volume += 0.1f;
+    Slider* volumeSlider = Slider::create(400, 10);
+    volumeSlider->setPosition(leftX + 100, 300);
+    volumeSlider->setValue(100);
+    volumeSlider->setOnValueChangedCallback([=](int value) {
+        const float volume = static_cast<float>(value) / 100.0f;
         AudioEngine::setVolume(m_audioID, volume);
-        char str[128];
-        snprintf(str, sizeof(str), "Volume: %f", AudioEngine::getVolume(m_audioID));
-        m_volumeLabel->setString(str);
-        });
-    addChild(volumeUp);
 
-    auto volumeDown = Button::create("ButtonNormal.png", "ButtonActive.png");
-    volumeDown->setText("-");
-    volumeDown->setPosition(leftX2, 300);
-    volumeDown->setOnClickCallback([=]() {
-        float volume = AudioEngine::getVolume(m_audioID);
-        volume -= 0.1f;
-        AudioEngine::setVolume(m_audioID, volume);
         char str[128];
-        snprintf(str, sizeof(str), "Volume: %f", AudioEngine::getVolume(m_audioID));
+        snprintf(str, sizeof(str), "Volume: %f", volume);
         m_volumeLabel->setString(str);
         });
-    addChild(volumeDown);
+    addChild(volumeSlider);
 
     return true;
 }
