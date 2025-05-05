@@ -4,7 +4,7 @@ NS_OCF_BEGIN
 
 namespace StringUtils {
 
-std::u32string StringUtils::convertUtf8ToUtf32(std::string_view utf8String)
+std::u32string convertUtf8ToUtf32(std::string_view utf8String)
 {
     std::u32string result;
     result.reserve(utf8String.size());

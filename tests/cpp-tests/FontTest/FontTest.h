@@ -10,7 +10,9 @@ public:
 
     void onExit() override;
 
+private:
     ocf::Label* m_pLabel;
     ocf::DrawShape* m_pDrawShape;
     ocf::MaxRectsBinPack m_maxRectsBinPack;
+    size_t m_index;
 };

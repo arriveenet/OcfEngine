@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 #include <set>
 #include <unordered_map>
 #include "2d/Font.h"

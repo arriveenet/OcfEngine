@@ -21,11 +21,10 @@ static glm::ivec2 rects[] = {
     { 32, 32 },
 };
 
-static size_t index = 0;
-
 FontTest::FontTest()
     : m_pLabel(nullptr)
     , m_pDrawShape(nullptr)
+    , m_index(0)
 {
 }
 
@@ -47,13 +46,13 @@ bool FontTest::init()
     auto keyboardListener = EventListenerKeyboard::create();
     keyboardListener->m_onKeyPressed = [&](Keyboard::KeyCode key, Event* /* pEvent */) {
         if (key == Keyboard::KeyCode::KEY_SPACE) {
-            if (index > std::size(rects) - 1)
+            if (m_index > std::size(rects) - 1)
                 return;
 
-            Rect rect = m_maxRectsBinPack.insert(static_cast<float>(rects[index].x), 
-                                                 static_cast<float>(rects[index].y));
+            Rect rect = m_maxRectsBinPack.insert(static_cast<float>(rects[m_index].x), 
+                                                 static_cast<float>(rects[m_index].y));
             OCFLOG("Packed to (x,y)=(%f,%f), (w,h)=(%f,%f)\n", rect.m_position.x, rect.m_position.y, rect.m_size.x, rect.m_size.y);
-            index++;
+            m_index++;
         }
         m_pDrawShape->clear();
 
@@ -77,6 +76,6 @@ bool FontTest::init()
 
 void FontTest::onExit()
 {
-    index = 0;
+    m_index = 0;
     TestCase::onExit();
 }
