@@ -69,6 +69,10 @@ bool AudioEngineImpl::init()
 
             result = true;
         }
+        else {
+            OCFLOG("OpenAL initialization failed. alcOpenDevice() failed.\n");
+            break;
+        }
     } while (false);
 
     return result;
