@@ -18,6 +18,9 @@ set(OCF_RENDERER_HEADER
     "renderer/TextureManager.h"
     "renderer/TrianglesCommand.h"
     "renderer/Types.h"
+
+    "renderer/backend/Driver.h"
+    "renderer/backend/DriverBase.h"
     )
     
 set(OCF_RENDERER_SRC
@@ -40,4 +43,20 @@ set(OCF_RENDERER_SRC
     "renderer/TrianglesCommand.cpp"
     "renderer/VertexArray.cpp"
     "renderer/VertexBuffer.cpp"
+
+    "renderer/backend/DriverBase.cpp"
     )
+
+option(OCF_USE_GL "Use OpenGL" ON)
+
+if(OCF_USE_GL)
+    list(APPEND OCF_RENDERER_HEADER
+        "renderer/backend/opengl/OpenGLContext.h"
+        "renderer/backend/opengl/OpenGLDriver.h"
+        )
+
+    list(APPEND OCF_RENDERER_SRC
+        "renderer/backend/opengl/OpenGLContext.cpp"
+        "renderer/backend/opengl/OpenGLDriver.cpp"
+        )
+endif()
