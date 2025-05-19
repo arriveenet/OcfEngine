@@ -1,6 +1,7 @@
 #include "FontTest.h"
 #include "renderer/Image.h"
 #include "base/EventListenerKeyboard.h"
+#include "ui/UICheckBox.h"
 
 using namespace ocf;
 
@@ -70,6 +71,11 @@ bool FontTest::init()
         };
 
     m_pGame->getEventDispatcher()->addEventListener(keyboardListener, this);
+
+    auto checkBox = ui::CheckBox::create(true);
+    checkBox->setPosition(200, 200);
+    addChild(checkBox);
+
 
     return true;
 }

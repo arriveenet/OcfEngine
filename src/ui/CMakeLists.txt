@@ -1,13 +1,15 @@
 set(OCF_UI_HEADER
-    "ui/UIBaseButton.h"
+    "ui/UIButtonBase.h"
     "ui/UIButton.h"
+    "ui/UICheckBox.h"
     "ui/UISlider.h"
     "ui/UIWidget.h"
     )
 
 set(OCF_UI_SRC
-    "ui/UIBaseButton.cpp"
+    "ui/UIButtonBase.cpp"
     "ui/UIButton.cpp"
+    "ui/UICheckBox.cpp"
     "ui/UISlider.cpp"
     "ui/UIWidget.cpp"
     )

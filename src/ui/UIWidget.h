@@ -12,8 +12,16 @@ public:
 
     virtual bool init();
 
+    virtual void onMouseClicked();
+    virtual void onMousePressed();
+    virtual void onMouseReleased();
+
+    bool isFocused() const { return m_focus; }
+
 protected:
     virtual void initRenderer();
+
+    bool m_focus = false;
 };
 
 }

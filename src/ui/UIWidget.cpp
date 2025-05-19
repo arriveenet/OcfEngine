@@ -22,9 +22,13 @@ bool Widget::init()
     return false;
 }
 
-void Widget::initRenderer()
-{
-}
+void Widget::onMouseClicked() {}
+
+void Widget::onMousePressed() {}
+
+void Widget::onMouseReleased() {}
+
+void Widget::initRenderer() {}
 
 }
 
