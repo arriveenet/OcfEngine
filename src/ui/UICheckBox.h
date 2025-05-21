@@ -22,9 +22,9 @@ protected:
     bool init() override;
     void initRenderer() override;
 
-    void updateNode(float deltaTime) override;
+    void onMouseClicked() override;
 
-    void onMouseReleased() override;
+    void resizeContent(float width, float height);
 
 private:
     bool m_isSelected;

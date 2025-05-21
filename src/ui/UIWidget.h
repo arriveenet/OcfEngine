@@ -22,6 +22,7 @@ protected:
     virtual void initRenderer();
 
     bool m_focus = false;
+    bool m_pressed = false;
 };
 
 }
