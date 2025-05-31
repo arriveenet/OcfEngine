@@ -117,7 +117,7 @@ bool Label::initWithTTF(std::string_view ttfPath, int fontSize)
     return true;
 }
 
-void Label::setString(const std::string& text)
+void Label::setString(std::string_view text)
 {
     if (m_text != text) {
         m_text = text;

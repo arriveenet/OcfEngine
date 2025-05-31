@@ -28,7 +28,7 @@ public:
 
     Font* getFont() const { return m_font; }
 
-    void setString(const std::string& text);
+    void setString(std::string_view text);
     std::string getString() const { return m_text; }
     void setTextColor(const glm::vec3& textColor);
     void setTextColor(unsigned char r, unsigned char g, unsigned b);
