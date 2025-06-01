@@ -7,7 +7,7 @@ namespace ui {
 
 class RadioButton : public ButtonBase {
 public:
-    static RadioButton* create();
+    static RadioButton* create(std::string_view text);
 
     RadioButton();
     ~RadioButton() override;
@@ -15,6 +15,8 @@ public:
 protected:
     bool init() override;
     void initRenderer() override;
+    void updateTextLocation() override;
+    void onMouseClicked() override;
 };
 
 } // namespace ui

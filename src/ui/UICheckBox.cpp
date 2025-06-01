@@ -1,5 +1,6 @@
 #include "UICheckBox.h"
 #include "2d/DrawShape.h"
+#include "2d/Label.h"
 
 static constexpr float CHECKBOX_DEFAULT_SIZE = 14.0f;
 
@@ -7,11 +8,21 @@ NS_OCF_BEGIN
 
 namespace ui {
 
-CheckBox *CheckBox::create(bool value)
+CheckBox* CheckBox::create()
 {
     CheckBox* checkBox = new CheckBox();
     if (checkBox->init()) {
-        checkBox->setSelected(value);
+        return checkBox;
+    }
+    OCF_SAFE_DELETE(checkBox);
+    return nullptr;
+}
+
+CheckBox* CheckBox::create(std::string_view text)
+{
+    CheckBox* checkBox = new CheckBox();
+    if (checkBox->init()) {
+        checkBox->setText(text);
         return checkBox;
     }
     OCF_SAFE_DELETE(checkBox);
@@ -19,8 +30,6 @@ CheckBox *CheckBox::create(bool value)
 }
 
 CheckBox::CheckBox()
-    : m_isSelected(false)
-    , m_pCheckMark(nullptr)
 {}
 
 CheckBox::~CheckBox() {}
@@ -37,14 +46,6 @@ void CheckBox::setSize(float width, float height)
     Widget::setSize(width, height);
 
     resizeContent(width, height);
-}
-
-bool CheckBox::init()
-{
-    if (Widget::init()) {
-        return true;
-    }
-    return false;
 }
 
 void CheckBox::initRenderer()
@@ -95,6 +96,14 @@ void CheckBox::resizeContent(float width, float height)
 
     m_pCheckMark->drawLine(p1, p2, Color4f::WHITE);
     m_pCheckMark->drawLine(p2, p3, Color4f::WHITE);
+}
+
+void CheckBox::updateTextLocation()
+{
+    if (m_pTextRenderer) {
+        constexpr float textOffset = 5.0f; // Offset between checkbox and text
+        m_pTextRenderer->setPosition(m_size.x + textOffset, 0.0f);
+    }
 }
 
 } // namespace ui

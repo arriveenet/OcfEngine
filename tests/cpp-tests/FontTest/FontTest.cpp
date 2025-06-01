@@ -2,6 +2,7 @@
 #include "renderer/Image.h"
 #include "base/EventListenerKeyboard.h"
 #include "ui/UICheckBox.h"
+#include "ui/UIRadioButton.h"
 
 using namespace ocf;
 
@@ -72,10 +73,13 @@ bool FontTest::init()
 
     m_pGame->getEventDispatcher()->addEventListener(keyboardListener, this);
 
-    auto checkBox = ui::CheckBox::create(true);
+    auto checkBox = ui::CheckBox::create("text");
     checkBox->setPosition(200, 200);
     addChild(checkBox);
 
+    auto radioButton = ui::RadioButton::create("option1");
+    radioButton->setPosition(300, 200);
+    addChild(radioButton);
 
     return true;
 }
