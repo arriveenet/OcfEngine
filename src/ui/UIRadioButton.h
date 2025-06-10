@@ -1,22 +1,50 @@
 #pragma once
 #include "UIButtonBase.h"
+#include <memory>
 
 NS_OCF_BEGIN
 
 namespace ui {
 
-class RadioButton : public ButtonBase {
+class ToggleGroup;
+
+class Toggle {
+public:
+    virtual ~Toggle() = default;
+    virtual void setToggleGroup(std::shared_ptr<ToggleGroup> group) = 0;
+    virtual std::shared_ptr<ToggleGroup> getToggleGroup() const = 0;
+};
+
+
+class ToggleGroup {
+public:
+    void addToggle(Toggle* toggle)
+    {
+        m_toggles.emplace_back(toggle);
+    }
+
+private:
+    std::vector<Toggle*> m_toggles;
+};
+
+class RadioButton : public ButtonBase, Toggle {
 public:
     static RadioButton* create(std::string_view text);
 
     RadioButton();
     ~RadioButton() override;
 
+    void setToggleGroup(std::shared_ptr<ToggleGroup> group) override;
+    std::shared_ptr<ToggleGroup> getToggleGroup() const override;
+
 protected:
     bool init() override;
     void initRenderer() override;
     void updateTextLocation() override;
     void onMouseClicked() override;
+
+private:
+    std::shared_ptr<ToggleGroup> m_toggleGroup;
 };
 
 } // namespace ui

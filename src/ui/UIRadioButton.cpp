@@ -21,11 +21,25 @@ RadioButton* RadioButton::create(std::string_view text)
 }
 
 RadioButton::RadioButton()
+    : m_toggleGroup(nullptr)
 {
 }
 
 RadioButton::~RadioButton()
 {
+}
+
+void RadioButton::setToggleGroup(std::shared_ptr<ToggleGroup> group)
+{
+    m_toggleGroup = group;
+    if (m_toggleGroup) {
+        m_toggleGroup->addToggle(this);
+    }
+}
+
+std::shared_ptr<ToggleGroup> RadioButton::getToggleGroup() const
+{
+    return m_toggleGroup;
 }
 
 bool RadioButton::init()
@@ -43,9 +57,9 @@ void RadioButton::initRenderer()
     addChild(m_pButtonBackground);
     addChild(m_pCheckMark);
 
-    m_pButtonBackground->drawFillCircle(glm::vec2(), 7.0f, Color4f::GRAY);
-    m_pButtonBackground->drawFillCircle(glm::vec2(), 6.0f, Color4f::WHITE);
-    m_pCheckMark->drawFillCircle(glm::vec2(), 3.0f, Color4f::BLACK);
+    m_pButtonBackground->drawFillCircle(glm::vec2(7.0f, 7.0f), 7.0f, Color4f::GRAY);
+    m_pButtonBackground->drawFillCircle(glm::vec2(7.0f, 7.0f), 6.0f, Color4f::WHITE);
+    m_pCheckMark->drawFillCircle(glm::vec2(7.0f, 7.0f), 3.0f, Color4f::BLACK);
 
     setSize(RADIO_BUTTON_DEFAULT_SIZE, RADIO_BUTTON_DEFAULT_SIZE);
 }
@@ -54,8 +68,7 @@ void RadioButton::updateTextLocation()
 {
     if (m_pTextRenderer) {
         auto size = m_pTextRenderer->getSize();
-        m_pTextRenderer->setPosition(
-            glm::vec2(size.x + 5.0f, size.y / 2.0f));
+        m_pTextRenderer->setPosition(glm::vec2(m_size.x + 5.0f, 0.0f));
     }
 }
 

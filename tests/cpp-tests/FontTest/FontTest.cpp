@@ -81,6 +81,14 @@ bool FontTest::init()
     radioButton->setPosition(300, 200);
     addChild(radioButton);
 
+    radioButton = ui::RadioButton::create("option2");
+    radioButton->setPosition(400, 200);
+    addChild(radioButton);
+
+     radioButton = ui::RadioButton::create("option3");
+     radioButton->setPosition(500, 200);
+     addChild(radioButton);
+
     return true;
 }
 
