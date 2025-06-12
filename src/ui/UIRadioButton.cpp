@@ -8,6 +8,27 @@ NS_OCF_BEGIN
 
 namespace ui {
 
+void ToggleGroup::addToggle(Toggle* toggle)
+{
+    m_toggles.emplace_back(toggle);
+}
+
+void ToggleGroup::selectedToggle(Toggle* value)
+{
+    for (const auto toggle : m_toggles) {
+        toggle->setSelected(toggle == value);
+    }
+}
+
+Toggle* ToggleGroup::getSelectedToggle() const
+{
+    for (const auto toggle : m_toggles ) {
+        if (toggle->isSelected())
+            return toggle;
+    }
+    return nullptr;
+}
+
 RadioButton* RadioButton::create(std::string_view text)
 {
     RadioButton* radioButton = new RadioButton();
@@ -22,6 +43,7 @@ RadioButton* RadioButton::create(std::string_view text)
 
 RadioButton::RadioButton()
     : m_toggleGroup(nullptr)
+    , m_isSelected(false)
 {
 }
 
@@ -42,6 +64,17 @@ std::shared_ptr<ToggleGroup> RadioButton::getToggleGroup() const
     return m_toggleGroup;
 }
 
+bool RadioButton::isSelected() const
+{
+     return m_isSelected; 
+}
+
+void RadioButton::setSelected(bool selected)
+{
+    m_isSelected = selected;
+    m_pCheckMark->setVisible(m_isSelected);
+}
+
 bool RadioButton::init()
 {
     if (Widget::init()) {
@@ -53,6 +86,7 @@ void RadioButton::initRenderer()
 {
     m_pButtonBackground = DrawShape::create();
     m_pCheckMark = DrawShape::create();
+    m_pCheckMark->setVisible(m_isSelected);
 
     addChild(m_pButtonBackground);
     addChild(m_pCheckMark);
@@ -74,13 +108,13 @@ void RadioButton::updateTextLocation()
 
 void RadioButton::onMouseClicked()
 {
-    m_isSelected = !m_isSelected;
+    if (m_toggleGroup) {
+        m_toggleGroup->selectedToggle(this);
+    }
 
     if (m_onAction) {
         m_onAction();
     }
-
-    m_pCheckMark->setVisible(m_isSelected);
 }
 
 }; // namespace ui

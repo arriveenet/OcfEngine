@@ -12,7 +12,6 @@ ButtonBase::ButtonBase()
     , m_pCheckMark(nullptr)
     , m_pTextRenderer(nullptr)
     , m_onAction(nullptr)
-    , m_isSelected(false)
 {}
 
 ButtonBase::~ButtonBase() {}

@@ -21,6 +21,8 @@ protected:
     void onMouseClicked() override;
     void resizeContent(float width, float height);
     void updateTextLocation() override;
+
+    bool m_isSelected;
 };
 
 } // namespace ui

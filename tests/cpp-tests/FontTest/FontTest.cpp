@@ -77,17 +77,23 @@ bool FontTest::init()
     checkBox->setPosition(200, 200);
     addChild(checkBox);
 
-    auto radioButton = ui::RadioButton::create("option1");
-    radioButton->setPosition(300, 200);
-    addChild(radioButton);
+    auto group = std::make_shared<ui::ToggleGroup>();
 
-    radioButton = ui::RadioButton::create("option2");
-    radioButton->setPosition(400, 200);
-    addChild(radioButton);
+    auto radioButton1 = ui::RadioButton::create("option1");
+    radioButton1->setPosition(300, 200);
+    radioButton1->setToggleGroup(group);
+    radioButton1->setSelected(true);
+    addChild(radioButton1);
 
-     radioButton = ui::RadioButton::create("option3");
-     radioButton->setPosition(500, 200);
-     addChild(radioButton);
+    auto radioButton2 = ui::RadioButton::create("option2");
+    radioButton2->setPosition(400, 200);
+    radioButton2->setToggleGroup(group);
+    addChild(radioButton2);
+
+    auto radioButton3 = ui::RadioButton::create("option3");
+    radioButton3->setPosition(500, 200);
+    radioButton3->setToggleGroup(group);
+    addChild(radioButton3);
 
     return true;
 }

@@ -13,15 +13,16 @@ public:
     virtual ~Toggle() = default;
     virtual void setToggleGroup(std::shared_ptr<ToggleGroup> group) = 0;
     virtual std::shared_ptr<ToggleGroup> getToggleGroup() const = 0;
+    virtual bool isSelected() const = 0;
+    virtual void setSelected(bool selected) = 0;
 };
 
 
 class ToggleGroup {
 public:
-    void addToggle(Toggle* toggle)
-    {
-        m_toggles.emplace_back(toggle);
-    }
+    void addToggle(Toggle* toggle);
+    void selectedToggle(Toggle* value);
+    Toggle* getSelectedToggle() const;
 
 private:
     std::vector<Toggle*> m_toggles;
@@ -36,6 +37,8 @@ public:
 
     void setToggleGroup(std::shared_ptr<ToggleGroup> group) override;
     std::shared_ptr<ToggleGroup> getToggleGroup() const override;
+    bool isSelected() const override;
+    void setSelected(bool selected) override;
 
 protected:
     bool init() override;
@@ -45,6 +48,7 @@ protected:
 
 private:
     std::shared_ptr<ToggleGroup> m_toggleGroup;
+    bool m_isSelected;
 };
 
 } // namespace ui
