@@ -48,6 +48,7 @@ Label* Label::createWithTTF(std::string_view ttfPath, std::string_view text, int
 
 Label::Label()
     : m_font(nullptr)
+    , m_labelType(LabelType::BMFONT)
     , m_isDirty(true)
     , m_textColor(1.0f, 1.0f, 1.0f)
 {
@@ -86,6 +87,7 @@ bool Label::initWithBMFont(std::string_view bmFontPath)
     }
 
     m_fontAtlas = m_font->getFontAtlas();
+    m_labelType = LabelType::BMFONT;
 
     updateBatchCommands();
 
@@ -108,7 +110,7 @@ bool Label::initWithTTF(std::string_view ttfPath, int fontSize)
     }
 
     m_fontAtlas = m_font->getFontAtlas();
-
+    m_labelType = LabelType::TTF;
     updateBatchCommands();
 
     ShaderManager* shaderManager = ShaderManager::getInstance();

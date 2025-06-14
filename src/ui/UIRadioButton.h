@@ -49,6 +49,7 @@ protected:
 private:
     std::shared_ptr<ToggleGroup> m_toggleGroup;
     bool m_isSelected;
+    glm::vec2 m_radioSize;
 };
 
 } // namespace ui

@@ -1,6 +1,7 @@
 #include "UIRadioButton.h"
 #include "2d/DrawShape.h"
 #include "2d/Label.h"
+#include "UICheckBox.h"
 
 static constexpr float RADIO_BUTTON_DEFAULT_SIZE = 14.0f;
 
@@ -44,6 +45,7 @@ RadioButton* RadioButton::create(std::string_view text)
 RadioButton::RadioButton()
     : m_toggleGroup(nullptr)
     , m_isSelected(false)
+    , m_radioSize(RADIO_BUTTON_DEFAULT_SIZE, RADIO_BUTTON_DEFAULT_SIZE)
 {
 }
 
@@ -101,8 +103,13 @@ void RadioButton::initRenderer()
 void RadioButton::updateTextLocation()
 {
     if (m_pTextRenderer) {
-        auto size = m_pTextRenderer->getSize();
-        m_pTextRenderer->setPosition(glm::vec2(m_size.x + 5.0f, 0.0f));
+        constexpr float textOffset = 5.0f;
+        const glm::vec2 textSize = m_pTextRenderer->getSize();
+        m_pTextRenderer->setPosition(m_radioSize.x + textOffset, 0.0f);
+
+         const float width = m_radioSize.x + textOffset + textSize.x;
+        const float height = m_radioSize.y;
+        setSize(width, height);
     }
 }
 

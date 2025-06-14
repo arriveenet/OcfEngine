@@ -13,16 +13,20 @@ public:
     CheckBox();
     ~CheckBox() override;
 
-    void setSize(const glm::vec2& size) override;
-    void setSize(float width, float height) override;
+    void setSelected(bool selected);
+    bool isSelected() const { return m_isSelected; }
+    void setIndeterminate(bool indeterminate);
+    bool isIndeterminate() const { return m_isIndeterminate; }
 
 protected:
     void initRenderer() override;
     void onMouseClicked() override;
-    void resizeContent(float width, float height);
+    void setCheckBoxSize(float width, float height);
     void updateTextLocation() override;
 
     bool m_isSelected;
+    bool m_isIndeterminate;
+    glm::vec2 m_checkBoxSize;
 };
 
 } // namespace ui
