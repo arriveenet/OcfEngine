@@ -23,6 +23,11 @@ void ButtonBase::updateNode(float /*deltaTime*/)
     Rect contentRect(0.0f, 0.0f, m_size.x, m_size.y);
 
     if (isScreenPointInRect(mousePos, camera, getWorldToNodeTransform(), contentRect, nullptr)) {
+        if (!m_focus) {
+            onSetFocus();
+        }
+        m_focus = true;
+
         if (Input::getMouseButtonState(Mouse::Left) == ButtonState::Pressed) {
             m_pressed = true;
             onMousePressed();
@@ -38,6 +43,9 @@ void ButtonBase::updateNode(float /*deltaTime*/)
         m_focus = true;
     }
     else {
+        if (m_focus) {
+            onKillFocus();
+        }
         m_focus = false;
         m_pressed = false;
     }

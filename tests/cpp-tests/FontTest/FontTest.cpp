@@ -95,6 +95,10 @@ bool FontTest::init()
     radioButton3->setToggleGroup(group);
     addChild(radioButton3);
 
+    auto button = ui::Button::create("button");
+    button->setPosition(500, 200);
+    addChild(button);
+
     return true;
 }
 

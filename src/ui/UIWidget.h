@@ -15,6 +15,8 @@ public:
     virtual void onMouseClicked();
     virtual void onMousePressed();
     virtual void onMouseReleased();
+    virtual void onSetFocus();
+    virtual void onKillFocus();
 
     bool isFocused() const { return m_focus; }
 

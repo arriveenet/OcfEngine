@@ -28,6 +28,10 @@ void Widget::onMousePressed() {}
 
 void Widget::onMouseReleased() {}
 
+void Widget::onSetFocus() {}
+
+void Widget::onKillFocus() {}
+
 void Widget::initRenderer() {}
 
 }
