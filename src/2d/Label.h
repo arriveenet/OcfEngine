@@ -15,6 +15,11 @@ class Font;
 
 class Label : public Node {
 public:
+    enum class LabelType {
+        BMFONT,
+        TTF,
+    };
+
     static Label* create(const std::string& text);
     static Label* createWithBMFont(std::string_view bmFontPath, std::string_view text);
     static Label* createWithTTF(std::string_view ttfPath, std::string_view text, int fontSize);
@@ -28,7 +33,7 @@ public:
 
     Font* getFont() const { return m_font; }
 
-    void setString(const std::string& text);
+    void setString(std::string_view text);
     std::string getString() const { return m_text; }
     void setTextColor(const glm::vec3& textColor);
     void setTextColor(unsigned char r, unsigned char g, unsigned b);
@@ -58,6 +63,7 @@ protected:
 
 protected:
     Font* m_font;
+    LabelType m_labelType;
     std::string m_text;
     std::u32string m_utf32Text;
     glm::vec3 m_textColor;

@@ -49,6 +49,8 @@ void FontFreeType::terminateFreeType()
 
 FontFreeType::FontFreeType()
     : m_fontSize(0)
+    , m_ascender(0)
+    , m_descender(0)
     , m_fontFace(nullptr)
     , m_glyphCollection(GlyphCollection::Dynamic)
 {
@@ -109,7 +111,7 @@ bool FontFreeType::prepareLetterDefinitions(const std::u32string& utf32Text)
         definition.width = tempRect.m_size.x;
         definition.height = tempRect.m_size.y;
         definition.xoffset = static_cast<float>(m_fontFace->glyph->bitmap_left);
-        definition.yoffset = static_cast<float>(-m_fontFace->glyph->bitmap_top);
+        definition.yoffset = static_cast<float>(m_lineHeight + m_descender - m_fontFace->glyph->bitmap_top);
         definition.xadvance = static_cast<float>(m_fontFace->glyph->advance.x >> 6);
         definition.page = m_pFontAtlas->getCurrentPage();
 
@@ -156,6 +158,10 @@ bool FontFreeType::initFont(const std::string_view fontPath, int fontSize)
     m_fontFace = face;
 
     FT_Set_Pixel_Sizes(face, 0, fontSize);
+
+    m_ascender = static_cast<int>(face->size->metrics.ascender >> 6);
+    m_descender = static_cast<int>(face->size->metrics.descender >> 6);
+    m_lineHeight = static_cast<float>(face->size->metrics.height >> 6);
 
     return true;
 }

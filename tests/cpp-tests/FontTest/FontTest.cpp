@@ -1,6 +1,8 @@
 #include "FontTest.h"
 #include "renderer/Image.h"
 #include "base/EventListenerKeyboard.h"
+#include "ui/UICheckBox.h"
+#include "ui/UIRadioButton.h"
 
 using namespace ocf;
 
@@ -70,6 +72,32 @@ bool FontTest::init()
         };
 
     m_pGame->getEventDispatcher()->addEventListener(keyboardListener, this);
+
+    auto checkBox = ui::CheckBox::create("Text");
+    checkBox->setPosition(200, 200);
+    addChild(checkBox);
+
+    auto group = std::make_shared<ui::ToggleGroup>();
+
+    auto radioButton1 = ui::RadioButton::create("option1");
+    radioButton1->setPosition(500, 300);
+    radioButton1->setToggleGroup(group);
+    radioButton1->setSelected(true);
+    addChild(radioButton1);
+
+    auto radioButton2 = ui::RadioButton::create("option2");
+    radioButton2->setPosition(500, 270);
+    radioButton2->setToggleGroup(group);
+    addChild(radioButton2);
+
+    auto radioButton3 = ui::RadioButton::create("option3");
+    radioButton3->setPosition(500, 240);
+    radioButton3->setToggleGroup(group);
+    addChild(radioButton3);
+
+    auto button = ui::Button::create("button");
+    button->setPosition(500, 200);
+    addChild(button);
 
     return true;
 }

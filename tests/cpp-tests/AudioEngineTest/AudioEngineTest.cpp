@@ -32,7 +32,7 @@ bool AudioEngineTest::init()
     auto button1 = Button::create("ButtonNormal.png", "ButtonActive.png");
     button1->setText("Play");
     button1->setPosition(leftX, 500);
-    button1->setOnClickCallback([=]() {
+    button1->setOnAction([=]() {
          m_audioID = AudioEngine::play(audioFileName, true);
         });
     addChild(button1);
@@ -40,7 +40,7 @@ bool AudioEngineTest::init()
     auto stopButton = Button::create("ButtonNormal.png", "ButtonActive.png");
     stopButton->setText("Stop");
     stopButton->setPosition(leftX2, 500);
-    stopButton->setOnClickCallback([=]() {
+    stopButton->setOnAction([=]() {
         AudioEngine::stop(m_audioID);
         });
     addChild(stopButton);
@@ -48,7 +48,7 @@ bool AudioEngineTest::init()
     auto pauseButton = Button::create("ButtonNormal.png", "ButtonActive.png");
     pauseButton->setText("Pause");
     pauseButton->setPosition(leftX, 400);
-    pauseButton->setOnClickCallback([=]() {
+    pauseButton->setOnAction([=]() {
         AudioEngine::pause(m_audioID);
         });
     addChild(pauseButton);
@@ -56,7 +56,7 @@ bool AudioEngineTest::init()
     auto resumeButton = Button::create("ButtonNormal.png", "ButtonActive.png");
     resumeButton->setText("Resume");
     resumeButton->setPosition(leftX2, 400);
-    resumeButton->setOnClickCallback([=]() {
+    resumeButton->setOnAction([=]() {
         AudioEngine::resume(m_audioID);
         });
     addChild(resumeButton);

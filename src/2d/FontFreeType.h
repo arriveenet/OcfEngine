@@ -41,6 +41,8 @@ private:
 
 private:
     int m_fontSize;
+    int m_ascender;
+    int m_descender;
     FT_Face m_fontFace;
     GlyphCollection m_glyphCollection;
 };

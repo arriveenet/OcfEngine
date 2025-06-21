@@ -25,7 +25,7 @@ bool TestCase::init()
         auto back = ui::Button::create("ButtonNormal.png", "ButtonActive.png");
         back->setText("Back");
         back->setPosition(visibleSize.x - 100.0f, 30.0f); 
-        back->setOnClickCallback([=]() {
+        back->setOnAction([=]() {
             auto scene = new MainScene();
             scene->init();
             m_pGame->replaceScene(scene);
