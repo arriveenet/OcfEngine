@@ -20,6 +20,7 @@ Game* Game::s_sharedGame = nullptr;
 
 Game::Game()
     : m_running(false)
+    , m_cleanupInNextLoop(false)
     , m_deltaTime(0.0f)
     , m_lastUpdate()
     , m_projection(Projection::_3D)
@@ -98,11 +99,9 @@ bool Game::init()
 
 void Game::mainLoop()
 {
-    if (!m_running) {
-        if (m_glView != nullptr) {
-            m_glView->end();
-            m_glView = nullptr;
-        }
+    if (m_cleanupInNextLoop) {
+        m_cleanupInNextLoop = false;
+        cleanup();
     }
     else {
         update();
@@ -113,6 +112,38 @@ void Game::mainLoop()
 void Game::exit()
 {
     m_running = false;
+    m_cleanupInNextLoop = true;
+}
+
+void Game::cleanup()
+{
+    OCF_SAFE_RELEASE(m_pFPSLabel);
+    OCF_SAFE_RELEASE(m_pDrawCallLabel);
+    OCF_SAFE_RELEASE(m_pDrawVertexLabel);
+
+    // シーンを解放
+    OCF_SAFE_RELEASE(m_currentScene);
+
+    // テクスチャーマネージャーを解放
+    OCF_SAFE_RELEASE(m_textureManager);
+
+    // イベントディスパッチャを解放
+    OCF_SAFE_RELEASE(m_eventDispatcher);
+
+    // ファイルユーティリティを解放
+    FileUtils::destroyInstance();
+    SpriteFrameManager::destroyInstance();
+    ShaderManager::destroyInstance();
+    FontManager::release();
+    AudioEngine::end();
+
+    // レンダラーを解放
+    OCF_SAFE_DELETE(m_renderer);
+
+    if (m_glView != nullptr) {
+        m_glView->end();
+        m_glView = nullptr;
+    }
 }
 
 void Game::runWithScene(Scene* pScene)
