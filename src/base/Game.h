@@ -51,6 +51,9 @@ public:
     /** ゲームのメインループから抜ける */
     void exit();
 
+    /** ゲームの終了処理 */
+    void cleanup();
+
     /** 起動時のシーンを設定する */
     void runWithScene(Scene* pScene);
 
@@ -203,6 +206,7 @@ private:
     /** ゲームクラスのインスタンス */
     static Game* s_sharedGame;
     bool m_running;
+    bool m_cleanupInNextLoop;
 
     float m_deltaTime;
     std::chrono::steady_clock::time_point m_lastUpdate;
