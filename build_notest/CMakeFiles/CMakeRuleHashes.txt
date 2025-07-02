@@ -1,0 +1,21 @@
+# Hashes of file build rules.
+6bafb8a79eff3b0eb6205f3ed52cf827 src/engine/thirdparty/OpenAL/CMakeFiles/clang-tidy-check
+f0e878c1050819de69d7b81cb5a9c7de src/engine/thirdparty/OpenAL/default_hrtf.txt
+c4fcd0e7378f4db00b7258381d9f35fd src/engine/thirdparty/glfw/src/fractional-scale-v1-client-protocol-code.h
+db87971894fe41ebf20572e78e544fce src/engine/thirdparty/glfw/src/fractional-scale-v1-client-protocol.h
+9948718703081c133c7494925a5a81d8 src/engine/thirdparty/glfw/src/idle-inhibit-unstable-v1-client-protocol-code.h
+67def708c70ea887137d7ab766f1ca24 src/engine/thirdparty/glfw/src/idle-inhibit-unstable-v1-client-protocol.h
+eebdcc0f8c151b70dac4f6d279796944 src/engine/thirdparty/glfw/src/pointer-constraints-unstable-v1-client-protocol-code.h
+df1031d3976e4d0ed80bd05d7309e241 src/engine/thirdparty/glfw/src/pointer-constraints-unstable-v1-client-protocol.h
+b2778056a2320668cb7ebba182dcc6b3 src/engine/thirdparty/glfw/src/relative-pointer-unstable-v1-client-protocol-code.h
+a0d38a260f85fa59940d47d8ad29b14e src/engine/thirdparty/glfw/src/relative-pointer-unstable-v1-client-protocol.h
+c5f6b254facee7862119b6d2dcddb443 src/engine/thirdparty/glfw/src/viewporter-client-protocol-code.h
+06fc034e48f60b5b697ee84645b42668 src/engine/thirdparty/glfw/src/viewporter-client-protocol.h
+1bad5d26c0d1589769c9e6ca5ad2d4dc src/engine/thirdparty/glfw/src/wayland-client-protocol-code.h
+100abbcaf539f31addc9b6872e04e751 src/engine/thirdparty/glfw/src/wayland-client-protocol.h
+ca77086d6b1fc0034a8e8b2d782a106a src/engine/thirdparty/glfw/src/xdg-activation-v1-client-protocol-code.h
+9a5120fd35c1196b1858d1a19dc9d794 src/engine/thirdparty/glfw/src/xdg-activation-v1-client-protocol.h
+81d1fc38d3f078c3e71ba5de8fcd77c9 src/engine/thirdparty/glfw/src/xdg-decoration-unstable-v1-client-protocol-code.h
+98a8b4a3312ba93ae641d31f78d4aa31 src/engine/thirdparty/glfw/src/xdg-decoration-unstable-v1-client-protocol.h
+5c53609edab8da3753fc71b8e3d1936d src/engine/thirdparty/glfw/src/xdg-shell-client-protocol-code.h
+d2ad639521f57b44a4c65ff5a38ce9a6 src/engine/thirdparty/glfw/src/xdg-shell-client-protocol.h
