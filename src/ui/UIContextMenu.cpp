@@ -3,6 +3,7 @@
 #include "platform/GLView.h"
 #include "base/Types.h"
 #include "platform/PlatformMacros.h"
+#include "2d/DrawShape.h"
 
 NS_OCF_BEGIN
 

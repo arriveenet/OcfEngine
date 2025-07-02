@@ -45,10 +45,13 @@ void MenuItem::setEnabled(bool enabled)
 {
     if (m_enabled != enabled) {
         m_enabled = enabled;
-        // Update visual state
+        // Update visual state by changing text color instead of opacity
         if (m_pTextRenderer) {
-            // Set text opacity based on enabled state
-            m_pTextRenderer->setOpacity(m_enabled ? 1.0f : 0.5f);
+            if (m_enabled) {
+                m_pTextRenderer->setTextColor(glm::vec3(0.0f, 0.0f, 0.0f)); // Black text
+            } else {
+                m_pTextRenderer->setTextColor(glm::vec3(0.5f, 0.5f, 0.5f)); // Gray text
+            }
         }
     }
 }

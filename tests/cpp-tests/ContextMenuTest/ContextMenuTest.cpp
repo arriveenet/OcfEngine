@@ -36,7 +36,7 @@ void ContextMenuTest::setupUI()
     addChild(titleLabel);
 
     // Add instruction
-    auto instructionLabel = Label::createWithTTF("fonts/NotoSansJP-Regular.ttf", "Right-click to show context menu", 16);
+    auto instructionLabel = Label::createWithTTF("fonts/NotoSansJP-Regular.ttf", "Right-click widgets to show context menu", 16);
     instructionLabel->setPosition(visibleSize.x * 0.5f, visibleSize.y - 100.0f);
     addChild(instructionLabel);
 
@@ -87,7 +87,20 @@ void ContextMenuTest::setupUI()
     testButton->setOnAction([this, visibleSize]() {
         showContextMenu(glm::vec2(visibleSize.x * 0.5f, visibleSize.y * 0.4f));
     });
+    // Set context menu for the button to demonstrate widget integration
+    testButton->setContextMenu(m_contextMenu);
     addChild(testButton);
+
+    // Add another widget to show context menu functionality
+    auto widget1 = Button::create("Widget 1 (Right-click me)");
+    widget1->setPosition(visibleSize.x * 0.3f, visibleSize.y * 0.3f);
+    widget1->setContextMenu(m_contextMenu);
+    addChild(widget1);
+
+    auto widget2 = Button::create("Widget 2 (Right-click me)");
+    widget2->setPosition(visibleSize.x * 0.7f, visibleSize.y * 0.3f);
+    widget2->setContextMenu(m_contextMenu);
+    addChild(widget2);
 }
 
 void ContextMenuTest::showContextMenu(const glm::vec2& position)

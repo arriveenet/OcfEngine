@@ -19,6 +19,7 @@ list(APPEND GAME_HEADER
     ActionTest/ActionTest.h
     AudioEngineTest/AudioEngineTest.h
     ComponentTest/ComponentTest.h
+    ContextMenuTest/ContextMenuTest.h
     DrawShapeTest/DrawShapeTest.h
     EventTest/EventTest.h
     FontTest/FontTest.h
@@ -34,6 +35,7 @@ list(APPEND GAME_SOURCE
     ActionTest/ActionTest.cpp
     AudioEngineTest/AudioEngineTest.cpp
     ComponentTest/ComponentTest.cpp
+    ContextMenuTest/ContextMenuTest.cpp
     DrawShapeTest/DrawShapeTest.cpp
     EventTest/EventTest.cpp
     FontTest/FontTest.cpp
