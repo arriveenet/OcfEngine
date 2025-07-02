@@ -52,6 +52,7 @@ public:
     void setPosition(float x, float y) override;
 
     /** スプライトのサイズを設定 */
+    void setSize(const glm::vec2& size) override;
     void setSize(float width, float height) override;
 
     /** スプライトの矩形を取得 */

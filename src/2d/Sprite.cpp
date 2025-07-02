@@ -181,6 +181,14 @@ void Sprite::setPosition(float x, float y)
     Node::setPosition(x, y);
 }
 
+void Sprite::setSize(const glm::vec2& size)
+{
+    Node::setSize(size);
+    updatePolygon();
+
+    m_isDirty = true;
+}
+
 void Sprite::setSize(float width, float height)
 {
     Node::setSize(width, height);
