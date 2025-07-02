@@ -90,33 +90,6 @@ cmake --build . --config Release
 - **SpriteTest**: 2Dスプライトのテスト
 - **TiledMapTest**: タイルマップのテスト
 
-## プロジェクト構造
-
-```
-OcfEngine/
-├── src/                    # エンジンのソースコード
-│   ├── 2d/                # 2D関連機能 (Camera, Sprite, Node等)
-│   ├── 3d/                # 3D関連機能 (Mesh, MeshRenderer等)
-│   ├── audio/             # オーディオエンジン
-│   ├── base/              # 基本機能 (Game, FileUtils, Event等)
-│   ├── input/             # 入力処理
-│   ├── platform/          # プラットフォーム固有処理
-│   ├── renderer/          # レンダリングシステム
-│   ├── ui/                # ユーザーインターフェース
-│   └── OcfEngine.h       # メインヘッダファイル
-├── tests/                 # テストプログラム
-│   └── cpp-tests/         # C++テストスイート
-├── assets/                # ゲームアセット
-│   ├── audio/             # オーディオファイル
-│   ├── fonts/             # フォントファイル
-│   ├── shaders/           # シェーダーファイル
-│   ├── textures/          # テクスチャファイル
-│   └── tiledmap/          # タイルマップデータ
-├── thirdparty/            # サードパーティライブラリ
-├── tools/                 # 開発ツール
-└── CMakeLists.txt         # CMake設定ファイル
-```
-
 ## 使用ライブラリ
 
 - **OpenGL**: グラフィックスレンダリング
