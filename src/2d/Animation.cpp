@@ -4,10 +4,10 @@
 NS_OCF_BEGIN
 
 Animation::Animation()
-    : m_loops(0)
-    , m_duration(0.0f)
-    , m_totalDelayUnits(0.0f)
+    : m_totalDelayUnits(0.0f)
     , m_delayPerUnit(0.0f)
+    , m_duration(0.0f)
+    , m_loops(0)
     , m_resetOriginalFrame(false)
 {
 }

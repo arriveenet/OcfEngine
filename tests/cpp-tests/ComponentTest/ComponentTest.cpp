@@ -80,8 +80,8 @@ Asteroid::Asteroid()
 
     glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
     float rot = static_cast<float>(rand() % 360);
-    float x = static_cast<float>(rand() % (int)visibleSize.x);
-    float y = static_cast<float>(rand() % (int)visibleSize.y);
+    float x = static_cast<float>(rand() % static_cast<int>(visibleSize.x));
+    float y = static_cast<float>(rand() % static_cast<int>(visibleSize.y));
 
     setRotation(rot);
     setPosition(x, y);
