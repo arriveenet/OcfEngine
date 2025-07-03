@@ -92,11 +92,11 @@ static BMFontConfiguration* FNTConfigLoadFile(std::string_view fntFile)
 }
 
 BMFontConfiguration::BMFontConfiguration()
-    : m_charactorSet(nullptr)
-    , m_commonHeight(0)
-    , m_fontSize(0)
-    , m_padding()
+    : m_commonHeight(0)
     , m_pages(0)
+    , m_padding()
+    , m_charactorSet(nullptr)
+    , m_fontSize(0)
 {
 }
 
@@ -150,7 +150,7 @@ std::set<unsigned int>* BMFontConfiguration::parseBinaryConfigFile(unsigned char
         remains -= 4;
 
         if (blockId == FntBlockType::Info) {
-            FntInfo info = { 0 };
+            FntInfo info = {};
             memcpy(&info, pData, sizeof(FntInfo));
             m_fontSize       = info.fontSize;
             m_padding.top    = info.paddingUp;
@@ -158,11 +158,11 @@ std::set<unsigned int>* BMFontConfiguration::parseBinaryConfigFile(unsigned char
             m_padding.bottom = info.paddingDown;
             m_padding.left   = info.paddingLeft;
 
-            const char* fontName = (const char*)pData + sizeof(FntInfo);
+            const char* fontName = reinterpret_cast<const char*>(pData) + sizeof(FntInfo);
             m_fontName = fontName;
         }
         else if (blockId == FntBlockType::Common) {
-            FntCommon common = { 0 };
+            FntCommon common = {};
             memcpy(&common, pData, sizeof(FntInfo));
             m_pages = common.pages;
             m_commonHeight = common.lineHeight;
@@ -172,7 +172,7 @@ std::set<unsigned int>* BMFontConfiguration::parseBinaryConfigFile(unsigned char
         else if (blockId == FntBlockType::Pages) {
             size_t offset = 0;
             while (offset < blockSize) {
-                const char* value = (const char*)pData + offset;
+                const char* value = reinterpret_cast<const char*>(pData) + offset;
                 auto atlasName = FileUtils::getInstance()->fullPathForFilename(value);
                 m_atlasNames.emplace_back(atlasName);
                 offset += strlen(value) + 1;
@@ -181,7 +181,7 @@ std::set<unsigned int>* BMFontConfiguration::parseBinaryConfigFile(unsigned char
             }
         }
         else if (blockId == FntBlockType::Chars) {
-            FntChars fntChar = { 0 };
+            FntChars fntChar = {};
 
             const uint32_t count = blockSize / 20;
             for (uint32_t i = 0; i < count; i++) {
@@ -267,7 +267,7 @@ FontAtlas* FontFNT::createFontAtlas()
     for (auto&& e : m_pConfiguration->m_fontDefDictionary) {
         BMFontConfiguration::BMFontDef& fontDef = e.second;
 
-        FontCharacterDefinition definition = { 0 };
+        FontCharacterDefinition definition = {};
 
         definition.x = fontDef.rect.m_position.x;
         definition.y = fontDef.rect.m_position.y;

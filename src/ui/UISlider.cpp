@@ -89,6 +89,26 @@ void Slider::setSize(float width, float height)
     Node::setSize(glm::vec2(width, height));
 }
 
+void Slider::setPosition(const glm::vec3& position)
+{
+    Node::setPosition(position);
+}
+
+void Slider::setPosition(const glm::vec2& position)
+{
+    Node::setPosition(position);
+}
+
+void Slider::setPosition(float x, float y, float z)
+{
+    Node::setPosition(x, y, z);
+}
+
+void Slider::setPosition(float x, float y)
+{
+    Node::setPosition(x, y);
+}
+
 void Slider::setValue(int value)
 {
     if (value > m_minValue && value < m_maxValue) {

@@ -48,10 +48,13 @@ public:
     virtual SpriteFrame* getSpriteFrame() const;
     
     /** スプライトの位置を設定 */
+    void setPosition(const glm::vec3& position) override;
     void setPosition(const glm::vec2& position) override;
+    void setPosition(float x, float y, float z) override;
     void setPosition(float x, float y) override;
 
     /** スプライトのサイズを設定 */
+    void setSize(const glm::vec2& size) override;
     void setSize(float width, float height) override;
 
     /** スプライトの矩形を取得 */
