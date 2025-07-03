@@ -102,31 +102,6 @@ cmake --build . --config Release
 - **fmt**: フォーマット処理
 - **tinyobjloader**: OBJファイル読み込み
 
-## 基本的な使用例
-
-```cpp
-#include "OcfEngine.h"
-
-class MyGame : public ocf::Game {
-public:
-    bool init() override {
-        // ゲーム初期化処理
-        auto sprite = ocf::Sprite::create("texture.png");
-        sprite->setPosition(400, 300);
-        this->addChild(sprite);
-        
-        return true;
-    }
-};
-
-int main() {
-    auto game = MyGame::create();
-    if (game && game->init()) {
-        ocf::Application::getInstance()->run(game);
-    }
-    return 0;
-}
-```
 
 ## トラブルシューティング
 
