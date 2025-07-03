@@ -24,6 +24,11 @@ public:
     void setSize(const glm::vec2& size) override;
     void setSize(float width, float height) override;
 
+    void setPosition(const glm::vec3& position) override;
+    void setPosition(const glm::vec2& position) override;
+    void setPosition(float x, float y, float z) override;
+    void setPosition(float x, float y) override;
+
     void setValue(int value);
     void setMinValue(int minValue) { m_minValue = minValue; }
     void setMaxValue(int maxValue) { m_maxValue = maxValue; }
