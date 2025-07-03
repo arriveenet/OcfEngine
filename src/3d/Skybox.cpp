@@ -80,6 +80,11 @@ Skybox::~Skybox()
     OCF_SAFE_RELEASE(m_textureCube);
 }
 
+bool Skybox::init()
+{
+    return Node::init();
+}
+
 bool Skybox::init(std::string_view positive_x,
                   std::string_view negative_x,
                   std::string_view positive_y,

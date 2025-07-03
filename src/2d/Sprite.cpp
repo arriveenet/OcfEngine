@@ -171,9 +171,19 @@ SpriteFrame* Sprite::getSpriteFrame() const
     return SpriteFrame::createWithTexture(m_texture, m_rect, false, glm::vec2(), m_size);
 }
 
+void Sprite::setPosition(const glm::vec3& position)
+{
+    Node::setPosition(position);
+}
+
 void Sprite::setPosition(const glm::vec2& position)
 {
     Node::setPosition(position);
+}
+
+void Sprite::setPosition(float x, float y, float z)
+{
+    Node::setPosition(x, y, z);
 }
 
 void Sprite::setPosition(float x, float y)
