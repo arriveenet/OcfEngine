@@ -9,6 +9,7 @@
 #include "EventTest/EventTest.h"
 #include "FontTest/FontTest.h"
 #include "DrawShapeTest/DrawShapeTest.h"
+#include "ContextMenuTest/ContextMenuTest.h"
 
 USING_NS_OCF;
 
@@ -38,6 +39,7 @@ bool MainScene::init()
     addTest("EventTest", []() {return new EventTest(); });
     addTest("FontTest", []() {return new FontTest(); });
     addTest("DrawShapeTest", []() {return new DrawShapeTest(); });
+    addTest("ContextMenuTest", []() {return new ContextMenuTest(); });
 
     glm::vec2 visibleSize = m_pGame->getVisibleSize();
 
