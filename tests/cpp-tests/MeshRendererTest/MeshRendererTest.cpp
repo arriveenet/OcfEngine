@@ -33,18 +33,18 @@ bool MeshRendererTest::init()
         "skybox/bottom.png",
         "skybox/front.png",
         "skybox/back.png");
-    skybox->setCameraMask((uint16_t)CameraFlag::User1);
+    skybox->setCameraMask(static_cast<uint16_t>(CameraFlag::User1));
     addChild(skybox);
 
     DrawShape* shape = DrawShape::create();
     shape->drawLine(glm::vec3(0, 0, 0), glm::vec3(100, 0, 0), Color4f::RED);
     shape->drawLine(glm::vec3(0, 0, 0), glm::vec3(0, 100, 0), Color4f::GREEN);
     shape->drawLine(glm::vec3(0, 0, 0), glm::vec3(0, 0, 100), Color4f::BLUE);
-    shape->setCameraMask((uint16_t)CameraFlag::User1);
+    shape->setCameraMask(static_cast<uint16_t>(CameraFlag::User1));
     addChild(shape);
 
    auto mesh = MeshRenderer::create("model/teapot.obj");
-   mesh->setCameraMask((uint16_t)CameraFlag::User1);
+   mesh->setCameraMask(static_cast<uint16_t>(CameraFlag::User1));
    addChild(mesh);
 
    m_pStatusLabel = Label::create("position: 0.000, 0.000, 0.000");

@@ -21,6 +21,7 @@ struct FontFaceInfo {
 
 class IFontEngine {
 public:
+    virtual ~IFontEngine() = default;
     virtual FontFaceInfo* lookupFontFaceForCodepoint(char32_t codepoint) = 0;
 
 };

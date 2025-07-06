@@ -18,6 +18,7 @@ public:
     Skybox();
     virtual ~Skybox();
 
+    bool init() override;
     bool init(std::string_view positive_x,
               std::string_view negative_x,
               std::string_view positive_y,

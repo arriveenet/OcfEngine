@@ -5,9 +5,9 @@
 NS_OCF_BEGIN
 
 MoveComponent::MoveComponent(Node* pEntity, int updateOrder)
-    : m_angularSpeed(0.0f)
+    : Component(pEntity, updateOrder)
+    , m_angularSpeed(0.0f)
     , m_forwardSpeed(0.0f)
-    , Component(pEntity, updateOrder)
 {
 }
 
