@@ -288,9 +288,9 @@ void Sprite::setTextureCoords(const Rect& rectInPoints, QuadV3fC3fT2f* outQuad)
     const float atlasHeight = static_cast<float>(m_texture->getHeight());
 
     float left   = rectInPoints.m_position.x / atlasWidth;
+    float bottom = rectInPoints.m_position.y / atlasHeight;
     float right  = (rectInPoints.m_position.x + rectInPoints.m_size.x) / atlasWidth;
-    float top    = rectInPoints.m_position.y / atlasHeight;
-    float bottom = (rectInPoints.m_position.y + rectInPoints.m_size.y) / atlasHeight;
+    float top = (rectInPoints.m_position.y + rectInPoints.m_size.y) / atlasHeight;
 
     outQuad->bottomLeft.texCoord  = { left, bottom };
     outQuad->bottomRight.texCoord = { right, bottom };

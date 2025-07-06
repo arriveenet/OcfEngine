@@ -15,7 +15,7 @@ USING_NS_OCF;
 using namespace ocf::ui;
 
 MainScene::MainScene()
-    : m_buttonPosY(600.0f)
+    : m_buttonPosY(150.0f)
 {
 }
 
@@ -42,7 +42,7 @@ bool MainScene::init()
     glm::vec2 visibleSize = m_pGame->getVisibleSize();
 
     auto button = Button::create("Exit");
-    button->setPosition(visibleSize.x - 100.0f, 30.0f);
+    button->setPosition(visibleSize.x - 100.0f, visibleSize.y - 30.0f);
     button->setOnAction([=]() {
         m_pGame->exit();
         });
@@ -62,6 +62,6 @@ void MainScene::addTest(std::string_view testName, std::function<TestCase*()> ca
         });
     addChild(button);
 
-    m_buttonPosY -= 32.0f;
+    m_buttonPosY += 32.0f;
 }
 

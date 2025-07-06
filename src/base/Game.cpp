@@ -23,7 +23,7 @@ Game::Game()
     , m_cleanupInNextLoop(false)
     , m_deltaTime(0.0f)
     , m_lastUpdate()
-    , m_projection(Projection::_3D)
+    , m_projection(Projection::_2D)
     , m_windowSize(0.0f, 0.0f)
     , m_resolutionSize(0.0f, 0.0f)
     , m_renderer(nullptr)
@@ -117,18 +117,18 @@ void Game::exit()
 
 void Game::cleanup()
 {
-    OCF_SAFE_RELEASE(m_pFPSLabel);
-    OCF_SAFE_RELEASE(m_pDrawCallLabel);
-    OCF_SAFE_RELEASE(m_pDrawVertexLabel);
+    OCF_SAFE_DELETE(m_pFPSLabel);
+    OCF_SAFE_DELETE(m_pDrawCallLabel);
+    OCF_SAFE_DELETE(m_pDrawVertexLabel);
 
     // シーンを解放
-    OCF_SAFE_RELEASE(m_currentScene);
+    OCF_SAFE_DELETE(m_currentScene);
 
     // テクスチャーマネージャーを解放
-    OCF_SAFE_RELEASE(m_textureManager);
+    OCF_SAFE_DELETE(m_textureManager);
 
     // イベントディスパッチャを解放
-    OCF_SAFE_RELEASE(m_eventDispatcher);
+    OCF_SAFE_DELETE(m_eventDispatcher);
 
     // ファイルユーティリティを解放
     FileUtils::destroyInstance();
@@ -467,11 +467,10 @@ void Game::createStatsLabel()
     m_pDrawCallLabel = Label::create("Draw call: 0");
     m_pDrawVertexLabel = Label::create("Draw vert: 0");
 
-    glm::vec2 visibleSize = getVisibleSize();
     float fontHeight = m_pFPSLabel->getFont()->getLineHeight();
-    m_pFPSLabel->setPosition(0, visibleSize.y - fontHeight);
-    m_pDrawCallLabel->setPosition(0, visibleSize.y - fontHeight * 2);
-    m_pDrawVertexLabel->setPosition(0, visibleSize.y - fontHeight * 3);
+    m_pFPSLabel->setPosition(0, 0);
+    m_pDrawCallLabel->setPosition(0, fontHeight);
+    m_pDrawVertexLabel->setPosition(0, fontHeight * 2);
 }
 
 NS_OCF_END

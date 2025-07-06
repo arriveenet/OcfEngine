@@ -25,16 +25,17 @@ bool SpriteTestDemo::init()
         this->addChild(sprite1);
 
         auto sprite2 = Sprite::create("textures/28_Frog.png");
-        sprite2->setPosition((size / 2.0f) * 0.5f);
+        sprite2->setPosition((size / 2.0f) * 1.5f);
         this->addChild(sprite2);
 
         SpriteFrameManager::getInstance()->addSpriteFramesWithFile("texture.xml");
         auto sprite3 = Sprite::createWithSpriteFrameName("Kirby_1.png");
-        sprite3->setPosition(100, 100);
+        sprite3->setPosition(100, 300);
         sprite3->setScale(10.0f);
         this->addChild(sprite3);
 
         auto sprite4 = Sprite::create();
+        sprite4->setPosition(100, 500);
         sprite4->setSize(100, 100);
         this->addChild(sprite4);
 

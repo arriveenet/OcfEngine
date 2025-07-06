@@ -64,7 +64,7 @@ Label::~Label()
 
 bool Label::init()
 {
-    m_font = FontManager::getFontFNT("Consolas.fnt");
+    m_font = FontManager::getFontFNT("NatoSansJP.fnt");
     if (m_font == nullptr) {
         return false;
     }
@@ -216,23 +216,23 @@ void Label::updateQuads()
         float tx1 = static_cast<float>((pChar.x) + pChar.width) / textureWidth;
         float ty1 = static_cast<float>((pChar.y) + pChar.height) / textureHeight;
 
-        const float offsetY = static_cast<float>(lineHeight - pChar.yoffset - pChar.height);
+        const float offsetY = pChar.yoffset;
 
         QuadV3fC3fT2f quad = { };
         quad.topLeft.position = { x + pChar.xoffset, y + offsetY + pChar.height, 0.0f };
-        quad.topLeft.texCoord = { tx0, ty0 };
+        quad.topLeft.texCoord = { tx0, ty1 };
         quad.topLeft.color = m_textColor;
 
         quad.bottomLeft.position = { x + pChar.xoffset, y + offsetY, 0.0f };
-        quad.bottomLeft.texCoord = { tx0, ty1 };
+        quad.bottomLeft.texCoord = { tx0, ty0 };
         quad.bottomLeft.color = m_textColor;
 
         quad.topRight.position = { x + pChar.xoffset + pChar.width, y + offsetY + pChar.height, 0.0f };
-        quad.topRight.texCoord = { tx1, ty0 };
+        quad.topRight.texCoord = { tx1, ty1 };
         quad.topRight.color = m_textColor;
 
         quad.bottomRight.position = { x + pChar.xoffset + pChar.width, y + offsetY, 0.0f };
-        quad.bottomRight.texCoord = { tx1, ty1 };
+        quad.bottomRight.texCoord = { tx1, ty0 };
         quad.bottomRight.color = m_textColor;
 
         x += pChar.xadvance;

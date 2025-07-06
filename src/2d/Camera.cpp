@@ -70,7 +70,7 @@ Camera::~Camera()
 
 bool Camera::init()
 {
-    glm::ivec2 size = m_pGame->getResolutionSize();
+    glm::vec2 size = m_pGame->getResolutionSize();
     switch (m_pGame->getProjection()) {
         case Game::Projection::_3D:
         {
@@ -89,8 +89,14 @@ bool Camera::init()
             m_zNear = -1024.0f;
             m_zFar  = 1024.0f;
 
-            initOrthographic((float)size.x, (float)size.y, m_zNear, m_zFar);
-            setPosition(glm::vec3(size.x / 2.0f, size.y / 2.0f, 0.0f));
+            const float halfWidth = size.x / 2.0f;
+            const float halfHeight = size.y / 2.0f;
+
+            initOrthographic(-halfWidth, halfWidth, halfHeight, -halfHeight, m_zNear, m_zFar);
+            glm::vec3 eye(size.x / 2.0f, size.y / 2.0f, 1.0f);
+            glm::vec3 center(size.x / 2.0f, size.y / 2.0f, 0.0f);
+            setPosition(eye);
+            lookAt(center, glm::vec3(0.0f, 1.0f, 0.0f)); 
             break;
         }
     }
@@ -109,13 +115,12 @@ bool Camera::initPerspective(float fovy, float aspect, float zNear, float zFar)
     return true;
 }
 
-bool Camera::initOrthographic(float width, float height, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
+bool Camera::initOrthographic(float left, float right, float bottom, float top, float zNear,
+                              float zFar)
 {
     m_type = Type::Orthographic;
 
-    const float halfWidth = width / 2.0f;
-    const float halfHeight = height / 2.0f;
-    m_projection = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight, zNear, zFar);
+    m_projection = glm::ortho(left, right, bottom, top, zNear, zFar);
 
     m_viewProjectionDirty = true;
 
