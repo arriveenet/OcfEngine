@@ -1,5 +1,5 @@
 #include "3d/FirstPersonCamera.h"
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "input/Input.h"
 #include "base/Game.h"
 #include "base/EventListenerKeyboard.h"

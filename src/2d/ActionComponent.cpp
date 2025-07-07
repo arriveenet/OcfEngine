@@ -1,6 +1,6 @@
 #include "ActionComponent.h"
 #include <algorithm>
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "2d/Animation.h"
 #include "2d/SpriteFrame.h"
 #include "2d/Sprite.h"

@@ -1,5 +1,5 @@
 #pragma once
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "renderer/TextureCube.h"
 #include "renderer/CustomCommand.h"
 #include <string>

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "base/Types.h"
 #include "base/Macros.h"
 #include "renderer/VertexArray.h"

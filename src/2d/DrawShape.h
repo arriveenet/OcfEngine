@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "renderer/VertexArray.h"
 #include "renderer/CustomCommand.h"
 #include "renderer/ShaderManager.h"

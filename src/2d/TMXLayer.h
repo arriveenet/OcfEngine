@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "renderer/QuadCommand.h"
 
 NS_OCF_BEGIN

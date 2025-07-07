@@ -1,5 +1,5 @@
 #include "CircleComponent.h"
-#include "2d/Node.h"
+#include "base/Node.h"
 
 NS_OCF_BEGIN
 

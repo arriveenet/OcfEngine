@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
 #include "Component.h"
-#include "Node.h"
 #include "DrawShape.h"
 #include "base/Types.h"
 #include "base/Rect.h"
+#include "base/Node.h"
 #include "base/Config.h"
 #include "renderer/TrianglesCommand.h"
 #include "renderer/VertexArray.h"

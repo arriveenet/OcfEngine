@@ -1,6 +1,6 @@
 #include "MoveComponent.h"
 #include <glm/glm.hpp>
-#include "Node.h"
+#include "base/Node.h"
 
 NS_OCF_BEGIN
 
