@@ -30,6 +30,7 @@ Node::Node()
     , m_transformDirty(true)
     , m_transformUpdated(true)
     , m_contentSizeDirty(true)
+    , m_name("Node")
 {
     m_pGame = Game::getInstance();
     m_pEventDispatcher = Game::getInstance()->getEventDispatcher();
@@ -260,6 +261,16 @@ void Node::setGlobalZOrder(float globalZorder)
     if (m_globalZOrder != globalZorder) {
         m_globalZOrder = globalZorder;
     }
+}
+
+std::string Node::getName() const
+{
+    return m_name;
+}
+
+void Node::setName(const std::string& name)
+{
+    m_name = name;
 }
 
 void Node::addChild(Node* pNode)

@@ -1,5 +1,6 @@
 set(OCF_BASE_HEADER
     "base/AutoreleasePool.h"
+    "base/CanvasItem.h"
     "base/Config.h"
     "base/Console.h"
     "base/Event.h"
@@ -23,6 +24,7 @@ set(OCF_BASE_HEADER
 
 set(OCF_BASE_SRC
     "base/AutoreleasePool.cpp"
+    "base/CanvasItem.cpp"
     "base/Console.cpp"
     "base/Event.cpp"
     "base/EventDispatcher.cpp"

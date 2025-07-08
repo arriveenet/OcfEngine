@@ -79,6 +79,9 @@ public:
     virtual void setGlobalZOrder(float globalZorder);
     virtual float getGlobalZOrder() const { return m_globalZOrder; }
 
+    std::string getName() const;
+    void setName(const std::string& name);
+
     /**
      * @brief 子ノードを追加
      * @param pNode 追加する子ノード
@@ -187,6 +190,7 @@ protected:
 
     std::vector<Node*> m_children;			//!< 子ノードの配列
     std::vector<Component*> m_components;	//!< コンポーネント
+    std::string m_name;                     //!< ノードの名前
 };
 
 bool isScreenPointInRect(const glm::vec2& pt, const Camera* pCamera, const glm::mat4& worldToLocal,
