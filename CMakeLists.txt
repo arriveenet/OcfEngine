@@ -40,4 +40,5 @@ if (OCF_BUILD_TESTS)
     endmacro()
     
      add_test_target(cpp-tests ${OCF_ROOT_PATH}/tests/cpp-tests)
+     add_test_target(unit-tests ${OCF_ROOT_PATH}/tests/unit-tests)
 endif()
