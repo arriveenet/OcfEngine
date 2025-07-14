@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "base/Node.h"
+#include "2d/Node2D.h"
 #include "renderer/QuadCommand.h"
 
 NS_OCF_BEGIN
@@ -10,7 +10,7 @@ class TMXTilesetInfo;
 class TMXMapInfo;
 class Texture2D;
 
-class TMXLayer : public Node {
+class TMXLayer : public Node2D {
 public:
     static TMXLayer* create(TMXTilesetInfo* tilesetInfo, TMXLayerInfo* layerInfo, TMXMapInfo* mapInfo);
 
