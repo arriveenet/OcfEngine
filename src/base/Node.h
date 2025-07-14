@@ -14,7 +14,7 @@ class EventDispatcher;
 class Renderer;
 class Scene;
 class Rect;
-class Camera;
+class Camera2D;
 
 /**
  * @brief ノードクラス
@@ -134,7 +134,7 @@ protected:
     std::string m_name;                     //!< ノードの名前
 };
 
-bool isScreenPointInRect(const glm::vec2& pt, const Camera* pCamera, const glm::mat4& worldToLocal,
+bool isScreenPointInRect(const glm::vec2& pt, const Camera2D* pCamera, const glm::mat4& worldToLocal,
                          const Rect& rect, glm::vec3* p);
 
 NS_OCF_END

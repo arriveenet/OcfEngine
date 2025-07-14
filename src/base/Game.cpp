@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 #include "2d/FontManager.h"
 #include "2d/Label.h"
 #include "2d/SpriteFrameManager.h"
@@ -448,7 +448,7 @@ void Game::showStats()
     m_pDrawCallLabel->update(m_deltaTime);
     m_pDrawVertexLabel->update(m_deltaTime);
 
-    Camera* pCamera = m_currentScene->getDefaultCamera();
+    Camera2D* pCamera = m_currentScene->getDefaultCamera();
     glm::mat4 modelView = pCamera->getViewMatrix();
 
     pushMatrix(MatrixStack::Projection);

@@ -5,7 +5,7 @@
 #include "base/Game.h"
 #include "base/Rect.h"
 #include "base/EventDispatcher.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 #include "2d/Scene.h"
 
 NS_OCF_BEGIN
@@ -203,12 +203,12 @@ Scene* Node::getScene() const
 
 bool Node::isVisitableByVisitingCamera() const
 {
-    Camera* pCamera = Camera::getVisitingCamera();
+    Camera2D* pCamera = Camera2D::getVisitingCamera();
     bool visibleByCamera = (pCamera != nullptr) ? static_cast<uint16_t>(pCamera->getCameraFlag()) & m_cameraMask : true;
     return visibleByCamera;
 }
 
-bool isScreenPointInRect(const glm::vec2& pt, const Camera* pCamera, const glm::mat4& worldToLocal,
+bool isScreenPointInRect(const glm::vec2& pt, const Camera2D* pCamera, const glm::mat4& worldToLocal,
                          const Rect& rect, glm::vec3* p)
 {
     if (pCamera == nullptr || rect.m_size.x <= 0 || rect.m_size.y <= 0) {

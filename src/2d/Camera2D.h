@@ -5,7 +5,7 @@ NS_OCF_BEGIN
 
 class Scene;
 
-class Camera : public Node2D {
+class Camera2D : public Node2D {
     friend class Scene;
 
 public:
@@ -14,17 +14,17 @@ public:
         Orthographic	//!< 平行投影
     };
 
-    static Camera* createPerspective(float fovy, float aspect, float zNear, float zFar);
-    static Camera* createOrthographic(float width, float height, float zNear = -1.0f, float zFar = 1.0f);
-    static Camera* getDefaultCamera();
+    static Camera2D* createPerspective(float fovy, float aspect, float zNear, float zFar);
+    static Camera2D* createOrthographic(float width, float height, float zNear = -1.0f, float zFar = 1.0f);
+    static Camera2D* getDefaultCamera();
 
-    static Camera* getVisitingCamera();
+    static Camera2D* getVisitingCamera();
 
     static const glm::vec4& getDefaultViewpot();
     static void setDefaultViewport(const glm::vec4& viewport);
 
-    Camera();
-    ~Camera();
+    Camera2D();
+    ~Camera2D();
 
     bool init() override;
     virtual bool initPerspective(float fovy, float aspect, float zNear, float zFar);
@@ -37,7 +37,7 @@ public:
     virtual const glm::mat4 getViewMatrix() const;
     virtual const glm::mat4 getViewProjectionMatrix() const;
 
-    Camera::Type getType() const { return m_type; }
+    Camera2D::Type getType() const { return m_type; }
 
     CameraFlag getCameraFlag() const { return m_cameraFlag; }
     void setCameraFlag(CameraFlag flag) { m_cameraFlag = flag; }
@@ -52,7 +52,7 @@ public:
     glm::vec3 unProjectGL(const glm::vec3& src) const;
 
 protected:
-    static Camera* s_pVisitingCamera;
+    static Camera2D* s_pVisitingCamera;
     static glm::vec4 s_defaultViewport;
     CameraFlag m_cameraFlag;
     glm::mat4 m_projection;

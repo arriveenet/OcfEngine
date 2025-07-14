@@ -1,7 +1,7 @@
 set(OCF_2D_HEADER
     "2d/ActionComponent.h"
     "2d/Animation.h"
-    "2d/Camera.h"
+    "2d/Camera2D.h"
     "2d/CircleComponent.h"
     "2d/Component.h"
     "2d/DrawShape.h"
@@ -28,7 +28,7 @@ set(OCF_2D_HEADER
 set(OCF_2D_SRC
     "2d/ActionComponent.cpp"
     "2d/Animation.cpp"
-    "2d/Camera.cpp"
+    "2d/Camera2D.cpp"
     "2d/CircleComponent.cpp"
     "2d/Component.cpp"
     "2d/DrawShape.cpp"

@@ -1,5 +1,5 @@
 #include "Mesh.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 #include "base/Game.h"
 #include "base/FileUtils.h"
 #include "renderer/Renderer.h"

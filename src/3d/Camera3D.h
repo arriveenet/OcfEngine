@@ -8,8 +8,8 @@ class Camera3D : public Node3D {
 
 public:
     enum class Type {
-        Perspective, //!< “§Ž‹“Š‰e
-        Orthographic //!< •½s“Š‰e
+        Perspective, //!< é€è¦–æŠ•å½±
+        Orthographic //!< å¹³è¡ŒæŠ•å½±
     };
 
     static Camera3D* createPerspective(float fovy, float aspect, float zNear, float zFar);

@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include "Camera2D.h"
 #include <assert.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include "platform/Application.h"
@@ -7,10 +7,49 @@
 
 NS_OCF_BEGIN
 
-Camera* Camera::s_pVisitingCamera = nullptr;
-glm::vec4 Camera::s_defaultViewport = glm::vec4(0.0f);
+Camera2D* Camera2D::s_pVisitingCamera = nullptr;
+glm::vec4 Camera2D::s_defaultViewport = glm::vec4(0.0f);
 
-Camera::Camera()
+Camera2D* Camera2D::createPerspective(float fovy, float aspect, float zNear, float zFar)
+{
+    Camera2D* pCamera = new Camera2D();
+    pCamera->initPerspective(glm::radians(fovy), aspect, zNear, zFar);
+
+    return pCamera;
+}
+
+Camera2D* Camera2D::createOrthographic(float width, float height, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
+{
+    Camera2D* pCamera = new Camera2D();
+    pCamera->initOrthographic(width, height, zNear, zFar);
+
+    return pCamera;
+}
+
+Camera2D* Camera2D::getDefaultCamera()
+{
+    Scene* pScene = Game::getInstance()->getCurrentScene();
+    assert(pScene != nullptr);
+
+    return pScene->getDefaultCamera();
+}
+
+Camera2D* Camera2D::getVisitingCamera()
+{
+    return s_pVisitingCamera;
+}
+
+const glm::vec4& Camera2D::getDefaultViewpot()
+{
+    return s_defaultViewport;
+}
+
+void Camera2D::setDefaultViewport(const glm::vec4& viewport)
+{
+    s_defaultViewport = viewport;
+}
+
+Camera2D::Camera2D()
     : m_cameraFlag(CameraFlag::Default)
     , m_projection(1.0f)
     , m_center(0.0f)
@@ -25,50 +64,11 @@ Camera::Camera()
 {
 }
 
-Camera* Camera::createPerspective(float fovy, float aspect, float zNear, float zFar)
-{
-    Camera* pCamera = new Camera();
-    pCamera->initPerspective(glm::radians(fovy), aspect, zNear, zFar);
-
-    return pCamera;
-}
-
-Camera* Camera::createOrthographic(float width, float height, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
-{
-    Camera* pCamera = new Camera();
-    pCamera->initOrthographic(width, height, zNear, zFar);
-
-    return pCamera;
-}
-
-Camera* Camera::getDefaultCamera()
-{
-    Scene* pScene = Game::getInstance()->getCurrentScene();
-    assert(pScene != nullptr);
-
-    return pScene->getDefaultCamera();
-}
-
-Camera* Camera::getVisitingCamera()
-{
-    return s_pVisitingCamera;
-}
-
-const glm::vec4& Camera::getDefaultViewpot()
-{
-    return s_defaultViewport;
-}
-
-void Camera::setDefaultViewport(const glm::vec4& viewport)
-{
-    s_defaultViewport = viewport;
-}
-
-Camera::~Camera()
+Camera2D::~Camera2D()
 {
 }
 
-bool Camera::init()
+bool Camera2D::init()
 {
     glm::vec2 size = m_pGame->getResolutionSize();
     switch (m_pGame->getProjection()) {
@@ -104,7 +104,7 @@ bool Camera::init()
     return true;
 }
 
-bool Camera::initPerspective(float fovy, float aspect, float zNear, float zFar)
+bool Camera2D::initPerspective(float fovy, float aspect, float zNear, float zFar)
 {
     m_type = Type::Perspective;
 
@@ -115,7 +115,7 @@ bool Camera::initPerspective(float fovy, float aspect, float zNear, float zFar)
     return true;
 }
 
-bool Camera::initOrthographic(float left, float right, float bottom, float top, float zNear,
+bool Camera2D::initOrthographic(float left, float right, float bottom, float top, float zNear,
                               float zFar)
 {
     m_type = Type::Orthographic;
@@ -127,18 +127,18 @@ bool Camera::initOrthographic(float left, float right, float bottom, float top, 
     return true;
 }
 
-void Camera::lookAt(const glm::vec3& center, const glm::vec3& up)
+void Camera2D::lookAt(const glm::vec3& center, const glm::vec3& up)
 {
     m_center = center;
     m_view = glm::lookAt(glm::vec3(m_position, 1.0f), center, up);
 }
 
-const glm::mat4 Camera::getProjectionMatrix() const
+const glm::mat4 Camera2D::getProjectionMatrix() const
 {
     return m_projection;
 }
 
-const glm::mat4 Camera::getViewMatrix() const
+const glm::mat4 Camera2D::getViewMatrix() const
 {
     //glm::mat4 viewInv(getNodeToWorldTransform());
     //if (viewInv != m_viewInverse) {
@@ -155,7 +155,7 @@ const glm::mat4 Camera::getViewMatrix() const
     return m_view;
 }
 
-const glm::mat4 Camera::getViewProjectionMatrix() const
+const glm::mat4 Camera2D::getViewProjectionMatrix() const
 {
     getViewMatrix();
     if (m_viewProjectionDirty) {
@@ -166,7 +166,7 @@ const glm::mat4 Camera::getViewProjectionMatrix() const
     return m_viewProjection;
 }
 
-void Camera::onEnter()
+void Camera2D::onEnter()
 {
     if (m_scene == nullptr) {
         auto scene = getScene();
@@ -178,14 +178,14 @@ void Camera::onEnter()
     Node::onEnter();
 }
 
-void Camera::onExit()
+void Camera2D::onExit()
 {
     // シーンからこのカメラを削除
     setScene(nullptr);
     Node::onExit();
 }
 
-void Camera::apply()
+void Camera2D::apply()
 {
     m_pGame->getRenderer()->setViewPort(static_cast<int>(s_defaultViewport.x),
                                         static_cast<int>(s_defaultViewport.y),
@@ -193,7 +193,7 @@ void Camera::apply()
                                         static_cast<int>(s_defaultViewport.w));
 }
 
-void Camera::setScene(Scene* scene)
+void Camera2D::setScene(Scene* scene)
 {
     if (m_scene != scene) {
         // シーンからこのカメラを削除
@@ -217,7 +217,7 @@ void Camera::setScene(Scene* scene)
     }
 }
 
-glm::vec3 Camera::unProjectGL(const glm::vec3& src) const
+glm::vec3 Camera2D::unProjectGL(const glm::vec3& src) const
 {
     const glm::vec2& size = m_pGame->getResolutionSize();
     glm::vec4 viewport(0.0f, 0.0f, size.x, size.y);

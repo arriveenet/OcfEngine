@@ -2,7 +2,7 @@
 #include "2d/Sprite.h"
 #include "2d/DrawShape.h"
 #include "2d/Label.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 #include "2d/Scene.h"
 
 NS_OCF_BEGIN

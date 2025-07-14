@@ -1,5 +1,5 @@
 #include "UISlider.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 
 NS_OCF_BEGIN
 
@@ -39,7 +39,7 @@ bool Slider::init()
 void Slider::updateNode(float /*deltaTime*/)
 {
     glm::vec2 mousePos = Input::getMousePosition();
-    Camera* camera = Camera::getDefaultCamera();
+    Camera2D* camera = Camera2D::getDefaultCamera();
 
     if (isScreenPointInRect(mousePos, camera, getWorldToNodeTransform(), m_thumbRect, nullptr)) {
         if (Input::getMouseButtonState(Mouse::Left) == ButtonState::Pressed) {

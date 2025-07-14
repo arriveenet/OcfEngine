@@ -1,5 +1,5 @@
 #include "UIButtonBase.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 #include "2d/Label.h"
 #include "base/Rect.h"
 
@@ -19,7 +19,7 @@ ButtonBase::~ButtonBase() {}
 void ButtonBase::updateNode(float /*deltaTime*/)
 {
     glm::vec2 mousePos = Input::getMousePosition();
-    Camera* camera = Camera::getDefaultCamera();
+    Camera2D* camera = Camera2D::getDefaultCamera();
     Rect contentRect(0.0f, 0.0f, m_size.x, m_size.y);
 
     if (isScreenPointInRect(mousePos, camera, getWorldToNodeTransform(), contentRect, nullptr)) {
