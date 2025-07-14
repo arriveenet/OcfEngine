@@ -244,7 +244,7 @@ void Label::updateQuads()
 
     const float sizeWidth = lineWidth + 2.0f;
     const float sizeHeight = lineHeight * numberOfLines;
-    setSize(sizeWidth, sizeHeight);
+    setSize(glm::vec2(sizeWidth, sizeHeight));
 
 #if OCF_LABEL_DEBUG_DRAW
     m_pDebugDrawShape->clear();

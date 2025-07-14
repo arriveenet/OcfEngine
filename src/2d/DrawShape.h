@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "base/Node.h"
+#include "2d/Node2D.h"
 #include "renderer/VertexArray.h"
 #include "renderer/CustomCommand.h"
 #include "renderer/ShaderManager.h"
@@ -8,7 +8,7 @@
 
 NS_OCF_BEGIN
 
-class DrawShape : public Node {
+class DrawShape : public Node2D {
 public:
     static DrawShape* create();
 

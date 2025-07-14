@@ -54,7 +54,7 @@ bool FirstPersonCamera::initPerspective(float fovy, float aspect, float zNear, f
     // マウスカーソルを中央に
     Input::setMouseMode(Input::MouseMode::Captured);
 
-    return Camera::initPerspective(fovy, aspect, zNear, zFar);
+    return Camera3D::initPerspective(fovy, aspect, zNear, zFar);
 }
 
 void FirstPersonCamera::updateNode(float deltaTime)

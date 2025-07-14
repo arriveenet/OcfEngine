@@ -30,8 +30,8 @@ bool ActionTest::init()
     }
 
     Sprite* unityChan = Sprite::createWithSpriteFrameName("Unitychan_Walk_1.png");
-    unityChan->setPosition(200, 200);
-    unityChan->setScale(10);
+    //unityChan->setPosition(200, 200);
+    //unityChan->setScale(10);
     Animation* pAnimation = Animation::createWithSpriteFrames(animationFrames, 0.2f);
     AnimateComponent* pAnimate = new AnimateComponent(unityChan);
     pAnimate->initWithAnimation(pAnimation);

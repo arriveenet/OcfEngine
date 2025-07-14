@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "base/Node.h"
+#include "2d/Node2D.h"
 #include "base/Types.h"
 #include "base/Macros.h"
 #include "renderer/VertexArray.h"
@@ -13,7 +13,7 @@ class FontAtlas;
 class DrawShape;
 class Font;
 
-class Label : public Node {
+class Label : public Node2D {
 public:
     enum class LabelType {
         BMFONT,

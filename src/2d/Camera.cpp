@@ -130,7 +130,7 @@ bool Camera::initOrthographic(float left, float right, float bottom, float top, 
 void Camera::lookAt(const glm::vec3& center, const glm::vec3& up)
 {
     m_center = center;
-    m_view = glm::lookAt(m_position, center, up);
+    m_view = glm::lookAt(glm::vec3(m_position, 1.0f), center, up);
 }
 
 const glm::mat4 Camera::getProjectionMatrix() const
@@ -145,7 +145,8 @@ const glm::mat4 Camera::getViewMatrix() const
     //	m_viewInverse = viewInv;
     //	m_view = glm::inverse(viewInv);
     //}
-    glm::mat4 view = glm::lookAt(m_position, m_center, glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 view =
+        glm::lookAt(glm::vec3(m_position, 1.0f), m_center, glm::vec3(0.0f, 1.0f, 0.0f));
     if (view != m_view) {
         m_viewProjectionDirty = true;
         m_view = view;

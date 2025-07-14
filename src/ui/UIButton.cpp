@@ -99,7 +99,7 @@ void Button::initRenderer()
         m_pButtonBackground->drawRect(glm::vec2(0.0f, 0.0f), BUTTON_DEFAULT_SIZE,
                                       glm::vec4(outlineColor, outlineColor, outlineColor, 1.0f));
         addChild(m_pButtonBackground);
-        setSize(150, 23);
+        setSize(glm::vec2(150, 23));
     }
 }
 

@@ -468,9 +468,9 @@ void Game::createStatsLabel()
     m_pDrawVertexLabel = Label::create("Draw vert: 0");
 
     float fontHeight = m_pFPSLabel->getFont()->getLineHeight();
-    m_pFPSLabel->setPosition(0, 0);
-    m_pDrawCallLabel->setPosition(0, fontHeight);
-    m_pDrawVertexLabel->setPosition(0, fontHeight * 2);
+    m_pFPSLabel->setPosition(glm::vec2(0, 0));
+    m_pDrawCallLabel->setPosition(glm::vec2(0, fontHeight));
+    m_pDrawVertexLabel->setPosition(glm::vec2(0, fontHeight * 2));
 }
 
 NS_OCF_END

@@ -52,7 +52,7 @@ void Scene::render(Renderer* renderer, const glm::mat4& /* eyeProjection */)
 
         camera->apply();
 
-        Node::visit(renderer, transform, 0);
+        Node2D::visit(renderer, transform, 0);
 
         renderer->draw();
 

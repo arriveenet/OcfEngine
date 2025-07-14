@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
-#include "Component.h"
-#include "DrawShape.h"
+#include "2d/Node2D.h"
+#include "2d/Component.h"
+#include "2d/DrawShape.h"
 #include "base/Types.h"
 #include "base/Rect.h"
-#include "base/Node.h"
 #include "base/Config.h"
 #include "renderer/TrianglesCommand.h"
 #include "renderer/VertexArray.h"
@@ -17,7 +17,7 @@ class SpriteFrame;
 /**
  * @brief スプライトクラス
  */
-class Sprite : public Node {
+class Sprite : public Node2D {
 public:
     /** スプライトを作成*/
     static Sprite* create();
@@ -46,16 +46,9 @@ public:
     virtual void setSpriteFrame(SpriteFrame* spriteFrame);
     /** スプライトフレームを取得 */
     virtual SpriteFrame* getSpriteFrame() const;
-    
-    /** スプライトの位置を設定 */
-    void setPosition(const glm::vec3& position) override;
-    void setPosition(const glm::vec2& position) override;
-    void setPosition(float x, float y, float z) override;
-    void setPosition(float x, float y) override;
 
     /** スプライトのサイズを設定 */
     void setSize(const glm::vec2& size) override;
-    void setSize(float width, float height) override;
 
     /** スプライトの矩形を取得 */
     virtual Rect getRect() const;

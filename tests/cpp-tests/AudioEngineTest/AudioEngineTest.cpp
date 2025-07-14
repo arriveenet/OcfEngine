@@ -26,12 +26,12 @@ bool AudioEngineTest::init()
     //std::string audioFileName = "audio/タイフーンパレード.wav";
 
     auto fileNameLabel = Label::createWithBMFont("MS Gothic.fnt", audioFileName);
-    fileNameLabel->setPosition(leftX, 550);
+    fileNameLabel->setPosition(glm::vec2(leftX, 550));
     addChild(fileNameLabel);
 
     auto button1 = Button::create("ButtonNormal.png", "ButtonActive.png");
     button1->setText("Play");
-    button1->setPosition(leftX, 500);
+    button1->setPosition(glm::vec2(leftX, 500));
     button1->setOnAction([=]() {
          m_audioID = AudioEngine::play(audioFileName, true);
         });
@@ -39,7 +39,7 @@ bool AudioEngineTest::init()
 
     auto stopButton = Button::create("ButtonNormal.png", "ButtonActive.png");
     stopButton->setText("Stop");
-    stopButton->setPosition(leftX2, 500);
+    stopButton->setPosition(glm::vec2(leftX2, 500));
     stopButton->setOnAction([=]() {
         AudioEngine::stop(m_audioID);
         });
@@ -47,7 +47,7 @@ bool AudioEngineTest::init()
 
     auto pauseButton = Button::create("ButtonNormal.png", "ButtonActive.png");
     pauseButton->setText("Pause");
-    pauseButton->setPosition(leftX, 400);
+    pauseButton->setPosition(glm::vec2(leftX, 400));
     pauseButton->setOnAction([=]() {
         AudioEngine::pause(m_audioID);
         });
@@ -55,18 +55,18 @@ bool AudioEngineTest::init()
 
     auto resumeButton = Button::create("ButtonNormal.png", "ButtonActive.png");
     resumeButton->setText("Resume");
-    resumeButton->setPosition(leftX2, 400);
+    resumeButton->setPosition(glm::vec2(leftX2, 400));
     resumeButton->setOnAction([=]() {
         AudioEngine::resume(m_audioID);
         });
     addChild(resumeButton);
 
     m_volumeLabel = Label::create("Volume: 1.0");
-    m_volumeLabel->setPosition(leftX, 330);
+    m_volumeLabel->setPosition(glm::vec2(leftX, 330));
     addChild(m_volumeLabel);
 
     Slider* volumeSlider = Slider::create(400, 10);
-    volumeSlider->setPosition(leftX + 100, 300);
+    volumeSlider->setPosition(glm::vec2(leftX + 100, 300));
     volumeSlider->setValue(100);
     volumeSlider->setOnValueChangedCallback([=](int value) {
         const float volume = static_cast<float>(value) / 100.0f;

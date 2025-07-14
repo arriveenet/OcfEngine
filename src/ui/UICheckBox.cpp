@@ -49,7 +49,7 @@ void CheckBox::initRenderer()
     addChild(m_pCheckMark);
 
     setCheckBoxSize(CHECKBOX_DEFAULT_SIZE, CHECKBOX_DEFAULT_SIZE);
-    setSize(CHECKBOX_DEFAULT_SIZE, CHECKBOX_DEFAULT_SIZE);
+    setSize(glm::vec2(CHECKBOX_DEFAULT_SIZE, CHECKBOX_DEFAULT_SIZE));
 }
 
 void CheckBox::onMouseClicked()
@@ -103,11 +103,11 @@ void CheckBox::updateTextLocation()
     if (m_pTextRenderer) {
         constexpr float textOffset = 5.0f;
         const glm::vec2 textSize = m_pTextRenderer->getSize();
-        m_pTextRenderer->setPosition(m_checkBoxSize.x + textOffset, 0.0f);
+        m_pTextRenderer->setPosition(glm::vec2(m_checkBoxSize.x + textOffset, 0.0f));
        
         const float width = m_checkBoxSize.x + textOffset + textSize.x;
         const float height = m_checkBoxSize.y;
-        setSize(width, height);
+        setSize(glm::vec2(width, height));
     }
 }
 

@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
-#include "base/Node.h"
+#include "2d/Node2D.h"
 
 NS_OCF_BEGIN
 
 class Camera;
 
-class Scene : public Node {
+class Scene : public Node2D {
 public:
     Scene();
     virtual ~Scene();

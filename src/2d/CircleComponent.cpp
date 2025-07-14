@@ -1,9 +1,9 @@
 #include "CircleComponent.h"
-#include "base/Node.h"
+#include "2d/Node2D.h"
 
 NS_OCF_BEGIN
 
-CircleComponent::CircleComponent(Node* pEntity)
+CircleComponent::CircleComponent(Node2D* pEntity)
     : Component(pEntity)
     , m_radius(0.0f)
 {

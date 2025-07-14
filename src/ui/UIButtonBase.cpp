@@ -83,7 +83,7 @@ std::string ButtonBase::getText() const
 bool ButtonBase::createTextRendererIfNull()
 {
     if (m_pTextRenderer == nullptr) {
-        m_pTextRenderer = Label::createWithTTF("fonts/NotoSansJP-Regular.ttf", "", 16);
+        m_pTextRenderer = Label::create("");
         addChild(m_pTextRenderer);
 
         return true;

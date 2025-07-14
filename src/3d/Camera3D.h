@@ -1,30 +1,29 @@
 #pragma once
-#include "2d/Node2D.h"
+#include "3d/Node3D.h"
 
 NS_OCF_BEGIN
 
-class Scene;
-
-class Camera : public Node2D {
+class Camera3D : public Node3D {
     friend class Scene;
 
 public:
     enum class Type {
-        Perspective,	//!< é€è¦–æŠ•å½±
-        Orthographic	//!< å¹³è¡ŒæŠ•å½±
+        Perspective, //!< “§Ž‹“Š‰e
+        Orthographic //!< •½s“Š‰e
     };
 
-    static Camera* createPerspective(float fovy, float aspect, float zNear, float zFar);
-    static Camera* createOrthographic(float width, float height, float zNear = -1.0f, float zFar = 1.0f);
-    static Camera* getDefaultCamera();
+    static Camera3D* createPerspective(float fovy, float aspect, float zNear, float zFar);
+    static Camera3D* createOrthographic(float width, float height, float zNear = -1.0f,
+                                      float zFar = 1.0f);
+    static Camera3D* getDefaultCamera();
 
-    static Camera* getVisitingCamera();
+    static Camera3D* getVisitingCamera();
 
     static const glm::vec4& getDefaultViewpot();
     static void setDefaultViewport(const glm::vec4& viewport);
 
-    Camera();
-    ~Camera();
+    Camera3D();
+    ~Camera3D();
 
     bool init() override;
     virtual bool initPerspective(float fovy, float aspect, float zNear, float zFar);
@@ -37,23 +36,23 @@ public:
     virtual const glm::mat4 getViewMatrix() const;
     virtual const glm::mat4 getViewProjectionMatrix() const;
 
-    Camera::Type getType() const { return m_type; }
+    Camera3D::Type getType() const
+    {
+        return m_type;
+    }
 
-    CameraFlag getCameraFlag() const { return m_cameraFlag; }
-    void setCameraFlag(CameraFlag flag) { m_cameraFlag = flag; }
-
-    void onEnter() override;
-    void onExit() override;
-
-    void apply();
-
-    void setScene(Scene* scene);
+    CameraFlag getCameraFlag() const
+    {
+        return m_cameraFlag;
+    }
+    void setCameraFlag(CameraFlag flag)
+    {
+        m_cameraFlag = flag;
+    }
 
     glm::vec3 unProjectGL(const glm::vec3& src) const;
 
 protected:
-    static Camera* s_pVisitingCamera;
-    static glm::vec4 s_defaultViewport;
     CameraFlag m_cameraFlag;
     glm::mat4 m_projection;
     glm::vec3 m_center;

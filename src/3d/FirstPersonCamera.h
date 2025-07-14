@@ -1,12 +1,12 @@
 #pragma once
 
-#include "2d/Camera.h"
+#include "3d/Camera3D.h"
 
 NS_OCF_BEGIN
 
 class Event;
 
-class FirstPersonCamera : public Camera {
+class FirstPersonCamera : public Camera3D {
 public:
     enum class Movement {
         Forward,
