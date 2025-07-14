@@ -9,11 +9,6 @@ class Camera2D : public Node2D {
     friend class Scene;
 
 public:
-    enum class Type {
-        Perspective,	//!< 透視投影
-        Orthographic	//!< 平行投影
-    };
-
     static Camera2D* createPerspective(float fovy, float aspect, float zNear, float zFar);
     static Camera2D* createOrthographic(float width, float height, float zNear = -1.0f, float zFar = 1.0f);
     static Camera2D* getDefaultCamera();
@@ -27,7 +22,6 @@ public:
     ~Camera2D();
 
     bool init() override;
-    virtual bool initPerspective(float fovy, float aspect, float zNear, float zFar);
     virtual bool initOrthographic(float left, float right, float bottom, float top,
                                   float zNear = -1.0f, float zFar = 1.0f);
 
@@ -36,8 +30,6 @@ public:
     virtual const glm::mat4 getProjectionMatrix() const;
     virtual const glm::mat4 getViewMatrix() const;
     virtual const glm::mat4 getViewProjectionMatrix() const;
-
-    Camera2D::Type getType() const { return m_type; }
 
     CameraFlag getCameraFlag() const { return m_cameraFlag; }
     void setCameraFlag(CameraFlag flag) { m_cameraFlag = flag; }
@@ -62,7 +54,6 @@ protected:
     mutable glm::mat4 m_viewProjection;
     float m_zNear;
     float m_zFar;
-    Type m_type;
     Scene* m_scene;
     mutable bool m_viewProjectionDirty;
 };

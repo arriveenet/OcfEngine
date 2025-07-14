@@ -1,5 +1,5 @@
 #include "Skybox.h"
-#include "2d/Camera2D.h"
+#include "3d/Camera3D.h"
 #include "renderer/Renderer.h"
 #include "renderer/ShaderManager.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -137,7 +137,7 @@ void Skybox::draw(Renderer* renderer, const glm::mat4& transform)
 {
     m_customCommand.init(m_globalZOrder, transform);
 
-    Camera2D* camera = Camera2D::getVisitingCamera();
+    Camera3D* camera = Camera3D::getVisitingCamera();
 
     glm::mat4 viewMatrix = glm::mat4(glm::mat3(camera->getViewMatrix()));
     glm::mat4 projection = camera->getProjectionMatrix();

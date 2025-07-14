@@ -12,14 +12,17 @@ Node3D::~Node3D()
 
 void Node3D::setPosition(const glm::vec3& position)
 {
+    m_position = position;
 }
 
 void Node3D::setRotation(const glm::vec3& rotation)
 {
+    m_rotation = rotation;
 }
 
 void Node3D::setScale(const glm::vec3& scale)
 {
+    m_scale = scale;
 }
 
 glm::vec3 Node3D::getPosition() const

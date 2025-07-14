@@ -15,7 +15,6 @@ public:
     static Camera3D* createPerspective(float fovy, float aspect, float zNear, float zFar);
     static Camera3D* createOrthographic(float width, float height, float zNear = -1.0f,
                                       float zFar = 1.0f);
-    static Camera3D* getDefaultCamera();
 
     static Camera3D* getVisitingCamera();
 
@@ -53,6 +52,8 @@ public:
     glm::vec3 unProjectGL(const glm::vec3& src) const;
 
 protected:
+    static Camera3D* s_pVisitingCamera;
+    static glm::vec4 s_defaultViewport;
     CameraFlag m_cameraFlag;
     glm::mat4 m_projection;
     glm::vec3 m_center;

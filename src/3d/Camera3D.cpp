@@ -7,20 +7,8 @@
 
 NS_OCF_BEGIN
 
-Camera3D::Camera3D()
-    : m_cameraFlag(CameraFlag::Default)
-    , m_projection(1.0f)
-    , m_center(0.0f)
-    , m_view(1.0f)
-    , m_viewInverse(1.0f)
-    , m_viewProjection(1.0f)
-    , m_zNear(0.0f)
-    , m_zFar(0.0f)
-    , m_type(Type::Perspective)
-    , m_scene(nullptr)
-    , m_viewProjectionDirty(true)
-{
-}
+Camera3D* Camera3D::s_pVisitingCamera = nullptr;
+glm::vec4 Camera3D::s_defaultViewport = glm::vec4(0.0f);
 
 Camera3D* Camera3D::createPerspective(float fovy, float aspect, float zNear, float zFar)
 {
@@ -37,6 +25,26 @@ Camera3D* Camera3D::createOrthographic(float width, float height, float zNear /*
     pCamera3D->initOrthographic(width, height, zNear, zFar);
 
     return pCamera3D;
+}
+
+Camera3D* Camera3D::getVisitingCamera()
+{
+    return s_pVisitingCamera;
+}
+
+Camera3D::Camera3D()
+    : m_cameraFlag(CameraFlag::Default)
+    , m_projection(1.0f)
+    , m_center(0.0f)
+    , m_view(1.0f)
+    , m_viewInverse(1.0f)
+    , m_viewProjection(1.0f)
+    , m_zNear(0.0f)
+    , m_zFar(0.0f)
+    , m_type(Type::Perspective)
+    , m_scene(nullptr)
+    , m_viewProjectionDirty(true)
+{
 }
 
 Camera3D::~Camera3D()
@@ -65,7 +73,7 @@ bool Camera3D::init()
         const float halfWidth = size.x / 2.0f;
         const float halfHeight = size.y / 2.0f;
 
-        initOrthographic(-halfWidth, halfWidth, halfHeight, -halfHeight, m_zNear, m_zFar);
+        initOrthographic(-halfWidth, halfWidth, -halfHeight, halfHeight, m_zNear, m_zFar);
         glm::vec3 eye(size.x / 2.0f, size.y / 2.0f, 1.0f);
         glm::vec3 center(size.x / 2.0f, size.y / 2.0f, 0.0f);
         setPosition(eye);

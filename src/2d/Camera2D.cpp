@@ -10,14 +10,6 @@ NS_OCF_BEGIN
 Camera2D* Camera2D::s_pVisitingCamera = nullptr;
 glm::vec4 Camera2D::s_defaultViewport = glm::vec4(0.0f);
 
-Camera2D* Camera2D::createPerspective(float fovy, float aspect, float zNear, float zFar)
-{
-    Camera2D* pCamera = new Camera2D();
-    pCamera->initPerspective(glm::radians(fovy), aspect, zNear, zFar);
-
-    return pCamera;
-}
-
 Camera2D* Camera2D::createOrthographic(float width, float height, float zNear /*=-1.0f*/, float zFar /*= 1.0f*/)
 {
     Camera2D* pCamera = new Camera2D();
@@ -58,7 +50,6 @@ Camera2D::Camera2D()
     , m_viewProjection(1.0f)
     , m_zNear(0.0f)
     , m_zFar(0.0f)
-    , m_type(Type::Perspective)
     , m_scene(nullptr)
     , m_viewProjectionDirty(true)
 {
@@ -71,46 +62,17 @@ Camera2D::~Camera2D()
 bool Camera2D::init()
 {
     glm::vec2 size = m_pGame->getResolutionSize();
-    switch (m_pGame->getProjection()) {
-        case Game::Projection::_3D:
-        {
-            float zEye = m_pGame->getZEye();
-            m_zNear = 0.5f;
-            m_zFar = zEye + size.y / 2.0f;
-            initPerspective(glm::radians(60.0f), (float)size.x / size.y, m_zNear, m_zFar);
-            glm::vec3 eye(size.x / 2.0f, size.y / 2.0f, zEye);
-            glm::vec3 center(size.x / 2.0f, size.y / 2.0f, 0.0f);
-            setPosition(eye);
-            lookAt(center, glm::vec3(0.0f, 1.0f, 0.0f));
-            break;
-        }
-        case Game::Projection::_2D:
-        {
-            m_zNear = -1024.0f;
-            m_zFar  = 1024.0f;
+    m_zNear = -1024.0f;
+    m_zFar = 1024.0f;
 
-            const float halfWidth = size.x / 2.0f;
-            const float halfHeight = size.y / 2.0f;
+    const float halfWidth = size.x / 2.0f;
+    const float halfHeight = size.y / 2.0f;
 
-            initOrthographic(-halfWidth, halfWidth, halfHeight, -halfHeight, m_zNear, m_zFar);
-            glm::vec3 eye(size.x / 2.0f, size.y / 2.0f, 1.0f);
-            glm::vec3 center(size.x / 2.0f, size.y / 2.0f, 0.0f);
-            setPosition(eye);
-            lookAt(center, glm::vec3(0.0f, 1.0f, 0.0f)); 
-            break;
-        }
-    }
-
-    return true;
-}
-
-bool Camera2D::initPerspective(float fovy, float aspect, float zNear, float zFar)
-{
-    m_type = Type::Perspective;
-
-    m_projection = glm::perspective(fovy, aspect, zNear, zFar);
-
-    m_viewProjectionDirty = true;
+    initOrthographic(-halfWidth, halfWidth, halfHeight, -halfHeight, m_zNear, m_zFar);
+    glm::vec3 eye(size.x / 2.0f, size.y / 2.0f, 1.0f);
+    glm::vec3 center(size.x / 2.0f, size.y / 2.0f, 0.0f);
+    setPosition(eye);
+    lookAt(center, glm::vec3(0.0f, 1.0f, 0.0f));
 
     return true;
 }
@@ -118,8 +80,6 @@ bool Camera2D::initPerspective(float fovy, float aspect, float zNear, float zFar
 bool Camera2D::initOrthographic(float left, float right, float bottom, float top, float zNear,
                               float zFar)
 {
-    m_type = Type::Orthographic;
-
     m_projection = glm::ortho(left, right, bottom, top, zNear, zFar);
 
     m_viewProjectionDirty = true;
