@@ -44,6 +44,7 @@ void CheckBox::initRenderer()
 
     m_pButtonBackground->setLineWidth(2.0f);
     m_pCheckMark->setLineWidth(1.5f);
+    m_pCheckMark->setVisible(m_isSelected);
 
     addChild(m_pButtonBackground);
     addChild(m_pCheckMark);
@@ -74,9 +75,9 @@ void CheckBox::setCheckBoxSize(float width, float height)
     p1.x = (3.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.x;
     p1.y = (7.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.y;
     p2.x = (6.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.x;
-    p2.y = (4.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.y;
+    p2.y = (10.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.y;
     p3.x = (11.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.x;
-    p3.y = (10.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.y;
+    p3.y = (4.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.y;
 
     m_pButtonBackground->clear();
     m_pCheckMark->clear();

@@ -12,7 +12,7 @@ public:
     bool isVisible() const;
 
 protected:
-    bool m_visible; //!< 表示フラグ
+    bool m_visible = true;  // 表示フラグ
 };
 
 NS_OCF_END
