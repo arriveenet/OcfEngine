@@ -45,6 +45,7 @@ Camera3D::Camera3D()
     , m_scene(nullptr)
     , m_viewProjectionDirty(true)
 {
+    setName("Camera3D");
 }
 
 Camera3D::~Camera3D()

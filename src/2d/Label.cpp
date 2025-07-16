@@ -52,6 +52,8 @@ Label::Label()
     , m_isDirty(true)
     , m_textColor(1.0f, 1.0f, 1.0f)
 {
+    setName("Label");
+
 #if OCF_LABEL_DEBUG_DRAW
     m_pDebugDrawShape = DrawShape::create();
     addChild(m_pDebugDrawShape);

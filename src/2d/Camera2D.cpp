@@ -53,6 +53,7 @@ Camera2D::Camera2D()
     , m_scene(nullptr)
     , m_viewProjectionDirty(true)
 {
+    setName("Camera2D");
 }
 
 Camera2D::~Camera2D()

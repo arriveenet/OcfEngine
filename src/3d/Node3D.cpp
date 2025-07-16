@@ -4,6 +4,7 @@ NS_OCF_BEGIN
 
 Node3D::Node3D()
 {
+    setName("Node3D");
 }
 
 Node3D::~Node3D()

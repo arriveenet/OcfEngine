@@ -73,6 +73,7 @@ Skybox* Skybox::create(std::string_view positive_x,
 Skybox::Skybox()
     : m_textureCube(nullptr)
 {
+    setName("Skybox");
 }
 
 Skybox::~Skybox()

@@ -17,6 +17,7 @@ MeshRenderer* MeshRenderer::create(std::string_view fileName)
 
 MeshRenderer::MeshRenderer()
 {
+    setName("MeshRenderer");
 }
 
 MeshRenderer::~MeshRenderer()

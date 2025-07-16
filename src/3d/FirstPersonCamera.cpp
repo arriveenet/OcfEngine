@@ -31,6 +31,7 @@ FirstPersonCamera::FirstPersonCamera()
     , m_keyStates{ false }
     , m_isCameraControl(true)
 {
+    setName("FirstPersonCamera");
 }
 
 FirstPersonCamera::~FirstPersonCamera()

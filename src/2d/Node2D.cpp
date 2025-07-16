@@ -21,6 +21,7 @@ Node2D::Node2D()
     , m_transformUpdated(true)
     , m_contentSizeDirty(true)
 {
+    setName("Node2D");
 }
 
 Node2D::~Node2D()
