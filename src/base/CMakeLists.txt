@@ -20,6 +20,7 @@ set(OCF_BASE_HEADER
     "base/RectBinPack.h"
     "base/StringUtils.h"
     "base/Types.h"
+    "base/Viewport.h"
     )
 
 set(OCF_BASE_SRC
@@ -41,4 +42,5 @@ set(OCF_BASE_SRC
     "base/Rect.cpp"
     "base/StringUtils.cpp"
     "base/Types.cpp"
+    "base/Viewport.cpp"
     )
