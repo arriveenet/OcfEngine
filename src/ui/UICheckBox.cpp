@@ -55,13 +55,11 @@ void CheckBox::initRenderer()
 
 void CheckBox::onMouseClicked()
 {
-    m_isSelected = !m_isSelected;
+    setSelected(!m_isSelected);
 
     if (m_onAction) {
         m_onAction();
     }
-
-    m_pCheckMark->setVisible(m_isSelected);
 }
 
 void CheckBox::setCheckBoxSize(float width, float height)
@@ -92,6 +90,7 @@ void CheckBox::setCheckBoxSize(float width, float height)
 void CheckBox::setSelected(bool selected)
 {
     m_isSelected = selected;
+    m_pCheckMark->setVisible(m_isSelected);
 }
 
 void CheckBox::setIndeterminate(bool indeterminate)
