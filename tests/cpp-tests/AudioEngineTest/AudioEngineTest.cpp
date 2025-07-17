@@ -1,5 +1,5 @@
 #include "AudioEngineTest.h"
-#include "ui/UICheckbox.h"
+#include "ui/UICheckBox.h"
 
 USING_NS_OCF;
 using namespace ocf::ui;
