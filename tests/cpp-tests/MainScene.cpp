@@ -42,7 +42,7 @@ bool MainScene::init()
     glm::vec2 visibleSize = m_pGame->getVisibleSize();
 
     auto button = Button::create("Exit");
-    button->setPosition(visibleSize.x - 100.0f, visibleSize.y - 30.0f);
+    button->setPosition(glm::vec2(visibleSize.x - 100.0f, visibleSize.y - 30.0f));
     button->setOnAction([=]() {
         m_pGame->exit();
         });
@@ -54,7 +54,7 @@ bool MainScene::init()
 void MainScene::addTest(std::string_view testName, std::function<TestCase*()> callback)
 {
     auto button = Button::create(testName);
-    button->setPosition(90, m_buttonPosY);
+    button->setPosition(glm::vec2(90, m_buttonPosY));
     button->setOnAction([=]() {
         auto test = callback();
         test->init();

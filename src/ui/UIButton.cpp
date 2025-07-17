@@ -2,7 +2,7 @@
 #include "2d/Sprite.h"
 #include "2d/DrawShape.h"
 #include "2d/Label.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 #include "2d/Scene.h"
 
 NS_OCF_BEGIN
@@ -99,7 +99,7 @@ void Button::initRenderer()
         m_pButtonBackground->drawRect(glm::vec2(0.0f, 0.0f), BUTTON_DEFAULT_SIZE,
                                       glm::vec4(outlineColor, outlineColor, outlineColor, 1.0f));
         addChild(m_pButtonBackground);
-        setSize(150, 23);
+        setSize(glm::vec2(150, 23));
     }
 }
 

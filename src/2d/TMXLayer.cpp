@@ -26,6 +26,7 @@ TMXLayer::TMXLayer()
     , m_pLayerInfo(nullptr)
     , m_pTexture(nullptr)
 {
+    setName("TMXLayer");
 }
 
 TMXLayer::~TMXLayer()

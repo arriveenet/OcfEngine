@@ -30,6 +30,14 @@ enum class GlyphCollection {
     Custom,
 };
 
+enum class CameraFlag : uint16_t {
+    Default = 1,
+    User1 = 1 << 1,
+    User2 = 1 << 2,
+    User3 = 1 << 3,
+    User4 = 1 << 4,
+};
+
 struct Color3b {
     static const glm::u8vec3 BLACK;
     static const glm::u8vec3 WHITE;

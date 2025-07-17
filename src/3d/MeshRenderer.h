@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "3d/Mesh.h"
 
 NS_OCF_BEGIN

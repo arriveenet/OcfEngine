@@ -1,13 +1,13 @@
 #include "ActionComponent.h"
 #include <algorithm>
-#include "2d/Node.h"
+#include "2d/Node2D.h"
 #include "2d/Animation.h"
 #include "2d/SpriteFrame.h"
 #include "2d/Sprite.h"
 
 NS_OCF_BEGIN
 
-ActionComponent::ActionComponent(Node* pNode)
+ActionComponent::ActionComponent(Node2D* pNode)
     : Component(pNode)
     , m_duration(0.0f)
     , m_elapsed(0.0f)
@@ -63,7 +63,7 @@ bool ActionComponent::isDone() const
     return m_done;
 }
 
-AnimateComponent::AnimateComponent(Node* pNode)
+AnimateComponent::AnimateComponent(Node2D* pNode)
     : ActionComponent(pNode)
     , m_pAnimation(nullptr)
     , m_pOriginFrame(nullptr)
@@ -156,7 +156,7 @@ void AnimateComponent::step(float time)
     }
 }
 
-BlinkComponent::BlinkComponent(Node* pNode)
+BlinkComponent::BlinkComponent(Node2D* pNode)
     : ActionComponent(pNode)
     , m_times(0)
 {
@@ -181,7 +181,7 @@ void BlinkComponent::step(float time)
     }
 }
 
-RotateByComponent::RotateByComponent(Node* pNode)
+RotateByComponent::RotateByComponent(Node2D* pNode)
     : ActionComponent(pNode)
     , m_deltaAngle(0.0f)
     , m_startAngle(0.0f)
@@ -203,11 +203,11 @@ void RotateByComponent::step(float time)
     m_pOwner->setRotation(m_startAngle.z + m_deltaAngle.z * time);
 }
 
-MoveByComponent::MoveByComponent(Node* pNode)
+MoveByComponent::MoveByComponent(Node2D* pNode)
     : ActionComponent(pNode)
-    , m_positionDelta(0.0f, 0.0f, 0.0f)
-    , m_startPosition(0.0f, 0.0f, 0.0f)
-    , m_previousPosition(0.0f, 0.0f, 0.0f)
+    , m_positionDelta(0.0f, 0.0f)
+    , m_startPosition(0.0f, 0.0f)
+    , m_previousPosition(0.0f, 0.0f)
 {
 }
 
@@ -223,15 +223,15 @@ bool MoveByComponent::initWithDuration(float duration, const glm::vec2& deltaPos
 
 void MoveByComponent::step(float time)
 {
-    glm::vec3 currentPosition = m_pOwner->getPosition();
-    glm::vec3 diff = currentPosition - m_previousPosition;
+    glm::vec2 currentPosition = m_pOwner->getPosition();
+    glm::vec2 diff = currentPosition - m_previousPosition;
     m_startPosition = m_startPosition + diff;
-    glm::vec3 newPosition = m_startPosition + (m_positionDelta * time);
+    glm::vec2 newPosition = m_startPosition + (m_positionDelta * time);
     m_pOwner->setPosition(newPosition);
     m_previousPosition = newPosition;
 }
 
-ScaleToComponent::ScaleToComponent(Node* pNode)
+ScaleToComponent::ScaleToComponent(Node2D* pNode)
     : ActionComponent(pNode)
     , m_startScale(0.0f)
     , m_endScale(0.0f)
@@ -254,12 +254,11 @@ bool ScaleToComponent::initWithDuration(float duration, float s)
 
 void ScaleToComponent::step(float time)
 {
-    m_pOwner->setScaleX(m_startScale.x + m_deltaScale.x * time);
-    m_pOwner->setScaleY(m_startScale.y + m_deltaScale.y * time);
-    m_pOwner->setScaleX(m_startScale.z + m_deltaScale.z * time);
+    const float scale = m_startScale.x + m_deltaScale.x * time;
+    m_pOwner->setScale(glm::vec2(scale, scale));
 }
 
-RepeatForever::RepeatForever(Node* pNode)
+RepeatForever::RepeatForever(Node2D* pNode)
     : ActionComponent(pNode)
     , m_pInnerlAction(nullptr)
 {

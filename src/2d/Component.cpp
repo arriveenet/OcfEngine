@@ -2,7 +2,7 @@
 
 NS_OCF_BEGIN
 
-Component::Component(Node* pEntity, int updateOrder)
+Component::Component(Node2D* pEntity, int updateOrder)
     : m_pOwner(pEntity)
     , m_updateOrder(updateOrder)
 {

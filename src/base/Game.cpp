@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 #include "2d/FontManager.h"
 #include "2d/Label.h"
 #include "2d/SpriteFrameManager.h"
@@ -448,7 +448,7 @@ void Game::showStats()
     m_pDrawCallLabel->update(m_deltaTime);
     m_pDrawVertexLabel->update(m_deltaTime);
 
-    Camera* pCamera = m_currentScene->getDefaultCamera();
+    Camera2D* pCamera = m_currentScene->getDefaultCamera();
     glm::mat4 modelView = pCamera->getViewMatrix();
 
     pushMatrix(MatrixStack::Projection);
@@ -468,9 +468,9 @@ void Game::createStatsLabel()
     m_pDrawVertexLabel = Label::create("Draw vert: 0");
 
     float fontHeight = m_pFPSLabel->getFont()->getLineHeight();
-    m_pFPSLabel->setPosition(0, 0);
-    m_pDrawCallLabel->setPosition(0, fontHeight);
-    m_pDrawVertexLabel->setPosition(0, fontHeight * 2);
+    m_pFPSLabel->setPosition(glm::vec2(0, 0));
+    m_pDrawCallLabel->setPosition(glm::vec2(0, fontHeight));
+    m_pDrawVertexLabel->setPosition(glm::vec2(0, fontHeight * 2));
 }
 
 NS_OCF_END

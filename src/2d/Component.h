@@ -3,18 +3,18 @@
 
 NS_OCF_BEGIN
 
-class Node;
+class Node2D;
 
 class Component {
 public:
-    Component(Node* pEntity, int updateOrder = 100);
+    Component(Node2D* pEntity, int updateOrder = 100);
     virtual ~Component();
 
     virtual void update(float deltaTime);
     int getUpdateOrder() const;
 
 protected:
-    Node* m_pOwner;
+    Node2D* m_pOwner;
     int m_updateOrder;
 };
 

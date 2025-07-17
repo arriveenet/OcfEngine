@@ -1,5 +1,6 @@
 set(OCF_BASE_HEADER
     "base/AutoreleasePool.h"
+    "base/CanvasItem.h"
     "base/Config.h"
     "base/Console.h"
     "base/Event.h"
@@ -14,14 +15,17 @@ set(OCF_BASE_HEADER
     "base/GameObject.h"
     "base/Macros.h"
     "base/MaxRectsBinPack.h"
+    "base/Node.h"
     "base/Rect.h"
     "base/RectBinPack.h"
     "base/StringUtils.h"
     "base/Types.h"
+    "base/Viewport.h"
     )
 
 set(OCF_BASE_SRC
     "base/AutoreleasePool.cpp"
+    "base/CanvasItem.cpp"
     "base/Console.cpp"
     "base/Event.cpp"
     "base/EventDispatcher.cpp"
@@ -34,7 +38,9 @@ set(OCF_BASE_SRC
     "base/Game.cpp"
     "base/GameObject.cpp"
     "base/MaxRectsBinPack.cpp"
+    "base/Node.cpp"
     "base/Rect.cpp"
     "base/StringUtils.cpp"
     "base/Types.cpp"
+    "base/Viewport.cpp"
     )

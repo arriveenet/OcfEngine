@@ -9,5 +9,5 @@ public:
     bool init() override;
 
 protected:
-    ocf::Camera* m_camera;
+    ocf::Camera2D* m_camera;
 };

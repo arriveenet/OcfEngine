@@ -20,6 +20,7 @@ TMXTiledMap::TMXTiledMap()
     , m_tileSize(0, 0)
     , m_pMapInfo(nullptr)
 {
+    setName("TMXTiledMap");
 }
 
 TMXTiledMap::~TMXTiledMap()

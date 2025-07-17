@@ -3,11 +3,11 @@
 
 NS_OCF_BEGIN
 
-class Node;
+class Node2D;
 
 class MoveComponent : public Component {
 public:
-    MoveComponent(Node* pEntity, int updateOrder = 100);
+    MoveComponent(Node2D* pEntity, int updateOrder = 100);
 
     void update(float deltaTime) override;
 

@@ -12,4 +12,5 @@ public:
 
     ocf::AUDIO_ID m_audioID;
     ocf::Label* m_volumeLabel;
+    std::string m_audioFileName;
 };

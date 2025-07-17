@@ -1,11 +1,11 @@
 #pragma once
-#include "2d/Node.h"
+#include "2d/Node2D.h"
 
 NS_OCF_BEGIN
 
 namespace ui {
 
-class Widget : public Node {
+class Widget : public Node2D {
 public:
     Widget();
     virtual ~Widget();

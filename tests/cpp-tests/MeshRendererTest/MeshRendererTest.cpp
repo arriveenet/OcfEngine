@@ -24,7 +24,7 @@ bool MeshRendererTest::init()
     glm::vec2 size = Game::getInstance()->getVisibleSize();
     m_pCamera = FirstPersonCamera::create(60.0f, size.x / size.y, 0.1f, 1000.0f);
     m_pCamera->setCameraFlag(CameraFlag::User1);
-    m_pCamera->setPosition(-5, 3, -8);
+   // m_pCamera->setPosition(-5, 3, -8);
     addChild(m_pCamera);
 
     Skybox* skybox = Skybox::create("skybox/right.png",
@@ -48,7 +48,7 @@ bool MeshRendererTest::init()
    addChild(mesh);
 
    m_pStatusLabel = Label::create("position: 0.000, 0.000, 0.000");
-   m_pStatusLabel->setPosition(0.0f, 550.0f);
+   //m_pStatusLabel->setPosition(0.0f, 550.0f);
    m_pStatusLabel->setGlobalZOrder(-100.0f);
    addChild(m_pStatusLabel);
 

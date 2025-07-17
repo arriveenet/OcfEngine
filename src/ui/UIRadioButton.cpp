@@ -97,7 +97,7 @@ void RadioButton::initRenderer()
     m_pButtonBackground->drawFillCircle(glm::vec2(7.0f, 7.0f), 6.0f, Color4f::WHITE);
     m_pCheckMark->drawFillCircle(glm::vec2(7.0f, 7.0f), 3.0f, Color4f::BLACK);
 
-    setSize(RADIO_BUTTON_DEFAULT_SIZE, RADIO_BUTTON_DEFAULT_SIZE);
+    setSize(glm::vec2(RADIO_BUTTON_DEFAULT_SIZE, RADIO_BUTTON_DEFAULT_SIZE));
 }
 
 void RadioButton::updateTextLocation()
@@ -105,11 +105,11 @@ void RadioButton::updateTextLocation()
     if (m_pTextRenderer) {
         constexpr float textOffset = 5.0f;
         const glm::vec2 textSize = m_pTextRenderer->getSize();
-        m_pTextRenderer->setPosition(m_radioSize.x + textOffset, 0.0f);
+        m_pTextRenderer->setPosition(glm::vec2(m_radioSize.x + textOffset, 0.0f));
 
         const float width = m_radioSize.x + textOffset + textSize.x;
         const float height = m_radioSize.y;
-        setSize(width, height);
+        setSize(glm::vec2(width, height));
     }
 }
 

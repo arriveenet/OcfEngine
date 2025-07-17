@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
-#include "2d/Node.h"
+#include "2d/Node2D.h"
 
 NS_OCF_BEGIN
 
 class TMXMapInfo;
 
-class TMXTiledMap : public Node {
+class TMXTiledMap : public Node2D {
 public:
     static TMXTiledMap* create(const std::string& tmxFile);
 

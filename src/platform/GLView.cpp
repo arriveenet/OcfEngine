@@ -1,6 +1,6 @@
 #include "GLView.h"
 #include "base/Game.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 
 NS_OCF_BEGIN
 
@@ -39,7 +39,7 @@ void GLView::setViewport(float x, float y, float w, float h)
     viewport.y = y + m_scaleY + m_viewportRect.m_position.y;
     viewport.z = w * m_scaleX;
     viewport.w = h * m_scaleY;
-    Camera::setDefaultViewport(viewport);
+    Camera2D::setDefaultViewport(viewport);
 }
 
 glm::vec2 GLView::getWindowSize() const

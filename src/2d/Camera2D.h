@@ -1,41 +1,27 @@
 #pragma once
-#include "Node.h"
+#include "2d/Node2D.h"
 
 NS_OCF_BEGIN
 
 class Scene;
 
-enum class CameraFlag : uint16_t {
-    Default = 1,
-    User1  = 1 << 1,
-    User2  = 1 << 2,
-    User3  = 1 << 3,
-    User4  = 1 << 4,
-};
-
-class Camera : public Node {
+class Camera2D : public Node2D {
     friend class Scene;
 
 public:
-    enum class Type {
-        Perspective,	//!< 透視投影
-        Orthographic	//!< 平行投影
-    };
+    static Camera2D* createPerspective(float fovy, float aspect, float zNear, float zFar);
+    static Camera2D* createOrthographic(float width, float height, float zNear = -1.0f, float zFar = 1.0f);
+    static Camera2D* getDefaultCamera();
 
-    static Camera* createPerspective(float fovy, float aspect, float zNear, float zFar);
-    static Camera* createOrthographic(float width, float height, float zNear = -1.0f, float zFar = 1.0f);
-    static Camera* getDefaultCamera();
-
-    static Camera* getVisitingCamera();
+    static Camera2D* getVisitingCamera();
 
     static const glm::vec4& getDefaultViewpot();
     static void setDefaultViewport(const glm::vec4& viewport);
 
-    Camera();
-    ~Camera();
+    Camera2D();
+    ~Camera2D();
 
     bool init() override;
-    virtual bool initPerspective(float fovy, float aspect, float zNear, float zFar);
     virtual bool initOrthographic(float left, float right, float bottom, float top,
                                   float zNear = -1.0f, float zFar = 1.0f);
 
@@ -44,8 +30,6 @@ public:
     virtual const glm::mat4 getProjectionMatrix() const;
     virtual const glm::mat4 getViewMatrix() const;
     virtual const glm::mat4 getViewProjectionMatrix() const;
-
-    Camera::Type getType() const { return m_type; }
 
     CameraFlag getCameraFlag() const { return m_cameraFlag; }
     void setCameraFlag(CameraFlag flag) { m_cameraFlag = flag; }
@@ -60,7 +44,7 @@ public:
     glm::vec3 unProjectGL(const glm::vec3& src) const;
 
 protected:
-    static Camera* s_pVisitingCamera;
+    static Camera2D* s_pVisitingCamera;
     static glm::vec4 s_defaultViewport;
     CameraFlag m_cameraFlag;
     glm::mat4 m_projection;
@@ -70,7 +54,6 @@ protected:
     mutable glm::mat4 m_viewProjection;
     float m_zNear;
     float m_zFar;
-    Type m_type;
     Scene* m_scene;
     mutable bool m_viewProjectionDirty;
 };

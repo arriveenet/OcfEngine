@@ -10,7 +10,7 @@ class SpriteFrame;
 
 class ActionComponent : public Component {
 public:
-    ActionComponent(Node* pNode);
+    ActionComponent(Node2D* pNode);
     virtual ~ActionComponent();
 
     bool initWithDuration(float duration);
@@ -38,7 +38,7 @@ protected:
 
 class AnimateComponent : public ActionComponent {
 public:
-    AnimateComponent(Node* pNode);
+    AnimateComponent(Node2D* pNode);
     virtual ~AnimateComponent();
 
     bool initWithAnimation(Animation* pAnimation);
@@ -60,7 +60,7 @@ protected:
 
 class BlinkComponent : public ActionComponent {
 public:
-    BlinkComponent(Node* pNode);
+    BlinkComponent(Node2D* pNode);
 
     bool initWithDuration(float duration, int blinks);
 
@@ -72,7 +72,7 @@ protected:
 
 class RotateByComponent : public ActionComponent {
 public:
-    RotateByComponent(Node* pNode);
+    RotateByComponent(Node2D* pNode);
 
     bool initWithDuration(float duration, float deltaAngle);
 
@@ -85,35 +85,35 @@ protected:
 
 class MoveByComponent : public ActionComponent {
 public:
-    MoveByComponent(Node* pNode);
+    MoveByComponent(Node2D* pNode);
 
     bool initWithDuration(float duration, const glm::vec2& deltaPosition);
 
     void step(float time) override;
 
 protected:
-    glm::vec3 m_positionDelta;
-    glm::vec3 m_startPosition;
-    glm::vec3 m_previousPosition;
+    glm::vec2 m_positionDelta;
+    glm::vec2 m_startPosition;
+    glm::vec2 m_previousPosition;
 };
 
 class ScaleToComponent : public ActionComponent {
 public:
-    ScaleToComponent(Node* pNode);
+    ScaleToComponent(Node2D* pNode);
 
     bool initWithDuration(float duration, float s);
 
     void step(float time) override;
 
 protected:
-    glm::vec3 m_startScale;
-    glm::vec3 m_endScale;
-    glm::vec3 m_deltaScale;
+    glm::vec2 m_startScale;
+    glm::vec2 m_endScale;
+    glm::vec2 m_deltaScale;
 };
 
 class RepeatForever : public ActionComponent {
 public:
-    RepeatForever(Node* pNode);
+    RepeatForever(Node2D* pNode);
     virtual ~RepeatForever();
 
     bool initWithAction(ActionComponent* pAction);

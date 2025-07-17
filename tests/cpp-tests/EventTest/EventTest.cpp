@@ -18,11 +18,11 @@ bool EventTest::init()
         return false;
 
     m_pKeyboardLabel = Label::create("Key code: ");
-    m_pKeyboardLabel->setPosition(40.0f, 550.f);
+    m_pKeyboardLabel->setPosition(glm::vec2(40.0f, 550.f));
     addChild(m_pKeyboardLabel);
 
     m_pMousePositionLabel = Label::create("Mouse position: ");
-    m_pMousePositionLabel->setPosition(40.0f, 500.0f);
+    m_pMousePositionLabel->setPosition(glm::vec2(40.0f, 500.0f));
     addChild(m_pMousePositionLabel);
 
     auto keyboardListener = EventListenerKeyboard::create();

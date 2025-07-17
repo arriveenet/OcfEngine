@@ -29,6 +29,7 @@ DrawShape::DrawShape()
     , m_pointSize(1.0f)
     , m_lineWidth(1.0f)
 {
+    setName("DrawShape");
 }
 
 DrawShape::~DrawShape()
