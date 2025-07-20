@@ -17,9 +17,9 @@ Mesh* Mesh::create()
 }
 
 Mesh::Mesh()
-    : m_pTexture(nullptr)
-    , m_hasNormal(false)
+    : m_hasNormal(false)
     , m_hasTexCoord(false)
+    , m_pTexture(nullptr)
 {
 }
 

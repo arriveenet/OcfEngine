@@ -369,4 +369,9 @@ build_*/
 # vscode
 .vscode
 
+# asset
 !assets/*/*
+
+# ctags
+tags
+TAGS

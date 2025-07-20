@@ -17,12 +17,6 @@ Rect::Rect(const glm::vec2& position, const glm::vec2& size)
     setRect(position.x, position.y, size.x, size.y);
 }
 
-Rect& Rect::operator=(const Rect& other)
-{
-    setRect(other.m_position.x, other.m_position.y, other.m_size.x, other.m_size.y);
-    return *this;
-}
-
 void Rect::setRect(float x, float y, float widht, float height)
 {
     m_position.x = x;

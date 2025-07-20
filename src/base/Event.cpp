@@ -4,8 +4,8 @@
 NS_OCF_BEGIN
 
 Event::Event(EventType eventType)
-	: m_pTarget(nullptr)
-	, m_eventType(eventType)
+	: m_eventType(eventType)
+	, m_pTarget(nullptr)
 {
 }
 

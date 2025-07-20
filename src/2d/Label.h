@@ -36,7 +36,7 @@ public:
     void setString(std::string_view text);
     std::string getString() const { return m_text; }
     void setTextColor(const glm::vec3& textColor);
-    void setTextColor(unsigned char r, unsigned char g, unsigned b);
+    void setTextColor(unsigned char r, unsigned char g, unsigned char b);
     const glm::vec3& getTextColor() const { return m_textColor; }
 
     void update(float deltaTime) override;

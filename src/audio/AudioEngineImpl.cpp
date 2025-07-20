@@ -231,12 +231,10 @@ AudioCache* AudioEngineImpl::preload(std::string_view filePath)
 
 void AudioEngineImpl::updatePlayers(bool /* forStop */)
 {
-    AUDIO_ID audioID;
     AudioPlayer* player;
     ALuint alSource;
 
     for (auto iter = m_audioPlayers.begin(); iter != m_audioPlayers.end();) {
-        audioID = iter->first;
         player = iter->second;
         alSource = player->m_alSource;
 

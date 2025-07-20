@@ -418,7 +418,7 @@ void Game::showStats()
 
     if (m_pFPSLabel) {
         if (m_accumulator > FPS_UPDATE_INTERVAL) {
-            snprintf(buffer, sizeof(buffer), "FPS: %.1f", m_frames / m_accumulator);
+            snprintf(buffer, sizeof(buffer), "FPS: %.1f", static_cast<float>(m_frames) / m_accumulator);
             m_pFPSLabel->setString(buffer);
 
             m_frames = 0;

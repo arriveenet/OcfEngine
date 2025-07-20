@@ -5,7 +5,7 @@ NS_OCF_BEGIN
 
 static constexpr uint32_t makeFourCC(char a, char b, char c, char d)
 {
-    return (uint32_t)((a) | ((b) << 8) | ((c) << 16) | (((uint32_t)(d)) << 24));
+    return static_cast<uint32_t>((a) | ((b) << 8) | ((c) << 16) | ((static_cast<uint32_t>(d)) << 24));
 }
 
 constexpr uint32_t WAV_SIGN_ID = makeFourCC('W', 'A', 'V', 'E');
@@ -147,7 +147,7 @@ bool AudioDecoderWav::seek(uint32_t frameOffset)
 {
     auto offset = framesToBytes(frameOffset);
     fseek(m_wavFile.pFile, m_wavFile.pcmDataOffset + offset, SEEK_SET);
-    uint32_t newOffset = ftell(m_wavFile.pFile);
+    uint32_t newOffset = static_cast<uint32_t>(ftell(m_wavFile.pFile));
     newOffset = (newOffset >= m_wavFile.pcmDataOffset) ? newOffset - m_wavFile.pcmDataOffset : -1;
 
     return offset == newOffset;

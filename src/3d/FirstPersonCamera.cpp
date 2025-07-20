@@ -191,9 +191,9 @@ void FirstPersonCamera::setCameraControl(bool centerCursor)
 void FirstPersonCamera::updateCameraVectors()
 {
     glm::vec3 front{};
-    front.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
-    front.y = sin(glm::radians(m_pitch));
-    front.z = sin(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
+    front.x = cosf(glm::radians(m_yaw)) * cosf(glm::radians(m_pitch));
+    front.y = sinf(glm::radians(m_pitch));
+    front.z = sinf(glm::radians(m_yaw)) * cosf(glm::radians(m_pitch));
 
     m_front = glm::normalize(front);
     m_right = glm::normalize(glm::cross(m_front, m_worldUp));

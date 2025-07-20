@@ -374,7 +374,7 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
 
 void GLViewImpl::handleWindowSize(int width, int height)
 {
-    GLView::setFrameSize(width / 1.0f, height / 1.0f);
+    GLView::setFrameSize(static_cast<float>(width), static_cast<float>(height));
 
     updateDesignResolutionSize();
 }
@@ -389,10 +389,10 @@ void GLViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, int a
     EventMouse::MouseEventType eventType = EventMouse::MouseEventType::None;
     switch (action) {
     case GLFW_PRESS:
-        eventType = eventType = EventMouse::MouseEventType::Down;
+        eventType = EventMouse::MouseEventType::Down;
         break;
     case GLFW_RELEASE:
-        eventType = eventType = EventMouse::MouseEventType::Up;
+        eventType = EventMouse::MouseEventType::Up;
         break;
     default:
         break;

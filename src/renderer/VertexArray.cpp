@@ -4,10 +4,10 @@ NS_OCF_BEGIN
 
 VertexArray::VertexArray()
     : m_vertexArray(0)
-    , m_vertexCount(0)
-    , m_indexCount(0)
     , m_vertexBuffer(nullptr)
     , m_indexBuffer(nullptr)
+    , m_vertexCount(0)
+    , m_indexCount(0)
     , m_isVertexBufferCreated(false)
     , m_isIndexBufferCreated(false)
     , m_stride(0)
