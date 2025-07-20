@@ -65,7 +65,7 @@ bool AudioDecoderMp3::open(std::string_view filename)
         m_sourceFormat = AudioSourceFormat::PCM_16;
         m_bytesPerBlock = m_channelCount * sizeof(int16_t);
 
-        m_totalFrames = handle->mp3dec.samples / m_channelCount;
+        m_totalFrames = static_cast<uint32_t>(handle->mp3dec.samples / m_channelCount);
 
         m_handle = handle;
 

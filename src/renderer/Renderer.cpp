@@ -10,14 +10,14 @@ NS_OCF_BEGIN
 
 Renderer::Renderer()
     : m_viewport(0, 0, 0, 0)
+    , m_drawCallCount(0)
+    , m_drawVertexCount(0)
     , m_pTriangleBatchToDraw(nullptr)
     , m_triangleVertices()
     , m_triangleIndices()
     , m_triangleVertexCount(0)
     , m_triangleIndexCount(0)
     , m_pVertexArray(nullptr)
-    , m_drawCallCount(0)
-    , m_drawVertexCount(0)
 {
     m_renderGroups.emplace_back();
     m_triangleBatchToDrawSize = 256;
@@ -304,7 +304,7 @@ void Renderer::drawTrianglesCommand()
             pTexture->setActive();
         }
 
-        glDrawElements(GL_TRIANGLES, drawInfo.indicesToDraw, GL_UNSIGNED_SHORT, (GLvoid*)(sizeof(m_triangleIndices[0]) * drawInfo.offset));
+        glDrawElements(GL_TRIANGLES, drawInfo.indicesToDraw, GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid*>(sizeof(m_triangleIndices[0]) * drawInfo.offset));
 
         m_drawCallCount++;
         m_drawVertexCount += drawInfo.indicesToDraw;

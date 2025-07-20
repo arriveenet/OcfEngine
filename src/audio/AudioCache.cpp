@@ -12,23 +12,23 @@
 NS_OCF_BEGIN
 
 AudioCache::AudioCache()
-    : m_state(State::Inital)
-    , m_alBufferId(static_cast<ALuint>(AL_INVALID))
-    , m_totalFrames(0)
+    : m_format(AL_FORMAT_STEREO16)
     , m_sampleRate(0)
+    , m_duration(0.0f)
+    , m_totalFrames(0)
+    , m_framesRead(0)
+    , m_state(State::Inital)
+    , m_alBufferId(static_cast<ALuint>(AL_INVALID))
+    , m_queBuffers()
     , m_queBufferSize()
     , m_queBufferFrames(0)
-    , m_framesRead(0)
-    , m_format(AL_FORMAT_STEREO16)
-    , m_duration(0.0f)
-    , m_queBuffers()
 {
 }
 
 AudioCache::~AudioCache()
 {
     if (m_state == State::Ready) {
-        if (m_alBufferId != AL_INVALID && alIsBuffer(m_alBufferId)) {
+        if (m_alBufferId != static_cast<ALuint>(AL_INVALID) && alIsBuffer(m_alBufferId)) {
             alDeleteBuffers(1, &m_alBufferId);
             m_alBufferId = static_cast<ALuint>(AL_INVALID);
         }
@@ -73,13 +73,13 @@ void AudioCache::readDate()
         }
 
         m_sampleRate  = static_cast<ALsizei>(sampleRate);
-        m_duration    = 1.0f * totalFrames / sampleRate;
+        m_duration    = 1.0f * static_cast<float>(totalFrames) / static_cast<float>(sampleRate);
         m_totalFrames = totalFrames;
 
         if (dataSize < PCMDATA_CACHEMAXSIZE) {
             uint32_t framesRead = 0;
             const uint32_t framesToReadOnce =
-                std::min(totalFrames, static_cast<uint32_t>(sampleRate * QUEUEBUFFER_TIME_STEP * QUEUEBUFFER_NUM));
+                std::min(totalFrames, static_cast<uint32_t>(static_cast<float>(sampleRate) * QUEUEBUFFER_TIME_STEP * QUEUEBUFFER_NUM));
 
             alGenBuffers(1, &m_alBufferId);
             ALenum alError = alGetError();
@@ -122,7 +122,7 @@ void AudioCache::readDate()
             m_state = State::Ready;
         }
         else {
-            m_queBufferFrames = static_cast<uint32_t>(sampleRate * QUEUEBUFFER_TIME_STEP);
+            m_queBufferFrames = static_cast<uint32_t>(static_cast<float>(sampleRate) * QUEUEBUFFER_TIME_STEP);
             if (m_queBufferFrames == 0) {
                 break;
             }
@@ -131,7 +131,7 @@ void AudioCache::readDate()
 
             for (int index = 0; index < QUEUEBUFFER_NUM; ++index)
             {
-                m_queBuffers[index] = (char*)malloc(queBufferBytes);
+                m_queBuffers[index] = static_cast<char*>(malloc(queBufferBytes));
                 m_queBufferSize[index] = queBufferBytes;
 
                 pAudioDecoder->readFixedFrames(m_queBufferFrames, m_queBuffers[index]);

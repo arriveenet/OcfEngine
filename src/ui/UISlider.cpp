@@ -61,8 +61,8 @@ void Slider::updateNode(float /*deltaTime*/)
         m_thumbRect.m_position.x = std::max(m_thumbRect.m_position.x, 0.0f);
         m_thumbRect.m_position.x = std::min(m_thumbRect.m_position.x, maxWidth);
 
-        const float raito = m_thumbRect.m_position.x / maxWidth;
-        m_value = static_cast<int>(raito * (m_maxValue - m_minValue) + m_minValue);
+        const int raito = static_cast<int>(m_thumbRect.m_position.x / maxWidth);
+        m_value = raito * (m_maxValue - m_minValue) + m_minValue;
         m_isDirty = true;
 
         if(m_onValueChanged)
@@ -128,7 +128,7 @@ void Slider::setValue(int value)
 
 float Slider::getPercent() const
 {
-    return static_cast<float>((m_value - m_minValue)) / (m_maxValue - m_minValue);
+    return static_cast<float>((m_value - m_minValue) / (m_maxValue - m_minValue));
 }
 
 void Slider::setOnValueChangedCallback(std::function<void(int)> onValueChanged)
