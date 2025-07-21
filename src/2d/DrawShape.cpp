@@ -170,9 +170,9 @@ void DrawShape::drawFillCircle(const glm::vec2& center, float radius, const glm:
     vertices.push_back(center);     // 中心点を追加
 
     for (int i = 0; i <= segments; ++i) {
-        float angle = angleIncrement * i;
-        float x = center.x + radius * cos(angle);
-        float y = center.y + radius * sin(angle);
+        float angle = angleIncrement * static_cast<float>(i);
+        float x = center.x + radius * cosf(angle);
+        float y = center.y + radius * sinf(angle);
         vertices.emplace_back(x, y);
     }
 
@@ -212,7 +212,7 @@ void DrawShape::drawPolygon(const std::vector<glm::vec2>& vertices, const glm::v
     //}
 }
 
-void DrawShape::drawPolyline(const std::vector<glm::vec2> &vertices, const glm::vec4 &color)
+void DrawShape::drawPolyline(const std::vector<glm::vec2>& /*vertices*/, const glm::vec4& /*color*/)
 {
 
 }

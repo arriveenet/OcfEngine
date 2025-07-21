@@ -5,9 +5,6 @@
 #endif
 #include "AppDelegate.h"
 
-#pragma comment(lib, "opengl32.lib")
-#pragma comment(lib, "OcfEngine.lib")
-
 using namespace ocf;
 
 int main(int /*argc*/, char** /*argv*/)

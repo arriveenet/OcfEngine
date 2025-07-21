@@ -49,8 +49,8 @@ Label* Label::createWithTTF(std::string_view ttfPath, std::string_view text, int
 Label::Label()
     : m_font(nullptr)
     , m_labelType(LabelType::BMFONT)
-    , m_isDirty(true)
     , m_textColor(1.0f, 1.0f, 1.0f)
+    , m_isDirty(true)
 {
     setName("Label");
 
@@ -135,7 +135,7 @@ void Label::setTextColor(const glm::vec3& textColor)
     m_textColor = textColor;
 }
 
-void Label::setTextColor(unsigned char r, unsigned char g, unsigned b)
+void Label::setTextColor(unsigned char r, unsigned char g, unsigned char b)
 {
     m_textColor.r = r / 255.0f;
     m_textColor.g = g / 255.0f;
@@ -196,7 +196,7 @@ void Label::updateQuads()
     float lineHeight = m_font->getLineHeight();
     int numberOfLines = 1;
 
-    for (int i = 0; i < m_utf32Text.size(); i++) {
+    for (size_t i = 0; i < m_utf32Text.size(); i++) {
 
         const char32_t p = m_utf32Text.at(i);
 

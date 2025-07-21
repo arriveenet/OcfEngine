@@ -3,13 +3,13 @@
 NS_OCF_BEGIN
 CustomCommand::CustomCommand()
     : m_pVertexArray(nullptr)
-    , m_drawType(DrawType::Element)
-    , m_primitiveType(PrimitiveType::Triangle)
     , m_vertexDrawStart(0)
     , m_vertexDrawCount(0)
     , m_indexDrawOffset(0)
     , m_indexDrawCount(0)
     , m_textureCube(nullptr)
+    , m_drawType(DrawType::Element)
+    , m_primitiveType(PrimitiveType::Triangle)
     , m_beforeCallback(nullptr)
     , m_afterCallback(nullptr) {
     m_Type = Type::CustomCommand;

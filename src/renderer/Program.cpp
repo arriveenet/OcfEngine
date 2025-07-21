@@ -9,10 +9,10 @@ void setUniform(GLuint location, unsigned int size, GLenum uniformType, void* da
     GLsizei count = size;
     switch (uniformType) {
     case GL_FLOAT_VEC3:
-        glUniform3fv(location, count, (GLfloat*)data);
+        glUniform3fv(location, count, static_cast<GLfloat*>(data));
         break;
     case GL_FLOAT_MAT4:
-        glUniformMatrix4fv(location, count, GL_FALSE, (GLfloat*)data);
+        glUniformMatrix4fv(location, count, GL_FALSE, static_cast<GLfloat*>(data));
         break;
     default:
         OCFASSERT(false, "Invalidate uniform data type\n");

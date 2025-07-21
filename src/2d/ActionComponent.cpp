@@ -83,7 +83,7 @@ bool AnimateComponent::initWithAnimation(Animation* pAnimation)
 {
     float singleDuration = pAnimation->getDuration();
 
-    if (ActionComponent::initWithDuration(singleDuration * pAnimation->getLoops())) {
+    if (ActionComponent::initWithDuration(singleDuration * static_cast<float>(pAnimation->getLoops()))) {
         m_pAnimation = pAnimation;
 
         float accumUnitsOftime = 0.0f;
@@ -124,7 +124,7 @@ void AnimateComponent::stop()
 void AnimateComponent::step(float time)
 {
     if (time < 1.0f) {
-        time *= m_pAnimation->getLoops();
+        time *= static_cast<float>(m_pAnimation->getLoops());
 
         const unsigned int loopNumber = static_cast<unsigned int>(time);
         if (loopNumber > m_excutedLoops) {
@@ -136,7 +136,7 @@ void AnimateComponent::step(float time)
     }
 
     auto& frames = m_pAnimation->getFrames();
-    size_t numberOfFrames = frames.size();
+    int numberOfFrames = static_cast<int>(frames.size());
     SpriteFrame* frameToDisplay = nullptr;
 
     for (int i = m_nextFrame; i < numberOfFrames; i++) {
@@ -175,7 +175,7 @@ bool BlinkComponent::initWithDuration(float duration, int blinks)
 void BlinkComponent::step(float time)
 {
     if (!isDone()) {
-        float slice = 1.0f / m_times;
+        float slice = 1.0f / static_cast<float>(m_times);
         float m = fmodf(time, slice);
         m_pOwner->setVisible(m > slice / 2.0f ? true : false);
     }

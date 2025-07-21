@@ -36,8 +36,9 @@ bool EventListenerMouse::init()
                 m_onMouseMove(event);
             break;
         case EventMouse::MouseEventType::Scroll:
-            if (m_onMouseScroll)
-                m_onMouseScroll;
+            // @Todo Add mouse scroll event
+            //if (m_onMouseScroll)
+            //    m_onMouseScroll;
             break;
         default:
             break;

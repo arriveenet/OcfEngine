@@ -42,7 +42,7 @@ namespace {
 
     void pngReadCallback(png_structp png_ptr, png_bytep data, png_size_t length)
     {
-        ImageSource* pSource = (ImageSource*)png_get_io_ptr(png_ptr);
+        ImageSource* pSource = static_cast<ImageSource*>(png_get_io_ptr(png_ptr));
 
         if ((pSource->offset + length) <= pSource->size) {
             memcpy(data, pSource->pData + pSource->offset, length);

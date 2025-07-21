@@ -73,8 +73,8 @@ protected:
     void setMVPMarixUniform();
 
 protected:
-    bool m_isDirty;
     QuadV3fC3fT2f m_quad;
+    bool m_isDirty;
     Rect m_rect;
     glm::mat4 m_modelView;
 

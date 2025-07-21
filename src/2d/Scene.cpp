@@ -33,17 +33,12 @@ bool Scene::init()
 
 void Scene::render(Renderer* renderer, const glm::mat4& /* eyeProjection */)
 {
-    Camera2D* defaultCamera = nullptr;
     for (const auto& camera : getCameras()) {
         if (!camera->isVisible()) {
             continue;
         }
 
         Camera2D::s_pVisitingCamera = camera;
-        const uint16_t cameraFlag = static_cast<uint16_t>(Camera2D::s_pVisitingCamera->getCameraFlag());
-        if (cameraFlag & static_cast<uint16_t>(CameraFlag::Default)) {
-            defaultCamera = Camera2D::s_pVisitingCamera;
-        }
 
         const auto& transform = getNodeToParentTransform();
 

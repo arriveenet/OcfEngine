@@ -9,16 +9,16 @@ NS_OCF_BEGIN
 
 AudioPlayer::AudioPlayer()
     : m_pAudioCache(nullptr)
+    , m_alSource(0)
+    , m_bufferIds{0}
+    , m_rotateBufferThread(nullptr)
+    , m_isRotateThreadExited(false)
     , m_currentTime(0.0f)
     , m_volume(1.0f)
     , m_loop(false)
     , m_isDestory(false)
     , m_removeByAudioEngine(false)
     , m_streamingSource(false)
-    , m_isRotateThreadExited(false)
-    , m_alSource(0)
-    , m_bufferIds{0}
-    , m_rotateBufferThread(nullptr)
 {
 }
 
@@ -90,7 +90,7 @@ void AudioPlayer::rotateBufferThread(int offsetFrame)
         const uint32_t frameToRead = m_pAudioCache->m_queBufferFrames;
         const uint32_t bufferSize = decoder->framesToBytes(frameToRead);
 
-        tmpBuffer = (char*)malloc(bufferSize);
+        tmpBuffer = static_cast<char*>(malloc(bufferSize));
         memset(tmpBuffer, 0, bufferSize);
 
         if (offsetFrame != 0) {

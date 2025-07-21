@@ -32,6 +32,8 @@ static void print_impl(std::string buf)
         DWORD ch = static_cast<DWORD>(buf.size());
         ::WriteConsoleA(hStdout, buf.c_str(), ch, nullptr, 0);
     }
+#else
+    printf(buf.c_str());
 #endif
 }
 
