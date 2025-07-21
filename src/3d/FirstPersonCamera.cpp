@@ -1,5 +1,5 @@
 #include "3d/FirstPersonCamera.h"
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "input/Input.h"
 #include "base/Game.h"
 #include "base/EventListenerKeyboard.h"
@@ -31,6 +31,7 @@ FirstPersonCamera::FirstPersonCamera()
     , m_keyStates{ false }
     , m_isCameraControl(true)
 {
+    setName("FirstPersonCamera");
 }
 
 FirstPersonCamera::~FirstPersonCamera()
@@ -54,7 +55,7 @@ bool FirstPersonCamera::initPerspective(float fovy, float aspect, float zNear, f
     // マウスカーソルを中央に
     Input::setMouseMode(Input::MouseMode::Captured);
 
-    return Camera::initPerspective(fovy, aspect, zNear, zFar);
+    return Camera3D::initPerspective(fovy, aspect, zNear, zFar);
 }
 
 void FirstPersonCamera::updateNode(float deltaTime)

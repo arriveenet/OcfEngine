@@ -1,5 +1,5 @@
 #include "EventDispatcher.h"
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "base/EventListener.h"
 
 namespace {

@@ -44,23 +44,22 @@ void CheckBox::initRenderer()
 
     m_pButtonBackground->setLineWidth(2.0f);
     m_pCheckMark->setLineWidth(1.5f);
+    m_pCheckMark->setVisible(m_isSelected);
 
     addChild(m_pButtonBackground);
     addChild(m_pCheckMark);
 
     setCheckBoxSize(CHECKBOX_DEFAULT_SIZE, CHECKBOX_DEFAULT_SIZE);
-    setSize(CHECKBOX_DEFAULT_SIZE, CHECKBOX_DEFAULT_SIZE);
+    setSize(glm::vec2(CHECKBOX_DEFAULT_SIZE, CHECKBOX_DEFAULT_SIZE));
 }
 
 void CheckBox::onMouseClicked()
 {
-    m_isSelected = !m_isSelected;
+    setSelected(!m_isSelected);
 
     if (m_onAction) {
         m_onAction();
     }
-
-    m_pCheckMark->setVisible(m_isSelected);
 }
 
 void CheckBox::setCheckBoxSize(float width, float height)
@@ -74,9 +73,9 @@ void CheckBox::setCheckBoxSize(float width, float height)
     p1.x = (3.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.x;
     p1.y = (7.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.y;
     p2.x = (6.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.x;
-    p2.y = (4.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.y;
+    p2.y = (10.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.y;
     p3.x = (11.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.x;
-    p3.y = (10.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.y;
+    p3.y = (4.0f / CHECKBOX_DEFAULT_SIZE) * checkBoxSize.y;
 
     m_pButtonBackground->clear();
     m_pCheckMark->clear();
@@ -91,6 +90,7 @@ void CheckBox::setCheckBoxSize(float width, float height)
 void CheckBox::setSelected(bool selected)
 {
     m_isSelected = selected;
+    m_pCheckMark->setVisible(m_isSelected);
 }
 
 void CheckBox::setIndeterminate(bool indeterminate)
@@ -103,11 +103,11 @@ void CheckBox::updateTextLocation()
     if (m_pTextRenderer) {
         constexpr float textOffset = 5.0f;
         const glm::vec2 textSize = m_pTextRenderer->getSize();
-        m_pTextRenderer->setPosition(m_checkBoxSize.x + textOffset, 0.0f);
+        m_pTextRenderer->setPosition(glm::vec2(m_checkBoxSize.x + textOffset, 0.0f));
        
         const float width = m_checkBoxSize.x + textOffset + textSize.x;
         const float height = m_checkBoxSize.y;
-        setSize(width, height);
+        setSize(glm::vec2(width, height));
     }
 }
 

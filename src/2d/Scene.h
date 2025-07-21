@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
-#include "2d/Node.h"
+#include "2d/Node2D.h"
 
 NS_OCF_BEGIN
 
-class Camera;
+class Camera2D;
 
-class Scene : public Node {
+class Scene : public Node2D {
 public:
     Scene();
     virtual ~Scene();
@@ -15,15 +15,15 @@ public:
 
     void render(Renderer* renderer, const glm::mat4& transform);
 
-    virtual Camera* getDefaultCamera() { return m_pDefaultCamera; }
+    virtual Camera2D* getDefaultCamera() { return m_pDefaultCamera; }
 
-    const std::vector<Camera*>& getCameras();
+    const std::vector<Camera2D*>& getCameras();
 
 protected:
-    friend Camera;
+    friend Camera2D;
 
-    Camera* m_pDefaultCamera;
-    std::vector<Camera*> m_cameras;
+    Camera2D* m_pDefaultCamera;
+    std::vector<Camera2D*> m_cameras;
 };
 
 NS_OCF_END

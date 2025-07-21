@@ -1,15 +1,15 @@
 #include "UISlider.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 
 NS_OCF_BEGIN
 
 namespace ui {
 
-Slider* ui::Slider::create(float widht, float height)
+Slider* ui::Slider::create(float width, float height)
 {
     Slider* slider = new Slider();
     if (slider->init()) {
-        slider->setSize(widht, height);
+        slider->setSize(glm::vec2(width, height));
         return slider;
     }
     OCF_SAFE_DELETE(slider);
@@ -39,7 +39,7 @@ bool Slider::init()
 void Slider::updateNode(float /*deltaTime*/)
 {
     glm::vec2 mousePos = Input::getMousePosition();
-    Camera* camera = Camera::getDefaultCamera();
+    Camera2D* camera = Camera2D::getDefaultCamera();
 
     if (isScreenPointInRect(mousePos, camera, getWorldToNodeTransform(), m_thumbRect, nullptr)) {
         if (Input::getMouseButtonState(Mouse::Left) == ButtonState::Pressed) {
@@ -76,37 +76,12 @@ void Slider::updateNode(float /*deltaTime*/)
 
 void Slider::setSize(const glm::vec2& size)
 {
-    this->setSize(size.x, size.y);
-}
-
-void Slider::setSize(float width, float height)
-{
-    const float thumbX = width * getPercent();
-    const float thumbWidth = width * 0.05f;
-    const float thumbHeight = height * 2.0f;
+    const float thumbX = size.x * getPercent();
+    const float thumbWidth = size.x * 0.05f;
+    const float thumbHeight = size.y * 2.0f;
     m_thumbRect = Rect(thumbX, -thumbHeight / 4.0f, thumbWidth, thumbHeight);
 
-    Node::setSize(glm::vec2(width, height));
-}
-
-void Slider::setPosition(const glm::vec3& position)
-{
-    Node::setPosition(position);
-}
-
-void Slider::setPosition(const glm::vec2& position)
-{
-    Node::setPosition(position);
-}
-
-void Slider::setPosition(float x, float y, float z)
-{
-    Node::setPosition(x, y, z);
-}
-
-void Slider::setPosition(float x, float y)
-{
-    Node::setPosition(x, y);
+    Node2D::setSize(size);
 }
 
 void Slider::setValue(int value)

@@ -13,7 +13,7 @@ public:
     static constexpr float DEFAULT_WIDTH = 200.0f;
     static constexpr float DEFAULT_HEIGHT = 10.0f;
 
-    static Slider* create(float widht = DEFAULT_WIDTH, float height = DEFAULT_HEIGHT);
+    static Slider* create(float width = DEFAULT_WIDTH, float height = DEFAULT_HEIGHT);
 
     Slider();
     virtual ~Slider();
@@ -22,12 +22,6 @@ public:
     void updateNode(float deltaTime) override;
 
     void setSize(const glm::vec2& size) override;
-    void setSize(float width, float height) override;
-
-    void setPosition(const glm::vec3& position) override;
-    void setPosition(const glm::vec2& position) override;
-    void setPosition(float x, float y, float z) override;
-    void setPosition(float x, float y) override;
 
     void setValue(int value);
     void setMinValue(int minValue) { m_minValue = minValue; }

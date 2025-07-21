@@ -6,7 +6,7 @@ NS_OCF_BEGIN
 
 class CircleComponent : public Component {
 public:
-    CircleComponent(Node* pEntity);
+    CircleComponent(Node2D* pEntity);
 
     void setRadius(float radius) { m_radius = radius; }
     float getRadius() const;
