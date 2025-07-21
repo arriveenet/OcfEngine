@@ -1,7 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "ApplicationBase.h"
-#include "2d/Scene.h"
 
 NS_OCF_BEGIN
 

@@ -18,6 +18,7 @@ set(OCF_BASE_HEADER
     "base/Node.h"
     "base/Rect.h"
     "base/RectBinPack.h"
+    "base/Scene.h"
     "base/StringUtils.h"
     "base/Types.h"
     "base/Viewport.h"
@@ -41,6 +42,7 @@ set(OCF_BASE_SRC
     "base/Node.cpp"
     "base/Rect.cpp"
     "base/StringUtils.cpp"
+    "base/Scene.cpp"
     "base/Types.cpp"
     "base/Viewport.cpp"
     )

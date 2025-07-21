@@ -6,6 +6,7 @@
 #include "audio/AudioEngine.h"
 #include "base/EventDispatcher.h"
 #include "base/FileUtils.h"
+#include "base/Scene.h"
 #include "input/Input.h"
 #include "platform/Application.h"
 #include "platform/GLView.h"

@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "base/Game.h"
-#include "2d/Scene.h"
+#include "base/Scene.h"
 #include "platform/PlatformMacros.h"
 #include "platform/GLView.h"
 

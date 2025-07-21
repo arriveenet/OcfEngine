@@ -1,8 +1,9 @@
 #include "Camera2D.h"
 #include <assert.h>
 #include <glm/gtc/matrix_transform.hpp>
-#include "platform/Application.h"
 #include "base/Game.h"
+#include "base/Scene.h"
+#include "platform/Application.h"
 #include "renderer/Renderer.h"
 
 NS_OCF_BEGIN
