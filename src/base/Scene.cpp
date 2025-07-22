@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "2d/Camera2D.h"
 #include "base/Game.h"
+#include "base/Viewport.h"
 #include "renderer/Renderer.h"
 
 NS_OCF_BEGIN
@@ -12,10 +13,13 @@ Scene::Scene()
     setAnchorPoint(glm::vec2(0.5f, 0.5f));
 
     Camera2D::s_pVisitingCamera = nullptr;
+
+    m_root = new Viewport();
 }
 
 Scene::~Scene()
 {
+    OCF_SAFE_DELETE(m_root)
 }
 
 bool Scene::init()
@@ -60,6 +64,18 @@ void Scene::render(Renderer* renderer, const glm::mat4& /* eyeProjection */)
 const std::vector<Camera2D*>& Scene::getCameras()
 {
     return m_cameras;
+}
+
+void Scene::addNode(Node* node)
+{
+    m_root->addChild(node);
+}
+
+void Scene::removeNode(Node* node)
+{
+    if (m_root) {
+        m_root->removeChild(node);
+    }
 }
 
 NS_OCF_END

@@ -5,6 +5,7 @@
 NS_OCF_BEGIN
 
 class Camera2D;
+class Viewport;
 
 class Scene : public Node2D {
 public:
@@ -19,11 +20,16 @@ public:
 
     const std::vector<Camera2D*>& getCameras();
 
+    void addNode(Node* node);
+    void removeNode(Node* node);
+
 protected:
     friend Camera2D;
 
     Camera2D* m_pDefaultCamera;
     std::vector<Camera2D*> m_cameras;
+
+    Viewport* m_root = nullptr;
 };
 
 NS_OCF_END
