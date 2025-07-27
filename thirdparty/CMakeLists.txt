@@ -135,3 +135,25 @@ set_target_properties(libpng
                       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
                       FOLDER "ThirdParty"
                       )
+
+add_subdirectory(libogg)
+target_include_directories(thirdparty INTERFACE "libogg")
+target_link_libraries(thirdparty INTERFACE ogg)
+set_target_properties(ogg
+                      PROPERTIES
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      FOLDER "ThirdParty"
+                      )
+
+add_subdirectory(libvorbis)
+target_include_directories(thirdparty INTERFACE "libvorbis")
+target_link_libraries(thirdparty INTERFACE vorbis vorbisenc vorbisfile)
+set_target_properties(vorbis vorbisenc vorbisfile
+                      PROPERTIES
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      FOLDER "ThirdParty"
+                      )

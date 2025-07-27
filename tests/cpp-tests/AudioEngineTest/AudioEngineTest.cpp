@@ -23,7 +23,7 @@ bool AudioEngineTest::init()
     float leftX = 300.0f;
     float leftX2 = 550.0f;
 
-    m_audioFileName = "audio/Canon in D Major.mp3";
+    m_audioFileName = "audio/maou_14_shining_star.ogg";
     //m_audioFileName = "audio/タイフーンパレード.wav";
     auto fileNameLabel = Label::createWithBMFont("MS Gothic.fnt", m_audioFileName);
     fileNameLabel->setPosition(glm::vec2(leftX, 150));
