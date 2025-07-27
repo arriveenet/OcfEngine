@@ -62,3 +62,11 @@ target_include_directories(${APP_NAME} PRIVATE ${TEST_INC_DIRS})
 
 include(GoogleTest)
 gtest_discover_tests(${APP_NAME})
+
+set_target_properties(gmock gmock_main gtest gtest_main
+                      PROPERTIES
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      FOLDER "ThirdParty"
+                      )
