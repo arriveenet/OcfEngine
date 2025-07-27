@@ -149,8 +149,8 @@ set_target_properties(ogg
 
 add_subdirectory(libvorbis)
 target_include_directories(thirdparty INTERFACE "libvorbis")
-target_link_libraries(thirdparty INTERFACE vorbis)
-set_target_properties(vorbis
+target_link_libraries(thirdparty INTERFACE vorbis vorbisenc vorbisfile)
+set_target_properties(vorbis vorbisenc vorbisfile
                       PROPERTIES
                       ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
