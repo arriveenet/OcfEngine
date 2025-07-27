@@ -7,6 +7,8 @@
 #include "base/Rect.h"
 #include "base/EventDispatcher.h"
 #include "base/Scene.h"
+#include "base/Viewport.h"
+#include <typeinfo>
 
 NS_OCF_BEGIN
 
@@ -183,9 +185,38 @@ void Node::removeComponent(Component* pComponent)
     }
 }
 
-void Node::visit(Renderer* /*pRenderer*/, const glm::mat4& /*parentTransform*/,
-                 uint32_t /*parentFlags*/)
+void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t parentFlags)
 {
+    const bool visibleByCamera = isVisitableByVisitingCamera();
+
+    if (!m_children.empty()) {
+        sortAllChildren();
+
+        for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
+            if ((*iter)->getLocalZOrder() < 0) {
+                (*iter)->visit(pRenderer, parentTransform, parentFlags);
+            }
+            else {
+                break;
+            }
+        }
+
+        // 自身を描画
+        if (visibleByCamera) {
+            this->draw(pRenderer, parentTransform);
+        }
+
+        // 子エンティティを描画
+        for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
+            (*iter)->visit(pRenderer, parentTransform, parentFlags);
+        }
+    }
+    else if (visibleByCamera) {
+        this->draw(pRenderer, parentTransform);
+    }
+    else {
+        // 何もしない
+    }
 }
 
 Scene* Node::getScene() const
@@ -206,6 +237,45 @@ bool Node::isVisitableByVisitingCamera() const
     Camera2D* pCamera = Camera2D::getVisitingCamera();
     bool visibleByCamera = (pCamera != nullptr) ? static_cast<uint16_t>(pCamera->getCameraFlag()) & m_cameraMask : true;
     return visibleByCamera;
+}
+
+void Node::setScene(Scene* scene)
+{
+    if (m_scene != nullptr) {
+        propagateExitTree();
+    }
+
+    m_scene = scene;
+
+    if (m_scene != nullptr) {
+        propagateEnterTree();
+    }
+}
+
+void Node::propagateEnterTree()
+{
+    if (m_pParent) {
+        m_scene = m_pParent->m_scene;
+        m_depth = m_pParent->m_depth + 1;
+    }
+    else {
+        m_depth = 1;
+    }
+
+    m_viewport = dynamic_cast<Viewport*>(this);
+    if (!m_viewport && m_pParent) {
+        m_viewport = m_pParent->m_viewport;
+    }
+
+    m_scene->addNode(this);
+
+    for (const auto& child : m_children) {
+        child->propagateEnterTree();
+    }
+}
+
+void Node::propagateExitTree()
+{
 }
 
 bool isScreenPointInRect(const glm::vec2& pt, const Camera2D* pCamera, const glm::mat4& worldToLocal,

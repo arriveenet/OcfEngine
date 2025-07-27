@@ -15,6 +15,7 @@ class Renderer;
 class Scene;
 class Rect;
 class Camera2D;
+class Viewport;
 
 /**
  * @brief ノードクラス
@@ -118,7 +119,12 @@ public:
 
 protected:
     bool isVisitableByVisitingCamera() const;
-    
+    void setScene(Scene* scene);
+    void propagateEnterTree();
+    void propagateExitTree();
+
+    friend class Viewport;
+
 protected:
     Node* m_pParent;                        //!< 親ノード
     Game* m_pGame;                          //!< シングルトンのゲームクラス
@@ -132,6 +138,11 @@ protected:
     std::vector<Node*> m_children;          //!< 子ノードの配列
     std::vector<Component*> m_components;   //!< コンポーネント
     std::string m_name;                     //!< ノードの名前
+
+    Viewport* m_viewport = nullptr;         //!< ビューポート
+    Scene* m_scene = nullptr;               //!< シーン
+    uint32_t m_depth = 0;                   //!< 深度
+
 };
 
 bool isScreenPointInRect(const glm::vec2& pt, const Camera2D* pCamera, const glm::mat4& worldToLocal,

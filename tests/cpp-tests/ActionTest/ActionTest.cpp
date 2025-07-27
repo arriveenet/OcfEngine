@@ -16,10 +16,6 @@ ActionTest::~ActionTest()
 
 bool ActionTest::init()
 {
-    if (!TestCase::init()) {
-        return false;
-    }
-
     SpriteFrameManager::getInstance()->addSpriteFramesWithFile("UnityChan.xml");
     std::vector<SpriteFrame*> animationFrames;
     char fileName[256] = { 0 };
@@ -40,8 +36,7 @@ bool ActionTest::init()
 
     unityChan->addComponent(repeat);
 
-    this->addChild(unityChan);
-
-
-    return true;
+    m_root->addChild(unityChan);
+    
+    return TestCase::init();
 }

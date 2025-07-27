@@ -25,9 +25,7 @@ MainScene::~MainScene()
 
 bool MainScene::init()
 {
-    if (!Scene::init()) {
-        return false;
-    }
+
 
     addTest("SpriteTest", []() {return new SpriteTestDemo(); });
     addTest("ActionTest", []() {return new ActionTest(); });
@@ -46,7 +44,11 @@ bool MainScene::init()
     button->setOnAction([=]() {
         m_pGame->exit();
         });
-    addChild(button);
+    m_root->addChild(button);
+
+    if (!Scene::init()) {
+        return false;
+    }
 
     return true;
 }
@@ -60,7 +62,7 @@ void MainScene::addTest(std::string_view testName, std::function<TestCase*()> ca
         test->init();
         m_pGame->replaceScene(test);
         });
-    addChild(button);
+    m_root->addChild(button);
 
     m_buttonPosY += 32.0f;
 }

@@ -5,6 +5,7 @@ NS_OCF_BEGIN
 
 class Camera2D;
 class Camera3D;
+class Scene;
 
 class Viewport : public Node {
 public:
@@ -17,10 +18,17 @@ public:
     Camera2D* getCamera2D() const;
     Camera3D* getCamera3D() const;
 
+    void determineActiveCamera();
+
+private:
+    void findCamera2DRecursive(Node* currentNode, Camera2D* foundCamera);
+    void findCamera3DRecursive(Node* currentNode, Camera3D* foundCamera);
+
 private:
     glm::ivec2 m_size;
     Camera2D* m_pCamera2D = nullptr;
     Camera3D* m_pCamera3D = nullptr;
+    friend class Scene;
 };
 
 NS_OCF_END

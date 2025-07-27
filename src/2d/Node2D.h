@@ -37,7 +37,7 @@ public:
                uint32_t parentFlags) override;
 
 protected:
-    glm::mat4 transform(const glm::mat4& parentTransform);
+    glm::mat4 transform(const glm::mat4& parentTransform) const;
     uint32_t processParentFlag(const glm::mat4& parentTransform, uint32_t parentFlag);
 
 protected:
