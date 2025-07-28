@@ -14,7 +14,6 @@ Scene::Scene()
     m_root = new Viewport();
     m_pDefaultCamera = new Camera2D();
     m_pDefaultCamera->init();
-    m_root->addChild(m_pDefaultCamera);
 
     auto size = m_pGame->getVisibleSize();
     m_root->setSize(size);
@@ -24,6 +23,7 @@ Scene::Scene()
 
 Scene::~Scene()
 {
+    OCF_SAFE_DELETE(m_pDefaultCamera);
     OCF_SAFE_DELETE(m_root);
 }
 
@@ -52,27 +52,6 @@ void Scene::render(Renderer* renderer, const glm::mat4& eyeProjection )
     renderer->draw();
 
     m_pGame->popMatrix(MatrixStack::Projection);
-
-    //for (const auto& camera : getCameras()) {
-    //    if (!camera->isVisible()) {
-    //        continue;
-    //    }
-
-    //    Camera2D::s_pVisitingCamera = camera;
-
-    //    const auto& transform = getNodeToParentTransform();
-
-    //    m_pGame->pushMatrix(MatrixStack::Projection);
-    //    m_pGame->loadMatrix(MatrixStack::Projection, Camera2D::s_pVisitingCamera->getViewProjectionMatrix());
-
-    //    camera->apply();
-
-    //    Node2D::visit(renderer, transform, 0);
-
-    //    renderer->draw();
-
-    //    m_pGame->popMatrix(MatrixStack::Projection);
-    //}
 
     Camera2D::s_pVisitingCamera = nullptr;
 }
