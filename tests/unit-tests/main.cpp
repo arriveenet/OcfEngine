@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <2d/Node.h>
 
 // Demonstrate some basic assertions.
 TEST(HelloTest, BasicAssertions) {
