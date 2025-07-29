@@ -36,52 +36,46 @@ Camera3D* Viewport::getCamera3D() const
 
 void Viewport::determineActiveCamera()
 {
-    Camera2D* camera2D = nullptr;
-    Camera3D* camera3D = nullptr;
-
-    findCamera2DRecursive(this, camera2D);
-    findCamera3DRecursive(this, camera3D);
-
-    m_pCamera2D = camera2D;
-    m_pCamera3D = camera3D;
+    m_pCamera2D = findCamera2DRecursive(this);
+    m_pCamera3D = findCamera3DRecursive(this);
 }
 
-void Viewport::findCamera2DRecursive(Node* currentNode,  Camera2D* foundCamera)
+Camera2D* Viewport::findCamera2DRecursive(Node* currentNode)
 {
-    if (foundCamera) {
-        return;
+    if (!currentNode) {
+        return nullptr;
     }
  
     Camera2D* camera = dynamic_cast<Camera2D*>(currentNode);
     if (camera) {
-        foundCamera = camera;
-        return;
+        return camera;
     }
 
-    for (const auto& child : m_children) {
-        findCamera2DRecursive(child, foundCamera);
-        if (foundCamera) {
-            return;
+    for (const auto& child : currentNode->m_children) {
+        camera = findCamera2DRecursive(child);
+        if (camera) {
+            return camera;
         }
     }
+
+    return nullptr;
 }
 
-void Viewport::findCamera3DRecursive(Node* currentNode, Camera3D* foundCamera)
+Camera3D* Viewport::findCamera3DRecursive(Node* currentNode)
 {
-    if (foundCamera) {
-        return;
+    if (!currentNode) {
+        return nullptr;
     }
 
     Camera3D* camera = dynamic_cast<Camera3D*>(currentNode);
     if (camera) {
-        foundCamera = camera;
-        return;
+        return camera;
     }
 
-    for (const auto& child : m_children) {
-        findCamera3DRecursive(child, foundCamera);
-        if (foundCamera) {
-            return;
+    for (const auto& child : currentNode->m_children) {
+        camera = findCamera3DRecursive(child);
+        if (camera) {
+            return camera;
         }
     }
 }

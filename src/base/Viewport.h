@@ -21,8 +21,8 @@ public:
     void determineActiveCamera();
 
 private:
-    void findCamera2DRecursive(Node* currentNode, Camera2D* foundCamera);
-    void findCamera3DRecursive(Node* currentNode, Camera3D* foundCamera);
+    Camera2D* findCamera2DRecursive(Node* currentNode);
+    Camera3D* findCamera3DRecursive(Node* currentNode);
 
 private:
     glm::ivec2 m_size;
