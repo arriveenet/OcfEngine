@@ -7,7 +7,7 @@ NS_OCF_BEGIN
 
 Keyboard Input::m_keyboard;
 Mouse Input::m_mouse;
-Input::MouseMode Input::m_mouseMode = Input::MouseMode::Visible;
+Input::MouseMode Input::m_mouseMode = Input::MouseMode::Normal;
 
 bool Input::init()
 {
@@ -34,11 +34,6 @@ void Input::update()
 
     // マウスボタンの状態を保持
     m_mouse.m_previousButton = m_mouse.m_currentButton;
-
-    if (m_mouseMode == Input::MouseMode::Captured) {
-        glm::vec2 windowSize = view->getWindowSize();
-        view->setCursolPosition(windowSize.x / 2.0f, windowSize.y / 2.0f);
-    }
 }
 
 ButtonState Input::getKeyState(Keyboard::KeyCode keyCode)
@@ -59,6 +54,8 @@ ButtonState Input::getMouseButtonState(Mouse::MouseButton button)
 void Input::setMouseMode(MouseMode mode)
 {
     m_mouseMode = mode;
+    GLViewImpl* view = static_cast<GLViewImpl*>(Game::getInstance()->getGLView());
+    view->setCursolMode(mode);
 }
 
 Input::MouseMode Input::getMouseMode()

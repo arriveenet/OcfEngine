@@ -8,7 +8,7 @@ NS_OCF_BEGIN
 class Input {
 public:
     enum class MouseMode {
-        Visible,
+        Normal,
         Hidden,
         Captured
     };
