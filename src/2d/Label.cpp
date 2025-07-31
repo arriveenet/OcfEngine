@@ -202,7 +202,7 @@ void Label::updateQuads()
 
         if (p == '\n') {
             x = 0;
-            y -= lineHeight;
+            y += lineHeight;
             numberOfLines++;
             continue;
         }

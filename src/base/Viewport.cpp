@@ -78,6 +78,8 @@ Camera3D* Viewport::findCamera3DRecursive(Node* currentNode)
             return camera;
         }
     }
+
+    return nullptr;
 }
 
 NS_OCF_END

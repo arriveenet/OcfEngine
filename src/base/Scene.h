@@ -18,6 +18,8 @@ public:
 
     void update(float deltaTime);
 
+    virtual void updateScene(float deltaTime);
+
     void render(Renderer* renderer, const glm::mat4& transform);
 
     virtual void onEnter();

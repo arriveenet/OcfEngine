@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "2d/Camera2D.h"
+#include "3d/Camera3D.h"
 #include "base/Game.h"
 #include "base/Viewport.h"
 #include "renderer/Renderer.h"
@@ -37,12 +38,24 @@ bool Scene::init()
 void Scene::update(float deltaTime)
 {
     OCFASSERT(m_root, "Scene root is not initialized.");
+    updateScene(deltaTime);
     m_root->update(deltaTime);
+}
+
+void Scene::updateScene(float /*deltaTime*/)
+{
 }
 
 void Scene::render(Renderer* renderer, const glm::mat4& eyeProjection )
 {
     OCFASSERT(m_root, "Scene root is not initialized.");
+
+    m_root->determineActiveCamera();
+
+    Camera3D* camera3D = m_root->getCamera3D();
+    if (camera3D) {
+        Camera3D::s_pVisitingCamera = camera3D;
+    }
 
     m_pGame->pushMatrix(MatrixStack::Projection);
     m_pGame->loadMatrix(MatrixStack::Projection, m_pDefaultCamera->getViewProjectionMatrix());
@@ -73,7 +86,7 @@ const std::vector<Camera2D*>& Scene::getCameras()
     return m_cameras;
 }
 
-void Scene::addNode(Node* node)
+void Scene::addNode(Node* /*node*/)
 {
   //  m_root->addChild(node);
 }

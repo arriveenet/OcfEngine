@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "2d/Camera2D.h"
+#include "3d/Camera3D.h"
 #include "base/Game.h"
 #include "base/FileUtils.h"
 #include "renderer/Renderer.h"
@@ -65,19 +66,24 @@ bool Mesh::setupMesh()
 
 void Mesh::draw(Renderer* renderer, float globalZOrder, const glm::mat4& transform)
 {
-    glm::mat4 projection = Game::getInstance()->getMatrix(MatrixStack::Projection);
+    Camera3D* camera = Camera3D::getVisitingCamera();
+    if (camera == nullptr) {
+        return;
+    }
+
+    glm::mat4 projection = camera->getViewProjectionMatrix();
     auto& programState = m_meshCommand.getProgramState();
     glm::vec3 objectColor(1.0f, 0.5f, 0.31f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
     glm::vec3 lightPosition(5.0f, 5.0f, 5.0f);
-    //glm::vec3 viewPosition(Camera::getVisitingCamera()->getPosition());
+    glm::vec3 viewPosition(camera->getPosition());
 
     programState.setUniform("uProjection", &projection, sizeof(projection));
     programState.setUniform("uModelView", &transform, sizeof(transform));
     programState.setUniform("objectColor", &objectColor, sizeof(objectColor));
     programState.setUniform("lightColor", &lightColor, sizeof(lightColor));
     programState.setUniform("lightposition", &lightPosition, sizeof(lightPosition));
-    //programState.setUniform("viewPosition", &viewPosition, sizeof(viewPosition));
+    programState.setUniform("viewPosition", &viewPosition, sizeof(viewPosition));
 
     m_meshCommand.init(globalZOrder);
     renderer->addCommand(&m_meshCommand);

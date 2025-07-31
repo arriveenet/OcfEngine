@@ -136,9 +136,12 @@ void Skybox::initBuffer()
 
 void Skybox::draw(Renderer* renderer, const glm::mat4& transform)
 {
-    m_customCommand.init(m_globalZOrder, transform);
-
     Camera3D* camera = Camera3D::getVisitingCamera();
+    if (camera == nullptr) {
+        return;
+    }
+
+    m_customCommand.init(m_globalZOrder, transform);
 
     glm::mat4 viewMatrix = glm::mat4(glm::mat3(camera->getViewMatrix()));
     glm::mat4 projection = camera->getProjectionMatrix();
