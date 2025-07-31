@@ -15,19 +15,16 @@ ComponentTest::~ComponentTest()
 
 bool ComponentTest::init()
 {
-    if (TestCase::init()) {
-        auto ship = new Ship();
-        this->addChild(ship);
+    Viewport* root = getRoot();
+    auto ship = new Ship();
+    root->addChild(ship);
 
-        for (int i = 0; i < 10; i++) {
-            auto asteroid = new Asteroid;
-            this->addChild(asteroid);
-        }
-
-        return true;
+    for (int i = 0; i < 10; i++) {
+        auto asteroid = new Asteroid;
+        root->addChild(asteroid);
     }
 
-    return false;
+    return TestCase::init();
 }
 
 Laser::Laser()

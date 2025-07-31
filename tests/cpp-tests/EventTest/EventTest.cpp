@@ -17,22 +17,24 @@ bool EventTest::init()
     if (!TestCase::init())
         return false;
 
+    Viewport* root = getRoot();
+
     m_pKeyboardLabel = Label::create("Key code: ");
     m_pKeyboardLabel->setPosition(glm::vec2(40.0f, 550.f));
-    addChild(m_pKeyboardLabel);
+    root->addChild(m_pKeyboardLabel);
 
     m_pMousePositionLabel = Label::create("Mouse position: ");
     m_pMousePositionLabel->setPosition(glm::vec2(40.0f, 500.0f));
-    addChild(m_pMousePositionLabel);
+    root->addChild(m_pMousePositionLabel);
 
     auto keyboardListener = EventListenerKeyboard::create();
     keyboardListener->m_onKeyPressed = std::bind(&EventTest::onKeyPressed, this, std::placeholders::_1, std::placeholders::_2);
     keyboardListener->m_onKeyReleased = std::bind(&EventTest::onKeyReleased, this, std::placeholders::_1, std::placeholders::_2);
-    m_pGame->getEventDispatcher()->addEventListener(keyboardListener, this);
+    m_pGame->getEventDispatcher()->addEventListener(keyboardListener, m_pKeyboardLabel);
 
     auto mouseListener = EventListenerMouse::create();
     mouseListener->m_onMouseMove = std::bind(&EventTest::onMouseMove, this, std::placeholders::_1);
-    m_pGame->getEventDispatcher()->addEventListener(mouseListener, this);
+    m_pGame->getEventDispatcher()->addEventListener(mouseListener, m_pMousePositionLabel);
 
     return true;
 }

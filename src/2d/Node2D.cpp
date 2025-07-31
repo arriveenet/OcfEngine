@@ -137,7 +137,11 @@ glm::mat4 Node2D::getNodeToParentTransform(Node* ancestor) const
     glm::mat4 t(this->getNodeToParentTransform());
 
     for (Node* p = m_pParent; p != nullptr && p != ancestor; p = p->getParent()) {
-        t = static_cast<Node2D*>(p)->getNodeToParentTransform() * t;
+        Node2D* n = dynamic_cast<Node2D*>(p);
+        if (n)
+            t = n->getNodeToParentTransform() * t;
+        else
+            break;
     }
 
     return t;
@@ -180,41 +184,12 @@ void Node2D::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32
     m_pGame->pushMatrix(MatrixStack::ModelView);
     m_pGame->loadMatrix(MatrixStack::ModelView, m_modelVewTransform);
 
-    const bool visibleByCamera = isVisitableByVisitingCamera();
-
-    if (!m_children.empty()) {
-        sortAllChildren();
-
-        for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
-            if ((*iter)->getLocalZOrder() < 0) {
-                (*iter)->visit(pRenderer, m_modelVewTransform, flags);
-            }
-            else {
-                break;
-            }
-        }
-
-        // 自身を描画
-        if (visibleByCamera) {
-            this->draw(pRenderer, m_modelVewTransform);
-        }
-
-        // 子エンティティを描画
-        for (auto iter = m_children.cbegin(); iter != m_children.cend(); ++iter) {
-            (*iter)->visit(pRenderer, m_modelVewTransform, flags);
-        }
-    }
-    else if (visibleByCamera) {
-        this->draw(pRenderer, m_modelVewTransform);
-    }
-    else {
-        // 何もしない
-    }
+    Node::visit(pRenderer, m_modelVewTransform, flags);
 
     m_pGame->popMatrix(MatrixStack::ModelView);
 }
 
-glm::mat4 Node2D::transform(const glm::mat4& parentTransform)
+glm::mat4 Node2D::transform(const glm::mat4& parentTransform) const
 {
     return parentTransform * this->getNodeToParentTransform();
 }

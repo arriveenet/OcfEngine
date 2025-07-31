@@ -1,8 +1,9 @@
 #include "Camera2D.h"
 #include <assert.h>
 #include <glm/gtc/matrix_transform.hpp>
-#include "platform/Application.h"
 #include "base/Game.h"
+#include "base/Scene.h"
+#include "platform/Application.h"
 #include "renderer/Renderer.h"
 
 NS_OCF_BEGIN
@@ -129,21 +130,21 @@ const glm::mat4 Camera2D::getViewProjectionMatrix() const
 
 void Camera2D::onEnter()
 {
-    if (m_scene == nullptr) {
-        auto scene = getScene();
-        if (scene) {
-            // シーンにこのカメラを追加
-            setScene(scene);
-        }
-    }
-    Node::onEnter();
+    //if (m_scene == nullptr) {
+    //    auto scene = getScene();
+    //    if (scene) {
+    //        // シーンにこのカメラを追加
+    //        setScene(scene);
+    //    }
+    //}
+    //Node::onEnter();
 }
 
 void Camera2D::onExit()
 {
     // シーンからこのカメラを削除
-    setScene(nullptr);
-    Node::onExit();
+    //setScene(nullptr);
+    //Node::onExit();
 }
 
 void Camera2D::apply()

@@ -6,6 +6,7 @@
 #include "audio/AudioEngine.h"
 #include "base/EventDispatcher.h"
 #include "base/FileUtils.h"
+#include "base/Scene.h"
 #include "input/Input.h"
 #include "platform/Application.h"
 #include "platform/GLView.h"
@@ -42,7 +43,7 @@ Game::~Game()
     OCF_SAFE_RELEASE(m_pDrawVertexLabel);
 
     // シーンを解放
-    OCF_SAFE_RELEASE(m_currentScene);
+    OCF_SAFE_DELETE(m_currentScene);
 
     // テクスチャーマネージャーを解放
     OCF_SAFE_RELEASE(m_textureManager);
@@ -181,7 +182,7 @@ void Game::setNextScene()
 {
     if (m_currentScene != nullptr) {
         m_currentScene->onExit();
-        m_currentScene->release();
+        OCF_SAFE_DELETE(m_currentScene);
     }
 
     m_currentScene = m_nextScene;

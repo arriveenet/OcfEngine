@@ -32,15 +32,14 @@ FontTest::FontTest()
 
 bool FontTest::init()
 {
-    if (!TestCase::init())
-        return false;
+    Viewport* root = getRoot();
 
     m_pLabel = ocf::Label::createWithTTF("fonts/NotoSansJP-Regular.ttf", "こんにちは、世界!", 24);
-    addChild(m_pLabel);
+    root->addChild(m_pLabel);
     m_pLabel->setPosition(glm::vec2(100, 100));
 
     m_pDrawShape = DrawShape::create();
-    addChild(m_pDrawShape);
+    root->addChild(m_pDrawShape);
 
     m_maxRectsBinPack.init(512, 512);
     m_maxRectsBinPack.setHeuristic(MaxRectsBinPack::FreeRectChoiceHeuristic::RectBestsShortSideFit);
@@ -71,11 +70,11 @@ bool FontTest::init()
         m_pDrawShape->drawRect(glm::vec2(0, 0), glm::vec2(512, 512), Color4f::GREEN);
         };
 
-    m_pGame->getEventDispatcher()->addEventListener(keyboardListener, this);
+    m_pGame->getEventDispatcher()->addEventListener(keyboardListener, m_pDrawShape);
 
     auto checkBox = ui::CheckBox::create("Text");
     checkBox->setPosition(glm::vec2(200, 200));
-    addChild(checkBox);
+    root->addChild(checkBox);
 
     auto group = std::make_shared<ui::ToggleGroup>();
 
@@ -83,23 +82,23 @@ bool FontTest::init()
     radioButton1->setPosition(glm::vec2(500, 300));
     radioButton1->setToggleGroup(group);
     radioButton1->setSelected(true);
-    addChild(radioButton1);
+    root->addChild(radioButton1);
 
     auto radioButton2 = ui::RadioButton::create("option2");
     radioButton2->setPosition(glm::vec2(500, 270));
     radioButton2->setToggleGroup(group);
-    addChild(radioButton2);
+    root->addChild(radioButton2);
 
     auto radioButton3 = ui::RadioButton::create("option3");
     radioButton3->setPosition(glm::vec2(500, 240));
     radioButton3->setToggleGroup(group);
-    addChild(radioButton3);
+    root->addChild(radioButton3);
 
     auto button = ui::Button::create("button");
     button->setPosition(glm::vec2(500, 200));
-    addChild(button);
+    root->addChild(button);
 
-    return true;
+    return TestCase::init();
 }
 
 void FontTest::onExit()

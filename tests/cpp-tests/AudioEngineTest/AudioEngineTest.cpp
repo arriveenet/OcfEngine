@@ -16,18 +16,16 @@ AudioEngineTest::~AudioEngineTest()
 
 bool AudioEngineTest::init()
 {
-    if (!TestCase::init()) {
-        return false;
-    }
-
     float leftX = 300.0f;
     float leftX2 = 550.0f;
 
-    m_audioFileName = "audio/maou_14_shining_star.ogg";
+    Viewport* root = getRoot();
+
+    m_audioFileName = "audio/Canon in D Major.mp3";
     //m_audioFileName = "audio/タイフーンパレード.wav";
     auto fileNameLabel = Label::createWithBMFont("MS Gothic.fnt", m_audioFileName);
     fileNameLabel->setPosition(glm::vec2(leftX, 150));
-    addChild(fileNameLabel);
+    root->addChild(fileNameLabel);
 
     auto button1 = Button::create();
     button1->setText("Play");
@@ -35,7 +33,7 @@ bool AudioEngineTest::init()
     button1->setOnAction([=]() {
          m_audioID = AudioEngine::play(m_audioFileName, true);
         });
-    addChild(button1);
+    root->addChild(button1);
 
     auto stopButton = Button::create();
     stopButton->setText("Stop");
@@ -43,7 +41,7 @@ bool AudioEngineTest::init()
     stopButton->setOnAction([=]() {
         AudioEngine::stop(m_audioID);
         });
-    addChild(stopButton);
+    root->addChild(stopButton);
 
     auto pauseButton = Button::create();
     pauseButton->setText("Pause");
@@ -51,7 +49,7 @@ bool AudioEngineTest::init()
     pauseButton->setOnAction([=]() {
         AudioEngine::pause(m_audioID);
         });
-    addChild(pauseButton);
+    root->addChild(pauseButton);
 
     auto resumeButton = Button::create();
     resumeButton->setText("Resume");
@@ -59,7 +57,7 @@ bool AudioEngineTest::init()
     resumeButton->setOnAction([=]() {
         AudioEngine::resume(m_audioID);
         });
-    addChild(resumeButton);
+    root->addChild(resumeButton);
 
     auto loopCheckbox = CheckBox::create("Loop");
     loopCheckbox->setPosition(glm::vec2(leftX, 250));
@@ -68,12 +66,12 @@ bool AudioEngineTest::init()
         const bool isSelected = loopCheckbox->isSelected();
         AudioEngine::setLoop(m_audioID, isSelected);
         });
-    addChild(loopCheckbox);
+    root->addChild(loopCheckbox);
 
 
     m_volumeLabel = Label::create("Volume: 1.0");
     m_volumeLabel->setPosition(glm::vec2(leftX, 450));
-    addChild(m_volumeLabel);
+    root->addChild(m_volumeLabel);
 
     Slider* volumeSlider = Slider::create(400, 10);
     volumeSlider->setPosition(glm::vec2(leftX + 100, 500));
@@ -85,14 +83,14 @@ bool AudioEngineTest::init()
         snprintf(str, sizeof(str), "Volume: %f", volume);
         m_volumeLabel->setString(str);
         });
-    addChild(volumeSlider);
+    root->addChild(volumeSlider);
 
-    return true;
+    return TestCase::init();
 }
 
 void AudioEngineTest::onExit()
 {
     AudioEngine::stop(m_audioID);
 
-    Node::onExit();
+    Scene::onExit();
 }

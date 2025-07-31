@@ -9,7 +9,7 @@ public:
 
     bool init() override;
     
-    void updateNode(float deltaTime) override;
+    void updateScene(float deltaTime) override;
 
     ocf::FirstPersonCamera* m_pCamera;
     ocf::Label* m_pStatusLabel;
