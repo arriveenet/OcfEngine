@@ -13,6 +13,9 @@ public:
 
     void onMouseMove(ocf::Event* pEvent);
 
+    void onMouseScroll(ocf::Event* pEvent);
+
     ocf::Label* m_pKeyboardLabel;
     ocf::Label* m_pMousePositionLabel;
+    ocf::Label* m_pMouseScrollLabel;
 };

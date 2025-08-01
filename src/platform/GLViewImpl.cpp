@@ -446,6 +446,7 @@ void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* /* window */, double xpos, 
 void GLViewImpl::onGLFWScrollCallback(GLFWwindow* /* window */, double xoffset, double yoffset)
 {
     EventMouse mouseEvent(EventMouse::MouseEventType::Scroll);
+    mouseEvent.setScrollDelta(glm::vec2(static_cast<float>(xoffset), static_cast<float>(yoffset)));
     Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 

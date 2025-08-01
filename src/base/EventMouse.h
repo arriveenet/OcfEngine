@@ -26,11 +26,14 @@ public:
     glm::vec2 getPosition() const { return m_position; }
     glm::vec2 getDelta() const;
 
+    void setScrollDelta(const glm::vec2& scrollDelta) { m_scrollDelta = scrollDelta; }
+    glm::vec2 getScrollDelta() const { return m_scrollDelta; }
 
     MouseEventType m_mouseEventType;
     Mouse::MouseButton m_mouseButton;
     glm::vec2 m_position;
     glm::vec2 m_lastPosition;
+    glm::vec2 m_scrollDelta;
 };
 
 NS_OCF_END
