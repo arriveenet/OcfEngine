@@ -55,7 +55,7 @@ void Input::setMouseMode(MouseMode mode)
 {
     m_mouseMode = mode;
     GLViewImpl* view = static_cast<GLViewImpl*>(Game::getInstance()->getGLView());
-    view->setCursolMode(mode);
+    view->setCursorMode(mode);
 }
 
 Input::MouseMode Input::getMouseMode()

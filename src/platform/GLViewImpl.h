@@ -29,9 +29,9 @@ public:
     glm::ivec2 getMonitorSize() const;
 
     glm::vec2 getMousePosition() const { return m_mousePosition; }
-    void setCursolPosition(float x, float y);
+    void setCursorPosition(float x, float y);
 
-    void setCursolMode(Input::MouseMode mode);
+    void setCursorMode(Input::MouseMode mode);
 
 #if (OCF_TARGET_PLATFORM == OCF_PLATFORM_WIN32)
     HWND getWin32Window() override;

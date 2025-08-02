@@ -22,7 +22,7 @@ public:
 
     void setPosition(const glm::vec2& position) { m_position = position; }
     void setLastPosition(const glm::vec2& position) { m_lastPosition = position; }
-    glm::vec2 getLastPosition() const{ return m_lastPosition; }
+    glm::vec2 getLastPosition() const { return m_lastPosition; }
     glm::vec2 getPosition() const { return m_position; }
     glm::vec2 getDelta() const;
 

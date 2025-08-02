@@ -321,14 +321,14 @@ glm::ivec2 GLViewImpl::getMonitorSize() const
     return monitorSize;
 }
 
-void GLViewImpl::setCursolPosition(float x, float y)
+void GLViewImpl::setCursorPosition(float x, float y)
 {
     if (m_pMainWindow != nullptr) {
         glfwSetCursorPos(m_pMainWindow, x, y);
     }
 }
 
-void GLViewImpl::setCursolMode(Input::MouseMode mode)
+void GLViewImpl::setCursorMode(Input::MouseMode mode)
 {
     if (m_pMainWindow != nullptr) {
         switch (mode) {
