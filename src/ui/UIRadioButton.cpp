@@ -103,11 +103,12 @@ void RadioButton::initRenderer()
 void RadioButton::updateTextLocation()
 {
     if (m_pTextRenderer) {
-        constexpr float textOffset = 5.0f;
         const glm::vec2 textSize = m_pTextRenderer->getSize();
-        m_pTextRenderer->setPosition(glm::vec2(m_radioSize.x + textOffset, 0.0f));
+        const float textMarginX = 5.0f;
+        const float textMarginY = (m_radioSize.y - textSize.y) / 2.0f;
+        m_pTextRenderer->setPosition(glm::vec2(m_radioSize.x + textMarginX, textMarginY));
 
-        const float width = m_radioSize.x + textOffset + textSize.x;
+        const float width = m_radioSize.x + textMarginX + textSize.x;
         const float height = m_radioSize.y;
         setSize(glm::vec2(width, height));
     }
