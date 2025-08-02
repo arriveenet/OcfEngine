@@ -13,9 +13,7 @@ EventMouse::EventMouse(MouseEventType mouseEventType)
 
 glm::vec2 EventMouse::getDelta() const
 {
-    const float deltaX = m_position.x - m_lastPosition.x;
-    const float deltaY = m_lastPosition.y - m_position.y;
-    return glm::vec2(deltaX, deltaY);
+    return m_position - m_lastPosition;
 }
 
 NS_OCF_END

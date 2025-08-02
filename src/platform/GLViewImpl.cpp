@@ -36,6 +36,13 @@ public:
         }
     }
 
+    static void onGLFWScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+    {
+        if (m_view) {
+            m_view->onGLFWScrollCallback(window, xoffset, yoffset);
+        }
+    }
+
     static void onGLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
     {
         if (m_view) {
@@ -314,10 +321,29 @@ glm::ivec2 GLViewImpl::getMonitorSize() const
     return monitorSize;
 }
 
-void GLViewImpl::setCursolPosition(float x, float y)
+void GLViewImpl::setCursorPosition(float x, float y)
 {
     if (m_pMainWindow != nullptr) {
         glfwSetCursorPos(m_pMainWindow, x, y);
+    }
+}
+
+void GLViewImpl::setCursorMode(Input::MouseMode mode)
+{
+    if (m_pMainWindow != nullptr) {
+        switch (mode) {
+        case Input::MouseMode::Normal:
+            glfwSetInputMode(m_pMainWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            break;
+        case Input::MouseMode::Hidden:
+            glfwSetInputMode(m_pMainWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+            break;
+        case Input::MouseMode::Captured:
+            glfwSetInputMode(m_pMainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            break;
+        default:
+            break;
+        }
     }
 }
 
@@ -359,6 +385,7 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
 
     glfwSetMouseButtonCallback(m_pMainWindow, GLFWEventHandler::onGLFWMouseButtonCallback);
     glfwSetCursorPosCallback(m_pMainWindow, GLFWEventHandler::onGLFWMouseMoveCallback);
+    glfwSetScrollCallback(m_pMainWindow, GLFWEventHandler::onGLFWScrollCallback);
     glfwSetKeyCallback(m_pMainWindow, GLFWEventHandler::onGLFWKeyCallback);
     glfwSetWindowSizeCallback(m_pMainWindow, GLFWEventHandler::onGLFWWindowSizeCallback);
 
@@ -399,7 +426,7 @@ void GLViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, int a
     }
 
     EventMouse mouseEvent(eventType);
-    mouseEvent.setPosition(static_cast<float>(xpos), static_cast<float>(ypos));
+    mouseEvent.setPosition(glm::vec2(xpos, ypos));
     Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 
@@ -408,10 +435,18 @@ void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* /* window */, double xpos, 
     m_mousePosition.x = static_cast<float>(xpos);
     m_mousePosition.y = static_cast<float>(m_windowSize.y - ypos);
 
-    m_lastMousePosition = m_mousePosition;
-
     EventMouse mouseEvent(EventMouse::MouseEventType::Move);
-    mouseEvent.setPosition(static_cast<float>(xpos), static_cast<float>(ypos));
+    mouseEvent.setPosition(m_mousePosition);
+    mouseEvent.setLastPosition(m_lastMousePosition);
+    Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
+
+    m_lastMousePosition = m_mousePosition;
+}
+
+void GLViewImpl::onGLFWScrollCallback(GLFWwindow* /* window */, double xoffset, double yoffset)
+{
+    EventMouse mouseEvent(EventMouse::MouseEventType::Scroll);
+    mouseEvent.setScrollDelta(glm::vec2(static_cast<float>(xoffset), static_cast<float>(yoffset)));
     Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 
