@@ -126,7 +126,6 @@ set_target_properties(zlib
                       )
 
 add_subdirectory(libjpeg-turbo)
-target_include_directories(thirdparty INTERFACE "jpeg-static")
 target_link_libraries(thirdparty INTERFACE jpeg-static)
 set_target_properties(jpeg-static
                       PROPERTIES

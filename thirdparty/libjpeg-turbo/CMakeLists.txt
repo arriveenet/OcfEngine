@@ -36,6 +36,14 @@ pad_number(TMP_VERSION_REVISION 3)
 set(LIBJPEG_TURBO_VERSION_NUMBER
   ${VERSION_MAJOR}${TMP_VERSION_MINOR}${TMP_VERSION_REVISION})
 
+if(WITH_JPEG8)
+  set(JPEG_LIB_VERSION 80)
+elseif(WITH_JPEG7)
+  set(JPEG_LIB_VERSION 70)
+else()
+  set(JPEG_LIB_VERSION 62)
+endif()
+
 
 message(STATUS "VERSION = ${VERSION}, BUILD = ${BUILD}")
 
@@ -222,10 +230,6 @@ if(UNIX)
   configure_file(src/libjpeg.map.in libjpeg.map)
 endif()
 
-# Include directories and compiler definitions
-include_directories(${CMAKE_CURRENT_BINARY_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/src)
-
 set(JPEG16_SOURCES src/jcapistd.c src/jccolor.c src/jcdiffct.c src/jclossls.c
   src/jcmainct.c src/jcprepct.c src/jcsample.c src/jdapistd.c src/jdcolor.c
   src/jddiffct.c src/jdlossls.c src/jdmainct.c src/jdpostct.c src/jdsample.c
@@ -278,9 +282,22 @@ endif()
 add_library(jpeg12-static OBJECT ${JPEG12_SOURCES})
 set_property(TARGET jpeg12-static PROPERTY COMPILE_FLAGS
   "-DBITS_IN_JSAMPLE=12")
+target_include_directories(
+  jpeg12-static PUBLIC
+  ${CMAKE_CURRENT_BINARY_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_library(jpeg16-static OBJECT ${JPEG16_SOURCES})
 set_property(TARGET jpeg16-static PROPERTY COMPILE_FLAGS
   "-DBITS_IN_JSAMPLE=16")
+target_include_directories(
+  jpeg16-static PUBLIC
+  ${CMAKE_CURRENT_BINARY_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_library(jpeg-static STATIC ${JPEG_SOURCES} ${SIMD_TARGET_OBJECTS}
   ${SIMD_OBJS} $<TARGET_OBJECTS:jpeg12-static>
   $<TARGET_OBJECTS:jpeg16-static>)
+  # Include directories and compiler definitions
+target_include_directories(
+  jpeg-static PUBLIC
+  ${CMAKE_CURRENT_BINARY_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/src)
