@@ -362,10 +362,16 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# Cmake build folder
+# Cmake build folders
 build/
+build_*/
 
 # vscode
 .vscode
 
+# asset
 !assets/*/*
+
+# ctags
+tags
+TAGS

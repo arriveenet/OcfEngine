@@ -64,7 +64,7 @@ bool TextureAtlas::initWidthTexture(Texture2D* pTexture, size_t capacity)
 
 void TextureAtlas::insertQuad(QuadV3fT2f* pQuad, size_t index)
 {
-    assert(index >= 0 && index < m_capacity);
+    assert(index < m_capacity);
 
     m_totalQuads++;
     assert(m_totalQuads <= m_capacity);
@@ -80,7 +80,7 @@ void TextureAtlas::insertQuad(QuadV3fT2f* pQuad, size_t index)
 
 void TextureAtlas::removeQuad(size_t index)
 {
-    assert(index >= 0 && index < m_totalQuads);
+    assert(index < m_totalQuads);
 
     size_t remaining = (m_totalQuads - 1) - index;
 
@@ -115,7 +115,7 @@ void TextureAtlas::setupIndices()
 {
     if (m_capacity == 0) return;
 
-    for (int i = 0; i < m_capacity; i++) {
+    for (size_t i = 0; i < m_capacity; i++) {
         m_pIndices[i * 6 + 0] = static_cast<unsigned short>(i * 4 + 0);
         m_pIndices[i * 6 + 1] = static_cast<unsigned short>(i * 4 + 1);
         m_pIndices[i * 6 + 2] = static_cast<unsigned short>(i * 4 + 2);

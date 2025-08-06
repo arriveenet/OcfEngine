@@ -3,8 +3,8 @@
 NS_OCF_BEGIN
 
 EventListener::EventListener()
-	: m_pNode(nullptr)
-    , m_type(Type::Unknown)
+	:m_type(Type::Unknown)
+	, m_pNode(nullptr)
 {
 }
 

@@ -15,19 +15,16 @@ ComponentTest::~ComponentTest()
 
 bool ComponentTest::init()
 {
-    if (TestCase::init()) {
-        auto ship = new Ship();
-        this->addChild(ship);
+    Viewport* root = getRoot();
+    auto ship = new Ship();
+    root->addChild(ship);
 
-        for (int i = 0; i < 10; i++) {
-            auto asteroid = new Asteroid;
-            this->addChild(asteroid);
-        }
-
-        return true;
+    for (int i = 0; i < 10; i++) {
+        auto asteroid = new Asteroid;
+        root->addChild(asteroid);
     }
 
-    return false;
+    return TestCase::init();
 }
 
 Laser::Laser()
@@ -80,11 +77,12 @@ Asteroid::Asteroid()
 
     glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
     float rot = static_cast<float>(rand() % 360);
-    float x = static_cast<float>(rand() % (int)visibleSize.x);
-    float y = static_cast<float>(rand() % (int)visibleSize.y);
+    glm::vec2 position;
+    position.x = static_cast<float>(rand() % static_cast<int>(visibleSize.x));
+    position.y = static_cast<float>(rand() % static_cast<int>(visibleSize.y));
 
     setRotation(rot);
-    setPosition(x, y);
+    setPosition(position);
 }
 
 void Asteroid::updateNode(float /*deltaTime*/)
@@ -113,7 +111,7 @@ Ship::Ship()
     addComponent(m_pMoveComponent);
 
     glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
-    setPosition(visibleSize.x / 2, visibleSize.y / 2);
+    setPosition(visibleSize / 2.0f);
 
     auto keyboardEvent = EventListenerKeyboard::create();
     keyboardEvent->m_onKeyPressed = [this](Keyboard::KeyCode key, Event* ) {

@@ -4,6 +4,17 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 add_library(thirdparty INTERFACE)
 
+add_subdirectory(fmt)
+target_include_directories(thirdparty INTERFACE "fmt/include")
+target_link_libraries(thirdparty INTERFACE fmt)
+set_target_properties(fmt
+                      PROPERTIES
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      FOLDER "ThirdParty"
+                      )
+
 add_subdirectory(freetype)
 target_include_directories(thirdparty INTERFACE "freetype/include")
 target_link_libraries(thirdparty INTERFACE freetype)
@@ -118,6 +129,28 @@ add_subdirectory(libpng)
 target_include_directories(thirdparty INTERFACE "libpng")
 target_link_libraries(thirdparty INTERFACE libpng)
 set_target_properties(libpng
+                      PROPERTIES
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      FOLDER "ThirdParty"
+                      )
+
+add_subdirectory(libogg)
+target_include_directories(thirdparty INTERFACE "libogg")
+target_link_libraries(thirdparty INTERFACE ogg)
+set_target_properties(ogg
+                      PROPERTIES
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      FOLDER "ThirdParty"
+                      )
+
+add_subdirectory(libvorbis)
+target_include_directories(thirdparty INTERFACE "libvorbis")
+target_link_libraries(thirdparty INTERFACE vorbis vorbisenc vorbisfile)
+set_target_properties(vorbis vorbisenc vorbisfile
                       PROPERTIES
                       ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"

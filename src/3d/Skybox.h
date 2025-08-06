@@ -1,5 +1,5 @@
 #pragma once
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "renderer/TextureCube.h"
 #include "renderer/CustomCommand.h"
 #include <string>
@@ -18,6 +18,7 @@ public:
     Skybox();
     virtual ~Skybox();
 
+    bool init() override;
     bool init(std::string_view positive_x,
               std::string_view negative_x,
               std::string_view positive_y,

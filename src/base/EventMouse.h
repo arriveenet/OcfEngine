@@ -20,16 +20,20 @@ public:
     void setMouseButton(Mouse::MouseButton button) { m_mouseButton = button; }
     Mouse::MouseButton getMouseButton() const { return m_mouseButton; }
 
-    void setPosition(float x, float y) { m_position.x = x, m_position.y = y; }
     void setPosition(const glm::vec2& position) { m_position = position; }
+    void setLastPosition(const glm::vec2& position) { m_lastPosition = position; }
+    glm::vec2 getLastPosition() const { return m_lastPosition; }
     glm::vec2 getPosition() const { return m_position; }
     glm::vec2 getDelta() const;
 
+    void setScrollDelta(const glm::vec2& scrollDelta) { m_scrollDelta = scrollDelta; }
+    glm::vec2 getScrollDelta() const { return m_scrollDelta; }
 
     MouseEventType m_mouseEventType;
     Mouse::MouseButton m_mouseButton;
     glm::vec2 m_position;
     glm::vec2 m_lastPosition;
+    glm::vec2 m_scrollDelta;
 };
 
 NS_OCF_END

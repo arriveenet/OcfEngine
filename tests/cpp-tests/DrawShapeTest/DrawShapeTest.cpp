@@ -4,8 +4,9 @@ using namespace ocf;
 
 void DrawShapeTest::onEnter()
 {
+    Viewport* root = getRoot();
     m_pDrawShape = DrawShape::create();
-    addChild(m_pDrawShape);
+    root->addChild(m_pDrawShape);
 
     // Draw Point
     m_pDrawShape->drawPoint(glm::vec2(500, 500), Color4f::WHITE);

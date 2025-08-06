@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-#include "Component.h"
-#include "Node.h"
-#include "DrawShape.h"
+#include "2d/Node2D.h"
+#include "2d/Component.h"
+#include "2d/DrawShape.h"
 #include "base/Types.h"
 #include "base/Rect.h"
 #include "base/Config.h"
@@ -17,7 +17,7 @@ class SpriteFrame;
 /**
  * @brief スプライトクラス
  */
-class Sprite : public Node {
+class Sprite : public Node2D {
 public:
     /** スプライトを作成*/
     static Sprite* create();
@@ -46,13 +46,9 @@ public:
     virtual void setSpriteFrame(SpriteFrame* spriteFrame);
     /** スプライトフレームを取得 */
     virtual SpriteFrame* getSpriteFrame() const;
-    
-    /** スプライトの位置を設定 */
-    void setPosition(const glm::vec2& position) override;
-    void setPosition(float x, float y) override;
 
     /** スプライトのサイズを設定 */
-    void setSize(float width, float height) override;
+    void setSize(const glm::vec2& size) override;
 
     /** スプライトの矩形を取得 */
     virtual Rect getRect() const;
@@ -77,8 +73,8 @@ protected:
     void setMVPMarixUniform();
 
 protected:
-    bool m_isDirty;
     QuadV3fC3fT2f m_quad;
+    bool m_isDirty;
     Rect m_rect;
     glm::mat4 m_modelView;
 

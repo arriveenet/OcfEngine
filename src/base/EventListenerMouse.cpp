@@ -37,7 +37,7 @@ bool EventListenerMouse::init()
             break;
         case EventMouse::MouseEventType::Scroll:
             if (m_onMouseScroll)
-                m_onMouseScroll;
+                m_onMouseScroll(event);
             break;
         default:
             break;

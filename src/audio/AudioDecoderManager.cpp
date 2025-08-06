@@ -2,6 +2,7 @@
 #include <filesystem>
 #include "audio/AudioDecoderWav.h"
 #include "audio/AudioDecoderMp3.h"
+#include "audio/AudioDecoderOgg.h"
 
 NS_OCF_BEGIN
 
@@ -23,6 +24,9 @@ AudioDecoder* AudioDecoderManager::createDecoder(std::string_view filePath)
     }
     else if (extension == ".mp3") {
         return new AudioDecoderMp3();
+    }
+    else if (extension == ".ogg") {
+        return new AudioDecoderOgg();
     }
     else {
 

@@ -26,6 +26,7 @@ TMXLayer::TMXLayer()
     , m_pLayerInfo(nullptr)
     , m_pTexture(nullptr)
 {
+    setName("TMXLayer");
 }
 
 TMXLayer::~TMXLayer()
@@ -81,7 +82,7 @@ void TMXLayer::updateTotalQuads()
             if (tileGID == 0)
                 continue;
 
-            glm::vec2 nodePosition(x * tileSize.x, (m_layerSize.y - 1 - y) * tileSize.y);
+            glm::vec2 nodePosition(x * tileSize.x, y * tileSize.y);
 
             auto& quad = m_totalQuads[quadIndex];
             float left, right, top, bottom, z;
@@ -102,8 +103,8 @@ void TMXLayer::updateTotalQuads()
             Rect tileTexture = m_pTileset->getRectForGID(tileGID);
             left   = tileTexture.m_position.x / m_pTexture->getSize().x;
             right  = left + (tileTexture.m_size.x / m_pTexture->getSize().x);
-            bottom = tileTexture.m_position.y / m_pTexture->getSize().y;
-            top    = bottom + (tileTexture.m_size.y / m_pTexture->getSize().y);
+            top = tileTexture.m_position.y / m_pTexture->getSize().y;
+            bottom    = top + (tileTexture.m_size.y / m_pTexture->getSize().y);
 
             quad.bottomLeft.texCoord  = { left, bottom };
             quad.bottomRight.texCoord = { right, bottom };

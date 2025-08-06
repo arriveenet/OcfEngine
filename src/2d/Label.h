@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "2d/Node.h"
+#include "2d/Node2D.h"
 #include "base/Types.h"
 #include "base/Macros.h"
 #include "renderer/VertexArray.h"
@@ -13,8 +13,13 @@ class FontAtlas;
 class DrawShape;
 class Font;
 
-class Label : public Node {
+class Label : public Node2D {
 public:
+    enum class LabelType {
+        BMFONT,
+        TTF,
+    };
+
     static Label* create(const std::string& text);
     static Label* createWithBMFont(std::string_view bmFontPath, std::string_view text);
     static Label* createWithTTF(std::string_view ttfPath, std::string_view text, int fontSize);
@@ -28,10 +33,10 @@ public:
 
     Font* getFont() const { return m_font; }
 
-    void setString(const std::string& text);
+    void setString(std::string_view text);
     std::string getString() const { return m_text; }
     void setTextColor(const glm::vec3& textColor);
-    void setTextColor(unsigned char r, unsigned char g, unsigned b);
+    void setTextColor(unsigned char r, unsigned char g, unsigned char b);
     const glm::vec3& getTextColor() const { return m_textColor; }
 
     void update(float deltaTime) override;
@@ -58,6 +63,7 @@ protected:
 
 protected:
     Font* m_font;
+    LabelType m_labelType;
     std::string m_text;
     std::u32string m_utf32Text;
     glm::vec3 m_textColor;

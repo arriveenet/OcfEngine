@@ -5,5 +5,5 @@ class DrawShapeTest : public TestCase {
 public:
     void onEnter() override;
 
-    ocf::DrawShape* m_pDrawShape;
+    ocf::DrawShape* m_pDrawShape = nullptr;
 };

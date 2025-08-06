@@ -1,4 +1,5 @@
 #include "AudioEngineTest.h"
+#include "ui/UICheckBox.h"
 
 USING_NS_OCF;
 using namespace ocf::ui;
@@ -15,75 +16,81 @@ AudioEngineTest::~AudioEngineTest()
 
 bool AudioEngineTest::init()
 {
-    if (!TestCase::init()) {
-        return false;
-    }
-
     float leftX = 300.0f;
     float leftX2 = 550.0f;
 
-    std::string audioFileName = "audio/Canon in D Major.mp3";
-    //std::string audioFileName = "audio/タイフーンパレード.wav";
+    Viewport* root = getRoot();
 
-    auto fileNameLabel = Label::createWithBMFont("MS Gothic.fnt", audioFileName);
-    fileNameLabel->setPosition(leftX, 550);
-    addChild(fileNameLabel);
+    m_audioFileName = "audio/Canon in D Major.mp3";
+    //m_audioFileName = "audio/タイフーンパレード.wav";
+    auto fileNameLabel = Label::createWithBMFont("MS Gothic.fnt", m_audioFileName);
+    fileNameLabel->setPosition(glm::vec2(leftX, 150));
+    root->addChild(fileNameLabel);
 
-    auto button1 = Button::create("ButtonNormal.png", "ButtonActive.png");
+    auto button1 = Button::create();
     button1->setText("Play");
-    button1->setPosition(leftX, 500);
-    button1->setOnClickCallback([=]() {
-         m_audioID = AudioEngine::play(audioFileName, true);
+    button1->setPosition(glm::vec2(leftX, 300));
+    button1->setOnAction([=]() {
+         m_audioID = AudioEngine::play(m_audioFileName, true);
         });
-    addChild(button1);
+    root->addChild(button1);
 
-    auto stopButton = Button::create("ButtonNormal.png", "ButtonActive.png");
+    auto stopButton = Button::create();
     stopButton->setText("Stop");
-    stopButton->setPosition(leftX2, 500);
-    stopButton->setOnClickCallback([=]() {
+    stopButton->setPosition(glm::vec2(leftX2, 300));
+    stopButton->setOnAction([=]() {
         AudioEngine::stop(m_audioID);
         });
-    addChild(stopButton);
+    root->addChild(stopButton);
 
-    auto pauseButton = Button::create("ButtonNormal.png", "ButtonActive.png");
+    auto pauseButton = Button::create();
     pauseButton->setText("Pause");
-    pauseButton->setPosition(leftX, 400);
-    pauseButton->setOnClickCallback([=]() {
+    pauseButton->setPosition(glm::vec2(leftX, 380));
+    pauseButton->setOnAction([=]() {
         AudioEngine::pause(m_audioID);
         });
-    addChild(pauseButton);
+    root->addChild(pauseButton);
 
-    auto resumeButton = Button::create("ButtonNormal.png", "ButtonActive.png");
+    auto resumeButton = Button::create();
     resumeButton->setText("Resume");
-    resumeButton->setPosition(leftX2, 400);
-    resumeButton->setOnClickCallback([=]() {
+    resumeButton->setPosition(glm::vec2(leftX2, 380));
+    resumeButton->setOnAction([=]() {
         AudioEngine::resume(m_audioID);
         });
-    addChild(resumeButton);
+    root->addChild(resumeButton);
+
+    auto loopCheckbox = CheckBox::create("Loop");
+    loopCheckbox->setPosition(glm::vec2(leftX, 250));
+    loopCheckbox->setSelected(true);
+    loopCheckbox->setOnAction([=]() {
+        const bool isSelected = loopCheckbox->isSelected();
+        AudioEngine::setLoop(m_audioID, isSelected);
+        });
+    root->addChild(loopCheckbox);
+
 
     m_volumeLabel = Label::create("Volume: 1.0");
-    m_volumeLabel->setPosition(leftX, 330);
-    addChild(m_volumeLabel);
+    m_volumeLabel->setPosition(glm::vec2(leftX, 450));
+    root->addChild(m_volumeLabel);
 
     Slider* volumeSlider = Slider::create(400, 10);
-    volumeSlider->setPosition(leftX + 100, 300);
+    volumeSlider->setPosition(glm::vec2(leftX + 100, 500));
     volumeSlider->setValue(100);
     volumeSlider->setOnValueChangedCallback([=](int value) {
         const float volume = static_cast<float>(value) / 100.0f;
         AudioEngine::setVolume(m_audioID, volume);
-
         char str[128];
         snprintf(str, sizeof(str), "Volume: %f", volume);
         m_volumeLabel->setString(str);
         });
-    addChild(volumeSlider);
+    root->addChild(volumeSlider);
 
-    return true;
+    return TestCase::init();
 }
 
 void AudioEngineTest::onExit()
 {
     AudioEngine::stop(m_audioID);
 
-    Node::onExit();
+    Scene::onExit();
 }

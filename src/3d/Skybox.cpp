@@ -1,5 +1,5 @@
 #include "Skybox.h"
-#include "2d/Camera.h"
+#include "3d/Camera3D.h"
 #include "renderer/Renderer.h"
 #include "renderer/ShaderManager.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -73,11 +73,17 @@ Skybox* Skybox::create(std::string_view positive_x,
 Skybox::Skybox()
     : m_textureCube(nullptr)
 {
+    setName("Skybox");
 }
 
 Skybox::~Skybox()
 {
     OCF_SAFE_RELEASE(m_textureCube);
+}
+
+bool Skybox::init()
+{
+    return Node::init();
 }
 
 bool Skybox::init(std::string_view positive_x,
@@ -130,9 +136,12 @@ void Skybox::initBuffer()
 
 void Skybox::draw(Renderer* renderer, const glm::mat4& transform)
 {
-    m_customCommand.init(m_globalZOrder, transform);
+    Camera3D* camera = Camera3D::getVisitingCamera();
+    if (camera == nullptr) {
+        return;
+    }
 
-    Camera* camera = Camera::getVisitingCamera();
+    m_customCommand.init(m_globalZOrder, transform);
 
     glm::mat4 viewMatrix = glm::mat4(glm::mat3(camera->getViewMatrix()));
     glm::mat4 projection = camera->getProjectionMatrix();

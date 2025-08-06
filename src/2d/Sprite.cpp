@@ -64,6 +64,8 @@ Sprite::Sprite()
     , m_texture(nullptr)
     , m_spriteFrame(nullptr)
 {
+    setName("Sprite");
+
     Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::Basic);
     m_trianglesCommand.getProgramState().setProgram(pProgram);
 
@@ -171,19 +173,9 @@ SpriteFrame* Sprite::getSpriteFrame() const
     return SpriteFrame::createWithTexture(m_texture, m_rect, false, glm::vec2(), m_size);
 }
 
-void Sprite::setPosition(const glm::vec2& position)
+void Sprite::setSize(const glm::vec2& size)
 {
-    Node::setPosition(position);
-}
-
-void Sprite::setPosition(float x, float y)
-{
-    Node::setPosition(x, y);
-}
-
-void Sprite::setSize(float width, float height)
-{
-    Node::setSize(width, height);
+    Node2D::setSize(size);
     updatePolygon();
 
     m_isDirty = true;
@@ -267,7 +259,7 @@ void Sprite::updatePolygon()
 
 void Sprite::setTextureRect(const Rect& rect, const glm::vec2& size)
 {
-    Node::setSize(size);
+    Node2D::setSize(size);
 
     setVertexRect(rect);
     updatePolygon();
@@ -288,9 +280,9 @@ void Sprite::setTextureCoords(const Rect& rectInPoints, QuadV3fC3fT2f* outQuad)
     const float atlasHeight = static_cast<float>(m_texture->getHeight());
 
     float left   = rectInPoints.m_position.x / atlasWidth;
+    float bottom = rectInPoints.m_position.y / atlasHeight;
     float right  = (rectInPoints.m_position.x + rectInPoints.m_size.x) / atlasWidth;
-    float top    = rectInPoints.m_position.y / atlasHeight;
-    float bottom = (rectInPoints.m_position.y + rectInPoints.m_size.y) / atlasHeight;
+    float top = (rectInPoints.m_position.y + rectInPoints.m_size.y) / atlasHeight;
 
     outQuad->bottomLeft.texCoord  = { left, bottom };
     outQuad->bottomRight.texCoord = { right, bottom };

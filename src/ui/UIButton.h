@@ -1,7 +1,5 @@
 #pragma once
-#include <string>
-#include <functional>
-#include "ui/UIWidget.h"
+#include "ui/UIButtonBase.h"
 
 NS_OCF_BEGIN
 
@@ -11,9 +9,10 @@ class DrawShape;
 
 namespace ui {
 
-class Button : public Widget {
+class Button : public ButtonBase {
 public:
     static Button* create();
+    static Button* create(std::string_view text);
     static Button* create(std::string_view normalImage, std::string_view activeImage);
 
     Button();
@@ -21,23 +20,19 @@ public:
 
     bool init() override;
     bool init(std::string_view normalImage, std::string_view activeImage);
-    void updateNode(float deltaTime) override;
-    void setOnClickCallback(std::function<void()> onClick);
-    void setText(const std::string& text);
-    std::string getText() const;
 
 protected:
     void initRenderer() override;
-    bool createTextRendererIfNull();
-    void updateTextLocation();
+    void updateTextLocation() override;
+    void onMouseClicked() override;
+    void onSetFocus() override;
+    void onKillFocus() override;
 
 protected:
     Sprite* m_pButtonNormalRenderer;
     Sprite* m_pButtonActiveRenderer;
     std::string m_normalFilename;
     std::string m_activeFilename;
-    Label* m_pTextRenderer;
-    std::function<void()> m_onClick;
 };
 
 }

@@ -1,13 +1,13 @@
 #include "MoveComponent.h"
 #include <glm/glm.hpp>
-#include "Node.h"
+#include "2d/Node2D.h"
 
 NS_OCF_BEGIN
 
-MoveComponent::MoveComponent(Node* pEntity, int updateOrder)
-    : m_angularSpeed(0.0f)
+MoveComponent::MoveComponent(Node2D* pEntity, int updateOrder)
+    : Component(pEntity, updateOrder)
+    , m_angularSpeed(0.0f)
     , m_forwardSpeed(0.0f)
-    , Component(pEntity, updateOrder)
 {
 }
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 #include "2d/Component.h"
-#include "2d/Node.h"
 #include "2d/Label.h"
+#include "2d/Node2D.h"
 #include "2d/Sprite.h"
 #include "2d/MoveComponent.h"
 #include "2d/CircleComponent.h"
@@ -18,6 +18,8 @@
 #include "base/Event.h"
 #include "base/EventListener.h"
 #include "base/EventDispatcher.h"
+#include "base/Node.h"
+#include "base/Scene.h"
 
 #include "input/Input.h"
 
@@ -27,5 +29,6 @@
 #include "platform/Application.h"
 
 #include "ui/UIButton.h"
+#include "ui/UICheckBox.h"
 #include "ui/UISlider.h"
 

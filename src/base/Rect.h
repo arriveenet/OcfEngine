@@ -14,8 +14,6 @@ public:
     Rect(float x, float y, float widht, float height);
     Rect(const glm::vec2& position, const glm::vec2& size);
 
-    Rect& operator= (const Rect& other);
-
     void setRect(float x, float y, float widht, float height);
 
     float getMaxX() const;

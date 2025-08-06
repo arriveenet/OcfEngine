@@ -16,10 +16,6 @@ ActionTest::~ActionTest()
 
 bool ActionTest::init()
 {
-    if (!TestCase::init()) {
-        return false;
-    }
-
     SpriteFrameManager::getInstance()->addSpriteFramesWithFile("UnityChan.xml");
     std::vector<SpriteFrame*> animationFrames;
     char fileName[256] = { 0 };
@@ -30,8 +26,8 @@ bool ActionTest::init()
     }
 
     Sprite* unityChan = Sprite::createWithSpriteFrameName("Unitychan_Walk_1.png");
-    unityChan->setPosition(200, 200);
-    unityChan->setScale(10);
+    unityChan->setPosition(glm::vec2(200, 200));
+    unityChan->setScale(glm::vec2(5.0f, 5.0f));
     Animation* pAnimation = Animation::createWithSpriteFrames(animationFrames, 0.2f);
     AnimateComponent* pAnimate = new AnimateComponent(unityChan);
     pAnimate->initWithAnimation(pAnimation);
@@ -40,8 +36,7 @@ bool ActionTest::init()
 
     unityChan->addComponent(repeat);
 
-    this->addChild(unityChan);
-
-
-    return true;
+    m_root->addChild(unityChan);
+    
+    return TestCase::init();
 }

@@ -1,5 +1,5 @@
 #include "3d/FirstPersonCamera.h"
-#include "2d/Node.h"
+#include "base/Node.h"
 #include "input/Input.h"
 #include "base/Game.h"
 #include "base/EventListenerKeyboard.h"
@@ -31,11 +31,12 @@ FirstPersonCamera::FirstPersonCamera()
     , m_keyStates{ false }
     , m_isCameraControl(true)
 {
+    setName("FirstPersonCamera");
 }
 
 FirstPersonCamera::~FirstPersonCamera()
 {
-    Input::setMouseMode(Input::MouseMode::Visible);
+    Input::setMouseMode(Input::MouseMode::Normal);
 }
 
 bool FirstPersonCamera::initPerspective(float fovy, float aspect, float zNear, float zFar)
@@ -54,7 +55,7 @@ bool FirstPersonCamera::initPerspective(float fovy, float aspect, float zNear, f
     // マウスカーソルを中央に
     Input::setMouseMode(Input::MouseMode::Captured);
 
-    return Camera::initPerspective(fovy, aspect, zNear, zFar);
+    return Camera3D::initPerspective(fovy, aspect, zNear, zFar);
 }
 
 void FirstPersonCamera::updateNode(float deltaTime)
@@ -95,17 +96,11 @@ void FirstPersonCamera::onMouseMove(Event* pEvent)
     EventMouse* mouseEvent = static_cast<EventMouse*>(pEvent);
 
     if (mouseEvent->m_mouseEventType == EventMouse::MouseEventType::Move) {
-        const glm::vec2 pos = mouseEvent->getPosition();
-        const glm::vec2 center = m_pGame->getVisibleSize() / 2.0f;
+        glm::vec2 mouseDelta = mouseEvent->getDelta();
+        mouseDelta *= m_sensitivity;
 
-        float xOffset = pos.x - center.x;
-        float yOffset = center.y - pos.y;
-
-        xOffset *= m_sensitivity;
-        yOffset *= m_sensitivity;
-
-        m_yaw += xOffset;
-        m_pitch += yOffset;
+        m_yaw += mouseDelta.x;
+        m_pitch += mouseDelta.y;
 
         // ヨー角度の制限
         if (m_yaw > 360.0f || m_yaw < -360.0f) {
@@ -184,16 +179,16 @@ void FirstPersonCamera::setCameraControl(bool centerCursor)
         Input::setMouseMode(Input::MouseMode::Captured);
     }
     else {
-        Input::setMouseMode(Input::MouseMode::Visible);
+        Input::setMouseMode(Input::MouseMode::Normal);
     }
 }
 
 void FirstPersonCamera::updateCameraVectors()
 {
     glm::vec3 front{};
-    front.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
-    front.y = sin(glm::radians(m_pitch));
-    front.z = sin(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
+    front.x = cosf(glm::radians(m_yaw)) * cosf(glm::radians(m_pitch));
+    front.y = sinf(glm::radians(m_pitch));
+    front.z = sinf(glm::radians(m_yaw)) * cosf(glm::radians(m_pitch));
 
     m_front = glm::normalize(front);
     m_right = glm::normalize(glm::cross(m_front, m_worldUp));

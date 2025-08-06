@@ -48,9 +48,12 @@ Label* Label::createWithTTF(std::string_view ttfPath, std::string_view text, int
 
 Label::Label()
     : m_font(nullptr)
-    , m_isDirty(true)
+    , m_labelType(LabelType::BMFONT)
     , m_textColor(1.0f, 1.0f, 1.0f)
+    , m_isDirty(true)
 {
+    setName("Label");
+
 #if OCF_LABEL_DEBUG_DRAW
     m_pDebugDrawShape = DrawShape::create();
     addChild(m_pDebugDrawShape);
@@ -63,7 +66,7 @@ Label::~Label()
 
 bool Label::init()
 {
-    m_font = FontManager::getFontFNT("Consolas.fnt");
+    m_font = FontManager::getFontFNT("NatoSansJP.fnt");
     if (m_font == nullptr) {
         return false;
     }
@@ -86,6 +89,7 @@ bool Label::initWithBMFont(std::string_view bmFontPath)
     }
 
     m_fontAtlas = m_font->getFontAtlas();
+    m_labelType = LabelType::BMFONT;
 
     updateBatchCommands();
 
@@ -108,7 +112,7 @@ bool Label::initWithTTF(std::string_view ttfPath, int fontSize)
     }
 
     m_fontAtlas = m_font->getFontAtlas();
-
+    m_labelType = LabelType::TTF;
     updateBatchCommands();
 
     ShaderManager* shaderManager = ShaderManager::getInstance();
@@ -117,7 +121,7 @@ bool Label::initWithTTF(std::string_view ttfPath, int fontSize)
     return true;
 }
 
-void Label::setString(const std::string& text)
+void Label::setString(std::string_view text)
 {
     if (m_text != text) {
         m_text = text;
@@ -131,7 +135,7 @@ void Label::setTextColor(const glm::vec3& textColor)
     m_textColor = textColor;
 }
 
-void Label::setTextColor(unsigned char r, unsigned char g, unsigned b)
+void Label::setTextColor(unsigned char r, unsigned char g, unsigned char b)
 {
     m_textColor.r = r / 255.0f;
     m_textColor.g = g / 255.0f;
@@ -192,13 +196,13 @@ void Label::updateQuads()
     float lineHeight = m_font->getLineHeight();
     int numberOfLines = 1;
 
-    for (int i = 0; i < m_utf32Text.size(); i++) {
+    for (size_t i = 0; i < m_utf32Text.size(); i++) {
 
         const char32_t p = m_utf32Text.at(i);
 
         if (p == '\n') {
             x = 0;
-            y -= lineHeight;
+            y += lineHeight;
             numberOfLines++;
             continue;
         }
@@ -214,23 +218,23 @@ void Label::updateQuads()
         float tx1 = static_cast<float>((pChar.x) + pChar.width) / textureWidth;
         float ty1 = static_cast<float>((pChar.y) + pChar.height) / textureHeight;
 
-        const float offsetY = static_cast<float>(lineHeight - pChar.yoffset - pChar.height);
+        const float offsetY = pChar.yoffset;
 
         QuadV3fC3fT2f quad = { };
         quad.topLeft.position = { x + pChar.xoffset, y + offsetY + pChar.height, 0.0f };
-        quad.topLeft.texCoord = { tx0, ty0 };
+        quad.topLeft.texCoord = { tx0, ty1 };
         quad.topLeft.color = m_textColor;
 
         quad.bottomLeft.position = { x + pChar.xoffset, y + offsetY, 0.0f };
-        quad.bottomLeft.texCoord = { tx0, ty1 };
+        quad.bottomLeft.texCoord = { tx0, ty0 };
         quad.bottomLeft.color = m_textColor;
 
         quad.topRight.position = { x + pChar.xoffset + pChar.width, y + offsetY + pChar.height, 0.0f };
-        quad.topRight.texCoord = { tx1, ty0 };
+        quad.topRight.texCoord = { tx1, ty1 };
         quad.topRight.color = m_textColor;
 
         quad.bottomRight.position = { x + pChar.xoffset + pChar.width, y + offsetY, 0.0f };
-        quad.bottomRight.texCoord = { tx1, ty1 };
+        quad.bottomRight.texCoord = { tx1, ty0 };
         quad.bottomRight.color = m_textColor;
 
         x += pChar.xadvance;
@@ -242,7 +246,7 @@ void Label::updateQuads()
 
     const float sizeWidth = lineWidth + 2.0f;
     const float sizeHeight = lineHeight * numberOfLines;
-    setSize(sizeWidth, sizeHeight);
+    setSize(glm::vec2(sizeWidth, sizeHeight));
 
 #if OCF_LABEL_DEBUG_DRAW
     m_pDebugDrawShape->clear();

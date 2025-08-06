@@ -1,11 +1,12 @@
 #include "Game.h"
-#include "2d/Camera.h"
+#include "2d/Camera2D.h"
 #include "2d/FontManager.h"
 #include "2d/Label.h"
 #include "2d/SpriteFrameManager.h"
 #include "audio/AudioEngine.h"
 #include "base/EventDispatcher.h"
 #include "base/FileUtils.h"
+#include "base/Scene.h"
 #include "input/Input.h"
 #include "platform/Application.h"
 #include "platform/GLView.h"
@@ -20,9 +21,10 @@ Game* Game::s_sharedGame = nullptr;
 
 Game::Game()
     : m_running(false)
+    , m_cleanupInNextLoop(false)
     , m_deltaTime(0.0f)
     , m_lastUpdate()
-    , m_projection(Projection::_3D)
+    , m_projection(Projection::_2D)
     , m_windowSize(0.0f, 0.0f)
     , m_resolutionSize(0.0f, 0.0f)
     , m_renderer(nullptr)
@@ -41,7 +43,7 @@ Game::~Game()
     OCF_SAFE_RELEASE(m_pDrawVertexLabel);
 
     // シーンを解放
-    OCF_SAFE_RELEASE(m_currentScene);
+    OCF_SAFE_DELETE(m_currentScene);
 
     // テクスチャーマネージャーを解放
     OCF_SAFE_RELEASE(m_textureManager);
@@ -98,11 +100,9 @@ bool Game::init()
 
 void Game::mainLoop()
 {
-    if (!m_running) {
-        if (m_glView != nullptr) {
-            m_glView->end();
-            m_glView = nullptr;
-        }
+    if (m_cleanupInNextLoop) {
+        m_cleanupInNextLoop = false;
+        cleanup();
     }
     else {
         update();
@@ -113,6 +113,38 @@ void Game::mainLoop()
 void Game::exit()
 {
     m_running = false;
+    m_cleanupInNextLoop = true;
+}
+
+void Game::cleanup()
+{
+    OCF_SAFE_DELETE(m_pFPSLabel);
+    OCF_SAFE_DELETE(m_pDrawCallLabel);
+    OCF_SAFE_DELETE(m_pDrawVertexLabel);
+
+    // シーンを解放
+    OCF_SAFE_DELETE(m_currentScene);
+
+    // テクスチャーマネージャーを解放
+    OCF_SAFE_DELETE(m_textureManager);
+
+    // イベントディスパッチャを解放
+    OCF_SAFE_DELETE(m_eventDispatcher);
+
+    // ファイルユーティリティを解放
+    FileUtils::destroyInstance();
+    SpriteFrameManager::destroyInstance();
+    ShaderManager::destroyInstance();
+    FontManager::release();
+    AudioEngine::end();
+
+    // レンダラーを解放
+    OCF_SAFE_DELETE(m_renderer);
+
+    if (m_glView != nullptr) {
+        m_glView->end();
+        m_glView = nullptr;
+    }
 }
 
 void Game::runWithScene(Scene* pScene)
@@ -150,7 +182,7 @@ void Game::setNextScene()
 {
     if (m_currentScene != nullptr) {
         m_currentScene->onExit();
-        m_currentScene->release();
+        OCF_SAFE_DELETE(m_currentScene);
     }
 
     m_currentScene = m_nextScene;
@@ -387,7 +419,7 @@ void Game::showStats()
 
     if (m_pFPSLabel) {
         if (m_accumulator > FPS_UPDATE_INTERVAL) {
-            snprintf(buffer, sizeof(buffer), "FPS: %.1f", m_frames / m_accumulator);
+            snprintf(buffer, sizeof(buffer), "FPS: %.1f", static_cast<float>(m_frames) / m_accumulator);
             m_pFPSLabel->setString(buffer);
 
             m_frames = 0;
@@ -417,7 +449,7 @@ void Game::showStats()
     m_pDrawCallLabel->update(m_deltaTime);
     m_pDrawVertexLabel->update(m_deltaTime);
 
-    Camera* pCamera = m_currentScene->getDefaultCamera();
+    Camera2D* pCamera = m_currentScene->getDefaultCamera();
     glm::mat4 modelView = pCamera->getViewMatrix();
 
     pushMatrix(MatrixStack::Projection);
@@ -436,11 +468,10 @@ void Game::createStatsLabel()
     m_pDrawCallLabel = Label::create("Draw call: 0");
     m_pDrawVertexLabel = Label::create("Draw vert: 0");
 
-    glm::vec2 visibleSize = getVisibleSize();
     float fontHeight = m_pFPSLabel->getFont()->getLineHeight();
-    m_pFPSLabel->setPosition(0, visibleSize.y - fontHeight);
-    m_pDrawCallLabel->setPosition(0, visibleSize.y - fontHeight * 2);
-    m_pDrawVertexLabel->setPosition(0, visibleSize.y - fontHeight * 3);
+    m_pFPSLabel->setPosition(glm::vec2(0, 0));
+    m_pDrawCallLabel->setPosition(glm::vec2(0, fontHeight));
+    m_pDrawVertexLabel->setPosition(glm::vec2(0, fontHeight * 2));
 }
 
 NS_OCF_END
