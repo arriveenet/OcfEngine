@@ -36,14 +36,7 @@ pad_number(TMP_VERSION_REVISION 3)
 set(LIBJPEG_TURBO_VERSION_NUMBER
   ${VERSION_MAJOR}${TMP_VERSION_MINOR}${TMP_VERSION_REVISION})
 
-if(WITH_JPEG8)
-  set(JPEG_LIB_VERSION 80)
-elseif(WITH_JPEG7)
-  set(JPEG_LIB_VERSION 70)
-else()
-  set(JPEG_LIB_VERSION 62)
-endif()
-
+set(JPEG_LIB_VERSION 70)
 
 message(STATUS "VERSION = ${VERSION}, BUILD = ${BUILD}")
 
@@ -88,6 +81,9 @@ endif()
 if(MSVC_IDE AND CMAKE_GENERATOR_PLATFORM MATCHES "arm64")
   set(CPU_TYPE arm64)
 endif()
+
+set(WITH_SIMD 1)
+set(HAVE_LIBJPEG_TURBO_SIMD 0 PARENT_SCOPE)
 
 macro(boolean_number var)
   if(${var})
@@ -257,27 +253,26 @@ if(WITH_ARITH_DEC)
   set(JPEG_SOURCES ${JPEG_SOURCES} src/jdarith.c)
 endif()
 
-if(WITH_SIMD)
+if(ENABLE_LIBJPEG_TURBO_SIMD)
   add_subdirectory(simd)
   if(NEON_INTRINSICS)
     add_definitions(-DNEON_INTRINSICS)
   endif()
 else()
-  message(STATUS "SIMD extensions: None (WITH_SIMD = ${WITH_SIMD})")
+  set(WITH_SIMD 0)
 endif()
-
-configure_file(src/jconfig.h.in jconfig.h)
-configure_file(src/jconfigint.h.in jconfigint.h)
 
 if(WITH_SIMD)
   message(STATUS "SIMD extensions: ${CPU_TYPE} (WITH_SIMD = ${WITH_SIMD})")
+  set(HAVE_LIBJPEG_TURBO_SIMD 1 PARENT_SCOPE)
   if(MSVC_IDE OR XCODE)
     set_source_files_properties(${SIMD_OBJS} PROPERTIES GENERATED 1)
   endif()
   set(SIMD_TARGET_OBJECTS $<TARGET_OBJECTS:simd>)
 endif()
 
-
+configure_file(src/jconfig.h.in jconfig.h)
+configure_file(src/jconfigint.h.in jconfigint.h)
 
 add_library(jpeg12-static OBJECT ${JPEG12_SOURCES})
 set_property(TARGET jpeg12-static PROPERTY COMPILE_FLAGS
