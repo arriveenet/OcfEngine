@@ -10,6 +10,7 @@ public:
     enum class Format {
         PNG,
         BMP,
+        JPEG,
         UNKNOWN
     };
 
@@ -35,9 +36,11 @@ protected:
     Format detectFormat(const unsigned char* pData, size_t dataSize);
     bool initWithBmpData(const unsigned char* pData, size_t dataSize);
     bool initWithPngData(const unsigned char* pData, size_t dataSize);
+    bool initWithJpegData(const unsigned char* pData, size_t dataSize);
 
     bool isBmp(const unsigned char* pData, size_t dataSize);
     bool isPng(const unsigned char* pData, size_t dataSize);
+    bool isJpeg(const unsigned char* pData, size_t dataSize);
 
     bool savePng(std::string_view filename);
 

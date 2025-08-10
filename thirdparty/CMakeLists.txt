@@ -125,6 +125,16 @@ set_target_properties(zlib
                       FOLDER "ThirdParty"
                       )
 
+add_subdirectory(libjpeg-turbo)
+target_link_libraries(thirdparty INTERFACE jpeg-static)
+set_target_properties(jpeg-static
+                      PROPERTIES
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      FOLDER "ThirdParty"
+                      )
+
 add_subdirectory(libpng)
 target_include_directories(thirdparty INTERFACE "libpng")
 target_link_libraries(thirdparty INTERFACE libpng)
