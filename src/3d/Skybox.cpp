@@ -52,6 +52,8 @@ namespace {
 
 NS_OCF_BEGIN
 
+using namespace backend;
+
 Skybox* Skybox::create(std::string_view positive_x,
                        std::string_view negative_x,
                        std::string_view positive_y,
@@ -116,7 +118,7 @@ bool Skybox::init(std::string_view positive_x,
 void Skybox::initBuffer()
 {
     m_customCommand.setDrawType(CustomCommand::DrawType::Array);
-    m_customCommand.setPrimitiveType(PrimitiveType::Triangle);
+    m_customCommand.setPrimitiveType(PrimitiveType::TRIANGLES);
 
     VertexArray* vertexArray = m_customCommand.getVertexArray();
     vertexArray->bind();

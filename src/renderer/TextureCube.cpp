@@ -1,10 +1,12 @@
 #include "TextureCube.h"
 #include "base/FileUtils.h"
 #include "renderer/Image.h"
-#include "renderer/OpenGLInclude.h"
-#include "renderer/OpenGLUtility.h"
+#include "backend/opengl/OpenGLInclude.h"
+#include "backend/opengl/OpenGLUtility.h"
 
 NS_OCF_BEGIN
+
+using namespace backend;
 
 TextureCube* TextureCube::create(std::string_view positive_x,
                                  std::string_view negative_x,

@@ -1,7 +1,7 @@
 #include "Program.h"
 #include <glm/gtc/type_ptr.hpp>
 #include "base/FileUtils.h"
-#include "renderer/OpenGLUtility.h"
+#include "renderer/backend/opengl/OpenGLUtility.h"
 
 namespace {
 void setUniform(GLuint location, unsigned int size, GLenum uniformType, void* data)
@@ -22,6 +22,8 @@ void setUniform(GLuint location, unsigned int size, GLenum uniformType, void* da
 }
 
 NS_OCF_BEGIN
+
+using namespace backend;
 
 Program::Program(const std::string& vertexShader, const std::string& fragmentShader)
     : m_uniformBufferSize(0)

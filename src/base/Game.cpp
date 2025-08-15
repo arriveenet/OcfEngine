@@ -12,10 +12,13 @@
 #include "platform/GLView.h"
 #include "renderer/Renderer.h"
 #include "renderer/TextureManager.h"
+#include "renderer/backend/opengl/OpenGLDriver.h"
 
 #define FPS_UPDATE_INTERVAL	(0.5f)
 
 NS_OCF_BEGIN
+
+using namespace backend;
 
 Game* Game::s_sharedGame = nullptr;
 
@@ -28,6 +31,7 @@ Game::Game()
     , m_windowSize(0.0f, 0.0f)
     , m_resolutionSize(0.0f, 0.0f)
     , m_renderer(nullptr)
+    , m_driver(nullptr)
     , m_currentScene(nullptr)
     , m_nextScene(nullptr)
     , m_glView(nullptr)
@@ -141,6 +145,9 @@ void Game::cleanup()
     // レンダラーを解放
     OCF_SAFE_DELETE(m_renderer);
 
+    // ドライバーを解放
+    OCF_SAFE_DELETE(m_driver);
+
     if (m_glView != nullptr) {
         m_glView->end();
         m_glView = nullptr;
@@ -247,6 +254,8 @@ void Game::setGLView(GLView* glView)
 {
     if (m_glView != glView) {
         m_renderer->init();
+        auto driver = OpenGLDriver::create();
+        m_driver = driver;
         m_glView = glView;
     }
 }

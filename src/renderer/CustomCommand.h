@@ -1,5 +1,5 @@
 #pragma once
-#include "Types.h"
+#include "Renderer/Backend/DriverEnums.h"
 #include "RenderCommand.h"
 #include <functional>
 
@@ -9,6 +9,8 @@ class TextureCube;
 
 class CustomCommand : public RenderCommand {
 public:
+    using PrimitiveType = backend::PrimitiveType;
+
     enum class DrawType {
         Array,
         Element

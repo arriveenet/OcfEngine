@@ -1,6 +1,8 @@
 #pragma once
 #include "base/GameObject.h"
 #include "base/Types.h"
+#include "renderer/backend/DriverBase.h"
+#include "renderer/backend/Handle.h"
 #include <glm/glm.hpp>
 #include <string>
 
@@ -32,6 +34,8 @@ private:
     int m_height;
     PixelFormat m_pixelFormat;
     glm::vec2 m_size;
+    backend::Handle<backend::HwTexture> m_handle;
+
 };
 
 NS_OCF_END

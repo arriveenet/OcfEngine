@@ -1,12 +1,14 @@
 #include "Renderer.h"
 #include "base/Game.h"
-#include "renderer/OpenGLInclude.h"
-#include "renderer/OpenGLUtility.h"
+#include "renderer/backend/opengl/OpenGLInclude.h"
+#include "renderer/backend/opengl/OpenGLUtility.h"
 #include "renderer/CustomCommand.h"
 #include "renderer/TextureCube.h"
 #include <glm/gtc/type_ptr.hpp>
 
 NS_OCF_BEGIN
+
+using namespace backend;
 
 Renderer::Renderer()
     : m_viewport(0, 0, 0, 0)
@@ -339,10 +341,11 @@ void Renderer::drawCustomCommand(RenderCommand* command)
     cmd->getVertexArray()->bind();
 
     const auto drawType = cmd->getDrawType();
+    const auto primitiveType = cmd->getPrimitiveType();
     if (drawType == CustomCommand::DrawType::Element) {
-        glDrawElements(OpenGLUtility::toGLPrimitive(cmd->getPrimitiveType()), 0, GL_UNSIGNED_SHORT, nullptr);
+        glDrawElements(OpenGLUtility::toGLPrimitive(primitiveType), 0, GL_UNSIGNED_SHORT, nullptr);
     } else {
-        glDrawArrays(OpenGLUtility::toGLPrimitive(cmd->getPrimitiveType()), cmd->getVertexDrawStart(), cmd->getVertexDrawCount());
+        glDrawArrays(OpenGLUtility::toGLPrimitive(primitiveType), cmd->getVertexDrawStart(), cmd->getVertexDrawCount());
     }
 
     m_drawCallCount++;

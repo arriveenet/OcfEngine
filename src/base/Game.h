@@ -15,6 +15,10 @@ class GLView;
 class TextureManager;
 class EventDispatcher;
 
+namespace backend {
+class Driver;
+}
+
 /**
  * @brief ゲームクラス
  * ゲームの状態管理などを行うシングルトンクラス。
@@ -109,6 +113,12 @@ public:
      * @return レンダラーのポインタ
      */
     Renderer* getRenderer() const { return m_renderer; }
+
+    /**
+     * @brief ドライバーを取得する
+     * @return ドライバーのポインタ
+     */
+    backend::Driver* getDriver() const { return m_driver; }
 
     /**
      * @brief 現在設定されているシーンを取得する
@@ -221,6 +231,7 @@ private:
     glm::vec2 m_resolutionSize;
 
     Renderer* m_renderer;
+    backend::Driver* m_driver;
     Scene* m_currentScene;
     Scene* m_nextScene;
     std::vector<Scene*> m_sceneStack;

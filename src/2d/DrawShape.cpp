@@ -38,9 +38,9 @@ DrawShape::~DrawShape()
 
 bool DrawShape::init()
 {
-    updateShader(m_customCommandPoint, ProgramType::DrawShape, PrimitiveType::Point);
-    updateShader(m_customCommandLine, ProgramType::DrawShape, PrimitiveType::Line);
-    updateShader(m_customCommandTriangle, ProgramType::DrawShape, PrimitiveType::Triangle);
+    updateShader(m_customCommandPoint, ProgramType::DrawShape, PrimitiveType::POINTS);
+    updateShader(m_customCommandLine, ProgramType::DrawShape, PrimitiveType::LINES);
+    updateShader(m_customCommandTriangle, ProgramType::DrawShape, PrimitiveType::TRIANGLES);
 
     m_customCommandPoint.setBeforeCallback(
         [=]() { m_pGame->getRenderer()->setPointSize(m_pointSize);});

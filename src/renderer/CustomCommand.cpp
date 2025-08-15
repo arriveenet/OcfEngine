@@ -9,7 +9,7 @@ CustomCommand::CustomCommand()
     , m_indexDrawCount(0)
     , m_textureCube(nullptr)
     , m_drawType(DrawType::Element)
-    , m_primitiveType(PrimitiveType::Triangle)
+    , m_primitiveType(PrimitiveType::TRIANGLES)
     , m_beforeCallback(nullptr)
     , m_afterCallback(nullptr) {
     m_Type = Type::CustomCommand;

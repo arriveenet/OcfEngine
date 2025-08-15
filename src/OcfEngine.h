@@ -24,7 +24,6 @@
 #include "input/Input.h"
 
 #include "renderer/Image.h"
-#include "renderer/OpenGLInclude.h"
 
 #include "platform/Application.h"
 

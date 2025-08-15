@@ -10,6 +10,8 @@
 
 NS_OCF_BEGIN
 
+using namespace backend;
+
 Mesh* Mesh::create()
 {
     Mesh* mesh = new Mesh();
@@ -31,7 +33,7 @@ Mesh::~Mesh()
 bool Mesh::setupMesh()
 {
     m_meshCommand.setDrawType(CustomCommand::DrawType::Array);
-    m_meshCommand.setPrimitiveType(PrimitiveType::Triangle);
+    m_meshCommand.setPrimitiveType(PrimitiveType::TRIANGLES);
 
     Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::Phong);
 

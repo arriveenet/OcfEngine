@@ -1,8 +1,6 @@
 #include "OpenGLUtility.h"
 
-NS_OCF_BEGIN
-
-using namespace backend;
+namespace ocf::backend {
 
 GLenum OpenGLUtility::toGLPrimitive(backend::PrimitiveType primitiveType)
 {
@@ -94,4 +92,4 @@ GLsizei OpenGLUtility::getGLDataTypeSize(GLenum type)
     return size;
 }
 
-NS_OCF_END
+} // namespace ocf::backend

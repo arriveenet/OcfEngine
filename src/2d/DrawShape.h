@@ -10,6 +10,8 @@ NS_OCF_BEGIN
 
 class DrawShape : public Node2D {
 public:
+      using PrimitiveType = backend::PrimitiveType;
+
     static DrawShape* create();
 
     DrawShape();

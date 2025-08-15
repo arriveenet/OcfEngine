@@ -1,9 +1,11 @@
 #include "Texture2D.h"
 #include "Image.h"
-#include "OpenGLInclude.h"
-#include "OpenGLUtility.h"
+#include "renderer/backend/opengl/OpenGLInclude.h"
+#include "renderer/backend/opengl/OpenGLUtility.h"
 
 NS_OCF_BEGIN
+
+using namespace backend;
 
 static int getPixelAlignment(PixelFormat format)
 {
