@@ -29,6 +29,7 @@ else()
 endif()
 
 option(OCF_BUILD_TESTS "Build cpp-tests" ON)
+option(OCF_BUILD_SAMPLES "Build samples" ON)
 
 # サブプロジェクトを含めます。
 add_subdirectory (${OCF_ROOT_PATH}/src)
@@ -41,4 +42,8 @@ if (OCF_BUILD_TESTS)
     
      add_test_target(cpp-tests ${OCF_ROOT_PATH}/tests/cpp-tests)
      add_test_target(unit-tests ${OCF_ROOT_PATH}/tests/unit-tests)
+endif()
+
+if (OCF_BUILD_SAMPLES)
+    add_subdirectory(samples/2d-action)
 endif()
