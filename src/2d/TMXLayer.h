@@ -3,7 +3,7 @@
 #include "2d/Node2D.h"
 #include "renderer/QuadCommand.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class TMXLayerInfo;
 class TMXTilesetInfo;
@@ -36,4 +36,4 @@ protected:
     Texture2D* m_pTexture;
 };
 
-NS_OCF_END
+} // namespace ocf

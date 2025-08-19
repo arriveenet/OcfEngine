@@ -10,7 +10,7 @@
 #include "base/Viewport.h"
 #include <typeinfo>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Node::Node()
     : m_pParent(nullptr)
@@ -316,4 +316,4 @@ bool isScreenPointInRect(const glm::vec2& pt, const Camera2D* pCamera, const glm
     return rect.intersect(glm::vec2(P.x, P.y));
 }
 
-NS_OCF_END
+} // namespace ocf

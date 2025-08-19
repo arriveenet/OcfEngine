@@ -5,7 +5,7 @@
 #include "base/Console.h"
 #include "base/FileUtils.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 static ALCdevice* s_pALDevice = nullptr;
 static ALCcontext* s_pALContext = nullptr;
@@ -275,4 +275,4 @@ ALuint AudioEngineImpl::findSource()
     return sourceId;
 }
 
-NS_OCF_END
+} // namespace ocf

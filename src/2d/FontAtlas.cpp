@@ -3,7 +3,7 @@
 #include "renderer/Texture2D.h"
 #include "renderer/Image.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 FontAtlas::FontAtlas()
     : FontAtlas(DEFAULT_TEXTURE_WIDTH, DEFAULT_TEXTURE_HEIGHT)
@@ -106,4 +106,4 @@ Texture2D* FontAtlas::getTexture(unsigned int slot) const
     return m_atlasTextures.at(slot);
 }
 
-NS_OCF_END
+} // namespace ocf

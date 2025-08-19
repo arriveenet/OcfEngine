@@ -4,7 +4,7 @@
 #include "renderer/OpenGLInclude.h"
 #include "renderer/OpenGLUtility.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 TextureCube* TextureCube::create(std::string_view positive_x,
                                  std::string_view negative_x,
@@ -126,4 +126,4 @@ Image* TextureCube::createImage(std::string_view filename)
     return nullptr;
 }
 
-NS_OCF_END
+} // namespace ocf

@@ -1,7 +1,7 @@
 #include "AudioEngine.h"
 #include "audio/AudioEngineImpl.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 const int AudioEngine::AUDIO_ID_INVALID = -1;
 const float AudioEngine::TIME_UNKNOWN = -1.0f;
@@ -182,4 +182,4 @@ void AudioEngine::uncacheAll()
     m_pAudioEngineImpl->unchacheAll();
 }
 
-NS_OCF_END
+} // namespace ocf

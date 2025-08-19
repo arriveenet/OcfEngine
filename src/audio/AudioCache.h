@@ -3,7 +3,7 @@
 #include <string>
 #include <AL/al.h>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class AudioCache {
 public:
@@ -38,4 +38,4 @@ protected:
     friend class AudioPlayer;
 };
 
-NS_OCF_END
+} // namespace ocf

@@ -1,6 +1,6 @@
 #include "Component.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Component::Component(Node2D* pEntity, int updateOrder)
     : m_pOwner(pEntity)
@@ -21,4 +21,4 @@ int Component::getUpdateOrder() const
     return m_updateOrder;
 }
 
-NS_OCF_END
+} // namespace ocf

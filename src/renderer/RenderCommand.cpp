@@ -1,6 +1,6 @@
 #include "RenderCommand.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 void RenderCommand::init(float globalZOrder, const glm::mat4& modelViewMatrix)
 {
@@ -20,4 +20,4 @@ RenderCommand::~RenderCommand()
 {
 }
 
-NS_OCF_END
+} // namespace ocf

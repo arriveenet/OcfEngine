@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include "base/Types.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Texture2D;
 class FontAtlas;
@@ -46,4 +46,4 @@ protected:
     friend class FontManager;
 };
 
-NS_OCF_END
+} // namespace ocf

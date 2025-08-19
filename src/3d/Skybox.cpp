@@ -50,7 +50,7 @@ namespace {
     };
 }
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Skybox* Skybox::create(std::string_view positive_x,
                        std::string_view negative_x,
@@ -153,4 +153,4 @@ void Skybox::draw(Renderer* renderer, const glm::mat4& transform)
     renderer->addCommand(&m_customCommand);
 }
 
-NS_OCF_END
+} // namespace ocf

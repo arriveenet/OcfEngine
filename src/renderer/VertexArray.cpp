@@ -1,6 +1,6 @@
 #include "VertexArray.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 VertexArray::VertexArray()
     : m_vertexArray(0)
@@ -96,4 +96,4 @@ void VertexArray::setAttribute(const std::string& name, int index, int size, boo
     m_attributes.emplace(name, attrib);
 }
 
-NS_OCF_END
+} // namespace ocf

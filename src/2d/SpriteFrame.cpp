@@ -4,7 +4,7 @@
 #include "renderer/Texture2D.h"
 #include "renderer/TextureManager.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 SpriteFrame* SpriteFrame::createWithTexture(Texture2D* texture,
                                             const Rect& rect,
@@ -81,4 +81,4 @@ Texture2D* SpriteFrame::getTexture() const
     return nullptr;
 }
 
-NS_OCF_END
+} // namespace ocf

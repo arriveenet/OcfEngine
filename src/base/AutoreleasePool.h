@@ -3,7 +3,7 @@
 #include <string>
 #include "base/GameObject.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class AutoreleasePool {
 public:
@@ -51,4 +51,4 @@ private:
     friend class AutoreleasePool;
 };
 
-NS_OCF_END
+} // namespace ocf

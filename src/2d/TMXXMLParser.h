@@ -6,7 +6,7 @@
 #include "base/GameObject.h"
 #include "base/Rect.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 enum class TMXLayerAttribute {
     None   = 1 << 0,
@@ -83,4 +83,4 @@ protected:
     std::vector<TMXLayerInfo*> m_layers;
 };
 
-NS_OCF_END
+} // namespace ocf

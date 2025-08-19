@@ -10,7 +10,7 @@
 #include "FontTest/FontTest.h"
 #include "DrawShapeTest/DrawShapeTest.h"
 
-USING_NS_OCF;
+using namespace ocf;;
 
 using namespace ocf::ui;
 

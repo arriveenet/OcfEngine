@@ -11,7 +11,7 @@
 #   include <windows.h>
 #endif
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Scene;
 class Renderer;
@@ -78,4 +78,4 @@ protected:
     float m_scaleY;
 };
 
-NS_OCF_END
+} // namespace ocf

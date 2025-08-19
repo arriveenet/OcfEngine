@@ -1,6 +1,6 @@
 #include "MeshCommand.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 MeshCommand::MeshCommand()
 {
@@ -22,4 +22,4 @@ void MeshCommand::init(float globalZOrder, const glm::mat4& transform)
     RenderCommand::init(globalZOrder, transform);
 }
 
-NS_OCF_END
+} // namespace ocf

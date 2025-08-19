@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include "base/Types.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Mouse {
 public:
@@ -38,4 +38,4 @@ private:
     static uint32_t m_previousButton;
 };
 
-NS_OCF_END
+} // namespace ocf

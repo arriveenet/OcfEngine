@@ -3,7 +3,7 @@
 #include "RenderCommand.h"
 #include <functional>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class TextureCube;
 
@@ -70,4 +70,4 @@ protected:
     CommandCallback m_afterCallback;
 };
 
-NS_OCF_END
+} // namespace ocf

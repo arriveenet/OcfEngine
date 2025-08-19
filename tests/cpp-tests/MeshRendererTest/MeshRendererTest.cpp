@@ -3,7 +3,7 @@
 #include "base/EventListenerKeyboard.h"
 #include "3d/Skybox.h"
 
-USING_NS_OCF;
+using namespace ocf;;
 
 MeshRendererTest::MeshRendererTest()
     : m_pCamera(nullptr)

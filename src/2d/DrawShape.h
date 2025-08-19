@@ -6,7 +6,7 @@
 #include "renderer/ShaderManager.h"
 #include <vector>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class DrawShape : public Node2D {
 public:
@@ -97,4 +97,4 @@ protected:
     float m_lineWidth;
 };
 
-NS_OCF_END
+} // namespace ocf

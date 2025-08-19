@@ -2,7 +2,7 @@
 #include "UIButtonBase.h"
 #include <memory>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 namespace ui {
 
@@ -54,4 +54,4 @@ private:
 
 } // namespace ui
 
-NS_OCF_END
+} // namespace ocf

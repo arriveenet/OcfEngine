@@ -4,7 +4,7 @@
 #include "audio/AudioDecoderMp3.h"
 #include "audio/AudioDecoderOgg.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 bool AudioDecoderManager::init()
 {
@@ -43,4 +43,4 @@ void AudioDecoderManager::destoroyDecoder(AudioDecoder* decoder)
     delete decoder;
 }
 
-NS_OCF_END
+} // namespace ocf

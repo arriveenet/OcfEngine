@@ -1,6 +1,6 @@
 #include "EventKeyboard.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 EventKeyboard::EventKeyboard(Keyboard::KeyCode key, bool isPressed)
     : Event(EventType::KeyboardEvent)
@@ -9,4 +9,4 @@ EventKeyboard::EventKeyboard(Keyboard::KeyCode key, bool isPressed)
 {
 }
 
-NS_OCF_END
+} // namespace ocf

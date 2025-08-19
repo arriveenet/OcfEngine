@@ -1,7 +1,7 @@
 #pragma once
 #include "base/CanvasItem.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Renderer;
 
@@ -59,4 +59,4 @@ protected:
 
 };
 
-NS_OCF_END
+} // namespace ocf

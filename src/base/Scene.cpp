@@ -5,7 +5,7 @@
 #include "base/Viewport.h"
 #include "renderer/Renderer.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Scene::Scene()
     : m_pDefaultCamera(nullptr)
@@ -98,4 +98,4 @@ void Scene::removeNode(Node* node)
     }
 }
 
-NS_OCF_END
+} // namespace ocf

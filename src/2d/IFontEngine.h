@@ -8,7 +8,7 @@ typedef struct FT_FaceRec_* FT_Face;
 typedef struct FT_StrokerRec_* FT_Stroker;
 typedef struct FT_BBox_ FT_BBox;
 
-NS_OCF_BEGIN
+namespace ocf {
 
 struct FontFaceInfo {
     FT_Face face;
@@ -26,4 +26,4 @@ public:
 
 };
 
-NS_OCF_END
+} // namespace ocf

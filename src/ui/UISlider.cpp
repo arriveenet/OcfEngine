@@ -1,7 +1,7 @@
 #include "UISlider.h"
 #include "2d/Camera2D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 namespace ui {
 
@@ -149,4 +149,4 @@ void Slider::updateSlider()
 
 } // namespace ui
 
-NS_OCF_END
+} // namespace ocf

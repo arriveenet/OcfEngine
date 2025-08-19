@@ -1,7 +1,7 @@
 #pragma once
 #include "base/Node.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class CanvasItem : public Node {
 public:
@@ -15,4 +15,4 @@ protected:
     bool m_visible = true;  // 表示フラグ
 };
 
-NS_OCF_END
+} // namespace ocf

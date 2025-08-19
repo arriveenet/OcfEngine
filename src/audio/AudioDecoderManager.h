@@ -2,7 +2,7 @@
 #include <string>
 #include "platform/PlatformMacros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class AudioDecoder;
 
@@ -14,4 +14,4 @@ public:
     static void destoroyDecoder(AudioDecoder* decoder);
 };
 
-NS_OCF_END
+} // namespace ocf

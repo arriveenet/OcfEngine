@@ -4,7 +4,7 @@
 
 #define KEY_CODE_MAX	348
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Keyboard {
 public:
@@ -147,4 +147,4 @@ private:
     static uint8_t m_prevState[static_cast<int>(KeyCode::KEY_LAST)];
 };
 
-NS_OCF_END
+} // namespace ocf

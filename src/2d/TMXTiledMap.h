@@ -2,7 +2,7 @@
 #include <string>
 #include "2d/Node2D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class TMXMapInfo;
 
@@ -24,4 +24,4 @@ protected:
     TMXMapInfo* m_pMapInfo;
 };
 
-NS_OCF_END
+} // namespace ocf

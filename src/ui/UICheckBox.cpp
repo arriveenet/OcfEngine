@@ -4,7 +4,7 @@
 
 static constexpr float CHECKBOX_DEFAULT_SIZE = 14.0f;
 
-NS_OCF_BEGIN
+namespace ocf {
 
 namespace ui {
 
@@ -114,4 +114,4 @@ void CheckBox::updateTextLocation()
 
 } // namespace ui
 
-NS_OCF_END
+} // namespace ocf

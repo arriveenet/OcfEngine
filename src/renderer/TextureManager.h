@@ -4,7 +4,7 @@
 #include "base/GameObject.h"
 #include "Texture2D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Image;
 
@@ -26,4 +26,4 @@ private:
     std::unordered_map<std::string, Texture2D*> m_textures;
 };
 
-NS_OCF_END
+} // namespace ocf

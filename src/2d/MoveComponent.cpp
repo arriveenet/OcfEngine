@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include "2d/Node2D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 MoveComponent::MoveComponent(Node2D* pEntity, int updateOrder)
     : Component(pEntity, updateOrder)
@@ -29,5 +29,5 @@ void MoveComponent::update(float deltaTime)
 }
 
 
-NS_OCF_END
+} // namespace ocf
 

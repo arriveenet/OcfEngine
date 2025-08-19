@@ -1,7 +1,7 @@
 #include "CircleComponent.h"
 #include "2d/Node2D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 CircleComponent::CircleComponent(Node2D* pEntity)
     : Component(pEntity)
@@ -30,4 +30,4 @@ bool intersectCircle(const CircleComponent& a, const CircleComponent& b)
     return (distSq <= radiiSq);
 }
 
-NS_OCF_END
+} // namespace ocf

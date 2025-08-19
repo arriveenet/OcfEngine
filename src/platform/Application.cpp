@@ -4,7 +4,7 @@
 #include "platform/PlatformMacros.h"
 #include "platform/GLView.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Applicaiton* g_pApplication = nullptr;
 
@@ -60,4 +60,4 @@ int Applicaiton::run()
     return 0;
 }
 
-NS_OCF_END
+} // namespace ocf

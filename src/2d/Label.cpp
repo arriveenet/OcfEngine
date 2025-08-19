@@ -8,7 +8,7 @@
 #include "renderer/ShaderManager.h"
 #include "renderer/Renderer.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Label* Label::create(const std::string& text)
 {
@@ -304,4 +304,4 @@ void Label::BatchCommand::insertQuad(const QuadV3fC3fT2f& quad)
 }
 
 
-NS_OCF_END
+} // namespace ocf

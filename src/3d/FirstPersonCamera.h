@@ -2,7 +2,7 @@
 
 #include "3d/Camera3D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Event;
 
@@ -61,4 +61,4 @@ protected:
 
 };
 
-NS_OCF_END
+} // namespace ocf

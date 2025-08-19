@@ -1,6 +1,6 @@
 #include "UIWidget.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 namespace ui {
 
@@ -36,4 +36,4 @@ void Widget::initRenderer() {}
 
 }
 
-NS_OCF_END
+} // namespace ocf

@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include "base/Event.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class EventListener;
 
@@ -25,4 +25,4 @@ private:
 	std::unordered_map <std::string, EventListenerVecotr> m_listenerMap;
 };
 
-NS_OCF_END
+} // namespace ocf

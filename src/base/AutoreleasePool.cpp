@@ -1,6 +1,6 @@
 #include "AutoreleasePool.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 AutoreleasePool::AutoreleasePool()
     : m_name("")
@@ -119,4 +119,4 @@ void PoolManager::pop()
 }
 
 
-NS_OCF_END
+} // namespace ocf

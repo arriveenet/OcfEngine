@@ -4,7 +4,7 @@
 #include "renderer/ShaderManager.h"
 #include <glm/gtc/constants.hpp>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 DrawShape* DrawShape::create()
 {
@@ -356,4 +356,4 @@ std::vector<glm::vec2> DrawShape::triangulate(const std::vector<glm::vec2>& vert
     return triangles;
 }
 
-NS_OCF_END
+} // namespace ocf

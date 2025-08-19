@@ -1,7 +1,7 @@
 #pragma once
 #include "2d/Node2D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Scene;
 
@@ -58,4 +58,4 @@ protected:
     mutable bool m_viewProjectionDirty;
 };
 
-NS_OCF_END
+} // namespace ocf

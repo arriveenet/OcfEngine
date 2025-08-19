@@ -3,7 +3,7 @@
 #include <sstream>
 #include <cassert>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 static GLenum toGLShaderType(ShaderStage stage)
 {
@@ -80,4 +80,4 @@ bool Shader::isCompiled(GLuint shader)
     return true;
 }
 
-NS_OCF_END
+} // namespace ocf

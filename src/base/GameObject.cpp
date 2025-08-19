@@ -1,7 +1,7 @@
 #include "base/GameObject.h"
 #include <iostream>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 GameObject::GameObject()
     : m_referenceCount(1)
@@ -47,4 +47,4 @@ unsigned int GameObject::getReferenceCount()
     return m_referenceCount;
 }
 
-NS_OCF_END
+} // namespace ocf

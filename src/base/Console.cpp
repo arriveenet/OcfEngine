@@ -6,7 +6,7 @@
 #include <Windows.h>
 #endif
 
-NS_OCF_BEGIN
+namespace ocf {
 
 static std::string vformat(const char* format, va_list ap)
 {
@@ -48,4 +48,4 @@ void print(const char* format, ...)
     print_impl(buf);
 }
 
-NS_OCF_END
+} // namespace ocf

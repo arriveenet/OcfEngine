@@ -1,7 +1,7 @@
 #include "Event.h"
 #include "base/Node.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Event::Event(EventType eventType)
 	: m_eventType(eventType)
@@ -13,4 +13,4 @@ Event::~Event()
 {
 }
 
-NS_OCF_END
+} // namespace ocf

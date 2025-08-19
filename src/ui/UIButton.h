@@ -1,7 +1,7 @@
 #pragma once
 #include "ui/UIButtonBase.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Sprite;
 class Label;
@@ -37,4 +37,4 @@ protected:
 
 }
 
-NS_OCF_END
+} // namespace ocf

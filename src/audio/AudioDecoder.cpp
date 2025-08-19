@@ -1,7 +1,7 @@
 #include "AudioDecoder.h"
 #include <string.h>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 uint32_t AudioDecoder::readFixedFrames(uint32_t framesToRead, char* pcmBuffer)
 {
@@ -76,4 +76,4 @@ AudioDecoder::~AudioDecoder()
 {
 }
 
-NS_OCF_END
+} // namespace ocf

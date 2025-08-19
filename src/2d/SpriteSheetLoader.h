@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "base/GameObject.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class SpriteFrameManager;
 
@@ -30,4 +30,4 @@ public:
     virtual void load(std::string_view filePath, SpriteFrameManager& manager) = 0;
 };
 
-NS_OCF_END
+} // namespace ocf

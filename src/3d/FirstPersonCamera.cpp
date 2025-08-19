@@ -7,7 +7,7 @@
 #include "base/EventDispatcher.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 FirstPersonCamera* FirstPersonCamera::create(float fovy, float aspect, float zNear, float zFar)
 {
@@ -195,4 +195,4 @@ void FirstPersonCamera::updateCameraVectors()
     m_up = glm::normalize(glm::cross(m_right, m_front));
 }
 
-NS_OCF_END
+} // namespace ocf

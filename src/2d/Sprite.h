@@ -9,7 +9,7 @@
 #include "renderer/TrianglesCommand.h"
 #include "renderer/VertexArray.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Texture2D;
 class SpriteFrame;
@@ -91,4 +91,4 @@ protected:
 #endif
 };
 
-NS_OCF_END
+} // namespace ocf

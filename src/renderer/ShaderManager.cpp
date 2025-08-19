@@ -1,6 +1,6 @@
 #include "ShaderManager.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 ShaderManager* ShaderManager::s_sharedShaderManager = nullptr;
 
@@ -76,4 +76,4 @@ bool ShaderManager::init()
     return true;
 }
 
-NS_OCF_END
+} // namespace ocf

@@ -2,7 +2,7 @@
 #include "2d/Camera2D.h"
 #include "3d/Camera3D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Viewport::Viewport()
     : m_size(512, 512)
@@ -82,4 +82,4 @@ Camera3D* Viewport::findCamera3DRecursive(Node* currentNode)
     return nullptr;
 }
 
-NS_OCF_END
+} // namespace ocf

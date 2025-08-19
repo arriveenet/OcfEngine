@@ -5,7 +5,7 @@
 #include "base/Game.h"
 #include "base/Rect.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Node2D::Node2D()
     : m_position(0.0f, 0.0f)
@@ -215,4 +215,4 @@ uint32_t Node2D::processParentFlag(const glm::mat4& parentTransform, uint32_t pa
 }
 
 
-NS_OCF_END
+} // namespace ocf

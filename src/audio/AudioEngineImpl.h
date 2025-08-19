@@ -9,7 +9,7 @@
 
 #define AUDIO_SOURCE_MAX	32
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class AudioEngineImpl {
 public:
@@ -43,4 +43,4 @@ private:
     AUDIO_ID m_currentAudioID;
 };
 
-NS_OCF_END
+} // namespace ocf

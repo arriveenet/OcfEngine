@@ -19,7 +19,7 @@ std::string getListenerID(ocf::EventType type)
 }
 }
 
-NS_OCF_BEGIN
+namespace ocf {
 
 EventDispatcher::EventDispatcher()
 {
@@ -75,4 +75,4 @@ void EventDispatcher::removeEventLisnerForTarget(Node* pTarget)
     }
 }
 
-NS_OCF_END
+} // namespace ocf

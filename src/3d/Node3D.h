@@ -1,7 +1,7 @@
 #pragma once
 #include "base/Node.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Node3D : public Node {
 public:
@@ -24,4 +24,4 @@ protected:
     glm::mat4 m_transform; // Transformation matrix combining position, rotation, and scale
 };
 
-NS_OCF_END
+} // namespace ocf

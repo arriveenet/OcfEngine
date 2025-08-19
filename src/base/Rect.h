@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include "base/Macros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Rect {
 public:
@@ -31,4 +31,4 @@ public:
     bool contain(const Rect& rect) const;
 };
 
-NS_OCF_END
+} // namespace ocf

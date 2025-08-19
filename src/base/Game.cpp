@@ -15,7 +15,7 @@
 
 #define FPS_UPDATE_INTERVAL	(0.5f)
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Game* Game::s_sharedGame = nullptr;
 
@@ -474,4 +474,4 @@ void Game::createStatsLabel()
     m_pDrawVertexLabel->setPosition(glm::vec2(0, fontHeight * 2));
 }
 
-NS_OCF_END
+} // namespace ocf

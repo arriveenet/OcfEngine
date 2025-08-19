@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include "2d/Component.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class CircleComponent : public Component {
 public:
@@ -18,4 +18,4 @@ private:
 
 bool intersectCircle(const CircleComponent& a, const CircleComponent& b);
 
-NS_OCF_END
+} // namespace ocf

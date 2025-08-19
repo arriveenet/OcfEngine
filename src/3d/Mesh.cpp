@@ -8,7 +8,7 @@
 #include "renderer/TextureManager.h"
 #include <tiny_obj_loader.h>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Mesh* Mesh::create()
 {
@@ -95,4 +95,4 @@ void Mesh::setTexture(std::string_view fileName)
     m_pTexture = texture;
 }
 
-NS_OCF_END
+} // namespace ocf

@@ -1,7 +1,7 @@
 #include "MaxRectsBinPack.h"
 #include <limits>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 MaxRectsBinPack::MaxRectsBinPack()
     : m_newFreeRectsLastSize(0)
@@ -421,4 +421,4 @@ void MaxRectsBinPack::pruneFreeList()
     m_newFreeRects.clear();
 }
 
-NS_OCF_END
+} // namespace ocf

@@ -9,7 +9,7 @@
 
 #define PCMDATA_CACHEMAXSIZE 1048576
 
-NS_OCF_BEGIN
+namespace ocf {
 
 AudioCache::AudioCache()
     : m_format(AL_FORMAT_STEREO16)
@@ -145,4 +145,4 @@ void AudioCache::readDate()
     AudioDecoderManager::destoroyDecoder(pAudioDecoder);
 }
 
-NS_OCF_END
+} // namespace ocf

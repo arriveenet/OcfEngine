@@ -18,7 +18,7 @@ __inline int IsEqualGUID(const GUID& rguid1, const GUID& rguid2)
 #include <guiddef.h>
 #endif
 
-NS_OCF_BEGIN
+namespace ocf {
 
 enum class WAV_FORMAT : uint16_t {
     UNKNOWN   = 0x0000,
@@ -101,4 +101,4 @@ protected:
     ;
 };
 
-NS_OCF_END
+} // namespace ocf

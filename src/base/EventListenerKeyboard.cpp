@@ -1,7 +1,7 @@
 #include "EventListenerKeyboard.h"
 #include "base/EventKeyboard.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 EventListenerKeyboard* EventListenerKeyboard::create()
 {
@@ -45,4 +45,4 @@ std::string EventListenerKeyboard::getListenerId()
     return "KeyEvent";
 }
 
-NS_OCF_END
+} // namespace ocf

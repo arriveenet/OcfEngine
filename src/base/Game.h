@@ -5,7 +5,7 @@
 #include "base/Types.h"
 #include "base/GameObject.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Scene;
 class Label;
@@ -239,4 +239,4 @@ private:
     friend class GLView;
 };
 
-NS_OCF_END
+} // namespace ocf

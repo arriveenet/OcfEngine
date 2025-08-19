@@ -1,7 +1,7 @@
 #include "EventListenerMouse.h"
 #include "base/EventMouse.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 EventListenerMouse* EventListenerMouse::create()
 {
@@ -56,4 +56,4 @@ std::string EventListenerMouse::getListenerId()
     return "MouseEvent";
 }
 
-NS_OCF_END
+} // namespace ocf

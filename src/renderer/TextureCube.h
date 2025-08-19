@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Image;
 
@@ -37,4 +37,4 @@ protected:
     unsigned int m_textureId;
 };
 
-NS_OCF_END
+} // namespace ocf

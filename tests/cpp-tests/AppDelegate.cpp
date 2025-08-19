@@ -3,7 +3,7 @@
 #include <platform/GLViewImpl.h>
 #include "MainScene.h"
 
-USING_NS_OCF;
+using namespace ocf;;
 
 AppDelegate::AppDelegate()
 {

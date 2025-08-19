@@ -4,7 +4,7 @@
 #include "2d/Sprite.h"
 #include "2d/SpriteFrameManager.h"
 
-USING_NS_OCF;
+using namespace ocf;;
 
 ActionTest::ActionTest()
 {

@@ -1,11 +1,11 @@
 #include "ApplicationBase.h"
 #include "base/Game.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 ApplicationBase::~ApplicationBase()
 {
     Game::destroyInstance();
 }
 
-NS_OCF_END
+} // namespace ocf

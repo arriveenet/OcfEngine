@@ -1,6 +1,6 @@
 #include "QuadCommand.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 QuadCommand::QuadCommand()
 {
@@ -21,4 +21,4 @@ void QuadCommand::init(float globalZOrder, Texture2D* texture, QuadV3fC3fT2f* pQ
     TrianglesCommand::init(globalZOrder, texture, triangles, modelView);
 }
 
-NS_OCF_END
+} // namespace ocf

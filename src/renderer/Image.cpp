@@ -10,7 +10,7 @@ extern "C" {
 
 #include "base/FileUtils.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 #pragma pack(push, 1)
 struct BitmapFileHeader {
@@ -482,4 +482,4 @@ bool Image::savePng(std::string_view filename)
     return result;
 }
 
-NS_OCF_END
+} // namespace ocf

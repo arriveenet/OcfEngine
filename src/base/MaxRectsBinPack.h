@@ -1,7 +1,7 @@
 #pragma once
 #include "base/RectBinPack.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class MaxRectsBinPack : public RectBinPack {
 public:
@@ -66,4 +66,4 @@ private:
     FreeRectChoiceHeuristic m_heuristic;
 };
 
-NS_OCF_END
+} // namespace ocf

@@ -1,6 +1,6 @@
 #include "AudioDecoderOgg.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 bool AudioDecoderOgg::open(std::string_view filename)
 {
@@ -54,4 +54,4 @@ AudioDecoderOgg::~AudioDecoderOgg()
     close();
 }
 
-NS_OCF_END
+} // namespace ocf

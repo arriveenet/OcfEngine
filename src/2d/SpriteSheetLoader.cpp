@@ -1,9 +1,9 @@
 #include "SpriteSheetLoader.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 ISpriteSheetLoader::ISpriteSheetLoader()
 {
 }
 
-NS_OCF_END
+} // namespace ocf

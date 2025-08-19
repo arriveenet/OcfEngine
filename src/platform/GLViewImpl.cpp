@@ -14,7 +14,7 @@
 #       define GLFW_EXPOSE_NATIVE_WIN32
 #   endif
 #endif
-NS_OCF_BEGIN
+namespace ocf {
 
 #include <GLFW/glfw3native.h>
 
@@ -466,4 +466,4 @@ void GLViewImpl::onGLFWWindowSizeCallback(GLFWwindow* /* window */, int width, i
     glViewport(0, 0, width, height);
 }
 
-NS_OCF_END
+} // namespace ocf

@@ -5,7 +5,7 @@
 #include "2d/Camera2D.h"
 #include "base/Scene.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 constexpr float BUTTON_DEFAULT_WIDTH = 150.0f;
 constexpr float BUTTON_DEFAULT_HEIGHT = 23.0f;
@@ -158,4 +158,4 @@ void Button::onKillFocus()
 
 }
 
-NS_OCF_END
+} // namespace ocf

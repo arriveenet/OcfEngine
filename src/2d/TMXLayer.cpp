@@ -5,7 +5,7 @@
 #include "renderer/Renderer.h"
 #include "renderer/TextureManager.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 TMXLayer* TMXLayer::create(TMXTilesetInfo* tilesetInfo, TMXLayerInfo* layerInfo, TMXMapInfo* mapInfo)
 {
@@ -126,4 +126,4 @@ void TMXLayer::updateTotalQuads()
     m_quadsDirty = false;
 }
 
-NS_OCF_END
+} // namespace ocf

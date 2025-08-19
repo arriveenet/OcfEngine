@@ -3,7 +3,7 @@
 #include "OpenGLInclude.h"
 #include "OpenGLUtility.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 static int getPixelAlignment(PixelFormat format)
 {
@@ -124,4 +124,4 @@ glm::vec2 Texture2D::getSize() const
     return result;
 }
 
-NS_OCF_END
+} // namespace ocf

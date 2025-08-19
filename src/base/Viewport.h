@@ -1,7 +1,7 @@
 #pragma once
 #include "base/Node.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Camera2D;
 class Camera3D;
@@ -31,4 +31,4 @@ private:
     friend class Scene;
 };
 
-NS_OCF_END
+} // namespace ocf

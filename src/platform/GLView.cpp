@@ -2,7 +2,7 @@
 #include "base/Game.h"
 #include "2d/Camera2D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 GLContextAttributes GLView::m_glContextAttributes = { 8, 8, 8, 8, 24 };
 
@@ -113,4 +113,4 @@ void GLView::updateDesignResolutionSize()
     pGame->setProjection(pGame->getProjection());
 }
 
-NS_OCF_END
+} // namespace ocf

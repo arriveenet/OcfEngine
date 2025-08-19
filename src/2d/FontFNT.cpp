@@ -5,7 +5,7 @@
 #include "renderer/TextureManager.h"
 #include <string.h>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 enum class FntBlockType : uint8_t {
     Info         = 1,
@@ -298,4 +298,4 @@ FontAtlas* FontFNT::createFontAtlas()
     return fontAtlas;
 }
 
-NS_OCF_END
+} // namespace ocf

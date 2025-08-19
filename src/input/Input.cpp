@@ -3,7 +3,7 @@
 #include "base/Game.h"
 #include "platform/GLViewImpl.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Keyboard Input::m_keyboard;
 Mouse Input::m_mouse;
@@ -63,4 +63,4 @@ Input::MouseMode Input::getMouseMode()
     return m_mouseMode;
 }
 
-NS_OCF_END
+} // namespace ocf

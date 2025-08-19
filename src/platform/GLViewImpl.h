@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class GLFWEventHandler;
 class GLViewImpl : public GLView {
@@ -57,4 +57,4 @@ protected:
     glm::vec2 m_lastMousePosition;
 };
 
-NS_OCF_END
+} // namespace ocf

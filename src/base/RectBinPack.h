@@ -4,7 +4,7 @@
 #include "base/GameObject.h"
 #include "base/Rect.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class RectBinPack {
 public:
@@ -25,4 +25,4 @@ protected:
     float m_binHeight;
 };
 
-NS_OCF_END
+} // namespace ocf

@@ -1,7 +1,7 @@
 #pragma once
 #include "base/GameObject.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Node;
 
@@ -25,4 +25,4 @@ protected:
 	Node* m_pTarget;
 };
 
-NS_OCF_END
+} // namespace ocf

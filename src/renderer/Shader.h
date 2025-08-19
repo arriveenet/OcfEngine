@@ -3,7 +3,7 @@
 #include "OpenGLInclude.h"
 #include "base/Macros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 enum class ShaderStage : uint32_t{
     Vertex,
@@ -28,4 +28,4 @@ private:
     GLuint m_shader = 0;
 };
 
-NS_OCF_END
+} // namespace ocf

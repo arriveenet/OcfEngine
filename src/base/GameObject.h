@@ -2,7 +2,7 @@
 #include "base/Macros.h"
 #include "base/Config.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 /**
  * @brief ゲームオブジェクト
@@ -50,4 +50,4 @@ private:
     unsigned int m_id;	//!< ID
 };
 
-NS_OCF_END
+} // namespace ocf

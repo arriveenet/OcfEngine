@@ -1,6 +1,6 @@
 #include "EventListener.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 EventListener::EventListener()
 	:m_type(Type::Unknown)
@@ -20,4 +20,4 @@ bool EventListener::init(Type type, const std::function<void(Event*)>& callback)
 	return true;
 }
 
-NS_OCF_END
+} // namespace ocf

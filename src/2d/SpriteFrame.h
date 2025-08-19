@@ -4,7 +4,7 @@
 #include "base/GameObject.h"
 #include "base/Rect.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Texture2D;
 
@@ -42,4 +42,4 @@ protected:
     std::string m_textureFilename;
 };
 
-NS_OCF_END
+} // namespace ocf

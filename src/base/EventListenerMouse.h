@@ -2,7 +2,7 @@
 #include "base/EventListener.h"
 #include "base/EventMouse.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class EventListenerMouse : public EventListener {
 public:
@@ -20,4 +20,4 @@ public:
     std::function<void(Event*)> m_onMouseScroll;
 };
 
-NS_OCF_END
+} // namespace ocf

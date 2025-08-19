@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 #include <string>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Image;
 
@@ -34,4 +34,4 @@ private:
     glm::vec2 m_size;
 };
 
-NS_OCF_END
+} // namespace ocf

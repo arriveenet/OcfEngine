@@ -3,7 +3,7 @@
 #include "2d/ActionComponent.h"
 #include "audio/AudioEngine.h"
 
-USING_NS_OCF;
+using namespace ocf;;
 
 SpriteTestDemo::SpriteTestDemo()
 {

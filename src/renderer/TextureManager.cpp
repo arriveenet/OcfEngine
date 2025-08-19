@@ -2,7 +2,7 @@
 #include "Image.h"
 #include "base/FileUtils.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 TextureManager::TextureManager()
 {
@@ -110,4 +110,4 @@ Texture2D* TextureManager::getWhiteTexture(const std::string& key, uint8_t luma)
     return texture;
 }
 
-NS_OCF_END
+} // namespace ocf
