@@ -9,7 +9,7 @@
 #include "base/Scene.h"
 #include "input/Input.h"
 #include "platform/Application.h"
-#include "platform/GLView.h"
+#include "platform/RenderView.h"
 #include "renderer/Renderer.h"
 #include "renderer/TextureManager.h"
 
@@ -243,7 +243,7 @@ void Game::setViewport()
     }
 }
 
-void Game::setGLView(GLView* glView)
+void Game::setRenderView(RenderView* glView)
 {
     if (m_glView != glView) {
         m_renderer->init();

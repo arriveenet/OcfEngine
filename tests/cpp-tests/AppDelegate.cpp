@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include <base/Game.h>
-#include <platform/GLViewImpl.h>
+#include <platform/RenderViewImpl.h>
 #include "MainScene.h"
 
 using namespace ocf;;
@@ -18,16 +18,16 @@ bool AppDelegate::applicationDidFinishLaunching()
     const float windowWidth = 920, windowHeight = 720;
 
     auto game = Game::getInstance();
-    auto glView = game->getGLView();
+    auto glView = game->getRenderView();
     if (glView == nullptr) {
-        glView = GLViewImpl::createWithRect("Ocf Engine", Rect(0, 0, windowWidth, windowHeight));
+        glView = RenderViewImpl::createWithRect("Ocf Engine", Rect(0, 0, windowWidth, windowHeight));
 
         if (glView == nullptr) {
             return false;
         }
 
         // ウィンドウの位置をディスプレイの中央に設定
-        GLViewImpl* glViewImpl = dynamic_cast<GLViewImpl*>(glView);
+        RenderViewImpl* glViewImpl = dynamic_cast<RenderViewImpl*>(glView);
         if (glViewImpl == nullptr) {
             return false;
         }
@@ -37,7 +37,7 @@ bool AppDelegate::applicationDidFinishLaunching()
         const int windowPosY = static_cast<int>(monitorSize.y / 2) - static_cast<int>(windowHeight / 2);
         glViewImpl->setWindowPosition(windowPosX, windowPosY);
 
-        game->setGLView(glView);
+        game->setRenderView(glView);
     }
 
     glView->setDesignResolutionSize(windowWidth, windowHeight);

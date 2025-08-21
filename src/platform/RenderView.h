@@ -25,10 +25,10 @@ struct GLContextAttributes {
     bool vsync = true;
 };
 
-class GLView : public GameObject {
+class RenderView : public GameObject {
 public:
-    GLView();
-    virtual ~GLView();
+    RenderView();
+    virtual ~RenderView();
 
     virtual void end() = 0;
 

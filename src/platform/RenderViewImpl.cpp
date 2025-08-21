@@ -1,4 +1,4 @@
-#include "GLViewImpl.h"
+#include "RenderViewImpl.h"
 
 #include <unordered_map>
 #include "input/Keyboard.h"
@@ -20,7 +20,7 @@ namespace ocf {
 
 class GLFWEventHandler {
 public:
-    static void setGLViewImpl(GLViewImpl* view) { m_view = view; }
+    static void setGLViewImpl(RenderViewImpl* view) { m_view = view; }
 
     static void onGLFWMouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
     {
@@ -57,9 +57,9 @@ public:
         }
     }
 private:
-    static GLViewImpl* m_view;
+    static RenderViewImpl* m_view;
 };
-GLViewImpl* GLFWEventHandler::m_view = nullptr;
+RenderViewImpl* GLFWEventHandler::m_view = nullptr;
 
 struct KeyCodeItem {
     int glfwKeyCode;
@@ -199,14 +199,14 @@ static KeyCodeItem g_keyCodeStructArray[] =
     {GLFW_KEY_LAST, Keyboard::KeyCode::KEY_LAST},
 };
 
-GLViewImpl* GLViewImpl::create(std::string_view viewName)
+RenderViewImpl* RenderViewImpl::create(std::string_view viewName)
 {
-    return GLViewImpl::create(viewName, false);
+    return RenderViewImpl::create(viewName, false);
 }
 
-GLViewImpl* GLViewImpl::create(std::string_view viewName, bool resizable)
+RenderViewImpl* RenderViewImpl::create(std::string_view viewName, bool resizable)
 {
-    auto result = new GLViewImpl();
+    auto result = new RenderViewImpl();
     if (result->initWithRect(viewName, Rect(0, 0, 640, 480), resizable)) {
         result->autorelease();
         return result;
@@ -215,9 +215,9 @@ GLViewImpl* GLViewImpl::create(std::string_view viewName, bool resizable)
     return nullptr;
 }
 
-GLViewImpl* GLViewImpl::createWithRect(std::string_view viewName, const Rect& rect, bool resizable)
+RenderViewImpl* RenderViewImpl::createWithRect(std::string_view viewName, const Rect& rect, bool resizable)
 {
-    auto result = new GLViewImpl();
+    auto result = new RenderViewImpl();
     if (result->initWithRect(viewName, rect, resizable)) {
         result->autorelease();
         return result;
@@ -226,7 +226,7 @@ GLViewImpl* GLViewImpl::createWithRect(std::string_view viewName, const Rect& re
     return nullptr;
 }
 
-void GLViewImpl::end()
+void RenderViewImpl::end()
 {
     if (m_pMainWindow != nullptr) {
         glfwDestroyWindow(m_pMainWindow);
@@ -237,7 +237,7 @@ void GLViewImpl::end()
     release();
 }
 
-GLViewImpl::GLViewImpl(bool initGlfw)
+RenderViewImpl::RenderViewImpl(bool initGlfw)
     : m_pMainWindow(nullptr)
     , m_mousePosition(0, 0)
     , m_lastMousePosition(0, 0)
@@ -253,13 +253,13 @@ GLViewImpl::GLViewImpl(bool initGlfw)
     }
 }
 
-GLViewImpl::~GLViewImpl()
+RenderViewImpl::~RenderViewImpl()
 {
     GLFWEventHandler::setGLViewImpl(nullptr);
     glfwTerminate();
 }
 
-bool GLViewImpl::windowShouldClose()
+bool RenderViewImpl::windowShouldClose()
 {
     if (m_pMainWindow) {
         return glfwWindowShouldClose(m_pMainWindow) ? true : false;
@@ -269,43 +269,43 @@ bool GLViewImpl::windowShouldClose()
     }
 }
 
-void GLViewImpl::pollEvents()
+void RenderViewImpl::pollEvents()
 {
     glfwPollEvents();
 }
 
-bool GLViewImpl::isOpenGLReady()
+bool RenderViewImpl::isOpenGLReady()
 {
     return m_pMainWindow != nullptr;
 }
 
-void GLViewImpl::swapBuffers()
+void RenderViewImpl::swapBuffers()
 {
     glfwSwapBuffers(m_pMainWindow);
 }
 
-void GLViewImpl::setWindowPosition(int xpos, int ypos)
+void RenderViewImpl::setWindowPosition(int xpos, int ypos)
 {
     if (m_pMainWindow != nullptr) {
         glfwSetWindowPos(m_pMainWindow, xpos, ypos);
     }
 }
 
-void GLViewImpl::setWindowSize(int* width, int* height)
+void RenderViewImpl::setWindowSize(int* width, int* height)
 {
     if (m_pMainWindow != nullptr) {
         glfwGetWindowSize(m_pMainWindow, width, height);
     }
 }
 
-int GLViewImpl::getMonitorCount() const
+int RenderViewImpl::getMonitorCount() const
 {
     int count = 0;
     glfwGetMonitors(&count);
     return count;
 }
 
-glm::ivec2 GLViewImpl::getMonitorSize() const
+glm::ivec2 RenderViewImpl::getMonitorSize() const
 {
     glm::ivec2 monitorSize(0, 0);
 
@@ -321,14 +321,14 @@ glm::ivec2 GLViewImpl::getMonitorSize() const
     return monitorSize;
 }
 
-void GLViewImpl::setCursorPosition(float x, float y)
+void RenderViewImpl::setCursorPosition(float x, float y)
 {
     if (m_pMainWindow != nullptr) {
         glfwSetCursorPos(m_pMainWindow, x, y);
     }
 }
 
-void GLViewImpl::setCursorMode(Input::MouseMode mode)
+void RenderViewImpl::setCursorMode(Input::MouseMode mode)
 {
     if (m_pMainWindow != nullptr) {
         switch (mode) {
@@ -348,13 +348,13 @@ void GLViewImpl::setCursorMode(Input::MouseMode mode)
 }
 
 #if (OCF_TARGET_PLATFORM == OCF_PLATFORM_WIN32)
-HWND GLViewImpl::getWin32Window()
+HWND RenderViewImpl::getWin32Window()
 {
     return glfwGetWin32Window(m_pMainWindow);
 }
 #endif
 
-bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool resizable)
+bool RenderViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool resizable)
 {
     setViewName(viewName);
 
@@ -399,14 +399,14 @@ bool GLViewImpl::initWithRect(std::string_view viewName, const Rect& rect, bool 
     return true;
 }
 
-void GLViewImpl::handleWindowSize(int width, int height)
+void RenderViewImpl::handleWindowSize(int width, int height)
 {
-    GLView::setFrameSize(static_cast<float>(width), static_cast<float>(height));
+    RenderView::setFrameSize(static_cast<float>(width), static_cast<float>(height));
 
     updateDesignResolutionSize();
 }
 
-void GLViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+void RenderViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     Mouse::onMouseButton(button, action, mods);
 
@@ -430,7 +430,7 @@ void GLViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, int a
     Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 
-void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* /* window */, double xpos, double ypos)
+void RenderViewImpl::onGLFWMouseMoveCallback(GLFWwindow* /* window */, double xpos, double ypos)
 {
     m_mousePosition.x = static_cast<float>(xpos);
     m_mousePosition.y = static_cast<float>(m_windowSize.y - ypos);
@@ -443,14 +443,14 @@ void GLViewImpl::onGLFWMouseMoveCallback(GLFWwindow* /* window */, double xpos, 
     m_lastMousePosition = m_mousePosition;
 }
 
-void GLViewImpl::onGLFWScrollCallback(GLFWwindow* /* window */, double xoffset, double yoffset)
+void RenderViewImpl::onGLFWScrollCallback(GLFWwindow* /* window */, double xoffset, double yoffset)
 {
     EventMouse mouseEvent(EventMouse::MouseEventType::Scroll);
     mouseEvent.setScrollDelta(glm::vec2(static_cast<float>(xoffset), static_cast<float>(yoffset)));
     Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 
-void GLViewImpl::onGLFWKeyCallback(GLFWwindow* /* window */, int key, int /* scancode */, int action, int /* mods */)
+void RenderViewImpl::onGLFWKeyCallback(GLFWwindow* /* window */, int key, int /* scancode */, int action, int /* mods */)
 {
     auto keyCode = g_keyCodeMap[key];
     Keyboard::onKeyEvent(keyCode, action);
@@ -460,7 +460,7 @@ void GLViewImpl::onGLFWKeyCallback(GLFWwindow* /* window */, int key, int /* sca
     Game::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 }
 
-void GLViewImpl::onGLFWWindowSizeCallback(GLFWwindow* /* window */, int width, int height)
+void RenderViewImpl::onGLFWWindowSizeCallback(GLFWwindow* /* window */, int width, int height)
 {
     handleWindowSize(width, height);
     glViewport(0, 0, width, height);

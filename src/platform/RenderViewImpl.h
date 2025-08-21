@@ -1,4 +1,4 @@
-#include "platform/GLView.h"
+#include "platform/RenderView.h"
 #include "input/Input.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -6,13 +6,13 @@
 namespace ocf {
 
 class GLFWEventHandler;
-class GLViewImpl : public GLView {
+class RenderViewImpl : public RenderView {
     friend GLFWEventHandler;
 
 public:
-    static GLViewImpl* create(std::string_view viewName);
-    static GLViewImpl* create(std::string_view viewName, bool resizable);
-    static GLViewImpl* createWithRect(std::string_view viewName, const Rect& rect, bool resizable = false);
+    static RenderViewImpl* create(std::string_view viewName);
+    static RenderViewImpl* create(std::string_view viewName, bool resizable);
+    static RenderViewImpl* createWithRect(std::string_view viewName, const Rect& rect, bool resizable = false);
 
     void end() override;
 
@@ -38,8 +38,8 @@ public:
 #endif
 
 protected:
-    GLViewImpl(bool initGlfw = true);
-    virtual ~GLViewImpl();
+    RenderViewImpl(bool initGlfw = true);
+    virtual ~RenderViewImpl();
 
     bool initWithRect(std::string_view viewName, const Rect& rect, bool resizable);
 

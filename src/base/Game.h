@@ -11,7 +11,7 @@ class Scene;
 class Label;
 class Input;
 class Renderer;
-class GLView;
+class RenderView;
 class TextureManager;
 class EventDispatcher;
 
@@ -120,13 +120,13 @@ public:
      * @brief OpenGLのビューを取得
      * @return OpenGLのビュー
      */
-    GLView* getGLView() { return m_glView; }
+    RenderView* getRenderView() { return m_glView; }
 
     /**
      * @brief OpenGLのビューを設定
      * @param[in] OpenGLのビュー
      */
-    void setGLView(GLView* glView);
+    void setRenderView(RenderView* glView);
 
     /**
      * @brief テクスチャ管理クラスを取得する
@@ -224,7 +224,7 @@ private:
     Scene* m_currentScene;
     Scene* m_nextScene;
     std::vector<Scene*> m_sceneStack;
-    GLView* m_glView;
+    RenderView* m_glView;
     TextureManager* m_textureManager;
 
     EventDispatcher* m_eventDispatcher;
@@ -236,7 +236,7 @@ private:
     std::stack<glm::mat4> m_projectionMatrixStack;
     std::stack<glm::mat4> m_modelViewMatrixStack;
 
-    friend class GLView;
+    friend class RenderView;
 };
 
 } // namespace ocf

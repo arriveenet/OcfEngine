@@ -1,12 +1,12 @@
-#include "GLView.h"
+#include "RenderView.h"
 #include "base/Game.h"
 #include "2d/Camera2D.h"
 
 namespace ocf {
 
-GLContextAttributes GLView::m_glContextAttributes = { 8, 8, 8, 8, 24 };
+GLContextAttributes RenderView::m_glContextAttributes = { 8, 8, 8, 8, 24 };
 
-GLView::GLView()
+RenderView::RenderView()
     : m_windowSize(0.0f, 0.0f)
     , m_designResolutionSize(0.0f, 0.0f)
     , m_viewportRect()
@@ -15,15 +15,15 @@ GLView::GLView()
 {
 }
 
-GLView::~GLView()
+RenderView::~RenderView()
 {
 }
 
-void GLView::pollEvents()
+void RenderView::pollEvents()
 {
 }
 
-void GLView::setFrameSize(float widht, float height)
+void RenderView::setFrameSize(float widht, float height)
 {
     m_windowSize = glm::vec2(widht, height);
 
@@ -32,7 +32,7 @@ void GLView::setFrameSize(float widht, float height)
     }
 }
 
-void GLView::setViewport(float x, float y, float w, float h)
+void RenderView::setViewport(float x, float y, float w, float h)
 {
     glm::vec4 viewport = {};
     viewport.x = x + m_scaleX + m_viewportRect.m_position.x;
@@ -42,12 +42,12 @@ void GLView::setViewport(float x, float y, float w, float h)
     Camera2D::setDefaultViewport(viewport);
 }
 
-glm::vec2 GLView::getWindowSize() const
+glm::vec2 RenderView::getWindowSize() const
 {
     return m_windowSize;
 }
 
-void GLView::setDesignResolutionSize(float width, float height)
+void RenderView::setDesignResolutionSize(float width, float height)
 {
     if (width <= 0.0f || height <= 0.0f) {
         return;
@@ -59,36 +59,36 @@ void GLView::setDesignResolutionSize(float width, float height)
     updateDesignResolutionSize();
 }
 
-const glm::vec2& GLView::getDesignResolutionSize() const
+const glm::vec2& RenderView::getDesignResolutionSize() const
 {
     return m_designResolutionSize;
 }
 
-void GLView::setViewName(std::string_view viewname)
+void RenderView::setViewName(std::string_view viewname)
 {
     m_viewName = viewname;
 }
 
-std::string_view GLView::getViewName() const
+std::string_view RenderView::getViewName() const
 {
     return m_viewName;
 }
 
-void GLView::renderScene(Scene* /* scene */, Renderer* /* renderer */)
+void RenderView::renderScene(Scene* /* scene */, Renderer* /* renderer */)
 {
 }
 
-void GLView::setGLContextAttributes(GLContextAttributes& glContextAttribues)
+void RenderView::setGLContextAttributes(GLContextAttributes& glContextAttribues)
 {
     m_glContextAttributes = glContextAttribues;
 }
 
-GLContextAttributes GLView::getGLContextAttributes()
+GLContextAttributes RenderView::getGLContextAttributes()
 {
     return m_glContextAttributes;
 }
 
-void GLView::updateDesignResolutionSize()
+void RenderView::updateDesignResolutionSize()
 {
     if ((m_windowSize.x <= 0.0f) && (m_windowSize.y <= 0.0f)
         && (m_designResolutionSize.x <= 0.0f) && (m_designResolutionSize.y <= 0.0f)) {

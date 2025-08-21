@@ -2,7 +2,7 @@
 #include "base/Game.h"
 #include "base/Scene.h"
 #include "platform/PlatformMacros.h"
-#include "platform/GLView.h"
+#include "platform/RenderView.h"
 
 namespace ocf {
 
@@ -39,7 +39,7 @@ int Applicaiton::run()
     }
 
     auto game = Game::getInstance();
-    auto glView = game->getGLView();
+    auto glView = game->getRenderView();
 
     glView->retain();
 

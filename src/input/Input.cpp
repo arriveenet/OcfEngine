@@ -1,7 +1,7 @@
 #include "Input.h"
 #include <cstring>
 #include "base/Game.h"
-#include "platform/GLViewImpl.h"
+#include "platform/RenderViewImpl.h"
 
 namespace ocf {
 
@@ -29,7 +29,7 @@ void Input::update()
     // マウスの座標を設定
     m_mouse.m_lastPosition = m_mouse.m_position;
 
-    GLViewImpl* view = dynamic_cast<GLViewImpl*>(Game::getInstance()->getGLView());
+    RenderViewImpl* view = dynamic_cast<RenderViewImpl*>(Game::getInstance()->getRenderView());
     m_mouse.m_position = view->getMousePosition();
 
     // マウスボタンの状態を保持
@@ -54,7 +54,7 @@ ButtonState Input::getMouseButtonState(Mouse::MouseButton button)
 void Input::setMouseMode(MouseMode mode)
 {
     m_mouseMode = mode;
-    GLViewImpl* view = static_cast<GLViewImpl*>(Game::getInstance()->getGLView());
+    RenderViewImpl* view = static_cast<RenderViewImpl*>(Game::getInstance()->getRenderView());
     view->setCursorMode(mode);
 }
 
