@@ -1,7 +1,7 @@
 #include "ProgramState.h"
 #include "VertexArray.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 ProgramState::ProgramState()
     : m_pProgram(nullptr)
@@ -48,4 +48,4 @@ char* ProgramState::getUniformBuffers() const
     return m_pUniformBuffers;
 }
 
-NS_OCF_END
+} // namespace ocf

@@ -1,7 +1,7 @@
 #pragma once
 #include "2d/SpriteSheetLoader.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class XmlSpriteSheetLoader : public ISpriteSheetLoader {
 public:
@@ -9,4 +9,4 @@ public:
     void load(std::string_view filePath, SpriteFrameManager& manager) override;
 };
 
-NS_OCF_END
+} // namespace ocf

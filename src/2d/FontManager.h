@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include "2d/Font.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 struct FontFreeTypeConfig;
 
@@ -17,4 +17,4 @@ private:
     static std::unordered_map<std::string, Font*> m_fontMap;
 };
 
-NS_OCF_END
+} // namespace ocf

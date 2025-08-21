@@ -1,7 +1,7 @@
 #include "Mouse.h"
 #include "renderer/backend/opengl/OpenGLInclude.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 uint32_t Mouse::m_currentButton = 0;
 uint32_t Mouse::m_previousButton = 0;
@@ -55,4 +55,4 @@ ButtonState Mouse::getButtonState(MouseButton button) const
     }
 }
 
-NS_OCF_END
+} // namespace ocf

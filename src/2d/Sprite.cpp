@@ -10,7 +10,7 @@
 
 using namespace glm;
 
-NS_OCF_BEGIN
+namespace ocf {
 
 static unsigned short indices[] = { 0, 1, 2, 3, 2, 1 };
 
@@ -322,4 +322,4 @@ void Sprite::setMVPMarixUniform()
     programState.setUniform("uMVPMatrix", &projection, sizeof(projection));
 }
 
-NS_OCF_END
+} // namespace ocf

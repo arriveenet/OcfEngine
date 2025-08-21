@@ -2,7 +2,7 @@
 #include <vector>
 #include "base/GameObject.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class SpriteFrame;
 
@@ -46,4 +46,4 @@ protected:
     bool m_resetOriginalFrame;
 };
 
-NS_OCF_END
+} // namespace ocf

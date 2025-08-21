@@ -7,7 +7,7 @@
 #include "base/GameObject.h"
 #include "input/Input.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Game;
 class EventDispatcher;
@@ -148,4 +148,4 @@ protected:
 bool isScreenPointInRect(const glm::vec2& pt, const Camera2D* pCamera, const glm::mat4& worldToLocal,
                          const Rect& rect, glm::vec3* p);
 
-NS_OCF_END
+} // namespace ocf

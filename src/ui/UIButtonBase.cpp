@@ -3,7 +3,7 @@
 #include "2d/Label.h"
 #include "base/Rect.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 namespace ui {
 
@@ -98,4 +98,4 @@ void ButtonBase::updateTextLocation()
 
 } // namespace ui
 
-NS_OCF_END
+} // namespace ocf

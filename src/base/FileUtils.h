@@ -3,7 +3,7 @@
 #include <vector>
 #include "Macros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 /**
  * @brief ファイルユーティリティクラス
@@ -110,4 +110,4 @@ private:
     std::string m_defaultAssetsRootPath;
 };
 
-NS_OCF_END
+} // namespace ocf

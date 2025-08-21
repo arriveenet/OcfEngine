@@ -6,7 +6,7 @@
 #include "Shader.h"
 #include "base/Macros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Shader;
 
@@ -45,4 +45,4 @@ private:
     size_t m_uniformBufferSize;
 };
 
-NS_OCF_END
+} // namespace ocf

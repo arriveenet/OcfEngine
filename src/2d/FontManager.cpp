@@ -4,7 +4,7 @@
 #include "2d/FontFreeType.h"
 #include <fmt/format.h>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 std::unordered_map<std::string, Font*> FontManager::m_fontMap;
 
@@ -61,4 +61,4 @@ void FontManager::release()
     FontFreeType::terminateFreeType();
 }
 
-NS_OCF_END
+} // namespace ocf

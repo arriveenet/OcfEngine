@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <glm/gtc/matrix_transform.hpp>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Camera3D* Camera3D::s_pVisitingCamera = nullptr;
 glm::vec4 Camera3D::s_defaultViewport = glm::vec4(0.0f);
@@ -155,4 +155,4 @@ glm::vec3 Camera3D::unProjectGL(const glm::vec3& src) const
     return glm::unProject(src, m_view, m_projection, viewport);
 }
 
-NS_OCF_END
+} // namespace ocf

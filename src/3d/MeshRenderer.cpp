@@ -2,7 +2,7 @@
 #include <tiny_obj_loader.h>
 #include "base/FileUtils.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 MeshRenderer* MeshRenderer::create(std::string_view fileName)
 {
@@ -111,4 +111,4 @@ void MeshRenderer::draw(Renderer* renderer, const glm::mat4& transform)
     }
 }
 
-NS_OCF_END
+} // namespace ocf

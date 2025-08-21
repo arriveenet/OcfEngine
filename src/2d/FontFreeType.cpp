@@ -13,7 +13,7 @@
 
 #include <iterator>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 using namespace std::string_view_literals;
 
@@ -201,4 +201,4 @@ std::string_view FontFreeType::getGlyphCollection() const
     return collection;
 }
 
-NS_OCF_END
+} // namespace ocf

@@ -5,7 +5,7 @@
 
 static constexpr float RADIO_BUTTON_DEFAULT_SIZE = 14.0f;
 
-NS_OCF_BEGIN
+namespace ocf {
 
 namespace ui {
 
@@ -127,4 +127,4 @@ void RadioButton::onMouseClicked()
 
 }; // namespace ui
 
-NS_OCF_END
+} // namespace ocf

@@ -1,7 +1,7 @@
 #include "AudioDecoderWav.h"
 #include <stdio.h>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 static constexpr uint32_t makeFourCC(char a, char b, char c, char d)
 {
@@ -162,4 +162,4 @@ AudioDecoderWav::~AudioDecoderWav()
 {
 }
 
-NS_OCF_END
+} // namespace ocf

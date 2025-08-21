@@ -6,7 +6,7 @@
 
 typedef struct Mp3DecImpl* Mp3DecHandle;
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class AudioDecoderMp3 :public AudioDecoder {
 public:
@@ -29,4 +29,4 @@ private:
     friend class AudioDecoderManager;
 };
 
-NS_OCF_END
+} // namespace ocf

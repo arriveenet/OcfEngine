@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Node2D;
 
@@ -21,4 +21,4 @@ private:
     float m_forwardSpeed;
 };
 
-NS_OCF_END
+} // namespace ocf

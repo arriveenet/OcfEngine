@@ -4,7 +4,7 @@
 #include "base/Macros.h"
 #include "base/Types.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 struct OpenGLUtility {
     static GLenum toGLPrimitive(backend::PrimitiveType primitiveType);
@@ -12,4 +12,4 @@ struct OpenGLUtility {
     static GLsizei getGLDataTypeSize(GLenum type);
 };
 
-NS_OCF_END
+} // namespace ocf

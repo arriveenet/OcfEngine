@@ -4,7 +4,7 @@
 #include "backend/opengl/OpenGLInclude.h"
 #include "backend/opengl/OpenGLUtility.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 using namespace backend;
 
@@ -128,4 +128,4 @@ Image* TextureCube::createImage(std::string_view filename)
     return nullptr;
 }
 
-NS_OCF_END
+} // namespace ocf

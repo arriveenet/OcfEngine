@@ -3,7 +3,7 @@
 #include "renderer/backend/opengl/OpenGLInclude.h"
 #include "renderer/backend/opengl/OpenGLUtility.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 using namespace backend;
 
@@ -126,4 +126,4 @@ glm::vec2 Texture2D::getSize() const
     return result;
 }
 
-NS_OCF_END
+} // namespace ocf

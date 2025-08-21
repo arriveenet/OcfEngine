@@ -3,11 +3,14 @@
 #include <string.h>
 #include <memory>
 
+extern "C" {
 #include <png.h>
+#include <jpeglib.h>
+} // extern "C"
 
 #include "base/FileUtils.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 #pragma pack(push, 1)
 struct BitmapFileHeader {
@@ -158,6 +161,9 @@ bool Image::loadImageData(const unsigned char* pData, size_t dataSize)
     case Format::PNG:
         result = initWithPngData(pData, dataSize);
         break;
+    case Format::JPEG:
+        result = initWithJpegData(pData, dataSize);
+        break;
     default:
         break;
     }
@@ -180,9 +186,14 @@ Image::Format Image::detectFormat(const unsigned char* pData, size_t dataSize)
 {
     if (isBmp(pData, dataSize)) {
         return Format::BMP;
-    } else if (isPng(pData, dataSize)) {
+    } 
+    else if (isPng(pData, dataSize)) {
         return Format::PNG;
-    } else {
+    }
+    else if (isJpeg(pData, dataSize)) {
+        return Format::JPEG;
+    } else
+    {
         return Format::UNKNOWN;
     }
 }
@@ -337,6 +348,56 @@ bool Image::initWithPngData(const unsigned char* pData, size_t dataSize)
     return result;
 }
 
+bool Image::initWithJpegData(const unsigned char* pData, size_t dataSize)
+{
+    jpeg_decompress_struct cinfo{};
+
+    jpeg_error_mgr jerr;
+
+    JSAMPROW row_pointer[1] = {0};
+    uint32_t location = 0;
+
+    bool result = false;
+    do {
+        cinfo.err = jpeg_std_error(&jerr);
+
+        jpeg_create_decompress(&cinfo);
+
+        jpeg_mem_src(&cinfo, pData, dataSize);
+
+        jpeg_read_header(&cinfo, TRUE);
+
+        if (cinfo.jpeg_color_space == JCS_GRAYSCALE) {
+            m_pixelFormat = PixelFormat::GRAY;
+        }
+        else {
+            cinfo.out_color_space = JCS_RGB;
+            m_pixelFormat = PixelFormat::RGB;
+        }
+
+        jpeg_start_decompress(&cinfo);
+
+        m_width = cinfo.output_width;
+        m_height = cinfo.output_height;
+
+        m_dataSize = cinfo.output_width * cinfo.output_height * cinfo.output_components;
+        m_pData = new unsigned char[m_dataSize];
+        OCF_BREAK_IF(m_pData == nullptr);
+
+        while (cinfo.output_scanline < cinfo.output_height) {
+            row_pointer[0] = m_pData + location;
+            location += cinfo.output_width * cinfo.output_components;
+            jpeg_read_scanlines(&cinfo, row_pointer, 1);
+        }
+
+        jpeg_destroy_decompress(&cinfo);
+
+        result = true;
+    } while (false);
+
+    return result;
+}
+
 bool Image::isBmp(const unsigned char* pData, size_t dataSize)
 {
     if (dataSize <= 4)
@@ -355,6 +416,16 @@ bool Image::isPng(const unsigned char* pData, size_t dataSize)
     static const unsigned char PNG_SIGNATURE[] = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
 
     return memcmp(PNG_SIGNATURE, pData, sizeof(PNG_SIGNATURE)) == 0;
+}
+
+bool Image::isJpeg(const unsigned char* pData, size_t dataSize)
+{
+    if (dataSize <= 4)
+        return false;
+
+    static const unsigned char JPEG_SIGNATURE[] = {0xFF, 0xD8};
+
+    return memcmp(pData, JPEG_SIGNATURE, 2) == 0;
 }
 
 bool Image::savePng(std::string_view filename)
@@ -411,4 +482,4 @@ bool Image::savePng(std::string_view filename)
     return result;
 }
 
-NS_OCF_END
+} // namespace ocf

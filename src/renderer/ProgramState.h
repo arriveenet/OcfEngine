@@ -3,7 +3,7 @@
 #include <string>
 #include "Program.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Texture2D;
 class VertexArray;
@@ -28,4 +28,4 @@ private:
     char* m_pUniformBuffers;
 };
 
-NS_OCF_END
+} // namespace ocf

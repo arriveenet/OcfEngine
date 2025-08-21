@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 #include "2d/Component.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Animation;
 class SpriteFrame;
@@ -126,4 +126,4 @@ protected:
     ActionComponent* m_pInnerlAction;
 };
 
-NS_OCF_END
+} // namespace ocf

@@ -3,7 +3,7 @@
 #include "2d/Node2D.h"
 #include "base/Viewport.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Camera2D;
 class Game;
@@ -48,4 +48,4 @@ protected:
     Game* m_pGame = nullptr;
 };
 
-NS_OCF_END
+} // namespace ocf

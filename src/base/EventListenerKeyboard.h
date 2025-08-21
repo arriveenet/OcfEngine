@@ -2,7 +2,7 @@
 #include "base/EventListener.h"
 #include "input/Keyboard.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class EventListenerKeyboard : public EventListener {
 public:
@@ -18,4 +18,4 @@ public:
     std::function<void(Keyboard::KeyCode, Event*)> m_onKeyReleased;
 };
 
-NS_OCF_END
+} // namespace ocf

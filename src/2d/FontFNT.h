@@ -6,7 +6,7 @@
 #include "2d/Font.h"
 #include "base/Rect.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class BMFontConfiguration : public GameObject {
 public:
@@ -63,4 +63,4 @@ protected:
     BMFontConfiguration* m_pConfiguration;
 };
 
-NS_OCF_END
+} // namespace ocf

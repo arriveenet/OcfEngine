@@ -5,7 +5,7 @@
 #include <string.h>
 #include <cassert>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 AudioPlayer::AudioPlayer()
     : m_pAudioCache(nullptr)
@@ -237,4 +237,4 @@ bool AudioPlayer::play()
     return result;
 }
 
-NS_OCF_END
+} // namespace ocf

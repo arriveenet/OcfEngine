@@ -1,7 +1,7 @@
 #pragma once
 #include"base/Macros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Node2D;
 
@@ -18,4 +18,4 @@ protected:
     int m_updateOrder;
 };
 
-NS_OCF_END
+} // namespace ocf

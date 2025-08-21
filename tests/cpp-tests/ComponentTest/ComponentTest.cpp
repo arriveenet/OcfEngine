@@ -2,7 +2,7 @@
 #include "2d/MoveComponent.h"
 #include "base/EventListenerKeyboard.h"
 
-USING_NS_OCF;
+using namespace ocf;;
 
 ComponentTest::ComponentTest()
 {

@@ -1,6 +1,6 @@
 #include "CanvasItem.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 CanvasItem::CanvasItem()
 {
@@ -24,4 +24,4 @@ bool CanvasItem::isVisible() const
     return m_visible;
 }
 
-NS_OCF_END
+} // namespace ocf

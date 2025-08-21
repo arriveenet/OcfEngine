@@ -1,6 +1,6 @@
 #include "Rect.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Rect::Rect()
 {
@@ -84,4 +84,4 @@ bool Rect::contain(const Rect& rect) const
     return false;
 }
 
-NS_OCF_END
+} // namespace ocf

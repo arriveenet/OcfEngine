@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include "platform/PlatformMacros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class AudioEngineImpl;
 
@@ -63,4 +63,4 @@ private:
 	static AudioEngineImpl* m_pAudioEngineImpl;
 };
 
-NS_OCF_END
+} // namespace ocf

@@ -6,7 +6,7 @@
 #include "platform/Application.h"
 #include "renderer/Renderer.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Camera2D* Camera2D::s_pVisitingCamera = nullptr;
 glm::vec4 Camera2D::s_defaultViewport = glm::vec4(0.0f);
@@ -187,4 +187,4 @@ glm::vec3 Camera2D::unProjectGL(const glm::vec3& src) const
     return glm::unProject(src, m_view, m_projection, viewport);
 }
 
-NS_OCF_END
+} // namespace ocf

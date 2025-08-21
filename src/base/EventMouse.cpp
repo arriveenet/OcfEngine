@@ -1,6 +1,6 @@
 #include "EventMouse.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 EventMouse::EventMouse(MouseEventType mouseEventType)
     : Event(EventType::MouseEvent)
@@ -16,4 +16,4 @@ glm::vec2 EventMouse::getDelta() const
     return m_position - m_lastPosition;
 }
 
-NS_OCF_END
+} // namespace ocf

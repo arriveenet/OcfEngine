@@ -2,7 +2,7 @@
 #include <vector>
 #include "base/Macros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class RenderCommand;
 
@@ -30,4 +30,4 @@ protected:
     std::vector<RenderCommand*> m_commands[QUEUE_COUNT];
 };
 
-NS_OCF_END
+} // namespace ocf

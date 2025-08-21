@@ -9,7 +9,7 @@
 #include "2d/Sprite.h"
 #include "2d/Label.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 /**
  * @brief レンダラークラス
@@ -102,4 +102,4 @@ private:
     VertexArray* m_pVertexArray;
 };
 
-NS_OCF_END
+} // namespace ocf

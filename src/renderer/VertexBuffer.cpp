@@ -1,6 +1,6 @@
 #include "VertexBuffer.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 namespace {
     GLenum toOpenGLUsage(BufferUsage usage)
@@ -81,4 +81,4 @@ void VertexBuffer::setAttribute(int index, int size, int stride, size_t offset)
     glVertexAttribPointer(index, size, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(offset));
 }
 
-NS_OCF_END
+} // namespace ocf

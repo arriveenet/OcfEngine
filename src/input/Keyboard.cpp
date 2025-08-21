@@ -3,7 +3,7 @@
 #include <cstring>
 #include <cstdio>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 struct _KeyCodeText {
     Keyboard::KeyCode code;
@@ -192,4 +192,4 @@ ButtonState Keyboard::getKeyState(KeyCode keyCode) const
     }
 }
 
-NS_OCF_END
+} // namespace ocf

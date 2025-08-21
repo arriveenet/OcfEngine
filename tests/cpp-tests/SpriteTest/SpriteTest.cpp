@@ -3,7 +3,7 @@
 #include "2d/ActionComponent.h"
 #include "audio/AudioEngine.h"
 
-USING_NS_OCF;
+using namespace ocf;;
 
 SpriteTestDemo::SpriteTestDemo()
 {
@@ -36,8 +36,14 @@ bool SpriteTestDemo::init()
 
     auto sprite4 = Sprite::create();
     sprite4->setPosition(glm::vec2(100, 500));
-    sprite4->setSize(glm::vec2(100, 100));
+    sprite4->setSize(glm::vec2(50, 50));
     root->addChild(sprite4);
+
+    auto sprite5 = Sprite::create("textures/fruit_suika_red.jpg");
+    sprite5->setPosition(glm::vec2(100, 600));
+    sprite5->setSize(glm::vec2(100, 100));
+    root->addChild(sprite5);
+
 
     return TestCase::init();
 }

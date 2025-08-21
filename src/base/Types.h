@@ -3,7 +3,7 @@
 #include "base/GameObject.h"
 #include "base/Macros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 enum class PixelFormat {
     GRAY,
@@ -103,4 +103,4 @@ struct QuadV3fC3fT2f {
     Vertex3fC3fT2f bottomRight;
 };
 
-NS_OCF_END
+} // namespace ocf

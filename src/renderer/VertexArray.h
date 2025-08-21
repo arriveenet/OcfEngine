@@ -6,7 +6,7 @@
 #include "base/Types.h"
 #include "backend/opengl/OpenGLInclude.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class VertexArray {
 public:
@@ -122,4 +122,4 @@ private:
     std::unordered_map<std::string, Attribute> m_attributes;
 };
 
-NS_OCF_END
+} // namespace ocf

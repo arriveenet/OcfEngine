@@ -2,9 +2,9 @@
 #include "base/Game.h"
 #include "base/Scene.h"
 #include "platform/PlatformMacros.h"
-#include "platform/GLView.h"
+#include "platform/RenderView.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Applicaiton* g_pApplication = nullptr;
 
@@ -39,7 +39,7 @@ int Applicaiton::run()
     }
 
     auto game = Game::getInstance();
-    auto glView = game->getGLView();
+    auto glView = game->getRenderView();
 
     glView->retain();
 
@@ -60,4 +60,4 @@ int Applicaiton::run()
     return 0;
 }
 
-NS_OCF_END
+} // namespace ocf

@@ -1,7 +1,7 @@
 #include "TiledMapTest.h"
 #include "2d/TMXTiledMap.h"
 
-USING_NS_OCF;
+using namespace ocf;;
 
 TiledMapTest::TiledMapTest()
     : m_camera(nullptr)

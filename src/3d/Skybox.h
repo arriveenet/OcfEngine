@@ -4,7 +4,7 @@
 #include "renderer/CustomCommand.h"
 #include <string>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Skybox : public Node {
 public:
@@ -35,4 +35,4 @@ protected:
     CustomCommand m_customCommand;
 };
 
-NS_OCF_END
+} // namespace ocf

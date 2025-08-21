@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #include <string>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Image;
 
@@ -38,4 +38,4 @@ private:
 
 };
 
-NS_OCF_END
+} // namespace ocf

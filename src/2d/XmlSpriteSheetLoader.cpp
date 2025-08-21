@@ -6,7 +6,7 @@
 #include "renderer/TextureManager.h"
 #include <tinyxml2.h>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 void XmlSpriteSheetLoader::load(std::string_view filePath, SpriteFrameManager& manager)
 {
@@ -50,4 +50,4 @@ void XmlSpriteSheetLoader::load(std::string_view filePath, SpriteFrameManager& m
     }
 }
 
-NS_OCF_END
+} // namespace ocf

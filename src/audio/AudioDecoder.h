@@ -2,7 +2,7 @@
 #include <string>
 #include "platform/PlatformMacros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 enum class AudioSourceFormat : uint16_t {
     PCM_UNKNOWN,
@@ -54,4 +54,4 @@ protected:
     friend class AudioDecoderManager;
 };
 
-NS_OCF_END
+} // namespace ocf

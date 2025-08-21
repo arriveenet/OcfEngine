@@ -2,7 +2,7 @@
 #include "base/Game.h"
 #include "renderer/TextureManager.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 TextureAtlas* TextureAtlas::create(const std::string& filename, size_t capacity)
 {
@@ -126,4 +126,4 @@ void TextureAtlas::setupIndices()
     }
 }
 
-NS_OCF_END
+} // namespace ocf

@@ -1,6 +1,6 @@
 #include "CustomCommand.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 CustomCommand::CustomCommand()
     : m_pVertexArray(nullptr)
     , m_vertexDrawStart(0)
@@ -26,4 +26,4 @@ void CustomCommand::init(float globalZOrder, const glm::mat4& modelView)
     RenderCommand::init(globalZOrder, modelView);
 }
 
-NS_OCF_END
+} // namespace ocf

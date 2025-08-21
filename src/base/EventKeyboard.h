@@ -2,7 +2,7 @@
 #include "base/Event.h"
 #include "input/Keyboard.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class EventKeyboard : public Event {
 public:
@@ -12,4 +12,4 @@ public:
     bool m_isPressed;
 };
 
-NS_OCF_END
+} // namespace ocf

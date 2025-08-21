@@ -34,7 +34,7 @@ static int seekMiniMp3(uint64_t position, void* user_data)
     return 0;
 }
 
-NS_OCF_BEGIN
+namespace ocf {
 
 bool AudioDecoderMp3::open(std::string_view filename)
 {
@@ -117,4 +117,4 @@ AudioDecoderMp3::~AudioDecoderMp3()
     close();
 }
 
-NS_OCF_END
+} // namespace ocf

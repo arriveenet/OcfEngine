@@ -3,7 +3,7 @@
 #include "2d/IFontEngine.h"
 #include <unordered_set>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 struct FontFreeTypeConfig {
     std::string fontPath;
@@ -47,4 +47,4 @@ private:
     GlyphCollection m_glyphCollection;
 };
 
-NS_OCF_END
+} // namespace ocf

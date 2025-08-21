@@ -2,7 +2,7 @@
 #include "2d/FontAtlas.h"
 #include "renderer/Texture2D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Font::Font()
     : m_pFontAtlas(nullptr)
@@ -42,4 +42,4 @@ std::string_view Font::getFontName() const
     return m_fontName;
 }
 
-NS_OCF_END
+} // namespace ocf

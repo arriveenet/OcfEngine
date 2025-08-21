@@ -1,7 +1,7 @@
 #pragma once
 #include "TrianglesCommand.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class QuadCommand : public TrianglesCommand {
 public:
@@ -12,4 +12,4 @@ public:
 
 };
 
-NS_OCF_END
+} // namespace ocf

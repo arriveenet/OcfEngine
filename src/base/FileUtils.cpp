@@ -3,7 +3,7 @@
 #include <filesystem>
 #include <algorithm>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 namespace fs = std::filesystem;
 
@@ -196,4 +196,4 @@ std::string FileUtils::getPathForFilename(const std::string& filename, const std
     return result;
 }
 
-NS_OCF_END
+} // namespace ocf

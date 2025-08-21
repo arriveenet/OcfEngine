@@ -6,7 +6,7 @@
 #include "renderer/TextureCube.h"
 #include <glm/gtc/type_ptr.hpp>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 using namespace backend;
 
@@ -366,4 +366,4 @@ void Renderer::drawMeshCommand(RenderCommand* command)
     glDisable(GL_DEPTH_TEST);
 }
 
-NS_OCF_END
+} // namespace ocf

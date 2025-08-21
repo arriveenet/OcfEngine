@@ -1,7 +1,7 @@
 #pragma once
 #include "renderer/CustomCommand.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class MeshCommand : public CustomCommand {
 public:
@@ -13,4 +13,4 @@ public:
     void init(float globalZOrder, const glm::mat4& transform);
 };
 
-NS_OCF_END
+} // namespace ocf

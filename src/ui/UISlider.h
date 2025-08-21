@@ -4,7 +4,7 @@
 #include "ui/UIWidget.h"
 #include <functional>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 namespace ui {
 
@@ -54,4 +54,4 @@ private:
 
 } // namespace ui
 
-NS_OCF_END
+} // namespace ocf

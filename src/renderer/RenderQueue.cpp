@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "renderer/RenderCommand.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 static bool compareRenderCommand(RenderCommand* a, RenderCommand* b)
 {
@@ -66,4 +66,4 @@ void RenderQueue::realloc(size_t reserveSize)
 }
 
 
-NS_OCF_END
+} // namespace ocf

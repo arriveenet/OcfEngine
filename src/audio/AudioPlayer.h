@@ -6,7 +6,7 @@
 #include <AL/alc.h>
 #include "audio/AudioMacros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class AudioCache;
 
@@ -43,4 +43,4 @@ protected:
     friend class AudioEngineImpl;
 };
 
-NS_OCF_END
+} // namespace ocf

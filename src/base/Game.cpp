@@ -9,14 +9,14 @@
 #include "base/Scene.h"
 #include "input/Input.h"
 #include "platform/Application.h"
-#include "platform/GLView.h"
+#include "platform/RenderView.h"
 #include "renderer/Renderer.h"
 #include "renderer/TextureManager.h"
 #include "renderer/backend/opengl/OpenGLDriver.h"
 
 #define FPS_UPDATE_INTERVAL	(0.5f)
 
-NS_OCF_BEGIN
+namespace ocf {
 
 using namespace backend;
 
@@ -250,7 +250,7 @@ void Game::setViewport()
     }
 }
 
-void Game::setGLView(GLView* glView)
+void Game::setRenderView(RenderView* glView)
 {
     if (m_glView != glView) {
         m_renderer->init();
@@ -483,4 +483,4 @@ void Game::createStatsLabel()
     m_pDrawVertexLabel->setPosition(glm::vec2(0, fontHeight * 2));
 }
 
-NS_OCF_END
+} // namespace ocf

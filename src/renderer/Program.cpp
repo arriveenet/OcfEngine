@@ -21,7 +21,7 @@ void setUniform(GLuint location, unsigned int size, GLenum uniformType, void* da
 }
 }
 
-NS_OCF_BEGIN
+namespace ocf {
 
 using namespace backend;
 
@@ -150,4 +150,4 @@ bool Program::isValidProgram() const
     return true;
 }
 
-NS_OCF_END
+} // namespace ocf

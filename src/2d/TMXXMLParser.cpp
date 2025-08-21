@@ -2,7 +2,7 @@
 #include <sstream>
 #include "base/FileUtils.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 TMXLayerInfo::TMXLayerInfo()
     : m_pTiles(nullptr)
@@ -174,4 +174,4 @@ void TMXMapInfo::parseLayer(tinyxml2::XMLElement* element)
     }
 }
 
-NS_OCF_END
+} // namespace ocf

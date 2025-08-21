@@ -1,6 +1,6 @@
 #include "Node3D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Node3D::Node3D()
     : m_position(0.0f, 0.0f, 0.0f)
@@ -45,4 +45,4 @@ glm::vec3 Node3D::getScale() const
     return m_scale;
 }
 
-NS_OCF_END
+} // namespace ocf

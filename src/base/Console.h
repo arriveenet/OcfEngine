@@ -1,11 +1,11 @@
 #pragma once
 #include "platform/PlatformMacros.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 /**
  * @brief デバッグメッセージを出力する
  */
 void print(const char* format, ...);
 
-NS_OCF_END
+} // namespace ocf

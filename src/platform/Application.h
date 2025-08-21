@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include "ApplicationBase.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Applicaiton : public ApplicationBase {
 public:
@@ -20,4 +20,4 @@ private:
     int m_windowHeight;
 };
 
-NS_OCF_END
+} // namespace ocf

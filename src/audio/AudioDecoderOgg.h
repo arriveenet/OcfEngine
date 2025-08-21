@@ -3,7 +3,7 @@
 #include "AudioDecoder.h"
 #include <vorbis/vorbisfile.h>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class AudioDecoderOgg : public AudioDecoder {
 public:
@@ -24,4 +24,4 @@ protected:
     friend class AudioDecoderManager;
 };
 
-NS_OCF_END
+} // namespace ocf

@@ -5,7 +5,7 @@
 #include "2d/SpriteFrame.h"
 #include "2d/Sprite.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 ActionComponent::ActionComponent(Node2D* pNode)
     : Component(pNode)
@@ -295,4 +295,4 @@ bool RepeatForever::isDone() const
     return false;
 }
 
-NS_OCF_END
+} // namespace ocf

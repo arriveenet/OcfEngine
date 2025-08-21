@@ -4,7 +4,7 @@
 #include "base/GameObject.h"
 #include "input/Keyboard.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Event;
 class Node;
@@ -33,4 +33,4 @@ public:
     std::function<void(Event*)> m_onEvent;
 };
 
-NS_OCF_END 
+} // namespace ocf 

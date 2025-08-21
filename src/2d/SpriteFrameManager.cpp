@@ -3,7 +3,7 @@
 
 using namespace std;
 
-NS_OCF_BEGIN
+namespace ocf {
 
 static SpriteFrameManager* s_sharedSpriteFrameManager = nullptr;
 
@@ -96,4 +96,4 @@ SpriteFrameManager::SpriteFrameManager()
 
 }
 
-NS_OCF_END
+} // namespace ocf

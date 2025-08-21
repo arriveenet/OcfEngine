@@ -7,7 +7,7 @@
 #include "renderer/VertexArray.h"
 #include "renderer/QuadCommand.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class FontAtlas;
 class DrawShape;
@@ -75,4 +75,4 @@ protected:
 #endif
 };
 
-NS_OCF_END
+} // namespace ocf

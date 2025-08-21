@@ -4,7 +4,7 @@
 #include "base/EventListenerMouse.h"
 #include <fmt/format.h>
 
-USING_NS_OCF;
+using namespace ocf;;
 
 EventTest::EventTest()
     : m_pKeyboardLabel(nullptr)

@@ -5,7 +5,7 @@
 #include "base/GameObject.h"
 #include "renderer/MeshCommand.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Texture2D;
 class Renderer;
@@ -33,4 +33,4 @@ protected:
     MeshCommand m_meshCommand;
 };
 
-NS_OCF_END
+} // namespace ocf

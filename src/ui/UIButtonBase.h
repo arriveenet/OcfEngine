@@ -2,7 +2,7 @@
 #include "ui/UIWidget.h"
 #include <functional>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class DrawShape;
 class Label;
@@ -37,4 +37,4 @@ protected:
 
 } // namespace ui
 
-NS_OCF_END
+} // namespace ocf

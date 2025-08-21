@@ -4,7 +4,7 @@
 #include "base/Node.h"
 #include "3d/Mesh.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class MeshRenderer : public Node {
 public:
@@ -21,4 +21,4 @@ protected:
     std::vector<Mesh* >m_meshes;
 };
 
-NS_OCF_END
+} // namespace ocf

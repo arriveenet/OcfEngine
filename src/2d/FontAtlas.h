@@ -4,7 +4,7 @@
 #include <memory>
 #include <unordered_map>
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Texture2D;
 class Rect;
@@ -49,4 +49,4 @@ private:
 
 };
 
-NS_OCF_END
+} // namespace ocf

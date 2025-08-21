@@ -5,7 +5,7 @@
 #include "2d/SpriteFrame.h"
 #include "2d/SpriteSheetLoader.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class SpriteFrameManager {
 public:
@@ -40,4 +40,4 @@ private:
     std::map<uint32_t, std::shared_ptr<ISpriteSheetLoader>> m_spriteSheetLoader;
 };
 
-NS_OCF_END
+} // namespace ocf

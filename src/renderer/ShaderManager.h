@@ -3,7 +3,7 @@
 #include "base/GameObject.h"
 #include "Program.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 enum class ProgramType : uint32_t {
     Basic,
@@ -36,4 +36,4 @@ private:
     std::unordered_map<ProgramType, Program*> m_programs;
 };
 
-NS_OCF_END
+} // namespace ocf

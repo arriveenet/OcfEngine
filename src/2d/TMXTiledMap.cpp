@@ -2,7 +2,7 @@
 #include "2d/TMXXMLParser.h"
 #include "2d/TMXLayer.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 TMXTiledMap* TMXTiledMap::create(const std::string& tmxFile)
 {
@@ -60,4 +60,4 @@ void TMXTiledMap::buildWithMapInfo(TMXMapInfo* mapInfo)
     }
 }
 
-NS_OCF_END
+} // namespace ocf

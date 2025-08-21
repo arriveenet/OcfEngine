@@ -1,6 +1,6 @@
 #include "OpenGLUtility.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 using namespace backend;
 
@@ -94,4 +94,4 @@ GLsizei OpenGLUtility::getGLDataTypeSize(GLenum type)
     return size;
 }
 
-NS_OCF_END
+} // namespace ocf

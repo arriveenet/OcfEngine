@@ -1,7 +1,7 @@
 #pragma once
 #include "3d/Node3D.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Camera3D : public Node3D {
     friend class Scene;
@@ -67,4 +67,4 @@ protected:
     mutable bool m_viewProjectionDirty;
 };
 
-NS_OCF_END
+} // namespace ocf

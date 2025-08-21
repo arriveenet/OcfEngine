@@ -1,7 +1,7 @@
 #include "Animation.h"
 #include "2d/SpriteFrame.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 Animation::Animation()
     : m_totalDelayUnits(0.0f)
@@ -44,4 +44,4 @@ float Animation::getDuration() const
     return m_totalDelayUnits * m_delayPerUnit;
 }
 
-NS_OCF_END
+} // namespace ocf

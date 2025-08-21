@@ -3,7 +3,7 @@
 #include "base/Event.h"
 #include "input/Mouse.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class EventMouse : public Event {
 public:
@@ -36,4 +36,4 @@ public:
     glm::vec2 m_scrollDelta;
 };
 
-NS_OCF_END
+} // namespace ocf

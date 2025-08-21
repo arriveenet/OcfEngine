@@ -3,7 +3,7 @@
 #include "input/Keyboard.h"
 #include "input/Mouse.h"
 
-NS_OCF_BEGIN
+namespace ocf {
 
 class Input {
 public:
@@ -31,4 +31,4 @@ private:
     static MouseMode m_mouseMode;
 };
 
-NS_OCF_END
+} // namespace ocf
