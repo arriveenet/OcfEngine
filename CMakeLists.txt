@@ -31,7 +31,7 @@ endif()
 option(OCF_BUILD_TESTS "Build cpp-tests" ON)
 
 # サブプロジェクトを含めます。
-add_subdirectory (${OCF_ROOT_PATH}/src)
+add_subdirectory (${OCF_ROOT_PATH}/ocf)
 
 if (OCF_BUILD_TESTS)
     macro(add_test_target target_name dir)
