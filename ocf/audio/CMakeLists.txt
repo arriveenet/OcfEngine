@@ -1,14 +1,14 @@
 set(OCF_AUDIO_HEADER
-    "audio/AudioCache.h"
-    "audio/AudioDecoder.h"
-    "audio/AudioDecoderManager.h"
-    "audio/AudioDecoderMp3.h"
-    "audio/AudioDecoderWav.h"
-    "audio/AudioDecoderOgg.h"
-    "audio/AudioEngine.h"
-    "audio/AudioEngineImpl.h"
-    "audio/AudioMacros.h"
-    "audio/AudioPlayer.h"
+    "${OCF_ROOT_PATH}/include/ocf/audio/AudioCache.h"
+    "${OCF_ROOT_PATH}/include/ocf/audio/AudioDecoder.h"
+    "${OCF_ROOT_PATH}/include/ocf/audio/AudioDecoderManager.h"
+    "${OCF_ROOT_PATH}/include/ocf/audio/AudioDecoderMp3.h"
+    "${OCF_ROOT_PATH}/include/ocf/audio/AudioDecoderWav.h"
+    "${OCF_ROOT_PATH}/include/ocf/audio/AudioDecoderOgg.h"
+    "${OCF_ROOT_PATH}/include/ocf/audio/AudioEngine.h"
+    "${OCF_ROOT_PATH}/include/ocf/audio/AudioEngineImpl.h"
+    "${OCF_ROOT_PATH}/include/ocf/audio/AudioMacros.h"
+    "${OCF_ROOT_PATH}/include/ocf/audio/AudioPlayer.h"
     )
 
 set(OCF_AUDIO_SRC

@@ -1,4 +1,4 @@
-#include "Scene.h"
+#include "base/Scene.h"
 #include "2d/Camera2D.h"
 #include "3d/Camera3D.h"
 #include "base/Game.h"

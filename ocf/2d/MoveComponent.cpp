@@ -1,4 +1,4 @@
-#include "MoveComponent.h"
+#include "2d/MoveComponent.h"
 #include <glm/glm.hpp>
 #include "2d/Node2D.h"
 

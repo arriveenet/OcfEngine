@@ -1,4 +1,4 @@
-#include "VertexArray.h"
+#include "renderer/VertexArray.h"
 
 namespace ocf {
 

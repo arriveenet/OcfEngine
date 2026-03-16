@@ -1,4 +1,4 @@
-#include "Camera3D.h"
+#include "3d/Camera3D.h"
 #include "base/Game.h"
 #include "platform/Application.h"
 #include "renderer/Renderer.h"

@@ -1,10 +1,10 @@
 set(OCF_3D_HEADER
-    "3d/Camera3D.h"
-    "3d/FirstPersonCamera.h"
-    "3d/Mesh.h"
-    "3d/MeshRenderer.h"
-    "3d/Node3D.h"
-    "3d/Skybox.h"
+    "${OCF_ROOT_PATH}/include/ocf/3d/Camera3D.h"
+    "${OCF_ROOT_PATH}/include/ocf/3d/FirstPersonCamera.h"
+    "${OCF_ROOT_PATH}/include/ocf/3d/Mesh.h"
+    "${OCF_ROOT_PATH}/include/ocf/3d/MeshRenderer.h"
+    "${OCF_ROOT_PATH}/include/ocf/3d/Node3D.h"
+    "${OCF_ROOT_PATH}/include/ocf/3d/Skybox.h"
     )
 
 set(OCF_3D_SRC

@@ -1,4 +1,4 @@
-#include "XmlSpriteSheetLoader.h"
+#include "2d/XmlSpriteSheetLoader.h"
 #include "2d/SpriteFrame.h"
 #include "2d/SpriteFrameManager.h"
 #include "base/Game.h"

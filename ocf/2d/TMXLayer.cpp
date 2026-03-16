@@ -1,4 +1,4 @@
-#include "TMXLayer.h"
+#include "2d/TMXLayer.h"
 #include "2d/TMXXMLParser.h"
 #include "2d/TMXTiledMap.h"
 #include "base/Game.h"

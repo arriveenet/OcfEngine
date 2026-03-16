@@ -1,4 +1,4 @@
-#include "VertexBuffer.h"
+#include "renderer/VertexBuffer.h"
 
 namespace ocf {
 

@@ -1,4 +1,4 @@
-#include "Sprite.h"
+#include "2d/Sprite.h"
 
 #include <glm/gtc/type_ptr.hpp>
 #include "base/Game.h"

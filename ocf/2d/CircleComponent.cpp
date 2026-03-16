@@ -1,4 +1,4 @@
-#include "CircleComponent.h"
+#include "2d/CircleComponent.h"
 #include "2d/Node2D.h"
 
 namespace ocf {

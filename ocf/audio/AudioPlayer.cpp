@@ -1,7 +1,7 @@
-#include "AudioPlayer.h"
+#include "audio/AudioPlayer.h"
 #include "audio/AudioCache.h"
 #include "audio/AudioDecoder.h"
-#include "AudioDecoderManager.h"
+#include "audio/AudioDecoderManager.h"
 #include <string.h>
 #include <cassert>
 

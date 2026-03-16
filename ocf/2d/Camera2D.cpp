@@ -1,4 +1,4 @@
-#include "Camera2D.h"
+#include "2d/Camera2D.h"
 #include <assert.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include "base/Game.h"

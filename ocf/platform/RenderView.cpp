@@ -1,4 +1,4 @@
-#include "RenderView.h"
+#include "platform/RenderView.h"
 #include "base/Game.h"
 #include "2d/Camera2D.h"
 

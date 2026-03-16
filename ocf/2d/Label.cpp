@@ -1,4 +1,4 @@
-#include "Label.h"
+#include "2d/Label.h"
 #include "2d/FontManager.h"
 #include "2d/FontAtlas.h"
 #include "2d/FontFreeType.h"

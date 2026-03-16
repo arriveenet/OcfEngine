@@ -1,4 +1,4 @@
-#include "TextureAtlas.h"
+#include "renderer/TextureAtlas.h"
 #include "base/Game.h"
 #include "renderer/TextureManager.h"
 

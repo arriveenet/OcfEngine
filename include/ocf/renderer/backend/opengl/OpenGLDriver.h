@@ -1,7 +1,7 @@
 #pragma once
 #include "renderer/backend/DriverBase.h"
-#include "GLTexture.h"
-#include "OpenGLContext.h"
+#include "renderer/backend/opengl/GLTexture.h"
+#include "renderer/backend/opengl/OpenGLContext.h"
 #include <string>
 
 namespace ocf::backend {

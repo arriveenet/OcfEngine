@@ -1,6 +1,6 @@
 #pragma once
-#include "Renderer/Backend/DriverEnums.h"
-#include "RenderCommand.h"
+#include "renderer/backend/DriverEnums.h"
+#include "renderer/RenderCommand.h"
 #include <functional>
 
 namespace ocf {

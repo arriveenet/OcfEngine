@@ -1,4 +1,4 @@
-#include "Input.h"
+#include "input/Input.h"
 #include <cstring>
 #include "base/Game.h"
 #include "platform/RenderViewImpl.h"

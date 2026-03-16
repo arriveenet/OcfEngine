@@ -1,8 +1,8 @@
-#include "TextureCube.h"
+#include "renderer/TextureCube.h"
 #include "base/FileUtils.h"
 #include "renderer/Image.h"
-#include "backend/opengl/OpenGLInclude.h"
-#include "backend/opengl/OpenGLUtility.h"
+#include "renderer/backend/opengl/OpenGLInclude.h"
+#include "renderer/backend/opengl/OpenGLUtility.h"
 
 namespace ocf {
 

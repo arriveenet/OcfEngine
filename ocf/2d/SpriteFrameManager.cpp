@@ -1,4 +1,4 @@
-#include "SpriteFrameManager.h"
+#include "2d/SpriteFrameManager.h"
 #include "2d/XmlSpriteSheetLoader.h"
 
 using namespace std;

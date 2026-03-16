@@ -1,10 +1,10 @@
 set(OCF_UI_HEADER
-    "ui/UIButtonBase.h"
-    "ui/UIButton.h"
-    "ui/UICheckBox.h"
-    "ui/UIRadioButton.h"
-    "ui/UISlider.h"
-    "ui/UIWidget.h"
+    "${OCF_ROOT_PATH}/include/ocf/ui/UIButtonBase.h"
+    "${OCF_ROOT_PATH}/include/ocf/ui/UIButton.h"
+    "${OCF_ROOT_PATH}/include/ocf/ui/UICheckBox.h"
+    "${OCF_ROOT_PATH}/include/ocf/ui/UIRadioButton.h"
+    "${OCF_ROOT_PATH}/include/ocf/ui/UISlider.h"
+    "${OCF_ROOT_PATH}/include/ocf/ui/UIWidget.h"
     )
 
 set(OCF_UI_SRC

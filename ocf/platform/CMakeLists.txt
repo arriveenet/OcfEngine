@@ -1,10 +1,10 @@
 set(OCF_PLATFORM_HEADER
-    "platform/Application.h"
-    "platform/ApplicationBase.h"
-    "platform/RenderView.h"
-    "platform/RenderViewImpl.h"
-    "platform/PlatformMacros.h"
-    "platform/PlatformConfig.h"
+    "${OCF_ROOT_PATH}/include/ocf/platform/Application.h"
+    "${OCF_ROOT_PATH}/include/ocf/platform/ApplicationBase.h"
+    "${OCF_ROOT_PATH}/include/ocf/platform/RenderView.h"
+    "${OCF_ROOT_PATH}/include/ocf/platform/RenderViewImpl.h"
+    "${OCF_ROOT_PATH}/include/ocf/platform/PlatformMacros.h"
+    "${OCF_ROOT_PATH}/include/ocf/platform/PlatformConfig.h"
     )
 
 set(OCF_PLATFORM_SRC

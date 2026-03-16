@@ -1,4 +1,4 @@
-#include "MeshRenderer.h"
+#include "3d/MeshRenderer.h"
 #include <tiny_obj_loader.h>
 #include "base/FileUtils.h"
 

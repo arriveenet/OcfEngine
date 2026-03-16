@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+#include "2d/Component.h"
 
 namespace ocf {
 

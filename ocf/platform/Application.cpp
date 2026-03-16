@@ -1,4 +1,4 @@
-#include "Application.h"
+#include "platform/Application.h"
 #include "base/Game.h"
 #include "base/Scene.h"
 #include "platform/PlatformMacros.h"

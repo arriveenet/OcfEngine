@@ -1,7 +1,7 @@
 set(OCF_INPUT_HEADER
-    "input/Input.h"
-    "input/Keyboard.h"
-    "input/Mouse.h"
+    "${OCF_ROOT_PATH}/include/ocf/input/Input.h"
+    "${OCF_ROOT_PATH}/include/ocf/input/Keyboard.h"
+    "${OCF_ROOT_PATH}/include/ocf/input/Mouse.h"
     )
 
 set(OCF_INPUT_SRC

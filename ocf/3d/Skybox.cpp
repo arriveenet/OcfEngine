@@ -1,4 +1,4 @@
-#include "Skybox.h"
+#include "3d/Skybox.h"
 #include "3d/Camera3D.h"
 #include "renderer/Renderer.h"
 #include "renderer/ShaderManager.h"

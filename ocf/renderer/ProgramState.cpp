@@ -1,5 +1,5 @@
-#include "ProgramState.h"
-#include "VertexArray.h"
+#include "renderer/ProgramState.h"
+#include "renderer/VertexArray.h"
 
 namespace ocf {
 

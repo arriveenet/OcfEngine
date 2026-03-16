@@ -1,4 +1,4 @@
-#include "UISlider.h"
+#include "ui/UISlider.h"
 #include "2d/Camera2D.h"
 
 namespace ocf {

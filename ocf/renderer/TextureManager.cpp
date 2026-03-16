@@ -1,5 +1,5 @@
-#include "TextureManager.h"
-#include "Image.h"
+#include "renderer/TextureManager.h"
+#include "renderer/Image.h"
 #include "base/FileUtils.h"
 
 namespace ocf {

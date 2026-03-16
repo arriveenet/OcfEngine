@@ -1,5 +1,5 @@
-#include "OpenGLDriver.h"
-#include "OpenGLUtility.h"
+#include "renderer/backend/opengl/OpenGLDriver.h"
+#include "renderer/backend/opengl/OpenGLUtility.h"
 
 namespace ocf::backend {
 

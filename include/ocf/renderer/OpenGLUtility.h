@@ -1,6 +1,6 @@
 #pragma once
-#include "OpenGLInclude.h"
-#include "Renderer/backend/DriverEnums.h"
+#include "renderer/backend/opengl/OpenGLInclude.h"
+#include "renderer/backend/DriverEnums.h"
 #include "base/Macros.h"
 #include "base/Types.h"
 

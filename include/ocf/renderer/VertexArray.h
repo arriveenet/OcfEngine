@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <unordered_map>
-#include "VertexBuffer.h"
+#include "renderer/VertexBuffer.h"
 #include "base/Macros.h"
 #include "base/Types.h"
 #include "backend/opengl/OpenGLInclude.h"

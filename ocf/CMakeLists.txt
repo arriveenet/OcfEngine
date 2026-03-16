@@ -23,7 +23,7 @@ include("renderer/CMakeLists.txt")
 include("ui/CMakeLists.txt")
 
 set("OCF_HEADER"
-    "OcfEngine.h"
+    "${OCF_ROOT_PATH}/include/ocf/OcfEngine.h"
     ${OCF_2D_HEADER}
     ${OCF_3D_HEADER}
     ${OCF_AUDIO_HEADER}
@@ -62,9 +62,7 @@ if(XCODE OR VS)
 endif()
 
 target_include_directories(${_OCF_ENGINE_LIB}
-    PUBLIC ${OCF_ROOT_PATH}
-    PUBLIC ${OCF_ROOT_PATH}/src
-    PUBLIC ${OCF_ROOT_PATH}/third_party
+    PUBLIC ${OCF_ROOT_PATH}/include/ocf
     INTERFACE ${OCF_ROOT_PATH}/thirdparty
 )
 

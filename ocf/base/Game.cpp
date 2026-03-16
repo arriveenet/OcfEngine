@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "base/Game.h"
 #include "2d/Camera2D.h"
 #include "2d/FontManager.h"
 #include "2d/Label.h"

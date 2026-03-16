@@ -1,4 +1,4 @@
-#include "FontAtlas.h"
+#include "2d/FontAtlas.h"
 #include "base/MaxRectsBinPack.h"
 #include "renderer/Texture2D.h"
 #include "renderer/Image.h"

@@ -1,5 +1,5 @@
-#include "Texture2D.h"
-#include "Image.h"
+#include "renderer/Texture2D.h"
+#include "renderer/Image.h"
 #include "renderer/backend/opengl/OpenGLInclude.h"
 #include "renderer/backend/opengl/OpenGLUtility.h"
 

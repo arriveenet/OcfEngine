@@ -1,5 +1,5 @@
 #pragma once
-#include "TrianglesCommand.h"
+#include "renderer/TrianglesCommand.h"
 
 namespace ocf {
 

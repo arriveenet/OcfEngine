@@ -1,7 +1,7 @@
-#include "UIRadioButton.h"
+#include "ui/UIRadioButton.h"
 #include "2d/DrawShape.h"
 #include "2d/Label.h"
-#include "UICheckBox.h"
+#include "ui/UICheckBox.h"
 
 static constexpr float RADIO_BUTTON_DEFAULT_SIZE = 14.0f;
 

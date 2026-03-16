@@ -1,14 +1,11 @@
 #pragma once
 
-#include "AudioDecoder.h"
-#include <fstream>
-#include <memory>
-
-typedef struct Mp3DecImpl* Mp3DecHandle;
+#include "audio/AudioDecoder.h"
+#include <vorbis/vorbisfile.h>
 
 namespace ocf {
 
-class AudioDecoderMp3 :public AudioDecoder {
+class AudioDecoderOgg : public AudioDecoder {
 public:
     bool open(std::string_view filename) override;
 
@@ -19,12 +16,10 @@ public:
     bool seek(uint32_t frameOffset) override;
 
 protected:
-    AudioDecoderMp3();
-    ~AudioDecoderMp3();
+    AudioDecoderOgg();
+    ~AudioDecoderOgg();
 
-private:
-    Mp3DecHandle m_handle;
-    std::unique_ptr<std::ifstream> m_fileStream;
+    OggVorbis_File m_vorbisFile;
 
     friend class AudioDecoderManager;
 };

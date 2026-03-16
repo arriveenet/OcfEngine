@@ -1,4 +1,4 @@
-#include "TMXTiledMap.h"
+#include "2d/TMXTiledMap.h"
 #include "2d/TMXXMLParser.h"
 #include "2d/TMXLayer.h"
 
