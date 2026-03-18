@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.19)
-project(OcfEngine_lib C ASM)
+project(OcfEngine_lib)
 
 set(TARGET ocfengine)
 set(PUBLIC_HDR_DIR include)
@@ -93,6 +93,8 @@ set_target_properties(${TARGET} PROPERTIES FOLDER ocfengine)
 target_link_libraries(${TARGET} PUBLIC fmt)
 target_link_libraries(${TARGET} PUBLIC glad)
 target_link_libraries(${TARGET} PUBLIC glfw)
+target_link_libraries(${TARGET} PUBLIC OpenAL)
+target_link_libraries(${TARGET} PUBLIC xxHash)
 
 # ==================================================================================================
 # Compiler flags

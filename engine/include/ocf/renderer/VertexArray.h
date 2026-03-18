@@ -4,7 +4,7 @@
 #include "VertexBuffer.h"
 #include "ocf/core/Macros.h"
 #include "ocf/core/Types.h"
-#include "backend/opengl/OpenGLInclude.h"
+#include "renderer/backend/opengl/OpenGLInclude.h"
 
 namespace ocf {
 

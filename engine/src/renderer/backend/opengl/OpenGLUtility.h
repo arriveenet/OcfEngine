@@ -1,6 +1,6 @@
 #pragma once
 #include "OpenGLInclude.h"
-#include "ocf/base/Types.h"
+#include "ocf/core/Types.h"
 #include "ocf/renderer/backend/DriverEnums.h"
 #include <utility>
 #include <string_view>

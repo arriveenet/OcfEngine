@@ -1,7 +1,7 @@
 #include "ocf/renderer/renderer.h"
 #include "ocf/core/Game.h"
-#include "ocf/renderer/backend/opengl/OpenGLInclude.h"
-#include "ocf/renderer/backend/opengl/OpenGLUtility.h"
+#include "renderer/backend/opengl/OpenGLInclude.h"
+#include "renderer/backend/opengl/OpenGLUtility.h"
 #include "ocf/renderer/CustomCommand.h"
 #include "ocf/renderer/TextureCube.h"
 #include <glm/gtc/type_ptr.hpp>

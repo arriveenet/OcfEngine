@@ -1,7 +1,7 @@
 #include "ocf/renderer/Program.h"
-#include <glm/gtc/type_ptr.hpp>
 #include "ocf/core/FileUtils.h"
-#include "ocf/renderer/backend/opengl/OpenGLUtility.h"
+#include "renderer/backend/opengl/OpenGLUtility.h"
+#include <glm/gtc/type_ptr.hpp>
 
 namespace {
 void setUniform(GLuint location, unsigned int size, GLenum uniformType, void* data)

@@ -1,7 +1,7 @@
 #include "ocf/ui/UIRadioButton.h"
 #include "ocf/2d/DrawShape.h"
 #include "ocf/2d/Label.h"
-#include "ocf/uiCheckBox.h"
+#include "ocf/ui/UICheckBox.h"
 
 static constexpr float RADIO_BUTTON_DEFAULT_SIZE = 14.0f;
 

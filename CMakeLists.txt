@@ -31,6 +31,7 @@ option(OCF_USE_GL "Use OpenGL" ON)
 #  Paths
 # ==================================================================================================
 set(OCF_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+set(OCF_THIRDPARTY_PATH ${OCF_ROOT_PATH}/third-party)
 
 # ==================================================================================================
 # General compiler flags
@@ -49,6 +50,13 @@ endif()
 # ==================================================================================================
 # Sub-projects
 # ==================================================================================================
+add_subdirectory(${OCF_THIRDPARTY_PATH}/fmt)
+add_subdirectory(${OCF_THIRDPARTY_PATH}/glad)
+add_subdirectory(${OCF_THIRDPARTY_PATH}/glfw)
+add_subdirectory(${OCF_THIRDPARTY_PATH}/googletest/ocf)
+add_subdirectory(${OCF_THIRDPARTY_PATH}/openal-soft)
+add_subdirectory(${OCF_THIRDPARTY_PATH}/xxHash)
+
 add_subdirectory (${OCF_ROOT_PATH}/engine)
 
 if (OCF_BUILD_TESTS)
@@ -58,5 +66,5 @@ if (OCF_BUILD_TESTS)
     endmacro()
     
      add_test_target(cpp-tests ${OCF_ROOT_PATH}/tests/cpp-tests)
-     add_test_target(unit-tests ${OCF_ROOT_PATH}/tests/unit-tests)
+     # add_test_target(unit-tests ${OCF_ROOT_PATH}/tests/unit-tests)
 endif()

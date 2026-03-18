@@ -1,7 +1,6 @@
+#include "ocf/renderer/RenderQueue.h"
 #include "ocf/renderer/RenderCommand.h"
-
 #include <algorithm>
-#include "ocf/renderer/RenderCommand.h"
 
 namespace ocf {
 
