@@ -123,7 +123,7 @@ void Skybox::initBuffer()
     VertexArray* vertexArray = m_customCommand.getVertexArray();
     vertexArray->bind();
 
-    vertexArray->createVertexBuffer(BufferUsage::Static);
+    vertexArray->createVertexBuffer(ocf::BufferUsage::Static);
     vertexArray->updateVertexBuffer(skyboxVertices, sizeof(skyboxVertices));
 
     vertexArray->setAttribute("inPosition", 0, 3, false, 0);

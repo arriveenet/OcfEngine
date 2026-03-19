@@ -43,7 +43,7 @@ bool Mesh::setupMesh()
     VertexArray* pVertexArray = m_meshCommand.getVertexArray();
     pVertexArray->bind();
 
-    pVertexArray->createVertexBuffer(BufferUsage::Static);
+    pVertexArray->createVertexBuffer(ocf::BufferUsage::Static);
 
     pVertexArray->updateVertexBuffer(m_data.data(), sizeof(float) * m_data.size());
     m_meshCommand.setVertexDrawInfo(0, static_cast<unsigned int>(m_data.size()));

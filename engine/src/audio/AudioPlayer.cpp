@@ -1,7 +1,7 @@
 #include "ocf/audio/audioPlayer.h"
 #include "ocf/audio/AudioCache.h"
 #include "ocf/audio/AudioDecoder.h"
-#include "ocf/audioDecoderManager.h"
+#include "ocf/audio/AudioDecoderManager.h"
 #include <string.h>
 #include <cassert>
 

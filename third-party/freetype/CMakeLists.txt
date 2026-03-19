@@ -166,6 +166,10 @@ set(VERSION_MAJOR "2")
 set(VERSION_MINOR "13")
 set(VERSION_PATCH "3")
 
+# Ocf MODIFY BEGIN
+set(FT_DISABLE_HARFBUZZ TRUE CACHE BOOL "Disable HarfBuzz support" FORCE)
+# Ocf MODIFY END
+
 # Generate LIBRARY_VERSION and LIBRARY_SOVERSION.
 set(LIBTOOL_REGEX "version_info='([0-9]+):([0-9]+):([0-9]+)'")
 file(STRINGS "${PROJECT_SOURCE_DIR}/builds/unix/configure.raw"
@@ -681,3 +685,7 @@ set(CPACK_COMPONENT_LIBRARIES_GROUP "Development")
 set(CPACK_COMPONENT_HEADERS_GROUP "Development")
 
 include(CPack)
+
+# Ocf MODIFY BEGIN
+set_target_properties(freetype PROPERTIES FOLDER ThirdParty)
+# Ocf MODIFY END

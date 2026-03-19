@@ -5,7 +5,7 @@
 
 extern "C" {
 #include <png.h>
-#include <jpeglib.h>
+//#include <jpeglib.h>
 } // extern "C"
 
 #include "ocf/core/FileUtils.h"
@@ -350,50 +350,50 @@ bool Image::initWithPngData(const unsigned char* pData, size_t dataSize)
 
 bool Image::initWithJpegData(const unsigned char* pData, size_t dataSize)
 {
-    jpeg_decompress_struct cinfo{};
+    //jpeg_decompress_struct cinfo{};
 
-    jpeg_error_mgr jerr;
+    //jpeg_error_mgr jerr;
 
-    JSAMPROW row_pointer[1] = {0};
-    uint32_t location = 0;
+    //JSAMPROW row_pointer[1] = {0};
+    //uint32_t location = 0;
 
     bool result = false;
-    do {
-        cinfo.err = jpeg_std_error(&jerr);
+    //do {
+    //    cinfo.err = jpeg_std_error(&jerr);
 
-        jpeg_create_decompress(&cinfo);
+    //    jpeg_create_decompress(&cinfo);
 
-        jpeg_mem_src(&cinfo, pData, dataSize);
+    //    jpeg_mem_src(&cinfo, pData, dataSize);
 
-        jpeg_read_header(&cinfo, TRUE);
+    //    jpeg_read_header(&cinfo, TRUE);
 
-        if (cinfo.jpeg_color_space == JCS_GRAYSCALE) {
-            m_pixelFormat = PixelFormat::GRAY;
-        }
-        else {
-            cinfo.out_color_space = JCS_RGB;
-            m_pixelFormat = PixelFormat::RGB;
-        }
+    //    if (cinfo.jpeg_color_space == JCS_GRAYSCALE) {
+    //        m_pixelFormat = PixelFormat::GRAY;
+    //    }
+    //    else {
+    //        cinfo.out_color_space = JCS_RGB;
+    //        m_pixelFormat = PixelFormat::RGB;
+    //    }
 
-        jpeg_start_decompress(&cinfo);
+    //    jpeg_start_decompress(&cinfo);
 
-        m_width = cinfo.output_width;
-        m_height = cinfo.output_height;
+    //    m_width = cinfo.output_width;
+    //    m_height = cinfo.output_height;
 
-        m_dataSize = cinfo.output_width * cinfo.output_height * cinfo.output_components;
-        m_pData = new unsigned char[m_dataSize];
-        OCF_BREAK_IF(m_pData == nullptr);
+    //    m_dataSize = cinfo.output_width * cinfo.output_height * cinfo.output_components;
+    //    m_pData = new unsigned char[m_dataSize];
+    //    OCF_BREAK_IF(m_pData == nullptr);
 
-        while (cinfo.output_scanline < cinfo.output_height) {
-            row_pointer[0] = m_pData + location;
-            location += cinfo.output_width * cinfo.output_components;
-            jpeg_read_scanlines(&cinfo, row_pointer, 1);
-        }
+    //    while (cinfo.output_scanline < cinfo.output_height) {
+    //        row_pointer[0] = m_pData + location;
+    //        location += cinfo.output_width * cinfo.output_components;
+    //        jpeg_read_scanlines(&cinfo, row_pointer, 1);
+    //    }
 
-        jpeg_destroy_decompress(&cinfo);
+    //    jpeg_destroy_decompress(&cinfo);
 
-        result = true;
-    } while (false);
+    //    result = true;
+    //} while (false);
 
     return result;
 }

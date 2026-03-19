@@ -1,7 +1,7 @@
 ﻿# ==================================================================================================
 # CMake
 # ==================================================================================================
-cmake_minimum_required (VERSION 3.19)
+cmake_minimum_required (VERSION 3.20)
 
 # ==================================================================================================
 # Project declaration
@@ -31,7 +31,7 @@ option(OCF_USE_GL "Use OpenGL" ON)
 #  Paths
 # ==================================================================================================
 set(OCF_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
-set(OCF_THIRDPARTY_PATH ${OCF_ROOT_PATH}/third-party)
+set(OCF_THIRD_PARTY_PATH ${OCF_ROOT_PATH}/third-party)
 
 # ==================================================================================================
 # General compiler flags
@@ -50,12 +50,22 @@ endif()
 # ==================================================================================================
 # Sub-projects
 # ==================================================================================================
-add_subdirectory(${OCF_THIRDPARTY_PATH}/fmt)
-add_subdirectory(${OCF_THIRDPARTY_PATH}/glad)
-add_subdirectory(${OCF_THIRDPARTY_PATH}/glfw)
-add_subdirectory(${OCF_THIRDPARTY_PATH}/googletest/ocf)
-add_subdirectory(${OCF_THIRDPARTY_PATH}/openal-soft)
-add_subdirectory(${OCF_THIRDPARTY_PATH}/xxHash)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/fmt)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/freetype)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/glad)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/glfw)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/glm)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/googletest/ocf)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/libjpeg-turbo)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/libogg)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/libpng)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/libvorbis)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/openal-soft)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/minimp3)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/tinyobjloader)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/tinyxml2)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/xxHash)
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/zlib)
 
 add_subdirectory (${OCF_ROOT_PATH}/engine)
 

@@ -14,13 +14,13 @@ public:
     Shader();
     ~Shader();
 
-    bool load(ShaderStage stage, const std::string& shaderSource);
+    bool load(ocf::ShaderStage stage, const std::string& shaderSource);
     void unload();
 
     GLuint getShader() const { return m_shader; }
 
 private:
-    bool compileShader(ShaderStage stage,const std::string& source);
+    bool compileShader(ocf::ShaderStage stage,const std::string& source);
     bool isCompiled(GLuint shader);
 
 private:

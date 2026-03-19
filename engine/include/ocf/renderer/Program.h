@@ -30,7 +30,7 @@ public:
 
     void use() const;
     void bindUniformBuffers(const char* data);
-    UniformInfo getUniformInfo(std::string_view name);
+    ocf::UniformInfo getUniformInfo(std::string_view name);
     size_t getUniformBufferSize() const;
 
 private:
@@ -41,7 +41,7 @@ private:
     GLuint m_program;
     Shader m_vertexShader;
     Shader m_fragmentShader;
-    std::unordered_map<std::string, UniformInfo> m_activeUniformInfos;
+    std::unordered_map<std::string, ocf::UniformInfo> m_activeUniformInfos;
     size_t m_uniformBufferSize;
 };
 

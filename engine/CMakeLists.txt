@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.19)
+cmake_minimum_required (VERSION 3.20)
 project(OcfEngine_lib)
 
 set(TARGET ocfengine)
@@ -85,16 +85,26 @@ endif()
 
 target_include_directories(${TARGET} PUBLIC ${PUBLIC_HDR_DIR})
 
-set_target_properties(${TARGET} PROPERTIES FOLDER ocfengine)
+set_target_properties(${TARGET} PROPERTIES FOLDER Engine)
 
 # ==================================================================================================
 # Dependencies
 # ==================================================================================================
 target_link_libraries(${TARGET} PUBLIC fmt)
+target_link_libraries(${TARGET} PUBLIC freetype)
 target_link_libraries(${TARGET} PUBLIC glad)
 target_link_libraries(${TARGET} PUBLIC glfw)
+target_link_libraries(${TARGET} PUBLIC glm)
+target_link_libraries(${TARGET} PUBLIC ogg)
+target_link_libraries(${TARGET} PUBLIC libpng)
+target_link_libraries(${TARGET} PUBLIC libjpeg-turbo)
+target_link_libraries(${TARGET} PUBLIC vorbis)
 target_link_libraries(${TARGET} PUBLIC OpenAL)
+target_link_libraries(${TARGET} PUBLIC tinyobjloader)
+target_link_libraries(${TARGET} PUBLIC tinyxml2)
+target_link_libraries(${TARGET} PUBLIC minimp3)
 target_link_libraries(${TARGET} PUBLIC xxHash)
+target_link_libraries(${TARGET} PUBLIC zlib)
 
 # ==================================================================================================
 # Compiler flags

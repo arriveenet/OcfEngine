@@ -35,8 +35,8 @@ Program::Program(const std::string& vertexShader, const std::string& fragmentSha
     auto fragmentFile = fileUtils->fullPathForFilename(shaderPath + fragmentShader);
 
     std::string assetsPath = FileUtils::getInstance()->getAssetsPath();
-    m_vertexShader.load(ShaderStage::Vertex, vertexFile);
-    m_fragmentShader.load(ShaderStage::Fragment, fragmentFile);
+    m_vertexShader.load(ocf::ShaderStage::Vertex, vertexFile);
+    m_fragmentShader.load(ocf::ShaderStage::Fragment, fragmentFile);
 
     // シェーダーをコンパイル
     compileProgram();
@@ -79,7 +79,7 @@ void Program::bindUniformBuffers(const char* data)
     }
 }
 
-UniformInfo Program::getUniformInfo(std::string_view name)
+ocf::UniformInfo Program::getUniformInfo(std::string_view name)
 {
     return m_activeUniformInfos[name.data()];
 }
@@ -117,7 +117,7 @@ void Program::computeUniformInfos()
     glGetProgramiv(m_program, GL_ACTIVE_UNIFORMS, &uniformCount);
 
     for (int i = 0; i < uniformCount; i++) {
-        UniformInfo uniform;
+        ocf::UniformInfo uniform;
         char buffer[512] = { 0 };
         GLint nameLength;
         glGetActiveUniform(m_program, i, 511, &nameLength, &uniform.count, &uniform.type, buffer);

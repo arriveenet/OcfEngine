@@ -38,8 +38,8 @@ bool Renderer::init()
 
     m_pVertexArray->setStride(sizeof(Vertex3fC3fT2f));
 
-    m_pVertexArray->createVertexBuffer(BufferUsage::Dynamic);
-    m_pVertexArray->createIndexBuffer(BufferUsage::Dynamic);
+    m_pVertexArray->createVertexBuffer(ocf::BufferUsage::Dynamic);
+    m_pVertexArray->createIndexBuffer(ocf::BufferUsage::Dynamic);
 
     m_pVertexArray->updateVertexBuffer(m_triangleVertices, m_triangleVertexCount);
     m_pVertexArray->updateIndexBuffer(m_triangleIndices, m_triangleIndexCount);
@@ -343,9 +343,9 @@ void Renderer::drawCustomCommand(RenderCommand* command)
     const auto drawType = cmd->getDrawType();
     const auto primitiveType = cmd->getPrimitiveType();
     if (drawType == CustomCommand::DrawType::Element) {
-        glDrawElements(OpenGLUtility::toGLPrimitive(primitiveType), 0, GL_UNSIGNED_SHORT, nullptr);
+        glDrawElements(ocf::OpenGLUtility::toGLPrimitive(primitiveType), 0, GL_UNSIGNED_SHORT, nullptr);
     } else {
-        glDrawArrays(OpenGLUtility::toGLPrimitive(primitiveType), cmd->getVertexDrawStart(), cmd->getVertexDrawCount());
+        glDrawArrays(ocf::OpenGLUtility::toGLPrimitive(primitiveType), cmd->getVertexDrawStart(), cmd->getVertexDrawCount());
     }
 
     m_drawCallCount++;
