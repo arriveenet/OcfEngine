@@ -1,5 +1,5 @@
 #pragma once
-#include "ocf/audio/AudioMacros.h"
+#include "audio/AudioMacros.h"
 #include <string>
 #include <AL/al.h>
 

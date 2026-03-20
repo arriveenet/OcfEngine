@@ -1,10 +1,10 @@
-#include "ocf/audio/AudioCache.h"
+#include "audio/AudioCache.h"
 
 #include <vector>
 #include <cassert>
 #include <string.h>
-#include "ocf/audio/AudioDecoderManager.h"
-#include "ocf/audio/AudioDecoder.h"
+#include "audio/AudioDecoderManager.h"
+#include "audio/AudioDecoder.h"
 #include <AL/alext.h>
 
 #define PCMDATA_CACHEMAXSIZE 1048576

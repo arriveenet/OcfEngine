@@ -67,7 +67,8 @@ add_subdirectory(${OCF_THIRD_PARTY_PATH}/tinyxml2)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/xxHash)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/zlib)
 
-add_subdirectory (${OCF_ROOT_PATH}/engine)
+add_subdirectory(${OCF_ROOT_PATH}/engine)
+
 
 if (OCF_BUILD_TESTS)
     macro(add_test_target target_name dir)
@@ -75,6 +76,7 @@ if (OCF_BUILD_TESTS)
         set_target_properties(${target_name} PROPERTIES FOLDER "Apps")
     endmacro()
     
-     add_test_target(cpp-tests ${OCF_ROOT_PATH}/tests/cpp-tests)
+     add_test_target(sandbox ${OCF_ROOT_PATH}/tests/sandbox)
+     # add_test_target(cpp-tests ${OCF_ROOT_PATH}/tests/cpp-tests)
      # add_test_target(unit-tests ${OCF_ROOT_PATH}/tests/unit-tests)
 endif()

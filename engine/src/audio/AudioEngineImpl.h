@@ -4,8 +4,8 @@
 #include <memory>
 #include <queue>
 #include "ocf/audio/AudioEngine.h"
-#include "ocf/audio/AudioPlayer.h"
-#include "ocf/audio/AudioCache.h"
+#include "audio/AudioPlayer.h"
+#include "audio/AudioCache.h"
 
 #define AUDIO_SOURCE_MAX	32
 

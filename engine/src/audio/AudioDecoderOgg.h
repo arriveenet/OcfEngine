@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ocf/audio/AudioDecoder.h"
+#include "audio/AudioDecoder.h"
 #include <vorbis/vorbisfile.h>
 
 namespace ocf {

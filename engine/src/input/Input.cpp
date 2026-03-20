@@ -1,7 +1,7 @@
-#include "Input.h"
+#include "ocf/input/Input.h"
+#include "ocf/core/Game.h"
+#include "ocf/platform/RenderViewImpl.h"
 #include <cstring>
-#include "base/Game.h"
-#include "platform/RenderViewImpl.h"
 
 namespace ocf {
 

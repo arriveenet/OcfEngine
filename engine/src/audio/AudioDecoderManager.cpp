@@ -1,7 +1,7 @@
-#include "ocf/audio/AudioDecoderManager.h"
-#include "ocf/audio/AudioDecoderWav.h"
-#include "ocf/audio/AudioDecoderMp3.h"
-#include "ocf/audio/AudioDecoderOgg.h"
+#include "audio/AudioDecoderManager.h"
+#include "audio/AudioDecoderWav.h"
+#include "audio/AudioDecoderMp3.h"
+#include "audio/AudioDecoderOgg.h"
 #include <filesystem>
 
 namespace ocf {

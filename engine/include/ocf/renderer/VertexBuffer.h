@@ -1,5 +1,5 @@
 #pragma once
-#include "ocf/renderer/OpenGLUtility.h"
+#include "renderer/backend/opengl/OpenGLUtility.h"
 #include "ocf/core/Macros.h"
 
 namespace ocf {

@@ -1,4 +1,4 @@
-#include "Mouse.h"
+#include "ocf/input/Mouse.h"
 #include "renderer/backend/opengl/OpenGLInclude.h"
 
 namespace ocf {

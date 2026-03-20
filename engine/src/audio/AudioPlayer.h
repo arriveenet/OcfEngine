@@ -4,7 +4,7 @@
 #include <mutex>
 #include <AL/al.h>
 #include <AL/alc.h>
-#include "ocf/audio/AudioMacros.h"
+#include "audio/AudioMacros.h"
 
 namespace ocf {
 

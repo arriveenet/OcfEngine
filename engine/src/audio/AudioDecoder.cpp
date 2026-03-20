@@ -1,4 +1,4 @@
-#include "ocf/audio/AudioDecoder.h"
+#include "audio/AudioDecoder.h"
 #include <string.h>
 
 namespace ocf {

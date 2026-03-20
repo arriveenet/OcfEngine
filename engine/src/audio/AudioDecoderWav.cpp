@@ -1,4 +1,4 @@
-#include "ocf/audio/AudioDecoderWav.h"
+#include "audio/AudioDecoderWav.h"
 #include <stdio.h>
 
 namespace ocf {
