@@ -1,6 +1,6 @@
 #pragma once
 #include "../BaseTest.h"
-#include "3d/FirstPersonCamera.h"
+#include "ocf/3d/FirstPersonCamera.h"
 
 class MeshRendererTest : public TestCase {
 public:

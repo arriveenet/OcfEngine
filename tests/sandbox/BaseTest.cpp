@@ -1,5 +1,7 @@
 #include "BaseTest.h"
 #include "MainScene.h"
+#include "ocf/core/Engine.h"
+#include "ocf/ui/UIButton.h"
 
 using namespace ocf;;
 

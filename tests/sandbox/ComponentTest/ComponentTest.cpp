@@ -1,6 +1,7 @@
 #include "ComponentTest.h"
-#include "2d/MoveComponent.h"
-#include "base/EventListenerKeyboard.h"
+#include <ocf/core/Engine.h>
+#include <ocf/core/EventDispatcher.h>
+#include <ocf/core/EventListenerKeyboard.h>
 
 using namespace ocf;;
 
@@ -47,7 +48,7 @@ void Laser::updateNode(float deltaTime)
 {
     m_deathTimer -= deltaTime;
     if (m_deathTimer <= 0.0f) {
-        m_pParent->removeChild(this);
+        m_parent->removeChild(this);
     }
     //else {
     //	for (auto astroid : g_pAsteroid) {
@@ -75,7 +76,7 @@ Asteroid::Asteroid()
     m_pCircleComponent->setRadius(40.0f);
     m_pMoveComponent->setForwardSpeed(150.0f);
 
-    glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
+    glm::vec2 visibleSize = Engine::getInstance()->getVisibleSize();
     float rot = static_cast<float>(rand() % 360);
     glm::vec2 position;
     position.x = static_cast<float>(rand() % static_cast<int>(visibleSize.x));
@@ -87,7 +88,7 @@ Asteroid::Asteroid()
 
 void Asteroid::updateNode(float /*deltaTime*/)
 {
-    glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
+    glm::vec2 visibleSize = Engine::getInstance()->getVisibleSize();
 
     if (m_position.x < 0.0f) {
         m_position.x = visibleSize.x;
@@ -110,7 +111,7 @@ Ship::Ship()
     m_pMoveComponent = new MoveComponent(this);
     addComponent(m_pMoveComponent);
 
-    glm::vec2 visibleSize = Game::getInstance()->getVisibleSize();
+    glm::vec2 visibleSize = Engine::getInstance()->getVisibleSize();
     setPosition(visibleSize / 2.0f);
 
     auto keyboardEvent = EventListenerKeyboard::create();
@@ -147,6 +148,6 @@ Ship::Ship()
         m_pMoveComponent->setForwardSpeed(fowardSpeed);
         };
 
-    m_pEventDispatcher->addEventListener(keyboardEvent, this);
+    m_eventDispatcher->addEventListener(keyboardEvent, this);
 }
 

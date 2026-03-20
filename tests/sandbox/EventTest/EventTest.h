@@ -1,5 +1,6 @@
 #pragma once
 #include "../BaseTest.h"
+#include <ocf/core/Event.h>
 
 class EventTest : public TestCase {
 public:

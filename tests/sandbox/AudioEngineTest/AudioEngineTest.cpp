@@ -1,7 +1,9 @@
 #include "AudioEngineTest.h"
-#include "ui/UICheckBox.h"
+#include <ocf/ui/UICheckBox.h>
+#include <ocf/ui/UIButton.h>
+#include <ocf/ui/UISlider.h>
 
-using namespace ocf;;
+using namespace ocf;
 using namespace ocf::ui;
 
 AudioEngineTest::AudioEngineTest()

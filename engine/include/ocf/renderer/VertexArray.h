@@ -1,10 +1,10 @@
 #pragma once
+#include <glad/glad.h>
 #include <string>
 #include <unordered_map>
 #include "VertexBuffer.h"
 #include "ocf/core/Macros.h"
 #include "ocf/core/Types.h"
-#include "renderer/backend/opengl/OpenGLInclude.h"
 
 namespace ocf {
 

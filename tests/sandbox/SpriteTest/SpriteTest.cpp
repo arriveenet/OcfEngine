@@ -1,7 +1,7 @@
 #include "SpriteTest.h"
-#include "2d/SpriteFrameManager.h"
-#include "2d/ActionComponent.h"
-#include "audio/AudioEngine.h"
+#include <ocf/2d/Sprite.h>
+#include <ocf/2d/SpriteFrameManager.h>
+#include <ocf/core/Engine.h>
 
 using namespace ocf;;
 

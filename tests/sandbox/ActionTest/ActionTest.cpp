@@ -1,8 +1,8 @@
 #include "ActionTest.h"
-#include "2d/ActionComponent.h"
-#include "2d/Animation.h"
-#include "2d/Sprite.h"
-#include "2d/SpriteFrameManager.h"
+#include "ocf/2d/ActionComponent.h"
+#include "ocf/2d/Animation.h"
+#include "ocf/2d/Sprite.h"
+#include "ocf/2d/SpriteFrameManager.h"
 
 using namespace ocf;;
 

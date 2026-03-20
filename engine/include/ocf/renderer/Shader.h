@@ -1,5 +1,5 @@
 #pragma once
-#include "renderer/backend/opengl/OpenGLInclude.h"
+#include <glad/glad.h>
 #include <string>
 
 namespace ocf {

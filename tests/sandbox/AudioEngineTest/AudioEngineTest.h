@@ -1,5 +1,6 @@
 #pragma once
 #include "../BaseTest.h"
+#include <ocf/audio/AudioEngine.h>
 
 class AudioEngineTest : public TestCase {
 public:

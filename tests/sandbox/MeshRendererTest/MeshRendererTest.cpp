@@ -1,7 +1,10 @@
 #include "MeshRendererTest.h"
-#include "base/EventKeyboard.h"
-#include "base/EventListenerKeyboard.h"
-#include "3d/Skybox.h"
+#include "ocf/core/EventKeyboard.h"
+#include "ocf/core/EventListenerKeyboard.h"
+#include "ocf/3d/Skybox.h"
+#include "ocf/core/Engine.h"
+#include "ocf/3d/MeshRenderer.h"
+#include "ocf/core/EventDispatcher.h"
 
 using namespace ocf;;
 
@@ -18,7 +21,7 @@ MeshRendererTest::~MeshRendererTest()
 bool MeshRendererTest::init()
 {
     Viewport* root = getRoot();
-    glm::vec2 size = Game::getInstance()->getVisibleSize();
+    glm::vec2 size = Engine::getInstance()->getVisibleSize();
     m_pCamera = FirstPersonCamera::create(60.0f, size.x / size.y, 0.1f, 1000.0f);
     m_pCamera->setCameraFlag(CameraFlag::User1);
     m_pCamera->setPosition(glm::vec3(- 5, 3, -8));

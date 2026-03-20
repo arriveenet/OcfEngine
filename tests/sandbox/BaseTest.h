@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
-#include"OcfEngine.h"
+#include "ocf/scene/Scene.h"
+#include "ocf/2d/Label.h"
 
 class TestCase : public ocf::Scene {
 public:

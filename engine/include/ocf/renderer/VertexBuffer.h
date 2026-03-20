@@ -1,6 +1,6 @@
 #pragma once
-#include "renderer/backend/opengl/OpenGLInclude.h"
 #include "ocf/core/Macros.h"
+#include <glad/glad.h>
 
 namespace ocf {
 

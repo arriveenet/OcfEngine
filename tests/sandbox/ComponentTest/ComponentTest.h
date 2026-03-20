@@ -1,5 +1,8 @@
 #pragma once
 #include "../BaseTest.h"
+#include <ocf/2d/Sprite.h>
+#include <ocf/2d/MoveComponent.h>
+#include <ocf/2d/CircleComponent.h>
 
 class ComponentTest : public TestCase {
 public:

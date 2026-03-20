@@ -1,5 +1,6 @@
 #include "TiledMapTest.h"
-#include "2d/TMXTiledMap.h"
+#include "ocf/2d/TMXTiledMap.h"
+#include "ocf/scene/Camera2D.h"
 
 using namespace ocf;;
 

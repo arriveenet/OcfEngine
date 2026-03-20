@@ -1,6 +1,6 @@
 #pragma once
 #include "../BaseTest.h"
-#include "base/MaxRectsBinPack.h"
+#include "ocf/math/MaxRectsBinPack.h"
 
 class FontTest : public TestCase {
 public:

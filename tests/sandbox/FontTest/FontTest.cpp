@@ -1,8 +1,12 @@
 #include "FontTest.h"
-#include "renderer/Image.h"
-#include "base/EventListenerKeyboard.h"
-#include "ui/UICheckBox.h"
-#include "ui/UIRadioButton.h"
+#include "ocf/core/Image.h"
+#include "ocf/core/EventListenerKeyboard.h"
+#include "ocf/ui/UICheckBox.h"
+#include "ocf/ui/UIButton.h"
+#include "ocf/ui/UIRadioButton.h"
+#include "ocf/2d/DrawShape.h"
+#include "ocf/core/Engine.h"
+#include "ocf/core/EventDispatcher.h"
 
 using namespace ocf;
 

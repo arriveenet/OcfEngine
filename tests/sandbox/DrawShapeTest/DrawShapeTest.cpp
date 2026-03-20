@@ -1,4 +1,5 @@
 #include "DrawShapeTest.h"
+#include <ocf/2d/DrawShape.h>
 
 using namespace ocf;
 
