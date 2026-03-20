@@ -1,7 +1,7 @@
 #include "ocf/scene/Camera2D.h"
 #include <assert.h>
 #include <glm/gtc/matrix_transform.hpp>
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/scene/Scene.h"
 #include "ocf/platform/Application.h"
 #include "ocf/renderer/Renderer.h"
@@ -21,7 +21,7 @@ Camera2D* Camera2D::createOrthographic(float width, float height, float zNear /*
 
 Camera2D* Camera2D::getDefaultCamera()
 {
-    Scene* pScene = Game::getInstance()->getCurrentScene();
+    Scene* pScene = Engine::getInstance()->getCurrentScene();
     assert(pScene != nullptr);
 
     return pScene->getDefaultCamera();
@@ -63,7 +63,7 @@ Camera2D::~Camera2D()
 
 bool Camera2D::init()
 {
-    glm::vec2 size = m_pGame->getResolutionSize();
+    glm::vec2 size = m_engine->getResolutionSize();
     m_zNear = -1024.0f;
     m_zFar = 1024.0f;
 
@@ -149,7 +149,7 @@ void Camera2D::onExit()
 
 void Camera2D::apply()
 {
-    m_pGame->getRenderer()->setViewPort(static_cast<int>(s_defaultViewport.x),
+    m_engine->getRenderer()->setViewPort(static_cast<int>(s_defaultViewport.x),
                                         static_cast<int>(s_defaultViewport.y),
                                         static_cast<int>(s_defaultViewport.z),
                                         static_cast<int>(s_defaultViewport.w));
@@ -181,7 +181,7 @@ void Camera2D::setScene(Scene* scene)
 
 glm::vec3 Camera2D::unProjectGL(const glm::vec3& src) const
 {
-    const glm::vec2& size = m_pGame->getResolutionSize();
+    const glm::vec2& size = m_engine->getResolutionSize();
     glm::vec4 viewport(0.0f, 0.0f, size.x, size.y);
 
     return glm::unProject(src, m_view, m_projection, viewport);

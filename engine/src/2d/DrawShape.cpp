@@ -1,5 +1,5 @@
 #include "ocf/2d/DrawShape.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/renderer/Renderer.h"
 #include "ocf/renderer/ShaderManager.h"
 #include <glm/gtc/constants.hpp>
@@ -43,10 +43,10 @@ bool DrawShape::init()
     updateShader(m_customCommandTriangle, ProgramType::DrawShape, PrimitiveType::TRIANGLES);
 
     m_customCommandPoint.setBeforeCallback(
-        [=]() { m_pGame->getRenderer()->setPointSize(m_pointSize);});
+        [=]() { m_engine->getRenderer()->setPointSize(m_pointSize);});
 
     m_customCommandLine.setBeforeCallback(
-        [=]() { m_pGame->getRenderer()->setLineWidth(m_lineWidth); });
+        [=]() { m_engine->getRenderer()->setLineWidth(m_lineWidth); });
 
     return true;
 }
@@ -266,7 +266,7 @@ void DrawShape::updateShader(CustomCommand& command, ProgramType programType, Pr
 
 void DrawShape::updateUniforms(const glm::mat4& transform, CustomCommand& cmd)
 {
-    glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
+    glm::mat4 projection = m_engine->getMatrix(MatrixStack::Projection);
     auto& programState = cmd.getProgramState();
 
     programState.setUniform("uProjection", &projection, sizeof(projection));

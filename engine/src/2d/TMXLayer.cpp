@@ -1,7 +1,7 @@
 #include "ocf/2d/TMXLayer.h"
 #include "ocf/2d/TMXXMLParser.h"
 #include "ocf/2d/TMXTiledMap.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/renderer/Renderer.h"
 #include "ocf/renderer/TextureManager.h"
 
@@ -43,7 +43,7 @@ bool TMXLayer::init(TMXTilesetInfo* tilesetInfo, TMXLayerInfo* layerInfo, TMXMap
     m_layerSize = layerInfo->m_layerSize;
     m_pTiles = layerInfo->m_pTiles;
 
-    m_pTexture = m_pGame->getTextureManager()->addImage("tiledmap/" + m_pTileset->m_imageSource);
+    m_pTexture = m_engine->getTextureManager()->addImage("tiledmap/" + m_pTileset->m_imageSource);
 
     Program* pProgram = ShaderManager::getInstance()->getBuiltinProgram(ProgramType::Basic);
     m_quadCommand.getProgramState().setProgram(pProgram);
@@ -55,7 +55,7 @@ void TMXLayer::draw(Renderer* renderer, const glm::mat4& transform)
 {
     updateTotalQuads();
 
-    glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
+    glm::mat4 projection = m_engine->getMatrix(MatrixStack::Projection);
     auto& programState = m_quadCommand.getProgramState();
     programState.setUniform("uMVPMatrix", &projection, sizeof(projection));
 

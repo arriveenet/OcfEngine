@@ -1,4 +1,4 @@
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/scene/Camera2D.h"
 #include "ocf/2d/FontManager.h"
 #include "ocf/2d/Label.h"
@@ -20,9 +20,9 @@ namespace ocf {
 
 using namespace backend;
 
-Game* Game::s_sharedGame = nullptr;
+Engine* Engine::s_sharedGame = nullptr;
 
-Game::Game()
+Engine::Engine()
     : m_running(false)
     , m_cleanupInNextLoop(false)
     , m_deltaTime(0.0f)
@@ -40,7 +40,7 @@ Game::Game()
 {
 }
 
-Game::~Game()
+Engine::~Engine()
 {
     OCF_SAFE_RELEASE(m_pFPSLabel);
     OCF_SAFE_RELEASE(m_pDrawCallLabel);
@@ -68,22 +68,22 @@ Game::~Game()
     s_sharedGame = nullptr;
 }
 
-Game* Game::getInstance()
+Engine* Engine::getInstance()
 {
     if (!s_sharedGame) {
-        s_sharedGame = new Game();
+        s_sharedGame = new Engine();
         s_sharedGame->init();
     }
 
     return s_sharedGame;
 }
 
-void Game::destroyInstance()
+void Engine::destroyInstance()
 {
     OCF_SAFE_DELETE(s_sharedGame);
 }
 
-bool Game::init()
+bool Engine::init()
 {
     m_running = true;
 
@@ -102,7 +102,7 @@ bool Game::init()
     return true;
 }
 
-void Game::mainLoop()
+void Engine::mainLoop()
 {
     if (m_cleanupInNextLoop) {
         m_cleanupInNextLoop = false;
@@ -114,13 +114,13 @@ void Game::mainLoop()
     }
 }
 
-void Game::exit()
+void Engine::exit()
 {
     m_running = false;
     m_cleanupInNextLoop = true;
 }
 
-void Game::cleanup()
+void Engine::cleanup()
 {
     OCF_SAFE_DELETE(m_pFPSLabel);
     OCF_SAFE_DELETE(m_pDrawCallLabel);
@@ -154,12 +154,12 @@ void Game::cleanup()
     }
 }
 
-void Game::runWithScene(Scene* pScene)
+void Engine::runWithScene(Scene* pScene)
 {
     pushScene(pScene);
 }
 
-void Game::replaceScene(Scene* pScene)
+void Engine::replaceScene(Scene* pScene)
 {
     assert(pScene != nullptr);
 
@@ -174,18 +174,18 @@ void Game::replaceScene(Scene* pScene)
     m_nextScene = pScene;
 }
 
-void Game::pushScene(Scene* pScene)
+void Engine::pushScene(Scene* pScene)
 {
     m_sceneStack.emplace_back(pScene);
     m_nextScene = pScene;
 }
 
-void Game::popScene()
+void Engine::popScene()
 {
     m_sceneStack.pop_back();
 }
 
-void Game::setNextScene()
+void Engine::setNextScene()
 {
     if (m_currentScene != nullptr) {
         m_currentScene->onExit();
@@ -198,7 +198,7 @@ void Game::setNextScene()
     m_nextScene = nullptr;
 }
 
-glm::vec2 Game::getVisibleSize() const
+glm::vec2 Engine::getVisibleSize() const
 {
     if (m_glView) {
         return m_glView->getWindowSize();
@@ -207,18 +207,18 @@ glm::vec2 Game::getVisibleSize() const
     return glm::vec2(0, 0);
 }
 
-const glm::vec2& Game::getResolutionSize() const
+const glm::vec2& Engine::getResolutionSize() const
 {
     return m_resolutionSize;
 }
 
-float Game::getZEye() const
+float Engine::getZEye() const
 {
     // FOVが60°の場合の距離
     return (m_resolutionSize.y / 1.154700538379252f);	//(2 * tanf(M_PI/6))
 }
 
-void Game::setProjection(Projection projection)
+void Engine::setProjection(Projection projection)
 {
     const glm::vec2 size = m_resolutionSize;
 
@@ -230,10 +230,10 @@ void Game::setProjection(Projection projection)
     setViewport();
 
     switch (projection) {
-    case ocf::Game::Projection::_2D:
+    case ocf::Engine::Projection::_2D:
 
         break;
-    case ocf::Game::Projection::_3D:
+    case ocf::Engine::Projection::_3D:
         loadIdentityMatrix(MatrixStack::ModelView);
         break;
     default:
@@ -243,14 +243,14 @@ void Game::setProjection(Projection projection)
     m_projection = projection;
 }
 
-void Game::setViewport()
+void Engine::setViewport()
 {
     if (m_glView != nullptr) {
         m_glView->setViewport(0, 0, m_resolutionSize.x, m_resolutionSize.y);
     }
 }
 
-void Game::setRenderView(RenderView* glView)
+void Engine::setRenderView(RenderView* glView)
 {
     if (m_glView != glView) {
         m_renderer->init();
@@ -260,7 +260,7 @@ void Game::setRenderView(RenderView* glView)
     }
 }
 
-void Game::initMatrixStack()
+void Engine::initMatrixStack()
 {
     while (!m_projectionMatrixStack.empty()) {
         m_projectionMatrixStack.pop();
@@ -274,7 +274,7 @@ void Game::initMatrixStack()
     m_modelViewMatrixStack.push(glm::mat4(1.0f));
 }
 
-void Game::loadIdentityMatrix(MatrixStack type)
+void Engine::loadIdentityMatrix(MatrixStack type)
 {
     switch (type) {
     case MatrixStack::Projection:
@@ -289,7 +289,7 @@ void Game::loadIdentityMatrix(MatrixStack type)
     }
 }
 
-void Game::loadMatrix(MatrixStack type, const glm::mat4& matrix)
+void Engine::loadMatrix(MatrixStack type, const glm::mat4& matrix)
 {
     switch (type) {
     case MatrixStack::Projection:
@@ -304,7 +304,7 @@ void Game::loadMatrix(MatrixStack type, const glm::mat4& matrix)
     }
 }
 
-void Game::multiplyMatrix(MatrixStack type, const glm::mat4& matrix)
+void Engine::multiplyMatrix(MatrixStack type, const glm::mat4& matrix)
 {
     switch (type) {
     case MatrixStack::Projection:
@@ -319,7 +319,7 @@ void Game::multiplyMatrix(MatrixStack type, const glm::mat4& matrix)
     }
 }
 
-void Game::pushMatrix(MatrixStack type)
+void Engine::pushMatrix(MatrixStack type)
 {
     switch (type) {
     case MatrixStack::Projection:
@@ -334,7 +334,7 @@ void Game::pushMatrix(MatrixStack type)
     }
 }
 
-void Game::popMatrix(MatrixStack type)
+void Engine::popMatrix(MatrixStack type)
 {
     switch (type) {
     case MatrixStack::Projection:
@@ -349,7 +349,7 @@ void Game::popMatrix(MatrixStack type)
     }
 }
 
-const glm::mat4& Game::getMatrix(MatrixStack type)
+const glm::mat4& Engine::getMatrix(MatrixStack type)
 {
     switch (type) {
     case MatrixStack::Projection:
@@ -363,7 +363,7 @@ const glm::mat4& Game::getMatrix(MatrixStack type)
     return m_modelViewMatrixStack.top();
 }
 
-void Game::update()
+void Engine::update()
 {
     calculateDeltaTime();
 
@@ -376,7 +376,7 @@ void Game::update()
     }
 }
 
-void Game::draw()
+void Engine::draw()
 {
     m_renderer->beginFrame();
 
@@ -406,14 +406,14 @@ void Game::draw()
     m_renderer->endFrame();
 }
 
-void Game::calculateDeltaTime()
+void Engine::calculateDeltaTime()
 {
     auto now = std::chrono::steady_clock::now();
     m_deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(now - m_lastUpdate).count() / 1000000.0f;
     m_lastUpdate = now;
 }
 
-void Game::showStats()
+void Engine::showStats()
 {
     static bool isCreate = false;
     if (!isCreate) {
@@ -471,7 +471,7 @@ void Game::showStats()
     popMatrix(MatrixStack::Projection);
 }
 
-void Game::createStatsLabel()
+void Engine::createStatsLabel()
 {
     m_pFPSLabel = Label::create("FPS: 0.0");
     m_pDrawCallLabel = Label::create("Draw call: 0");

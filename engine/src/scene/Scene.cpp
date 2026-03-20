@@ -1,7 +1,7 @@
 #include "ocf/scene/Scene.h"
 #include "ocf/scene/Camera2D.h"
 #include "ocf/scene/Camera3D.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/scene/Viewport.h"
 #include "ocf/renderer/Renderer.h"
 
@@ -11,7 +11,7 @@ Scene::Scene()
     : m_pDefaultCamera(nullptr)
 {
     Camera2D::s_pVisitingCamera = nullptr;
-    m_pGame = Game::getInstance();
+    m_pGame = Engine::getInstance();
     m_root = new Viewport();
     m_pDefaultCamera = new Camera2D();
     m_pDefaultCamera->init();

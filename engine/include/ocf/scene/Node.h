@@ -9,7 +9,7 @@
 
 namespace ocf {
 
-class Game;
+class Engine;
 class EventDispatcher;
 class Renderer;
 class Scene;
@@ -79,7 +79,7 @@ public:
      * @brief 親ノードを取得
      * @return pNode 親ノード
      */
-    virtual Node* getParent() { return m_pParent; }
+    virtual Node* getParent() { return m_parent; }
 
     /**
      * @brief 子ノードをすべてソートする
@@ -126,9 +126,9 @@ protected:
     friend class Viewport;
 
 protected:
-    Node* m_pParent;                        //!< 親ノード
-    Game* m_pGame;                          //!< シングルトンのゲームクラス
-    EventDispatcher* m_pEventDispatcher;    // イベントディスパッチ
+    Node* m_parent;                        //!< 親ノード
+    Engine* m_engine;                      //!< シングルトンのエンジンクラス
+    EventDispatcher* m_eventDispatcher;    // イベントディスパッチ
 
     uint16_t m_cameraMask;                  //!< カメラマスク
 

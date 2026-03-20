@@ -1,7 +1,7 @@
 #include "ocf/2d/Sprite.h"
 
 #include <glm/gtc/type_ptr.hpp>
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/2d/SpriteFrameManager.h"
 #include "ocf/renderer/Renderer.h"
 #include "ocf/renderer/Texture2D.h"
@@ -88,7 +88,7 @@ bool Sprite::init()
 
 bool Sprite::initWithFile(const std::string& filename)
 {
-    Texture2D* texture = Game::getInstance()->getTextureManager()->addImage(filename);
+    Texture2D* texture = Engine::getInstance()->getTextureManager()->addImage(filename);
     if (texture != nullptr) {
         Rect rect;
         rect.m_size = texture->getSize();
@@ -138,7 +138,7 @@ bool Sprite::initWithSpriteFrame(SpriteFrame* spriteFrame)
 void Sprite::setTexture(Texture2D* texture)
 {
     if (texture == nullptr) {
-        texture = m_pGame->getTextureManager()->getWhiteTexture();
+        texture = m_engine->getTextureManager()->getWhiteTexture();
     }
 
     if (m_texture != texture) {
@@ -317,7 +317,7 @@ void Sprite::flipY()
 
 void Sprite::setMVPMarixUniform()
 {
-    glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
+    glm::mat4 projection = m_engine->getMatrix(MatrixStack::Projection);
     auto& programState = m_trianglesCommand.getProgramState();
     programState.setUniform("uMVPMatrix", &projection, sizeof(projection));
 }

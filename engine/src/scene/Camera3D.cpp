@@ -1,5 +1,5 @@
 #include "ocf/scene/Camera3D.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/platform/Application.h"
 #include "ocf/renderer/Renderer.h"
 #include <assert.h>
@@ -54,10 +54,10 @@ Camera3D::~Camera3D()
 
 bool Camera3D::init()
 {
-    glm::vec2 size = m_pGame->getResolutionSize();
-    switch (m_pGame->getProjection()) {
-    case Game::Projection::_3D: {
-        float zEye = m_pGame->getZEye();
+    glm::vec2 size = m_engine->getResolutionSize();
+    switch (m_engine->getProjection()) {
+    case Engine::Projection::_3D: {
+        float zEye = m_engine->getZEye();
         m_zNear = 0.5f;
         m_zFar = zEye + size.y / 2.0f;
         initPerspective(glm::radians(60.0f), (float)size.x / size.y, m_zNear, m_zFar);
@@ -67,7 +67,7 @@ bool Camera3D::init()
         lookAt(center, glm::vec3(0.0f, 1.0f, 0.0f));
         break;
     }
-    case Game::Projection::_2D: {
+    case Engine::Projection::_2D: {
         m_zNear = -1024.0f;
         m_zFar = 1024.0f;
 
@@ -149,7 +149,7 @@ const glm::mat4 Camera3D::getViewProjectionMatrix() const
 
 glm::vec3 Camera3D::unProjectGL(const glm::vec3& src) const
 {
-    const glm::vec2& size = m_pGame->getResolutionSize();
+    const glm::vec2& size = m_engine->getResolutionSize();
     glm::vec4 viewport(0.0f, 0.0f, size.x, size.y);
 
     return glm::unProject(src, m_view, m_projection, viewport);

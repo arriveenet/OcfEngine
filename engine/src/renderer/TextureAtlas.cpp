@@ -1,5 +1,5 @@
 #include "ocf/renderer/TextureAtlas.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/renderer/TextureManager.h"
 
 namespace ocf {
@@ -35,7 +35,7 @@ TextureAtlas::~TextureAtlas()
 
 bool TextureAtlas::initWithFile(const std::string& filename, size_t capacity)
 {
-    Texture2D* texture = Game::getInstance()->getTextureManager()->addImage(filename);
+    Texture2D* texture = Engine::getInstance()->getTextureManager()->addImage(filename);
 
     if (texture) {
         return initWidthTexture(texture, capacity);

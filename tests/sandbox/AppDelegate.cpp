@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include <ocf/core/Game.h>
+#include <ocf/core/Engine.h>
 #include <ocf/platform/RenderViewImpl.h>
 #include "MainScene.h"
 
@@ -17,7 +17,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 {
     const float windowWidth = 920, windowHeight = 720;
 
-    auto game = Game::getInstance();
+    auto game = Engine::getInstance();
     auto glView = game->getRenderView();
     if (glView == nullptr) {
         glView = RenderViewImpl::createWithRect("Ocf Engine", Rect(0, 0, windowWidth, windowHeight));

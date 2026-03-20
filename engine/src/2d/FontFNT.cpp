@@ -1,7 +1,7 @@
 #include "ocf/2d/FontFNT.h"
 #include "ocf/2d/FontAtlas.h"
 #include "ocf/platform/FileUtils.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/renderer/TextureManager.h"
 #include <string.h>
 
@@ -224,7 +224,7 @@ FontFNT* FontFNT::create(std::string_view fntFilePath)
     }
 
     for (auto&& atlasName : config->m_atlasNames) {
-        Texture2D* texture = Game::getInstance()->getTextureManager()->addImage(atlasName);
+        Texture2D* texture = Engine::getInstance()->getTextureManager()->addImage(atlasName);
         if (texture == nullptr) {
             return nullptr;
         }
@@ -283,7 +283,7 @@ FontAtlas* FontFNT::createFontAtlas()
 
     unsigned int slot = 0;
     for (auto&& atlasName : m_pConfiguration->m_atlasNames) {
-        Texture2D* texture = Game::getInstance()->getTextureManager()->addImage(atlasName);
+        Texture2D* texture = Engine::getInstance()->getTextureManager()->addImage(atlasName);
         if (texture == nullptr) {
             OCF_SAFE_DELETE(fontAtlas);
             return nullptr;

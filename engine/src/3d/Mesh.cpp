@@ -1,7 +1,7 @@
 #include "ocf/3d/Mesh.h"
 #include "ocf/scene/Camera2D.h"
 #include "ocf/scene/Camera3D.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/platform/FileUtils.h"
 #include "ocf/renderer/Renderer.h"
 #include "ocf/renderer/Texture2D.h"
@@ -93,7 +93,7 @@ void Mesh::draw(Renderer* renderer, float globalZOrder, const glm::mat4& transfo
 
 void Mesh::setTexture(std::string_view fileName)
 {
-    Texture2D* texture = Game::getInstance()->getTextureManager()->addImage(fileName.data());
+    Texture2D* texture = Engine::getInstance()->getTextureManager()->addImage(fileName.data());
     m_pTexture = texture;
 }
 

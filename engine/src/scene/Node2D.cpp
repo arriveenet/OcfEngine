@@ -2,7 +2,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/math/Rect.h"
 
 namespace ocf {
@@ -136,7 +136,7 @@ glm::mat4 Node2D::getNodeToParentTransform(Node* ancestor) const
 {
     glm::mat4 t(this->getNodeToParentTransform());
 
-    for (Node* p = m_pParent; p != nullptr && p != ancestor; p = p->getParent()) {
+    for (Node* p = m_parent; p != nullptr && p != ancestor; p = p->getParent()) {
         Node2D* n = dynamic_cast<Node2D*>(p);
         if (n)
             t = n->getNodeToParentTransform() * t;
@@ -181,12 +181,12 @@ void Node2D::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32
 
     uint32_t flags = processParentFlag(parentTransform, parentFlags);
 
-    m_pGame->pushMatrix(MatrixStack::ModelView);
-    m_pGame->loadMatrix(MatrixStack::ModelView, m_modelVewTransform);
+    m_engine->pushMatrix(MatrixStack::ModelView);
+    m_engine->loadMatrix(MatrixStack::ModelView, m_modelVewTransform);
 
     Node::visit(pRenderer, m_modelVewTransform, flags);
 
-    m_pGame->popMatrix(MatrixStack::ModelView);
+    m_engine->popMatrix(MatrixStack::ModelView);
 }
 
 glm::mat4 Node2D::transform(const glm::mat4& parentTransform) const

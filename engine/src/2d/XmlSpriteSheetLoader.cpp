@@ -1,7 +1,7 @@
 #include "ocf/2d/XmlSpriteSheetLoader.h"
 #include "ocf/2d/SpriteFrame.h"
 #include "ocf/2d/SpriteFrameManager.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/platform/FileUtils.h"
 #include "ocf/renderer/TextureManager.h"
 #include <tinyxml2.h>
@@ -33,7 +33,7 @@ void XmlSpriteSheetLoader::load(std::string_view filePath, SpriteFrameManager& m
     auto height = textureAtlas->IntAttribute("height");
 
     auto imageFullPath = FileUtils::getInstance()->fullPathForFilename(imagePath);
-    const auto texture = Game::getInstance()->getTextureManager()->addImage(imageFullPath);
+    const auto texture = Engine::getInstance()->getTextureManager()->addImage(imageFullPath);
 
     for (tinyxml2::XMLElement* spriteElement = textureAtlas->FirstChildElement("sprite");
         spriteElement != nullptr;

@@ -6,7 +6,7 @@
 namespace ocf {
 
 class Camera2D;
-class Game;
+class Engine;
 class Viewport;
 
 class Scene {
@@ -45,7 +45,7 @@ protected:
     std::vector<Camera2D*> m_cameras;
 
     Viewport* m_root = nullptr;
-    Game* m_pGame = nullptr;
+    Engine* m_pGame = nullptr;
 };
 
 } // namespace ocf

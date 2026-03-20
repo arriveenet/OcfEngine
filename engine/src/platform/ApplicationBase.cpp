@@ -1,11 +1,11 @@
 #include "ocf/platform/ApplicationBase.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 
 namespace ocf {
 
 ApplicationBase::~ApplicationBase()
 {
-    Game::destroyInstance();
+    Engine::destroyInstance();
 }
 
 } // namespace ocf

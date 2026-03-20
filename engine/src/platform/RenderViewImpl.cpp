@@ -2,7 +2,7 @@
 
 #include "ocf/input/Keyboard.h"
 #include "ocf/input/Mouse.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/core/EventKeyboard.h"
 #include "ocf/core/EventMouse.h"
 #include "ocf/core/EventDispatcher.h"
@@ -429,7 +429,7 @@ void RenderViewImpl::onGLFWMouseButtonCallback(GLFWwindow* window, int button, i
 
     EventMouse mouseEvent(eventType);
     mouseEvent.setPosition(glm::vec2(xpos, ypos));
-    Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
+    Engine::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 
 void RenderViewImpl::onGLFWMouseMoveCallback(GLFWwindow* /* window */, double xpos, double ypos)
@@ -440,7 +440,7 @@ void RenderViewImpl::onGLFWMouseMoveCallback(GLFWwindow* /* window */, double xp
     EventMouse mouseEvent(EventMouse::MouseEventType::Move);
     mouseEvent.setPosition(m_mousePosition);
     mouseEvent.setLastPosition(m_lastMousePosition);
-    Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
+    Engine::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 
     m_lastMousePosition = m_mousePosition;
 }
@@ -449,7 +449,7 @@ void RenderViewImpl::onGLFWScrollCallback(GLFWwindow* /* window */, double xoffs
 {
     EventMouse mouseEvent(EventMouse::MouseEventType::Scroll);
     mouseEvent.setScrollDelta(glm::vec2(static_cast<float>(xoffset), static_cast<float>(yoffset)));
-    Game::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
+    Engine::getInstance()->getEventDispatcher()->dispatchEvent(&mouseEvent);
 }
 
 void RenderViewImpl::onGLFWKeyCallback(GLFWwindow* /* window */, int key, int /* scancode */, int action, int /* mods */)
@@ -459,7 +459,7 @@ void RenderViewImpl::onGLFWKeyCallback(GLFWwindow* /* window */, int key, int /*
 
     EventKeyboard event(g_keyCodeMap[key], action);
     event.m_isPressed = (action == GLFW_PRESS || action == GLFW_REPEAT);
-    Game::getInstance()->getEventDispatcher()->dispatchEvent(&event);
+    Engine::getInstance()->getEventDispatcher()->dispatchEvent(&event);
 }
 
 void RenderViewImpl::onGLFWWindowSizeCallback(GLFWwindow* /* window */, int width, int height)

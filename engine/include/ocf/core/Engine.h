@@ -23,23 +23,25 @@ class Driver;
  * @brief ゲームクラス
  * ゲームの状態管理などを行うシングルトンクラス。
  */
-class Game : public GameObject {
+class Engine : public GameObject {
 public:
+    using Driver = backend::Driver;
+
     enum class Projection {
         _2D,
         _3D
     };
 
     /** コンストラクタ */
-    Game();
+    Engine();
     /** デストラクタ */
-    ~Game();
+    ~Engine();
 
     /**
      * @brief ゲームのインスタンスを取得する
      * @return ゲームクラスのインスタンス
      */
-    static Game* getInstance();
+    static Engine* getInstance();
 
     /**
      * @brief ゲームのインスタンスを破棄する
@@ -118,7 +120,7 @@ public:
      * @brief ドライバーを取得する
      * @return ドライバーのポインタ
      */
-    backend::Driver* getDriver() const { return m_driver; }
+    backend::Driver& getDriver() const { return *m_driver; }
 
     /**
      * @brief 現在設定されているシーンを取得する
@@ -214,7 +216,7 @@ protected:
 
 private:
     /** ゲームクラスのインスタンス */
-    static Game* s_sharedGame;
+    static Engine* s_sharedGame;
     bool m_running;
     bool m_cleanupInNextLoop;
 

@@ -1,5 +1,5 @@
 #include "ocf/platform/RenderView.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/scene/Camera2D.h"
 
 namespace ocf {
@@ -108,7 +108,7 @@ void RenderView::updateDesignResolutionSize()
                            (m_windowSize.y - viewportHeight) / 2.0f,
                            viewportWidth, viewportHeight);
 
-    Game* pGame = Game::getInstance();
+    Engine* pGame = Engine::getInstance();
     pGame->m_resolutionSize = getDesignResolutionSize();
     pGame->setProjection(pGame->getProjection());
 }

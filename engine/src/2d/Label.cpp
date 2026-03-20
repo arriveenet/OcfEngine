@@ -3,7 +3,7 @@
 #include "ocf/2d/FontAtlas.h"
 #include "ocf/2d/FontFreeType.h"
 #include "ocf/2d/DrawShape.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/core/StringUtils.h"
 #include "ocf/renderer/ShaderManager.h"
 #include "ocf/renderer/Renderer.h"
@@ -158,7 +158,7 @@ void Label::draw(Renderer* renderer, const glm::mat4& transform)
     if (m_batchCommands.empty())
         return;
 
-    glm::mat4 projection = m_pGame->getMatrix(MatrixStack::Projection);
+    glm::mat4 projection = m_engine->getMatrix(MatrixStack::Projection);
     for (auto& batchCommand : m_batchCommands) {
         if (batchCommand.quads.empty())
             continue;

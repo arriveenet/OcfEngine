@@ -1,5 +1,5 @@
 #include "ocf/renderer/renderer.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "renderer/backend/opengl/OpenGLInclude.h"
 #include "renderer/backend/opengl/OpenGLUtility.h"
 #include "ocf/renderer/CustomCommand.h"
@@ -214,13 +214,15 @@ void Renderer::trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int 
 {
     // 頂点データを配列に追加
     unsigned int vertexCount = pCmd->getTriangles().vertexCount;
-    memcpy(&m_triangleVertices[m_triangleVertexCount], pCmd->getTriangles().vertices, sizeof(Vertex3fC3fT2f) * vertexCount);
+    memcpy(&m_triangleVertices[m_triangleVertexCount], pCmd->getTriangles().vertices,
+           sizeof(Vertex3fC3fT2f) * vertexCount);
     
     // ローカル座標からワールド座標に変換
     const glm::mat4& modelView = pCmd->getModelView();
     for (unsigned int i = 0; i < vertexCount; i++) {
         Vertex3fC3fT2f vertex = m_triangleVertices[m_triangleVertexCount + i];
-        m_triangleVertices[m_triangleVertexCount + i].position = modelView * glm::vec4(vertex.position, 1.0f);
+        m_triangleVertices[m_triangleVertexCount + i].position =
+            modelView * glm::vec4(vertex.position, 1.0f);
     }
 
     // インデックスを配列に追加
@@ -228,7 +230,8 @@ void Renderer::trianglesVerticesAndIndices(TrianglesCommand* pCmd, unsigned int 
     const unsigned int indexCount = pCmd->getTriangles().indexCount;
     const unsigned int offset = m_triangleVertexCount + vertexBufferOffset;
     for (unsigned int i = 0; i < indexCount; i++) {
-        m_triangleIndices[m_triangleIndexCount + i] = static_cast<unsigned short>(offset + indices[i]);
+        m_triangleIndices[m_triangleIndexCount + i] =
+            static_cast<unsigned short>(offset + indices[i]);
     }
 
     m_triangleVertexCount += vertexCount;
@@ -265,7 +268,9 @@ void Renderer::drawTrianglesCommand()
         } else {
             if (!firstCommand) {
                 batchTotal++;
-                m_pTriangleBatchToDraw[batchTotal].offset = m_pTriangleBatchToDraw[batchTotal - 1].offset + m_pTriangleBatchToDraw[batchTotal - 1].indicesToDraw;
+                m_pTriangleBatchToDraw[batchTotal].offset =
+                    m_pTriangleBatchToDraw[batchTotal - 1].offset +
+                    m_pTriangleBatchToDraw[batchTotal - 1].indicesToDraw;
             }
 
             m_pTriangleBatchToDraw[batchTotal].pCommand = cmd;
@@ -275,7 +280,8 @@ void Renderer::drawTrianglesCommand()
         if (batchTotal + 1 >= m_triangleBatchToDrawSize) {
             m_triangleBatchToDrawSize = static_cast<int>(m_triangleBatchToDrawSize * 1.4);
 
-            m_pTriangleBatchToDraw = static_cast<TriangleBatchToDraw*>(std::realloc(m_pTriangleBatchToDraw, sizeof(TriangleBatchToDraw) * m_triangleBatchToDrawSize));
+            m_pTriangleBatchToDraw = static_cast<TriangleBatchToDraw*>(std::realloc(
+                m_pTriangleBatchToDraw, sizeof(TriangleBatchToDraw) * m_triangleBatchToDrawSize));
         }
 
         prevMaterialID = currentMaterialID;
@@ -306,7 +312,8 @@ void Renderer::drawTrianglesCommand()
             pTexture->setActive();
         }
 
-        glDrawElements(GL_TRIANGLES, drawInfo.indicesToDraw, GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid*>(sizeof(m_triangleIndices[0]) * drawInfo.offset));
+        glDrawElements(GL_TRIANGLES, drawInfo.indicesToDraw, GL_UNSIGNED_SHORT,
+                       reinterpret_cast<GLvoid*>(sizeof(m_triangleIndices[0]) * drawInfo.offset));
 
         m_drawCallCount++;
         m_drawVertexCount += drawInfo.indicesToDraw;
@@ -345,7 +352,8 @@ void Renderer::drawCustomCommand(RenderCommand* command)
     if (drawType == CustomCommand::DrawType::Element) {
         glDrawElements(ocf::OpenGLUtility::toGLPrimitive(primitiveType), 0, GL_UNSIGNED_SHORT, nullptr);
     } else {
-        glDrawArrays(ocf::OpenGLUtility::toGLPrimitive(primitiveType), cmd->getVertexDrawStart(), cmd->getVertexDrawCount());
+        glDrawArrays(ocf::OpenGLUtility::toGLPrimitive(primitiveType), cmd->getVertexDrawStart(),
+                     cmd->getVertexDrawCount());
     }
 
     m_drawCallCount++;

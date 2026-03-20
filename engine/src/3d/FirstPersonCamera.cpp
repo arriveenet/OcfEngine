@@ -1,7 +1,7 @@
 #include "ocf/3d/FirstPersonCamera.h"
 #include "ocf/scene/Node.h"
 #include "ocf/input/Input.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/core/EventListenerKeyboard.h"
 #include "ocf/core/EventListenerMouse.h"
 #include "ocf/core/EventDispatcher.h"
@@ -49,8 +49,8 @@ bool FirstPersonCamera::initPerspective(float fovy, float aspect, float zNear, f
     keyboardListener->m_onKeyPressed = std::bind(&FirstPersonCamera::onKeyPressed, this, std::placeholders::_1, std::placeholders::_2);
     keyboardListener->m_onKeyReleased = std::bind(&FirstPersonCamera::onKeyReleased, this, std::placeholders::_1, std::placeholders::_2);
 
-    m_pGame->getEventDispatcher()->addEventListener(mouseListener, this);
-    m_pGame->getEventDispatcher()->addEventListener(keyboardListener, this);
+    m_engine->getEventDispatcher()->addEventListener(mouseListener, this);
+    m_engine->getEventDispatcher()->addEventListener(keyboardListener, this);
 
     // マウスカーソルを中央に
     Input::setMouseMode(Input::MouseMode::Captured);

@@ -1,5 +1,5 @@
 #include "ocf/platform/Application.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/scene/Scene.h"
 #include "ocf/platform/PlatformMacros.h"
 #include "ocf/platform/RenderView.h"
@@ -38,7 +38,7 @@ int Applicaiton::run()
         return 1;
     }
 
-    auto game = Game::getInstance();
+    auto game = Engine::getInstance();
     auto glView = game->getRenderView();
 
     glView->retain();

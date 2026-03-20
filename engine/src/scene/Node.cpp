@@ -3,7 +3,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 #include "ocf/scene/Camera2D.h"
-#include "ocf/core/Game.h"
+#include "ocf/core/Engine.h"
 #include "ocf/math/Rect.h"
 #include "ocf/core/EventDispatcher.h"
 #include "ocf/scene/Scene.h"
@@ -13,14 +13,14 @@
 namespace ocf {
 
 Node::Node()
-    : m_pParent(nullptr)
+    : m_parent(nullptr)
     , m_cameraMask(1)
     , m_localZOrder(0)
     , m_globalZOrder(0.0f)
     , m_name("Node")
 {
-    m_pGame = Game::getInstance();
-    m_pEventDispatcher = Game::getInstance()->getEventDispatcher();
+    m_engine = Engine::getInstance();
+    m_eventDispatcher = Engine::getInstance()->getEventDispatcher();
 
     glm::mat4 A(1.0f); // 単位行列としてAを初期化
     glm::mat4 B = A;   // AのコピーとしてBを初期化（コピーコンストラクタが呼ばれる）
@@ -28,7 +28,7 @@ Node::Node()
 
 Node::~Node()
 {
-    m_pEventDispatcher->removeEventLisnerForTarget(this);
+    m_eventDispatcher->removeEventLisnerForTarget(this);
 
     while (!m_children.empty()) {
         auto entity = m_children.back();
@@ -148,7 +148,7 @@ size_t Node::getChildCount() const
 
 void Node::setParent(Node* pEntity)
 {
-    m_pParent = pEntity;
+    m_parent = pEntity;
 }
 
 void Node::sortAllChildren()
@@ -224,12 +224,12 @@ void Node::visit(Renderer* pRenderer, const glm::mat4& parentTransform, uint32_t
 
 Scene* Node::getScene() const
 {
-    if(m_pParent == nullptr)
+    if(m_parent == nullptr)
         return nullptr;
 
-    auto* sceneNode = m_pParent;
-    while (sceneNode->m_pParent != nullptr) {
-        sceneNode = sceneNode->m_pParent;
+    auto* sceneNode = m_parent;
+    while (sceneNode->m_parent != nullptr) {
+        sceneNode = sceneNode->m_parent;
     }
 
     return dynamic_cast<Scene*>(sceneNode);
@@ -257,17 +257,17 @@ void Node::setScene(Scene* scene)
 
 void Node::propagateEnterTree()
 {
-    if (m_pParent) {
-        m_scene = m_pParent->m_scene;
-        m_depth = m_pParent->m_depth + 1;
+    if (m_parent) {
+        m_scene = m_parent->m_scene;
+        m_depth = m_parent->m_depth + 1;
     }
     else {
         m_depth = 1;
     }
 
     m_viewport = dynamic_cast<Viewport*>(this);
-    if (!m_viewport && m_pParent) {
-        m_viewport = m_pParent->m_viewport;
+    if (!m_viewport && m_parent) {
+        m_viewport = m_parent->m_viewport;
     }
 
     m_scene->addNode(this);
