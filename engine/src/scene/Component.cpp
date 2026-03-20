@@ -1,4 +1,4 @@
-#include "ocf/2d/Component.h"
+#include "ocf/scene/Component.h"
 
 namespace ocf {
 

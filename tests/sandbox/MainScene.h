@@ -1,4 +1,4 @@
-#include <ocf/core/Scene.h>
+#include <ocf/scene/Scene.h>
 #include <functional>
 
 class TestCase;

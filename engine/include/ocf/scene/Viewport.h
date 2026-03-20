@@ -1,5 +1,5 @@
 #pragma once
-#include "ocf/core/Node.h"
+#include "ocf/scene/Node.h"
 
 namespace ocf {
 

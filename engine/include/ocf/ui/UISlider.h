@@ -1,6 +1,6 @@
 #pragma once
 #include "ocf/2d/DrawShape.h"
-#include "ocf/core/Rect.h"
+#include "ocf/math/Rect.h"
 #include "ocf/ui/UIWidget.h"
 #include <functional>
 

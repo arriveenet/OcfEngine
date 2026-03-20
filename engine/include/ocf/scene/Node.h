@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <vector>
 #include <glm/glm.hpp>
-#include "ocf/2d/Component.h"
+#include "ocf/scene/Component.h"
 #include "ocf/core/GameObject.h"
 #include "ocf/input/Input.h"
 

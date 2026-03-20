@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 #include <tinyxml2.h>
 #include "ocf/core/GameObject.h"
-#include "ocf/core/Rect.h"
+#include "ocf/math/Rect.h"
 
 namespace ocf {
 

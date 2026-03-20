@@ -1,5 +1,5 @@
 #include "ocf/renderer/Program.h"
-#include "ocf/core/FileUtils.h"
+#include "ocf/platform/FileUtils.h"
 #include "renderer/backend/opengl/OpenGLUtility.h"
 #include <glm/gtc/type_ptr.hpp>
 

@@ -1,5 +1,5 @@
 #include "ocf/core/EventDispatcher.h"
-#include "ocf/core/Node.h"
+#include "ocf/scene/Node.h"
 #include "ocf/core/EventListener.h"
 
 namespace {

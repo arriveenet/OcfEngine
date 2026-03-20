@@ -1,5 +1,5 @@
 #include "ocf/core/Event.h"
-#include "ocf/core/Node.h"
+#include "ocf/scene/Node.h"
 
 namespace ocf {
 

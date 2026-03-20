@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
-#include "ocf/2d/Node2D.h"
-#include "ocf/2d/Component.h"
+#include "ocf/scene/Node2D.h"
+#include "ocf/scene/Component.h"
 #include "ocf/2d/DrawShape.h"
 #include "ocf/core/Types.h"
-#include "ocf/core/Rect.h"
+#include "ocf/math/Rect.h"
 #include "ocf/core/Config.h"
 #include "ocf/renderer/TrianglesCommand.h"
 #include "ocf/renderer/VertexArray.h"

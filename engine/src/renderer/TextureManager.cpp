@@ -1,6 +1,6 @@
 #include "ocf/renderer/TextureManager.h"
-#include "ocf/renderer/Image.h"
-#include "ocf/core/FileUtils.h"
+#include "ocf/core/Image.h"
+#include "ocf/platform/FileUtils.h"
 
 namespace ocf {
 

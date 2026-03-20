@@ -2,8 +2,8 @@
 #include "ocf/2d/Sprite.h"
 #include "ocf/2d/DrawShape.h"
 #include "ocf/2d/Label.h"
-#include "ocf/2d/Camera2D.h"
-#include "ocf/core/Scene.h"
+#include "ocf/scene/Camera2D.h"
+#include "ocf/scene/Scene.h"
 
 namespace ocf {
 

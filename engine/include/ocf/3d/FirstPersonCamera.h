@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ocf/3d/Camera3D.h"
+#include "ocf/scene/Camera3D.h"
 
 namespace ocf {
 

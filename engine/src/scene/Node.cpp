@@ -1,13 +1,13 @@
-#include "ocf/core/Node.h"
+#include "ocf/scene/Node.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
-#include "ocf/2d/Camera2D.h"
+#include "ocf/scene/Camera2D.h"
 #include "ocf/core/Game.h"
-#include "ocf/core/Rect.h"
+#include "ocf/math/Rect.h"
 #include "ocf/core/EventDispatcher.h"
-#include "ocf/core/Scene.h"
-#include "ocf/core/Viewport.h"
+#include "ocf/scene/Scene.h"
+#include "ocf/scene/Viewport.h"
 #include <typeinfo>
 
 namespace ocf {

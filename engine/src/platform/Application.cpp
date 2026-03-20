@@ -1,6 +1,6 @@
 #include "ocf/platform/Application.h"
 #include "ocf/core/Game.h"
-#include "ocf/core/Scene.h"
+#include "ocf/scene/Scene.h"
 #include "ocf/platform/PlatformMacros.h"
 #include "ocf/platform/RenderView.h"
 

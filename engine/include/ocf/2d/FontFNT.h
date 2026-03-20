@@ -4,7 +4,7 @@
 #include <set>
 #include <unordered_map>
 #include "ocf/2d/Font.h"
-#include "ocf/core/Rect.h"
+#include "ocf/math/Rect.h"
 
 namespace ocf {
 

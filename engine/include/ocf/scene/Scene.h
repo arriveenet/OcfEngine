@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-#include "ocf/2d/Node2D.h"
-#include "ocf/core/Viewport.h"
+#include "ocf/scene/Node2D.h"
+#include "ocf/scene/Viewport.h"
 
 namespace ocf {
 

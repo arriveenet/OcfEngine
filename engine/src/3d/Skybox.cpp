@@ -1,5 +1,5 @@
 #include "ocf/3d/Skybox.h"
-#include "ocf/3d/Camera3D.h"
+#include "ocf/scene/Camera3D.h"
 #include "ocf/renderer/Renderer.h"
 #include "ocf/renderer/ShaderManager.h"
 #include <glm/gtc/matrix_transform.hpp>

@@ -1,4 +1,4 @@
-#include "ocf/core/MaxRectsBinPack.h"
+#include "ocf/math/MaxRectsBinPack.h"
 #include <limits>
 
 namespace ocf {

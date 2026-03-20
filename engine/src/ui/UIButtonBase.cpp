@@ -1,7 +1,7 @@
 #include "ocf/ui/UIButtonBase.h"
-#include "ocf/2d/Camera2D.h"
+#include "ocf/scene/Camera2D.h"
 #include "ocf/2d/Label.h"
-#include "ocf/core/Rect.h"
+#include "ocf/math/Rect.h"
 
 namespace ocf {
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "ocf/2d/Component.h"
+#include "ocf/scene/Component.h"
 #include <glm/glm.hpp>
 
 namespace ocf {

@@ -2,7 +2,7 @@
 
 #include "ocf/core/Types.h"
 #include "ocf/core/GameObject.h"
-#include "ocf/core/Rect.h"
+#include "ocf/math/Rect.h"
 
 #include <string>
 #include <glm/glm.hpp>

@@ -1,5 +1,5 @@
 #include "ocf/2d/ActionComponent.h"
-#include "ocf/2d/Node2D.h"
+#include "ocf/scene/Node2D.h"
 #include "ocf/2d/Animation.h"
 #include "ocf/2d/SpriteFrame.h"
 #include "ocf/2d/Sprite.h"

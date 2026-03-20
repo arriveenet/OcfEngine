@@ -1,4 +1,4 @@
-#include "ocf/3d/Node3D.h"
+#include "ocf/scene/Node3D.h"
 
 namespace ocf {
 

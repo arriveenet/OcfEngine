@@ -1,4 +1,4 @@
-#include "ocf/renderer/Image.h"
+#include "ocf/core/Image.h"
 #include <fstream>
 #include <string.h>
 #include <memory>
@@ -8,7 +8,7 @@ extern "C" {
 //#include <jpeglib.h>
 } // extern "C"
 
-#include "ocf/core/FileUtils.h"
+#include "ocf/platform/FileUtils.h"
 
 namespace ocf {
 

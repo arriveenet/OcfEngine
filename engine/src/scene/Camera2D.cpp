@@ -1,8 +1,8 @@
-#include "ocf/2d/Camera2D.h"
+#include "ocf/scene/Camera2D.h"
 #include <assert.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include "ocf/core/Game.h"
-#include "ocf/core/Scene.h"
+#include "ocf/scene/Scene.h"
 #include "ocf/platform/Application.h"
 #include "ocf/renderer/Renderer.h"
 

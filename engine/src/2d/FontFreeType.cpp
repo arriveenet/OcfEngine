@@ -1,8 +1,8 @@
 ﻿#include "ocf/2d/FontFreeType.h"
 
 #include "ocf/2d/FontAtlas.h"
-#include "ocf/core/FileUtils.h"
-#include "ocf/core/Rect.h"
+#include "ocf/platform/FileUtils.h"
+#include "ocf/math/Rect.h"
 #include "ocf/core/StringUtils.h"
 
 #include <ft2build.h>

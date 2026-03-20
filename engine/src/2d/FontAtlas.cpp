@@ -1,7 +1,7 @@
 #include "ocf/2d/FontAtlas.h"
-#include "ocf/core/MaxRectsBinPack.h"
+#include "ocf/math/MaxRectsBinPack.h"
 #include "ocf/renderer/Texture2D.h"
-#include "ocf/renderer/Image.h"
+#include "ocf/core/Image.h"
 
 namespace ocf {
 

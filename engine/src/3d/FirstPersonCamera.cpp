@@ -1,5 +1,5 @@
 #include "ocf/3d/FirstPersonCamera.h"
-#include "ocf/core/Node.h"
+#include "ocf/scene/Node.h"
 #include "ocf/input/Input.h"
 #include "ocf/core/Game.h"
 #include "ocf/core/EventListenerKeyboard.h"

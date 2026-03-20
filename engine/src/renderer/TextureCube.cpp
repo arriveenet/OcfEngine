@@ -1,6 +1,6 @@
 #include "ocf/renderer/TextureCube.h"
-#include "ocf/core/FileUtils.h"
-#include "ocf/renderer/Image.h"
+#include "ocf/platform/FileUtils.h"
+#include "ocf/core/Image.h"
 #include "backend/opengl/OpenGLInclude.h"
 #include "backend/opengl/OpenGLUtility.h"
 

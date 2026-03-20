@@ -1,5 +1,5 @@
 #pragma once
-#include "ocf/core/RectBinPack.h"
+#include "ocf/math/RectBinPack.h"
 
 namespace ocf {
 

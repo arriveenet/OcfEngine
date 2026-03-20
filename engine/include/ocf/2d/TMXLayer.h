@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "ocf/2d/Node2D.h"
+#include "ocf/scene/Node2D.h"
 #include "ocf/renderer/QuadCommand.h"
 
 namespace ocf {

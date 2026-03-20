@@ -2,7 +2,7 @@
 #include "ocf/2d/SpriteFrame.h"
 #include "ocf/2d/SpriteFrameManager.h"
 #include "ocf/core/Game.h"
-#include "ocf/core/FileUtils.h"
+#include "ocf/platform/FileUtils.h"
 #include "ocf/renderer/TextureManager.h"
 #include <tinyxml2.h>
 

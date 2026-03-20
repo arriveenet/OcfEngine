@@ -1,9 +1,9 @@
-#include "ocf/2d/Node2D.h"
+#include "ocf/scene/Node2D.h"
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 
 #include "ocf/core/Game.h"
-#include "ocf/core/Rect.h"
+#include "ocf/math/Rect.h"
 
 namespace ocf {
 

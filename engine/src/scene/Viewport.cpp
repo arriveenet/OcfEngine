@@ -1,6 +1,6 @@
-#include "ocf/core/Viewport.h"
-#include "ocf/2d/Camera2D.h"
-#include "ocf/3d/Camera3D.h"
+#include "ocf/scene/Viewport.h"
+#include "ocf/scene/Camera2D.h"
+#include "ocf/scene/Camera3D.h"
 
 namespace ocf {
 

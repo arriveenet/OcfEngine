@@ -1,6 +1,6 @@
 #include "audio/audioEngineImpl.h"
 #include "audio/AudioDecoderManager.h"
-#include "ocf/core/FileUtils.h"
+#include "ocf/platform/FileUtils.h"
 #include <AL/al.h>
 #include <AL/alc.h>
 

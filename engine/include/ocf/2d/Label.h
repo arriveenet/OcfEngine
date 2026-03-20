@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "ocf/2d/Node2D.h"
+#include "ocf/scene/Node2D.h"
 #include "ocf/core/Types.h"
 #include "ocf/renderer/QuadCommand.h"
 

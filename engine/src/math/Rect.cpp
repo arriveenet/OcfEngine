@@ -1,4 +1,4 @@
-#include "ocf/core/Rect.h"
+#include "ocf/math/Rect.h"
 
 namespace ocf {
 

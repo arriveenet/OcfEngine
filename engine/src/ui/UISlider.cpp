@@ -1,5 +1,5 @@
 #include "ocf/ui/UISlider.h"
-#include "ocf/2d/Camera2D.h"
+#include "ocf/scene/Camera2D.h"
 
 namespace ocf {
 

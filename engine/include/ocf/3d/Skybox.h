@@ -1,5 +1,5 @@
 #pragma once
-#include "ocf/core/Node.h"
+#include "ocf/scene/Node.h"
 #include "ocf/renderer/TextureCube.h"
 #include "ocf/renderer/CustomCommand.h"
 #include <string>

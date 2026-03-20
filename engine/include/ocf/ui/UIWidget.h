@@ -1,5 +1,5 @@
 #pragma once
-#include "ocf/2d/Node2D.h"
+#include "ocf/scene/Node2D.h"
 
 namespace ocf {
 

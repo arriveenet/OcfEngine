@@ -1,4 +1,4 @@
-#include "ocf/3d/Camera3D.h"
+#include "ocf/scene/Camera3D.h"
 #include "ocf/core/Game.h"
 #include "ocf/platform/Application.h"
 #include "ocf/renderer/Renderer.h"
