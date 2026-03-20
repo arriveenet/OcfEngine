@@ -201,3 +201,7 @@ include(CPack)
 
 set(OGG_INCLUDE_DIR "${OGG_HEADERS}" CACHE STRING "libogg include dir" FORCE)
 set(OGG_LIBRARY "libogg" CACHE INTERNAL "libogg library" FORCE)
+
+# Ocf MODIFY BEGIN
+set_target_properties(ogg PROPERTIES FOLDER ThirdParty)
+# Ocf MODIFY END

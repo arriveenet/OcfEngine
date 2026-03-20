@@ -96,3 +96,8 @@ set_target_properties(zlib PROPERTIES SOVERSION 1)
 
 set(ZLIB_INCLUDE_DIR "${zlib_INC_DIR}" CACHE STRING "zlib include dir" FORCE)
 set(ZLIB_LIBRARY "zlib" CACHE INTERNAL "zlib library" FORCE)
+
+# Ocf MODIFY BEGIN
+set_target_properties(zlib PROPERTIES FOLDER ThirdParty)
+set_target_properties(zlibstatic PROPERTIES FOLDER ThirdParty)
+# Ocf MODIFY END

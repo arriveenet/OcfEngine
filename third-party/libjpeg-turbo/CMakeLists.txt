@@ -296,3 +296,9 @@ target_include_directories(
   jpeg-static PUBLIC
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+# Ocf MODIFY BEGIN
+set_target_properties(jpeg-static PROPERTIES FOLDER ThirdParty)
+set_target_properties(jpeg12-static PROPERTIES FOLDER ThirdParty)
+set_target_properties(jpeg16-static PROPERTIES FOLDER ThirdParty)
+# Ocf MODIFY END

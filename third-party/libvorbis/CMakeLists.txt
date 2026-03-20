@@ -79,3 +79,9 @@ install(
     DESTINATION
     ${CMAKE_INSTALL_LIBDIR}/pkgconfig
 )
+
+# Ocf MODIFY BEGIN
+set_target_properties(vorbis PROPERTIES FOLDER ThirdParty)
+set_target_properties(vorbisenc PROPERTIES FOLDER ThirdParty)
+set_target_properties(vorbisfile PROPERTIES FOLDER ThirdParty)
+# Ocf MODIFY END

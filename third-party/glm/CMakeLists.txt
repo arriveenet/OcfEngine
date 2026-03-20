@@ -302,3 +302,7 @@ if (GLM_BUILD_INSTALL)
 		"${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
 	)
 endif()
+
+# Ocf MODIFY BEGIN
+set_target_properties(glm PROPERTIES FOLDER ThirdParty)
+# Ocf MODIFY END

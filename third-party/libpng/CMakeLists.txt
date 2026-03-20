@@ -224,3 +224,7 @@ endif()
 add_library(libpng STATIC ${lib_srcs} ${lib_hdrs})
 target_include_directories(libpng PRIVATE ${ZLIB_INCLUDE_DIR})
 target_link_libraries(libpng ${ZLIB_LIBRARY})
+
+# Ocf MODIFY BEGIN
+set_target_properties(libpng PROPERTIES FOLDER ThirdParty)
+# Ocf MODIFY END
