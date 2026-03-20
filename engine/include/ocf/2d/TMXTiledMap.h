@@ -1,0 +1,27 @@
+#pragma once
+#include <string>
+#include "ocf/scene/Node2D.h"
+
+namespace ocf {
+
+class TMXMapInfo;
+
+class TMXTiledMap : public Node2D {
+public:
+    static TMXTiledMap* create(const std::string& tmxFile);
+
+    TMXTiledMap();
+    virtual ~TMXTiledMap();
+
+    bool initWithTMXFile(const std::string& tmxFile);
+
+protected:
+    void buildWithMapInfo(TMXMapInfo* mapInfo);
+
+    glm::ivec2 m_mapSize;
+    glm::ivec2 m_tileSize;
+    std::string m_TMXFilenName;
+    TMXMapInfo* m_pMapInfo;
+};
+
+} // namespace ocf
