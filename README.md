@@ -1,11 +1,9 @@
-# OcfEngine
-新しくエンジンを開発中
-
-OcfEngineは、C++17で開発されているクロスプラットフォームゲームエンジンです。2D/3Dレンダリング、オーディオ、入力処理、UI機能を提供します。
+# OCF Engine (Object-Oriented Classic Forge Engine)
+OCF Engineは、C++20で開発されているクロスプラットフォームゲームエンジンです。2D/3Dレンダリング、オーディオ、入力処理、UI機能を提供します。
 
 ## 特徴
 - **クロスプラットフォーム**: Windows、Linuxをサポート
-- **モダンなC++**: C++17標準を使用
+- **モダンなC++**: C++20標準を使用
 - **2D/3Dレンダリング**: OpenGL ベースのレンダリングシステム
 - **オーディオエンジン**: OpenAL を使用した3Dオーディオ
 - **GUI**: ボタン、チェックボックス、スライダーなどのUI要素
@@ -78,30 +76,6 @@ cmake --build . --config Release
 # ビルドディレクトリから
 ./tests/cpp-tests/cpp-tests
 ```
-
-### テスト内容
-- **ActionTest**: アクションシステムのテスト
-- **AudioEngineTest**: オーディオエンジンのテスト
-- **ComponentTest**: コンポーネントシステムのテスト
-- **DrawShapeTest**: 図形描画のテスト
-- **EventTest**: イベントシステムのテスト
-- **FontTest**: フォントレンダリングのテスト
-- **MeshRendererTest**: 3Dメッシュレンダリングのテスト
-- **SpriteTest**: 2Dスプライトのテスト
-- **TiledMapTest**: タイルマップのテスト
-
-## 使用ライブラリ
-
-- **OpenGL**: グラフィックスレンダリング
-- **GLFW**: ウィンドウ管理・入力処理
-- **OpenAL**: オーディオ処理
-- **GLM**: 数学ライブラリ
-- **FreeType**: フォントレンダリング
-- **libpng**: PNG画像処理
-- **TinyXML2**: XML処理
-- **fmt**: フォーマット処理
-- **tinyobjloader**: OBJファイル読み込み
-
 
 ## トラブルシューティング
 
