@@ -50,6 +50,7 @@ endif()
 # ==================================================================================================
 # Sub-projects
 # ==================================================================================================
+add_subdirectory(${OCF_THIRD_PARTY_PATH}/zlib)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/fmt)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/freetype)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/glad)
@@ -65,7 +66,6 @@ add_subdirectory(${OCF_THIRD_PARTY_PATH}/minimp3)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/tinyobjloader)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/tinyxml2)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/xxHash)
-add_subdirectory(${OCF_THIRD_PARTY_PATH}/zlib)
 
 add_subdirectory(${OCF_ROOT_PATH}/engine)
 
