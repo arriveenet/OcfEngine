@@ -32,7 +32,7 @@ bool AudioEngineTest::init()
     auto button1 = Button::create();
     button1->setText("Play");
     button1->setPosition(glm::vec2(leftX, 300));
-    button1->setOnAction([=]() {
+    button1->setOnAction([=, this]() {
          m_audioID = AudioEngine::play(m_audioFileName, true);
         });
     root->addChild(button1);
@@ -40,7 +40,7 @@ bool AudioEngineTest::init()
     auto stopButton = Button::create();
     stopButton->setText("Stop");
     stopButton->setPosition(glm::vec2(leftX2, 300));
-    stopButton->setOnAction([=]() {
+    stopButton->setOnAction([=, this]() {
         AudioEngine::stop(m_audioID);
         });
     root->addChild(stopButton);
@@ -48,7 +48,7 @@ bool AudioEngineTest::init()
     auto pauseButton = Button::create();
     pauseButton->setText("Pause");
     pauseButton->setPosition(glm::vec2(leftX, 380));
-    pauseButton->setOnAction([=]() {
+    pauseButton->setOnAction([=, this]() {
         AudioEngine::pause(m_audioID);
         });
     root->addChild(pauseButton);
@@ -56,7 +56,7 @@ bool AudioEngineTest::init()
     auto resumeButton = Button::create();
     resumeButton->setText("Resume");
     resumeButton->setPosition(glm::vec2(leftX2, 380));
-    resumeButton->setOnAction([=]() {
+    resumeButton->setOnAction([=, this]() {
         AudioEngine::resume(m_audioID);
         });
     root->addChild(resumeButton);
@@ -64,7 +64,7 @@ bool AudioEngineTest::init()
     auto loopCheckbox = CheckBox::create("Loop");
     loopCheckbox->setPosition(glm::vec2(leftX, 250));
     loopCheckbox->setSelected(true);
-    loopCheckbox->setOnAction([=]() {
+    loopCheckbox->setOnAction([=, this]() {
         const bool isSelected = loopCheckbox->isSelected();
         AudioEngine::setLoop(m_audioID, isSelected);
         });
@@ -78,7 +78,7 @@ bool AudioEngineTest::init()
     Slider* volumeSlider = Slider::create(400, 10);
     volumeSlider->setPosition(glm::vec2(leftX + 100, 500));
     volumeSlider->setValue(100);
-    volumeSlider->setOnValueChangedCallback([=](int value) {
+    volumeSlider->setOnValueChangedCallback([=, this](int value) {
         const float volume = static_cast<float>(value) / 100.0f;
         AudioEngine::setVolume(m_audioID, volume);
         char str[128];

@@ -45,10 +45,10 @@ bool DrawShape::init()
     updateShader(m_customCommandTriangle, ProgramType::DrawShape, PrimitiveType::TRIANGLES);
 
     m_customCommandPoint.setBeforeCallback(
-        [=]() { m_engine->getRenderer()->setPointSize(m_pointSize);});
+        [=, this]() { m_engine->getRenderer()->setPointSize(m_pointSize);});
 
     m_customCommandLine.setBeforeCallback(
-        [=]() { m_engine->getRenderer()->setLineWidth(m_lineWidth); });
+        [=, this]() { m_engine->getRenderer()->setLineWidth(m_lineWidth); });
 
     return true;
 }

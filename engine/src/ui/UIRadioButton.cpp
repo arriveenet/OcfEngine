@@ -126,6 +126,6 @@ void RadioButton::onMouseClicked()
     }
 }
 
-}; // namespace ui
+} // namespace ui
 
 } // namespace ocf
