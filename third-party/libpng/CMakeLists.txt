@@ -222,6 +222,7 @@ if(PNG_DEBUG)
 endif()
 
 add_library(libpng STATIC ${lib_srcs} ${lib_hdrs})
+target_include_directories(libpng PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(libpng PRIVATE ${ZLIB_INCLUDE_DIR})
 target_link_libraries(libpng ${ZLIB_LIBRARY})
 
