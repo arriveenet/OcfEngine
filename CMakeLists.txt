@@ -42,14 +42,16 @@ if (MSVC)
     set(CXX_STANDARD "/std:c++20")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_STANDARD} /W0 /Zc:__cplusplus")
 else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_STANDARD}
-        -fstrict-aliasing -Wno-unknown-pragmas
-        -Wno-unused-function -Wno-deprecated-declarations")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_STANDARD} -fstrict-aliasing -Wno-unknown-pragmas -Wno-unused-function -Wno-deprecated-declarations")
 endif()
 
 # ==================================================================================================
 # Sub-projects
 # ==================================================================================================
+# Enable -fPIC flag when compiling as shared libs.
+if (UNIX AND NOT ANDROID)
+    set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+endif()
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/zlib)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/fmt)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/freetype)
@@ -66,6 +68,10 @@ add_subdirectory(${OCF_THIRD_PARTY_PATH}/minimp3)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/tinyobjloader)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/tinyxml2)
 add_subdirectory(${OCF_THIRD_PARTY_PATH}/xxHash)
+# Disable -fPIC flag for other libs.
+if (UNIX AND NOT ANDROID)
+    set(CMAKE_POSITION_INDEPENDENT_CODE OFF)
+endif()
 
 add_subdirectory(${OCF_ROOT_PATH}/engine)
 

@@ -3,6 +3,7 @@
 #include "ocf/core/Types.h"
 #include "ocf/core/GameObject.h"
 #include "ocf/math/Rect.h"
+#include "ocf/platform/PlatformConfig.h"
 
 #include <string>
 #include <glm/glm.hpp>

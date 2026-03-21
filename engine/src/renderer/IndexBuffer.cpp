@@ -1,9 +1,13 @@
 #include "ocf/renderer/IndexBuffer.h"
+
+#include "renderer/backend/DriverBase.h"
 #include "ocf/core/Engine.h"
 #include "ocf/renderer/backend/Driver.h"
 #include <iostream>
 
 namespace ocf {
+
+using namespace backend;
 
 struct IndexBuffer::BuilderDetails {
     uint32_t indexCount = 0;

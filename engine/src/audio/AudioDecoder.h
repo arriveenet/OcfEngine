@@ -1,6 +1,7 @@
 #pragma once
-#include <string>
 #include "ocf/platform/PlatformMacros.h"
+#include <cstdint>
+#include <string>
 
 namespace ocf {
 

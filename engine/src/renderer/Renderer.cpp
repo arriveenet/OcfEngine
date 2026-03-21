@@ -1,4 +1,4 @@
-#include "ocf/renderer/renderer.h"
+#include "ocf/renderer/Renderer.h"
 
 #include "ocf/core/Engine.h"
 #include "ocf/renderer/CustomCommand.h"
@@ -6,6 +6,7 @@
 #include "ocf/renderer/TextureCube.h"
 #include "ocf/renderer/VertexArray.h"
 #include "renderer/backend/opengl/OpenGLUtility.h"
+#include <cstring>
 
 namespace ocf {
 
