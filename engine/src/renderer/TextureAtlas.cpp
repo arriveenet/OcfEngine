@@ -3,6 +3,7 @@
 #include "ocf/core/Engine.h"
 #include "ocf/renderer/Texture2D.h"
 #include "ocf/renderer/TextureManager.h"
+#include <cstring>
 
 namespace ocf {
 

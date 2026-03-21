@@ -16,8 +16,8 @@ public:
     using ElementType = backend::ElementType;
 
     enum class IndexType : uint8_t {
-        USHORT = ElementType::UNSIGNED_SHORT,
-        UINT = ElementType::UNSIGNED_INT
+        USHORT = uint8_t(ElementType::UNSIGNED_SHORT),
+        UINT = uint8_t(ElementType::UNSIGNED_INT)
     };
 
     class Builder {

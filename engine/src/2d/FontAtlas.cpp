@@ -4,6 +4,7 @@
 #include "ocf/math/MaxRectsBinPack.h"
 #include "ocf/platform/PlatformMacros.h"
 #include "ocf/renderer/Texture2D.h"
+#include <cstring>
 
 namespace ocf {
 

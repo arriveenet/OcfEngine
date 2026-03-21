@@ -1,4 +1,4 @@
-#include "audio/audioPlayer.h"
+#include "audio/AudioPlayer.h"
 #include "audio/AudioCache.h"
 #include "audio/AudioDecoder.h"
 #include "audio/AudioDecoderManager.h"

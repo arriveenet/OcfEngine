@@ -76,8 +76,8 @@ endif()
 # ==================================================================================================
 # Includes & target definition
 # ==================================================================================================
-include_directories(${PUBLIC_HEADER_FILES})
-include_directories(src)
+include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 #building a library
 add_library(${TARGET} ${PUBLIC_HEADER_FILES} ${PRIVATE_HEADER_FILES} ${SOURCE_FILES})

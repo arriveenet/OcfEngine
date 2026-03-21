@@ -1,5 +1,6 @@
 #pragma once
 #include "ocf/core/Types.h"
+#include "ocf/core/Config.h"
 #include "ocf/renderer/QuadCommand.h"
 #include "ocf/scene/Node2D.h"
 #include <string>

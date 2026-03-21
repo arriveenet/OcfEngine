@@ -1,7 +1,8 @@
 #pragma once
 #include "audio/AudioMacros.h"
-#include <string>
 #include <AL/al.h>
+#include <cstdint>
+#include <string>
 
 namespace ocf {
 
