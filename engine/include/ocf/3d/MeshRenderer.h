@@ -1,8 +1,8 @@
 #pragma once
-#include <vector>
-#include <string>
-#include "ocf/scene/Node.h"
 #include "ocf/3d/Mesh.h"
+#include "ocf/scene/Node.h"
+#include <string>
+#include <vector>
 
 namespace ocf {
 

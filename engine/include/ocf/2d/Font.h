@@ -1,7 +1,7 @@
 #pragma once
+#include "ocf/core/GameObject.h"
 #include <string>
 #include <unordered_map>
-#include "ocf/core/Types.h"
 
 namespace ocf {
 

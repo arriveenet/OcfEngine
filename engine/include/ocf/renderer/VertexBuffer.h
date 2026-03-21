@@ -1,26 +1,26 @@
 #pragma once
-#include "ocf/core/Macros.h"
 #include <glad/glad.h>
 
 namespace ocf {
+namespace v1 {
 
-enum class BufferType {
-    Vertex,
-    Index
-};
+enum class BufferType { Vertex, Index };
 
-enum class BufferUsage {
-    Static,
-    Dynamic
-};
+enum class BufferUsage { Static, Dynamic };
 
 class VertexBuffer {
 public:
     VertexBuffer(BufferType type, BufferUsage usage);
     ~VertexBuffer();
 
-    GLuint getBuffer() const { return m_buffer; }
-    BufferType getType() const { return m_type; }
+    GLuint getBuffer() const
+    {
+        return m_buffer;
+    }
+    BufferType getType() const
+    {
+        return m_type;
+    }
 
     void bind() const;
     void unbind() const;
@@ -36,4 +36,5 @@ private:
     BufferUsage m_usage;
 };
 
+} // namespace v1
 } // namespace ocf

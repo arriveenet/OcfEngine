@@ -1,12 +1,14 @@
 #include "ocf/2d/Label.h"
-#include "ocf/2d/FontManager.h"
+
 #include "ocf/2d/FontAtlas.h"
 #include "ocf/2d/FontFreeType.h"
-#include "ocf/2d/DrawShape.h"
+#include "ocf/2d/FontManager.h"
 #include "ocf/core/Engine.h"
 #include "ocf/core/StringUtils.h"
-#include "ocf/renderer/ShaderManager.h"
+#include "ocf/platform/PlatformMacros.h"
 #include "ocf/renderer/Renderer.h"
+#include "ocf/renderer/ShaderManager.h"
+#include "ocf/renderer/Texture2D.h"
 
 namespace ocf {
 

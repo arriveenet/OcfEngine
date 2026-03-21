@@ -1,10 +1,8 @@
 #pragma once
+#include "VertexBuffer.h"
 #include <glad/glad.h>
 #include <string>
 #include <unordered_map>
-#include "VertexBuffer.h"
-#include "ocf/core/Macros.h"
-#include "ocf/core/Types.h"
 
 namespace ocf {
 
@@ -43,12 +41,12 @@ public:
      * @brief 頂点バッファを作成する
      * @param usage 予想される使用パターン
      */
-    void createVertexBuffer(BufferUsage usage);
+    void createVertexBuffer(ocf::v1::BufferUsage usage);
     /**
      * @brief インデックスバッファを作成する
      * @param usage 予想される使用パターン
      */
-    void createIndexBuffer(BufferUsage usage);
+    void createIndexBuffer(ocf::v1::BufferUsage usage);
  
     /**
      * @bfief 頂点バッファデータを作成し、初期化する
@@ -109,8 +107,8 @@ public:
 private:
     GLuint m_vertexArray;
 
-    VertexBuffer* m_vertexBuffer;
-    VertexBuffer* m_indexBuffer;
+    v1::VertexBuffer* m_vertexBuffer;
+    v1::VertexBuffer* m_indexBuffer;
 
     unsigned int m_vertexCount;
     unsigned int m_indexCount;

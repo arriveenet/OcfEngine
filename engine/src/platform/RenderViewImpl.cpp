@@ -6,6 +6,7 @@
 #include "ocf/core/EventKeyboard.h"
 #include "ocf/core/EventMouse.h"
 #include "ocf/core/EventDispatcher.h"
+#include "ocf/platform/PlatformMacros.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <unordered_map>

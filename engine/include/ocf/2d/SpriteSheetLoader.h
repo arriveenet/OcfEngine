@@ -1,8 +1,8 @@
 #pragma once
-#include <string>
+#include <cstdint>
 #include <set>
-#include <stdint.h>
-#include "ocf/core/GameObject.h"
+#include <string>
+#include <string_view>
 
 namespace ocf {
 

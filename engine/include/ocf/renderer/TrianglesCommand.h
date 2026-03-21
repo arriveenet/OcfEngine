@@ -3,6 +3,8 @@
 
 namespace ocf {
 
+struct Vertex3fC3fT2f;
+
 class TrianglesCommand : public RenderCommand {
 public:
     struct Triangles {

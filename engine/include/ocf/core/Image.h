@@ -1,7 +1,7 @@
 #pragma once
-#include <string>
 #include "ocf/core/GameObject.h"
 #include "ocf/core/Types.h"
+#include <string>
 
 namespace ocf {
 

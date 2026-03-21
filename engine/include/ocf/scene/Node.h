@@ -1,11 +1,11 @@
 #pragma once
-#include <cstdint>
-#include <algorithm>
-#include <vector>
-#include <glm/glm.hpp>
-#include "ocf/scene/Component.h"
 #include "ocf/core/GameObject.h"
-#include "ocf/input/Input.h"
+#include "ocf/scene/Component.h"
+#include <algorithm>
+#include <cstdint>
+#include <glm/glm.hpp>
+#include <string>
+#include <vector>
 
 namespace ocf {
 

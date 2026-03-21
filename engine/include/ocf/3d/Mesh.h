@@ -1,9 +1,8 @@
 #pragma once
-#include <vector>
-#include <string>
 #include "ocf/core/Types.h"
 #include "ocf/core/GameObject.h"
 #include "ocf/renderer/MeshCommand.h"
+#include <vector>
 
 namespace ocf {
 

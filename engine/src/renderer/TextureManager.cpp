@@ -1,6 +1,10 @@
 #include "ocf/renderer/TextureManager.h"
+
 #include "ocf/core/Image.h"
+#include "ocf/core/Macros.h"
 #include "ocf/platform/FileUtils.h"
+#include "ocf/platform/PlatformMacros.h"
+#include "ocf/renderer/Texture2D.h"
 
 namespace ocf {
 

@@ -1,6 +1,7 @@
 #include "ocf/3d/MeshRenderer.h"
-#include <tiny_obj_loader.h>
 #include "ocf/platform/FileUtils.h"
+#include "ocf/platform/PlatformMacros.h"
+#include <tiny_obj_loader.h>
 
 namespace ocf {
 

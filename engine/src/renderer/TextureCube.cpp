@@ -1,6 +1,8 @@
 #include "ocf/renderer/TextureCube.h"
 #include "ocf/platform/FileUtils.h"
+#include "ocf/platform/PlatformMacros.h"
 #include "ocf/core/Image.h"
+#include "ocf/core/Macros.h"
 #include "backend/opengl/OpenGLInclude.h"
 #include "backend/opengl/OpenGLUtility.h"
 

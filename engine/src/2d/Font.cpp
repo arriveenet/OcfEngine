@@ -1,6 +1,7 @@
 #include "ocf/2d/Font.h"
 #include "ocf/2d/FontAtlas.h"
 #include "ocf/renderer/Texture2D.h"
+#include "ocf/platform/PlatformMacros.h"
 
 namespace ocf {
 

@@ -1,4 +1,7 @@
 #include "ocf/ui/UISlider.h"
+
+#include "ocf/input/Input.h"
+#include "ocf/platform/PlatformMacros.h"
 #include "ocf/scene/Camera2D.h"
 
 namespace ocf {

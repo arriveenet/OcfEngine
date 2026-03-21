@@ -1,6 +1,7 @@
 #include "ocf/core/EventDispatcher.h"
 #include "ocf/scene/Node.h"
 #include "ocf/core/EventListener.h"
+#include "ocf/core/Macros.h"
 
 namespace {
 std::string getListenerID(ocf::EventType type)

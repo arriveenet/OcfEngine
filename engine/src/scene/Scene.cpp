@@ -2,7 +2,9 @@
 #include "ocf/scene/Camera2D.h"
 #include "ocf/scene/Camera3D.h"
 #include "ocf/core/Engine.h"
+#include "ocf/core/Macros.h"
 #include "ocf/scene/Viewport.h"
+#include "ocf/platform/PlatformMacros.h"
 #include "ocf/renderer/Renderer.h"
 
 namespace ocf {

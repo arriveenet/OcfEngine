@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include "ocf/core/Macros.h"
 
 namespace ocf {
 

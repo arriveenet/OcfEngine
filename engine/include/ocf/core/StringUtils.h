@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "ocf/core/Macros.h"
 
 namespace ocf {
 

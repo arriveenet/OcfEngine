@@ -1,4 +1,6 @@
 #include "ocf/renderer/VertexArray.h"
+#include "ocf/core/Macros.h"
+#include "ocf/platform/PlatformMacros.h"
 
 namespace ocf {
 
@@ -36,22 +38,22 @@ void VertexArray::setStride(std::size_t stride)
     m_stride = stride;
 }
 
-void VertexArray::createVertexBuffer(BufferUsage usage)
+void VertexArray::createVertexBuffer(ocf::v1::BufferUsage usage)
 {
     OCF_SAFE_DELETE(m_vertexBuffer);
 
     m_isVertexBufferCreated = true;
 
-    m_vertexBuffer = new VertexBuffer(BufferType::Vertex, usage);
+    m_vertexBuffer = new ocf::v1::VertexBuffer(ocf::v1::BufferType::Vertex, usage);
 }
 
-void VertexArray::createIndexBuffer(BufferUsage usage)
+void VertexArray::createIndexBuffer(ocf::v1::BufferUsage usage)
 {
     OCF_SAFE_DELETE(m_indexBuffer);
 
     m_isIndexBufferCreated = true;
 
-    m_indexBuffer = new VertexBuffer(BufferType::Index, usage);
+    m_indexBuffer = new ocf::v1::VertexBuffer(ocf::v1::BufferType::Index, usage);
 }
 
 void VertexArray::updateVertexBuffer(void* pData, size_t size)

@@ -1,10 +1,11 @@
 #pragma once
-#include "ocf/scene/Node.h"
-#include "ocf/renderer/TextureCube.h"
 #include "ocf/renderer/CustomCommand.h"
-#include <string>
+#include "ocf/scene/Node.h"
+#include <string_view>
 
 namespace ocf {
+
+class TextureCube;
 
 class Skybox : public Node {
 public:

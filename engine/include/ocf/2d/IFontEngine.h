@@ -1,5 +1,4 @@
 #pragma once
-#include "ocf/core/Config.h"
 #include <string_view>
 
 typedef struct FT_LibraryRec_* FT_Library;

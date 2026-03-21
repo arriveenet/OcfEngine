@@ -1,4 +1,6 @@
 #include "ocf/2d/FontManager.h"
+
+#include "ocf/2d/Font.h"
 #include "ocf/2d/FontAtlas.h"
 #include "ocf/2d/FontFNT.h"
 #include "ocf/2d/FontFreeType.h"

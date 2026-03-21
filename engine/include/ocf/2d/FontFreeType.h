@@ -1,6 +1,7 @@
 #pragma once
 #include "ocf/2d/Font.h"
 #include "ocf/2d/IFontEngine.h"
+#include "ocf/core/Types.h"
 #include <unordered_set>
 
 namespace ocf {

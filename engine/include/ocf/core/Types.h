@@ -1,7 +1,5 @@
 #pragma once
 #include <glm/glm.hpp>
-#include "ocf/core/GameObject.h"
-#include "ocf/core/Macros.h"
 
 namespace ocf {
 

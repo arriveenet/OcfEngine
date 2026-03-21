@@ -1,8 +1,11 @@
 #include "ocf/2d/TMXLayer.h"
+
 #include "ocf/2d/TMXXMLParser.h"
-#include "ocf/2d/TMXTiledMap.h"
 #include "ocf/core/Engine.h"
+#include "ocf/platform/PlatformMacros.h"
 #include "ocf/renderer/Renderer.h"
+#include "ocf/renderer/ShaderManager.h"
+#include "ocf/renderer/Texture2D.h"
 #include "ocf/renderer/TextureManager.h"
 
 namespace ocf {

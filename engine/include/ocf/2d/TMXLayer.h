@@ -1,7 +1,7 @@
 #pragma once
-#include <string>
-#include "ocf/scene/Node2D.h"
 #include "ocf/renderer/QuadCommand.h"
+#include "ocf/scene/Node2D.h"
+#include <string>
 
 namespace ocf {
 

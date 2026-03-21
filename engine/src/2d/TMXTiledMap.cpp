@@ -1,6 +1,7 @@
 #include "ocf/2d/TMXTiledMap.h"
 #include "ocf/2d/TMXXMLParser.h"
 #include "ocf/2d/TMXLayer.h"
+#include "ocf/platform/PlatformMacros.h"
 
 namespace ocf {
 

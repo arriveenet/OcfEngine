@@ -3,6 +3,7 @@
 #include "ocf/platform/FileUtils.h"
 #include "ocf/renderer/Texture2D.h"
 #include "ocf/renderer/TextureManager.h"
+#include "ocf/platform/PlatformMacros.h"
 
 namespace ocf {
 

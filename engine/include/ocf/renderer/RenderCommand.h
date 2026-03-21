@@ -1,11 +1,6 @@
 #pragma once
-#include <glm/glm.hpp>
-#include "Texture2D.h"
-#include "Program.h"
 #include "ProgramState.h"
-#include "VertexBuffer.h"
-#include "VertexArray.h"
-#include "ocf/core/Types.h"
+#include <glm/glm.hpp>
 
 namespace ocf {
 

@@ -1,10 +1,10 @@
 #pragma once
-#include <string>
-#include <vector>
-#include <glm/glm.hpp>
-#include <tinyxml2.h>
 #include "ocf/core/GameObject.h"
 #include "ocf/math/Rect.h"
+#include <glm/glm.hpp>
+#include <string>
+#include <tinyxml2.h>
+#include <vector>
 
 namespace ocf {
 

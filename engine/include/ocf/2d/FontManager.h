@@ -1,9 +1,10 @@
 #pragma once
-#include "ocf/2d/Font.h"
+#include <string>
 #include <unordered_map>
 
 namespace ocf {
 
+class Font;
 struct FontFreeTypeConfig;
 
 class FontManager {

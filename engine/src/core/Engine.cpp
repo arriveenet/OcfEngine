@@ -1,18 +1,23 @@
 #include "ocf/core/Engine.h"
-#include "ocf/scene/Camera2D.h"
+
+#include "renderer/backend/opengl/OpenGLDriver.h"
+
+#include "ocf/2d/Font.h"
 #include "ocf/2d/FontManager.h"
 #include "ocf/2d/Label.h"
 #include "ocf/2d/SpriteFrameManager.h"
 #include "ocf/audio/AudioEngine.h"
 #include "ocf/core/EventDispatcher.h"
-#include "ocf/platform/FileUtils.h"
-#include "ocf/scene/Scene.h"
 #include "ocf/input/Input.h"
-#include "ocf/platform/Application.h"
+#include "ocf/platform/FileUtils.h"
+#include "ocf/platform/PlatformMacros.h"
 #include "ocf/platform/RenderView.h"
 #include "ocf/renderer/Renderer.h"
+#include "ocf/renderer/ShaderManager.h"
 #include "ocf/renderer/TextureManager.h"
-#include "renderer/backend/opengl/OpenGLDriver.h"
+#include "ocf/scene/Camera2D.h"
+#include "ocf/scene/Scene.h"
+
 
 #define FPS_UPDATE_INTERVAL	(0.5f)
 

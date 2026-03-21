@@ -1,7 +1,9 @@
 ﻿#include "ocf/2d/FontFreeType.h"
 
 #include "ocf/2d/FontAtlas.h"
+#include "ocf/core/Macros.h"
 #include "ocf/platform/FileUtils.h"
+#include "ocf/platform/PlatformMacros.h"
 #include "ocf/math/Rect.h"
 #include "ocf/core/StringUtils.h"
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "../BaseTest.h"
 #include <ocf/core/Event.h>
+#include <ocf/input/Keyboard.h>
 
 class EventTest : public TestCase {
 public:

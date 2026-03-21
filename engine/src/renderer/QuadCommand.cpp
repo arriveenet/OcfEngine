@@ -1,4 +1,5 @@
 #include "ocf/renderer/QuadCommand.h"
+#include "ocf/core//Types.h"
 
 namespace ocf {
 

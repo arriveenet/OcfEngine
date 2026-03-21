@@ -1,4 +1,6 @@
 #include "ocf/renderer/CustomCommand.h"
+#include "ocf/renderer/VertexArray.h"
+#include "ocf/platform/PlatformMacros.h"
 
 namespace ocf {
 CustomCommand::CustomCommand()

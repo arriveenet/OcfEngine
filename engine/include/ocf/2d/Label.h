@@ -1,9 +1,9 @@
 #pragma once
-#include <string>
-#include <vector>
-#include "ocf/scene/Node2D.h"
 #include "ocf/core/Types.h"
 #include "ocf/renderer/QuadCommand.h"
+#include "ocf/scene/Node2D.h"
+#include <string>
+#include <vector>
 
 namespace ocf {
 

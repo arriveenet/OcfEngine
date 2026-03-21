@@ -1,9 +1,5 @@
 #pragma once
-#include "ocf/core/Config.h"
 #include "ocf/core/Console.h"
-#include "ocf/platform/PlatformConfig.h"
-#include <stdint.h>
-#include <string.h>
 
 #define OCF_SAFE_DELETE(p) \
     do                     \

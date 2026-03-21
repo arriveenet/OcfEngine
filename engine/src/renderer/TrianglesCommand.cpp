@@ -1,4 +1,6 @@
 #include "ocf/renderer/TrianglesCommand.h"
+
+#include "ocf/renderer/Texture2D.h"
 #define XXH_INLINE_ALL
 #include "xxhash.h"
 

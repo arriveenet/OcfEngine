@@ -1,15 +1,14 @@
 #pragma once
-#include <vector>
-#include <glm/glm.hpp>
-#include "ocf/renderer/VertexBuffer.h"
-#include "ocf/renderer/ShaderManager.h"
+#include "ocf/core/Types.h"
 #include "ocf/renderer/RenderCommand.h"
 #include "ocf/renderer/TrianglesCommand.h"
 #include "ocf/renderer/RenderQueue.h"
-#include "ocf/2d/Sprite.h"
-#include "ocf/2d/Label.h"
+#include <glm/glm.hpp>
+#include <vector>
 
 namespace ocf {
+
+class VertexArray;
 
 /**
  * @brief レンダラークラス

@@ -1,10 +1,10 @@
 #pragma once
-#include <string>
-#include <vector>
-#include <set>
-#include <unordered_map>
 #include "ocf/2d/Font.h"
 #include "ocf/math/Rect.h"
+#include <set>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace ocf {
 

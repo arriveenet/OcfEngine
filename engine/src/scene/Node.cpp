@@ -4,6 +4,7 @@
 #include <glm/gtx/transform.hpp>
 #include "ocf/scene/Camera2D.h"
 #include "ocf/core/Engine.h"
+#include "ocf/core/Macros.h"
 #include "ocf/math/Rect.h"
 #include "ocf/core/EventDispatcher.h"
 #include "ocf/scene/Scene.h"

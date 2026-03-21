@@ -1,6 +1,8 @@
 #include "ocf/2d/TMXXMLParser.h"
-#include <sstream>
+#include "ocf/core/Macros.h"
 #include "ocf/platform/FileUtils.h"
+#include "ocf/platform/PlatformMacros.h"
+#include <sstream>
 
 namespace ocf {
 

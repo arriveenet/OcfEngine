@@ -1,5 +1,6 @@
 #include "ocf/renderer/ProgramState.h"
 #include "ocf/renderer/VertexArray.h"
+#include "ocf/platform/PlatformMacros.h"
 
 namespace ocf {
 

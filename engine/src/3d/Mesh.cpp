@@ -1,12 +1,11 @@
 #include "ocf/3d/Mesh.h"
-#include "ocf/scene/Camera2D.h"
 #include "ocf/scene/Camera3D.h"
 #include "ocf/core/Engine.h"
-#include "ocf/platform/FileUtils.h"
 #include "ocf/renderer/Renderer.h"
 #include "ocf/renderer/Texture2D.h"
 #include "ocf/renderer/TextureManager.h"
-#include <tiny_obj_loader.h>
+#include "ocf/renderer/VertexArray.h"
+#include "ocf/renderer/ShaderManager.h"
 
 namespace ocf {
 
@@ -43,7 +42,7 @@ bool Mesh::setupMesh()
     VertexArray* pVertexArray = m_meshCommand.getVertexArray();
     pVertexArray->bind();
 
-    pVertexArray->createVertexBuffer(ocf::BufferUsage::Static);
+    pVertexArray->createVertexBuffer(ocf::v1::BufferUsage::Static);
 
     pVertexArray->updateVertexBuffer(m_data.data(), sizeof(float) * m_data.size());
     m_meshCommand.setVertexDrawInfo(0, static_cast<unsigned int>(m_data.size()));

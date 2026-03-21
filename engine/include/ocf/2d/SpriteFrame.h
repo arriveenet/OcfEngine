@@ -1,8 +1,8 @@
 #pragma once
-#include <string>
-#include <glm/glm.hpp>
 #include "ocf/core/GameObject.h"
 #include "ocf/math/Rect.h"
+#include <glm/glm.hpp>
+#include <string>
 
 namespace ocf {
 

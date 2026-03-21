@@ -1,5 +1,7 @@
 #include "ocf/core/EventListenerKeyboard.h"
+
 #include "ocf/core/EventKeyboard.h"
+#include "ocf/platform/PlatformMacros.h"
 
 namespace ocf {
 

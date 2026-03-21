@@ -1,4 +1,5 @@
 #pragma once
+#include "ocf/core/Types.h"
 #include "ocf/scene/Node2D.h"
 #include <glm/glm.hpp>
 

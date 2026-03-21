@@ -1,12 +1,12 @@
 #include "ocf/2d/Sprite.h"
 
-#include <glm/gtc/type_ptr.hpp>
-#include "ocf/core/Engine.h"
 #include "ocf/2d/SpriteFrameManager.h"
+#include "ocf/core/Engine.h"
+#include "ocf/platform/PlatformMacros.h"
 #include "ocf/renderer/Renderer.h"
+#include "ocf/renderer/ShaderManager.h"
 #include "ocf/renderer/Texture2D.h"
 #include "ocf/renderer/TextureManager.h"
-#include "ocf/renderer/ShaderManager.h"
 
 using namespace glm;
 

@@ -7,6 +7,7 @@
 #include "ocf/2d/DrawShape.h"
 #include "ocf/core/Engine.h"
 #include "ocf/core/EventDispatcher.h"
+#include "ocf/core/Logger.h"
 
 using namespace ocf;
 
@@ -56,7 +57,7 @@ bool FontTest::init()
 
             Rect rect = m_maxRectsBinPack.insert(static_cast<float>(rects[m_index].x), 
                                                  static_cast<float>(rects[m_index].y));
-            OCFLOG("Packed to (x,y)=(%f,%f), (w,h)=(%f,%f)\n", rect.m_position.x, rect.m_position.y, rect.m_size.x, rect.m_size.y);
+            OCF_LOG_INFO("Packed to (x,y)=(%f,%f), (w,h)=(%f,%f)\n", rect.m_position.x, rect.m_position.y, rect.m_size.x, rect.m_size.y);
             m_index++;
         }
         m_pDrawShape->clear();

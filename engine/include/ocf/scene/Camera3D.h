@@ -1,5 +1,6 @@
 #pragma once
 #include "ocf/scene/Node3D.h"
+#include "ocf/core/Types.h"
 
 namespace ocf {
 

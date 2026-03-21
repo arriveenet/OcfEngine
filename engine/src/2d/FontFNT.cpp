@@ -1,7 +1,10 @@
 #include "ocf/2d/FontFNT.h"
+
 #include "ocf/2d/FontAtlas.h"
-#include "ocf/platform/FileUtils.h"
 #include "ocf/core/Engine.h"
+#include "ocf/core/Macros.h"
+#include "ocf/platform/FileUtils.h"
+#include "ocf/platform/PlatformMacros.h"
 #include "ocf/renderer/TextureManager.h"
 #include <string.h>
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ocf/scene/Camera3D.h"
+#include <ocf/input/Keyboard.h>
 
 namespace ocf {
 

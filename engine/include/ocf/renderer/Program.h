@@ -1,10 +1,9 @@
 #pragma once
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <glm/glm.hpp>
 #include "Shader.h"
-#include "ocf/core/Macros.h"
+#include <glm/glm.hpp>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace ocf {
 

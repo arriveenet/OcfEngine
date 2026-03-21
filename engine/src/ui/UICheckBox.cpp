@@ -1,6 +1,7 @@
 #include "ocf/ui/UICheckBox.h"
 #include "ocf/2d/DrawShape.h"
 #include "ocf/2d/Label.h"
+#include "ocf/platform/PlatformMacros.h"
 
 static constexpr float CHECKBOX_DEFAULT_SIZE = 14.0f;
 

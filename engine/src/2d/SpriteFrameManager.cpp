@@ -1,5 +1,6 @@
 #include "ocf/2d/SpriteFrameManager.h"
 #include "ocf/2d/XmlSpriteSheetLoader.h"
+#include "ocf/platform/PlatformMacros.h"
 
 using namespace std;
 

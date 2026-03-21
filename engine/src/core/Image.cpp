@@ -1,4 +1,7 @@
 #include "ocf/core/Image.h"
+
+#include "ocf/core/Macros.h"
+#include "ocf/platform/PlatformMacros.h"
 #include <fstream>
 #include <string.h>
 #include <memory>

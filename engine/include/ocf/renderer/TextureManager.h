@@ -2,11 +2,11 @@
 #include <string>
 #include <unordered_map>
 #include "ocf/core/GameObject.h"
-#include "Texture2D.h"
 
 namespace ocf {
 
 class Image;
+class Texture2D;
 
 class TextureManager : public GameObject {
 public:

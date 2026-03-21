@@ -1,4 +1,5 @@
 #include "ocf/core/AutoreleasePool.h"
+#include "ocf/core/Macros.h"
 
 namespace ocf {
 

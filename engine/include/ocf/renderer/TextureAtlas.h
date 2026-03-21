@@ -1,10 +1,11 @@
 #pragma once
-#include <string>
 #include "ocf/core/GameObject.h"
-#include "Texture2D.h"
 #include "ocf/core/Types.h"
+#include <string>
 
 namespace ocf {
+
+class Texture2D;
 
 class TextureAtlas : public GameObject {
 public:

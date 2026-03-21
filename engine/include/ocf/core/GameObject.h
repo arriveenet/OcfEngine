@@ -1,6 +1,4 @@
 #pragma once
-#include "ocf/core/Macros.h"
-#include "ocf/core/Config.h"
 
 namespace ocf {
 

@@ -1,6 +1,7 @@
 #include "ocf/ui/UIButton.h"
 #include "ocf/2d/Sprite.h"
 #include "ocf/2d/DrawShape.h"
+#include "ocf/platform/PlatformMacros.h"
 #include "ocf/2d/Label.h"
 #include "ocf/scene/Camera2D.h"
 #include "ocf/scene/Scene.h"

@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include "ocf/scene/Node2D.h"
+#include <string>
 
 namespace ocf {
 

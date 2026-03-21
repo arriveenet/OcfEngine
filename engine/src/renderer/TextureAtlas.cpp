@@ -1,5 +1,7 @@
 #include "ocf/renderer/TextureAtlas.h"
+
 #include "ocf/core/Engine.h"
+#include "ocf/renderer/Texture2D.h"
 #include "ocf/renderer/TextureManager.h"
 
 namespace ocf {

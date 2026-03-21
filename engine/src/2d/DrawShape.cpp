@@ -1,7 +1,9 @@
 #include "ocf/2d/DrawShape.h"
 #include "ocf/core/Engine.h"
+#include "ocf/core/Macros.h"
 #include "ocf/renderer/Renderer.h"
 #include "ocf/renderer/ShaderManager.h"
+#include "ocf/renderer/VertexArray.h"
 #include <glm/gtc/constants.hpp>
 
 namespace ocf {
@@ -253,7 +255,7 @@ void DrawShape::updateShader(CustomCommand& command, ProgramType programType, Pr
 
     pVertexArray->setStride(sizeof(Vertex3fC4f));
 
-    pVertexArray->createVertexBuffer(BufferUsage::Dynamic);
+    pVertexArray->createVertexBuffer(ocf::v1::BufferUsage::Dynamic);
     pVertexArray->updateVertexBuffer(nullptr, 0);
 
     pVertexArray->setAttribute("inPosition", 0, 3, false, 0);

@@ -1,10 +1,11 @@
 #include "ocf/renderer/renderer.h"
+
 #include "ocf/core/Engine.h"
-#include "renderer/backend/opengl/OpenGLInclude.h"
-#include "renderer/backend/opengl/OpenGLUtility.h"
 #include "ocf/renderer/CustomCommand.h"
+#include "ocf/renderer/Texture2D.h"
 #include "ocf/renderer/TextureCube.h"
-#include <glm/gtc/type_ptr.hpp>
+#include "ocf/renderer/VertexArray.h"
+#include "renderer/backend/opengl/OpenGLUtility.h"
 
 namespace ocf {
 
@@ -38,8 +39,8 @@ bool Renderer::init()
 
     m_pVertexArray->setStride(sizeof(Vertex3fC3fT2f));
 
-    m_pVertexArray->createVertexBuffer(ocf::BufferUsage::Dynamic);
-    m_pVertexArray->createIndexBuffer(ocf::BufferUsage::Dynamic);
+    m_pVertexArray->createVertexBuffer(ocf::v1::BufferUsage::Dynamic);
+    m_pVertexArray->createIndexBuffer(ocf::v1::BufferUsage::Dynamic);
 
     m_pVertexArray->updateVertexBuffer(m_triangleVertices, m_triangleVertexCount);
     m_pVertexArray->updateIndexBuffer(m_triangleIndices, m_triangleIndexCount);

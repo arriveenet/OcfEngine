@@ -1,5 +1,6 @@
 #include "ocf/core/EventListenerMouse.h"
 #include "ocf/core/EventMouse.h"
+#include "ocf/platform/PlatformMacros.h"
 
 namespace ocf {
 

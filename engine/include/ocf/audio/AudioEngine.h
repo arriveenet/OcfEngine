@@ -1,8 +1,6 @@
 #pragma once
 #include <string>
-#include <memory>
 #include <unordered_map>
-#include "ocf/platform/PlatformMacros.h"
 
 namespace ocf {
 

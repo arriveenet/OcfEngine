@@ -3,6 +3,7 @@
 #include "ocf/2d/Animation.h"
 #include "ocf/2d/SpriteFrame.h"
 #include "ocf/2d/Sprite.h"
+#include "ocf/platform/PlatformMacros.h"
 
 namespace ocf {
 
